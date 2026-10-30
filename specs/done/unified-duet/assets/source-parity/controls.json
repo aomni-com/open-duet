@@ -1,0 +1,13 @@
+{
+  "requestMutation": {
+    "exitCode": 1,
+    "diagnostic": "Traceback (most recent call last):\n  File \"/Users/synthetic-user/.codex/worktrees/232f/duet/specs/unified-duet/assets/packaging/compare.py\", line 41, in <module>\n    assert normalize(source[\"requests\"]) == normalize(candidate[\"requests\"])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\nTraceback (most recent call last):\n  File \"/Users/synthetic-user/.codex/worktrees/232f/duet/specs/unified-duet/assets/source-parity/compare.py\", line 19, in <module>\n    subprocess.run([sys.executable, str(Path(__file__).parent.parent / \"packaging\" / \"compare.py\"),\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                    *map(str, paths)], check=True)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py\", line 578, in run\n    raise CalledProcessError(retcode, process.args,\n                             output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command '['/opt/homebrew/opt/python@3.14/bin/python3.14', '/Users/synthetic-user/.codex/worktrees/232f/duet/specs/unified-duet/assets/packaging/compare.py', '/var/folders/3p/k21gnpt573b8yy45xvy27nd00000gn/T/duet-parity-e75eg5uf/source.json', '/var/folders/3p/k21gnpt573b8yy45xvy27nd00000gn/T/duet-parity-e75eg5uf/candidate.json']' returned non-zero exit status 1.\n"
+  },
+  "hangDeadline": {
+    "command": "timeout --signal=KILL 1s bun -e setInterval",
+    "exitCode": 137,
+    "acceptance": "Required probe exit0;137 rejected"
+  },
+  "producer": "Explicitflush exactsharedprobe passed; no output/request normalization added",
+  "provenance": "Healthy candidate and changed-model negative control rerun against the new committed-source payload"
+}

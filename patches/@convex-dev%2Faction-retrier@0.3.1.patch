@@ -1,0 +1,44 @@
+diff --git a/dist/component/run.js b/dist/component/run.js
+index 72c48564abd0e8b521f0ae9808b43f4e92403f3b..28fef02ffee7eb9056d06c91db1d4c5ff7ca1f8a 100644
+--- a/dist/component/run.js
++++ b/dist/component/run.js
+@@ -238,7 +238,7 @@ function withJitter(delay) {
+     return delay * (0.5 + Math.random());
+ }
+ const CLEANUP_MIN_AGE_MS = 1000 * 60 * 60 * 24 * 7; // 1 week
+-const MAX_CLEANUP_BATCH = 1024;
++const MAX_CLEANUP_BATCH = 256;
+ export const cleanupExpiredRuns = internalMutation({
+     args: {},
+     handler: async (ctx) => {
+@@ -246,7 +246,7 @@ export const cleanupExpiredRuns = internalMutation({
+         const expired = await ctx.db
+             .query("runs")
+             .withIndex("by_state", (q) => q.eq("state.type", "completed").lt("state.completedAt", cutoff))
+-            .take(1024);
++            .take(MAX_CLEANUP_BATCH);
+         for (const doc of expired) {
+             await ctx.db.delete("runs", doc._id);
+         }
+diff --git a/src/component/run.ts b/src/component/run.ts
+index fbb562dec3b1e4dc14e98b825efbb1ce8b91f0ef..b7b36d0792c78a637a452a6e5ce119efa759d134 100644
+--- a/src/component/run.ts
++++ b/src/component/run.ts
+@@ -317,7 +317,7 @@ function withJitter(delay: number) {
+ }
+ 
+ const CLEANUP_MIN_AGE_MS = 1000 * 60 * 60 * 24 * 7; // 1 week
+-const MAX_CLEANUP_BATCH = 1024;
++const MAX_CLEANUP_BATCH = 256;
+ 
+ export const cleanupExpiredRuns = internalMutation({
+   args: {},
+@@ -328,7 +328,7 @@ export const cleanupExpiredRuns = internalMutation({
+       .withIndex("by_state", (q) =>
+         q.eq("state.type", "completed").lt("state.completedAt", cutoff),
+       )
+-      .take(1024);
++      .take(MAX_CLEANUP_BATCH);
+     for (const doc of expired) {
+       await ctx.db.delete("runs", doc._id);
+     }

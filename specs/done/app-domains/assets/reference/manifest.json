@@ -1,0 +1,124 @@
+{
+  "referenceRevision": "3a9000f4f714c1c699df79cd608afc01ccd920c6",
+  "duetInspectedRevision": "577bcbf38b0515d00a20aca4fcc7a425c24b8d9e",
+  "frozenOn": "2026-09-30",
+  "evidence": "provider and legacy action-handler controlled-response reproduction; UI, routing, auth and real Convex semantics remain source-inspected",
+  "sources": [
+    {
+      "source": "packages/backend/convex/services/vercel.ts",
+      "snapshot": "vercel.ts.txt",
+      "sha256": "ffdda4f5537ab71ab36a9531b2b5e6c5e45d4380631c054b0489e6d5f8a76873",
+      "gitBlob": "13ad8d4fe49ded32e2c556f76b260c05cfb3b474"
+    },
+    {
+      "source": "packages/backend/convex/domains/customDomains/actions.ts",
+      "snapshot": "actions.ts.txt",
+      "sha256": "20da0ddb1ba879cfaa18363e98abcd0346a6923e51c8257b2db6c86b2a069285",
+      "gitBlob": "ab5b9a5d096a4051862af9f479d8b3c68b8d7d53"
+    },
+    {
+      "source": "packages/backend/convex/domains/customDomains/internal.ts",
+      "snapshot": "internal.ts.txt",
+      "sha256": "25bc0c027b80ce3d7f56bf461a8ab4e5051f31face3b0a8a68d3d5f02ba3a1e8",
+      "gitBlob": "3b7db0896b158835bcbee442d9e94578f27f5c43"
+    },
+    {
+      "source": "packages/backend/convex/domains/customDomains/queries.ts",
+      "snapshot": "queries.ts.txt",
+      "sha256": "05082762f13a2208140e73a973cf2bd890c42462c0d435d4224e153c2395f95d",
+      "gitBlob": "2b01ba6b6c3c0176ffaa9e4cdbbabe26d4914a3b"
+    },
+    {
+      "source": "apps/web/components/apps/app-custom-domains.tsx",
+      "snapshot": "app-custom-domains.tsx.txt",
+      "sha256": "63d5aee068e1adcf18bd3fbe125b5d76ccdf6084525b56be20585dd0f33b8070",
+      "gitBlob": "309afaf7c32ae3c0ac3f25da23f07975a2ed9089"
+    },
+    {
+      "source": "apps/sandbox-gateway/app/[[...path]]/route.ts",
+      "snapshot": "host-route.ts.txt",
+      "sha256": "e07c7f3e0c48890546103432dc5121920ca5813c21c518d2fcd0a6f1b615231b",
+      "gitBlob": "55373820697479b53b70cd3150397a73719f969f"
+    },
+    {
+      "source": "packages/agent-gateway/src/routes/public-domains.ts",
+      "snapshot": "agent-domains.ts.txt",
+      "sha256": "09a19205fc5fa28838be9f538ade7069d30c4fdaa77f24171a02a3e419a5f592",
+      "gitBlob": "d882f30bfe0355123ab61a18381cdbaa31da920c"
+    },
+    {
+      "source": "packages/backend/package.json",
+      "snapshot": "backend-package.json.txt",
+      "sha256": "1e8a6ba964fd47fe3ce6179ba1a99411b8cf256080139c0e2f5b081d46b2aef3",
+      "gitBlob": "01bfe278b156172e207556b43ba1692169ca03db"
+    },
+    {
+      "source": "apps/web/package.json",
+      "snapshot": "web-package.json.txt",
+      "sha256": "757faf273d8adaec07c8310c4eaf841cff955da5d34a89b9c71698cf05e46992",
+      "gitBlob": "4d23194825712f0d0bb74f3ca7b61b86917db2de"
+    },
+    {
+      "source": "package.json",
+      "snapshot": "root-package.json.txt",
+      "sha256": "b9fbc3feb244edaa9f4ee9701a14789398ac3eef4059c556a9c83973ceb3ce13",
+      "gitBlob": "9c71c7a7b4e42f8fb3e3142759d3e04b0b460ed8"
+    }
+  ],
+  "configuration": {
+    "requiredLegacyEnvironmentNames": [
+      "VERCEL_TOKEN",
+      "VERCEL_TEAM_ID",
+      "VERCEL_SANDBOX_GATEWAY_PROJECT_ID"
+    ],
+    "credentialValues": "not captured",
+    "portTarget": {
+      "teamId": "team_I18zdvAznXXwqq1PcIampT1t",
+      "projectId": "prj_mPNx8yJ4JRlThnK3NMZOIpeenJjM",
+      "stagingGitBranch": "staging",
+      "productionGitBranch": null
+    }
+  },
+  "dependencyLock": {
+    "source": "bun.lock",
+    "gitBlob": "88ec265f2700cbed48f2e5f01e580901c689b892",
+    "sha256": "9744bceb75c8f3f97f689bb728226ef2a09c981241058a9b6ae0b34d5b95dc75",
+    "recovery": "git show 3a9000f4f714c1c699df79cd608afc01ccd920c6:bun.lock in reference repo"
+  },
+  "localBunVersion": "1.3.14",
+  "reproduction": {
+    "completedOn": "2026-09-30",
+    "bunVersion": "1.3.14",
+    "dependencies": "Bun builtins and Node compatibility APIs only; legacy framework boundaries are controlled in-memory modules",
+    "clockMilliseconds": 1800000000000,
+    "command": "bun specs/app-domains/research/reference-probe.ts",
+    "providerCaseCount": 19,
+    "actionCaseCount": 21,
+    "artifacts": [
+      {
+        "path": "research/reference-probe.ts",
+        "sha256": "79c64e3acef46c5d6b29a6f7050cdeb68c0a5d524f6ef371f700a8075f04e20a"
+      },
+      {
+        "path": "research/reference-actions.ts",
+        "sha256": "44b5901493b6a3dd7c64f524f6a2976d003692d543e1fe7275bcf532e7a9bf9b"
+      },
+      {
+        "path": "research/reference-probe.test.ts",
+        "sha256": "321bcab58de5b6f51be93affad7f9c6188c7a175d87be1d0c0d5cc0e2e126169"
+      },
+      {
+        "path": "research/provider-fixtures.json",
+        "sha256": "56d00c919afaf2e7e8075483b1d9fe036ebe542599bdf8ff6c72f8703136da0b"
+      },
+      {
+        "path": "research/action-fixtures.json",
+        "sha256": "dfd4b46d67a37f6dbc851b4bfc6a68c5c87b63ae793b48e80663b99afbcb3ad5"
+      },
+      {
+        "path": "assets/reference/probe-transcript.json",
+        "sha256": "f5fc31d71bbc4a5d6a4cbed4ac98b0ce30005503ed23e4070759e27f4f58af3b"
+      }
+    ]
+  }
+}

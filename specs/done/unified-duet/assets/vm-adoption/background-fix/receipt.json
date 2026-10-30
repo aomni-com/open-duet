@@ -1,0 +1,56 @@
+{
+  "baseSource": "e10290eb0cea24ac50dc12917a234d49d0554fa2",
+  "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+  "adoptionHelperSha256": "2d2996031e865bfa9aa6f3e8c211fd7462618160e96e9f79b122247ed4141f1b",
+  "finalHelperSha256": "0e0b880610e5a95f53ea15b10b6eea5ff87f8ccff1a506e5b9dc74966ba48428",
+  "fixtureImage": "sha256:e0f573cb051e16bb0a6d311c2a29f8caba9a38f957cc7d6c69095502e4292b85",
+  "frozenWiring": {
+    "gateway-bun": "a83d263767d839e4d2649ca8e35d07159c7afc99afdc96d731ced29e056dda0c",
+    "runtime-bootstrap.js": "b33587a373136cdac66b78cf74f2e05eb2ee7341207d7adafef49045f0b4e1ab",
+    "gateway.service": "84677a224fe0385b335a36dc8cb4e9609424a75f49ed138ab671a4f9c8e3b867"
+  },
+  "cachedOSRuntime": {
+    "ld-linux-x86-64.so.2": "c20a2dc8917c755f02b94049356320fe1f62ac7d9f8994731f807d9df39302da",
+    "libstdc++.so.6": "1fd75fe70354a416d75aef22bcae68c47bd25d20e2d0568c30b1a9838cf62f11",
+    "libc.so.6": "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf",
+    "libresolv.so.2": "1d730ea434da5a5595bc6a961d7a9ace83e03703205df9644044b3dca79c362f",
+    "libgcc_s.so.1": "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb",
+    "libm.so.6": "fce00b6f25f459cf4ae0b7fae4257909a1a8a86f9149e7c029a5d617baf1ccd0",
+    "libpthread.so.0": "90491a21ce44efcf3bd4b65ec82501c091d7ebe7f8d9b341dd01d721001d9ecd",
+    "librt.so.1": "6d072187d88e092e81561a44c03a4a41397319022c6d43519757cc051c576d82",
+    "libdl.so.2": "c2994527172cc23b7fb0f7d611b71e00a37da27af12c2e5e9e0dc1a742886c96"
+  },
+  "limits": [
+    "Disposable Docker systemd proof, not live provider/control-plane proof.",
+    "Synthetic Syncthing process sentinel proves no unit/PID interruption, not protocol compatibility.",
+    "Final dependency guard tightening validated by red/green tests and actual unchanged-process census after the successful adoption, not a second full transition.",
+    "Background services remain RUNNING. Present ownership/path dependencies are inspected; future instructions are not fenced.",
+    "The private recovery installation is retained until strict pairs settle."
+  ],
+  "postTransitionCensusHelperSha256": "a92a6cca0afa2bf7ca34d5db7ee86a19c64ee674f52c96b81242b6da8a1d86c4",
+  "focusedGate": {
+    "tests": 12,
+    "assertions": 51,
+    "failures": 0,
+    "typecheck": true,
+    "lint": true
+  },
+  "sourceSha256": {
+    "scripts/vm-runtime-adoption.ts": "c8b50f2dd24adef62f1a9d115c3aae231fb52faebb4f14224b577c8b1ad9d577",
+    "scripts/vm-runtime-adoption.test.ts": "80e0eebe80db08e385d1d1ceacc71209a0d03c86939c8a1a61bdb34ab6ce5013"
+  },
+  "independentReview": {
+    "status": "known findings resolved; no additional review loop",
+    "resolved": [
+      "Direct custom environment path dependencies",
+      "Relative/symlink and symlink-parent traversal",
+      "Standard colon path-list variable components",
+      "Known descendants across cgroup boundaries",
+      "New descendants inheriting the preserved dead owner",
+      "Unrelated --rpc option spelling remains outside Duet ownership"
+    ],
+    "dismissed": [
+      "Freeze arbitrary background services against future instructions: violates required process continuity and exceeds ordinary updater contract."
+    ]
+  }
+}

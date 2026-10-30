@@ -1,0 +1,255 @@
+---
+title: 'How to Run Claude Code 24/7: Setup Guide for Always-On AI Agents'
+description: 'Run Claude Code 24/7 without babysitting sessions. Compare tmux, systemd, and Docker to a persistent, zero-setup server that keeps your AI agent always on.'
+date: '2026-03-01'
+updatedAt: '2026-07-06'
+readTime: '9 min read'
+author:
+  name: 'David'
+  role: 'Founder'
+  link: '/'
+category: 'ai'
+tags: ['claude-code', 'ai-agents', 'automation', 'cron', 'always-on']
+type: 'article'
+image: '/blog/how-to-set-up-a-24-7-ai-agent/cover.png'
+relatedPosts:
+  [
+    'how-to-host-openclaw-in-the-cloud',
+    'mcp-alternatives-code-execution-agents',
+    'openclaw-vs-managed-ai-agent-platforms',
+  ]
+cta:
+  title: 'Your agent, on the clock 24/7.'
+  subtitle: 'Duet runs scheduled jobs, listens for webhooks, and keeps memory across sessions. No cron syntax, no babysitting.'
+  buttonText: 'Spin up the agent'
+  href: '/sign-in?from=blog-24-7-agent'
+---
+
+# How to Run Claude Code 24/7?
+
+<Callout emoji="💡">
+Quick answer
+
+Claude Code is a terminal-first CLI, so it dies when your SSH connection drops, your laptop sleeps, or the machine reboots. You can stretch its uptime with tmux, nohup, systemd, or Docker, but each one adds maintenance. To actually run Claude Code 24/7 with zero babysitting, host it on a persistent server like [Duet](/) that stays up and keeps your agent's context across restarts.
+
+</Callout>
+
+You fire up Claude Code in your terminal, give it a solid prompt, and step away to grab coffee.
+
+Ten minutes later you're back, and the session is gone. SSH dropped, laptop slept, or the process just quietly died. Your agent's context? Vanished. The work you thought was running? Never happened.
+
+Claude Code was built for interactive terminal sessions, not for staying alive on its own. Most developers try the usual fixes, tmux, screen, nohup, systemd services, and they help, until they don't.
+
+You still end up babysitting processes, restoring context, and wondering why something this useful has to be this fragile.
+
+You don't actually need to become a DevOps babysitter just to keep an AI coding agent running 24/7.
+
+In this post I'll show you the practical ways people force Claude Code to stay alive in the terminal (with all their messy trade-offs). Then I'll show you the dramatically simpler path: running it on a persistent, zero-setup server that just works, no SSH gymnastics, no lost context, no maintenance.
+
+If you want Claude Code that actually runs while you sleep, let's get into it.
+
+## Why Claude Code Can't Run 24/7 Out of the Box
+
+Claude Code is fundamentally a terminal-first tool. It expects an active, interactive session, which is exactly why it shines when you're sitting in front of it, but starts showing cracks the moment you walk away.
+
+Here's what usually happens:
+
+- Your SSH connection drops (or your laptop sleeps) and the process dies with it.
+- Even with tmux or screen, a server reboot, OOM kill, or unhandled error can wipe the session entirely.
+- Context doesn't survive restarts automatically. Claude Code has a `--continue` flag that can resume the most recent conversation, but you have to invoke it manually, re-orient the agent, and hope it picks up where it left off cleanly. More often than not, you're re-explaining the task.
+- There's no built-in heartbeat or auto-recovery. If something breaks at 2 a.m., it just stays broken until you notice.
+
+The result? You end up treating a coding agent like a houseplant that needs constant watering. You check on it, restart it, re-brief it, and hope it didn't lose the thread.
+
+Most of the "run it 24/7" advice online is really just a collection of terminal hacks, tmux sessions, supervisor scripts, and keep-alive loops, all of which reduce the babysitting but never eliminate it.
+
+They work until they don't. And when they don't, you're back to debugging your debugging tools.
+
+This is the hidden tax of running Claude Code the traditional way.
+
+## Practical Ways to Keep Claude Code Running Longer
+
+If you're determined to stay in the terminal, there are several established patterns people use to reduce how often they have to restart Claude Code.
+
+None of them are truly hands-off, but they do buy you more uptime than a raw interactive session.
+
+### Session Persistence with screen or tmux
+
+The most common first step is detaching your session from the terminal so it survives SSH disconnects or laptop sleep.
+
+- screen (older, simpler) and tmux (more powerful, modern default) both let you start Claude Code inside a detachable session.
+- You can detach (Ctrl+B D in tmux), close your laptop, and reconnect later to reattach.
+- The process keeps running on the remote machine as long as the machine itself stays up.
+
+Limitation: These tools only protect against terminal detachment. A server reboot, OOM killer, or uncaught crash will still terminate the session. You'll come back to a dead process and need to restart Claude Code manually (then use `--continue` if you want to resume the last conversation).
+
+### nohup, disown, and Background Processes
+
+For quick-and-dirty persistence without a full multiplexer:
+
+```bash
+nohup claude [your prompt] > output.log 2>&1 &
+disown
+```
+
+This tells the shell to ignore hangup signals and run the process in the background.
+
+Limitation: Still vulnerable to machine-level events (reboots, OOM, crashes). No automatic restart. Logs help with debugging but don't restore state.
+
+### Systemd Services (Linux) or launchd (macOS)
+
+For a more robust setup, wrap Claude Code in a service manager so the OS treats it like any other long-running daemon.
+
+- On Linux you can write a systemd unit file with `Restart=always` or `Restart=on-failure`.
+- On macOS, launchd plists give you similar keep-alive behavior.
+
+This survives SSH drops and some crashes better than raw tmux.
+
+Limitation: Still requires you to maintain the service definition, handle log rotation, manage dependencies, and monitor for silent failures. Not zero-maintenance.
+
+### Docker Containers and Restart Policies
+
+Containerizing the environment gives you isolation and a clean restart policy:
+
+```bash
+docker run -d --restart unless-stopped your-claude-image
+```
+
+You can combine this with tmux inside the container or run it as a service.
+
+Limitation: You're now managing Dockerfiles, image updates, volume mounts for context, and container orchestration. One more layer that can break.
+
+### Cloud VMs or Dedicated Servers
+
+The nuclear option is to spin up a cheap cloud VM (Hetzner, DigitalOcean, AWS, etc.), install Claude Code, and leave it running 24/7.
+
+You get real uptime (assuming the provider stays healthy) and can combine it with any of the above tools.
+
+Limitation: Now you have infrastructure to pay for, secure, update, and monitor. Cost, SSH keys, firewall rules, and occasional provider maintenance all become your problem.
+
+These approaches all reduce the babysitting burden compared to a raw terminal session. But they share the same core issues: manual restarts, fragile context recovery (even with `--continue`), and ongoing operational overhead.
+
+Most developers eventually hit a point where the maintenance tax outweighs the benefit, and that's where a different approach starts to look attractive.
+
+## How to Run Claude Code 24/7 on Duet
+
+Getting Claude Code running 24/7 on Duet takes just a few minutes and requires zero infrastructure setup.
+
+### Create your Duet server
+
+Head to [duet.so](/) and sign up (or log in). Every account gets its own dedicated server environment, this is where your agents will live and run persistently.
+
+### Connect Claude Code
+
+Inside your Duet server you can install and run Claude Code exactly as you would in any terminal. The difference is that this terminal lives on a server that stays up 24/7.
+
+```bash
+# Example: install and start Claude Code inside your Duet server
+claude --help
+```
+
+You can start agents, give them tasks, and detach, they'll keep working even if you close your browser or laptop.
+
+### Set up recurring or long-running work
+
+Duet supports running agents as background processes or scheduled tasks. You can:
+
+- Kick off a long-running coding or research task and leave it
+- Set up recurring agent runs (e.g., daily code reviews, monitoring jobs)
+- Use Duet's built-in memory so agents retain context across restarts
+
+No tmux, no systemd unit files, no Docker restart policies.
+
+### Monitor and collaborate
+
+Agent work is visible in durable Duet sessions. Teammates can follow session events, review outputs, or continue the work without needing SSH access. The durable event history remains attached to the session.
+
+### Final Step
+
+Your Claude Code agents now run on infrastructure designed for persistence. When you come back hours or days later, the work is still there, no manual `--continue` flags, no lost context, no surprise crashes.
+
+The entire flow is deliberately minimal: sign up, connect Claude Code, let it run. No provisioning, no maintenance, no hidden DevOps work.
+
+## Terminal Hacks vs. Duet
+
+Here's how the two approaches stack up in practice:
+
+- If you enjoy tinkering with infrastructure and want full control over every layer, the terminal route still works, just expect to keep paying the maintenance tax.
+- If your goal is "Claude Code that actually runs while I'm not looking," Duet removes the entire category of problems instead of patching around them.
+
+Many developers who try both end up settling on Duet for anything that needs to run longer than a single focused session. If you want to see the managed path in detail, here is how to [run Claude Code in the cloud](/blog/how-to-run-claude-code-in-the-cloud).
+
+## When Terminal Still Makes Sense
+
+Not every use case needs a persistent server. Here's a quick decision framework.
+
+Stick with terminal hacks when:
+
+- You're doing short, focused sessions (a few hours at most)
+- You're already comfortable with tmux or Docker and the maintenance overhead doesn't bother you
+- You need full control over the environment (specific OS packages, custom networking, air-gapped setups)
+- Budget is extremely tight and you already have spare VMs or local hardware
+
+Switch to Duet when:
+
+- You want agents running overnight, over weekends, or across days without checking in
+- You value your time more than the cost of a managed server
+- You work with a team and need shared visibility without sharing SSH credentials
+- You've already spent more time babysitting processes than actually building
+- You want to test an always-on agent without first becoming a part-time sysadmin
+
+The pattern most developers follow is simple. Start in the terminal, feel the friction, then move to Duet once the maintenance tax becomes obvious. There's no shame in either path, the right choice is the one that lets you ship without the tool fighting you.
+
+## Our Verdict
+
+Claude Code is powerful, but it was designed for focused, interactive terminal sessions, not for running unattended. The terminal hacks (tmux, systemd, Docker, VMs) can stretch it further, but they all share the same hidden cost: you become the babysitter.
+
+Duet flips the model. Instead of bolting persistence onto a tool that wasn't built for it, you get an always-on server environment where Claude Code (and any other agent) simply stays alive. No SSH, no config files, no `--continue` flags, no 2 a.m. restarts. Just agents that keep working while you're not looking.
+
+If you've ever come back to a dead session and wondered why this has to be so fragile, you already know the problem. The solution is choosing infrastructure that was designed for 24/7 from day one.
+
+Ready to stop babysitting your Claude Code?
+
+Try Duet free, spin up your first always-on server and connect Claude Code in under two minutes. No credit card, no infrastructure to manage, no maintenance tax.
+
+## Frequently Asked Questions
+
+### Can Claude Code run without a terminal?
+
+Not on its own. Claude Code is a terminal-first CLI built for interactive sessions, so it needs an active shell to run. To use it without keeping a terminal open, you host it on a persistent server (a cloud VM or a managed environment like Duet) where the process stays alive after you close your laptop.
+
+### Does Claude Code work with tmux?
+
+Yes. Running Claude Code inside tmux (or screen) is the most common way to keep a session alive after an SSH disconnect. tmux protects against terminal detachment, but not against server reboots, OOM kills, or crashes, so it buys you uptime rather than true hands-off 24/7 operation.
+
+### How do I keep Claude Code running overnight?
+
+Detach the session from your terminal so it survives disconnects. The usual options are tmux or screen, a systemd or launchd service with auto-restart, a Docker container with a restart policy, or a persistent server like Duet that stays up 24/7 with none of that setup.
+
+### Is Claude Code available as a cloud service?
+
+Anthropic ships Claude Code as a local CLI, not a hosted service. To run it in the cloud you install it on your own server, or use a managed environment like Duet, which gives every account a persistent always-on server where Claude Code keeps running after you log off.
+
+### What happens to my Claude Code session when SSH disconnects?
+
+By default the process dies with the connection and the session is lost. tmux or screen keep it alive through an SSH drop, and a persistent server keeps it running regardless. Claude Code's `--continue` flag can resume the most recent conversation, but only if the process and its state survived.
+
+### Can you run Claude Code 24/7 without any maintenance?
+
+Yes, if you run it on Duet. The server stays up, the agent keeps its state, and you don't need to restart processes or manage infrastructure. Terminal setups can get close with enough workarounds, but they always require some level of monitoring.
+
+### How is Duet different from just using a VPS?
+
+A VPS gives you a machine; you still have to install Claude Code, set up tmux or systemd, handle updates, manage logs, and deal with crashes. Duet gives you the same always-on environment with all of that already handled. No SSH, no config files, no maintenance.
+
+### Does Duet work with other coding agents besides Claude?
+
+Yes. Duet is agent-agnostic, you can run Claude Code, Cursor, Aider, or any terminal-based agent inside your persistent server. The 24/7 behavior comes from the server, not the specific tool.
+
+### What happens if my laptop is off while using Duet?
+
+Nothing changes. Your Duet server runs independently of your local machine. Close your laptop, shut down your Wi-Fi, go on vacation, the agents keep working.
+
+### Is there a free way to test Duet?
+
+Duet offers a 7-day free trial so you can spin up a server and try running Claude Code 24/7 before choosing a monthly plan. Most people know within the first session whether the persistent model fits their workflow.

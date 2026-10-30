@@ -1,0 +1,9 @@
+bun test v1.3.14 (0d9b296a)
+
+packages/agent/test/connected-provider-bundled-oauth.test.ts:
+(pass) the registered Codex OAuth flow refreshes with the patched scope and rotated credential [1.25ms]
+
+ 1 pass
+ 0 fail
+ 4 expect() calls
+Ran 1 test across 1 file. [67.00ms]

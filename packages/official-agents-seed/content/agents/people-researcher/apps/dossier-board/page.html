@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dossier Board</title>
+    <script>
+      const requestedTheme = new URLSearchParams(location.search).get('theme')
+      if (requestedTheme === 'light' || requestedTheme === 'dark') {
+        document.documentElement.dataset.theme = requestedTheme
+      }
+    </script>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --canvas: #f2f0e9;
+        --surface: rgba(255, 255, 255, 0.78);
+        --solid: #fffefa;
+        --ink: #17201f;
+        --muted: #68716e;
+        --line: rgba(23, 32, 31, 0.13);
+        --teal: #087f71;
+        --teal-soft: #d8f3ec;
+        --amber: #d97a16;
+        --amber-soft: #fff0d6;
+        --blue: #3457d5;
+        --blue-soft: #e4e8ff;
+        --shadow: 0 22px 70px rgba(43, 53, 49, 0.1);
+      }
+
+      :root[data-theme='dark'] {
+        --canvas: #111716;
+        --surface: rgba(27, 35, 33, 0.86);
+        --solid: #1c2422;
+        --ink: #eff5f2;
+        --muted: #a5b0ac;
+        --line: rgba(239, 245, 242, 0.13);
+        --teal: #62dbc6;
+        --teal-soft: #193d37;
+        --amber: #ffb457;
+        --amber-soft: #49331d;
+        --blue: #9bacff;
+        --blue-soft: #29325b;
+        --shadow: 0 22px 70px rgba(0, 0, 0, 0.32);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) {
+          --canvas: #111716;
+          --surface: rgba(27, 35, 33, 0.86);
+          --solid: #1c2422;
+          --ink: #eff5f2;
+          --muted: #a5b0ac;
+          --line: rgba(239, 245, 242, 0.13);
+          --teal: #62dbc6;
+          --teal-soft: #193d37;
+          --amber: #ffb457;
+          --amber-soft: #49331d;
+          --blue: #9bacff;
+          --blue-soft: #29325b;
+          --shadow: 0 22px 70px rgba(0, 0, 0, 0.32);
+        }
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        min-width: 0;
+        min-height: 100vh;
+        margin: 0;
+        overflow-x: hidden;
+        background:
+          radial-gradient(circle at 12% 3%, color-mix(in srgb, var(--teal) 14%, transparent), transparent 26rem),
+          radial-gradient(circle at 94% 90%, color-mix(in srgb, var(--amber) 11%, transparent), transparent 30rem),
+          var(--canvas);
+        color: var(--ink);
+        font: 15px/1.5 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      button { color: inherit; font: inherit; }
+      .shell { width: min(100% - 2rem, 88rem); margin: 0 auto; padding: 1.3rem 0 3rem; }
+      header { display: flex; align-items: end; justify-content: space-between; gap: 1rem; padding: 1rem 0 1.7rem; }
+      .eyebrow { margin: 0 0 .35rem; color: var(--teal); font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+      h1 { margin: 0; font: 500 clamp(2.2rem, 4vw, 4.25rem)/.98 ui-serif, Georgia, serif; letter-spacing: -.05em; }
+      .live { display: inline-flex; align-items: center; gap: .5rem; color: var(--muted); font-size: .78rem; font-weight: 700; }
+      .live::before { width: .52rem; height: .52rem; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 .24rem color-mix(in srgb, var(--teal) 18%, transparent); content: ''; }
+      .layout { display: grid; grid-template-columns: minmax(16rem, .72fr) minmax(0, 2fr); gap: 1rem; align-items: start; }
+      .panel { border: 1px solid var(--line); border-radius: 1.35rem; background: var(--surface); box-shadow: var(--shadow); backdrop-filter: blur(18px); }
+      .rail { position: sticky; top: 1rem; overflow: hidden; }
+      .panel-head { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.05rem; border-bottom: 1px solid var(--line); }
+      .panel-head strong { font-size: .82rem; letter-spacing: .02em; }
+      .count { color: var(--muted); font-size: .72rem; }
+      #people { display: grid; gap: .42rem; padding: .55rem; }
+      .person-button { display: flex; align-items: center; gap: .7rem; width: 100%; min-height: 4.25rem; padding: .8rem; border: 1px solid transparent; border-radius: .95rem; background: transparent; text-align: left; cursor: pointer; }
+      .person-button:hover, .person-button.active { border-color: var(--line); background: var(--solid); }
+      .person-copy { min-width: 0; }
+      .person-name { overflow: hidden; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+      .person-role { display: block; margin-top: .2rem; overflow: hidden; color: var(--muted); font-size: .74rem; text-overflow: ellipsis; white-space: nowrap; }
+      .avatar { flex: 0 0 auto; width: 2.6rem; height: 2.6rem; border: 1px solid var(--line); border-radius: 50%; background: var(--teal-soft); color: var(--teal); font-size: .82rem; font-weight: 800; object-fit: cover; }
+      .avatar-fallback { display: inline-flex; align-items: center; justify-content: center; }
+      .hero .avatar { width: 5.5rem; height: 5.5rem; font-size: 1.6rem; }
+      .empty { padding: 2.5rem 1.4rem; color: var(--muted); text-align: center; }
+      .empty strong { display: block; margin-bottom: .35rem; color: var(--ink); }
+      .detail { min-height: 36rem; overflow: hidden; }
+      .hero { padding: clamp(1.25rem, 3vw, 2rem); border-bottom: 1px solid var(--line); background: linear-gradient(135deg, color-mix(in srgb, var(--teal-soft) 58%, transparent), transparent 65%); }
+      .hero-top { display: flex; align-items: center; gap: 1.1rem; }
+      h2 { margin: 0; font: 520 clamp(1.8rem, 3vw, 2.8rem)/1 ui-serif, Georgia, serif; letter-spacing: -.035em; }
+      .hero-role { margin-top: .4rem; font-size: .95rem; }
+      .identity { margin-top: .55rem; color: var(--muted); font-size: .75rem; }
+      .identity a { color: var(--teal); }
+      .photo-note { margin-top: .3rem; color: var(--muted); font-size: .7rem; }
+      .body { padding: clamp(1rem, 2.4vw, 1.5rem); }
+      .section-title { display: flex; align-items: center; justify-content: space-between; margin: 1.45rem 0 .7rem; }
+      .section-title:first-child { margin-top: 0; }
+      h3 { margin: 0; font-size: .82rem; letter-spacing: .05em; text-transform: uppercase; }
+      .summary { margin: 0; color: var(--muted); }
+      .channels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
+      .channel { min-width: 0; padding: .9rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--solid); }
+      .channel-head { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+      .channel-label { font-weight: 760; }
+      .chip { padding: .2rem .48rem; border-radius: 999px; background: var(--blue-soft); color: var(--blue); font-size: .64rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+      .chip.verified { background: var(--teal-soft); color: var(--teal); }
+      .chip.unverified { background: var(--amber-soft); color: var(--amber); }
+      .channel-value { margin: .65rem 0 .35rem; overflow-wrap: anywhere; font-size: 1rem; }
+      .channel-value.missing { color: var(--muted); }
+      .channel-note { color: var(--muted); font-size: .7rem; }
+      .enrich { margin-top: .6rem; padding: .5rem .85rem; border: 1px solid var(--teal); border-radius: 999px; background: transparent; color: var(--teal); font-size: .78rem; font-weight: 750; cursor: pointer; }
+      .enrich:hover:enabled { background: var(--teal-soft); }
+      .enrich:disabled { border-color: var(--line); color: var(--muted); cursor: progress; }
+      .roles { display: grid; gap: .5rem; }
+      .role { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: .75rem .9rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--solid); }
+      .role-title { font-weight: 750; }
+      .role-company { display: block; margin-top: .15rem; color: var(--muted); font-size: .78rem; }
+      .role-dates { flex: 0 0 auto; color: var(--muted); font-size: .74rem; font-variant-numeric: tabular-nums; }
+      .highlights { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+      .highlight { padding: .75rem .9rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--solid); }
+      .highlight-date { color: var(--muted); font-size: .72rem; font-weight: 750; }
+      .highlight a { color: var(--teal); font-size: .74rem; }
+      .error { margin: 1rem; padding: .8rem; border-radius: .8rem; background: var(--amber-soft); color: var(--amber); }
+      @media (max-width: 760px) {
+        .shell { width: min(100% - 1rem, 88rem); padding-top: .5rem; }
+        header { align-items: center; padding: .8rem .35rem 1rem; }
+        .layout { grid-template-columns: 1fr; }
+        .rail { position: static; }
+        #people { display: flex; overflow-x: auto; }
+        .person-button { min-width: 14rem; }
+        .channels { grid-template-columns: 1fr; }
+        .detail { min-height: 28rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <div><p class="eyebrow">People research</p><h1>Dossier Board</h1></div>
+        <div class="live">Live from disk</div>
+      </header>
+      <div class="layout">
+        <aside class="panel rail">
+          <div class="panel-head"><strong>People</strong><span id="count" class="count">0 researched</span></div>
+          <div id="people"><div class="empty">Loading people…</div></div>
+        </aside>
+        <section id="detail" class="panel detail"><div class="empty"><strong>No one selected</strong>Research a person to build their one-pager.</div></section>
+      </div>
+    </main>
+    <script type="module">
+      const peopleNode = document.querySelector('#people')
+      const detailNode = document.querySelector('#detail')
+      const countNode = document.querySelector('#count')
+      let people = []
+      let selectedId
+
+      const formatDate = value => new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' }).format(new Date(value))
+      const initials = name => name.split(/\s+/).slice(0, 2).map(part => part[0] || '').join('').toUpperCase()
+      const confirmations = {
+        'profile-url': 'their profile link',
+        'verified-search': 'a verified search',
+        'user-choice': 'your choice',
+      }
+      const el = (tag, className, text) => {
+        const node = document.createElement(tag)
+        if (className) node.className = className
+        if (text !== undefined) node.textContent = text
+        return node
+      }
+      const avatarNode = person => {
+        if (!person.avatar) {
+          const fallback = el('span', 'avatar avatar-fallback', initials(person.name))
+          fallback.setAttribute('aria-hidden', 'true')
+          return fallback
+        }
+        const image = el('img', 'avatar')
+        image.src = `/api/people/${person.id}/avatar?v=${encodeURIComponent(person.avatar.capturedAt)}`
+        image.alt = `${person.name}, from their ${person.avatar.source === 'x' ? 'X' : 'LinkedIn'} profile`
+        return image
+      }
+
+      async function refresh() {
+        try {
+          const response = await fetch('/api/people')
+          if (!response.ok) throw new Error(`API returned ${response.status}`)
+          people = (await response.json()).people
+          if (!people.some(person => person.id === selectedId)) selectedId = people[0]?.id
+          render()
+        } catch (error) {
+          detailNode.replaceChildren(el('div', 'error', `Could not load people: ${error.message}`))
+        }
+      }
+
+      async function enrichPhone(id) {
+        try {
+          const response = await fetch(`/api/people/${id}/phone`, { method: 'POST' })
+          if (!response.ok) {
+            const body = await response.json().catch(() => ({}))
+            detailNode.prepend(el('div', 'error', body.error || `The lookup could not start (${response.status}).`))
+            return
+          }
+          await refresh()
+        } catch (error) {
+          detailNode.prepend(el('div', 'error', `The lookup could not start: ${error.message}`))
+        }
+      }
+
+      function render() {
+        countNode.textContent = `${people.length} researched`
+        if (people.length === 0) {
+          peopleNode.replaceChildren(el('div', 'empty', 'No one researched yet.'))
+          detailNode.innerHTML = '<div class="empty"><strong>No one selected</strong>Research a person to build their one-pager.</div>'
+          return
+        }
+        peopleNode.replaceChildren(...people.map(person => {
+          const button = el('button', `person-button${person.id === selectedId ? ' active' : ''}`)
+          button.type = 'button'
+          button.addEventListener('click', () => { selectedId = person.id; render() })
+          const copy = el('div', 'person-copy')
+          copy.append(el('span', 'person-name', person.name), el('span', 'person-role', person.title || 'Role unfound'))
+          button.append(avatarNode(person), copy)
+          return button
+        }))
+        renderDetail(people.find(person => person.id === selectedId))
+      }
+
+      function renderEmail(person) {
+        const card = el('div', 'channel')
+        const head = el('div', 'channel-head')
+        head.append(el('span', 'channel-label', 'Email'))
+        const email = person.email
+        if (email?.status === 'found') {
+          const verified = email.verification === 'DELIVERABLE'
+          head.append(el('span', `chip ${verified ? 'verified' : 'unverified'}`, email.verification))
+          card.append(head, el('div', 'channel-value', email.address))
+          card.append(el('div', 'channel-note', `${verified ? 'Verified deliverable' : 'Not verified — the provider could not confirm it'} · retrieved ${formatDate(email.retrievedAt)}`))
+        } else if (email?.status === 'unfound') {
+          head.append(el('span', 'chip unverified', 'unfound'))
+          card.append(head, el('div', 'channel-value missing', 'No address found'))
+          card.append(el('div', 'channel-note', `${email.note || 'The provider returned no address.'} · checked ${formatDate(email.retrievedAt)}`))
+        } else {
+          card.append(head, el('div', 'channel-value missing', 'Not looked up yet'))
+        }
+        return card
+      }
+
+      function renderPhone(person) {
+        const card = el('div', 'channel')
+        const head = el('div', 'channel-head')
+        head.append(el('span', 'channel-label', 'Phone'))
+        const phone = person.phone
+        if (phone.state === 'found') {
+          head.append(el('span', 'chip verified', phone.region || 'found'))
+          card.append(head, el('div', 'channel-value', phone.number))
+          card.append(el('div', 'channel-note', `Retrieved ${formatDate(phone.retrievedAt)}`))
+          return card
+        }
+        if (phone.state === 'unfound') {
+          head.append(el('span', 'chip unverified', 'unfound'))
+          card.append(head, el('div', 'channel-value missing', 'No number found'))
+          card.append(el('div', 'channel-note', `Checked ${formatDate(phone.retrievedAt)}`))
+          return card
+        }
+        card.append(head)
+        if (phone.state === 'enriching') {
+          card.append(el('div', 'channel-value missing', 'Looking…'))
+          const button = el('button', 'enrich', 'Looking up…')
+          button.type = 'button'
+          button.disabled = true
+          card.append(button)
+          return card
+        }
+        card.append(el('div', 'channel-value missing', phone.state === 'failed' ? 'Lookup failed' : 'Not looked up'))
+        if (phone.state === 'failed') card.append(el('div', 'channel-note', phone.reason))
+        const button = el('button', 'enrich', phone.state === 'failed' ? 'Try the phone lookup again' : 'Enrich phone')
+        button.type = 'button'
+        button.addEventListener('click', () => enrichPhone(person.id))
+        card.append(button, el('div', 'channel-note', 'A phone number costs far more than the rest of this page, so it is only looked up when you ask.'))
+        return card
+      }
+
+      function renderDetail(person) {
+        const hero = el('div', 'hero')
+        const heroTop = el('div', 'hero-top')
+        const title = el('div')
+        title.append(el('h2', '', person.name))
+        title.append(el('div', 'hero-role', [person.title, person.company].filter(Boolean).join(' at ') || 'Role unfound'))
+        if (person.identity) {
+          const identity = el('div', 'identity')
+          const link = el('a', '', person.identity.profileUrl)
+          link.href = person.identity.profileUrl
+          link.target = '_blank'
+          link.rel = 'noreferrer'
+          identity.append(document.createTextNode(`Identity confirmed by ${confirmations[person.identity.confirmedBy] || 'research'} · `), link)
+          title.append(identity)
+        } else {
+          title.append(el('div', 'identity', 'Identity not confirmed yet'))
+        }
+        if (person.avatar) {
+          title.append(el('div', 'photo-note', `Photo from ${person.avatar.source === 'x' ? 'X' : 'LinkedIn'} · ${person.avatar.sourceUrl}`))
+        }
+        heroTop.append(avatarNode(person), title)
+        hero.append(heroTop)
+
+        const body = el('div', 'body')
+        if (person.summary) {
+          const summaryTitle = el('div', 'section-title'); summaryTitle.append(el('h3', '', 'What they own'))
+          body.append(summaryTitle, el('p', 'summary', person.summary))
+        }
+
+        const channelsTitle = el('div', 'section-title'); channelsTitle.append(el('h3', '', 'Contact'))
+        const channels = el('div', 'channels')
+        channels.append(renderEmail(person), renderPhone(person))
+        body.append(channelsTitle, channels)
+
+        const rolesTitle = el('div', 'section-title')
+        rolesTitle.append(el('h3', '', 'Work history'), el('span', 'count', `${person.roles.length} roles`))
+        const roles = el('div', 'roles')
+        if (person.roles.length === 0) roles.append(el('div', 'empty', 'No work history retrieved yet.'))
+        for (const role of person.roles) {
+          const row = el('div', 'role')
+          const copy = el('div')
+          copy.append(el('span', 'role-title', role.title), el('span', 'role-company', role.company))
+          row.append(copy, el('span', 'role-dates', `${role.start || '—'} → ${role.end || 'present'}`))
+          roles.append(row)
+        }
+        body.append(rolesTitle, roles)
+
+        const activityTitle = el('div', 'section-title'); activityTitle.append(el('h3', '', 'Public activity'))
+        body.append(activityTitle)
+        if (person.highlights.length === 0) {
+          body.append(el('div', 'empty', 'No public activity retrieved.'))
+        } else {
+          const list = el('ul', 'highlights')
+          for (const highlight of person.highlights) {
+            const item = el('li', 'highlight')
+            item.append(el('div', 'highlight-date', formatDate(highlight.date)), el('div', '', highlight.summary))
+            const link = el('a', '', highlight.url)
+            link.href = highlight.url
+            link.target = '_blank'
+            link.rel = 'noreferrer'
+            item.append(link)
+            list.append(item)
+          }
+          body.append(list)
+        }
+        detailNode.replaceChildren(hero, body)
+      }
+
+      new EventSource('/events').onmessage = () => refresh()
+      refresh()
+    </script>
+  </body>
+</html>

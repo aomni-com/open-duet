@@ -1,0 +1,21 @@
+{
+  // Vercel's @vercel/node builder type-checks this app under its OWN compiler
+  // environment and does NOT resolve our `extends`, so the deploy-critical
+  // options are set explicitly here. `lib: ["ESNext"]` drops the browser DOM
+  // lib: on Vercel, DOM's Response/ReadableStream definitions collide with
+  // @types/node's, producing false type errors that fail the build. The fetch
+  // runtime globals come from @types/node instead. Test files legitimately use
+  // DOM Web-API types, so `check-types` runs against tsconfig.check.json (which
+  // re-adds DOM); @vercel/node only type-checks the traced entry, never tests.
+  "extends": "@repo/typescript-config/base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["node", "bun"],
+    "allowImportingTsExtensions": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ESNext"]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

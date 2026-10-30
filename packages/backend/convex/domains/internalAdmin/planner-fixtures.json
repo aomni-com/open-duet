@@ -1,0 +1,415 @@
+[
+  {
+    "id": "sole-member",
+    "input": {
+      "targetUserId": "user-target",
+      "workspaces": [
+        {
+          "workspaceId": "ws-sole",
+          "status": "active",
+          "billingUserId": "user-target",
+          "members": [
+            {
+              "membershipId": "m-sole",
+              "userId": "user-target",
+              "role": "owner",
+              "generationId": "m-sole-gen"
+            }
+          ]
+        }
+      ]
+    },
+    "expected": {
+      "canStart": true,
+      "workspaceActions": [
+        {
+          "kind": "delete_workspace",
+          "key": "workspace:ws-sole:delete",
+          "workspaceId": "ws-sole",
+          "membershipGenerationId": "m-sole-gen",
+          "membershipId": "m-sole"
+        }
+      ],
+      "identity": {
+        "kind": "retire_identity",
+        "key": "identity:user-target",
+        "userId": "user-target"
+      },
+      "retainedHistory": {
+        "kind": "retained_history",
+        "tables": [
+          "auditEvents",
+          "adminAuditEvents",
+          "creditTransactions",
+          "usageRollups",
+          "billingSettlements",
+          "billingTopups",
+          "gatewayGenerations",
+          "campaignAttributions",
+          "conversionDeliveries"
+        ]
+      },
+      "blockers": []
+    }
+  },
+  {
+    "id": "shared-non-payer",
+    "input": {
+      "targetUserId": "user-target",
+      "workspaces": [
+        {
+          "workspaceId": "ws-shared",
+          "status": "active",
+          "billingUserId": "user-payer",
+          "members": [
+            {
+              "membershipId": "m-target",
+              "userId": "user-target",
+              "role": "editor",
+              "generationId": "m-target-gen"
+            },
+            {
+              "membershipId": "m-owner",
+              "userId": "user-payer",
+              "role": "owner",
+              "generationId": "m-owner-gen"
+            }
+          ]
+        }
+      ]
+    },
+    "expected": {
+      "canStart": true,
+      "workspaceActions": [
+        {
+          "kind": "detach_membership",
+          "key": "workspace:ws-shared:membership:m-target-gen",
+          "workspaceId": "ws-shared",
+          "membershipGenerationId": "m-target-gen",
+          "membershipId": "m-target"
+        }
+      ],
+      "identity": {
+        "kind": "retire_identity",
+        "key": "identity:user-target",
+        "userId": "user-target"
+      },
+      "retainedHistory": {
+        "kind": "retained_history",
+        "tables": [
+          "auditEvents",
+          "adminAuditEvents",
+          "creditTransactions",
+          "usageRollups",
+          "billingSettlements",
+          "billingTopups",
+          "gatewayGenerations",
+          "campaignAttributions",
+          "conversionDeliveries"
+        ]
+      },
+      "blockers": []
+    }
+  },
+  {
+    "id": "shared-payer-one-owner",
+    "input": {
+      "targetUserId": "user-target",
+      "workspaces": [
+        {
+          "workspaceId": "ws-transfer",
+          "status": "active",
+          "billingUserId": "user-target",
+          "members": [
+            {
+              "membershipId": "m-target",
+              "userId": "user-target",
+              "role": "owner",
+              "generationId": "m-target-gen"
+            },
+            {
+              "membershipId": "m-owner",
+              "userId": "user-owner",
+              "role": "owner",
+              "generationId": "m-owner-gen"
+            }
+          ]
+        }
+      ]
+    },
+    "expected": {
+      "canStart": true,
+      "workspaceActions": [
+        {
+          "kind": "transfer_billing_then_detach",
+          "key": "workspace:ws-transfer:membership:m-target-gen",
+          "workspaceId": "ws-transfer",
+          "membershipGenerationId": "m-target-gen",
+          "membershipId": "m-target",
+          "newBillingUserId": "user-owner"
+        }
+      ],
+      "identity": {
+        "kind": "retire_identity",
+        "key": "identity:user-target",
+        "userId": "user-target"
+      },
+      "retainedHistory": {
+        "kind": "retained_history",
+        "tables": [
+          "auditEvents",
+          "adminAuditEvents",
+          "creditTransactions",
+          "usageRollups",
+          "billingSettlements",
+          "billingTopups",
+          "gatewayGenerations",
+          "campaignAttributions",
+          "conversionDeliveries"
+        ]
+      },
+      "blockers": []
+    }
+  },
+  {
+    "id": "shared-payer-zero-owners",
+    "input": {
+      "targetUserId": "user-target",
+      "workspaces": [
+        {
+          "workspaceId": "ws-no-owner",
+          "status": "active",
+          "billingUserId": "user-target",
+          "members": [
+            {
+              "membershipId": "m-target",
+              "userId": "user-target",
+              "role": "owner",
+              "generationId": "m-target-gen"
+            },
+            {
+              "membershipId": "m-editor",
+              "userId": "user-editor",
+              "role": "editor",
+              "generationId": "m-editor-gen"
+            }
+          ]
+        }
+      ]
+    },
+    "expected": {
+      "canStart": false,
+      "workspaceActions": [
+        {
+          "kind": "block_billing_transfer",
+          "key": "workspace:ws-no-owner:membership:m-target-gen",
+          "workspaceId": "ws-no-owner",
+          "membershipGenerationId": "m-target-gen",
+          "membershipId": "m-target",
+          "reason": "expected exactly one remaining owner, found 0"
+        }
+      ],
+      "identity": {
+        "kind": "retire_identity",
+        "key": "identity:user-target",
+        "userId": "user-target"
+      },
+      "retainedHistory": {
+        "kind": "retained_history",
+        "tables": [
+          "auditEvents",
+          "adminAuditEvents",
+          "creditTransactions",
+          "usageRollups",
+          "billingSettlements",
+          "billingTopups",
+          "gatewayGenerations",
+          "campaignAttributions",
+          "conversionDeliveries"
+        ]
+      },
+      "blockers": [
+        {
+          "code": "billing_owner_count",
+          "workspaceId": "ws-no-owner",
+          "ownerCount": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "shared-payer-multiple-owners",
+    "input": {
+      "targetUserId": "user-target",
+      "workspaces": [
+        {
+          "workspaceId": "ws-many-owner",
+          "status": "active",
+          "billingUserId": "user-target",
+          "members": [
+            {
+              "membershipId": "m-target",
+              "userId": "user-target",
+              "role": "owner",
+              "generationId": "m-target-gen"
+            },
+            {
+              "membershipId": "m-owner-a",
+              "userId": "user-a",
+              "role": "owner",
+              "generationId": "m-owner-a-gen"
+            },
+            {
+              "membershipId": "m-owner-b",
+              "userId": "user-b",
+              "role": "owner",
+              "generationId": "m-owner-b-gen"
+            }
+          ]
+        }
+      ]
+    },
+    "expected": {
+      "canStart": false,
+      "workspaceActions": [
+        {
+          "kind": "block_billing_transfer",
+          "key": "workspace:ws-many-owner:membership:m-target-gen",
+          "workspaceId": "ws-many-owner",
+          "membershipGenerationId": "m-target-gen",
+          "membershipId": "m-target",
+          "reason": "expected exactly one remaining owner, found 2"
+        }
+      ],
+      "identity": {
+        "kind": "retire_identity",
+        "key": "identity:user-target",
+        "userId": "user-target"
+      },
+      "retainedHistory": {
+        "kind": "retained_history",
+        "tables": [
+          "auditEvents",
+          "adminAuditEvents",
+          "creditTransactions",
+          "usageRollups",
+          "billingSettlements",
+          "billingTopups",
+          "gatewayGenerations",
+          "campaignAttributions",
+          "conversionDeliveries"
+        ]
+      },
+      "blockers": [
+        {
+          "code": "billing_owner_count",
+          "workspaceId": "ws-many-owner",
+          "ownerCount": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "already-deleted-workspace",
+    "input": {
+      "targetUserId": "user-target",
+      "workspaces": [
+        {
+          "workspaceId": "ws-deleted",
+          "status": "deleted",
+          "billingUserId": "user-target",
+          "members": [
+            {
+              "membershipId": "m-deleted",
+              "userId": "user-target",
+              "role": "owner",
+              "generationId": "m-deleted-gen"
+            }
+          ]
+        }
+      ]
+    },
+    "expected": {
+      "canStart": true,
+      "workspaceActions": [],
+      "identity": {
+        "kind": "retire_identity",
+        "key": "identity:user-target",
+        "userId": "user-target"
+      },
+      "retainedHistory": {
+        "kind": "retained_history",
+        "tables": [
+          "auditEvents",
+          "adminAuditEvents",
+          "creditTransactions",
+          "usageRollups",
+          "billingSettlements",
+          "billingTopups",
+          "gatewayGenerations",
+          "campaignAttributions",
+          "conversionDeliveries"
+        ]
+      },
+      "blockers": []
+    }
+  },
+  {
+    "id": "self-target",
+    "input": {
+      "targetUserId": "user-target",
+      "selfTarget": true,
+      "workspaces": [
+        {
+          "workspaceId": "ws-sole",
+          "status": "active",
+          "billingUserId": "user-target",
+          "members": [
+            {
+              "membershipId": "m-sole",
+              "userId": "user-target",
+              "role": "owner",
+              "generationId": "m-sole-gen"
+            }
+          ]
+        }
+      ]
+    },
+    "expected": {
+      "canStart": false,
+      "workspaceActions": [
+        {
+          "kind": "delete_workspace",
+          "key": "workspace:ws-sole:delete",
+          "workspaceId": "ws-sole",
+          "membershipGenerationId": "m-sole-gen",
+          "membershipId": "m-sole"
+        }
+      ],
+      "identity": {
+        "kind": "retire_identity",
+        "key": "identity:user-target",
+        "userId": "user-target"
+      },
+      "retainedHistory": {
+        "kind": "retained_history",
+        "tables": [
+          "auditEvents",
+          "adminAuditEvents",
+          "creditTransactions",
+          "usageRollups",
+          "billingSettlements",
+          "billingTopups",
+          "gatewayGenerations",
+          "campaignAttributions",
+          "conversionDeliveries"
+        ]
+      },
+      "blockers": [
+        {
+          "code": "self_target"
+        }
+      ]
+    }
+  }
+]

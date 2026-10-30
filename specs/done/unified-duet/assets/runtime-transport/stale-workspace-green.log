@@ -1,0 +1,10 @@
+bun test v1.3.14 (0d9b296a)
+
+packages/agent/benchmarks/swebench/test/swebench-packaging.test.ts:
+(pass) SWE-bench Duet packaging > carries declared dependency patches into the isolated Linux build [16.55ms]
+(pass) SWE-bench Duet packaging > loads the exact prebuilt worker artifact without rebuilding it [1.15ms]
+
+ 2 pass
+ 0 fail
+ 5 expect() calls
+Ran 2 tests across 1 file. [50.00ms]

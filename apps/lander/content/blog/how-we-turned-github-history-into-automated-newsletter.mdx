@@ -1,0 +1,131 @@
+---
+title: 'How We Automated Our Weekly Product Newsletter With AI'
+description: "Two hours to write one newsletter. Every week. Here's how Duet automated it — and how you can do the same for any recurring update."
+date: '2026-03-13'
+updatedAt: '2026-05-08'
+readTime: '6 min read'
+author:
+  name: 'Sawyer Middeleer'
+  role: 'Chief of Staff, Duet'
+  link: '/'
+category: 'productivity'
+tags: ['newsletter', 'automation', 'resend', 'ai-tools', 'workflow']
+type: 'article'
+image: '/blog/how-we-turned-github-history-into-automated-newsletter/cover.png'
+cta:
+  title: 'Your newsletter, on autopilot.'
+  subtitle: 'Duet reads your GitHub history, drafts the weekly update, and ships it to Resend. Two hours of writing, every week, gone.'
+  buttonText: 'Automate the newsletter'
+  href: '/sign-in?from=blog-automated-newsletter'
+---
+
+<Callout emoji="💡">
+**Quick Summary**
+
+This guide covers how the Duet team automated their weekly product newsletter using AI, including the workflow, tools, prompts, and time savings so you can replicate the same system for your own newsletter.
+
+</Callout>
+
+<Callout emoji="❓">
+**Questions this page answers**
+
+<ul>
+  <li>How to automate a product newsletter with AI</li>
+  <li>Best AI tools for newsletter automation</li>
+  <li>How to use AI to write a weekly newsletter</li>
+  <li>Can AI fully automate newsletter creation?</li>
+  <li>What does an automated newsletter system look like?</li>
+</ul>
+</Callout>
+
+Every week, our team ships new features.
+
+Every week, someone has to write the newsletter.
+
+Look through what changed, pick the highlights, write the copy, format the email, upload it to the email platform, send a test, tweak it, and finally hit send.
+
+It takes a couple hours. It's important work keeping users in the loop drives retention and engagement. But it's repetitive, and the information is already sitting right there in our project history.
+
+So we taught our AI agent to do it.
+
+## The Problem With Manual Newsletters
+
+Our weekly product update follows a simple pattern: look at what the team shipped, pick the top 5 things users will care about, describe them in plain language, and send it out.
+
+The inputs are predictable (what we built this week), the format is consistent (a branded email), and the audience is the same (our user list). This is exactly the kind of task AI should handle.
+
+The real friction wasn't the writing, it was the context switching. Someone had to stop what they were working on, review a week of changes, translate technical updates into language customers understand, open the email platform, format everything, test the email, and manage the back-and-forth. All for something that follows the same structure every single time.
+
+## How We Set It Up
+
+The setup was surprisingly simple. We use Resend for sending emails and Duet as our AI workspace. Here's what we did:
+
+1. Connected the email tool. We installed Resend's command-line tool in our Duet workspace and logged in. This is a one-time setup think of it like connecting a new app to your phone. Once it's linked, the AI agent can create drafts, send previews, and manage your email list without you touching the email platform.
+
+2. Taught the agent the workflow. We saved a simple Markdown playbook in workspace Files describing the newsletter process in plain English: which email list to use, what the template looks like, where to find the week's updates, and rules such as "always create a draft first; never send without approval." You don't need to write code. You're describing the process the way you'd explain it to a new team member.
+
+3. Scheduled it. We set a weekly timer (Duet has built-in scheduling) so the agent runs the workflow every Thursday morning automatically.
+
+That's it. No programming. No API integrations to build. Just connecting a tool, writing instructions, and setting a schedule.
+
+## What Happens Every Thursday
+
+Here's the workflow that runs automatically each week:
+
+### The agent reviews what shipped
+
+It looks through the team's project history from the past 7 days — every feature added, bug fixed, and improvement made. This is the raw material.
+
+### It picks the highlights and rewrites them
+
+The agent reads through everything and translates technical updates into benefits users actually care about. For example, a developer might log a change as "add infinite scroll to threads tab." The agent turns that into:
+
+> Smoother Thread Browsing Threads now load continuously as you scroll. No more clicking "load more" to find older conversations.
+
+It picks the top 5 most impactful changes, focusing on things users will notice right away rather than behind-the-scenes improvements.
+
+### It builds a branded email
+
+Using our newsletter template (with our logo, colors, button styles, and footer already baked in), the agent assembles a complete, styled email. If screenshots are available, it includes those too.
+
+### It creates a draft never sends directly
+
+This is a key safety rule we built in. The agent creates a draft in Resend and sends a preview to my inbox. It never blasts the full list without a human saying "go."
+
+### I review and give feedback
+
+A preview lands in my inbox. I look it over and can request changes in plain English — "lead with the dashboard feature instead," "remove the second screenshot," "make the intro punchier." The agent makes the edits, creates an updated draft, and sends a new preview.
+
+### I say "send it" and it goes out
+
+Once I'm happy with it, I reply "send it" and the agent sends the newsletter to our full user list. The entire back-and-forth usually takes about 5 minutes of my time down from 2 hours of manual work.
+
+## Why This Works So Well
+
+The information already exists. Every team tracks what they're working on somewhere—project management tools, shared docs, chat history, or (in our case) a code repository. The newsletter isn't new content. It's a curated summary of work that's already been done. AI is great at summarizing.
+
+The format never changes. A weekly newsletter has the same structure every time: greeting, top updates, maybe a screenshot or two, a call to action, footer. Once you define the template, the agent fills in the blanks.
+
+A human stays in the loop. The agent does the heavy lifting, but a person reviews every email before it goes out. This catches anything the AI gets wrong and lets you add your own voice. It's automation with a safety net.
+
+## You Can Set This Up Today
+
+This pattern works for any recurring communication that follows a predictable format:
+
+- Weekly product updates from your project board or changelog
+- Internal team digests summarizing what everyone accomplished
+- Customer announcements when you launch new features
+- Monthly recap emails pulling from your activity over the past 30 days
+  The key ingredients are:
+
+1. A source of information the AI can read (project history, a task board, a shared doc, meeting notes)
+1. A template that defines what the email should look like
+1. An email platform for sending (we use Resend, but any platform with a similar tool works)
+1. An AI agent that can tie it all together on a schedule
+   In Duet, this means saving an instruction file in workspace Files, connecting your email tool through Integrations, and setting the cadence. The agent handles the rest: reading updates, writing and formatting the email, and creating a draft for review.
+
+The whole setup takes about 30 minutes. After that, your newsletter writes itself every week. You just review and approve.
+
+---
+
+We built this with Duet, a cloud workspace where your AI agent has memory, tools, scheduling, and everything it needs to handle recurring work like this. If your weekly newsletter is eating hours you'd rather spend building, give it a try.

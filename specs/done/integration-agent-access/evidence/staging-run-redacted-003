@@ -1,0 +1,44 @@
+# Live staging evidence — 2026-08-02
+
+The focused journey ran against shared staging after commit `7f763089` was
+fast-forwarded onto `origin/staging`. Vercel deployment metadata reported both
+the API deployment `dpl_7gyWqLYHJC1HiFW6kV1xzUnDQKQ7` and web deployment
+`dpl_9ZpheMQpaRRLhHEcFtCy8BxpNZoY` as Ready from that exact Git SHA. The API
+build completed the repository's API-owned Convex deployment rail before the
+journey began.
+
+```text
+bun run e2e:staging -- --journey integration-agent-access
+run: staging-e2e-synthetic
+result: pass
+```
+
+The provider and runtime verdicts were all true:
+
+- root denied the selected Firecrawl toolkit;
+- child agent allowed the toolkit;
+- same-conversation Workbench context reused;
+- another conversation isolated its Workbench and provider session;
+- a policy edit left the old snapshot unchanged;
+- the next turn received the new policy;
+- returning to the prior fingerprint reused its original provider session;
+- disconnect/reconnect retained policy;
+- clearing the policy restored All.
+
+The journey also required connection management, remote Workbench, and remote
+Bash to remain present. Same-conversation and return-to-prior turns each had to
+produce a fresh successful namespaced Workbench tool call whose output contained
+the existing sentinel; historical configuration rows could not satisfy the
+verdict.
+
+Cleanup passed with zero orphans. It verified deletion of the ephemeral user,
+workspace, durable agent, three Duet sessions, two Firecrawl connected accounts,
+and four Tool Router sessions. The artifact credential scan passed before the
+journey reported success.
+
+Two earlier attempts exposed a harness-only browser race: the server-confirmed
+policy response replaced the native disclosure node, closing the editor before
+the next checkbox assertion. The journey now reopens the same connected row
+after each successful save. A later attempt correctly rejected a cold staging
+delivery that returned `queued`; the passing run retained the stronger
+`accepted` requirement.

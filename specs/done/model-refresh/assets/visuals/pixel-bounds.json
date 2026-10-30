@@ -1,0 +1,78 @@
+[
+  {
+    "viewport": "desktop",
+    "name": "compose-bar-provider-models",
+    "width": 1440,
+    "height": 900,
+    "changedPixels": 283,
+    "bounds": {
+      "minx": 876,
+      "miny": 571,
+      "maxx": 939,
+      "maxy": 694
+    },
+    "crop": {
+      "x": 813,
+      "y": 475,
+      "w": 448,
+      "h": 238
+    }
+  },
+  {
+    "viewport": "desktop",
+    "name": "settings-provider-models",
+    "width": 1440,
+    "height": 900,
+    "changedPixels": 286,
+    "bounds": {
+      "minx": 434,
+      "miny": 750,
+      "maxx": 1066,
+      "maxy": 873
+    },
+    "crop": {
+      "x": 940,
+      "y": 654,
+      "w": 448,
+      "h": 238
+    }
+  },
+  {
+    "viewport": "mobile",
+    "name": "compose-bar-provider-models",
+    "width": 390,
+    "height": 844,
+    "changedPixels": 283,
+    "bounds": {
+      "minx": 75,
+      "miny": 650,
+      "maxx": 138,
+      "maxy": 805
+    },
+    "crop": {
+      "x": 13,
+      "y": 535,
+      "w": 364,
+      "h": 294
+    }
+  },
+  {
+    "viewport": "mobile",
+    "name": "settings-provider-models",
+    "width": 390,
+    "height": 844,
+    "changedPixels": 283,
+    "bounds": {
+      "minx": 75,
+      "miny": 650,
+      "maxx": 138,
+      "maxy": 805
+    },
+    "crop": {
+      "x": 13,
+      "y": 535,
+      "w": 364,
+      "h": 294
+    }
+  }
+]

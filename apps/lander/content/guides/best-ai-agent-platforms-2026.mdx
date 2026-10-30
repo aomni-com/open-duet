@@ -1,0 +1,465 @@
+---
+title: 'The 10 Best AI Agent Platforms for Developers in 2026 — Ranked by Fit'
+metaTitle: 'Best AI Agent Platforms for Developers 2026 | Duet'
+description: 'The 10 best AI coding agent platforms compared — Cursor, Devin, Claude Code, Duet, v0, and more. Ranked by fit for solo devs, teams, and enterprises.'
+date: '2026-06-09'
+updatedAt: '2026-06-09'
+author:
+  name: 'Duet'
+  avatar: '/mascots/3.png'
+category: 'guides'
+tags:
+  [
+    'ai-agent-platform',
+    'ai-coding-agent',
+    'cursor',
+    'devin',
+    'claude-code',
+    'comparison',
+    'developer-tools',
+    '2026',
+  ]
+type: 'guide'
+image: '/guides/best-ai-agent-platforms-2026/cover.png'
+relatedPosts:
+  - slug: 'claude-code-vs-claude-cowork'
+    context: 'Deep dive on Claude Code vs Cowork mentioned in the platform reviews.'
+  - slug: 'duet-vs-codex'
+    context: 'Full Duet vs OpenAI Codex head-to-head comparison.'
+  - slug: 'duet-vs-claude-code'
+    context: 'Full Duet vs Claude Code comparison.'
+howTo:
+  name: 'How to Choose the Right AI Agent Platform for Your Team'
+  description: 'Five questions to answer before committing to an AI agent development platform — covering execution environment, team model, technical level, compliance, and build vs. run needs.'
+  steps:
+    - name: 'Decide if you need always-on execution'
+      text: 'If the agent must keep working after you log off, eliminate local-first tools like Cursor and default Claude Code. Cloud-native platforms — Duet, Devin, OpenAI Codex, Factory — support genuine background and scheduled execution.'
+    - name: 'Determine individual tool vs. shared workspace'
+      text: 'A shared-workspace model (Duet) is architecturally different from isolated per-user agents with shared billing (Cursor, Claude Code). Decide which model your team actually needs before evaluating features.'
+    - name: "Match the platform to your primary user's technical level"
+      text: 'Developers → Cursor, Claude Code, Factory. Mixed technical/non-technical teams → Duet. Non-technical founders → Lovable, Replit Agent, MGX/Atoms.'
+    - name: 'Identify compliance and data privacy requirements'
+      text: "Cloud-native platforms require code to leave your machine. Factory (Teams+) and Devin (Enterprise) offer Zero Data Retention contracts. Factory Enterprise adds on-premise deployment. Surface this requirement before you're past easy-migration territory."
+    - name: 'Clarify whether you need build, run, or both'
+      text: 'Most platforms stop at delivery. Duet, Devin, and OpenAI Codex also handle ongoing operations — crons, automations, monitoring — after the build phase. Be honest about which mode your team needs.'
+cta:
+  title: 'The AI agent platform that keeps running after you ship.'
+  subtitle: "Duet gives your team a persistent cloud workspace — crons, automations, and 10K+ integrations — so AI keeps working after you've logged off."
+  buttonText: 'Try Duet free'
+  href: '/sign-in?from=guide-best-ai-agent-platforms-2026'
+---
+
+<HeroImage
+  src="/guides/best-ai-agent-platforms-2026/cover.png"
+  alt="The 10 best AI agent platforms for developers in 2026 — ranked by fit"
+/>
+
+An AI agent platform is a tool that lets developers and technical teams build, deploy, and run autonomous AI agents — software that executes multi-step tasks, writes and reviews code, and operates independently without step-by-step prompting. Unlike no-code AI builders, coding agent platforms are designed for engineers who want AI that works inside their development workflow.
+
+A [GitHub Copilot productivity study (InfoQ, 2024)](https://www.infoq.com/news/2024/09/copilot-developer-productivity/) across three RCTs with 4,000+ developers found a 26% improvement in PR throughput. Yet nearly all top search results cover no-code builders, not developer-grade platforms. This guide covers ten developer-grade platforms, ranked by use-case fit. For the CLI agent three-way comparison, see [our full Claude Code vs Cursor vs Codex comparison](/blog/claude-code-vs-cursor-vs-codex).
+
+<GuideTOC
+  items={[
+    {
+      number: 1,
+      title: 'What Is an AI Coding Agent?',
+      href: '#what-is-an-ai-coding-agent-and-how-is-it-different-from-a-no-code-builder',
+    },
+    {
+      number: 2,
+      title: 'Quick Comparison Table',
+      href: '#quick-comparison-10-ai-agent-platforms-at-a-glance',
+    },
+    {
+      number: 3,
+      title: 'How We Evaluated',
+      href: '#how-we-evaluated-these-ai-agent-platforms',
+    },
+    {
+      number: 4,
+      title: 'The 10 Platforms, Reviewed',
+      href: '#the-best-ai-coding-agents-and-platforms-reviewed',
+    },
+    {
+      number: 5,
+      title: 'Best Pick by Use Case',
+      href: '#best-ai-agent-platform-by-use-case',
+    },
+    {
+      number: 6,
+      title: 'How to Choose',
+      href: '#how-to-choose-the-right-ai-agent-development-platform-for-your-team',
+    },
+    {
+      number: 7,
+      title: 'FAQ',
+      href: '#frequently-asked-questions-about-ai-agent-platforms',
+    },
+  ]}
+/>
+
+---
+
+## What Is an AI Coding Agent? (And How Is It Different from a No-Code Builder?)
+
+An AI coding agent is an AI agent specialized for software development tasks: writing code, reviewing PRs, debugging, running tests, and managing deployment pipelines — typically integrated into a developer's IDE or cloud workspace.
+
+No-code builders like Zapier, Lovable, and n8n let non-technical users create workflows through visual interfaces without touching a codebase. AI coding agents are different — they work inside your actual files, terminal, and version control.
+
+A tool handles one job: autocomplete, linting, or code review. An AI agent platform is a complete execution environment — memory, integrations, scheduling, and team collaboration — where the agent operates independently of whether you're at your keyboard.
+
+---
+
+## Quick Comparison: 10 AI Agent Platforms at a Glance
+
+Not all platforms serve the same team or phase of work. The table below shows the key dimensions at a glance; detailed reviews follow.
+
+| Platform         | Runs where           | Best for                    | Free tier?       | Team features           | Ongoing tasks?  | Pricing from       |
+| ---------------- | -------------------- | --------------------------- | ---------------- | ----------------------- | --------------- | ------------------ |
+| **Duet**         | Cloud (dedicated)    | Cloud-native teams          | ✅ 7-day trial  | Full shared workspace   | ✅ Core feature | Monthly plans      |
+| **Cursor**       | Local (your machine) | Solo devs (IDE-native)      | ✅ Yes           | Shared billing + rules  | ❌ No           | Free / $20/mo      |
+| **Devin**        | Cloud                | Engineering teams           | ✅ Yes           | Via Slack/Linear/GitHub | ✅ Automations  | Free / $20/mo      |
+| **Claude Code**  | Hybrid (local exec)  | Individual developers       | ❌ (Pro $20/mo)  | Limited                 | ⚠️ Limited      | $20/mo             |
+| **OpenAI Codex** | Cloud                | OpenAI ecosystem teams      | ✅ (Plus $20/mo) | Via Skills              | ✅ Automations  | $20/mo             |
+| **Factory**      | Cloud / Hybrid       | Compliance-sensitive teams  | ❌ ($20/mo)      | Via integrations        | ✅ Yes          | $20/mo             |
+| **Lovable**      | Cloud                | Non-technical founders      | ✅ Yes           | Basic                   | ❌ No           | Free / $25/mo      |
+| **Replit Agent** | Cloud                | Beginners / no-code         | ✅ Yes           | Basic                   | ⚠️ Partial      | Free / $25/mo      |
+| **v0**           | Cloud                | Frontend/React devs         | ✅ Yes           | Team plan               | ❌ No           | Free / $30/user/mo |
+| **MGX (Atoms)**  | Cloud                | Non-technical entrepreneurs | ✅ Yes           | Minimal                 | ⚠️ Partial      | Free / $20/mo      |
+
+For the Claude Code vs Cursor vs Codex head-to-head, see [our full Claude Code vs Cursor vs Codex comparison](/blog/claude-code-vs-cursor-vs-codex).
+
+---
+
+## How We Evaluated These AI Agent Platforms
+
+The right AI agent platform depends on how you actually work, not feature counts. We scored each platform on nine criteria.
+
+**1. Execution environment.** Local vs. cloud vs. hybrid — and whether the agent keeps working when your laptop closes. This axis alone eliminates several platforms for team-scale use.
+
+**2. Ongoing operations.** Scheduled tasks, crons, and event-driven automations after the build phase. Most platforms don't support this; a few make it their primary value.
+
+**3. Team collaboration model.** Shared workspace vs. integrations-only vs. individual tool — genuinely different architectures, not just billing variations.
+
+**4. Technical barrier to entry.** Developer-grade, some technical, or truly non-technical — we matched each platform's friction to its stated audience.
+
+**5. Pricing transparency.** Published pricing vs. "contact us" gates. Opacity is a signal as much as a friction point.
+
+**6. Model flexibility.** Multi-model with model-agnostic token pricing vs. single-vendor lock-in. Platform markup on tokens compounds at scale.
+
+**7. Code and data ownership.** Where code lives at rest and in transit, Zero Data Retention availability, on-premise options per tier.
+
+**8. Integration depth.** Engineering integrations (GitHub, CI/CD, [ai code review tools](/blog/claude-code-vs-cursor-vs-codex)), business integrations (email, CRM, Slack), and deployment integrations (Vercel, hosting) each serve different teams differently.
+
+**9. Autonomy level.** Interactive assistant (saves minutes) vs. autonomous agent (saves hours). A [2025 RCT on experienced developer productivity (arXiv)](https://arxiv.org/abs/2507.09089) found measurable gains from frontier tools on well-defined tasks — autonomy level determines how those gains compound.
+
+---
+
+## The Best AI Coding Agents and Platforms, Reviewed
+
+Each platform earns its ranking by being the right fit for a specific use case. Duet leads for cloud-native team work; the rest are ordered by developer mindshare and use-case clarity.
+
+---
+
+### 1. Duet — Best AI Agent Platform for Cloud-Native Teams
+
+Duet is the only platform on this list where the agent doesn't stop working when you close your laptop. Every team gets a private, dedicated cloud server with a persistent, always-on AI teammate: filesystem, memory, cron scheduler, 10K+ integrations, and a shared workspace where humans can assign work through durable sessions and inspect the event history.
+
+The core frame is **Build AND Run**. Every other tool helps you ship something. Duet keeps running the business after you do — email triage, support routing, weekly reports, and deployment monitoring all run automatically, 24/7, with no human trigger required.
+
+Because it operates through durable shared sessions rather than a private assistant window, teammates can follow the event history, answer questions, and inspect results. Non-engineering teammates benefit directly, not just developers.
+
+**Strengths:**
+
+- Always-on cloud execution — crons, automations, and monitoring run 24/7 with no human trigger
+- True team workspace — humans share sessions, files, and event history with the AI; the whole team benefits, not just developers
+- Monthly credits shared across the workspace, with a paid reserve ready for overage
+
+**Weaknesses:**
+
+- Less IDE-native than Cursor or Claude Code; pair with either for in-editor autocomplete
+- Monthly credits reset without rollover, so choose a plan around the work you expect to hand off
+
+**Pricing:** 7-day free trial, no credit card. Starter, Pro, and Max are monthly subscriptions with included credits; paid-reserve topups cover overage. Enterprise is a procurement path, not another tier. [See pricing at duet.so →](/pricing)
+
+---
+
+### 2. Cursor — Best AI Coding Agent for IDE-Native Developers
+
+Cursor is a VS Code fork with AI at every layer — Agent mode traverses codebases autonomously, and a proprietary Tab model predicts full diffs before standard API latency allows. It leads by developer mindshare: NVIDIA (40,000 engineers), Stripe, and much of the YC portfolio.
+
+**Strengths:**
+
+- Best-in-class Tab completion with a proprietary diff-prediction model
+- Multi-model: swap between OpenAI, Anthropic, Gemini, xAI, or Cursor's own models per task
+- Largest developer community; extensive shared rules, templates, and integrations
+
+**Weaknesses:**
+
+- Local-only execution — laptop must be running; no background agents or crons
+- No true shared workspace — Teams plan centralizes billing but agents run on individual machines
+
+**Pricing:** Free (Hobby). Pro: $20/mo. Pro+/Ultra: ~$40/mo / ~$200/mo (approximate; verify at [cursor.com/pricing](https://cursor.com/pricing)). Teams Standard: $40/user/mo.
+
+---
+
+### 3. Devin — Best AI Agent Platform for Enterprise Codebase Automation
+
+Devin is a fully autonomous, cloud-hosted software engineer: assign a task via Slack, GitHub, or Linear and it plans, codes, tests, and opens a PR without hand-holding. The Nubank case (6M-line codebase migration at 12× efficiency) is the canonical proof point.
+
+**Strengths:**
+
+- Genuinely autonomous multi-step execution across hours-long, multi-repo work
+- Deep enterprise integrations: Slack, Linear, GitHub, GitLab, Jira, Datadog, Confluence
+- Automations for recurring tasks: daily QA, CI triage, release notes
+
+**Weaknesses:**
+
+- Opaque enterprise pricing — fleet costs require "contact us"
+- Best on well-defined tasks; novel feature work still needs significant oversight
+
+**Pricing:** Free. Pro: $20/mo. Max: $200/mo. Teams: $80/mo + $40/seat. Enterprise: custom. [devin.ai/pricing](https://devin.ai/pricing)
+
+<DuetCTA />
+
+---
+
+### 4. Claude Code — Best AI Coding Agent for Developers Already on Anthropic
+
+Claude Code is Anthropic's terminal-native coding agent — available in terminal, VS Code, JetBrains, desktop, Slack, and mobile. Claude Opus 4.8 powers the reasoning, and the "phone-to-PR" workflow (describe a task on mobile, return to a finished PR) is its headline capability.
+
+**Strengths:**
+
+- Widest interface coverage: terminal, VS Code, JetBrains, desktop, web, mobile, and Slack
+- Claude Opus 4.8 for nuanced refactoring, debugging, and multi-file architectural decisions
+- Claude Cowork ships alongside Claude Code — see [Claude Code vs Claude Cowork](/guides/claude-code-vs-claude-cowork) for when to use each
+
+**Weaknesses:**
+
+- Local execution by default — machine must be on ([run Claude Code in the cloud](/blog/how-to-run-claude-code-in-the-cloud) with Duet for always-on execution)
+- Heavy large-codebase use burns through Max plan limits quickly
+
+**Pricing:** Pro: $20/mo ($17/mo annual). Max 5×: $100/mo. Max 20×: $200/mo. [claude.com/pricing](https://claude.com/pricing)
+
+---
+
+### 5. OpenAI Codex — Best AI Agent Platform for Parallel Multi-Agent Workflows
+
+This is the 2025 Codex product — a cloud-native coding agent via desktop app and CLI, not the deprecated 2021 Codex API. Cloud worktrees enable multiple agents running simultaneously on separate tasks, no local machine required. See [Codex vs Claude Code head-to-head](/blog/codex-vs-claude-code) if you're deciding between the two.
+
+**Strengths:**
+
+- Parallel multi-agent via cloud worktrees — simultaneous tasks, no local machine required
+- Automations for background work: CI triage, alert monitoring, routine maintenance
+- Skills system lets teams define, share, and enforce reusable procedures and coding standards
+
+**Weaknesses:**
+
+- Primarily OpenAI model ecosystem — less model-agnostic than Cursor
+- No shared human+AI workspace — agents run in isolated cloud environments
+
+**Pricing:** Go: $8/mo. Plus: $20/mo (expanded Codex access). Business: $20/user/mo (annual) / $25/user/mo (monthly). Pro: $100/mo. Enterprise: custom. [openai.com/chatgpt/pricing](https://openai.com/chatgpt/pricing)
+
+---
+
+### 6. Factory — Best AI Agent Platform for Security-Conscious Teams
+
+Factory's "Droid" agents each have a persistent cloud computer — not a sandbox that resets per session — so tools, memory, and history survive. On-premise deployment is available below enterprise tier (Plus+) and Teams plans include contractual Zero Data Retention, rare at this price point.
+
+**Strengths:**
+
+- Persistent machine per Droid — environment and context survive between sessions
+- Only platform with on-premise deployment available at non-enterprise tiers
+- Zero Data Retention on Teams plan — rare at this price point
+
+**Weaknesses:**
+
+- Smaller community and ecosystem than Cursor or Devin
+- Sharp pricing jump from Pro ($20/mo) to Plus ($100/mo)
+
+**Pricing:** Pro: $20/mo. Plus: $100/mo (Droid Computers). Max: $200/mo. Teams: custom. Enterprise: custom with on-premise. [factory.ai/pricing](https://factory.ai/pricing)
+
+---
+
+### 7. Lovable — Best AI Coding Agent for Non-Technical Founders Building MVPs
+
+Lovable builds React + Supabase apps from a text description in real time — no terminal, no setup, one-click deploy. Built for founders who need a working product without learning a stack.
+
+**Strengths:**
+
+- Zero technical knowledge required — full-stack apps from a description in hours
+- Integrated backend: Supabase auth, database, and storage provisioned automatically
+- Real-time visual preview as code generates
+
+**Weaknesses:**
+
+- Stack lock-in: React + Supabase only; no framework flexibility
+- No ongoing agent — Lovable's role ends at deployment
+
+**Pricing:** Free (30 credits/mo). Pro: $25/mo. Business: $50/mo (SSO, team workspace). Enterprise: custom. [lovable.dev/pricing](https://lovable.dev/pricing)
+
+---
+
+### 8. Replit Agent — Best AI Coding Agent for Beginners and No-Code Prototyping
+
+Replit Agent is entirely browser-based: describe an app or upload a screenshot and Replit selects the stack, builds, and deploys — zero local setup. The screenshot-to-app feature differentiates it from text-only competitors.
+
+**Strengths:**
+
+- Zero setup, browser-native — works on any device including mobile
+- Screenshot-to-app: upload a design reference and Agent replicates the interface
+- Up to 10 parallel Agent sessions on Pro
+
+**Weaknesses:**
+
+- Vendor lock-in: migrating off Replit's infrastructure is non-trivial
+- Generated code often needs refactoring before meeting production standards
+
+**Pricing:** Free (Starter). Core: $25/mo (2 agents). Pro: $100/mo (10 agents). Enterprise: custom. [replit.com/pricing](https://replit.com/pricing)
+
+<DuetCTA />
+
+---
+
+### 9. v0 — Best AI Agent Platform for Frontend and React/Next.js Developers
+
+v0 is Vercel's AI UI generator: production-ready React/Next.js with Tailwind CSS — real component architecture and idiomatic conventions, not throwaway prototypes. Design Mode bridges visual editing and code; one-click deploy to Vercel closes the loop.
+
+**Strengths:**
+
+- Best React/Next.js code quality: real components, accessibility, idiomatic Tailwind
+- Design Mode enables visual editing without writing code
+- Tightest Vercel ecosystem integration: GitHub sync, AI SDK compatibility, instant deploy
+
+**Weaknesses:**
+
+- Frontend-heavy — weaker on complex backend logic or multi-service architecture
+- No ongoing agent: generates on demand, no post-deployment automation
+
+**Pricing:** Free ($5/mo credit, 7 messages/day). Team: $30/user/mo. Business: $100/user/mo (training opt-out). Enterprise: custom. [v0.dev/pricing](https://v0.dev/pricing)
+
+---
+
+### 10. MGX (Atoms) — Best AI Agent Platform for Full-Stack Founder Launches
+
+MGX rebranded to Atoms (atoms.dev) mid-2025; both names remain in circulation. Atoms deploys a multi-agent team — researcher, architect, PM, engineer, SEO specialist, ads agent — collaborating from idea through launch. No other platform here makes SEO and paid acquisition first-class agent roles.
+
+**Strengths:**
+
+- Multi-agent team simulation: specialized roles rather than a single generalist
+- SEO and Ads agents extend the platform beyond building into acquiring customers
+- Academic foundation: ~30 published papers at ICLR, NeurIPS, and ACL
+
+**Weaknesses:**
+
+- Brand confusion: the MGX → Atoms rebrand creates discovery friction
+- Thin enterprise story: no meaningful SSO, admin controls, or audit trails
+
+**Pricing:** Free (25 credits/mo). Pro: $20/mo ($15.80/mo annual, 100 credits/mo). Max: $100/mo (500 credits/mo + Race mode). [atoms.dev/pricing](https://atoms.dev/pricing)
+
+---
+
+## Best AI Agent Platform by Use Case
+
+The best AI agent platform depends on what your team actually needs to accomplish. Here's the direct answer for each common scenario.
+
+| Use Case                    | Best Pick     | Why                                                                       |
+| --------------------------- | ------------- | ------------------------------------------------------------------------- |
+| Solo indie dev              | Cursor        | Best IDE integration, largest community, free tier                        |
+| Startup team (2–10 people)  | Duet + Cursor | Duet for ops/automation, Cursor for coding — complementary, not competing |
+| Non-technical founder       | Lovable       | No code required; full-stack app in hours                                 |
+| Enterprise engineering team | Devin         | Proven at scale, Slack/Linear/GitHub integrations, fleet support          |
+| Design/UI-focused work      | v0            | Production-ready React + Tailwind; Design Mode; Vercel deploy             |
+| Autonomous ongoing tasks    | Duet          | Only platform where ongoing ops is the primary value proposition          |
+
+---
+
+## How to Choose the Right AI Agent Development Platform for Your Team
+
+The right AI agent development platform fits how your team works. Answer these five questions before signing up.
+
+**1. Do you need the agent to keep working after you log off?**
+Local-first tools like Cursor and default Claude Code won't work for always-on use. Duet, Devin, OpenAI Codex, and Factory offer genuine background and scheduled execution — this question eliminates half the list.
+
+**2. Is this an individual tool or a team workspace?**
+A shared-workspace model is fundamentally different from isolated agents on individual machines. See [rolling out Claude Code across your team](/guides/claude-code-for-teams) for a reference point on what team adoption actually requires.
+
+**3. What's the technical level of your primary user?**
+Developers → Cursor, Claude Code, Factory. Mixed teams → Duet. Non-technical founders → Lovable, Replit Agent, MGX/Atoms. No feature list overcomes a tool-audience mismatch.
+
+**4. Do you have compliance or data privacy requirements?**
+Factory (Teams+) and Devin (Enterprise) offer Zero Data Retention; Factory Enterprise adds on-premise. Identify this requirement before you scale past easy-migration territory.
+
+**5. What does AI agent work look like — build or run?**
+Most platforms stop at delivery. Duet, Devin, and OpenAI Codex also handle ongoing operations. Teams using AI for sustained operational work saw a [31.8% improvement in PR close time in 2025 (arXiv)](https://arxiv.org/html/2509.19708v1). Be clear about which mode you need.
+
+---
+
+## Frequently Asked Questions About AI Agent Platforms
+
+<Accordion type="single" collapsible className="w-full">
+
+<AccordionItem value="q1">
+  <AccordionTrigger>What is the best AI agent platform for developers in 2026?</AccordionTrigger>
+  <AccordionContent>
+    The best AI agent platform depends on your use case. For teams needing always-on automation and
+    ongoing operations, **Duet** leads in 2026. For solo developers wanting deep IDE integration,
+    **Cursor** dominates. For enterprise codebase automation, **Devin** is proven at scale. There is
+    no single best platform; fit beats features.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="q2">
+  <AccordionTrigger>
+    What is the difference between an AI coding agent and a no-code AI builder?
+  </AccordionTrigger>
+  <AccordionContent>
+    An **AI coding agent** works inside a developer's codebase — reading files, writing code,
+    running terminal commands, managing PRs and tests. A **no-code AI builder** (Zapier, Lovable,
+    n8n) lets non-technical users create automations or apps through a visual chat interface without
+    writing code. Coding agents work at the code layer; no-code builders abstract it away entirely.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="q3">
+  <AccordionTrigger>Which AI agent platforms support team collaboration?</AccordionTrigger>
+  <AccordionContent>
+    **Duet** provides a shared human+AI workspace with durable sessions, files, apps, and roles
+    around the same persistent coworker. **Devin**, **Factory**, and **OpenAI Codex** support team
+    workflows via Slack, Linear, and GitHub integrations but agents run in isolation. **Cursor** and
+    **Claude Code** are individual tools with shared billing — a meaningful difference when
+    evaluating any AI agent development platform.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="q4">
+  <AccordionTrigger>
+    Can I run an AI coding agent in the cloud without a local machine?
+  </AccordionTrigger>
+  <AccordionContent>
+    Yes. **Duet**, **Devin**, **OpenAI Codex**, **Factory**, **Replit Agent**, **v0**, and
+    **MGX/Atoms** all run cloud-side with no local machine required. **Cursor** and **Claude Code**
+    execute locally by default, though you can [run Claude Code in the
+    cloud](/blog/how-to-run-claude-code-in-the-cloud) without local setup.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="q5">
+  <AccordionTrigger>
+    How do AI agent platforms charge — subscription or usage-based?
+  </AccordionTrigger>
+  <AccordionContent>
+    Most use flat subscriptions: Cursor Pro ($20/mo), Devin Pro ($20/mo), Claude Code Pro ($20/mo),
+    Lovable Pro ($25/mo), v0 Team ($30/user/mo). Some add usage overages on top. **Duet** is the
+    subscription option: Starter, Pro, and Max include monthly credits, with paid-reserve topups for
+    overage. Monthly credits reset at renewal and do not roll over.
+  </AccordionContent>
+</AccordionItem>
+
+</Accordion>
+
+<DuetCTA />
+
+---
+
+_Last updated: June 2026. Pricing and features change frequently — verify directly with each platform before purchasing._

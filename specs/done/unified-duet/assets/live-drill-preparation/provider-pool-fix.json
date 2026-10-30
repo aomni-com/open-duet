@@ -1,0 +1,19 @@
+{
+  "contract": "Pool ownership tag is deduplicated into provider creation tags; no post-create tag operation.",
+  "actualFailure": "Provider rejected adding duet-test after it was already attached at creation; old pool catch removed the created fixture.",
+  "verification": {
+    "redTests": 2,
+    "greenTests": 3,
+    "greenAssertions": 8,
+    "typecheck": "passed",
+    "lint": "passed",
+    "independentReview": "no findings"
+  },
+  "logs": {
+    "red": "/tmp/unified-duet-provider-pool-red.txt",
+    "green": "/tmp/unified-duet-provider-pool-green.txt",
+    "review": "/tmp/unified-duet-provider-pool-review.txt"
+  },
+  "frozenFixtureDriverChanged": false,
+  "liveOperationsByThisLane": false
+}

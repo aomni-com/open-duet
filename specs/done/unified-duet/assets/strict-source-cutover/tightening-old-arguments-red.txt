@@ -1,0 +1,22 @@
+bun test v1.3.14 (0d9b296a)
+
+convex/strict-runtime-observation.test.ts:
+50 |               image: 'original-image',
+51 |             },
+52 |           },
+53 |         },
+54 |       ),
+55 |     ).rejects.toThrow()
+                   ^
+error: 
+
+Expected promise that rejects
+Received promise that resolved: Promise { <resolved> }
+
+      at <anonymous> (/Users/synthetic-user/.codex/worktrees/unified-birth-fence/duet/packages/backend/convex/strict-runtime-observation.test.ts:55:15)
+(fail) strict observations reject retired arguments without changing the workspace and write one runtime identity [16.17ms]
+
+ 0 pass
+ 1 fail
+ 1 expect() calls
+Ran 1 test across 1 file. [89.00ms]

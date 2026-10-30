@@ -1,0 +1,19 @@
+{
+  "experiment": "Same working directory, same frozen source/dependencies; append one EOF blank line only to connected-providers/snapshot.ts after trimmed JS build",
+  "trimmedSha256": "b5c743dd93585fef46b255bb867085e255ce66d5778ef0b83a43a9a1eaa38ff9",
+  "extraBlankSha256": "b5c743dd93585fef46b255bb867085e255ce66d5778ef0b83a43a9a1eaa38ff9",
+  "identicalBytes": true,
+  "trimmedBytes": 14411924,
+  "extraBlankBytes": 14411924,
+  "diffExcerpt": "",
+  "scope": "Diagnostic on isolated scratch source; actual constructor executable built separately from committed trimmed snapshot. No executable byte-equality inference.",
+  "differentBuildDirectory": {
+    "otherSha256": "df52f8e8a62ebf500218f26e8474b077c64d7faa4695225ef4ada1674f8d214a",
+    "otherBytes": 14411930,
+    "identicalBytes": false,
+    "firstDiffOffset": 8124300,
+    "trimmedExcerpt": "hoton_rs = __commonJS((exports, module4) => {\n  var __dirname = \"/tmp/build/node_modules/.bun/@silvia-odwyer+photon-node@0.3.4/node_modules/@silvia-odwyer/photon-node\";\n  var imports = {};\n  imports[\"__wbindgen_placehold",
+    "otherExcerpt": "hoton_rs = __commonJS((exports, module4) => {\n  var __dirname = \"/tmp/other-build/node_modules/.bun/@silvia-odwyer+photon-node@0.3.4/node_modules/@silvia-odwyer/photon-node\";\n  var imports = {};\n  imports[\"__wbindgen_pla",
+    "observed": "Bun embeds absolute dependency directory in Photon CJS __dirname; this independently changes JS bytes. This does not prove the cause of the prior root assertion failure."
+  }
+}

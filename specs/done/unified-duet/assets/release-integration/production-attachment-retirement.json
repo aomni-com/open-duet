@@ -1,0 +1,32 @@
+{
+  "observedAt": "2026-10-04T16:05:34.104Z",
+  "environment": "production",
+  "identity": {
+    "revision": "dbb28fe14a026c143f2134b88586a13f2e0ebdef",
+    "schema": 1
+  },
+  "workspaceId": "qs7b293gt664d6w6sgye7evx6h8f3bf7",
+  "previouslyAttachedVm": "workspace-redacted",
+  "workspace": {
+    "_id": "qs7b293gt664d6w6sgye7evx6h8f3bf7",
+    "slug": "kamil-blasiak-s-workspace",
+    "status": "archived",
+    "servicingStatus": "paused",
+    "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:f784540dcdd160adaa002832031bedc378f800a520414d1bcad47f26c7cd9a56",
+    "updatedAt": 1791119485093
+  },
+  "audit": [
+    {
+      "event": "api_key.vm_model_key_revoked",
+      "at": 1791119485093
+    },
+    {
+      "event": "workspace.servicing_archived_without_archive",
+      "at": 1791119485093
+    }
+  ],
+  "migrationPerformed": false,
+  "outcome": "independently archived by the existing servicing owner; VM attachment absent and provider name absent in refreshed inventory",
+  "previousAttachmentCount": 15,
+  "currentAttachmentCount": 14
+}

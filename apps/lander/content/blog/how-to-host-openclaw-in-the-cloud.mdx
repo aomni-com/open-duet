@@ -1,0 +1,562 @@
+---
+title: 'How to Host OpenClaw in the Cloud (Always On)'
+description: 'Deploy OpenClaw on a VPS or managed platform for 24/7 AI agent operation with Docker, security best practices, and cost analysis.'
+date: '2026-03-01'
+updatedAt: '2026-05-08'
+readTime: '10 min read'
+author:
+  name: 'David'
+  role: 'Founder'
+  link: '/'
+category: 'ai'
+tags: ['openclaw', 'cloud', 'deployment', 'ai-agents']
+type: 'article'
+image: '/blog/how-to-host-openclaw-in-the-cloud/cover.png'
+relatedPosts:
+  [
+    'openclaw-vs-managed-ai-agent-platforms',
+    'how-to-set-up-a-24-7-ai-agent',
+    'mcp-alternatives-code-execution-agents',
+  ]
+cta:
+  title: 'Skip the VPS setup.'
+  subtitle: 'Duet runs your AI agents on managed cloud sandboxes with persistent memory and zero DevOps. OpenClaw power without the Docker tax.'
+  buttonText: 'Run agents in Duet'
+  href: '/sign-in?from=blog-openclaw-cloud'
+---
+
+# How to Host OpenClaw in the Cloud
+
+<Callout emoji="💡">
+Quick Summary
+
+This guide covers how to host OpenClaw in the cloud so it runs 24/7, no local machine required. You'll get a persistent, always-on OpenClaw instance accessible from anywhere, without managing your own VPS or infrastructure.
+
+</Callout>
+
+<Callout emoji="❓">
+Questions this page answers
+
+- How to host OpenClaw in the cloud
+- Can you run OpenClaw on a cloud server?
+- How to make OpenClaw always-on
+- Best cloud hosting for OpenClaw
+- How to run OpenClaw without a local machine?
+
+</Callout>
+
+OpenClaw is an open-source autonomous AI agent platform with over 140,000 GitHub stars.
+
+It executes complex tasks by breaking them into steps, writing code, running commands, and iterating until completion.
+
+Unlike traditional AI assistants that answer questions, OpenClaw takes action.
+
+It builds apps, fixes bugs, analyzes data, and automates workflows without constant supervision.
+
+The platform runs locally by default. When your laptop sleeps or closes, OpenClaw stops.
+
+For long-running tasks or team collaboration, you need cloud hosting.
+
+## Why Self-Hosting OpenClaw Requires a Cloud Server
+
+Local OpenClaw deployment has limitations:
+
+- Stops when your computer sleeps. Tasks fail mid-execution.
+- No remote access. You can't check progress from another device.
+- Single-user only. Team members can't share agents or workflows.
+- Resource intensive. Running AI models drains laptop battery and CPU.
+  Cloud hosting solves these problems. Your agent runs 24/7 on dedicated infrastructure, accessible from anywhere, with shared team access.
+
+## Cloud Hosting Options for OpenClaw
+
+VPS, Docker, and Managed Platforms
+
+You have two paths: self-host on a VPS or use a managed platform.
+
+Self-hosting gives you full control. You configure the server, manage updates, handle security, and pay only for compute resources.
+
+Managed platforms handle infrastructure, security, and updates automatically. You focus on using the agent, not maintaining servers.
+
+## How to Self-Host OpenClaw on a VPS
+
+Self-hosting requires a Linux server, Docker, and basic command-line skills. Here's the complete setup.
+
+### Choose a VPS Provider
+
+Select a provider based on pricing and location:
+
+| Provider             | Monthly Cost | RAM | CPU Cores | Storage  |
+| -------------------- | ------------ | --- | --------- | -------- |
+| Hetzner CAX11        | $5           | 4GB | 2         | 40GB SSD |
+| DigitalOcean Basic   | $6           | 1GB | 1         | 25GB SSD |
+| DigitalOcean Regular | $12          | 2GB | 1         | 50GB SSD |
+| AWS Lightsail        | $10          | 2GB | 1         | 60GB SSD |
+| Linode Shared        | $12          | 2GB | 1         | 50GB SSD |
+
+OpenClaw requires minimum 4GB RAM and 2 CPU cores for stable operation. The $5 Hetzner option is the most cost-effective for full performance.
+
+For lighter usage, a 2GB instance ($10-12/mo) works but may timeout on large tasks.
+
+### Provision and Access Your Server
+
+Create a new instance with Ubuntu 22.04 LTS. Add your SSH public key during setup.
+
+Connect to your server:
+
+```bash
+ssh root@YOUR_SERVER_IP
+```
+
+Update system packages:
+
+```bash
+apt update && apt upgrade -y
+```
+
+### Install Docker
+
+Install Docker Engine:
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+```
+
+Verify installation:
+
+```bash
+docker --version
+```
+
+Enable Docker to start on boot:
+
+```bash
+systemctl enable docker
+```
+
+### Configure Environment Variables
+
+Create a directory for OpenClaw:
+
+```bash
+mkdir -p /opt/openclaw
+cd /opt/openclaw
+```
+
+Create an environment file:
+
+```bash
+nano .env
+```
+
+Add your configuration:
+
+```plaintext
+ANTHROPIC_API_KEY=your_anthropic_key
+OPENAI_API_KEY=your_openai_key
+WORKSPACE_DIR=/workspace
+PORT=3000
+```
+
+Save and exit (Ctrl+X, Y, Enter).
+
+### Run OpenClaw with Docker
+
+Pull the latest OpenClaw image:
+
+```bash
+docker pull openclaw/openclaw:latest
+```
+
+Run the container:
+
+```bash
+docker run -d \
+  --name openclaw \
+  --restart unless-stopped \
+  -p 3000:3000 \
+  -v /opt/openclaw/workspace:/workspace \
+  --env-file /opt/openclaw/.env \
+  openclaw/openclaw:latest
+```
+
+Check container status:
+
+```bash
+docker ps
+```
+
+View logs:
+
+```bash
+docker logs -f openclaw
+```
+
+### Configure Firewall and Security
+
+Set up UFW firewall:
+
+```bash
+ufw allow OpenSSH
+ufw allow 3000/tcp
+ufw enable
+```
+
+Disable password authentication:
+
+```bash
+nano /etc/ssh/sshd_config
+```
+
+Set PasswordAuthentication no. Restart SSH:
+
+```bash
+systemctl restart sshd
+```
+
+### Set Up SSL with Nginx (Optional)
+
+For HTTPS access, install Nginx and Certbot:
+
+```bash
+apt install nginx certbot python3-certbot-nginx -y
+```
+
+Configure Nginx reverse proxy:
+
+```bash
+nano /etc/nginx/sites-available/openclaw
+```
+
+Add configuration:
+
+```plaintext
+server {
+    listen 80;
+    server_name your-domain.com;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+Enable site and get SSL certificate:
+
+```bash
+ln -s /etc/nginx/sites-available/openclaw /etc/nginx/sites-enabled/
+certbot --nginx -d your-domain.com
+```
+
+### Monitor and Update
+
+Check OpenClaw health:
+
+```bash
+docker stats openclaw
+```
+
+Update to latest version:
+
+```bash
+docker pull openclaw/openclaw:latest
+docker stop openclaw
+docker rm openclaw
+docker run -d \
+  --name openclaw \
+  --restart unless-stopped \
+  -p 3000:3000 \
+  -v /opt/openclaw/workspace:/workspace \
+  --env-file /opt/openclaw/.env \
+  openclaw/openclaw:latest
+```
+
+Set up automatic backups of /opt/openclaw/workspace:
+
+```bash
+crontab -e
+```
+
+Add daily backup:
+
+```plaintext
+0 2 * * * tar -czf /backup/openclaw-$(date +\%Y\%m\%d).tar.gz /opt/openclaw/workspace
+```
+
+## OpenClaw Cloud Security
+
+Risks You Need to Know Before Deploying
+
+Exposing an AI agent to the internet creates attack surface.
+
+### API Key Exposure
+
+OpenClaw stores API keys in environment variables. If an attacker gains container access, they can extract keys and rack up charges on your accounts.
+
+Mitigation:
+
+- Use read-only API keys where possible
+- Set spending limits on OpenAI/Anthropic accounts
+- Rotate keys monthly
+- Never commit .env files to version control
+
+### Code Execution Vulnerabilities
+
+OpenClaw executes arbitrary code. Malicious prompts could exploit this to run unintended commands.
+
+CVE-2024-47068 affected similar AI agent platforms in October 2024, allowing remote code execution through prompt injection.
+
+Mitigation:
+
+- Run OpenClaw in isolated containers with limited filesystem access
+- Use non-root users inside containers
+- Implement network segmentation
+- Monitor logs for suspicious activity
+
+### Skill and Plugin Risks
+
+OpenClaw supports custom skills. Unverified skills can contain malicious code.
+
+Mitigation:
+
+- Review skill source code before installation
+- Use only official or vetted community skills
+- Run skills in sandboxed environments
+- Maintain an allowlist of approved skills
+
+## Self-Hosted OpenClaw vs. Managed AI Agent Platforms
+
+Managed platforms eliminate infrastructure maintenance but reduce flexibility.
+
+### What You Get with Managed Platforms
+
+Managed AI agent platforms handle:
+
+- Server provisioning and scaling
+- Security patches and updates
+- SSL certificates and domain configuration
+- Team collaboration features
+- Built-in authentication and access control
+- Monitoring and alerting
+  You access the agent through a web interface without touching Docker or Linux commands.
+
+### Cost Comparison
+
+| Hosting Type     | Monthly Cost | Setup Time | Maintenance | Security              |
+| ---------------- | ------------ | ---------- | ----------- | --------------------- |
+| VPS Self-Host    | $5-20        | 1-2 hours  | Ongoing     | Your responsibility   |
+| Managed Platform | $20-100      | 5 minutes  | None        | Handled automatically |
+
+Self-hosting is cheaper for single users comfortable with server administration. Managed platforms save time and reduce security risk for teams.
+
+### When to Choose Self-Hosting
+
+Choose self-hosting if you:
+
+- Want maximum control over infrastructure
+- Have DevOps expertise or time to learn
+- Need custom configurations not supported by platforms
+- Run sensitive workloads that can't use shared infrastructure
+
+### When to Choose Managed Hosting
+
+Choose managed platforms if you:
+
+- Want to start immediately without setup
+- Lack server administration experience
+- Need team collaboration features
+- Prefer predictable costs without surprise server bills
+
+## Best Managed Alternatives to Self-Hosting OpenClaw
+
+If you like OpenClaw's autonomous capabilities but want cloud infrastructure handled for you, several platforms offer similar functionality with better team features.
+
+Duet provides an always-on AI agent that runs in the cloud with no server setup required. Unlike self-hosted OpenClaw, you get team workspaces, built-in security, reusable instructions in Files, durable facts and sources in Train, and managed Integrations. Your agents run continuously on managed infrastructure, so you do not have to operate the server or maintain Docker yourself.
+
+The platform includes collaboration features OpenClaw lacks: durable shared sessions, trained workspace memory, role-based access, and shared files and apps. Team members can assign work to the same persistent AI coworker and follow its session events while long-running tasks continue in the cloud.
+
+For teams moving from local development to production AI workflows, Duet bridges the gap between DIY open source tools and fully managed infrastructure. Learn more at duet.so.
+
+## How to Migrate OpenClaw from Local to Cloud Hosting
+
+Moving an existing OpenClaw setup to the cloud preserves your configuration and conversation history.
+
+### Export Local Data
+
+On your local machine, locate the OpenClaw workspace directory. Default locations:
+
+- Linux/macOS: ~/.openclaw/workspace
+- Windows: C:\Users\YourName\.openclaw\workspace
+  Archive the workspace:
+
+```bash
+tar -czf openclaw-backup.tar.gz ~/.openclaw/workspace
+```
+
+### Transfer to VPS
+
+Copy the archive to your server:
+
+```bash
+scp openclaw-backup.tar.gz root@YOUR_SERVER_IP:/opt/openclaw/
+```
+
+SSH into the server and extract:
+
+```bash
+cd /opt/openclaw
+tar -xzf openclaw-backup.tar.gz
+```
+
+### Update Configuration
+
+Copy environment variables from local .env to server /opt/openclaw/.env.
+
+Verify API keys work by testing with curl:
+
+```bash
+curl https://api.anthropic.com/v1/models \
+  -H "x-api-key: $ANTHROPIC_API_KEY"
+```
+
+### Start Cloud Instance
+
+Run Docker container with migrated workspace:
+
+```bash
+docker run -d \
+  --name openclaw \
+  --restart unless-stopped \
+  -p 3000:3000 \
+  -v /opt/openclaw/workspace:/workspace \
+  --env-file /opt/openclaw/.env \
+  openclaw/openclaw:latest
+```
+
+Access via http://YOURSERVERIP:3000 and verify conversation history loaded.
+
+## OpenClaw Cloud Maintenance
+
+What You Need to Keep It Running
+
+Cloud-hosted OpenClaw requires regular maintenance.
+
+### Weekly Tasks
+
+- Review Docker logs for errors: docker logs openclaw --tail 100
+- Check disk usage: df -h
+- Monitor API spending in Anthropic/OpenAI dashboards
+
+### Monthly Tasks
+
+- Update OpenClaw to latest version (see Step 8 above)
+- Rotate API keys
+- Review and clean old workspace files
+- Check security advisories for dependencies
+
+### Quarterly Tasks
+
+- Audit installed skills for updates
+- Review firewall rules
+- Test backup restoration process
+- Evaluate server sizing (upgrade if hitting resource limits)
+
+### Automation
+
+Reduce manual work with systemd timers or cron jobs:
+
+```bash
+# /etc/cron.weekly/openclaw-update
+#!/bin/bash
+docker pull openclaw/openclaw:latest
+docker stop openclaw
+docker rm openclaw
+docker run -d --name openclaw --restart unless-stopped -p 3000:3000 \
+  -v /opt/openclaw/workspace:/workspace \
+  --env-file /opt/openclaw/.env \
+  openclaw/openclaw:latest
+```
+
+## OpenClaw High Availability Setup
+
+Load Balancing and Failover
+
+Single-server deployments fail when the server goes down. High availability requires redundancy.
+
+### Load Balancer Setup
+
+Deploy multiple OpenClaw instances behind a load balancer:
+
+1. Provision 2-3 identical VPS instances
+1. Set up shared storage (NFS or S3) for workspace directory
+1. Configure Nginx or Traefik as load balancer
+1. Point DNS to load balancer IP
+   Cost increases 2-3x but eliminates single point of failure.
+
+### Database Replication
+
+If OpenClaw stores state in a database, configure primary-replica replication:
+
+```bash
+# On primary server
+docker run -d \
+  --name postgres-primary \
+  -e POSTGRES_PASSWORD=secure_password \
+  -e POSTGRES_USER=openclaw \
+  -p 5432:5432 \
+  postgres:15
+```
+
+Configure replicas to stream from primary. Update OpenClaw config to use read replicas for queries.
+
+### Health Monitoring
+
+Set up uptime monitoring with UptimeRobot or Healthchecks.io:
+
+1. Create HTTP health check endpoint
+1. Configure alert if endpoint returns non-200 status
+1. Set notification to email/Slack on failure
+   Most teams don't need HA for development use cases. Production workflows justify the added complexity.
+
+## Final Thoughts
+
+Hosting OpenClaw in the cloud transforms a local development tool into a 24/7 autonomous agent. Self-hosting on a VPS costs $5-20/month and gives you full control, but requires ongoing security maintenance and server administration.
+
+For teams or those who want to skip infrastructure management, managed platforms handle deployment, security, and scaling automatically. The choice depends on your technical comfort level, budget, and collaboration requirements.
+
+Start with a basic VPS deployment to understand OpenClaw's cloud hosting needs. As usage grows, migrate to high-availability setups or managed platforms that offer better team features and reduced operational overhead.
+
+## Frequently Asked Questions
+
+### How much does it cost to host OpenClaw in the cloud?
+
+Hosting OpenClaw on a VPS costs $5-20/month for the server plus API usage fees. A Hetzner CAX11 ($5/mo) with 4GB RAM handles most workloads. Add $10-50/mo for Anthropic/OpenAI API calls depending on usage. SSL certificates via Let's Encrypt are free.
+
+### Can I run OpenClaw on AWS free tier?
+
+AWS free tier includes 750 hours of t2.micro instances with 1GB RAM. This is insufficient for OpenClaw, which requires minimum 4GB RAM. You'll need a t3.medium ($30/mo) or t3.large ($60/mo) instance for reliable performance.
+
+### What's the easiest way to deploy OpenClaw?
+
+The easiest deployment method is using Docker on a managed VPS. Providers like DigitalOcean and Hetzner offer one-click Docker images. After provisioning, run a single docker run command with your API keys. Setup takes 15-30 minutes including SSL configuration.
+
+### How do I secure API keys on a cloud server?
+
+Store API keys in environment files outside the container with restricted permissions: chmod 600 /opt/openclaw/.env. Use read-only API keys where possible. Rotate keys monthly. Enable audit logging to detect unauthorized access. Consider using secret management tools like Vault for production deployments.
+
+### Does OpenClaw work with custom AI models?
+
+Yes, OpenClaw supports custom models through OpenAI-compatible API endpoints. Configure the OPENAIAPIBASE environment variable to point to your model provider (e.g., Ollama, LocalAI, or self-hosted LLaMA). Performance depends on model capability and hosting infrastructure.
+
+### Can multiple people use the same OpenClaw instance?
+
+OpenClaw's default setup is single-user. Multiple people accessing the same instance share conversation history and workspace files, which creates confusion. For team use, deploy separate instances per user or use a managed platform with built-in multi-user support.
+
+### What happens if my server crashes?
+
+If you configured, restart unless-stopped, Docker automatically restarts the OpenClaw container when the server reboots. In-progress tasks may fail and require manual restart. Implement health monitoring and alerting to detect outages quickly. Regular workspace backups prevent data loss.

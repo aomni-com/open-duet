@@ -1,0 +1,38 @@
+{
+  "status": "prepared-held",
+  "sourceFiles": {
+    "prepare-strict-predecessor.ts": "da4c21740a9a3cbab13cf8cceaf3b79be872335ecab8790701b76721775e8dbc",
+    "strict-predecessor-help.patch": "8349dad16d05e97bc8098cb03fe80e6b53e2bfa1a7f4614e2557d440d6da5ce8"
+  },
+  "requiredInputs": [
+    "sourceCheckout",
+    "sourceRevision",
+    "targetDir",
+    "targetVersion",
+    "outputDir"
+  ],
+  "pending": [
+    "exact served strict R2 source revision and runtime inventory",
+    "source-native construction",
+    "physical predecessor verification"
+  ],
+  "checks": {
+    "typescript": "passed",
+    "lint": "passed",
+    "ownerInterfaces": "inspected",
+    "independentReview": "unavailable: cliproxy connection retries; no review performed",
+    "constructorIdentity": "1 test / 40 assertions passed; CLI-only bytes change identity, missing sidecar rejects",
+    "sourcePatch": "git apply --check and apply passed on disposable exact source-file copy; only requested help text changed"
+  },
+  "reviewSession": "01a107ef-f21d-7330-94bb-559d1412cec3",
+  "constructionPerformed": false,
+  "liveAllocationPerformed": false,
+  "reviewRetry": {
+    "status": "completed-no-actionable-defects",
+    "scope": "commit8f95fc97b",
+    "session": "01a107fd-9b46-7530-99e4-95840a68cbb8",
+    "constructorIdentity": "passed1/40",
+    "broaderBuild": "reviewer attempted full owning file; native packaging blocked by sandbox temp-directory permission; no predecessor constructed",
+    "trackedSourceUnchanged": true
+  }
+}

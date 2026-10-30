@@ -1,0 +1,15 @@
+bun test v1.3.14 (0d9b296a)
+
+src/index.test.ts:
+(pass) edge proxy > resolves a custom hostname before admission and preserves deep request bytes [4.00ms]
+(pass) edge proxy > rejects unknown custom hosts after identity lookup without reaching an origin [0.23ms]
+(pass) edge proxy > ends an app SSE segment on service.example.invalid and cancels its origin before the function limit [13.44ms]
+(pass) edge proxy > ends an app SSE segment on aomni.co and cancels its origin before the function limit [11.18ms]
+(pass) custom hostname indexing > preserves upstream indexing only for public custom origin content [0.58ms]
+(pass) custom host mapping is read before grant exchange and again on each visit [1.48ms]
+
+ 6 pass
+ 40 filtered out
+ 0 fail
+ 33 expect() calls
+Ran 6 tests across 1 file. [88.00ms]

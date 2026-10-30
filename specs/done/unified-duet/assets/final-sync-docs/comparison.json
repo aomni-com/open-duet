@@ -1,0 +1,28 @@
+[
+  {
+    "viewport": "desktop",
+    "beforeDimensions": [
+      1440,
+      6039
+    ],
+    "candidateDimensions": [
+      1440,
+      5929
+    ],
+    "beforeSha256": "89df29224461b21fe128f8b9c7fa3ba04cd587e4150cc544f2658490c8724ef7",
+    "candidateSha256": "f5e2c29858a95cf49cf9d5fb699ff37efdbb5049227957c99a4452a3e5e45e63"
+  },
+  {
+    "viewport": "mobile",
+    "beforeDimensions": [
+      390,
+      8701
+    ],
+    "candidateDimensions": [
+      390,
+      8649
+    ],
+    "beforeSha256": "1416c7c7a8ce774b72873c7c58ee91d8141a9f06da9c9131ae4b437b2ca0714c",
+    "candidateSha256": "6e2942d9ebce2e1cd9d0e9ebc903de5df5ca7a2e396c80d9073fe1ee0e113406"
+  }
+]

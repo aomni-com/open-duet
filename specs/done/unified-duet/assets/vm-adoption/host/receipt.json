@@ -1,0 +1,36 @@
+{
+  "status": "local-controller-proof",
+  "liveVmMutations": false,
+  "sourceSha256": {
+    "scripts/migrate-vm-fleet.ts": "623fdfa13b5f024cf1be5b841fddaaf05239a26e035ddc97d8707c7db697bef1",
+    "scripts/migrate-vm-fleet.test.ts": "2cdefed60ec4477b3504c913f5475a1e8eb986d630030f4afbd1893aacc7df40",
+    "scripts/testing/fleet-transfer-fixture.ts": "6718e15c1ee12662ba04be56a3987a4fe68a1ad0d27c7b866f6fa4f978be4b23"
+  },
+  "helperCommit": "869ba7274f5ac8dcaa5a73ff7566d62ccaa5dc43",
+  "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+  "gates": {
+    "hostTests": 27,
+    "joinedTests": 34,
+    "joinedAssertions": 88,
+    "typecheck": "green with the owning gateway text-asset declarations",
+    "lint": "green",
+    "independentReview": "no actionable regressions",
+    "realHostSystemd": "fresh final447 adoption and noop green; private receipt reads corrected"
+  },
+  "fleetPlans": {
+    "observedAt": "2026-10-04T11:35:36Z",
+    "staging": 2,
+    "production": 15,
+    "unprovisionedPausedWorkspaces": {
+      "staging": 2,
+      "production": 40
+    },
+    "unmatchedProviderVms": 0,
+    "lifecycleFenceClosed": false,
+    "apply": false
+  },
+  "limits": [
+    "External account and transport edges map to a disposable old-layout fixture, not a live VM.",
+    "Dry-run inventory is not a closed-fence drain or an adopted fleet."
+  ]
+}

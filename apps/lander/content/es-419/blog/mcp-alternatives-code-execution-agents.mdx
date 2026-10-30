@@ -1,0 +1,191 @@
+---
+title: 'Por qué reemplazamos MCP por agentes de ejecución de código'
+description: 'MCP se veía prometedor. Luego probamos agentes de ejecución de código y no miramos atrás. Esto fue lo que nos hizo cambiar de opinión.'
+date: '2026-03-06'
+updatedAt: '2026-05-08'
+readTime: '11 min read'
+author:
+  name: 'Sawyer Middeleer'
+  role: 'Co-founder'
+  link: '/'
+category: 'ai'
+tags: ['ai-agents', 'mcp', 'integrations', 'ai-architecture', 'code-execution']
+type: 'article'
+image: '/blog/mcp-alternatives-code-execution-agents/cover.png'
+relatedPosts:
+  - 'how-to-set-up-a-24-7-ai-agent'
+  - 'openclaw-vs-managed-ai-agent-platforms'
+  - 'how-to-host-openclaw-in-the-cloud'
+locale: es-419
+translationKey: 'mcp-alternatives-code-execution-agents'
+cta:
+  title: 'Olvídate del zoológico de servidores MCP.'
+  subtitle: 'Duet ejecuta agentes de ejecución de código que se comunican con cualquier herramienta, con estado persistente y cero deriva de configuración. El arreglo de MCP que nuestro equipo de verdad construyó.'
+  buttonText: 'Ejecutar un agente de code-exec'
+  href: '/sign-in?from=blog-mcp-alternatives'
+---
+
+# Por qué reemplazamos MCP por agentes de ejecución de código
+
+Cuando construimos por primera vez la infraestructura de agentes de Duet, nos apoyamos mucho en MCP, Model Context Protocol.
+
+Era limpio, estaba bien documentado y se sentía como la capa de abstracción correcta para conectar modelos de AI con herramientas externas.
+
+Para el uso simple de herramientas, funcionaba bien.
+
+Pero a medida que nuestros workflows se volvieron más complejos (automatizaciones de varios pasos, lógica condicional, manejo de errores, creación dinámica de herramientas), MCP empezó a mostrar sus límites.
+
+La arquitectura sin estado que lo hacía predecible también lo hacía frágil para cualquier cosa no trivial.
+
+Con el tiempo migramos a agentes de ejecución de código, y la diferencia fue significativa.
+
+Esta entrada explica exactamente por qué, cuándo MCP todavía tiene sentido y qué recomendaríamos para equipos que construyen workflows de AI en producción en 2026.
+
+<Callout emoji="💡">
+Resumen rápido
+
+Esta entrada explica por qué el equipo de Duet se alejó de MCP (Model Context Protocol) hacia los agentes de ejecución de código, cubriendo las limitaciones de MCP, qué hacen mejor los agentes de ejecución de código y cuándo tiene sentido cada enfoque.
+
+</Callout>
+
+<Callout emoji="❓">
+Preguntas que responde esta página
+
+- ¿Cuál es la diferencia entre MCP y los agentes de ejecución de código?
+- ¿Por qué reemplazar MCP por agentes de ejecución de código?
+- ¿Cuáles son las limitaciones de MCP en los workflows de AI?
+- ¿Cómo funcionan los agentes de ejecución de código?
+- ¿Qué es Model Context Protocol (MCP)?
+
+</Callout>
+
+---
+
+## El problema de la inflación de contexto en MCP
+
+MCP (Model Context Protocol) es la forma estándar en que los agentes de AI se conectan a servicios externos. El patrón: defines un conjunto de herramientas con schemas, las inyectas en el contexto del agente y dejas que el agente las llame.
+
+Funciona. Hasta que no funciona.
+
+El problema es el costo lineal de contexto. Cada herramienta MCP que agregas (su nombre, descripción, schema de parámetros, ejemplos) ocupa espacio en la ventana de contexto del agente. Conecta 10 servicios con 5 herramientas cada uno y habrás quemado miles de tokens antes de que el agente haya hecho algo útil.
+
+Esto crea un compromiso doloroso:
+
+- Cargar todo por adelantado y aceptar un rendimiento degradado en la tarea real (menos espacio para razonamiento, historial de conversación y memoria de trabajo)
+- Limitar las integraciones y aceptar que tu agente solo pueda comunicarse con un puñado de servicios
+- Construir carga dinámica de herramientas y aceptar la latencia y complejidad del middleware de selección de herramientas
+  Ninguna de estas es buena. La ventana de contexto es el espacio más valioso que tiene tu agente. Llenarla con definiciones de herramientas que tal vez nunca use es un desperdicio.
+
+Más allá de los costos de contexto, MCP tiene otras limitaciones que se vuelven claras a escala.
+
+Cada herramienta solo expone lo que el desarrollador original eligió incluir. ¿Necesitas un parámetro que el autor de la herramienta no anticipó? Estás atascado. ¿Necesitas combinar tres llamadas de API en una operación atómica? La abstracción de la herramienta se interpone.
+
+## Agentes que escriben sus propias integraciones
+
+¿Y si el agente no necesitara herramientas predefinidas en absoluto?
+
+Este es el enfoque al que llegamos: en lugar de inyectar definiciones de herramientas MCP, le das al agente un entorno de servidor persistente donde puede escribir y ejecutar código. Cuando el agente necesita interactuar con un servicio externo:
+
+1. Consulta la API: lee la documentación, encuentra los endpoints, entiende la autenticación
+1. Escribe el código de integración: un script de Python o TypeScript que llama directo a la API
+1. Lo ejecuta: corre el código en su servidor, obtiene resultados
+1. Lo guarda: almacena el código que funciona en su memoria persistente para la próxima vez
+   La próxima vez que el agente necesite esa integración, no vuelve a descubrir nada. Carga su código guardado y lo ejecuta. Con el tiempo, el agente construye una biblioteca creciente de integraciones que escribió él mismo.
+
+¿El costo de contexto? Cero al inicio. El agente solo carga lo que necesita, cuando lo necesita.
+
+## MCP vs. ejecución de código
+
+Esto no es solo una optimización de rendimiento. La ejecución de código es fundamentalmente más capaz que las herramientas MCP en cada eje que importa para los agentes de AI en producción.
+
+Considera un ejemplo concreto. Una herramienta MCP para un servicio de gestión de proyectos podría exponer create_issue, list_issues, update_issue: un conjunto fijo de operaciones. Un agente que escribe su propia integración puede llegar a cualquier endpoint de la API, combinar varias llamadas en una sola operación, transformar datos entre formatos y manejar casos límite que el autor de la herramienta nunca anticipó.
+
+El agente no está limitado a lo que alguien preconstruyó. Tiene todo el poder de la API.
+
+## Software que se autoevoluciona
+
+La propiedad más interesante de esta arquitectura es que el agente mejora sus propias integraciones con el tiempo.
+
+Cuando una llamada de API falla, el agente la depura, arregla el código y guarda la versión mejorada. Cuando un workflow necesita una nueva transformación de datos, el agente la escribe y la agrega a su biblioteca. Cuando un servicio cambia su API, el agente actualiza su código la próxima vez que se ejecuta.
+
+Esto es software que se autoevoluciona. La capa de integración del agente no es estática, crece y se adapta con el uso.
+
+Compara esto con las herramientas MCP, que están congeladas en la versión que publicó el desarrollador. Cuando una API cambia, esperas a que el autor de la herramienta la actualice. Cuando necesitas una función que la herramienta no soporta, abres un issue y esperas. El agente está a merced de mantenedores externos.
+
+Con la ejecución de código, el agente es su propio mantenedor.
+
+Esto se compone con el tiempo. Un agente de AI 24/7 corriendo en infraestructura persistente no solo ejecuta tareas, acumula código de integración funcional, patrones de manejo de errores y conocimiento de dominio. Cada sesión hace que la siguiente sea más eficiente.
+
+## El requisito de infraestructura
+
+Hay una trampa. Esta arquitectura requiere tres cosas que la mayoría de los productos de AI no tienen:
+
+1. Un servidor persistente: algún lugar para ejecutar código, almacenar archivos y mantener el estado entre sesiones
+1. Memoria: una forma de guardar el código de integración y recuperarlo después sin usar la ventana de contexto
+1. Ejecución de código: un entorno de runtime con acceso a la red, gestión de paquetes y acceso al sistema de archivos
+   Por esto las herramientas de AI basadas en sesiones no pueden hacerlo. ChatGPT, Claude.ai y la mayoría de los asistentes de AI levantan un entorno nuevo en cada conversación. No hay persistencia. No hay memoria. No hay forma de construir sobre trabajo previo.
+
+Necesitas un servidor en la nube que se mantenga encendido, uno donde el agente pueda escribir un script hoy y ejecutarlo la próxima semana. Donde pueda instalar un paquete, guardar credenciales y construir una biblioteca de código funcional con el tiempo.
+
+Esta es la apuesta arquitectónica central detrás de Duet. Cada usuario obtiene un servidor en la nube persistente con un agente de AI siempre encendido. El agente tiene su propio sistema de archivos, memoria, tareas programadas y entorno de ejecución de código. Escribe sus propias integraciones, las guarda y las reutiliza. Volviéndose más capaz cuanto más tiempo corre.
+
+También es por eso que este enfoque es raro hoy. La mayoría de los productos de AI son sin estado por diseño. Construir un agente persistente con respaldo de servidor es un desafío de infraestructura fundamentalmente distinto. Uno que requiere repensar desde cero cómo se construyen las plataformas de agentes de AI.
+
+## ¿Qué hay de la seguridad de MCP?
+
+El modelo de seguridad de MCP introduce sus propios riesgos. Cada servidor MCP que conectas obtiene acceso al contexto de tu agente y puede ejecutar operaciones en tu nombre. Cuantos más servidores conectas, mayor es tu superficie de ataque.
+
+Con ejecución de código en un servidor en sandbox, el agente controla exactamente qué corre, cuándo y con qué credenciales. No hay un servidor de herramientas de terceros entre tu agente y la API. El agente escribe llamadas de API directas con autenticación explícita, sin nada oculto en capas de middleware.
+
+Esto no elimina las preocupaciones de seguridad, pero desplaza el límite de confianza. En lugar de confiar en docenas de implementaciones de servidores MCP de terceros, confías en un único entorno de ejecución en sandbox que tú controlas.
+
+## Cuándo MCP todavía tiene sentido
+
+MCP no va a desaparecer, y no debería. Es un estándar útil para escenarios específicos:
+
+- Prototipado rápido: cuando necesitas una integración funcional en minutos, no en horas
+- APIs estables y bien definidas: donde la abstracción del autor de la herramienta coincide exactamente con tu caso de uso
+- Arranque de capacidades del agente: poner productivo a un agente nuevo antes de que construya su propia biblioteca
+- Interfaces estandarizadas: donde importa la interoperabilidad entre distintos frameworks de agentes
+  La guía Agent Skills 101 desglosa el espectro desde llamadas simples de herramientas hasta servidores MCP y sistemas completos de skills. MCP ocupa un terreno medio útil, solo que no es el destino final para los agentes en producción que necesitan funcionar en docenas de servicios.
+
+## Qué significa esto para el futuro de las integraciones de AI
+
+Para los agentes de AI en producción que necesitan funcionar en docenas de servicios, manejar casos límite y mejorar con el tiempo, el futuro es la ejecución de código en infraestructura persistente.
+
+La capa de integración del futuro no es un catálogo de herramientas preconstruidas. Es un agente que puede leer la documentación de una API y escribir la suya propia.
+
+Este cambio tiene implicaciones para cómo los equipos construyen con AI:
+
+- Deja de optimizar por la cantidad de herramientas. El número de integraciones preconstruidas que ofrece una plataforma importa menos que si el agente puede escribir las suyas.
+- Invierte en persistencia. Un agente que olvida todo entre sesiones nunca puede construir una biblioteca de integraciones reutilizable. Los agentes alojados en la nube con almacenamiento persistente son lo mínimo.
+- Piensa en código, no en configuraciones. Los agentes más capaces no son los que tienen más herramientas preconfiguradas. Son los que tienen los mejores entornos de ejecución de código y la libertad de usarlos.
+  Los equipos que ya usan AI para operaciones de startups, inteligencia competitiva y prospección de ventas lo están descubriendo de primera mano: los agentes que escriben sus propias integraciones superan de forma consistente a los que están limitados a catálogos de herramientas preconstruidas.
+
+La pregunta no es si los agentes de AI superarán a MCP. Es qué tan rápido.
+
+## Preguntas frecuentes
+
+### ¿Qué es MCP (Model Context Protocol)?
+
+MCP es un estándar abierto para conectar agentes de AI a servicios externos. Define un protocolo donde las herramientas (funciones con schemas de entrada) se inyectan en la ventana de contexto de un agente, permitiéndole llamarlas durante las conversaciones. Fue diseñado para estandarizar cómo los modelos de AI interactúan con APIs, bases de datos y otros servicios.
+
+### ¿Cuáles son las principales limitaciones de MCP?
+
+Las principales limitaciones de MCP son la inflación de contexto (cada herramienta consume tokens en la ventana de contexto del agente), la cobertura limitada de API (las herramientas solo exponen lo que el desarrollador construyó), la parametrización rígida (no puedes personalizar más allá de las entradas predefinidas) y la dependencia de mantenimiento (esperas a que los autores de las herramientas actualicen cuando cambian las APIs). Estas se componen a medida que agregas más integraciones.
+
+### ¿La ejecución de código reemplaza por completo a MCP?
+
+No del todo. MCP sigue siendo útil para el prototipado rápido, las APIs estables donde las abstracciones preconstruidas coinciden con tus necesidades, y las interfaces estandarizadas entre frameworks de agentes. La ejecución de código es mejor para agentes en producción que necesitan cobertura completa de API, lógica personalizada e integraciones que se automejoran en muchos servicios.
+
+### ¿Qué infraestructura necesitan los agentes de AI para la ejecución de código?
+
+La ejecución de código de los agentes de AI requiere tres cosas: un servidor persistente que se mantenga corriendo entre sesiones, un sistema de memoria para guardar y recuperar el código de integración, y un entorno de runtime con acceso a la red y gestión de paquetes. Por esto la mayoría de los chatbots de AI no pueden hacerlo, usan entornos efímeros y sin estado.
+
+### ¿Cómo mejora la seguridad de los agentes de AI la ejecución de código?
+
+La ejecución de código en un servidor en sandbox desplaza el límite de confianza. En lugar de conectarte a docenas de servidores MCP de terceros (cada uno con acceso al contexto de tu agente), el agente hace llamadas de API directas desde un único entorno controlado. Gestionas un límite de confianza en vez de muchos.
+
+### ¿Los agentes de AI de verdad pueden escribir sus propias integraciones de API?
+
+Sí. Los modelos de AI modernos pueden leer la documentación de una API, escribir scripts de integración en Python o TypeScript, probarlos, depurar fallas y guardar el código funcional para reutilizarlo. En infraestructura persistente, los agentes construyen bibliotecas crecientes de integraciones escritas por ellos mismos que mejoran con cada uso.

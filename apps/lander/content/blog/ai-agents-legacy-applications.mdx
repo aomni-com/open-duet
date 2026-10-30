@@ -1,0 +1,260 @@
+---
+title: "AI Agents for Legacy Applications: What Amazon WorkSpaces Actually Solves (and What It Doesn't)"
+metaTitle: 'AI Agents for Legacy Applications: The Real Answer'
+description: "Amazon WorkSpaces lets AI agents click legacy apps. Here's what that solves, what it doesn't, and the decision framework for SMB operators."
+date: '2026-07-18'
+updatedAt: '2026-07-18'
+readTime: '11 min read'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/10.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'ai'
+tags:
+  [
+    'ai agents for legacy applications',
+    'remote desktop for ai agents',
+    'computer use agent',
+    'ai agents',
+    'small business',
+  ]
+type: 'article'
+image: '/blog/ai-agents-legacy-applications/cover.png'
+citations:
+  - name: 'Amazon WorkSpaces for AI agents'
+    url: 'https://aws.amazon.com/about-aws/whats-new/2026/06/amazon-workspaces-ai/'
+    author: 'Amazon Web Services'
+    publisher: 'Amazon Web Services'
+    datePublished: '2026-06-30'
+  - name: 'Amazon WorkSpaces now lets AI agents operate desktop applications'
+    url: 'https://aws.amazon.com/blogs/desktop-and-application-streaming/amazon-workspaces-now-lets-ai-agents-operate-desktop-applications/'
+    author: 'Amazon Web Services'
+    publisher: 'AWS Desktop and Application Streaming Blog'
+    datePublished: '2026-06-30'
+  - name: 'Modernize your workflows — Amazon WorkSpaces now gives AI agents their own desktop (preview)'
+    url: 'https://aws.amazon.com/blogs/aws/modernize-your-workflows-amazon-workspaces-now-gives-ai-agents-their-own-desktop-preview/'
+    author: 'Amazon Web Services'
+    publisher: 'AWS News Blog'
+    datePublished: '2026-04-28'
+  - name: 'Computer use is 45x more expensive than structured APIs'
+    url: 'https://reflex.dev/blog/computer-use-is-45x-more-expensive-than-structured-apis/'
+    author: 'Reflex'
+    publisher: 'Reflex Blog'
+    datePublished: '2026-06-29'
+  - name: 'Business solutions survey 2024'
+    url: 'https://erp.intuit.com/blog/research/business-solutions-survey-2024/'
+    author: 'Intuit QuickBooks'
+    publisher: 'Intuit QuickBooks'
+    datePublished: '2024-11-12'
+  - name: 'Claude pricing'
+    url: 'https://platform.claude.com/docs/en/about-claude/pricing'
+    author: 'Anthropic'
+    publisher: 'Anthropic Docs'
+  - name: 'Computer use in Microsoft Copilot Studio'
+    url: 'https://learn.microsoft.com/en-us/microsoft-copilot-studio/computer-use'
+    author: 'Microsoft'
+    publisher: 'Microsoft Learn'
+    dateModified: '2026-04-30'
+  - name: 'Use computer use with Claude'
+    url: 'https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool'
+    author: 'Anthropic'
+    publisher: 'Anthropic Docs'
+  - name: 'QuickBooks Desktop Pro and Premier — discontinue new subscriptions'
+    url: 'https://quickbooks.intuit.com/learn-support/en-us/help-article/feature-preferences/subscription-changes-quickbooks-desktop-pro-premier/L8vcjPqEE_US_en_US'
+    author: 'Intuit QuickBooks'
+    publisher: 'Intuit QuickBooks'
+  - name: 'QuickBooks Desktop Enterprise'
+    url: 'https://quickbooks.intuit.com/enterprise/'
+    author: 'Intuit QuickBooks'
+    publisher: 'Intuit QuickBooks'
+  - name: 'Sage 100 ERP'
+    url: 'https://www.sage.com/en-us/products/sage-100/'
+    author: 'Sage'
+    publisher: 'Sage'
+  - name: '10 questions small business leaders must answer before deploying AI agents'
+    url: 'https://www.microsoft.com/en-us/microsoft-cloud/blog/2026/03/25/10-questions-small-business-leaders-must-answer-before-deploying-ai-agents/'
+    author: 'Microsoft'
+    publisher: 'Microsoft Cloud Blog'
+    datePublished: '2026-03-25'
+  - name: 'Amazon WorkSpaces'
+    url: 'https://aws.amazon.com/workspaces/'
+    author: 'Amazon Web Services'
+    publisher: 'Amazon Web Services'
+relatedPosts:
+  - slug: 'where-to-host-ai-agents'
+    context: 'DIY vs serverless vs managed — where the agent process itself should run'
+  - slug: 'who-runs-your-ai-agent-after-you-build-it'
+    context: 'The ownership and handoff question in full'
+  - slug: 'how-to-set-up-a-24-7-ai-agent'
+    context: 'The runtime side of work that continues while you sleep'
+  - slug: 'how-to-automate-bookkeeping-financial-reporting-ai'
+    context: 'The SMB back-office workflow this decision applies to'
+cta:
+  title: 'Map one recurring workflow.'
+  subtitle: 'The app it touches, the files it reads and writes, the approval before any side effect, the run history you would need to show someone, and who owns it after handoff.'
+  buttonText: 'See what a persistent workspace adds'
+  href: '/'
+---
+
+> Amazon WorkSpaces now lets an AI agent operate desktop applications that have no API — the unchanged software many small businesses still run every day. That solves reach: the agent gets a governed computer to click. It does not, by itself, solve continuity. A remote desktop is an execution surface; recurring work still needs a persistent home for files, context, approvals, run history, and ownership.
+
+This is not about rewriting legacy code — it is about whether an AI agent can operate the desktop software you already run.
+
+## What did Amazon WorkSpaces just change for legacy applications?
+
+On June 30, 2026, AWS made [Amazon WorkSpaces for AI agents generally available](https://aws.amazon.com/about-aws/whats-new/2026/06/amazon-workspaces-ai/) — a governed computer an AI agent can see and click. It targets ERP systems, CRMs, mainframes, and proprietary tools AWS calls "too critical to abandon and costly to modernize."
+
+The pitch is specific: an agent can operate existing desktop software "without requiring application modernization or custom integrations." Nothing about the underlying app changes to make this work.
+
+AWS backs the launch with two stats from its own material. McKinsey, cited by AWS, puts 70% of the enterprise software Fortune 500 companies use at more than 20 years old. Gartner, cited by AWS, forecasts enterprises scaling past 150,000 agents by 2028, up from 15 in 2025.
+
+Those numbers describe AWS's enterprise customers, not small businesses. But the condition they describe — recurring work stuck behind software with no API — isn't limited to companies that size. More on that below.
+
+## Can an AI agent use my desktop applications?
+
+Yes — with conditions. A computer-use agent perceives the screen through screenshots and acts through a virtual mouse and keyboard: the same screenshot-reason-act loop AWS itself uses to describe the capability.
+
+[AWS's launch demo](https://aws.amazon.com/blogs/aws/modernize-your-workflows-amazon-workspaces-now-gives-ai-agents-their-own-desktop-preview/) shows what that looks like: a Strands Agent SDK agent completes a prescription refill — looks up the patient, searches the medication, places the order, confirms it — inside a sample pharmacy system with no API. "The application doesn't know an agent is driving it. Nothing about the software was modified, rebuilt, or integrated," AWS writes.
+
+Two things worth being precise about. First, that's a demo AWS built on a sample system to illustrate the capability — not a published production case study. Second, reliability depends on UI stability, session length, and how explicit your instructions are; a stable, simple screen behaves very differently than a dense, dialog-heavy one.
+
+## What does a remote desktop for AI agents actually give you?
+
+It gives the agent an execution surface, not an operating home. That distinction is the pivot the rest of this article builds on.
+
+**What the desktop session gives the agent:**
+
+- Session control at three levels: watch only, watch-and-stop, or fully unattended
+- Domain-joined identity, so actions attribute to an existing Active Directory account under existing access policies
+- Tool forwarding, so MCP servers installed inside the session hand the agent direct tools instead of pixels wherever a programmatic interface exists
+- A technical audit trail — logs, metrics, and screenshots via CloudTrail, CloudWatch, and S3
+
+**What it does not give the work, by default:**
+
+- A durable home for files
+- Retained business context across sessions
+- A workflow-approval gate before an external side effect
+- A reviewable run history
+- A named owner once the session ends
+
+![Two columns compare what a governed remote desktop gives an AI agent — session control, governed identity, hybrid tool access, and technical audit — with what it does not give the work: durable files, retained context, an approval gate, run history, and a named owner.](/blog/ai-agents-legacy-applications/diagram-desktop-vs-continuity.png)
+
+A desktop gives the agent reach. A persistent workspace gives the work continuity. That's the sentence worth carrying through the rest of this piece.
+
+For where the agent's actual process should live — the server it runs on, not just the screen it clicks — see [where to host AI agents](/blog/where-to-host-ai-agents). AWS's own architecture makes the same hybrid bet: [route agents to tools where they exist and pixels where they don't](https://aws.amazon.com/blogs/desktop-and-application-streaming/amazon-workspaces-now-lets-ai-agents-operate-desktop-applications/).
+
+## When should an agent use the screen instead of an API?
+
+Structured APIs beat pixels on every measured axis where they exist. That's not an opinion — it's a controlled benchmark.
+
+[Reflex ran the same task two ways](https://reflex.dev/blog/computer-use-is-45x-more-expensive-than-structured-apis/) on a react-admin "Posters Galore" demo panel seeded with 900 customers, 600 orders, and 324 reviews: once with a vision-based agent clicking through screenshots, once with the same Claude model calling the app's own API directly.
+
+| Metric                           | Vision (screen)                | API (structured)        |
+| -------------------------------- | ------------------------------ | ----------------------- |
+| Input tokens                     | 550,976 ± 178,849              | 12,151 ± 27             |
+| Wall-clock time                  | ≈17 min (1003s ± 254s)         | ≈20s (19.7s ± 2.8s)     |
+| Steps / calls                    | 53 ± 13 steps                  | 8 ± 0 calls             |
+| Variance across 3 identical runs | 43–68 cycles, 407k–751k tokens | identical to ±27 tokens |
+
+The gap is roughly 45×. The vision agent also initially failed the task outright — it found one of four pending reviews and stopped, with no signal to scroll for the rest — and only succeeded once given an explicit 14-step walkthrough naming every screen, tab, and field. Claude's cheapest model, Haiku, couldn't complete the vision path at all; on the API path it finished in 7.7 seconds using about 9,500 tokens, the cheapest configuration tested.
+
+![Paired log-scale bars from one controlled Reflex benchmark on the same admin-panel task: the vision agent used 550,976 input tokens and about 17 minutes; the API agent used 12,151 tokens and about 20 seconds — roughly a 45× cost gap, with zero run-to-run variance on the API path.](/blog/ai-agents-legacy-applications/chart-reflex-45x.png)
+
+<Callout emoji="⚖️">
+**Fair representation:** that 45× gap applies specifically where an API surface exists or can be generated. Reflex's own conclusion: "Vision agents remain the right tool for applications you do not control: third-party SaaS products, legacy systems, anything you cannot modify."
+
+</Callout>
+
+**That gap applies specifically where an API surface exists or can be generated.** Reflex says as much in its own conclusion: "Vision agents remain the right tool for applications you do not control: third-party SaaS products, legacy systems, anything you cannot modify." Both halves matter — the 45× figure isn't an argument that computer use is always wasteful. It's an argument for using it only where nothing better is available.
+
+## Is this actually relevant to a small business, not just a Fortune 500 ERP?
+
+AWS's own material is enterprise-framed — Fortune 500, Active Directory, claims processing, trade settlement. But the underlying pattern is measurably an SMB condition too.
+
+A [2024 Intuit QuickBooks survey of 630 US small businesses](https://erp.intuit.com/blog/research/business-solutions-survey-2024/) with 10–99 employees found the average business runs 10 digital solutions and loses 25 hours a week to manual data entry and reconciliation across them. 43% named integration between apps as a direct challenge.
+
+That gap shows up in the installed base itself. Intuit stopped selling new US subscriptions of QuickBooks Desktop Pro and Premier after September 30, 2024, but Desktop Enterprise is still sold today, and existing subscribers can keep renewing. Sage 100 is still actively positioned and sold to small and midsize businesses. The unchanged desktop software AWS is describing isn't hypothetical — it's what a lot of real operators run every day.
+
+## What happens to the work when the laptop is closed?
+
+Nothing continues on its own. A desktop session is ephemeral by design: no schedule, no run record, no handoff.
+
+AWS makes its own version of this warning: an agent running straight off a laptop "inherits everything the laptop has — your operating system, your credentials, your network, your files," with "almost no line between the person and the autonomous worker."
+
+Before you scale any workflow past a demo, it needs five things that don't come from the desktop session itself:
+
+1. **Files** — a durable home for inputs and outputs
+2. **Retained context** — what the agent learned last time, still true this time
+3. **An approval gate** — a checkpoint before any external side effect
+4. **Run history** — a reviewable record of what happened and when
+5. **A named owner** — someone accountable once the builder moves on
+
+If nothing in your setup answers "what happens overnight," you don't have a workflow yet — you have a demo. [Setting up a 24/7 AI agent that works while you sleep](/blog/how-to-set-up-a-24-7-ai-agent) covers the runtime side of that; [why your AI keeps forgetting (and how to fix it)](/guides/ai-amnesia-why-your-ai-keeps-forgetting) covers the memory side.
+
+## Who owns the workflow after a consultant leaves?
+
+Whoever inherits the context, credentials, artifacts, and run history — not whoever happened to be watching the agent's last session. Vendors sell session control, workflow approval, and handoff as one vague "human in the loop." Operators can't afford to collapse them.
+
+|                       | What it means                                                                              | Example                                                      |
+| --------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
+| **Session control**   | Interrupt a live run                                                                       | Watch-and-stop: you halt the agent mid-task                  |
+| **Workflow approval** | Review a proposed action before an external side effect                                    | The invoice is drafted; you approve it before it posts       |
+| **Handoff**           | Transfer context, credentials, artifacts, and run history to whoever inherits the workflow | The next person picks up exactly where the last one left off |
+
+![Three columns separate session control (interrupting a live run), workflow approval (reviewing an action before an external side effect), and handoff (transferring context, credentials, artifacts, and run history to a new owner) — three distinct things vendors collapse into "human in the loop."](/blog/ai-agents-legacy-applications/diagram-human-in-the-loop.png)
+
+Picture a consultant running month-end close for five clients (an illustrative composite, not a named customer): each client's books live in a different desktop install. Watching a live session solves nothing if the review notes, approvals, and run log for each client don't survive the consultant's next vacation, or their next contract. [Who runs your AI agent after you build it](/blog/who-runs-your-ai-agent-after-you-build-it) walks through that ownership question in full.
+
+## So which path should your business actually choose?
+
+Three paths, stated fairly:
+
+1. **Desktop-control runtime wins** for a true no-API GUI, a domain-joined identity requirement, or a strict compliance boundary you can't work around.
+2. **API/integration-first wins** wherever a structured interface already exists — it wins on cost, latency, and determinism, per the benchmark above.
+3. **Hybrid wins** for the common case: direct tools for the structured majority of a workflow, the screen only for the one irreducible step with no API. This is AWS's own GA architecture — MCP tool forwarding alongside computer use.
+
+![A flowchart for choosing how to automate a legacy workflow: if every system has an API, go integration-first; if only one irreducible GUI step lacks an API, go hybrid; if nothing has an API, use a desktop-control runtime — and on every path, answer where continuity lives and who owns the workflow.](/blog/ai-agents-legacy-applications/diagram-three-question-framework.png)
+
+Before you scale any of the three, qualify the workflow:
+
+- Pick one recurring workflow — for example, [invoice entry and reconciliation](/blog/how-to-automate-bookkeeping-financial-reporting-ai)
+- Check every system it touches for an API, export, or database path
+- Shrink the screen-control step to the smallest possible action
+- Start supervised — watch-and-stop, not fully autonomous
+- Define the one approval gate — the point of no return — before you loosen oversight
+
+## Where does a persistent workspace like Duet fit into this?
+
+A desktop-control runtime like Amazon WorkSpaces solves reach — it gives an agent a governed computer to click. It doesn't solve what happens between sessions, and it isn't meant to.
+
+That's a different layer: a persistent workspace where an agent's files and memory outlive any single session, where scheduled runs keep recurring work moving without an open laptop, and where outputs land as real, shareable artifacts instead of screen recordings. Duet is one example of that layer. It holds durable shared memory across every agent on a team — what one agent learns about your pricing rules or customer history, the next one already knows. It runs pipelines and scheduled work on their own clock. It hosts dashboards and internal tools at real URLs. And nothing external ever sends or posts without your explicit approval first.
+
+None of that requires WorkSpaces, and none of it operates a legacy application's screen. It's the ledger the desktop session doesn't keep. [Map one recurring workflow against it](/) — the files it touches, the approval it needs, who owns it after handoff — and see what's actually missing.
+
+---
+
+A desktop gives the agent reach. A persistent workspace gives the work continuity. WorkSpaces answers the first question well. Before you build on it, answer the second one too: map one recurring workflow — the app it touches, the files it reads and writes, the approval before any side effect, the run history you'd need to show someone, and who owns it after handoff.
+
+## Frequently asked questions
+
+**What is an AI agent desktop?**
+A phrase used loosely for a computer or virtual machine an AI agent can see and operate — usually via screenshots and simulated mouse and keyboard input. Amazon WorkSpaces for AI agents and [Microsoft Copilot Studio's computer-use tool](https://learn.microsoft.com/en-us/microsoft-copilot-studio/computer-use) are two governed, vendor-backed versions of the idea; "AI agent desktop" isn't a single product.
+
+**Can AI agents really operate legacy software that has no API?**
+Yes. As of Amazon WorkSpaces' June 30, 2026 general availability, an agent can be given a governed desktop session and interact with any application that renders on screen — no API required. AWS's own demo shows an agent completing a prescription refill in a sample pharmacy system without modifying the application. Reliability still depends on UI stability, session length, and how explicit your instructions are.
+
+**Is computer use the same thing as RPA?**
+No. RPA runs deterministic scripts against fixed selectors and breaks when the UI changes. Computer-use agents perceive the screen and reason about what to click, so they adapt to layout changes — but that reasoning is probabilistic, slower, and far more token-hungry per step than either RPA or a direct API call.
+
+**How much more expensive is computer use than an API integration?**
+In one controlled Reflex benchmark on an identical admin-panel task, the vision-based agent used 550,976 input tokens and took about 17 minutes; the same task through a structured API took 12,151 tokens and about 20 seconds — roughly a 45× gap, with the API path also showing zero run-to-run variance. That gap applies specifically where an API surface exists or can be generated; for a genuinely no-API legacy system, screen control remains the only option.
+
+**Do I need Amazon WorkSpaces (or AWS at all) to automate a legacy application?**
+No. AWS is the vendor behind this specific launch and the clearest current example of a governed desktop-control runtime, but it isn't the only path — Microsoft's Copilot Studio ships a comparable computer-use tool for Windows automation. The decision that matters is architectural (desktop control vs. API-first vs. hybrid), not which cloud you're already on.
+
+**Does Duet integrate with Amazon WorkSpaces or operate my desktop apps directly?**
+No. Duet has no computer-use or remote-desktop product, and no integration or partnership with Amazon WorkSpaces exists. Duet is a persistent workspace — durable files, memory, schedules, and approvals — that a desktop-control runtime like WorkSpaces could feed into, as a complementary layer, not a bundled product.
+
+**What's the safest way to start automating a no-API legacy workflow?**
+Pick one recurring workflow and map every system it touches. Route anything with an API or export path through direct integrations. Shrink the screen-control step to the smallest possible action. Start supervised — watch-and-stop, not fully autonomous — and define the one approval gate, the point of no return, before you loosen oversight.

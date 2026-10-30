@@ -1,0 +1,90 @@
+{/* DOCS-FIRST DRAFT (slice 20), revision 2 — edited after the unprimed
+    review (findings + resolutions recorded in
+    specs/file-attribution/slices/20-sync-credential.md). Full revised text
+    of apps/docs/app/api-keys/page.mdx incorporating the sync-device
+    credential kind. Lands with the slice-20 implementation in the same
+    diff. The `user:` scope grammar was endorsed by the review — the
+    slice's recorded kind-ceiling alternative is closed. */}
+
+export const metadata = {
+  title: 'API keys and scopes',
+  description: 'Grant a Duet credential the smallest workspace capability it needs.',
+  alternates: { canonical: '/api-keys/' },
+}
+
+<p className="eyebrow">Authorization</p>
+
+# A key is a workspace grant — with one exception
+
+Ordinary API keys are deliberately single-workspace. Their scopes use the shape
+`ws:{workspaceSlug}:{capability}`. This makes the authority boundary readable in logs, reviews, and
+approval screens.
+
+```text
+ws:acme:files:read
+ws:acme:files:write
+ws:acme:apps
+```
+
+## Ask for less
+
+Read-only automation should not receive a write capability. An integration that invokes connected
+providers should not also receive workspace administration. The `admin` capability satisfies other
+capabilities in the same workspace, so reserve it for genuinely administrative tooling.
+
+## Sync devices are the one user-wide grant
+
+A sync device — a machine that mirrors your workspaces with `duetfs sync` — holds the only kind of
+key that is not workspace-scoped. Its scopes use the `user:` shape instead of `ws:`, and no other
+key kind may carry them:
+
+```text
+user:files:read
+user:files:write
+```
+
+One credential identifies one device and carries exactly this pair. That is a deliberate tension
+with asking for less: a v1 mirror is bidirectional by protocol, so a narrower request does not yet
+exist — a receive-only device grant is named future work. The key is valid in every workspace you
+are a member of, evaluated live on each request: `user:files:read` satisfies any workspace's
+`files:read` requirement while your membership holds, and the same for write. Join a workspace and
+the device can mirror it immediately. Leave one and requests to it fail with `403` — and the same
+cascade that runs on revocation removes the device from that workspace's mirror folders and
+tunnel. Sync devices are issued through the [device flow](/device-flow), never by pasting a
+workspace key into the daemon.
+
+Clients discover the reachable set with `GET /v1/whoami` ([getting started](/getting-started)),
+which returns the memberships the credential currently satisfies. A `403` from a workspace that
+worked yesterday means membership was lost: drop it from the mirror set rather than retrying.
+
+## The floor is files, never authority
+
+A sync-device key can read and write workspace files and query [file activity](/file-activity) —
+nothing else. It never carries agent, administration, share, or publish capability, and the
+ceiling is enforced both when the key is minted and again on every request, so a request outside
+the file surface fails with `403` in every workspace. Everything the device does is attributed as
+`mirror:<deviceId>` in file activity, where the device id is the credential's document id (not the
+secret). Mirror reads emit no read markers — replication would otherwise flood every file's
+seen-by with mechanical noise — so a device's reads leave no per-file record; the device list's
+last-used time is the read-side signal.
+
+## Name, watch, and revoke devices
+
+Each device is named at issuance — the name is asserted by the requesting tool, so confirm it on
+the approval screen — and listed in the web app with its creation time and last use. Revocation is
+per-device: revoke the machine you lost and every other device keeps working. A revoked key
+returns `401` on every request after a short propagation window bounded by the server's credential
+cache — treat revocation as fast, not instantaneous, and rotate rather than wait when a key may
+have been exposed.
+
+## Send and rotate safely
+
+Use `Authorization: Bearer <key>` over HTTPS. Keys begin with `duet_sk_`, which helps secret scanners
+recognize them, but the prefix is not authentication. Treat a displayed key as a one-time secret,
+store it outside code, and replace it when ownership or required authority changes.
+
+## Scope mismatch is a design signal
+
+An insufficient-scope response should identify the missing grant. Do not catch it by switching to a
+more powerful shared key. Either narrow the operation or send the user through an explicit approval
+flow for the additional capability.

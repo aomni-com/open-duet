@@ -1,0 +1,37 @@
+{
+  "instanceId": "5785a4d5-6a61-44a3-896a-a33dc10b8f2c",
+  "bootId": "1e69d572-5026-473f-a72c-cf208b76d9af",
+  "imageVersion": "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+  "runtimeVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+  "uptimeSeconds": 61,
+  "diagnostics": {
+    "runtimeUpdateInFlight": false,
+    "attribution": {
+      "rawEventsObserved": 0,
+      "droppedReads": 0,
+      "overflow": 0,
+      "mirrorReadsSkipped": 0,
+      "cgroupMisses": 3,
+      "helperRestarts": 0
+    },
+    "scanNudge": {
+      "scans": 0,
+      "failures": 0,
+      "loopGuardSkips": 0,
+      "rawPathsObserved": 0,
+      "latestPaths": []
+    },
+    "anchorReconcile": {
+      "path": "fast",
+      "anchorCount": 0,
+      "anchorProbes": 0,
+      "walkEntries": 0,
+      "markerResolutionOperations": 0,
+      "excludedSubtrees": 0,
+      "durationMs": 0.009303999999247026
+    },
+    "restoreInFlight": false,
+    "backup": null,
+    "bootHealthCertified": true
+  }
+}

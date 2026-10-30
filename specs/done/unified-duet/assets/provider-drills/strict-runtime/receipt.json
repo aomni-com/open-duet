@@ -1,0 +1,21 @@
+{
+  "status": "pass",
+  "execution": "provider-vm",
+  "controlPlane": "controlled-loopback",
+  "fixtureId": "staging-e2e-synthetic",
+  "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+  "targetVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+  "drillKinds": [
+    "live-work-deferral",
+    "agent-only-update",
+    "missing-asset-repair",
+    "matched-rollback"
+  ],
+  "nativeMemoryVerified": true,
+  "bootIdBefore": "3efca0f8-ed42-4e68-91e7-46d3646a13b4",
+  "bootIdAfter": "3efca0f8-ed42-4e68-91e7-46d3646a13b4",
+  "selectedStateAndCredentialsUnchanged": true,
+  "cleanupVerifiedAbsent": true,
+  "ownedMetadataSha256": "0e16738acd5532fb36a7774a6fbb8287f3db2781df29a3b9609554f73ea88dfa",
+  "actualRealControlPlaneJourney": "running, not established by disposable drills"
+}

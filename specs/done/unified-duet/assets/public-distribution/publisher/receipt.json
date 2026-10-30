@@ -1,0 +1,51 @@
+{
+  "status": "validated",
+  "package": "@duetso/agent@1.0.0",
+  "version": "1.0.0",
+  "revision": null,
+  "artifact": {
+    "sha256": "b94bb1184bcbe9def3f5e9d9ba3a0305d775099fa381ef576ef145afe1139c37",
+    "integrity": "sha512-LqJa9+Vq2I2NXMw8NMMd75qlkigcCkMypOm2+W+fPeqFH8DgjbzIvggOySvXP4nTaaAcSzgh1GNHsPvWvSd2uw==",
+    "bytes": 2375204
+  },
+  "registryInstallVerified": false,
+  "scope": "Publisher tooling against retained native public-distribution winner; composed CLI05 integration and live publication remain separate gates",
+  "environment": {
+    "platform": "linux/amd64",
+    "bun": "1.3.14",
+    "node": "24.21.0",
+    "npm": "11.19.0"
+  },
+  "fixtureGate": {
+    "tests": 9,
+    "assertions": 39,
+    "exitCode": 0,
+    "registry": "ephemeral local HTTP; synthetic fixture token; actual npm pack/publish/install"
+  },
+  "negativeControls": {
+    "defaultWrite": "Removing --dry-run produced a registry PUT and failed the maintained default-write assertion",
+    "staleReceipt": "Removing receipt reset retained a prior success after E503 and failed retry assertion",
+    "largeEntry": "Original 4MiB stdout bound failed actual tar entry read; extraction/file read passed a 5MiB entry and real 12MiB native winner"
+  },
+  "liveOperations": {
+    "published": false,
+    "secretWritten": false,
+    "oldWriterChanged": false
+  },
+  "source": {
+    ".github/workflows/public-cli-release.yml": "c964c5c4ae8fc68238823899964ab44f0903e925f3cd6343d6380552b1f9be1e",
+    "packages/duet/scripts/release-public-cli.ts": "0ff071a44caebee3c0ab4be1652844088ee1d61547ea2160e3632177eae62489",
+    "packages/duet/test/public-cli-release.test.ts": "09cbdb73ad211ab2d3779721d6fae179d16b5f95bd8b0997de6c7d4bfa9318d1"
+  },
+  "review": {
+    "selfReview": "refactor-clean, code-review, write-docs; one publisher, exact staged artifact, clear failed-attempt receipt, documentation links resolve",
+    "codex": {
+      "command": "command codex review --uncommitted </dev/null",
+      "exitCode": 0,
+      "finding": "P1: existing agent-tests container lacks npm; host setup-node does not provide container npm",
+      "resolution": "Root-owned Node24/npm11+Bun1.3.14 owning-container rail change required before joined CI gate; local actual Node24/npm fixture gate independently passed"
+    },
+    "typecheckExitCode": 0,
+    "lintExitCode": 0
+  }
+}

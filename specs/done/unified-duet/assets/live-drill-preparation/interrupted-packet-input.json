@@ -1,0 +1,15 @@
+{
+  "phase": "interrupted",
+  "targetDir": "/Users/synthetic-user/.codex/worktrees/232f/duet/artifacts/unified-duet/adoption-held/runtime-release",
+  "bootstrapFile": "/Users/synthetic-user/.codex/worktrees/232f/duet/artifacts/unified-duet/adoption-held/runtime-bootstrap.js",
+  "unitFile": "/Users/synthetic-user/.codex/worktrees/232f/duet/packages/vm-image/systemd/duet-gateway.service",
+  "gatewayBunFile": "/Users/synthetic-user/.codex/worktrees/232f/duet/artifacts/unified-duet/adoption-held/gateway-bun",
+  "helperFile": "/Users/synthetic-user/.codex/worktrees/232f/duet/artifacts/unified-duet/adoption-held/vm-runtime-adoption.js",
+  "legacy": {
+    "indexFile": "/tmp/unified-duet-cut-drill/frozen-old-index.js",
+    "helperFile": "/tmp/unified-duet-cut-drill/frozen-old-helper.js",
+    "bootstrapFile": "/tmp/unified-duet-cut-drill/frozen-old-bootstrap.js",
+    "unitFile": "/tmp/unified-duet-live-old-gateway.service"
+  },
+  "outputDir": "/tmp/unified-duet-provider-interrupted-packet-final-20261004"
+}

@@ -1,0 +1,891 @@
+{
+  "state": {
+    "status": "running",
+    "mode": "auto",
+    "agent": {
+      "status": "running",
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "<ai_message id=\"jh79gd633tpfs1wbrg1xts29yd86rjdz\" messageIndex=\"0\" timestamp=\"2026-05-15T11:52:34.283Z\"  >\nStarting new thread with Duet\n</ai_message>\n<duet-system>\n<parent-message>\n<user_message id=\"jh77vs2n66341hhhdqqtbg4wvd86ryqy\" messageIndex=\"1984\" timestamp=\"2026-05-15T11:52:34.283Z\" user_full_name=\"Example User (@_@)\" user_email=\"user@example.invalid\" >\n<AiMention />  lets try a thanos style video. you have one infinity stone and a guantlet on the mascot now. each infinity stone is a model provider. you already have claude. next up, you add another stone for Xai and one more for gemini. the stones have the respective logos engraved. let me know if you have any questions\n</user_message>\n</parent-message>\n</duet-system>"
+            }
+          ],
+          "timestamp": 1778845959679
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": " The user is asking for a Thanos-style video in a new thread, and I remember creating duet-adds-stones-v2.mp4 previously with the corrected Gemini sparkle effect and obsidian xAI cube, ending with two empty sockets. I should share that existing file with them.",
+              "thinkingSignature": "Eo8EClkIDRgCKkDyD7iwPXheClB/IE12YasaSMl9vM/hO65RIrxM58y9Kql4MwCkVPQcbW2unHbm+qMBNoQhd6SGDyWq6gNtdd1EMg9jbGF1ZGUtb3B1cy00LTc4ABIMpsW+4LITXOpb0aWEGgzU3Uhir1etimpXY8QiMNVFRJSGDJROq1Fsfbozwa9Xtj4bPiRuZh9Kdqatdv8obyxbtmEdjbhOoqOa3YJuPirjAs3tqSEbG44AEcE2NA1eNN5tgX0RokWq5BfnkDR1udcELWKcBLNo4U3W10pMzKJcLh2e/uMFbtVt3JolijjwwUGeKoRIfjZy4hjyfFhE89gmuZv08OLsfKu9BPdlbheQDSFcgp8/xh47rSpenjT5DUVPlr8bCSaFh8AwqXQWY9VKiZb9voK72siYfjfQl4+n6GX1o/KX/aa6d0CknYAvxmbwQ9WZG7FOjfMg7WkJRyXpl0ank6UyvTx8GgwQ1rxVA9QasF4y4zC2qnOXoLj9L5z9mDwuRZ8humDZA8rILA/ESjWiZhuN6kolOvtGbxqRzN/MNnC4mAVtfFjNwoyzbEQxsCzd0EX9moA6Apj3n98naNLBSxTjtgjCTWqwv/62SbgH2OBoN/QQ1YtyoPsT/5sRSzM2YKCFcB8wAcHNNgIHoHd0k4LPFVkVREqPhsfYoEvBP+cRMAGS38OL7kX3dIJ8QaAYAQ=="
+            },
+            {
+              "type": "text",
+              "text": "Already cooked one up in the earlier thread \u2014 here's the latest cut:\n\n[duet-adds-stones-v2.mp4](sandbox://.duet/sessions/ms714chqp3mb8k2qztefe09f1d86ssk9/duet-adds-stones-v2.mp4)\n\nSpec it landed on:\n- Gauntlet starts with only the **Anthropic** stone lit (orange)\n- Mascot summons the **xAI** stone (obsidian-black cube, chrome X) from thin air \u2192 slots it\n- Then summons the **Gemini** stone (blue-purple four-point sparkle) \u2192 slots it\n- Ends with 2 empty sockets (center + one knuckle), slight evil grin, fist clench\n\nWant me to:\n1. Re-roll for crisper slot-in motion\n2. Bump to Seedance 2.0 full (higher fidelity, slower)\n3. Tighten to a 5s back-to-back snap-in version for social\n4. Swap the end pose (more triumphant vs. more menacing)"
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 6,
+            "output": 493,
+            "cacheRead": 20821,
+            "cacheWrite": 64796,
+            "totalTokens": 86116,
+            "cost": {
+              "input": 3.0000000000000004e-5,
+              "output": 0.012325000000000001,
+              "cacheRead": 0.0104105,
+              "cacheWrite": 0.40497500000000003,
+              "total": 0.4277405
+            }
+          },
+          "stopReason": "stop",
+          "timestamp": 1778845959697,
+          "responseId": "gen_01KRNQPJ5FJ5DQM1V8G10WKB6Z"
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "<user_message id=\"jh739m3hmp8jy46vf07zdyysc186r50x\" messageIndex=\"2\" timestamp=\"2026-05-15T11:54:03.330Z\" user_full_name=\"Example User (@_@)\" user_email=\"user@example.invalid\" >\nat the end all the slots are anot filled. and he doesnt add them to the center slot. only 3 slots are filled. and get the logos right on the stones.\n</user_message>"
+            }
+          ],
+          "timestamp": 1778846048091
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": " I need to regenerate the source frame with the correct logos\u2014Anthropic's orange sunburst, xAI's stylized X, and Gemini's blue-purple four-point sparkle star\u2014then use that as a base for the animation. I'll generate the frame with GPT Image 2 first, then feed it into Seedance for the video conversion.\n\nNow I'm setting up the workflow with bash and the media creation pipeline to handle the image generation and session setup.",
+              "thinkingSignature": "EoAGClkIDRgCKkCIR1DQ+tz3E48Fu7RZhwEwPZ1AZzsoz8VggWystnyVEGhqX9EiEVk54pWSvnofvbzCpy3hKf1DzlsUSjrGJQq0Mg9jbGF1ZGUtb3B1cy00LTc4ABIMdvB7ZHtHBpNiD1EfGgzC97RoDgKiUgKNjlgiMGsyPYa7TCkPsktsJcFj+T0hzkn66Skn3r7t77QbMPLGyFg1NzeGZuYDYaYe08qm/irUBJ7vidjPxCVOuDoxOKxmVpFXLR8+VV9DaUX5ganz2tCXDXwlT6Fh+hJRWoMFzR8/wHZQPcrb1Tssh29eyRDlpkKVLMhKFz2WxRlpaUYOVJWxSbA14gJQFo/22aBOgIxqCRbJIsYsozLerhqMtczUrMK935fVxcetuqWUZ/XjRIs3ujtzciLwbQz/3vNi+c5ovt8RttX8BD9pVNeNn8Y13zpRxihINKoTS2jrjrGAW8z5K9itzHwuW80YiDG+5AxqcYlPpmN57rUf7l5vssJpfNuMEhe0MLaz+h2S//HiIEPavX/ltxNlna80OCp5e6hXksrhSCoRzLR5aKH6a4j1cHsqysN90NLtKcYiFGeUKu7LIp01/tM0zKS0Xd2W8TprR5Gm8qevgDou+TnbMU2G1l8KPD/AGEElnggnh9xO47hSXnG/fw8KaWxksuNOK/MUpPxErs8+ezKweiXZTSnMKJ483O9NzV3BEGdm+2U/1xD/BIeOUuHvXRabtw5Dl4A5oP2vbp3cARWAdJTadfpLj5xKcIHrhMEI3PuHb7npIuErpUIoCcEZl5hinPKq/JDSxrOYA/UqcXySgN93Fl+Mrb8YOh1d3x7aqU41gHPQADS6sR0wFmws2gpYtwBLiSQ9pTVaRTUfd4/cgaJpSGqM/3G8heTCmUSuLX4OkAbJUCJ1RLuWGBEBQsj7LduZgMYde7P3rJgll5MCxl6xRcZWCfTqZ8djs6dxpR3Rz3b+rhb6xTMYiXIRc4Tvv2XT6nKF7np9Cr69fPz7bL3r5Bu7o9KIgtpOGAE="
+            },
+            {
+              "type": "toolCall",
+              "id": "toolu_01KpsNNRa1LHmB6HBMeMt2Di",
+              "name": "bash",
+              "arguments": {
+                "command": "ls /home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/ 2>/dev/null; mkdir -p /home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1"
+              }
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 6,
+            "output": 391,
+            "cacheRead": 63316,
+            "cacheWrite": 22947,
+            "totalTokens": 86660,
+            "cost": {
+              "input": 3.0000000000000004e-5,
+              "output": 0.009775,
+              "cacheRead": 0.031658,
+              "cacheWrite": 0.14341875,
+              "total": 0.18488175
+            }
+          },
+          "stopReason": "toolUse",
+          "timestamp": 1778846048119,
+          "responseId": "gen_01KRNQS8NH5QM07DGJHJQCEXY2"
+        },
+        {
+          "role": "toolResult",
+          "toolCallId": "toolu_01KpsNNRa1LHmB6HBMeMt2Di",
+          "toolName": "bash",
+          "content": [
+            { "type": "text", "text": "metadata.json\nrunner-output.log\nsystem-prompt.md\n" }
+          ],
+          "isError": false,
+          "timestamp": 1778846056951
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "toolCall",
+              "id": "toolu_01TMRc6WB8kbKF41VqJR3Cy3",
+              "name": "read_skill",
+              "arguments": { "name": "image" }
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 1,
+            "output": 64,
+            "cacheRead": 86263,
+            "cacheWrite": 429,
+            "totalTokens": 86757,
+            "cost": {
+              "input": 5e-6,
+              "output": 0.0016,
+              "cacheRead": 0.043131499999999996,
+              "cacheWrite": 0.00268125,
+              "total": 0.04741775
+            }
+          },
+          "stopReason": "toolUse",
+          "timestamp": 1778846056953,
+          "responseId": "gen_01KRNQSH1Z0F3R5GW4C98DK0PA"
+        },
+        {
+          "role": "toolResult",
+          "toolCallId": "toolu_01TMRc6WB8kbKF41VqJR3Cy3",
+          "toolName": "read_skill",
+          "content": [
+            {
+              "type": "text",
+              "text": "Skill: image\nPath: /home/synthetic-user/.agents/skills/image/SKILL.md\n\n---\n\n---\nname: image\ndescription: Generate images via the Duet AI Gateway with the right model and prompting nuances for the job. Picks between GPT Image 2 (default), GPT Image 1.5 (transparent bg, no reference), and Nano Banana (style-matching to a reference image). Handles transparent backgrounds for reference-style generations via the magenta chroma-key technique, since Nano Banana ignores \"transparent background\" instructions. Use whenever the user asks to make, generate, create, draw, render, or iterate on an image \u2014 including mascot art, illustrations, product shots, marketing visuals, logo cutouts, and reference-style variations.\n---\n\n# Image Generation\n\nPick the right model first, then craft the prompt, then iterate. Most failures come from picking the wrong model for transparency or style-matching, not from prompt quality.\n\n## Model decision tree\n\n```\nNeed transparent background?\n\u251c\u2500 Yes\n\u2502   \u251c\u2500 Need to match a reference image's style/character?\n\u2502   \u2502   \u251c\u2500 Yes \u2192 Nano Banana on MAGENTA bg + chroma-key script   (most mascot work)\n\u2502   \u2502   \u2514\u2500 No  \u2192 GPT Image 1.5 with background: 'transparent'\n\u2502   \u2514\u2500\n\u2514\u2500 No\n    \u251c\u2500 Need to match a reference image's style/character?\n    \u2502   \u251c\u2500 Yes \u2192 Nano Banana with image input\n    \u2502   \u2514\u2500 No  \u2192 GPT Image 2 (default, highest quality, best text)\n```\n\n**Why this matters:**\n- GPT Image 2 produces the highest quality and best in-image text \u2014 but cannot do transparent backgrounds and cannot accept an image as style reference via the gateway.\n- GPT Image 1.5 supports `background: 'transparent'` natively, but cannot match a reference image.\n- Nano Banana (`google/gemini-3.1-flash-image-preview`) is the only gateway model that accepts a reference image, but **ignores transparent-background instructions** \u2014 even when prompted, it returns opaque output. Workaround below.\n\n## Always set up the gateway\n\n```js\nimport { createGateway, generateText, generateImage } from 'ai'\nimport { readFileSync, writeFileSync } from 'fs'\n\nconst gateway = createGateway({\n  baseURL: 'https://service.example.invalid/api/v1/ai-gateway/v3/ai',\n  apiKey: process.env.DUET_API_KEY,\n})\n```\n\nSave outputs to the session working dir (e.g. `/home/synthetic-user/.duet/sessions/<sessionId>/`). Display results to the user with `sandbox://.duet/sessions/<sessionId>/<filename>` markdown links.\n\n## GPT Image 2 \u2014 default\n\n```js\nconst { image } = await generateImage({\n  model: gateway.imageModel('openai/gpt-image-2'),\n  prompt: '<PROMPT>',\n  size: '1024x1024',\n  providerOptions: { openai: { quality: 'high' } },\n})\nwriteFileSync('out.png', image.uint8Array)\n```\n\n`size`: `'1024x1024'` | `'1536x1024'` | `'1024x1536'` | `'auto'`. No `aspectRatio`, no `seed`.\n\n## GPT Image 1.5 \u2014 transparent bg, no reference\n\n```js\nconst { image } = await generateImage({\n  model: gateway.imageModel('openai/gpt-image-1.5'),\n  prompt: '<PROMPT>',\n  size: '1024x1024',\n  providerOptions: {\n    openai: { background: 'transparent', output_format: 'png', quality: 'high' },\n  },\n})\n```\n\nSame API as GPT Image 2. Use for logo cutouts, isolated product shots, icon-style art where you don't need to match an existing character.\n\n## Nano Banana \u2014 reference-image style matching\n\nMultimodal LLM. Pass the reference image inline; output comes back in `result.files`.\n\n```js\nconst result = await generateText({\n  model: gateway('google/gemini-3.1-flash-image-preview'),\n  messages: [{\n    role: 'user',\n    content: [\n      { type: 'image', image: readFileSync('reference.png') },\n      { type: 'text', text: '<PROMPT>' },\n    ],\n  }],\n})\nfor (const [i, file] of result.files.entries()) {\n  if (file.mediaType?.startsWith('image/')) {\n    writeFileSync(`out-${i}.png`, file.uint8Array)\n  }\n}\n```\n\nTo download a user-attached reference from Duet storage:\n\n```bash\ncurl -s -H \"Authorization: Bearer $DUET_API_KEY\" \\\n  \"https://service.example.invalid/api/v1/files/<storageId>\" -o ref.png\n```\n\n## Transparent backgrounds with Nano Banana \u2192 magenta chroma key\n\nNano Banana ignores \"transparent background\" / \"no background\" prompts. **Don't fight it.** Generate on a solid magenta bg, then chroma-key it out.\n\n**Why magenta (#FF00FF):** very few subjects contain pure magenta, so the key is clean. Green screen also works but green often appears in props/foliage.\n\n**Don't use `rembg` for multi-object scenes** (mascot + desk + sign + mug). The default u2net model treats secondary objects as background and eats the desk. rembg is fine only for single isolated subjects, and even then chroma-key gives cleaner edges. Reach for rembg only as a last resort.\n\nIn the prompt, end with:\n\n> CRITICAL: solid pure chroma key MAGENTA background (#FF00FF, bright pink-magenta), NO floor, NO shadow, NO walls. Square 1:1 format.\n\nThen run:\n\n```bash\npython3 ~/skills/image/scripts/chroma_key.py <input.png> <output.png>\n```\n\nThe script masks the magenta, decontaminates the magenta tint that bleeds onto fuzzy/translucent edges, and outputs a clean RGBA PNG.\n\n## Prompt nuances\n\nThese are the lessons that bite when generating mascot/character work, but most apply broadly.\n\n### Style-locking to a reference\n\nLead with: _\"Generate the EXACT same mascot character from the reference \u2014 same [fabric/material], same [hat/accessory], same eyes, same proportions, same [3D plush / illustrated / etc] aesthetic.\"_ Spelling out the invariants beats saying \"same style.\"\n\n### Negative anatomy\n\nIf a character has stubs, paws, no fingers, no nose, etc., the model will default to drawing the human/cartoon version unless you say so explicitly and repeatedly. Pattern:\n\n> NO fingers, NO articulated digits, NO hands. Arms END in simple smooth rounded fuzzy stubs \u2014 like the reference.\n\nRepeat the constraint at the start AND end of the prompt for stubborn traits.\n\n### Camera-direction poses (reaching toward viewer, pointing at us)\n\nThe model defaults to a flat profile or thumbs-up. To get a foreshortened reach:\n\n> ONE arm is FULLY EXTENDED STRAIGHT FORWARD TOWARD THE CAMERA, foreshortened, so the [hand/paw/stub] appears LARGER and CLOSER than the body due to perspective \u2014 like a wide-angle pose where the reaching arm dominates the foreground.\n\nThe \"appears larger than the body\" wording is what flips the model into a perspective pose.\n\n### Eye contact\n\n> Looking DIRECTLY AT THE CAMERA / VIEWER, eyes locked on the lens.\n\nWithout this, the model often draws the subject looking off-camera.\n\n### Two changes at once \u2192 one regresses\n\nWhen you push for \"warmer expression AND extended arm AND new accessory,\" the model often nails one and drops the others. Strategy:\n\n1. Lock the most-fragile constraint with caps and a \"REQUIRED, do not skip\" marker.\n2. Generate 2 variants per call (`n: 2` or just multiple gens) \u2014 second seed often resolves the conflict.\n3. If still broken, narrow the prompt to the single failing constraint, re-issue, then layer back.\n\n### Readable text on signs/badges\n\nPut the exact text in `\"quotation marks\"`, request \"bold clean black sans-serif type on a white background\", and specify that the text must be \"fully legible / readable / centered.\" GPT Image 2 renders text best; Nano Banana is workable for short single words but blurs longer copy.\n\n### All objects in frame\n\nIf a scene has multiple props (\"mascot at desk with HIRED sign and coffee mug\"), state explicitly: _\"Camera framed so all of [mascot, desk, sign, mug] are fully visible in the frame.\"_ Otherwise the model crops aggressively.\n\n### When the reference has bad framing, Nano Banana copies it\n\nIf the user passes a reference image that clips the subject (e.g. arms cut off at the bottom), the model treats the framing as part of the style and reproduces the same clipping \u2014 even when you ask for \"no clipping.\" Asking it to \"fix the clipping\" is too soft.\n\nThe fix: explicitly tell it to IGNORE the reference framing and prescribe new margins. Pattern:\n\n> Use the reference ONLY to identify the character. DO NOT copy its framing \u2014 the reference is poorly framed. Recompose so the mascot occupies the middle 70% of the canvas, with ~15% of empty magenta margin above the cap, ~15% below the [feet/arms], and breathing room left and right. Nothing touches any edge of the frame.\n\nNaming specific percentages and the empty space on each side makes the model actually re-frame instead of mimicking.\n\n### Zoom-vs-headroom conflicts \u2192 change camera angle, not just framing\n\nWhen you want a tighter zoom on the face/subject AND a tall accessory (hat, antlers, mic) fully visible, repeating \"don't crop the hat\" won't work \u2014 the geometry is in conflict at the requested zoom level. The model resolves it by either ignoring the zoom or clipping the accessory.\n\nThe fix is to change the camera angle, not the framing language. A slight LOW ANGLE / worm's-eye view makes the accessory tilt back in perspective, freeing vertical space at the top of the frame while the face stays large and forward. Conversely, a slight high angle pushes a long body or tail back into the frame. Once you specify the angle, the model produces both constraints naturally.\n\n### Iteration etiquette\n\nWhen the user says \"X is wrong,\" restate the inverse in caps in the next prompt \u2014 don't just remove the wrong word. Models latch onto positive descriptions; bare omissions don't override the default.\n\n## What gets saved where\n\n- Working files (intermediate raws, scripts) \u2192 session working dir\n- Final deliverable \u2192 session working dir, linked back to the user via `sandbox://` URL\n- Don't paste base64 image bytes into chat \u2014 link the file\n\n## Tell the user what model you used\n\nOne line after delivery: _\"Generated with Nano Banana + magenta chroma key for style match to your reference\"_ or _\"GPT Image 2\"_. Helps them ask for an alternative if the result drifts.\n\n## Reference\n\n- `scripts/chroma_key.py` \u2014 magenta \u2192 transparent with edge decontamination\n- See also: `../media-creation/SKILL.md` for the broader image+video skill set and Fal AI fallbacks.\n"
+            }
+          ],
+          "details": {
+            "type": "read_skill",
+            "name": "image",
+            "filePath": "/home/synthetic-user/.agents/skills/image/SKILL.md"
+          },
+          "isError": false,
+          "timestamp": 1778846060117
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "toolCall",
+              "id": "toolu_01LmUxwBXHVXZpCp1ndL27AV",
+              "name": "bash",
+              "arguments": {
+                "command": "ls /home/synthetic-user/.duet/sessions/ms714chqp3mb8k2qztefe09f1d86ssk9/ | head -40"
+              }
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 1,
+            "output": 107,
+            "cacheRead": 86692,
+            "cacheWrite": 3825,
+            "totalTokens": 90625,
+            "cost": {
+              "input": 5e-6,
+              "output": 0.0026750000000000003,
+              "cacheRead": 0.043345999999999996,
+              "cacheWrite": 0.02390625,
+              "total": 0.06993225
+            }
+          },
+          "stopReason": "toolUse",
+          "timestamp": 1778846060119,
+          "responseId": "gen_01KRNQSM5FD81T7XVM7QDP0K2G"
+        },
+        {
+          "role": "toolResult",
+          "toolCallId": "toolu_01LmUxwBXHVXZpCp1ndL27AV",
+          "toolName": "bash",
+          "content": [
+            {
+              "type": "text",
+              "text": "duet-adds-stones-v2.mp4\nduet-adds-stones.mp4\nframe-v4-0.png\nframe-v5-0.png\nframe-v7-2-0.png\ngauntlet-empty-0.png\ngen-frame-v6.mjs\ngen-frame-v6b.mjs\ngen-frame-v6c.mjs\ngen-frame-v7.mjs\ngen-frame-v8.mjs\ngen-frame.mjs\ngen-frame2.mjs\ngen-frame3.mjs\ngen-frame4.mjs\ngen-frame5.mjs\ngen-video.mjs\ngen-video2.mjs\nmetadata.json\nref-mascot.png\nrunner-output.log\nsystem-prompt.md\n"
+            }
+          ],
+          "isError": false,
+          "timestamp": 1778846064390
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": " I'm looking at how to structure this animation properly\u2014the video needs to show the mascot adding stones, so I should start with just Anthropic filled and animate to the end state with three stones (Anthropic, xAI, and Gemini) in the knuckle slots. My previous attempts at this approach didn't work well, so I'm going to try generating the final frame first and then work backwards to set up the animation correctly.",
+              "thinkingSignature": "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"
+            },
+            {
+              "type": "toolCall",
+              "id": "toolu_01GYRosiXLxdLW3HRnjmPs3h",
+              "name": "bash",
+              "arguments": {
+                "command": "ls /home/synthetic-user/.duet/ | grep -i mascot; ls /home/synthetic-user/avatars/ 2>/dev/null"
+              }
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 1,
+            "output": 610,
+            "cacheRead": 90517,
+            "cacheWrite": 363,
+            "totalTokens": 91491,
+            "cost": {
+              "input": 5e-6,
+              "output": 0.015250000000000001,
+              "cacheRead": 0.0452585,
+              "cacheWrite": 0.00226875,
+              "total": 0.06278225
+            }
+          },
+          "stopReason": "toolUse",
+          "timestamp": 1778846064392,
+          "responseId": "gen_01KRNQSRAQRBG0F2F8SJJ8A0AD"
+        },
+        {
+          "role": "toolResult",
+          "toolCallId": "toolu_01GYRosiXLxdLW3HRnjmPs3h",
+          "toolName": "bash",
+          "content": [{ "type": "text", "text": "(no output)\n\nCommand exited with code 2" }],
+          "details": {},
+          "isError": true,
+          "timestamp": 1778846076076
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "toolCall",
+              "id": "toolu_01SrcmBxhrvMmZLnmUmfLPnp",
+              "name": "bash",
+              "arguments": {
+                "command": "ls /home/synthetic-user/.duet/sessions/ms714chqp3mb8k2qztefe09f1d86ssk9/ref-mascot.png && cp /home/synthetic-user/.duet/sessions/ms714chqp3mb8k2qztefe09f1d86ssk9/ref-mascot.png /home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/ref-mascot.png && echo OK"
+              }
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 1,
+            "output": 213,
+            "cacheRead": 90880,
+            "cacheWrite": 643,
+            "totalTokens": 91737,
+            "cost": {
+              "input": 5e-6,
+              "output": 0.005325,
+              "cacheRead": 0.04544,
+              "cacheWrite": 0.004018750000000001,
+              "total": 0.054788750000000004
+            }
+          },
+          "stopReason": "toolUse",
+          "timestamp": 1778846076078,
+          "responseId": "gen_01KRNQT3V67DP86YQEDM3K0STH"
+        },
+        {
+          "role": "toolResult",
+          "toolCallId": "toolu_01SrcmBxhrvMmZLnmUmfLPnp",
+          "toolName": "bash",
+          "content": [
+            {
+              "type": "text",
+              "text": "/home/synthetic-user/.duet/sessions/ms714chqp3mb8k2qztefe09f1d86ssk9/ref-mascot.png\nOK\n"
+            }
+          ],
+          "isError": false,
+          "timestamp": 1778846081166
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": " I'm going to create a static hero image first showing the gauntlet in its final state\u2014three stones already placed in the knuckle sockets (orange for Anthropic, black for xAI, blue for Gemini), the center palm socket empty, and one knuckle socket empty\u2014then animate it with Seedance if it gets approved.",
+              "thinkingSignature": "Er4IClkIDRgCKkCsMnIzEcYqvbeCRLY2E74wMXwWm8rvrT3daE+kIonb2sfYMVo7wsueBjYqWqf9b+jD+rt5rzKfLNT0ttjMbiqDMg9jbGF1ZGUtb3B1cy00LTc4ABIM22DPjhP9ikDHZT3OGgyagxq/r6mNxFHIXh4iMNqw2X72TdxzXwe3zO5+TSjLdl1TKpL0ARF+HcdCu22nHjWbOOUdg25KNox6FPG/IiqSB7kOl5X3+XvNKhDB0MDaAa12NGJA7zzFI9MtrUFUKtIDU2DLh7Wzyl8wbpzI+5dJIerNnuxGS6GOEm6r1GcRy1/h39tbCrRbOmGVTaZwPpZgbfkS5yHOdFCM5kkvV6Rzy+JYU8zz2MxeRA/yQVcBm/yaaeFDEI4uD87UKEIg3CQj17GHXUdyXFibg33BY5kdm97ZVnsOrXoBPmrCu7+aiNXlZUjb+/O0l+tmbGtsS45orkCZ7I7yeh+1s0zcsnEiPCxDl6sgn4Y5fNhQaM1fpB3k/RMyZtexjXjHnmqUPbMlQItpnSrV4jsljHbNHJ3NEk9bAqdieJrdvpi2GzEbZM2RrZ7Wsg4WVUi/EF5q5ItjcoLsNhRweIl/m736G1YPoZpvVQMjJus0bkmvZuirDirKqG3g6C/+4v09C8qjlWotMD0zpUY20BMsIZugK4JndvdLjkQUvip9GFyDPb1V5JobB3PizJW8I9iM4UEoGpAk3tvGwK2xy5gpFJyoLDo6/LVXs9w7aVsaVo2g1L7PphaQmCZQc3hOAxqTHJgKsS488QHMxxXnHwXyIzn/Dr5t/aVYJnPuxZt0IzAbdSuzigX43fRV065sywlXIEsTJ/pUNJutHE44OJ5USMeU0nMrLXNnmK3GEdEH7sVHF4GDtOG9+py5/Zos73mAgUol7IvU+RpCPEB7G5MuHGg6UD7aP26xVWJLl73UbXVQ71u9VhVaeXTN2uAMD/QB3TQnFVmOq6T5mffWzW8n2Nwf8FUKCA+fUdeo8Ri4Q1II29TLOb0Dp5JX1YvrtPvRMcyOf6nJQNC0pT7pp8poneh7M0QydN99v1IWT9DeRG29iQSYFhHCCgi1LJvMfh6pz1Af4RNh0pwaH3uTtMu8+Zcg8Hyoote5lahFmBkXu+iAjojg4gZzafJ+XVILoTqsOJ7ORH7Qmi7Np7D8ZU1d43YRYNmEOOMt/Nm3g7pfeorlTYBoteWFddSeclsmZHSqS6YgJzfAeki4zMXsomTho1pBkG3VBa9lQYItpaRpp9ZZpuAQ9PvGuGDaG3JFoMyhM9GD5Z5MTBmAlNLThovXtMi/t8CZmNg1N4tX0kPNmhrCMASnm+o2uazLcpB9j5ffHpF4bozScT305IGXjC175apkubUfTO8QtYRvncqlQm9k4X7BZxplxd0AcGpRBpb3eBNWUccPUeKrirCCADKfcW58KIneJQjCGAE="
+            },
+            {
+              "type": "toolCall",
+              "id": "toolu_011jmpXEH3kvkqBtKW5RuCQA",
+              "name": "write",
+              "arguments": {
+                "path": "/home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/gen-frame.mjs",
+                "content": "import { createGateway, generateText } from 'ai'\nimport { readFileSync, writeFileSync } from 'fs'\n\nconst gateway = createGateway({\n  baseURL: 'https://service.example.invalid/api/v1/ai-gateway/v3/ai',\n  apiKey: process.env.DUET_API_KEY,\n})\n\nconst prompt = `Generate the EXACT same fuzzy plush Duet mascot from the reference \u2014 same teal/green fabric, same little cap, same round black eyes, same simple rounded stub arms (NO fingers, NO articulated hands). Cinematic Thanos-style hero shot, low angle, cosmic twilight nebula background with soft volumetric god rays.\n\nThe mascot is wearing a GIANT GOLD INFINITY-GAUNTLET-style armored glove on one stub arm, raised triumphantly toward the camera, slightly foreshortened so the gauntlet dominates the foreground.\n\nTHE GAUNTLET HAS EXACTLY 6 ROUND SOCKETS, arranged like the classic Infinity Gauntlet:\n- 4 SMALL knuckle sockets in a row across the knuckles\n- 1 LARGE PROMINENT central socket on the back of the hand (palm-side, middle)\n- 1 socket on the thumb\n\nEXACTLY 3 SOCKETS ARE FILLED WITH GLOWING STONES, the other 3 SOCKETS ARE COMPLETELY EMPTY (clearly hollow dark gold metal, NO stone, NO glow):\n\nFILLED SOCKETS (3 of them, on 3 of the knuckle sockets only):\n1. ORANGE stone \u2014 bright glowing amber-orange gem, with the Anthropic logo clearly engraved on its face (the Anthropic sunburst / asterisk-like radial mark, in solid black or dark bronze, fully legible)\n2. OBSIDIAN-BLACK stone \u2014 deep matte black gem with a chrome / silver stylized \"X\" engraved on its face (the xAI X logo, sharp angular X, fully legible)\n3. BLUE-PURPLE stone \u2014 glowing sapphire-violet gem with the Gemini logo engraved on its face (the four-pointed blue sparkle / star shape, white-blue, fully legible)\n\nEMPTY SOCKETS (3 of them, REQUIRED EMPTY):\n- The LARGE CENTER socket on the back of the hand is EMPTY \u2014 clearly visible as a hollow gold ring with dark interior, NO stone inside, this is the most prominent socket and it MUST be empty\n- 1 of the remaining knuckle sockets is EMPTY\n- The thumb socket is EMPTY\n\nThe mascot looks EXCITED and slightly mischievous \u2014 wide eyes locked DIRECTLY AT THE CAMERA, a tiny grin. Dramatic rim lighting from the cosmic background.\n\nCRITICAL: exactly 3 filled sockets (Anthropic orange, xAI black, Gemini blue), exactly 3 empty sockets including the prominent large CENTER socket. Logos must be clearly readable and correct: Anthropic radial sunburst, xAI sharp X, Gemini four-point sparkle. NO fingers on the mascot \u2014 just fuzzy stub arms ending in the gauntlet. Square 1:1 cinematic composition.`\n\nconst result = await generateText({\n  model: gateway('google/gemini-3.1-flash-image-preview'),\n  messages: [{\n    role: 'user',\n    content: [\n      { type: 'image', image: readFileSync('/home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/ref-mascot.png') },\n      { type: 'text', text: prompt },\n    ],\n  }],\n})\nlet i = 0\nfor (const file of result.files) {\n  if (file.mediaType?.startsWith('image/')) {\n    writeFileSync(`/home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/frame-${i}.png`, file.uint8Array)\n    console.log('wrote', i)\n    i++\n  }\n}\n"
+              }
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 1,
+            "output": 1900,
+            "cacheRead": 91523,
+            "cacheWrite": 276,
+            "totalTokens": 93700,
+            "cost": {
+              "input": 5e-6,
+              "output": 0.0475,
+              "cacheRead": 0.0457615,
+              "cacheWrite": 0.0017250000000000002,
+              "total": 0.0949915
+            }
+          },
+          "stopReason": "toolUse",
+          "timestamp": 1778846081168,
+          "responseId": "gen_01KRNQT8R1VQAV3Y4FC21ZJ4S3"
+        },
+        {
+          "role": "toolResult",
+          "toolCallId": "toolu_011jmpXEH3kvkqBtKW5RuCQA",
+          "toolName": "write",
+          "content": [
+            {
+              "type": "text",
+              "text": "Successfully wrote 3117 bytes to /home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/gen-frame.mjs"
+            }
+          ],
+          "isError": false,
+          "timestamp": 1778846108672
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "toolCall",
+              "id": "toolu_01QgjTGwsqWSWJrMj5GLsoXp",
+              "name": "bash",
+              "arguments": {
+                "command": "cd /home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1 && node gen-frame.mjs 2>&1 | tail -20"
+              }
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 1,
+            "output": 125,
+            "cacheRead": 91799,
+            "cacheWrite": 1976,
+            "totalTokens": 93901,
+            "cost": {
+              "input": 5e-6,
+              "output": 0.003125,
+              "cacheRead": 0.045899499999999996,
+              "cacheWrite": 0.01235,
+              "total": 0.0613795
+            }
+          },
+          "stopReason": "toolUse",
+          "timestamp": 1778846108674,
+          "responseId": "gen_01KRNQV3K49104QNN8EA1ZVTX6"
+        },
+        {
+          "role": "toolResult",
+          "toolCallId": "toolu_01QgjTGwsqWSWJrMj5GLsoXp",
+          "toolName": "bash",
+          "content": [{ "type": "text", "text": "(no output)" }],
+          "isError": false,
+          "timestamp": 1778846126835
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "toolCall",
+              "id": "toolu_01CbY6wCW4LVrE3eAqdECqY5",
+              "name": "bash",
+              "arguments": {
+                "command": "ls -la /home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/*.png"
+              }
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 1,
+            "output": 108,
+            "cacheRead": 93775,
+            "cacheWrite": 141,
+            "totalTokens": 94025,
+            "cost": {
+              "input": 5e-6,
+              "output": 0.0027,
+              "cacheRead": 0.0468875,
+              "cacheWrite": 0.0008812500000000001,
+              "total": 0.05047375
+            }
+          },
+          "stopReason": "toolUse",
+          "timestamp": 1778846126838,
+          "responseId": "gen_01KRNQVNNQHQ2SM3FPXTZ4560Q"
+        },
+        {
+          "role": "toolResult",
+          "toolCallId": "toolu_01CbY6wCW4LVrE3eAqdECqY5",
+          "toolName": "bash",
+          "content": [
+            {
+              "type": "text",
+              "text": "-rw-r--r-- 1 user user 72813 May 15 11:54 /home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/ref-mascot.png\n"
+            }
+          ],
+          "isError": false,
+          "timestamp": 1778846130543
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": " The first attempt didn't work out, so I'm switching to GPT Image 2 since it handles text and logos more effectively.",
+              "thinkingSignature": "EoACClkIDRgCKkAXfIb0oHCkpgk4PKGNI8RtQqz9gZ0LKo0yweVTDl4+yFqxAHh0uwzdfqwM4iHMMQuBqGqDq9BbTtLn5wUfY+xJMg9jbGF1ZGUtb3B1cy00LTc4ABIMVJddAI755UgmgIUUGgweVQ5G7Z+lvcWC7IMiMMxNvzN5gu2lWjrWvLflHo9zQfSqmGiUE7jcGeJ5Hje59VzSeiOouqnnQuAe9C7O9SpVO1ap2YO2UbdYsTRKK33eyJfqCm+7QL2AkDX1p6SuOARwaKyGiicSn4g07JUwJBr90rFqJ/h5G6LCe+pI51UQN9ukxdPGyjc1veD0yDFR1HKKnq8lSxgB"
+            },
+            {
+              "type": "toolCall",
+              "id": "toolu_01Pj3seFYE46Zb9hFieyxVsJ",
+              "name": "bash",
+              "arguments": {
+                "command": "cd /home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1 && node --no-deprecation -e \"\nimport('ai').then(async ({createGateway, generateText}) => {\n  const {readFileSync, writeFileSync} = await import('fs')\n  const gateway = createGateway({baseURL:'https://service.example.invalid/api/v1/ai-gateway/v3/ai',apiKey:process.env.DUET_API_KEY})\n  try {\n    const r = await generateText({\n      model: gateway('google/gemini-3.1-flash-image-preview'),\n      messages: [{role:'user',content:[{type:'image',image:readFileSync('ref-mascot.png')},{type:'text',text:'test simple: generate the mascot waving hello'}]}]\n    })\n    console.log('files:', r.files?.length, 'text:', r.text?.slice(0,200))\n  } catch(e) { console.error('ERR:', e.message) }\n})\n\" 2>&1 | tail -10"
+              }
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 1,
+            "output": 451,
+            "cacheRead": 93916,
+            "cacheWrite": 195,
+            "totalTokens": 94563,
+            "cost": {
+              "input": 5e-6,
+              "output": 0.011275,
+              "cacheRead": 0.046958,
+              "cacheWrite": 0.00121875,
+              "total": 0.059456749999999996
+            }
+          },
+          "stopReason": "toolUse",
+          "timestamp": 1778846130544,
+          "responseId": "gen_01KRNQVRZB5NQDWWXP5YGEGDTG"
+        },
+        {
+          "role": "toolResult",
+          "toolCallId": "toolu_01Pj3seFYE46Zb9hFieyxVsJ",
+          "toolName": "bash",
+          "content": [{ "type": "text", "text": "files: 1 text: \n" }],
+          "isError": false,
+          "timestamp": 1778846154624
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": " Good, Nano Banana is working as expected. Now I'll run the original script again but with more detailed error handling to catch what's going wrong.",
+              "thinkingSignature": "EpQCClkIDRgCKkDVhnPDCF/pp8EWQeO4x0/w4Cfd3dq2uRlXydjhZKKtELcBuEKjaA1jKL2oXsImI2PK2CAyLFpMP7SzjORAhZ82Mg9jbGF1ZGUtb3B1cy00LTc4ABIMWD7eoVv+vEd7HTsJGgxbKVCwhH63VL6zn/UiMPq971LiipACHwb+RVfxfZmG+Feiil9IMM0MpLugXhyZOvCZP4TerG1laRNBphDF8SppXl6U7vT6GYt/v9XcIgGI9qCn7JfS6O7zpaEc53ewoVuPdZcrTb4j5fHvvfEA7TcWXsJaKFNUSqTPEifuvBEcfCrbfes8vyW6hzQ+1P9Ol+W044xbQY2ZbuANSRT+KWgSyHT97Mr6krDIGAE="
+            },
+            {
+              "type": "toolCall",
+              "id": "toolu_01P952E9atbYfieo4ome2kfu",
+              "name": "bash",
+              "arguments": {
+                "command": "cd /home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1 && node gen-frame.mjs 2>&1; ls -la *.png"
+              }
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 1,
+            "output": 174,
+            "cacheRead": 94111,
+            "cacheWrite": 472,
+            "totalTokens": 94758,
+            "cost": {
+              "input": 5e-6,
+              "output": 0.004350000000000001,
+              "cacheRead": 0.0470555,
+              "cacheWrite": 0.00295,
+              "total": 0.0543605
+            }
+          },
+          "stopReason": "toolUse",
+          "timestamp": 1778846154626,
+          "responseId": "gen_01KRNQWGFYMZHMT9XA6932BGA8"
+        },
+        {
+          "role": "toolResult",
+          "toolCallId": "toolu_01P952E9atbYfieo4ome2kfu",
+          "toolName": "bash",
+          "content": [
+            { "type": "text", "text": "-rw-r--r-- 1 user user 72813 May 15 11:54 ref-mascot.png\n" }
+          ],
+          "isError": false,
+          "timestamp": 1778846170791
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "toolCall",
+              "id": "toolu_01VXAZncTo2Uj7G6Nh4YkBma",
+              "name": "edit",
+              "arguments": {
+                "path": "/home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/gen-frame.mjs",
+                "edits": [
+                  {
+                    "oldText": "let i = 0\nfor (const file of result.files) {",
+                    "newText": "console.log('files len:', result.files?.length, 'text:', result.text?.slice(0,400))\nlet i = 0\nfor (const file of result.files || []) {"
+                  }
+                ]
+              }
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 1,
+            "output": 221,
+            "cacheRead": 94583,
+            "cacheWrite": 221,
+            "totalTokens": 95026,
+            "cost": {
+              "input": 5e-6,
+              "output": 0.005525,
+              "cacheRead": 0.0472915,
+              "cacheWrite": 0.00138125,
+              "total": 0.05420275
+            }
+          },
+          "stopReason": "toolUse",
+          "timestamp": 1778846170794,
+          "responseId": "gen_01KRNQX0A9ET68FPPY97YD4YKN"
+        },
+        {
+          "role": "toolResult",
+          "toolCallId": "toolu_01VXAZncTo2Uj7G6Nh4YkBma",
+          "toolName": "edit",
+          "content": [
+            {
+              "type": "text",
+              "text": "Successfully replaced 1 block(s) in /home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/gen-frame.mjs."
+            }
+          ],
+          "details": {
+            "diff": "    ...\n 40       { type: 'text', text: prompt },\n 41     ],\n 42   }],\n 43 })\n+44 console.log('files len:', result.files?.length, 'text:', result.text?.slice(0,400))\n 44 let i = 0\n-45 for (const file of result.files) {\n+46 for (const file of result.files || []) {\n 46   if (file.mediaType?.startsWith('image/')) {\n 47     writeFileSync(`/home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/frame-${i}.png`, file.uint8Array)\n 48     console.log('wrote', i)\n 49     i++\n    ...",
+            "firstChangedLine": 44
+          },
+          "isError": false,
+          "timestamp": 1778846175256
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "toolCall",
+              "id": "toolu_01HsWJnDQbjWmNvdgQpWUc92",
+              "name": "bash",
+              "arguments": {
+                "command": "cd /home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1 && node gen-frame.mjs 2>&1 | head -30"
+              }
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 1,
+            "output": 124,
+            "cacheRead": 94804,
+            "cacheWrite": 298,
+            "totalTokens": 95227,
+            "cost": {
+              "input": 5e-6,
+              "output": 0.0031000000000000003,
+              "cacheRead": 0.047402,
+              "cacheWrite": 0.0018625,
+              "total": 0.0523695
+            }
+          },
+          "stopReason": "toolUse",
+          "timestamp": 1778846175258,
+          "responseId": "gen_01KRNQX4PMKAMZ8SV1MT10BTMP"
+        },
+        {
+          "role": "toolResult",
+          "toolCallId": "toolu_01HsWJnDQbjWmNvdgQpWUc92",
+          "toolName": "bash",
+          "content": [{ "type": "text", "text": "files len: 0 text: \n" }],
+          "isError": false,
+          "timestamp": 1778846191781
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": " Nano Banana is refusing the request \u2014 the prompt might be too long or complex, or the content filter caught the \"Thanos\" reference. I'll try a simpler version without that keyword.",
+              "thinkingSignature": "EscCClkIDRgCKkAgk4BHbnPL8CPgGI/MdPh491EbXZFnC6Fw7hCzwpNkvfaNcEqdc3IJBmP/GsoidVfE20ZGa+PNc4fOdpPcW74JMg9jbGF1ZGUtb3B1cy00LTc4ABIM7mUge9NX2EZeqeFLGgwRC8n2eBOkOjOpXqEiMOQTBh+DHbnWHs01zxWJ0WOa/OUyE8OnGKu2QupqM5hm4F+HeuLJ3Zrb5lJpNQiL1SqbAd7GWZcPzSdtUJKUcYNYFzFoadszP+Qq6PqrKDyUHKtJlNnrio+IwFQHb78koi+6l2Uoa4UZdbs2eNugiAxJwpH/P5EaXuR/0UyGA549v5tIDptzBZz3/TU/s8mEahmQargYHdkbqqV3vJJIlcp7OQ+MuMX/PV7ItQYsEAnLhsVXMZpbxh918ytFvBHsG0VXYVVFLNHZJXjoa3akGAE="
+            },
+            {
+              "type": "toolCall",
+              "id": "toolu_01AXT3Q7hqcuQM62AzwWRwv5",
+              "name": "write",
+              "arguments": {
+                "path": "/home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/gen-frame2.mjs",
+                "content": "import { createGateway, generateText } from 'ai'\nimport { readFileSync, writeFileSync } from 'fs'\n\nconst gateway = createGateway({\n  baseURL: 'https://service.example.invalid/api/v1/ai-gateway/v3/ai',\n  apiKey: process.env.DUET_API_KEY,\n})\n\nconst prompt = `Cinematic hero shot of the EXACT mascot from the reference (same fuzzy teal plush, same cap, same round eyes, simple rounded stub arms, NO fingers). Low angle, cosmic purple-blue nebula background, dramatic god rays.\n\nThe mascot wears a giant golden Infinity-Gauntlet-style armored glove on one stub arm, raised triumphantly toward camera, foreshortened so the gauntlet fills the foreground.\n\nThe gauntlet has 6 round sockets total: 4 small knuckle sockets in a row, 1 large prominent central socket on the back of the hand, 1 thumb socket.\n\nExactly 3 sockets are filled with glowing gems, 3 sockets are clearly EMPTY (hollow dark gold rings, no stone):\n\nFilled (only on 3 of the knuckles):\n- A bright glowing ORANGE gem with a black radial sunburst symbol engraved on it (Anthropic logo: a stylized asterisk / sunburst of straight lines radiating from a center point)\n- A matte OBSIDIAN BLACK gem with a clean white sharp letter \"X\" engraved on it (xAI logo)\n- A glowing BLUE-VIOLET sapphire gem with a white four-pointed sparkle / star engraved on it (Gemini logo: a four-point star with concave sides)\n\nEmpty (must be clearly hollow, no stone, no glow):\n- The LARGE CENTER socket on the back of the hand \u2014 empty, just a hollow gold ring with dark interior\n- One of the four knuckle sockets \u2014 empty\n- The thumb socket \u2014 empty\n\nThe mascot looks excited, slightly mischievous, eyes locked on camera, tiny grin. Square 1:1 composition.\n\nREQUIRED: exactly 3 filled gems (orange Anthropic, black xAI, blue Gemini) on 3 knuckles. Center palm socket EMPTY. Logos must be readable and accurate. No human fingers on mascot.`\n\nconst result = await generateText({\n  model: gateway('google/gemini-3.1-flash-image-preview'),\n  messages: [{\n    role: 'user',\n    content: [\n      { type: 'image', image: readFileSync('/home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/ref-mascot.png') },\n      { type: 'text', text: prompt },\n    ],\n  }],\n})\nconsole.log('files:', result.files?.length, 'text:', result.text?.slice(0,300))\nlet i = 0\nfor (const file of result.files || []) {\n  if (file.mediaType?.startsWith('image/')) {\n    writeFileSync(`/home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/frame2-${i}.png`, file.uint8Array)\n    console.log('wrote', i)\n    i++\n  }\n}\n"
+              }
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 1,
+            "output": 1291,
+            "cacheRead": 95102,
+            "cacheWrite": 146,
+            "totalTokens": 96540,
+            "cost": {
+              "input": 5e-6,
+              "output": 0.032275,
+              "cacheRead": 0.047550999999999996,
+              "cacheWrite": 0.0009125,
+              "total": 0.08074349999999998
+            }
+          },
+          "stopReason": "toolUse",
+          "timestamp": 1778846191783,
+          "responseId": "gen_01KRNQXMSPVREX0BXYCX19Y7D6"
+        },
+        {
+          "role": "toolResult",
+          "toolCallId": "toolu_01AXT3Q7hqcuQM62AzwWRwv5",
+          "toolName": "write",
+          "content": [
+            {
+              "type": "text",
+              "text": "Successfully wrote 2510 bytes to /home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/gen-frame2.mjs"
+            }
+          ],
+          "isError": false,
+          "timestamp": 1778846213150
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "toolCall",
+              "id": "toolu_01L1No6LxB4gbeMqoYWEAaB8",
+              "name": "bash",
+              "arguments": {
+                "command": "cd /home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1 && node gen-frame2.mjs 2>&1 | head -20"
+              }
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 1,
+            "output": 125,
+            "cacheRead": 95248,
+            "cacheWrite": 1368,
+            "totalTokens": 96742,
+            "cost": {
+              "input": 5e-6,
+              "output": 0.003125,
+              "cacheRead": 0.047624,
+              "cacheWrite": 0.00855,
+              "total": 0.059304
+            }
+          },
+          "stopReason": "toolUse",
+          "timestamp": 1778846213153,
+          "responseId": "gen_01KRNQY9NBK2KRQXCN3RJ3P2WH"
+        },
+        {
+          "role": "toolResult",
+          "toolCallId": "toolu_01L1No6LxB4gbeMqoYWEAaB8",
+          "toolName": "bash",
+          "content": [{ "type": "text", "text": "files: 1 text: \nwrote 0\n" }],
+          "isError": false,
+          "timestamp": 1778846230979
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "toolCall",
+              "id": "toolu_01JgqGkULcbzr7yQooUm9iUg",
+              "name": "read",
+              "arguments": {
+                "path": "/home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/frame2-0.png"
+              }
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 1,
+            "output": 107,
+            "cacheRead": 96616,
+            "cacheWrite": 152,
+            "totalTokens": 96876,
+            "cost": {
+              "input": 5e-6,
+              "output": 0.0026750000000000003,
+              "cacheRead": 0.048308,
+              "cacheWrite": 0.00095,
+              "total": 0.051938
+            }
+          },
+          "stopReason": "toolUse",
+          "timestamp": 1778846230981,
+          "responseId": "gen_01KRNQYV1BAKDE7SZB4XPJ3JHC"
+        },
+        {
+          "role": "toolResult",
+          "toolCallId": "toolu_01JgqGkULcbzr7yQooUm9iUg",
+          "toolName": "read",
+          "content": [
+            { "type": "text", "text": "Read image file [image/png]" },
+            {
+              "type": "image",
+              "data": "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",
+              "mimeType": "image/png"
+            }
+          ],
+          "isError": false,
+          "timestamp": 1778846234628
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "It looks like there's no new user message to respond to \u2014 the thread is caught up. Let me know what you'd like to tackle next."
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 6,
+            "output": 42,
+            "cacheRead": 63316,
+            "cacheWrite": 21988,
+            "totalTokens": 85352,
+            "cost": {
+              "input": 3.0000000000000004e-5,
+              "output": 0.0010500000000000002,
+              "cacheRead": 0.031658,
+              "cacheWrite": 0.13742500000000002,
+              "total": 0.170163
+            }
+          },
+          "stopReason": "stop",
+          "timestamp": 1778846234630,
+          "responseId": "gen_01KRNQYYKNDAJK8N7Q81ZG23J7"
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "<user_message id=\"jh7fjprc21xx796mykrtrmpse986r0j3\" messageIndex=\"4\" timestamp=\"2026-05-15T12:49:34.178Z\" user_full_name=\"Example User\" user_email=\"user@example.invalid\" >\n<AiMention /> is the image done?\n</user_message>"
+            }
+          ],
+          "timestamp": 1778849379247
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": " The user is asking about an image, so I'm checking back on the Thanos and gauntlet mascot work we were doing to see what the current state is.",
+              "thinkingSignature": "EtACClkIDRgCKkCJsi8mtU/Js9UFL0u64brd1kTMQD4nonuVfhDAjPKTjYOKaQE8orqOos5obdGex2KXRiYGSlPwmwVW2CLtWuS7Mg9jbGF1ZGUtb3B1cy00LTc4ABIMKmBlfZL4b7uezkKyGgw1ScXm8iJGeUpkmFAiMGCuNETbTcv5YpoxSIIfuCzgjUlRFqHNHnhzYFxdjBSaLgwZeK2FFEMBF1QCTVTy8SqkAcMpoEwfENWtGicZ3nT4cydbk402QPIR35x2BzJ8ceCdqMnB3ubR2lEO3Ua3cc7sc/OAMAWeWIRLszbMJv6x+b/hj1bPM9Z0Qa+rf8AEUrGTOxF/JcxG80KyolaYu/Rf1a6hco3fBe6Rio0b7ox1c+xAttBwqRnizHMTiCN/rwDdVORgVXP6MCkqkY95FwHBjjs/639IsydoZbDpFtoJGS28h744GAE="
+            },
+            {
+              "type": "toolCall",
+              "id": "toolu_01Vczsp6Hnr3uKLYK8wbB5oT",
+              "name": "bash",
+              "arguments": {
+                "command": "ls -lt /home/synthetic-user/.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/ 2>/dev/null | head -20; echo ---; ls -lt /home/synthetic-user/.duet/sessions/ms714chqp3mb8k2qztefe09f1d86ssk9/ 2>/dev/null | head -20"
+              }
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 6,
+            "output": 248,
+            "cacheRead": 0,
+            "cacheWrite": 85956,
+            "totalTokens": 86210,
+            "cost": {
+              "input": 3.0000000000000004e-5,
+              "output": 0.006200000000000001,
+              "cacheRead": 0,
+              "cacheWrite": 0.5372250000000001,
+              "total": 0.543455
+            }
+          },
+          "stopReason": "toolUse",
+          "timestamp": 1778849379290,
+          "responseId": "gen_01KRNTYXK6NA4GYP7BVFJ72Y5E"
+        },
+        {
+          "role": "toolResult",
+          "toolCallId": "toolu_01Vczsp6Hnr3uKLYK8wbB5oT",
+          "toolName": "bash",
+          "content": [
+            {
+              "type": "text",
+              "text": "total 9764\n-rw-r--r-- 1 user user 6201426 May 15 12:49 runner-output.log\n-rw-r--r-- 1 user user   55027 May 15 12:49 system-prompt.md\n-rw-r--r-- 1 user user 2130136 May 15 12:49 metadata.json\n-rw-r--r-- 1 user user 1514482 May 15 11:57 frame2-0.png\n-rw-r--r-- 1 user user    2516 May 15 11:56 gen-frame2.mjs\n-rw-r--r-- 1 user user    3221 May 15 11:56 gen-frame.mjs\n-rw-r--r-- 1 user user   72813 May 15 11:54 ref-mascot.png\n---\ntotal 33152\n-rw-r--r-- 1 user user  8244931 May 15 11:03 metadata.json\n-rw-r--r-- 1 user user 10485760 May 15 11:03 runner-output.log\n-rw-r--r-- 1 user user     2386 May 15 11:01 gen-frame-v8.mjs\n-rw-r--r-- 1 user user    53502 May 15 11:01 system-prompt.md\n-rw-r--r-- 1 user user  1517792 May 15 10:08 frame-v7-2-0.png\n-rw-r--r-- 1 user user     2248 May 15 10:07 gen-frame-v7.mjs\n-rw-r--r-- 1 user user     3109 May 15 10:06 gen-frame-v6c.mjs\n-rw-r--r-- 1 user user     2359 May 15 10:05 gen-frame-v6b.mjs\n-rw-r--r-- 1 user user     3759 May 15 10:04 gen-frame-v6.mjs\n-rw-r--r-- 1 user user    72813 May 15 10:03 ref-mascot.png\n-rw-r--r-- 1 user user  1450866 May 15 09:22 frame-v5-0.png\n-rw-r--r-- 1 user user     2455 May 15 09:21 gen-frame5.mjs\n-rw-r--r-- 1 user user  5455230 May 15 08:56 duet-adds-stones-v2.mp4\n-rw-r--r-- 1 user user     2540 May 15 08:54 gen-video2.mjs\n-rw-r--r-- 1 user user  1471749 May 15 08:34 frame-v4-0.png\n-rw-r--r-- 1 user user     2254 May 15 08:33 gen-frame4.mjs\n-rw-r--r-- 1 user user     1927 May 15 08:32 gen-frame3.mjs\n-rw-r--r-- 1 user user     2495 May 15 08:31 gen-frame2.mjs\n-rw-r--r-- 1 user user  3619421 May 15 07:53 duet-adds-stones.mp4\n"
+            }
+          ],
+          "isError": false,
+          "timestamp": 1778849387708
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "Latest frame is ready: [frame2-0.png](sandbox://.duet/sessions/ms7cwhvgvnz304m8v59d21sg6986sfs1/frame2-0.png).\n\nWant me to push it into a Seedance video next, or iterate on the still first?"
+            }
+          ],
+          "api": "anthropic-messages",
+          "provider": "vercel-ai-gateway",
+          "model": "anthropic/claude-opus-4.7",
+          "usage": {
+            "input": 1,
+            "output": 95,
+            "cacheRead": 85956,
+            "cacheWrite": 1234,
+            "totalTokens": 87286,
+            "cost": {
+              "input": 5e-6,
+              "output": 0.002375,
+              "cacheRead": 0.042977999999999995,
+              "cacheWrite": 0.007712500000000001,
+              "total": 0.05307049999999999
+            }
+          },
+          "stopReason": "stop",
+          "timestamp": 1778849387709,
+          "responseId": "gen_01KRNTZ5S617NV110S0HZQQQZ1"
+        }
+      ]
+    }
+  }
+}

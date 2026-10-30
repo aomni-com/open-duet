@@ -1,0 +1,2806 @@
+/* ==========================================================================
+   Knowledge map — scoped under `.knowledge-map`, imported by the component
+   that owns it.
+
+   Kept out of the shared token file on purpose: these are one surface's
+   variables, not a contract every Duet surface shares, and defining them at
+   `:root` would leak a second, competing palette into the product.
+
+   ---- the colour rule, in one paragraph ----
+   Two questions get asked of every node and they are answered from different
+   parts of the spectrum. KIND — jobs, skills, files, apps — is a low-chroma hue
+   that appears only in a mark, a hairline, or a small wash behind a chip. STATE
+   is the only thing allowed to be saturated, and only two states are: *needs
+   you* and *running*. Ready-to-read is a quiet neutral dot, because it is news
+   rather than an alarm. Connected wears nothing at all — decorating the normal
+   case is how a map turns into a dashboard.
+
+   Hover, focus and selection are colourless. That matters more than it sounds:
+   one amber used to mean *running*, *skills*, *you are pointing at it*, *this
+   is focused* and *primary button* simultaneously, so it meant none of them.
+   Running has since moved off amber altogether — see `--km-live` below.
+   ========================================================================== */
+/* `.km-hues` is for anything that draws the map's state marks while standing
+   outside `.knowledge-map` — where every variable below is undefined, so
+   `StateDot` falls back to `currentColor` and the whole state axis collapses to
+   grey text. Two things are: the jobs dialog, whose portal mounts to
+   `document.body`, and the agents rail, which is a column *beside* the map
+   rather than a layer inside it.
+
+   Hues and nothing else. The *material* rules further down stay scoped to
+   `.km-page`, because a product dialog or a product rail drawing itself in glass
+   is the "two products bolted together" reading the design is avoiding. Extend
+   the selector list here — never restate a value. */
+.knowledge-map,
+.km-hues {
+  /* Surfaces are the product's, not a parallel palette. These are the same
+     OKLCH channel tokens every other Duet surface reads, so the map's greys
+     move when the theme does and it stops being the one screen with its own
+     idea of what "background" means. Both themes come for free. */
+  --km-bg: oklch(var(--background));
+  --km-slab: oklch(var(--card));
+  --km-slab-2: oklch(var(--muted));
+  --km-edge: oklch(var(--border) / 0.7);
+  --km-line: oklch(var(--border));
+  --km-fg: oklch(var(--foreground));
+  --km-dim: oklch(var(--muted-foreground));
+  /* On paper the same 62% that reads as quiet on a dark ground composites to
+     about 2.3:1 — the counts under an empty chip disappeared, and so did the one
+     label on the map that is asking to be clicked. */
+  --km-faint: oklch(var(--muted-foreground) / 0.9);
+
+  /* Edges get their own value rather than borrowing the border token. A border
+     separates two surfaces that are already distinguishable; an edge here *is*
+     the information, and at 1.3:1 on paper there was no graph, only nodes. */
+  --km-wire: color-mix(in oklab, oklch(var(--foreground)) 45%, oklch(var(--muted-foreground)));
+
+  /* kind — what a thing is. Matched lightness, low chroma, small doses only. */
+  --km-jobs: #584ea2; /* iris  — work handed out */
+  --km-skills: #26775b; /* jade  — what it knows how to do */
+  --km-files: #846f3c; /* sand  — what it keeps */
+  --km-apps: #356697; /* steel — what it can reach */
+  --km-k: var(--km-fg); /* whichever of the four is in scope */
+
+  /* how much of it to spend. On paper a 6% wash is invisible, so the same hue
+     buys more coverage there rather than a different hue. */
+  --km-wash: 10%;
+  --km-hair: 40%;
+  --km-lift: 16%;
+  --km-open: 20%;
+
+  /* state — the only saturated colours on the map, and there are two.
+
+     They are a warm and a cool, deliberately: *needs you* is a stopped thing and
+     it is the one alarm on this surface, and *running* is a machine getting on
+     with it. Those want opposite temperatures. Running used to be amber, which
+     is coral's neighbour on the wheel — two warm marks a few pixels apart on the
+     same plate, and at ring scale a reader had to compare them to tell an alarm
+     from a progress light. Electric blue is as far from coral as this palette
+     goes, and it is the colour a thing in flight ought to be.
+
+     The one hue it has to stay clear of is `--km-apps` steel above. That is the
+     *kind* axis and it is low chroma by rule, never more than a hairline or a
+     monogram; this is saturated, and only ever on something that is moving. */
+  --km-ask: hsl(var(--ask));
+  --km-live: hsl(var(--live));
+  /* Unread. The third saturated colour on a map that budgets two, and it is
+     spent deliberately: the two it already had are *states* — asking is rust,
+     running is blue — so the colours a reader would instinctively read as "new"
+     were both taken. Full ink was what was left, and a near-black dot reads as
+     a smudge rather than as something waiting for you.
+
+     Amber, because it is the one hue this map deliberately vacated: running
+     moved off it (see the header), so nothing else here claims it, and it is
+     far enough round the wheel from rust that a ring of it survives on an
+     asking bead — which is the pair this had to be checked against. */
+  --km-unread: hsl(var(--unread));
+  --km-tone: var(--km-faint); /* whichever state is in scope */
+
+  /* The beat, at rest. Every one of these is overridden per agent a few rules
+     down — but they are declared here, on the map itself, because an undefined
+     custom property inside an `animation` shorthand does not fall back to
+     anything: it makes the whole declaration invalid, and the pulse silently
+     does not run. Stating the base here means the worst case is a ring that
+     beats in unison rather than a ring that does not beat. */
+  --km-cycle: 3.1s;
+  --km-lead: 0s;
+  --km-lag: 0.56s;
+
+  /* the core reads as a lift out of the page, whichever way the page runs */
+  --km-core-in: oklch(var(--card));
+  --km-core-out: oklch(var(--background));
+  --km-core-ink: 0.6;
+
+  /* The app's own faces. Content is sans like every other surface; mono is kept
+     for counts, extensions and the small uppercase meta, where it is doing the
+     job mono is for. The map used to be mono top to bottom, which read as a
+     terminal artifact bolted onto a product. */
+  --km-sans: var(--font-sans);
+  --km-mono: var(--font-mono);
+
+  /* Five sizes for the whole map and four on the home surface. It had seven for
+     forty words, three of them a point apart, which is not a hierarchy — it is
+     the absence of one. Each step is about a quarter again, far enough apart to
+     be a decision you can see.
+
+     Every one of them is multiplied by `--km-hold`, which the motion loop writes
+     each frame from the camera's own scale — see `labelScale` in metrics.ts. It
+     is 1 at rest and while flying in, and above 1 on the way out, so a word on
+     this map is never drawn below its floor however far back the camera has
+     gone. The declared numbers stay the numbers; what changes is how hard they
+     are held. The fallback is what a surface with no loop running gets, which is
+     the scale the sizes were chosen at. */
+  --km-hold: 1;
+  --km-t1: calc(21px * var(--km-hold)); /* the core, and nothing else */
+  --km-t2: calc(16px * var(--km-hold)); /* names: an agent, a card, the add slot */
+  --km-t3: calc(13px * var(--km-hold)); /* labels: a chip, a tile */
+  --km-t4: calc(11px * var(--km-hold)); /* counts and meta, always mono */
+  --km-t5: calc(9px * var(--km-hold)); /* the file extension: a stamp, not a word */
+}
+
+/* The canvas's own box, and deliberately *not* in the block above — that one is
+   shared with `.km-hues` and these five declarations are the map's alone. They
+   were up there until the dialog joined the selector list and inherited
+   `width: 100%; height: 100%; position: relative`, which beat the dialog's own
+   Tailwind sizing on source order and drew a 1440-wide static panel where a
+   1024×640 fixed one belonged. Variables are shareable; a surface's geometry is
+   not.
+
+   The map fills what it is given and the camera frames content into that
+   shape — see `viewport()`. It used to be pinned to a square bounded by the
+   window height, which on a wide screen meant a third of the surface was dead
+   background and the parts of the graph that would have lived there were cut
+   off at the edge of the box instead.
+
+   The floor is for a host that hands down no height at all — the surface is out
+   of flow, so without it there is nothing left to measure. It is capped against
+   the window so that it can never be the thing that overflows. */
+.knowledge-map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: min(70svh, 640px);
+  isolation: isolate;
+  /* The backdrop is deliberately larger than the map — `inset: -20%`, so a
+     rotating wash never shows its own corners — and something has to say where
+     it stops. Without this it is the *document* that grows by a fifth of the
+     map on every side: measured at 287px of horizontal overflow on the agent
+     surface, which stacks several maps down a page.
+
+     On the box rather than on the pseudo-elements, because it is the map's own
+     statement about its edge: everything this surface draws is framed by the
+     camera into exactly this rectangle, and anything outside it is backdrop
+     that was never meant to be seen. */
+  overflow: hidden;
+}
+
+.dark .knowledge-map,
+.dark .km-hues {
+  /* Only what is genuinely the map's own has to flip here; the neutrals above
+     are product tokens and `.dark` has already re-declared them. */
+  /* Ink on a dark ground carries further, so both of the values that had to be
+     lifted for paper stay where they were. */
+  --km-faint: oklch(var(--muted-foreground) / 0.62);
+  --km-wire: oklch(var(--border));
+  --km-jobs: #9e93d2;
+  --km-skills: #71be9f;
+  --km-files: #c8b893;
+  --km-apps: #89afd6;
+  --km-wash: 6%;
+  --km-hair: 22%;
+  --km-lift: 11%;
+  --km-open: 14%;
+  /* `--km-ask`, `--km-live` and `--km-unread` are not restated here: they read
+     the app-wide `--ask`, `--live` and `--unread` (globals.css), which already
+     lift for the dark ground. Live most of all — on a dark ground it is the
+     only thing on the map meant to look lit rather than printed. */
+  --km-core-in: oklch(var(--muted));
+  --km-core-out: oklch(var(--card));
+  --km-core-ink: 1;
+}
+
+/* ---------- which kind, and which state, are in scope ----------
+   Two custom properties set on whatever element owns them, so every rule below
+   is written once against var(--km-k) / var(--km-tone) instead of four and six
+   times. */
+.knowledge-map [data-kind='jobs'] {
+  --km-k: var(--km-jobs);
+}
+.knowledge-map [data-kind='skills'] {
+  --km-k: var(--km-skills);
+}
+.knowledge-map [data-kind='files'] {
+  --km-k: var(--km-files);
+}
+.knowledge-map [data-kind='apps'] {
+  --km-k: var(--km-apps);
+}
+
+/* The tone axis is the one thing the jobs dialog borrows across the portal — a
+   job that needs you is the same coral in the dialog as on the face out on the
+   canvas, and re-declaring it against `text-destructive` would be a third
+   vocabulary for one meaning, disagreeing with the map underneath. */
+:is(.knowledge-map, .km-hues) [data-tone='alert'] {
+  --km-tone: var(--km-ask);
+}
+:is(.knowledge-map, .km-hues) [data-tone='live'] {
+  --km-tone: var(--km-live);
+}
+:is(.knowledge-map, .km-hues) [data-tone='ok'] {
+  --km-tone: var(--km-dim);
+}
+:is(.knowledge-map, .km-hues) [data-tone='offer'] {
+  --km-tone: var(--km-faint);
+}
+:is(.knowledge-map, .km-hues) [data-tone='muted'] {
+  --km-tone: var(--km-faint);
+}
+
+/* ---------- the surface ----------
+   Out of flow on purpose: an <svg> with a viewBox has an intrinsic aspect ratio,
+   so in flow it decides how tall its own container is from how wide it is — and
+   since the viewBox is measured back off that container, the two chase each
+   other. The container is sized by its host; the surface fills it. */
+/* ==========================================================================
+   Looks — three finishes over one drawing.
+
+   `data-look` on the map picks one. They are *finishes*, not layouts: not one
+   of them moves a node, changes a colour's meaning, or adds an element to the
+   scene. The geometry, the two colour axes and the state vocabulary are the
+   same in all three, so anything learned about the map in one is true in the
+   others.
+
+   Everything here animates `transform` and `opacity`, and nothing else. That is
+   not stylistic restraint — those are the two properties a browser composites
+   off the main thread, and the map's frame budget was won by moving the node
+   transforms onto exactly them. A backdrop animating a gradient's stops, a blur
+   radius, or a filter hands it all back: each repaints the layer every frame,
+   behind six hundred elements.
+
+   ⚠️ `background-position` belongs on the forbidden list, not the safe one.
+   The laser grid drifted with it in a first pass and measured **44fps with 78
+   janky frames in two seconds** — it repaints the whole layer per frame like
+   any other paint property. It moves by `transform` now, which is why the grid
+   is its own element: a transform moves everything the element paints, so the
+   drifting tiles and the still glow cannot share one box.
+   ========================================================================== */
+
+/* The backdrop lives on the map's own box rather than in the SVG, so it does
+   not travel with the camera — the drive sits *in* a place, and a field that
+   flew around with the ring would read as one more thing on the canvas. */
+.knowledge-map::before {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+}
+.knowledge-map > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- aurora ----------
+   A cold light somewhere behind the drive, breathing. Two offset radial washes
+   in the kind hues at very low alpha, counter-rotating slowly enough that you
+   never catch them moving — the picture should feel *lit* rather than animated.
+
+   Scaled and rotated, never re-gradiented: the stops are fixed and the element
+   is transformed, so this is one composited layer and not a repaint. */
+.knowledge-map[data-look='aurora']::before {
+  opacity: 1;
+  background-image:
+    radial-gradient(
+      38% 44% at 32% 38%,
+      color-mix(in oklab, var(--km-apps) 26%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      34% 40% at 70% 64%,
+      color-mix(in oklab, var(--km-jobs) 24%, transparent),
+      transparent 72%
+    );
+  animation: km-aurora 34s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes km-aurora {
+  from {
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    transform: scale(1.14) rotate(8deg);
+  }
+}
+/* The core stops being a slab in this one and becomes the brightest thing on
+   the canvas, which is what a drive's own knowledge should be. */
+.knowledge-map[data-look='aurora'] {
+  --km-core-in: color-mix(in oklab, var(--km-apps) 22%, oklch(var(--muted)));
+  --km-core-out: oklch(var(--card));
+}
+
+/* ---------- laser ----------
+   The instrument version. A faint survey grid under the ring so the drawing
+   sits on measured ground, and every trunk carrying work reads as a beam rather
+   than a tinted wire: the wire brightens and the comets already travelling it
+   become the hot core of the same line.
+
+   The still half — the glow the ring stands in. */
+.knowledge-map[data-look='laser']::before {
+  opacity: 1;
+  background-image: radial-gradient(
+    46% 46% at 50% 50%,
+    color-mix(in oklab, var(--km-live) 9%, transparent),
+    transparent 70%
+  );
+}
+/* The moving half. Its own element because it moves by `transform`, and a
+   transform moves everything the element paints — the glow above has to stay
+   still while the tiles drift under it. One tile of travel, so the loop is
+   seamless without the pattern ever being redrawn. */
+.knowledge-map[data-look='laser']::after {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in oklab, var(--km-wire) 10%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--km-wire) 10%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 68px 68px;
+  /* The grid is ground, not content: it has to be readable as *measured* space
+     and never competitive with the drawing standing on it. Masked to the middle
+     so it fades out well before the edge, and taken down again on top of that —
+     at full strength it read as a table the ring had been dropped onto. */
+  opacity: 0.45;
+  -webkit-mask-image: radial-gradient(48% 48% at 50% 50%, #000, transparent 74%);
+  mask-image: radial-gradient(48% 48% at 50% 50%, #000, transparent 74%);
+  animation: km-grid 22s linear infinite;
+  will-change: transform;
+}
+@keyframes km-grid {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(68px, 68px, 0);
+  }
+}
+/* The beam. A live trunk is already tinted and already carries comets — this
+   only turns the tint up and widens it, so the two halves of the pair stay the
+   pair rather than becoming two effects. */
+.knowledge-map[data-look='laser'] .km-edge.km-live {
+  stroke: color-mix(in oklab, var(--km-live) 72%, var(--km-wire));
+  stroke-width: 2.2;
+}
+.knowledge-map[data-look='laser'] .km-spark {
+  stroke-width: 3.4;
+}
+/* And a working face stands in its own light. */
+.knowledge-map[data-look='laser'] .km-n[data-live] .km-av-frame {
+  stroke: color-mix(in oklab, var(--km-live) 60%, var(--km-line));
+}
+
+/* Reduced motion takes the drift and the breathing off both. The light stays —
+   it is the finish, not the animation — and a still gradient is simply a
+   gradient. */
+@media (prefers-reduced-motion: reduce) {
+  .knowledge-map::before,
+  .knowledge-map::after {
+    animation: none !important;
+  }
+}
+
+.km-svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0, #000 3.5%, #000 96.5%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 3.5%, #000 96.5%, transparent 100%);
+  mask-image:
+    linear-gradient(to right, transparent 0, #000 3.5%, #000 96.5%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 3.5%, #000 96.5%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+/* Inside an agent, the top edge stops dissolving and starts holding.
+   The fade is a share of the map's height because it is there to dissolve the
+   *ring* at the frame — and a ring is a share of the map's height too. Nothing
+   of the ring is at the top edge once the camera is inside an agent: what is
+   there is the agent's own face, parked in the hole the surface leaves for it,
+   with the mark that means "this one needs you" standing a head above it.
+
+   Fading that is the map dimming the one thing you clicked. And it used to be
+   paid for out of `--km-brow` — a band of empty canvas over the agent's name,
+   sized to hold the badge below the fade, which meant the air above the name
+   grew with the window while the card beside it kept a padding that did not.
+   The two columns started together on a laptop and half an inch apart on a
+   display. A fixed depth is the honest unit for clearing a fixed piece of
+   chrome, and the sides and the bottom keep the share they always had, because
+   the ring is still dissolving there. */
+.knowledge-map[data-level='1'] .km-svg {
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0, #000 3.5%, #000 96.5%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 4px, #000 96.5%, transparent 100%);
+  mask-image:
+    linear-gradient(to right, transparent 0, #000 3.5%, #000 96.5%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 4px, #000 96.5%, transparent 100%);
+}
+.km-svg:focus {
+  outline: none;
+}
+.km-svg:focus-visible {
+  outline: 1px solid var(--km-dim);
+  outline-offset: 2px;
+}
+/* ---------- edges ----------
+   Every rule below draws a hairline, and a hairline that thickens when the
+   camera flies in is not a hairline any more — it is a border. `non-scaling
+   -stroke` is what keeps a line 1.6px whatever the scene is doing, and it is
+   the other half of the promise `--km-hold` makes about the words: the halo a
+   caption is painted with is a stroke too, and one that grew with the camera
+   would eat the letters it exists to separate. Anything in here without a stroke
+   is unaffected, which is why this can be stated once. */
+.km-svg :is(path, rect, circle, ellipse, line, polyline, polygon, text) {
+  vector-effect: non-scaling-stroke;
+}
+
+/* ---------- every line on this map is the same line ----------
+   Dotted, one weight, one colour, whether it joins the core to an agent or an
+   agent to the work it has in flight. A trunk drawn heavier than a limb says
+   the second one matters less, which is a claim the drawing has no business
+   making — an app an agent can reach and the agent itself are both simply
+   *there*, and depth is already carried by where a thing sits.
+
+   Round caps on a near-zero dash is what makes a dot rather than a dash: the
+   cap draws the whole mark and `stroke-dasharray` only spaces them. Stated as
+   `0.01` rather than `0` because a zero-length dash is undefined behaviour and
+   at least one engine drops the stroke entirely.
+
+   The comets are unaffected. They are their own paths under `.km-sparks` with
+   their own dash pattern — that is what lets a wire be dotted at rest and still
+   carry a solid head travelling along it. */
+.km-edge {
+  fill: none;
+  stroke: var(--km-wire);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-dasharray: 0.01 4;
+  /* `opacity` as well as `stroke-opacity`: a limb is put away with the app it
+     joins, and it has to come back with it too rather than snapping on. */
+  transition:
+    stroke-opacity 0.5s,
+    opacity 0.34s ease-out,
+    stroke 0.4s;
+}
+/* An edge steps back with the nodes it joins, and by the same amount — a line
+   half as present as the node it joins was the point at which the light theme
+   lost the graph a second time, one tier down. */
+.km-faint {
+  stroke-opacity: 0.16;
+}
+
+/* ---------- one clock per agent ----------
+   Every trunk pulsing on the same clock is a metronome: a dozen identical blinks
+   in chorus, which the eye stops reading as a dozen machines working and starts
+   reading as one animation looping. Two numbers per agent fix that, and they
+   arrive as custom properties from `pulseStyle` — a hash of the agent's own name,
+   so it is the same beat on every render and in every screenshot.
+
+   `--km-phase` is where in the cycle this agent starts, spent as a *negative*
+   delay so it begins already under way rather than waiting its turn. `--km-stretch`
+   makes its cycle a little longer than the base, which is the part that matters
+   most: agents started apart but running identical cycles would hold their
+   spacing forever, which is still a chorus, just a spread one. Slightly different
+   lengths mean the ring is always drifting through arrangements it has not been
+   in before.
+
+   Both are set on the trunk's own spark group and on the mark on the plate at the
+   far end, so a comet, the echo behind it and the rings they strike share one
+   clock even while every other agent is on its own. Eighteen percent is as far as the
+   stretch is allowed to go: past that the slowest agent reads as stalled rather
+   than as busy at its own pace. */
+.km-sparks > g,
+.km-live-mark {
+  --km-cycle: calc(3.1s * (1 + 0.18 * var(--km-stretch, 0)));
+  --km-lead: calc(var(--km-cycle) * var(--km-phase, 0) * -1);
+  /* where the echo falls behind the comet in front of it, in cycles */
+  --km-lag: calc(var(--km-lead) + var(--km-cycle) * 0.19);
+}
+
+/* ---------- a trunk with work on it ----------
+   The one thing the ring can say without a mark: this agent is running
+   something. The badge on its face cannot say it — attention surfaces the single
+   most urgent state, so an agent stuck on a question has already spent its badge
+   and says nothing at all about the three sessions underneath.
+
+   The wire is tinted rather than lit: it is a line the length of the ring's
+   radius and there may be a dozen of them, so at full strength the resting
+   picture would be a starburst. What is saturated is the spark, which is short
+   and moving and never in the same place twice. Same colour, so they read as one
+   thing — the trunk is the wire the spark runs down, cool where it has been. */
+.km-trunk.km-live {
+  stroke: color-mix(in oklab, var(--km-live) 42%, var(--km-wire));
+  stroke-opacity: 0.85;
+}
+
+/* ---- the pulse itself ----
+   A comet leaves the core, runs out to the face, and is gone for about as long
+   again before the next one.
+
+   It is *one* path. The comet — a head with three shortening fragments trailing
+   it — is the dash pattern, and the long gap after it is what guarantees only
+   one is ever on a line at a time. Reading the array: the pieces are listed
+   smallest-first because the pattern travels head-last. A dash at pattern
+   position q lands at path position q − offset, so the piece with the largest q
+   is the one furthest along the line — which is the one that has to be the head.
+   Written the intuitive way round, the comet flies backwards.
+
+   Declared in fractions of the line rather than in world units, which is what
+   `pathLength={1}` on the element buys: the comet is a quarter of whatever trunk
+   it is on, it crosses in the same beat at every fleet size, and the stylesheet
+   is never told how long a trunk is.
+
+   The offset numbers are the two ends of that trip. 2.5 stands the comet's nose
+   exactly on the path's first point; 1.2 has its last fragment clear of the last
+   point, with room to spare — 1.25 would leave the tail *on* the endpoint, and a
+   zero-length dash under a round linecap is not nothing, it is a dot. That is a
+   bead of light parked on every working face.
+
+   The rest between beats is a keyframe rather than the tail of the offset range,
+   and that is what decides what a *still* of this looks like. A screenshot
+   harness crushes the duration to nothing, so the frame everyone reviews is
+   whichever keyframe it lands on — and landing on the start parked a bright stub
+   at the core end of every live trunk, which is not a moment this pulse ever
+   has: it reads as a wire that is brighter at one end. Landing on the rest
+   leaves the picture between beats, which is exactly what a reader on reduced
+   motion is shown, and it loops seamlessly because the comet is off the end of
+   the path at the moment the next beat starts it over.
+
+   The width is the canvas's own non-scaling stroke, like every other line here —
+   `pathLength` is what keeps the *dashes* in the drawing's units while the width
+   stays in the screen's, which is the pair this needs. A comet whose length was
+   pinned to the screen would be a fixed number of pixels crawling along a line
+   that grows and shrinks with the fleet. */
+
+/* Two shadows, not one, and that is the whole difference between a glowing line
+   and a line with a shadow: a tight bright halo for the filament and a wide soft
+   one for the bloom around it. One filter for the layer rather than one per
+   spark — a filter per element is a filter region per element to composite every
+   frame — and declared here so a comet that is faint under the glass takes its
+   own light down with it. */
+.km-sparks {
+  filter: drop-shadow(0 0 2px color-mix(in srgb, var(--km-live) 90%, transparent))
+    drop-shadow(0 0 8px color-mix(in srgb, var(--km-live) 45%, transparent));
+}
+.km-spark {
+  --km-spark-opacity: 1;
+  fill: none;
+  stroke: var(--km-live);
+  stroke-width: 3;
+  stroke-linecap: round;
+  /* fragment · gap · fragment · gap · head · the long gap that keeps it alone */
+  stroke-dasharray: 0.03 0.02 0.06 0.02 0.12 2;
+  /* One uninterrupted ease-in-out owns the whole crossing: quiet off the core,
+     confident through the middle, and soft into the portrait. Intermediate
+     linear stops made the beam visibly change gears instead of accelerating. */
+  animation: km-travel var(--km-cycle) cubic-bezier(0.77, 0, 0.175, 1) infinite forwards;
+  animation-delay: var(--km-lead);
+}
+/* The second one down the same wire, a fifth of a cycle back and half the
+   weight. One comet a cycle is a tick; a comet with something following it is a
+   thing with a pulse — and because both are the same animation on the same
+   clock, the pair stays a pair however far this agent's beat drifts from its
+   neighbours'. */
+.km-spark-echo {
+  --km-spark-opacity: 0.62;
+  stroke-width: 1.8;
+  animation-delay: var(--km-lag);
+}
+.km-spark.km-faint {
+  --km-spark-opacity: 0.34;
+}
+.km-spark-echo.km-faint {
+  --km-spark-opacity: 0.2;
+}
+@keyframes km-travel {
+  /* Nose on the first point of the trunk. */
+  0% {
+    stroke-dashoffset: 2.5;
+    stroke-opacity: 0;
+  }
+  /* Fade the filament up without adding a stop to its travel curve. */
+  4% {
+    stroke-opacity: var(--km-spark-opacity);
+  }
+  /* Tail clear of the portrait rim. */
+  58% {
+    stroke-dashoffset: 1.2;
+    stroke-opacity: var(--km-spark-opacity);
+  }
+  62% {
+    stroke-dashoffset: 1.2;
+    stroke-opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: 1.2;
+    stroke-opacity: 0;
+  }
+}
+
+/* ---------- nodes ----------
+   Two depths: the agent you went into with everything hanging off it, and the
+   rest of the ring. Out-of-focus nodes stop taking pointer events, so a node you
+   cannot properly see is never one you can accidentally click. */
+.km-n {
+  cursor: pointer;
+  /* Shorter than the flight, and it starts with it: what is leaving should be
+     gone before the thing you are arriving at gets there. Fading the ring out
+     across the whole flight meant a half-lit ring sweeping past the frame for
+     half a second, which is the part of this motion that made people look
+     away. */
+  transition: opacity 0.34s ease-out;
+}
+.km-n:focus {
+  outline: none;
+}
+/* Out of the way, but still a drawing of something. At 0.06 a node read as a
+   smudge on the glass rather than as the rest of the map standing back — and
+   half of one hanging off the edge of the frame read as a rendering fault. */
+.km-dim {
+  opacity: 0.16;
+  pointer-events: none;
+}
+/* Not stepped back — put away. The apps the focused agent carries, and the limbs
+   they hang on: inside the agent the pane on the right is showing one of them by
+   name, and the row was the same answer again, smaller.
+   `visibility` rather than opacity alone, because a `<g>` at nought opacity is
+   still in the tab order — and it is delayed by exactly the fade so the node is
+   gone the frame it finishes rather than the frame it starts. Coming back it is
+   not delayed at all: the transition is `.km-n`'s, which does not mention
+   visibility, so it flips at once and only the opacity travels. */
+.km-gone {
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.34s ease-out,
+    visibility 0s linear 0.34s;
+  pointer-events: none;
+}
+/* Inside an agent, its name is set once — in the cluster over the face, at the
+   size a heading is set at. The node's own caption underneath would be the same
+   word twice, at two sizes, a few pixels apart. */
+.knowledge-map[data-level='1'] .km-on .km-label,
+.knowledge-map[data-level='1'] .km-on .km-agent-sub,
+.knowledge-map[data-level='1'] .km-on .km-meta {
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.km-hit {
+  fill: transparent;
+}
+
+.km-label,
+.km-meta,
+.km-agent-sub,
+.km-app-label,
+.km-job-label {
+  paint-order: stroke fill;
+  stroke: var(--km-bg);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+.km-label {
+  fill: var(--km-fg);
+  font-weight: 500;
+  font-size: var(--km-t2);
+  font-family: var(--km-sans);
+  letter-spacing: -0.01em;
+}
+.km-meta {
+  fill: var(--km-faint);
+  font-size: var(--km-t4);
+  font-family: var(--km-mono);
+  letter-spacing: 0.06em;
+}
+/* The slug under a named agent. Sans and untracked rather than the mono every
+   other `t4` on this map is set in: mono at that tracking runs a quarter wider
+   per character than the sans the captions are *cut* against, so a slug budgeted
+   with everything else would have been the one word on the ring allowed to run
+   into its neighbour's. It is the quietest thing an agent draws — the name above
+   it is what you read, and this is only there for when the two differ. */
+.km-agent-sub {
+  fill: var(--km-faint);
+  font-size: var(--km-t4);
+  font-family: var(--km-sans);
+  letter-spacing: 0;
+  /* A narrower halo than the group's. Five units around a sixteen-unit name is
+     a rim; the same five around eleven units of slug is a plate you can see the
+     edges of, sitting under the name like a second, paler label. */
+  stroke-width: 3.5px;
+}
+
+/* ---------- core ----------
+   The point cloud holds all four kinds at once, which is what the core *is*:
+   everything the agents know, before it was sorted into anything. */
+.km-core-disc {
+  stroke: var(--km-edge);
+  stroke-width: 1;
+}
+.km-core-rim {
+  fill: none;
+  stroke: var(--km-line);
+  stroke-width: 1;
+  stroke-dasharray: 2 10;
+  opacity: 0.7;
+}
+/* on paper the same cloud is grit rather than glow, so the field steps back */
+.km-core-field {
+  opacity: var(--km-core-ink);
+}
+.km-kn {
+  fill: var(--km-fg);
+}
+.km-kn[data-kind='jobs'] {
+  fill: var(--km-jobs);
+}
+.km-kn[data-kind='skills'] {
+  fill: var(--km-skills);
+}
+.km-kn[data-kind='files'] {
+  fill: var(--km-files);
+}
+.km-kn[data-kind='apps'] {
+  fill: var(--km-apps);
+}
+.km-core-label {
+  font-size: var(--km-t1);
+}
+
+/* Duet stands on the sphere rather than in it: an opaque slab, so the drawing
+   reads as a figure on top of the cloud instead of one more thing inside it.
+   Fill only — the tile's one border is `.km-av-frame`, the same border every
+   other face on this map wears. */
+.km-core-plate {
+  fill: var(--km-slab);
+}
+
+/* ---------- agents ----------
+   The slab under the art, and nothing else: a plate that also stroked itself
+   was the map's second border, sitting seven units outside the face's own. */
+.km-agent-disc {
+  fill: var(--km-slab);
+  transition: fill 0.25s;
+}
+/* Full colour, exactly as the roster and the session header show the same face.
+   These were desaturated to stop them drowning the palette; the answer was to
+   quieten everything around them instead, not to make an agent's identity
+   look switched off. */
+/* The one border a face has. Core, agent, live or locked, every state below
+   restates this stroke rather than adding one beside it. */
+.km-av-frame {
+  fill: none;
+  stroke: var(--km-line);
+  stroke-width: 1.6;
+  pointer-events: none;
+  transition: stroke 0.25s;
+}
+.km-n:hover .km-av-frame,
+.km-n:focus-visible .km-av-frame {
+  stroke: color-mix(in srgb, var(--km-fg) 38%, transparent);
+}
+/* built in, and not removable — a firmer rule, not a colour and not a second
+   outline. It was a double rule back when a face had two borders to strike. */
+/* Pointed at from the rail, and deliberately louder than this map's own hover.
+   The reader's eye is in the list when this fires — three hundred pixels away
+   from the thing it marks — so a cue tuned for a pointer already resting on the
+   face would never be found from there. Two marks rather than one: the rim goes
+   to full ink and thickens, and the whole node carries a glow, because the ring
+   is drawn over a lit canvas and a stroke alone loses against a bright agent.
+
+   It also borrows `km-cap`, so the agent's apps say their names while it is
+   held — pointing at a row should answer "which one is that" and "what does it
+   reach" in the same gesture. */
+.km-flag .km-av-frame {
+  stroke: var(--km-fg);
+  stroke-width: 3;
+}
+.km-flag {
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--km-fg) 45%, transparent));
+}
+/* Apps and jobs answer to the same mark on whatever shape they have: an app is
+   a rounded tile with a rim already there to thicken, a job is a bare bead, so
+   the bead grows a stroke it does not normally carry. Neither turns the glow up
+   — that is on the group above, so a tile a third the size of a face is already
+   proportionally brighter than one. */
+.km-flag .km-app-disc,
+.km-flag .km-app-edge {
+  stroke: var(--km-fg);
+  stroke-width: 2.5;
+}
+/* A bead is the smallest thing on the ring — four units of radius — so the
+   treatment the other two get is invisible on it. The stroke goes under the
+   fill instead and is drawn wide enough to read as a halo, which roughly
+   doubles the mark without touching the geometry the layout solved. Sized in
+   absolute units rather than proportionally for the same reason the beads are:
+   at the pitch five jobs sit on, anything larger closes the gap to its
+   neighbour and the arc reads as one smear. */
+.km-flag .km-bead {
+  stroke: color-mix(in srgb, var(--km-fg) 85%, transparent);
+  stroke-width: 5;
+  paint-order: stroke;
+}
+
+.km-n[data-locked] .km-av-frame {
+  stroke: color-mix(in srgb, var(--km-fg) 30%, transparent);
+}
+
+/* ---------- apps ----------
+   An agent carries the apps it can reach and nothing else, so this is the whole
+   fan. A small wash and a tinted hairline is all of the kind colour the map
+   gives a tile: it reads as a family at a glance and disappears when you stop
+   looking — and where the app has artwork of its own, the wash is underneath it
+   and the hairline is all that is left.
+
+   The plate and the border are two elements, because a rect paints its stroke
+   over its own fill and an icon laid on top would eat the inner half of it. The
+   same split a face makes between `.km-agent-disc` and `.km-av-frame`, for the
+   same reason. */
+.km-app-disc {
+  fill: color-mix(in srgb, var(--km-k) var(--km-wash), var(--km-slab));
+  transition: fill 0.25s;
+}
+.km-app-edge {
+  fill: none;
+  stroke: color-mix(in srgb, var(--km-k) var(--km-hair), var(--km-line));
+  stroke-width: 1.5;
+  pointer-events: none;
+  transition: stroke 0.25s;
+}
+.km-n:hover .km-app-disc,
+.km-n:focus-visible .km-app-disc {
+  fill: color-mix(in srgb, var(--km-k) var(--km-lift), var(--km-slab-2));
+}
+.km-n:hover .km-app-edge,
+.km-n:focus-visible .km-app-edge {
+  stroke: color-mix(in srgb, var(--km-k) 56%, var(--km-line));
+}
+/* not connected is an offer, not a fault: dashed, and no colour at all */
+.km-n[data-tone='offer'] .km-app-disc {
+  fill: var(--km-slab);
+}
+.km-n[data-tone='offer'] .km-app-edge {
+  stroke: var(--km-faint);
+  stroke-dasharray: 4 5;
+  stroke-opacity: 0.5;
+}
+/* The artwork is the tile — the whole square, clipped to its own corner. */
+.km-app-art {
+  pointer-events: none;
+}
+/* the rest of them: a count, not a name, so it wears the outline of a slot */
+.km-more-edge {
+  stroke-dasharray: 4 5;
+}
+.km-app-mono {
+  fill: color-mix(in srgb, var(--km-k) 46%, var(--km-fg));
+  font-weight: 700;
+  font-size: var(--km-t3);
+  font-family: var(--km-mono);
+  letter-spacing: -0.02em;
+}
+.km-n[data-tone='offer'] .km-app-mono {
+  fill: var(--km-faint);
+}
+.km-app-label {
+  /* A step below the agent's own name on purpose. The agent is the subject and
+     the apps are what it reaches: at full ink an app read as loud as the face it
+     hangs off, and the two sat on almost the same baseline with nothing to tell
+     them apart. */
+  fill: color-mix(in srgb, var(--km-fg) 72%, transparent);
+  font-weight: 500;
+  font-size: var(--km-t3);
+  font-family: var(--km-sans);
+  letter-spacing: -0.01em;
+  transition: opacity 0.25s;
+}
+/* Past seven agents the map stops naming every app — thirty-six labels is not
+   information, it is fog. Point at an agent and its own come back. */
+.knowledge-map[data-dense='true'] .km-app-label {
+  opacity: 0;
+}
+.knowledge-map[data-dense='true'][data-level='0'] .km-cap .km-app-label {
+  opacity: 1;
+}
+
+/* ---------- work in flight ----------
+   The Jobs seat wears the app disc, because it is a seat in the same row and
+   two bodies in one row is a row that has not decided what it is. What tells
+   them apart is the kind hue and the mark on it — the same jobs iris the badge
+   on the face above and the headings in the dialog already use.
+
+   Under it, one dot per job. They carry no captions: a job title needs about
+   eight characters at this pitch, and eight characters of a title is not a
+   title. Only the two loud states are ever saturated — needs you and running —
+   which is why a resting job is the kind hue and nothing more, and why a
+   finished one gets no dot at all: the layout never builds it. */
+/* Unread, as a ring around the bead. Full ink, the same material the agent's
+   own unread dot is made of, so the two read as one idea without spending a
+   third saturated colour — the bead's *fill* is already carrying its state. */
+.km-bead-unread-gap {
+  fill: none;
+  stroke: var(--km-bg);
+  stroke-width: 2;
+}
+.km-bead-unread {
+  fill: none;
+  stroke: var(--km-unread);
+  stroke-width: 1.5;
+}
+.km-bead {
+  fill: color-mix(in srgb, var(--km-k) 40%, var(--km-slab));
+  stroke: color-mix(in srgb, var(--km-k) 30%, var(--km-line));
+  stroke-width: 1.25;
+  transition:
+    fill 0.25s,
+    stroke 0.25s;
+}
+.km-n[data-tone='alert'] .km-bead,
+.km-n[data-tone='live'] .km-bead {
+  fill: var(--km-tone);
+  stroke: color-mix(in srgb, var(--km-tone) 60%, transparent);
+}
+.km-n:hover .km-bead,
+.km-n:focus-visible .km-bead {
+  fill: color-mix(in srgb, var(--km-k) 85%, var(--km-slab));
+  stroke: color-mix(in srgb, var(--km-k) 70%, var(--km-line));
+}
+/* A job's own title, drawn only where the row had the arc for one — see
+   `Ring.jobTitles`. A step quieter than an app's name, because a job is what
+   the agent is doing rather than something you go to; the state on the dot
+   beside it is the loud half of the pair. */
+.km-job-label {
+  fill: color-mix(in srgb, var(--km-fg) 62%, transparent);
+  font-weight: 500;
+  font-size: var(--km-t3);
+  font-family: var(--km-sans);
+  letter-spacing: -0.01em;
+  transition: opacity 0.25s;
+}
+.km-job-label-more {
+  fill: var(--km-dim);
+}
+.km-n:hover .km-job-label,
+.km-n:focus-visible .km-job-label {
+  fill: var(--km-fg);
+}
+
+/* The work that did not fit, as a mark rather than a number: the ring's job
+   read is drive-wide and capped at thirty rows, so a count here would be a
+   floor presented as a total. */
+.km-bead-more-disc {
+  fill: none;
+  stroke-dasharray: 4 5;
+}
+.km-bead-more {
+  stroke: color-mix(in srgb, var(--km-k) 55%, var(--km-line));
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  transition: stroke 0.25s;
+}
+.km-n:hover .km-bead-more {
+  stroke: var(--km-k);
+}
+
+/* ---------- the four marks ----------
+   Tellable apart in greyscale — a fork, a spark, a page, a frame you step out
+   of — so colour is the second cue, never the only one. */
+.km-mark {
+  color: var(--km-k);
+}
+
+/* ---------- add ---------- */
+.km-add-disc {
+  fill: none;
+  stroke: var(--km-faint);
+  stroke-width: 1.6;
+  stroke-dasharray: 7 8;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    stroke 0.25s,
+    transform 0.3s;
+}
+.km-n:hover .km-add-disc {
+  transform: rotate(45deg);
+  stroke: var(--km-dim);
+}
+.km-add-plus {
+  stroke: var(--km-faint);
+  stroke-width: 2;
+  stroke-linecap: round;
+  transition: stroke 0.25s;
+}
+.km-n:hover .km-add-plus {
+  stroke: var(--km-fg);
+}
+/* The one thing on an untouched map that is asking to be clicked, in the one
+   size on the ring that is a name — the same as the agents it will stand beside.
+   It wore the quietest grey the map has and a size used nowhere else. */
+.km-add-label {
+  fill: var(--km-dim);
+  transition: fill 0.25s;
+}
+.km-n:hover .km-add-label {
+  fill: var(--km-fg);
+}
+
+/* ---------- attention badges ----------
+   One vocabulary everywhere: a ring plus a glyph that says what to do. Tone
+   drives colour; the glyph drives meaning. A ring on its own would be a
+   decoration — which is why a finished job gets no badge rather than an empty
+   one. */
+.km-badge {
+  color: var(--km-tone);
+  pointer-events: none;
+}
+.km-badge-bg {
+  fill: var(--km-bg);
+  stroke: currentcolor;
+  stroke-width: 1.6;
+}
+.km-badge-q {
+  fill: currentcolor;
+  font-weight: 700;
+  font-family: var(--km-mono);
+}
+.km-badge-rule {
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.km-badge-dot {
+  fill: currentcolor;
+}
+.km-badge-spin {
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: km-spin 1.5s linear infinite;
+}
+@keyframes km-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.km-badge-n {
+  fill: currentcolor;
+  font-weight: 700;
+  font-size: var(--km-t4);
+  font-family: var(--km-mono);
+  paint-order: stroke fill;
+  stroke: var(--km-bg);
+  stroke-width: 3.5px;
+  stroke-linejoin: round;
+}
+
+/* Needs-you is solid; running is an open arc. At 26px a ring with a "?" in it
+   and a ring with a gap in it are the same mark, and they mean opposite things.
+   The pulse is a stroke growing out of the disc, so it works at every radius
+   the badge is drawn at. */
+.km-badge[data-glyph='ask'] .km-badge-bg {
+  fill: currentcolor;
+  stroke: currentcolor;
+  stroke-opacity: 0.32;
+  animation: km-knock 2.6s ease-out infinite;
+}
+.km-badge[data-glyph='ask'] .km-badge-q {
+  fill: var(--km-bg);
+}
+@keyframes km-knock {
+  0% {
+    stroke-width: 0;
+  }
+  10% {
+    stroke-width: 5.5;
+  }
+  42% {
+    stroke-width: 0;
+  }
+  100% {
+    stroke-width: 0;
+  }
+}
+
+/* ---------- the mark on a working face ----------
+   The plate's own outline struck twice: a rim that holds, and a copy of it
+   thrown off when the comet lands. Concentric with the plate and with the face
+   inside it, so the three read as one object — the badge already owns the
+   corner, and it may well be lit at the same time on an agent that is both stuck
+   and busy.
+
+   The rim carries a halo of its own, tight and low, so a working face reads as
+   lit rather than outlined. It is the same two-shadow recipe the comet uses, one
+   size down — and it is on `.km-live-mark` rather than `.km-live`, which the
+   trunk already wears: one class, two meanings, and this glow would have landed
+   on every wire on the map. */
+.km-live-mark {
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--km-live) 45%, transparent));
+}
+.km-live-rim {
+  fill: none;
+  stroke: var(--km-live);
+  stroke-width: 1.6;
+  stroke-opacity: 0.9;
+}
+/* `forwards` is for the clock that never runs. An infinite animation never ends,
+   so it changes nothing in the product — but a screenshot harness crushes every
+   duration to nothing, and a flare with no fill mode snaps back to its *base*
+   style, which is a second solid rim sitting on top of the first. Landing on the
+   last keyframe instead leaves what a still frame of this ought to leave: the
+   rim, alone, exactly as a reader on reduced motion sees it. */
+.km-live-flare {
+  fill: none;
+  stroke: var(--km-live);
+  stroke-width: 2;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: km-flare var(--km-cycle) ease-out infinite forwards;
+  animation-delay: var(--km-lead);
+}
+/* The echo's arrival. Same ring, same clock, a fifth of a cycle later and
+   quieter — the peak is a variable precisely so this is one number rather than a
+   second set of keyframes drifting away from the first. */
+.km-live-flare-echo {
+  --km-flare-peak: 0.4;
+  stroke-width: 1.4;
+  animation-delay: var(--km-lag);
+}
+/**
+ * One clock, and the order of events is the whole point.
+ *
+ * The flare waits while the comet is still crossing the map, snaps on at the
+ * moment it reaches the rim, and is thrown off outwards after. It used to fire
+ * at nought — the ring swelling as the comet *left* the core, half a second
+ * before anything got here — which is the same two animations playing at once
+ * rather than one thing happening to something else. Same beat, correct order,
+ * and the map now reads as delivery.
+ *
+ * It stops at 1.16 of the plate, which is not a taste number: it is
+ * `FLARE_REACH` in `metrics.ts`, and `inkRadius` reserves exactly that much when
+ * the camera flies into a face. A flare that swelled past it would be the one
+ * thing on the agent landing outside the hole the unfolded surface leaves. CSS
+ * cannot read that constant, so the two are pinned by naming each other and by
+ * `well.test.ts`, which asserts the reserve.
+ */
+@keyframes km-flare {
+  0%,
+  58% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  /* struck */
+  62% {
+    opacity: var(--km-flare-peak, 0.8);
+    transform: scale(1.02);
+  }
+  82%,
+  100% {
+    opacity: 0;
+    transform: scale(1.16);
+  }
+}
+
+/* ---------- the agent, unfolded ----------
+   Not a page. The camera has already flown into the face this grew out of and
+   the ring is still there behind it, so the whole job of this layer is to stay
+   out of the way of that: it is inset, so the canvas frames it on four sides;
+   it is glass rather than card, so the ring and the trunk read through it; and
+   the first thing in the left column is a *hole*, which is where the face
+   itself is standing.
+
+   Two near-opaque panels edge to edge was the version that read as a new page.
+   The layout is the same one — a third and two thirds — and only the light
+   through it changed.
+
+   `--km-well` is the band the agent's own cluster stands in; the camera reads
+   the hole inside it off the DOM, so this number is free to move without
+   anything else having to be told. */
+/* Two numbers, and both of them are pixels. That is the change.
+
+   `--km-gap` is every gap on this surface: the air between the sheet and the
+   frame on all four sides, the channel between the two columns, and the step
+   from the agent's own cluster down to the conversation under it. It used to be
+   three different `clamp()`s — twenty at the frame, sixteen between the columns,
+   ten inside the left one — which is three numbers claiming to be one idea, and
+   the eye reads the difference as the panels not lining up rather than as
+   deliberate hierarchy. One number, stated once, and smaller than any of them:
+   this is a surface unfolded over a live canvas, and the canvas is what the air
+   is for.
+
+   `--km-well` is the hole the face stands in, and it is the whole height of the
+   band — there is no brow over it any more. A brow used to hold the attention
+   badge below the canvas's own edge fade, which is a share of the map's height,
+   which meant the air over an agent's name grew with the window while the card
+   beside it kept a padding of seven pixels whatever the window did: the name
+   started level with the card's first chip on a laptop and forty-six pixels
+   below it at 2560. The fade is now shallow while the camera is inside an agent
+   — see `[data-level='1'] .km-svg` — so the badge is clear because of where the
+   fade ends, not because of how much canvas is left empty above a name.
+
+   What is left is one number for the face, and it is set against the block of
+   two lines standing next to it. Those two are centred on each other, so every
+   pixel the hole has over them is paid twice, half above the name and half below
+   the doors — which is why a hole half again taller than its own caption read as
+   a caption adrift in a band, and why the twelve per cent this used to be put
+   the name thirty-seven pixels down a column whose neighbour started at twelve.
+   Near enough to the same height, they read as one object. A share of the
+   surface was the wrong unit for it: a face in an identity block is chrome, and
+   chrome does not scale with the viewport — the map's own captions were pinned
+   to screen pixels for exactly the same reason. */
+.km-page {
+  --km-gap: 10px;
+  --km-well: 5.25rem;
+  /* Opaque, and that is the whole difference between this and the overlay it
+     replaced. `--km-glass` is 72% of the card colour, which reads as a panel
+     only because a live canvas was behind it — the ring showing through the
+     words is what the translucency was *for*. On a page there is nothing
+     behind it: 72% card over a background the same colour is a panel you
+     cannot see, and the blur underneath it is paid for and invisible.
+
+     So the page states the token opaque and turns the filter off below. The
+     panels keep every other thing that made them panels — the hairline, the
+     radius, the shadow — and stop pretending to be windows onto something. */
+  --km-glass: var(--km-slab);
+  display: grid;
+  min-height: 0;
+  min-width: 0;
+  height: 100%;
+  /* Background against card, which is the pair this product already uses for a
+     panel on a page. Muted was the first guess and it is wrong in the dark:
+     `--km-slab-2` and `--km-slab` are both near-black there, so the card and
+     the ground under it came out the same colour and the right-hand panel
+     disappeared entirely. */
+  background: var(--km-bg);
+  padding: var(--km-gap);
+  /* The window's own bar is frosted glass floating over this canvas, so the
+     canvas runs under it — but the panels must not. A chip row read through
+     the bar is a chip row you cannot click, so the sheet starts one bar plus
+     the usual gap down. Zero when there is no bar overhead: the playground
+     mounts this surface on its own, and the fixture must not pay for chrome
+     that is not there. */
+  padding-top: calc(var(--km-gap) + var(--drive-topbar-h, 0px));
+  /* The frame the phone composition is measured against, and it has to be *this*
+     element rather than the sheet inside it. `.km-sheet` is itself a container,
+     and a container query resolves against the nearest container **ancestor** —
+     so a rule targeting `.km-sheet` from inside a query on the sheet's own
+     inline size is asking about whatever box the page sits in, which is not the
+     question, and silently never matches.
+
+     Named, so the two queries in this file cannot be mistaken for one another:
+     the 52rem one further down is about the sheet's own left column and belongs
+     to the sheet; this one is about whether there is room for two columns at
+     all, and belongs to the frame around them. */
+  container: km-frame / inline-size;
+}
+/* See above: nothing to blur, so nothing pays for a blur. */
+.km-page .km-sheet-left > :not(.km-well),
+.km-page .km-card,
+.km-page .km-name {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* The sheet grows out of the well — out of the face the camera is flying into,
+   from the same corner, on the same curve. That is what makes one motion out of
+   two: the eye follows the face in and the panels arrive around it rather than
+   over it.
+
+   The panel moves and nothing else. Its opacity is deliberately not animated: a
+   surface that is mid-fade when the frames stop is a surface you cannot read,
+   and this one is the whole reason you clicked. */
+.km-page > * {
+  transform-origin: 17% 10%;
+  /* A beat behind the camera and landing with it: the flight is 520ms, so this
+     starts at 140 and is done at 520. The eye follows the face in and the
+     panels are already resolving around it by the time it arrives — one motion
+     rather than two things happening at once. */
+  animation: km-unfold 0.38s cubic-bezier(0.33, 0, 0.15, 1) 0.14s both;
+}
+@keyframes km-scrim {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes km-unfold {
+  from {
+    /* Barely. The panels are meant to resolve around the face, not swoop at
+       it — anything deeper and the surface reads as a third moving thing. */
+    transform: scale(0.955);
+  }
+}
+
+/* ---------- the unfolded surface's type ----------
+   Four steps and no near-duplicates. The panel had six sizes with three of them
+   inside a pixel of each other, which is not a hierarchy, it is noise — and it
+   is the same mistake the map's own scale was fixed for.
+
+   They are the map's own tiers, and the agent's name is `t2` because that is
+   the tier the map sets an agent's name in: the cluster over the well is the
+   caption the canvas would have drawn if the DOM were not drawing it.
+
+   `--km-hold` is deliberately *not* applied here: these are DOM, not scene, so
+   they were never being scaled by the camera in the first place. */
+.km-page .km-name {
+  /* One size, and it does not track the camera. It used to be scaled by
+     `--km-screen` — what the motion loop is worth per world unit — because the
+     hole was a share of the surface, so the face grew with the window and a name
+     set beside it in browser pixels would have shrunk against it. The hole is
+     fixed chrome now, which pinned the camera's scale for this framing at about
+     0.87, which drove this straight into the bottom of its own clamp: the
+     subject of the whole surface ended up set *smaller* than the section
+     heading in the panel next to it.
+     A step over the map's `t2`, because that is what this word is — the name of
+     the thing every other word here is about. */
+  font-size: 18px;
+  font-weight: 600;
+  /* Tight, because this is a caption over a face rather than a paragraph: the
+     leading was putting more air between the name and the face than the cluster
+     had anywhere else. */
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+/* The one thing the card is showing, named at the top of it — a job's title
+   when a job is open. `t3`: a step under the agent's own name, which is the
+   subject of the whole surface and is set three inches to the left of this. */
+.km-page .km-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.km-page .km-body {
+  font-size: 13px;
+}
+.km-page .km-quiet {
+  color: var(--km-dim);
+  font-size: 12px;
+}
+.km-page .km-eyebrow {
+  color: var(--km-dim);
+  font-size: 11px;
+  font-family: var(--km-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+/* The slug under the name over the well — the DOM's copy of `.km-agent-sub`,
+   which is the same line on the face this surface unfolded from. Mono here and
+   not out on the canvas: nothing is being cut to a budget in the DOM, and an
+   identifier you might type is worth setting in the family the rest of the
+   product sets identifiers in. Tight to the name above it: the pair is one
+   subject, and the block's own step is the distance to the doors under it. */
+.km-page .km-well-sub {
+  margin-top: 2px;
+  color: var(--km-dim);
+  font-size: 12px;
+  font-family: var(--km-mono);
+  line-height: 1.2;
+}
+.km-page .km-meta-text {
+  color: var(--km-dim);
+  font-size: 11px;
+  font-family: var(--km-mono);
+}
+
+/* A quiet block inside a panel — a step, a question, a progress bar. It borrows
+   `--km-tone` when it has one, so the question a job is stuck on is the one
+   block on the surface that is coloured. */
+.km-page .km-slab {
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--km-tone, var(--km-line)) 55%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--km-slab-2) 45%, transparent);
+}
+
+/* ---------- the sheet ----------
+   Two columns and no middle. Left is who this is and the conversation with
+   them; right is one card whose body is whatever the row across its top is set
+   to. It was a third and two thirds with the work stacked between the identity
+   and the thread, which put the conversation you came back to continue two
+   thirds of the way down its own column.
+
+   The left column is clamped rather than fractional. At 2560 a third of the
+   surface is eight hundred pixels of chat, and everything that gets wider with
+   the window ought to be the card: the app on it is somebody else's product with
+   its own idea of how much room it wants. The ceiling is what a conversation
+   stops needing; the floor is what it needs before it wraps to four words a
+   line — but the floor gives way first on a surface narrower than the floor
+   itself, because a column that insists on its minimum on a phone does not get
+   its minimum, it pushes the card off the screen entirely. This is a desktop
+   surface and a phone is not a shape it is designed for; it is a shape it must
+   not be *broken* in.
+
+   The left column's first row is `--km-well`: no background, no border,
+   nothing — the face the camera flew into is standing there on the canvas, and
+   the name beside it is that face's name rather than a caption on a copy. */
+.km-sheet {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  /* Equal halves. The conversation and the card are the two things an agent is
+     read through, and neither is the other's margin.
+
+     It used to be `clamp(min(22rem, 46%), 33%, 32rem)` for the conversation and
+     the rest for the card. That was right while the surface owned the whole
+     window — the card framed a running app and wanted the room. It stopped
+     being right when the roster took 22rem off the front: the card was then
+     paying twice, and at a 1200px window it measured 409px against 781 before.
+     See `specs/done/agents-three-columns` for the measured sweep. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--km-gap);
+  /* Queried below, so the cluster restacks on the width of the *surface* rather
+     than of the window. The surface is also narrow inside a fixture box and
+     inside a split viewport, and both of those are the same problem as a phone —
+     a device query would fix one of the three. */
+  container-type: inline-size;
+}
+/* An agent that has not been set up yet is one thing to do, so it is one
+   column: the agent's own cluster, and its setup taking everything under it.
+   The second column is withheld rather than emptied — a locked agent has no
+   conversation to hold and no other view to choose, so the two-column shape
+   would draw a pane of absences beside the only control on the surface. */
+.km-sheet[data-mode='setup'] {
+  grid-template-columns: minmax(0, 1fr);
+  /* `auto` rather than the well's own height: under the narrow container query
+     the cluster restacks into two rows, and a fixed band would crop the name
+     off the bottom of it. */
+  grid-template-rows: auto minmax(0, 1fr);
+}
+.km-sheet[data-mode='setup'] .km-sheet-left {
+  grid-template-rows: auto;
+  min-height: var(--km-well);
+  position: relative;
+}
+/* ---------- the agent's own cluster, dressed as an onboarding ----------
+   Not a second header. This surface already names the agent at the top of
+   itself, so an onboarding is that same cluster recomposed: the face over the
+   name instead of beside it, centred on its own measure, with the word for what
+   this is above and one line about how it ends below.
+
+   The camera follows the hole rather than a constant (see `zoom-well.ts`), so
+   moving the face to the middle moves the flight that lands in it — the agent
+   flies into the centre of its own setup, which is the one moment on this
+   surface where the face is the subject rather than a label. */
+.km-sheet[data-mode='setup'] .km-well {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 2px 16px;
+  text-align: left;
+}
+/* The row is `auto` here, so the face cannot take its height from a track that
+   no longer has one — it is sized outright. Every value in this block is spent
+   against the same budget: what is under this header is the setup itself, and a
+   hero that pushes the conversation down the screen has taken room from the
+   thing it is introducing. */
+.km-sheet[data-mode='setup'] .km-face {
+  height: 3.25rem;
+  width: 3.25rem;
+  flex: none;
+}
+/* Everything the header says stands beside the face rather than under it — the
+   word for what this is, the name, and the line about how it ends, stacked in
+   one column to the right. Under the face they were three centred rows and the
+   height of a small page; beside it they are the height of the face. */
+.km-sheet[data-mode='setup'] .km-ident {
+  justify-items: start;
+  gap: 2px;
+  margin-left: 0;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+/* Train and Settings go to the opposite corner from the way out, rather than
+   sitting under the name on a row of their own. Neither is what a reader came
+   here to do — the one thing to do is under this header — and as a centred row
+   they cost the setup a whole line of its height to say so. */
+.km-sheet[data-mode='setup'] .km-well-acts {
+  position: absolute;
+  top: 0;
+  right: 0;
+  gap: 7px;
+}
+/* The slug, and nothing else, is what this composition drops. It is the name's
+   technical twin — useful in a working header where it names the folder and the
+   URL you are looking at, and dead weight in an introduction, where it costs a
+   whole line to repeat the word above it in lower case. */
+.km-sheet[data-mode='setup'] .km-well-sub {
+  display: none;
+}
+/* The serif this product keeps for the things it makes a moment of. */
+.km-sheet[data-mode='setup'] .km-name {
+  font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  line-height: 1.2;
+}
+/* Out stays where out always is. Centred with the rest it would read as one of
+   the agent's own controls; pinned to the corner it is the same way back the
+   working surface has, in the same place. */
+/* ---------- the composer, on the header's measure ----------
+   The thread keeps the measure it reads on everywhere else in the product; the
+   compose bar does not need that much room and looked it, running the width of
+   a page under a header half as wide. Capped here rather than in the
+   conversation, because this is the one host that asks for it — every other
+   mount of that component is a working session and keeps its own width.
+
+   `display: contents` on the wrapper means this reaches the real footer without
+   putting a box around the conversation: a box would clip its background into a
+   slab floating on the card. */
+.km-setup-chat {
+  display: contents;
+}
+.km-setup-chat footer > div {
+  max-width: 40rem;
+}
+.km-setup-note {
+  max-width: 28rem;
+  color: var(--km-dim);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+.km-sheet-left,
+.km-card {
+  display: grid;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  border: 1px solid color-mix(in srgb, var(--km-line) 70%, transparent);
+  border-radius: 14px;
+  background: var(--km-glass);
+  /* The glass is what lets the ring read through the words instead of behind a
+     wall. It is the only blur on this layer — see `.km-page::before`. */
+  backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow: 0 18px 44px -30px oklch(0 0 0 / 55%);
+}
+/* Identity, and then the conversation with everything left over. Two rows: the
+   band the agent's own cluster stands in, and the thread starting immediately
+   under it. */
+.km-sheet-left {
+  grid-template-rows: var(--km-well) minmax(0, 1fr);
+  /* The well has to be a hole all the way through, so the panel's own surface
+     starts under it. */
+  border: 0;
+  background: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  /* The same gap as everywhere else. It used to be half of it, on the theory
+     that the conversation belongs to the agent above it and should sit closer to
+     it than the columns sit to each other — which is true, and was still read as
+     the panel edges not lining up. The relationship is already stated by the two
+     being one column. */
+  gap: var(--km-gap);
+}
+.km-sheet-left > :not(.km-well) {
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  border: 1px solid color-mix(in srgb, var(--km-line) 70%, transparent);
+  border-radius: 14px;
+  background: var(--km-glass);
+  backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow: 0 18px 44px -30px oklch(0 0 0 / 55%);
+}
+
+/* ---------- the agent's own cluster ----------
+   The way out, the face, and then the name over the three doors — one row, read
+   left to right, standing on the canvas with nothing behind it. It used to be a
+   column, because the apps this agent carries were drawn out here and the band
+   had to be tall and narrow to stay out of their way. They are not drawn from
+   inside any more, so the block turns on its side into the width that frees, and
+   the height goes to the conversation below.
+
+   It is one object and it is spaced as one: the way out is tucked against the
+   face at a hair's distance, the block of words is a step further off, and the
+   two lines inside it are tighter to each other than either is to the face.
+
+   Only the ink takes the pointer. Everything between is still canvas, and
+   clicking canvas is what flies you back out. */
+.km-well {
+  display: flex;
+  /* The face is the tallest thing in the row and everything else is centred on
+     it, which is the alignment the eye reads as one object. */
+  align-items: center;
+  gap: 5px;
+  /* Flush with the top of its column, the way the card next door is flush with
+     the top of its own — the surface's gap is already above both of them, and a
+     second one here was the whole of the extra air over the agent's name. */
+  min-width: 0;
+  pointer-events: none;
+}
+.km-well > * {
+  pointer-events: auto;
+}
+/* Name over doors. `start` rather than stretch, so the block is as wide as its
+   widest line and a short name does not claim a strip of canvas it is not
+   using. */
+.km-ident {
+  display: grid;
+  flex: 1 1 auto;
+  /* Half the step from the face to this block, and a step further than the way
+     out keeps from it: two lines of one thing, one gap from another thing, and
+     the tightest gap of the three belongs to the pair that is one control. */
+  gap: 7px;
+  /* The same step the way out keeps on the other side. The hole is wider than
+     the plate drawn in it — the camera leaves a fit margin — so the *visible*
+     gap on each side is this number plus that slack, and stating a different
+     number here made the cluster sit thirteen pixels off its own back button and
+     twenty-one off its name. Equal here is equal on screen. */
+  margin-left: 5px;
+  min-width: 0;
+  justify-items: start;
+  pointer-events: none;
+}
+.km-ident > * {
+  pointer-events: auto;
+}
+.km-well-cap {
+  /* Optically centred rather than mathematically. A line of type carries
+     leading above its cap that a row of buttons does not carry below its
+     border, so centring the two *boxes* against the face leaves the pair
+     sitting low — visibly, at the size this is set at on a wide screen. Pulling
+     the name up by its own leading moves the whole block half that far and
+     leaves the gap inside it alone. It is stated in the name's own em because
+     the name is the only thing here that grows with the window. */
+  margin-top: -0.18em;
+  max-width: 100%;
+  min-width: 0;
+  /* The DOM's version of the `paint-order: stroke fill` the map paints its own
+     captions with. There is no panel behind it — a trunk passing under a word
+     has to lose, and only the word does. Doubling each radius is how a
+     `text-shadow` gets opaque enough to read as a halo rather than a glow. */
+  text-shadow:
+    0 0 5px var(--km-bg),
+    0 0 5px var(--km-bg),
+    0 0 5px var(--km-bg),
+    0 0 11px var(--km-bg),
+    0 0 11px var(--km-bg),
+    0 0 11px var(--km-bg);
+}
+/* The hole, and the only thing on this surface the camera is told about. Square,
+   and it takes the whole height of the band: the band *is* the hole now, and the
+   camera measures this element rather than being told a number, so its size and
+   its place are free to move without anything else having to be told.
+
+   It never takes the pointer itself: what is drawn here is the canvas. */
+/* As tall as the words beside it, not as tall as the row it stands in.
+
+   It used to be `height: 100%` — the full `--km-well` — because it was a *hole*
+   and the hole was the row: the camera flew a face into the whole band. Drawn
+   rather than flown, that reads as a portrait overhanging the block it belongs
+   to; the name, the slug and the three doors stack to 68px and the face stood
+   84. Matching them is what makes the two read as one object.
+
+   The row keeps its own height. Shrinking `--km-well` would pull the name up
+   with it and break the one alignment this surface actually promises — that the
+   agent's name and the card's first selector start level (see the
+   column-start check in `playground.spec.ts`). The face is centred in the band
+   instead, which is what `.km-well`'s `align-items: center` already does. */
+.km-face {
+  flex: none;
+  height: 4.25rem;
+  aspect-ratio: 1;
+  pointer-events: none;
+}
+.km-well-acts {
+  display: flex;
+  flex-wrap: wrap;
+  /* Far enough apart to be three links. At six against fourteen of internal
+     padding they fused into one segmented control, which says "pick one". */
+  gap: 9px;
+}
+/* These three stand on bare canvas, and the canvas is moving: the face flies in
+   from wherever this agent was standing on the ring, and the straight line it
+   takes to the hole passes through exactly this row. At 55% of a slab the plate
+   read through them on the way past — a hard-edged tile sliding under three
+   buttons, which is what "the doors and the face overlap" actually looked like.
+   The way out has always had the full glass treatment; these are the same kind
+   of thing standing in the same weather, so they get it too. It is the same rule
+   the name is already painted under: a trunk passing beneath a word has to lose,
+   and only the word does. */
+.km-well-acts .km-act {
+  background: var(--km-glass);
+  backdrop-filter: blur(14px) saturate(1.4);
+}
+
+/* ---------- and the cluster restacks when its column runs out ----------
+   Beside the face is where the doors belong, and they stay there for as long as
+   there is room. On a phone there is not: the left column resolves to about a
+   hundred and seventy pixels, of which the way out, the hole and the gaps have
+   already spent a hundred and twenty-five, and the doors want more than twice
+   what is left. They wrapped to a line each, kept their width anyway, and ran
+   out under the card next door — with the agent's name truncated to two
+   characters above them.
+
+   So below the width where it fits, the block goes back under the face, which is
+   where it lived before the apps stopped being drawn out here and freed the
+   width to turn it on its side. Beside the face is better and it stays the
+   default; it is simply not available at a hundred and seventy pixels, and the
+   name is the subject of the whole surface — "Data ." is worse than a line
+   break.
+
+   The block moves whole. Its name and its doors keep their own gap and their own
+   left edge, because they are one thing and only their position relative to the
+   face is in question here.
+
+   The face's row stays exactly `--km-well` tall. It is a hole the camera flies a
+   real face into and measures, not a picture that may reflow; only the row
+   *under* it is new, which is why `.km-sheet-left` stops pinning its first row to
+   that variable and lets the band say how tall it now is.
+
+   ---- the number, and the rule that sets it ----
+   **Beside the face applies only while the whole door row fits on one line in
+   every locale we ship.** Wrapping is not an escape: the band is one fixed row
+   tall, and a door that wraps inside it overflows the column sideways — which is
+   exactly the bug, not a softer version of it.
+
+   So the threshold is measured, not chosen, and it is tied to the door *count*:
+   whoever adds or removes one re-measures this and moves it. The way out, the
+   hole and the gaps spend 125px of the column before the doors start, and three
+   doors measure 244px in English and **280px in es-419** — Spanish is the one
+   that decides. 125 + 280 = 405px of column.
+
+   What turns that into a container width is how the column is sized, and **that
+   is the half that changed**. Under the old `clamp(min(22rem,46%), 33%, 32rem)`
+   the column was the 33% middle branch at these widths, so 405px of column
+   wanted 1227px of container, and 80rem was the round step above that crossing.
+
+   The columns are equal halves now. A column is `(container − 10px gap) / 2`,
+   so the same measured 405px wants **820px of container** — and the crossing
+   moves from 76.7rem to 51.25rem. **52rem** is the step above it.
+
+   Check the margin in pixels of *column*, not in rem of container, because the
+   conversion changed and a round rem step no longer buys what it used to: under
+   the 33% clamp one rem of container was ~5px of column, and under an even split
+   it is 8px.
+
+   Where that lands, stated exactly, because it is closer than it looks. The
+   sheet is the window minus the roster minus `.km-page`'s own `--km-gap` on both
+   sides — so a 1200px window with the roster out is a **828px** sheet, 51.75rem,
+   and a 409px column. That clears the measured 405 by four pixels and is
+   therefore *inside* the margin this threshold exists to provide, not outside
+   it: restacking there is the query doing its job, not firing early.
+
+   Every width the product reaches by default is comfortably clear. At the
+   narrowest window where the roster stands on its own — 1280, the fold band's
+   edge — the sheet is 908px, 56.75rem, and the column is 449px. The one state
+   that stacks is a reader who has overruled the fold inside the band, which is
+   a reader who has asked for a cramped layout and got one.
+
+   Carrying 80rem forward was not a smaller mistake than picking a number at
+   random: with a roster taking 22rem off the front, the sheet is under 80rem at
+   every desktop width below about 1650, so the header restacked across the
+   whole range anyone actually works at while it still had two hundred pixels to
+   spare. An unprimed critique of that state called the
+   stacked cluster "reflowed, not composed" with no context at all.
+
+   The measured input — 405px of column, 280px of it three doors in es-419 — is
+   unchanged, and the rule that sets it is unchanged: whoever adds or removes a
+   door re-measures and moves this. Only the column-to-container conversion is
+   new. Verified the same way the old number was, by sweeping the container in
+   es-419 and watching the band go from one line to two. */
+@container (max-width: 52rem) {
+  /* The setup cluster is already a centred single-column grid and stays one:
+     this query exists to restack the WORKING header, whose face and name sit
+     side by side until they run out of room. */
+  /* The setup cluster is a face with a column beside it at every width — it is
+     already as short as this query is trying to make the working header. */
+  .km-sheet[data-mode='setup'] .km-well {
+    display: flex;
+  }
+  .km-sheet[data-mode='setup'] .km-ident {
+    grid-area: auto;
+  }
+  /* The plate behind the name is for a name sitting ON the canvas, which is
+     where the working header puts it under this query. This one has the face
+     beside it and a line under it, and a pill around the middle row of the
+     three reads as a chip rather than as a heading. */
+  .km-sheet[data-mode='setup'] .km-name {
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    width: auto;
+    padding: 0;
+  }
+  .km-well {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: var(--km-well) auto;
+    align-items: center;
+    column-gap: 5px;
+    row-gap: 7px;
+  }
+  .km-face {
+    /* A square hole in a column that would otherwise stretch it into a slot. */
+    justify-self: start;
+  }
+  .km-ident {
+    grid-area: 2 / 1 / 3 / -1;
+    /* The offset that held it off the face. Under the face there is nothing to
+       hold it off, and five pixels of indent on the only block in the row reads
+       as a mistake rather than as spacing. */
+    margin-left: 0;
+  }
+  /* Beside the face, the name sits clear of the trunk and a halo is enough to
+     win the few pixels the wire clips. Under the face it sits *on* the trunk —
+     the wire runs from the hole down towards the core and passes straight
+     through the word — and a halo cannot help there, because it radiates from
+     the ink and the wire crosses the counters between the strokes. An unprimed
+     reader called it a leftover path rather than a connection, which is the
+     whole problem: it reads as a rendering fault.
+
+     So the name takes the plate the doors under it already wear, and for the
+     same stated reason. The two of them become one family of glass standing on
+     moving canvas instead of a word the canvas draws over.
+
+     The plate starts where the doors' plates start, not where their labels do.
+     Pulling it left by its own padding would align the *words* down the column
+     and leave three glass edges on two different verticals, which is the louder
+     of the two misalignments — the plate is the thing you see. */
+  .km-name {
+    width: fit-content;
+    max-width: 100%;
+    padding: 1px 7px;
+    border-radius: 8px;
+    background: var(--km-glass);
+    backdrop-filter: blur(14px) saturate(1.4);
+  }
+  .km-sheet-left {
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+}
+
+/* Out, tucked against the plate. Quiet until it is pointed at, because the face
+   is the subject and this is the frame around it — but always drawn, and always
+   the same distance from the face at every window size, because it is the row's
+   first item rather than something placed in the column.
+
+   It leads the row rather than following it: the way out is the one control here
+   that undoes the thing you just did, and it belongs on the edge you came in
+   from, not buried past the name. */
+
+.km-chat {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+/* The thread fades at both ends here, and only here.
+
+   Everywhere else the conversation runs under a real header — a bar with its
+   own hairline and a backdrop blur — and a hard top edge is the correct one,
+   because the bar is what the text disappears behind. This panel's header is a
+   bare word set in the eyebrow's ink with nothing under it, so the same hard
+   edge slices a line of somebody's message in half two pixels below the letters
+   spelling CHAT and reads as a clipping fault rather than as a scroller.
+
+   Stated on the panel rather than in the conversation for exactly that reason:
+   the fade is a fact about this host's chrome, not about threads. Both shapes
+   the column can mount answer to `role="log"` — the live timeline and the empty
+   chat's own scroller — and the bottom stop stays where each of them already
+   put it, 1rem clear of the compose bar. */
+.km-chat [role='log'] {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 0.75rem,
+    black calc(100% - 1rem),
+    transparent
+  );
+}
+/* The one control over the conversation, at the end of its header's line.
+
+   No plate. The three doors stand a few pixels above this and a fourth piece of
+   glass here would join that row by accident — so it is the header's own quiet
+   ink, in the eyebrow's family and size, and it takes its turn at being the
+   loudest thing on the line only when it is pointed at.
+
+   The size is not a taste decision: this row is the `auto` track of the grid
+   above, and the conversation has the other one. A line taller than the eyebrow
+   beside it moves the thread's top edge down. Same font-size, same inherited
+   line-height, and a glyph that fits inside both. */
+.km-page .km-chat-act {
+  display: inline-flex;
+  /* Baseline, not centre, and the glyph opts out below. A flex box hands its
+     parent the baseline of its first baseline-aligned item; with everything
+     centred that item is the icon, whose baseline is its bottom edge, so the
+     label sat 2px above the eyebrow it shares a line with. Letting only the
+     text participate makes the row's `items-baseline` mean what it says. */
+  align-items: baseline;
+  gap: 5px;
+  min-width: 0;
+  color: var(--km-dim);
+  font-size: 11px;
+  font-family: var(--km-mono);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+/* The label gives way first: a narrow column ellipsises the words rather than
+   pushing the panel wider than itself, and the glyph stays whole so what is
+   left still reads as a control. */
+.km-page .km-chat-act > span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.km-page .km-chat-act > svg {
+  flex: none;
+  /* Out of the baseline calculation (see above) and optically centred on the
+     label instead. */
+  align-self: center;
+}
+.km-page .km-chat-act:hover:not(:disabled) {
+  color: var(--km-fg);
+}
+.km-page .km-chat-act:disabled {
+  /* Faded enough to read as unavailable, not so far that it stops reading as
+     ink: this is already the quietest text on the panel, so the multiplier
+     compounds. At 0.45 it measured ~2:1 against the card. */
+  opacity: 0.62;
+  cursor: default;
+}
+/* The row of selectors, and under it whatever they are set to. */
+.km-card {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+/* Setup has no selector row — the setup IS the card — so the stage must take
+   the tracks the header would have shared. Without this the stage lands in the
+   `auto` row and an iframe inside it collapses to the element's 150px default:
+   the geometry the frame fixtures measure. A locked card stays one track too:
+   the setup frame re-cuts its own header and body inside that single child, so
+   the card is told about one thing and what it does with its height is the
+   frame's business. */
+.km-card[data-stage='setup'] {
+  grid-template-rows: minmax(0, 1fr);
+}
+/* The app gets the whole card and no margin: it is a product surface in its own
+   right, and a reading column around it would be this surface's opinion about
+   somebody else's layout. */
+.km-stage {
+  display: grid;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+}
+/* The frame owns its own box — the iframe and the placeholder beneath it are
+   laid out inside `[data-app-frame]` — so the stage sizes that box and stops
+   there.
+   Named rather than `> *` because it is the one child of a stage whose height
+   cannot come from stretching: an iframe is replaced content and collapses to
+   its 150px default the moment nothing states otherwise, which is the geometry
+   the frame fixtures measure. */
+.km-stage > [data-app-frame] {
+  width: 100%;
+  height: 100%;
+}
+/* Everything that is not a product surface is reading: a scroller with a column
+   in it. It used to carry a second row under the scroller for a door — the way
+   out of the jobs list and the way out of the connections list — and both of
+   those lists are gone, so the row is one. */
+.km-view {
+  display: grid;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+/* ---------- the row across the top of the card ----------
+   One selector per app, then the fixed folder and workspace-desktop doors.
+   Its left edge is the card's left edge and the reading column below it starts
+   on the same line: centring that column put its content on an axis nothing
+   else shared, which is what made a short list read as floating in a void
+   rather than sitting at the top of a page. */
+.km-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-bottom: 1px solid color-mix(in srgb, var(--km-line) 60%, transparent);
+  min-width: 0;
+}
+/* The apps scroll sideways rather than wrapping: an agent that reaches nine of
+   them would otherwise push the app itself down by a second row of chrome, and
+   what is under this row is the whole point of the card. The scrollbar is left
+   off because the strip fades at its own trailing edge, which is the same thing
+   the map does at the edge of the canvas and says the same thing.
+
+   `min-width: 0` on the strip and not on the buttons: the strip has to be
+   allowed to be narrower than its content, or the row grows to fit every app
+   and pushes the far end off the card. */
+.km-picks {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.km-picks::-webkit-scrollbar {
+  display: none;
+}
+/* The fade is fixed to the strip's own right edge, so a strip whose apps all fit
+   was still drawing its last name half gone — a "there is more" over an agent
+   that reaches five apps and shows five. The padding is the fade's own width:
+   content that fits ends before the fade starts, and content that scrolls ends
+   there too once you reach the end of it. Only what is genuinely under the edge
+   is dimmed. */
+.km-picks {
+  padding-right: 24px;
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent);
+}
+/* An empty strip must not claim the fade, the gap, or the eighteen pixels the
+   mask reserves — an agent that reaches no apps has nothing on this side. */
+.km-picks:empty {
+  display: none;
+}
+.km-pick {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  max-width: 14rem;
+  padding: 4px 10px;
+  border-radius: 7px;
+  color: var(--km-dim);
+  font-size: 12.5px;
+  transition:
+    background 0.15s,
+    color 0.15s;
+  cursor: pointer;
+}
+.km-pick:hover {
+  background: color-mix(in srgb, var(--km-slab-2) 60%, transparent);
+  color: var(--km-fg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .km-pick {
+    transition: none;
+  }
+}
+/* The current one is the only one that is not quiet. It is stated with a slab
+   and full-strength ink rather than with a rule underneath: this row sits on the
+   top edge of a card that already has a border under it, and two horizontal
+   lines a pixel apart read as a rendering fault.
+
+   And with nothing that changes the type's own metrics. Weight was the third
+   signal here and the only one that resets the word's width: picking an app made
+   its name grow, which nudged every chip after it sideways and read as the row
+   twitching rather than as a selection. A name is the same name whether or not
+   you are looking at it. */
+.km-pick[aria-current='true'] {
+  background: color-mix(in srgb, var(--km-slab-2) 92%, transparent);
+  color: var(--km-fg);
+}
+
+/* ---------- the phone: one pane at a time ----------
+   The surface above is two columns and it stays two columns for as long as two
+   columns fit. Under 30rem of *container* they do not: the conversation lands at
+   about 170px and the card beside it at 190px, which is four words a line next
+   to something too narrow to be an app. The old answer here was to shrink the
+   two fixed selectors so their Spanish labels survived in that 190px card — a
+   fix for a symptom of a composition that should not have been drawn.
+
+   So the composition changes instead. One column, and the reader chooses which
+   of the two panes is in it. That is not the same as hiding one: both are named
+   on a switch that is always drawn, and the identity block above it — the face,
+   the name, and the three doors that have no other entrance in the product —
+   is lifted out of the left column entirely and stands over *both* panes.
+
+   `display: contents` is what lifts it. `.km-sheet-left` stops being a box and
+   its two children become children of the sheet, so the well and the thread can
+   be ordered independently of the card. Everything that dressed them keeps
+   working: `.km-sheet-left > :not(.km-well)` is a child selector and a box that
+   draws nothing is still a parent.
+
+   Ordered rather than reordered in the markup, because the markup is the desktop
+   composition and the desktop composition is the one that is read most. */
+@container km-frame (max-width: 30rem) {
+  .km-sheet:not([data-mode='setup']) {
+    grid-template-columns: minmax(0, 1fr);
+    /* The well and the switch take what they need; whichever pane is showing
+       takes the rest. Two `auto` rows rather than one, because the well restacks
+       into two lines of its own under the 52rem query above and a fixed band
+       would crop the name off the bottom of it. */
+    grid-template-rows: auto auto minmax(0, 1fr);
+  }
+  .km-sheet:not([data-mode='setup']) .km-sheet-left {
+    display: contents;
+  }
+  .km-sheet:not([data-mode='setup']) .km-well {
+    order: 1;
+  }
+  /* `.km-sheet` in front of it on purpose: the base rule that keeps this out of
+     the layout is declared further down the file, so an equally specific
+     override here would lose the tie to source order. */
+  .km-sheet .km-pane-switch {
+    order: 2;
+    display: flex;
+  }
+  .km-sheet:not([data-mode='setup']) .km-chat,
+  .km-sheet:not([data-mode='setup']) .km-card {
+    order: 3;
+  }
+  /* The pane that is not current is out of the layout rather than off to the
+     side. `display: none` and not `visibility` or a transform, because a live
+     app frame parked off-screen still paints and still lays out — and the one
+     that *is* current has to be able to take the whole remaining row. */
+  .km-sheet[data-pane='chat'] .km-card,
+  .km-sheet[data-pane='work'] .km-chat {
+    display: none;
+  }
+
+  /* ---- the header becomes one row ----
+     This is the change the whole composition was for. Under the 52rem query the
+     identity block restacks — face on its own line, then the name, then a row of
+     three doors — which is right on a narrow *column* beside a canvas and wrong
+     as the top of a phone screen. Measured before this rule: 159px of header,
+     46px of switch and a 32px band inside the conversation, so 41% of the window
+     was chrome and the conversation itself got about sixty pixels. A screen whose
+     selected tab says "Chat" and shows no chat.
+
+     So the phone gets the header every phone app has: the way out, the face, the
+     name, and everything else behind one control at the end. */
+  .km-sheet:not([data-mode='setup']) .km-well {
+    grid-template-columns: auto auto minmax(0, 1fr) auto;
+    grid-template-rows: auto;
+    align-items: center;
+    column-gap: 10px;
+    row-gap: 0;
+  }
+  .km-sheet:not([data-mode='setup']) .km-face {
+    /* A portrait, not a hero. Four and a quarter rem is the size a face flown
+       into a hole on a canvas wants to be; at the top of a phone it is a third
+       of the header. */
+    height: 2.75rem;
+    grid-area: auto;
+    justify-self: start;
+  }
+  .km-sheet:not([data-mode='setup']) .km-ident {
+    grid-area: auto;
+    gap: 0;
+  }
+  /* The three doors move into the menu at the end of the row — see
+     `AgentOverflow`. Drawn and hidden rather than not rendered, because whether
+     there is room for a row of doors is a question about the container and only
+     a container query can answer it. */
+  .km-sheet:not([data-mode='setup']) .km-well-acts {
+    display: none;
+  }
+  .km-sheet:not([data-mode='setup']) .km-overflow {
+    display: inline-flex;
+  }
+  /* The conversation's own heading is the one band that can go entirely: the
+     switch directly above it already says "Chat", and a panel captioned with the
+     word the tab above it just used is the same fact twice. What the row is
+     actually carrying — the control that archives the thread — stays, alone and
+     against the right edge. */
+  .km-sheet:not([data-mode='setup']) .km-chat > div:first-child {
+    padding-top: 6px;
+    padding-bottom: 0;
+  }
+  .km-sheet:not([data-mode='setup']) .km-chat > div:first-child > h3 {
+    display: none;
+  }
+  /* With the heading gone the row has one child, and `justify-between` puts a
+     lone child at the start — so the control that had been sitting against the
+     right edge slid to the left one and read as a stray label. */
+  .km-sheet:not([data-mode='setup']) .km-chat > div:first-child {
+    justify-content: flex-end;
+    /* Baseline alignment is what put the icon nine pixels below its own label:
+       an inline glyph handed the row its own baseline, and with the heading gone
+       there was nothing left to align it against. Centres, because the row is now
+       one control and not a caption with something beside it. */
+    align-items: center;
+  }
+
+  /* ---- and the controls become controls ----
+     Every number below is a pointer's number that a finger cannot use, and the
+     three doors are the ones that matter most: Train, Settings and Jobs have no
+     other entrance anywhere in the product, so on a phone they are not merely
+     small, they are the only way in and they are 28 pixels tall.
+
+     Sized here rather than on the base rules because the base rules are the
+     desktop surface's and are correct there — a 44px door in a row beside a
+     face measured in `--km-well` would push the identity block apart. The room
+     to grow into is exactly the room this composition just freed. */
+  .km-well-acts .km-act {
+    min-height: 40px;
+    padding-inline: 12px;
+  }
+  .km-pick {
+    min-height: 36px;
+  }
+  /* The one control that may not grow: `.km-chat-act` sits in the `auto` track
+     of the thread's own grid, and a taller line there moves the conversation's
+     top edge down — which is the reason the base rule states 11px and says so.
+     What it gets instead is room around it, which the track absorbs. */
+  .km-page .km-chat-act {
+    min-height: 32px;
+    padding-inline: 8px;
+    align-items: center;
+  }
+}
+/* ---------- the switch between the two panes ----------
+   Only ever drawn on the phone composition (`display: none` here, `flex` inside
+   the container query above), because at every other width both panes are on
+   screen and a control for choosing between them would be choosing nothing.
+
+   A segment names its own content rather than a category: the second one says
+   "Invoices" or "Files", never "Work". A reader who has to guess what is behind
+   a tab is reading a menu, and the whole claim of this composition is that
+   nothing is hidden — a claim a generic label quietly withdraws. */
+.km-pane-switch {
+  display: none;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+  padding: 3px;
+  border-radius: 999px;
+  /* A *recessed* track, stated in alpha of the foreground rather than as a slab
+     colour. This is the one number an unprimed reviewer measured and found
+     identical to the pill on top of it — `--km-glass` over a page painted in
+     `--km-bg` composites to within four values of `--km-slab`, so the control
+     was distinguishing its two states with a hairline and the weight of the
+     label. Alpha of the foreground is the only way one number reads as recessed
+     in both themes; a fixed tone is a near-white in the light one and vanishes. */
+  background: color-mix(in srgb, var(--km-fg) 7%, transparent);
+  box-shadow: inset 0 1px 2px color-mix(in srgb, var(--km-fg) 8%, transparent);
+}
+.km-pane-seg {
+  display: inline-flex;
+  flex: 1 1 0;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  /* A finger's row. The segment is the one control on this surface a reader
+     touches on the way to everything else, so it is the one that may not be
+     sized for a pointer. */
+  min-height: 38px;
+  padding-inline: 10px;
+  border-radius: 999px;
+  color: var(--km-dim);
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.2;
+  transition:
+    background-color 140ms ease,
+    color 140ms ease;
+}
+.km-pane-seg > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* A real step, not a hint. At 92% of the slab against the track behind it the
+   two were within a couple of points of each other and the only thing saying
+   which side was live was the label going grey — which is not enough for the
+   primary view control on the screen. */
+.km-pane-seg[aria-selected='true'] {
+  /* Raised out of the track: the card colour, a hairline, and a real shadow. The
+     three together are what a segmented control uses to say which half is live
+     from across a room, and any one of them alone is what this had. */
+  background: var(--km-slab);
+  color: var(--km-fg);
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--km-fg) 16%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--km-fg) 8%, transparent);
+}
+.km-pane-seg:focus-visible {
+  outline: 2px solid var(--km-ring, currentColor);
+  outline-offset: -2px;
+}
+
+/* The control the three doors move behind on a phone. Hidden at every width
+   that has room to draw them as a row — see the frame query above. */
+.km-overflow {
+  display: none;
+  position: relative;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  color: var(--km-dim);
+  transition:
+    background-color 140ms ease,
+    color 140ms ease;
+}
+.km-overflow:hover,
+.km-overflow[data-state='open'] {
+  background: color-mix(in srgb, var(--km-slab-2) 92%, transparent);
+  color: var(--km-fg);
+}
+.km-overflow:focus-visible {
+  outline: 2px solid var(--km-ring, currentColor);
+  outline-offset: -2px;
+}
+/* The unread mark rides the corner of the trigger rather than sitting in the
+   flow, so a door with something waiting behind it still says so once the row it
+   used to stand in is gone. */
+.km-overflow > [data-read-dot] {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+}
+
+/* One shell holding a chip and its door. They share a slab so the pair reads as
+   a single object, and the door only exists on the current chip — an app you are
+   not looking at has nothing to open on its own yet. */
+/* One shell per selector in the row, and every selector has one — the current
+   chip is not a different box from the ones beside it, it is the same box with
+   ink in it. It used to borrow `.km-chip`, which a list of skills further down
+   this file already owned: a name collision, and it cost the app selector ten
+   pixels of height that nothing on the row could explain.
+
+   It is also what the reader drags. A `draggable` button is dragged by a test
+   dispatching the events and by almost nothing else — Chrome and Safari let a
+   form control swallow the gesture — so the shell takes it and the button inside
+   goes on being a button. */
+.km-pick-slot {
+  /* The trigger's width, stated once and inherited by both the trigger itself
+     and the empty gap kept for it beside an app that is not the one being
+     shown — see the reserve below. Declared here rather than on the trigger
+     because a custom property only travels downwards, and the gap is drawn on
+     this element rather than inside that one. */
+  --km-chip-menu-w: 26px;
+  display: inline-flex;
+  flex: none;
+  align-items: stretch;
+  border-radius: 7px;
+  /* Safari drags an element only when it is told to, and the two properties are
+     spelled differently. Selecting the label instead of moving it is the failure
+     this prevents. */
+  -webkit-user-drag: element;
+  user-select: none;
+}
+.km-pick-slot[draggable='true'] {
+  cursor: grab;
+}
+.km-pick-slot[draggable='true']:active {
+  cursor: grabbing;
+}
+.km-pick-slot[data-current='true'] {
+  background: color-mix(in srgb, var(--km-slab-2) 92%, transparent);
+}
+/* The slab is the shell's now, so the chip inside never paints its own — two
+   backgrounds a pixel apart is what made the current one look inset. */
+.km-pick-slot[data-current='true'] .km-pick {
+  background: none;
+}
+/* ---- the row does not move when you pick something in it ----
+   An app selector reserves its menu's room whether or not it is the app being
+   shown. It used to give the room up on selection — the trigger appeared, the
+   chip's own right padding dropped from ten to four, and every chip after it
+   slid 21px sideways. That is the same fault this row was fixed for when a
+   bolder label reset a word's width, and the same one the drag placeholder
+   avoids by dimming a held chip rather than removing it: what is picked may
+   change how the row *reads* and never where it *is*.
+
+   One number, and both halves read it — the trigger is sized by it and the gap
+   left for the trigger is the same width — so the reserve cannot drift away
+   from the thing it is reserving. */
+.km-pick-slot[data-menu-slot='true'] .km-pick {
+  padding-right: 4px;
+}
+.km-pick-slot[data-menu-slot='true']:not(:has(.km-chip-menu))::after {
+  content: '';
+  flex: none;
+  width: var(--km-chip-menu-w);
+}
+/* And the pointer lights the whole reserved shell rather than the chip inside
+   it. The slab is what the reader aims at, so a slab that stopped short of the
+   gap would advertise the reserve as a seam. The chip gives its own up here for
+   the same reason the current one does. */
+.km-pick-slot[data-menu-slot='true']:hover {
+  background: color-mix(in srgb, var(--km-slab-2) 60%, transparent);
+}
+.km-pick-slot[data-menu-slot='true']:hover .km-pick {
+  background: none;
+}
+/* What is in the air. Dimmed rather than hidden: a chip that vanishes mid-drag
+   takes the row's width with it and everything else jumps, which leaves the
+   reader aiming at a moving target for the rest of the gesture. */
+.km-pick-slot[data-held='true'] {
+  opacity: 0.4;
+}
+/* Where it would land — a hairline on the leading edge rather than an outline
+   around the whole thing, because the held chip takes this one's place and
+   pushes it along rather than dropping onto it. */
+.km-pick-slot[draggable='true']:not([data-held='true']):hover {
+  box-shadow: inset 2px 0 0 -1px var(--km-dim);
+}
+/* Divided by a hairline rather than a gap: the two do different things and a
+   click that lands between them has to belong to one of them, not to neither. */
+.km-chip-menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--km-chip-menu-w);
+  border-left: 1px solid color-mix(in srgb, var(--km-line) 55%, transparent);
+  border-radius: 0 7px 7px 0;
+  color: var(--km-dim);
+  transition:
+    color 0.15s,
+    background 0.15s;
+  cursor: pointer;
+}
+.km-chip-menu:hover,
+.km-chip-menu[data-state='open'] {
+  background: color-mix(in srgb, var(--km-slab-2) 70%, transparent);
+  color: var(--km-fg);
+}
+
+/* The destination's own glyph, dimmed to the same weight as the word beside it
+   so the chip reads as one thing. A read that has not landed goes quieter
+   still, which is the only claim this mark is allowed to make about it. */
+.km-pick-mark {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  color: currentColor;
+  opacity: 0.75;
+}
+.km-pick-mark[data-phase='pending'],
+.km-pick-mark[data-phase='failed'] {
+  opacity: 0.35;
+}
+.km-pick[aria-current='true'] .km-pick-mark {
+  opacity: 1;
+}
+
+.km-act {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border: 1px solid color-mix(in srgb, var(--km-line) 80%, transparent);
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--km-slab-2) 55%, transparent);
+  color: var(--km-fg);
+  font-size: 12px;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+  cursor: pointer;
+}
+.km-act:hover {
+  border-color: color-mix(in srgb, var(--km-fg) 26%, transparent);
+  background: color-mix(in srgb, var(--km-slab-2) 85%, transparent);
+}
+.km-act:active {
+  transform: translateY(0.5px);
+}
+
+.km-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  text-align: left;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+  cursor: pointer;
+}
+.km-row:hover {
+  background: color-mix(in srgb, var(--km-slab-2) 70%, transparent);
+}
+.km-row:active {
+  background: color-mix(in srgb, var(--km-slab-2) 100%, transparent);
+}
+
+.km-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px;
+  border: 1px solid color-mix(in srgb, var(--km-line) 75%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--km-slab-2) 45%, transparent);
+  font-size: 12px;
+}
+.km-badge-pill {
+  padding: 1px 6px;
+  border: 1px solid color-mix(in srgb, var(--km-line) 75%, transparent);
+  border-radius: 4px;
+  color: var(--km-dim);
+  font-size: 10px;
+  font-family: var(--km-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  flex: none;
+}
+
+/* Only the sheet's own chrome. Product panels render inside `.km-page` too,
+   and they carry their own focus rings — a blanket descendant rule here also
+   lands on the session composer's contenteditable, which matches
+   `:focus-visible` on every mouse click, not just keyboard focus. */
+.km-page :is(.km-act, .km-chat-act, .km-chip-menu, .km-hues, .km-pick, .km-row):focus-visible {
+  outline: 2px solid var(--km-dim);
+  outline-offset: 1px;
+}
+
+/* A scrolling pane inside the surface fades its own bottom edge. There is more
+   than a screenful in here on a 1440, and a row cut in half by a hard border
+   reads as a fault rather than as "there is more" — which is exactly why the
+   map fades its own outer edge under a mask. */
+.km-view > .km-scroll {
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 26px), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 26px), transparent);
+}
+
+/* ---------- the peek ----------
+   What a working agent is doing, at the moment you point at its face. HTML
+   rather than canvas, and a sibling of it rather than a layer inside it: a
+   paragraph needs wrapping and an ellipsis, a bar needs a box, and anything
+   drawn inside the camera group is scaled by the camera and clipped by the edge
+   of the map — which is exactly where the ring gets closest to the frame.
+
+   It never takes the pointer. The thing under it is the face it belongs to, and
+   a card that could be hovered would flicker every time the pointer crossed its
+   own edge. Everything in here is one click away in the agent's own surface,
+   which is what this card is a peek at rather than a replacement for. */
+.km-peek {
+  position: absolute;
+  z-index: 2;
+  top: var(--km-peek-y, 50%);
+  left: var(--km-peek-x, 50%);
+  display: grid;
+  gap: 9px;
+  /* Narrow enough that it never becomes the picture; the floor is for a map on
+     a phone, where nothing can hover but a focus ring still can. */
+  width: min(17rem, 66vw);
+  padding: 11px 12px;
+  border: 1px solid color-mix(in srgb, var(--km-line) 80%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--km-slab) 88%, transparent);
+  /* The same glass the unfolded surface is made of, so the ring reads through
+     the card rather than disappearing behind it. */
+  backdrop-filter: blur(12px) saturate(1.3);
+  box-shadow: 0 14px 34px -22px oklch(0 0 0 / 62%);
+  transform: translate(0, -50%);
+  pointer-events: none;
+  animation: km-peek-in 0.18s ease-out both;
+}
+.km-peek[data-side='left'] {
+  transform: translate(-100%, -50%);
+}
+/* `translate` rather than `transform`, which the side above already owns. */
+@keyframes km-peek-in {
+  from {
+    opacity: 0;
+    translate: 0 4px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.km-peek-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid color-mix(in srgb, var(--km-line) 60%, transparent);
+}
+/* The same clock as the flare on the face, and on the same beat of it: the card
+   is about one agent, and the ring on that agent's plate is throwing off at the
+   same instant a few inches away. Two lights on one rhythm read as one system;
+   two on their own read as a busy screen. */
+.km-peek-live {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--km-live);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--km-live) 70%, transparent);
+  animation: km-peek-beat 2.6s ease-out infinite forwards;
+}
+@keyframes km-peek-beat {
+  0%,
+  46% {
+    box-shadow: 0 0 6px color-mix(in srgb, var(--km-live) 70%, transparent);
+  }
+  53% {
+    box-shadow:
+      0 0 6px color-mix(in srgb, var(--km-live) 70%, transparent),
+      0 0 0 0 color-mix(in srgb, var(--km-live) 70%, transparent);
+  }
+  82%,
+  100% {
+    box-shadow:
+      0 0 6px color-mix(in srgb, var(--km-live) 70%, transparent),
+      0 0 0 5px transparent;
+  }
+}
+.km-peek-who {
+  overflow: hidden;
+  flex: 1;
+  color: var(--km-fg);
+  font-weight: 500;
+  font-size: 12.5px;
+  font-family: var(--km-sans);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.km-peek-count {
+  flex: none;
+  color: var(--km-live);
+  font-size: 10.5px;
+  font-family: var(--km-mono);
+  letter-spacing: 0.08em;
+}
+
+.km-peek-jobs {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.km-peek-job {
+  display: grid;
+  gap: 3px;
+}
+.km-peek-lead {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+/* Two lines and then an ellipsis. A job title is a sentence somebody typed, and
+   the fourth line of one is never what you stopped to read. */
+.km-peek-title {
+  display: -webkit-box;
+  overflow: hidden;
+  flex: 1;
+  min-width: 0;
+  color: var(--km-fg);
+  font-size: 12.5px;
+  font-family: var(--km-sans);
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.km-peek-step {
+  overflow: hidden;
+  color: var(--km-dim);
+  font-size: 11.5px;
+  font-family: var(--km-sans);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.km-peek-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+.km-peek-bar {
+  overflow: hidden;
+  flex: 1;
+  height: 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--km-slab-2) 90%, transparent);
+}
+.km-peek-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--km-live);
+}
+.km-peek-when {
+  flex: none;
+  margin-left: auto;
+  color: var(--km-faint);
+  font-size: 10.5px;
+  font-family: var(--km-mono);
+}
+/* What is not in flight, counted. It is under a rule because it is a different
+   claim from the rows above it — those are happening, this is not. */
+.km-peek-rest {
+  padding-top: 8px;
+  border-top: 1px solid color-mix(in srgb, var(--km-line) 60%, transparent);
+  color: var(--km-faint);
+  font-size: 10.5px;
+  font-family: var(--km-mono);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .knowledge-map *,
+  .knowledge-map *::before,
+  .knowledge-map *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+  /* The dialog the map opens, which is outside every selector above it: a
+     portal mounts to `document.body`, and this app has no global reduce rule to
+     fall back on — so without this line the one surface that fades and zooms on
+     entry is the one surface that ignores the setting.
+
+     `.km-hues` itself and not `.km-hues *`, on purpose. The dialog mounts a
+     whole `SessionsProduct` inside it, and killing every transition in there
+     would be this stylesheet overruling another surface's own motion decisions
+     from two modules away. Stopping the entrance is what was actually missing. */
+  .km-hues {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+  /* Killing the animation is not enough for the two marks that *are* the
+     animation. A spark with no clock is a stub of light parked at the core end
+     of every live trunk, and a ping with no clock is a second rim on top of the
+     first. Both come off, and what is left — the warmed wire and the rim on the
+     plate — says the same thing standing still. */
+  .knowledge-map .km-spark,
+  .knowledge-map .km-live-flare {
+    display: none;
+  }
+}
+
+/* ---- unread ----
+   Full ink, and deliberately not a tone. The tone reserved for this resolves to
+   `--km-dim` — the same value as `ok` — so a toned mark would be the same grey
+   as a connected app; and the map allows only two saturated things, neither of
+   which is news. Shape is what tells it apart: a numeral, which nothing else on
+   this map wears on its own.
+
+   Filled rather than outlined, unlike `.km-badge-bg`. An outline at this size
+   reads as an empty ring, and an empty ring is the map's word for "nothing to
+   do here". */
+.km-unread {
+  pointer-events: none;
+}
+.km-unread-bg {
+  fill: var(--km-unread);
+  /* A rim in the page's own ground, so the disc separates from whatever it is
+     drawn on. It used to sit only on the Jobs seat, whose plate is a known pale
+     tile — full ink on that needs no help. On an agent's face the plate is a
+     generated avatar in an arbitrary colour, and against a dark one the disc
+     disappeared entirely: all that survived was the light glyph, which for a
+     count of one is a thin vertical stroke that reads as a scratch on the
+     portrait. Measured, not guessed — see F17. */
+  stroke: var(--km-bg);
+  stroke-width: 1.5;
+}
+.km-unread-n {
+  fill: var(--km-bg);
+  font-weight: 700;
+  font-size: var(--km-t4);
+  font-family: var(--km-mono);
+}

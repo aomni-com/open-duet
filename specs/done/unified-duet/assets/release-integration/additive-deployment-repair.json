@@ -1,0 +1,94 @@
+{
+  "firstRelease": "13762c2e992621960e57dffa98d6490a4da48f8d",
+  "remoteBuild": "passed",
+  "constructedRuntime": "0.0.0+0414c0bb488220259a527d8f2ce2fd6ba0eb9a2782fa7c490e5bd9b2a3ba8584",
+  "deployedProbe": {
+    "revision": "13762c2e992621960e57dffa98d6490a4da48f8d",
+    "backend": {
+      "revision": "235fa76aa058d68978a45cda622d864d36382426",
+      "schema": 1
+    },
+    "runtime": {
+      "version": null
+    }
+  },
+  "artifactFailure": "Runtime inventory was module-adjacent; the launcher working directory was used for its relative environment path.",
+  "competingWriter": {
+    "revision": "235fa76aa058d68978a45cda622d864d36382426",
+    "source": "Dependabot preview PR 70 against staging"
+  },
+  "coldPackagingFix": {
+    "contract": "A cold relocated Vercel API function announces and streams its own packaged complete runtime independently of launcher cwd",
+    "red": {
+      "runtimeVersion": null,
+      "artifactStatus": 503,
+      "exitCode": 1
+    },
+    "green": {
+      "runtimeVersion": "0.0.0+6c0d1d543a0b391c80128d84bff512808d9adb039f98b03dbc78edee37aa9f99",
+      "artifactStatus": 200,
+      "exactFixtureBytes": true,
+      "exitCode": 0
+    },
+    "proof": {
+      "realPackagingScript": true,
+      "realApiDefaultHandler": true,
+      "freshNodeProcess": true,
+      "relocatedFunction": true,
+      "buildSourceRemoved": true,
+      "actualVcConfigEnvironment": true,
+      "backendNetworkEdgeStubOnly": true
+    },
+    "gates": {
+      "apiTests": 20,
+      "assertions": 144,
+      "railTests": 7,
+      "typeScript": "7.0.1-rc",
+      "apiTypes": "passed",
+      "focusedLint": "passed",
+      "independentReview": "no actionable defects"
+    },
+    "deployedAcceptance": "Not performed; root must verify actual /deployment runtime equals served complete manifest after new deployment",
+    "liveWrites": false
+  },
+  "releaseWriterRule": "Staging branch and production deployments publish backend; other previews build against shared staging.",
+  "joinedChecks": {
+    "tests": 22,
+    "assertions": 78,
+    "independentReleaseGateReview": "no actionable regressions"
+  },
+  "controls": {
+    "updatesPaused": false,
+    "lifecycleClosed": true,
+    "observedAt": "2026-10-04T17:45:08.012Z"
+  },
+  "acceptance": "Actual additive API inventory accepted and all eight served hashes verified. Updates enabled through ordinary owner. R1 certification on both VMs precedes row migrations; birth admission remains closed.",
+  "remoteRepair": {
+    "revision": "a0836865fc64da1e67c80ce67d207423b2bd8f29",
+    "deploymentId": "dpl_HJQ2X5RfJShiPGV258MoM9BXKspX",
+    "apiBackendRevisionMatch": true,
+    "constructedRuntime": "0.0.0+1f50c5ff6c025306da1e705a22abcd6b4820a957add0024a65cbacdfec4521ea",
+    "announcedRuntime": null,
+    "observedReleaseDir": "/var/task/runtime-release",
+    "conclusion": "Expected module-adjacent directory selected; inventory rejection cause remains unknown. No guessed fallback or weakened validation."
+  },
+  "diagnostic": {
+    "sourceCommit": "c0d4ff2811c7af4450cc383b55b758eb034aa7f4",
+    "contract": "Existing refusal logs identify manifest/schema/identity or artifact metadata/digest/read failure using primitive metadata only. Validation unchanged.",
+    "tests": 12,
+    "assertions": 122,
+    "typeScript": "passed",
+    "lint": "passed",
+    "independentReview": "no actionable regressions",
+    "deployedAcceptance": "pending"
+  },
+  "acceptedRelease": {
+    "sourceRevision": "7b3404fbe0da1627b7a7f82f0b49d15f040a648f",
+    "deploymentId": "dpl_55U2tnqSqoh6AgSUgoTo56q8bJhp",
+    "runtimeVersion": "0.0.0+0414c0bb488220259a527d8f2ce2fd6ba0eb9a2782fa7c490e5bd9b2a3ba8584",
+    "apiBackendRevisionMatch": true,
+    "exactServedArtifactHashesVerified": 8,
+    "manifestIdentityIndependentlyVerified": true,
+    "receipt": "staging-served-r1.json"
+  }
+}

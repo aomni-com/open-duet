@@ -1,0 +1,308 @@
+[
+  {
+    "name": "desktop",
+    "route": "/install",
+    "pre": {
+      "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace, ui-monospace, monospace",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "fontStretch": "100%",
+      "fontSynthesis": "weight style small-caps",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "whiteSpace": "pre-wrap",
+      "overflowWrap": "normal",
+      "paddingLeft": "24px",
+      "color": "oklch(0.239603 0.02332 257)",
+      "backgroundColor": "rgba(0, 0, 0, 0)"
+    },
+    "code": {
+      "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace, ui-monospace, monospace",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "fontStretch": "100%",
+      "fontSynthesis": "weight style small-caps",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "whiteSpace": "pre-wrap",
+      "overflowWrap": "normal",
+      "paddingLeft": "0px",
+      "color": "oklch(0.239603 0.02332 257)",
+      "backgroundColor": "rgba(0, 0, 0, 0)"
+    },
+    "step": {
+      "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace, ui-monospace, monospace",
+      "fontSize": "14px",
+      "fontWeight": "600",
+      "fontStretch": "100%",
+      "fontSynthesis": "weight style small-caps",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "whiteSpace": "pre-wrap",
+      "overflowWrap": "normal",
+      "paddingLeft": "0px",
+      "color": "oklch(0.239603 0.02332 257)",
+      "backgroundColor": "rgba(0, 0, 0, 0)"
+    },
+    "width": 894,
+    "scrollWidth": 894,
+    "text": "# 1. Mail a sign-in code to your human's address, keeping the 202's request_id.\nDUET_API_URL=\"https://service.example.invalid\"\nDUET_REQUEST_ID=$(curl -fsS -X POST \\\n  \"$DUET_API_URL/v1/auth/email/start\" \\\n  -H 'content-type: application/json' \\\n  -d '{\n    \"email\":\"user@example.invalid\",\n    \"client_name\":\"Claude Code\"\n  }' \\\n  | node -pe 'JSON.parse(\n      require(\"fs\").readFileSync(\n        0, \"utf8\",\n      ),\n    ).request_id')\nexport DUET_REQUEST_ID\n\n# 2. Exchange the code your human read back. Same shell as step 1, whose export it reads.\nDUET_API_URL=\"https://service.example.invalid\" DUET_CODE=\"<the code they read back>\" \\\nnode --input-type=module <<'NODE'\nimport {\n  chmodSync, existsSync, mkdirSync,\n  readFileSync, writeFileSync,\n} from \"node:fs\";\nimport { join } from \"node:path\";\nconst {\n  DUET_API_URL: apiUrl,\n  DUET_REQUEST_ID, DUET_CODE,\n} = process.env;\nconst response = await fetch(\n  `${apiUrl}/v1/auth/email/verify`, {\n  method: \"POST\",\n  headers: { \"content-type\": \"application/json\" },\n  body: JSON.stringify({\n    request_id: DUET_REQUEST_ID,\n    code: DUET_CODE,\n  }),\n});\nconst body = await response.json();\nif (!response.ok) throw new Error(`${response.status} ${JSON.stringify(body)}`);\nconst duetDir = join(process.env.HOME, \".duet\");\nmkdirSync(duetDir, { recursive: true, mode: 0o700 });\nconst outPath = join(duetDir, \"config.json\");\nconst config = existsSync(outPath)\n  ? JSON.parse(readFileSync(\n      outPath, \"utf8\",\n    ))\n  : {};\nObject.assign(config, {\n  apiKey: body.access_token,\n  defaultWorkspace:\n    body.workspace.slug,\n  apiUrl,\n});\nwriteFileSync(\n  outPath,\n  JSON.stringify(config, null, 2)\n    + \"\\n\",\n  { mode: 0o600 },\n);\nchmodSync(outPath, 0o600);\nconsole.log(`Signed in to ${body.workspace.slug}. Wrote ${outPath}; key not printed.`);\nNODE\n\n# 3. Inspect your current workspaces and roles.\nduet whoami"
+  },
+  {
+    "name": "desktop",
+    "route": "/playground/lander-install-code",
+    "pre": {
+      "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace, ui-monospace, monospace",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "fontStretch": "100%",
+      "fontSynthesis": "weight style small-caps",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "whiteSpace": "pre-wrap",
+      "overflowWrap": "normal",
+      "paddingLeft": "24px",
+      "color": "oklch(0.239603 0.02332 257)",
+      "backgroundColor": "rgba(0, 0, 0, 0)"
+    },
+    "code": {
+      "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace, ui-monospace, monospace",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "fontStretch": "100%",
+      "fontSynthesis": "weight style small-caps",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "whiteSpace": "pre-wrap",
+      "overflowWrap": "normal",
+      "paddingLeft": "0px",
+      "color": "oklch(0.239603 0.02332 257)",
+      "backgroundColor": "rgba(0, 0, 0, 0)"
+    },
+    "step": {
+      "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace, ui-monospace, monospace",
+      "fontSize": "14px",
+      "fontWeight": "600",
+      "fontStretch": "100%",
+      "fontSynthesis": "weight style small-caps",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "whiteSpace": "pre-wrap",
+      "overflowWrap": "normal",
+      "paddingLeft": "0px",
+      "color": "oklch(0.239603 0.02332 257)",
+      "backgroundColor": "rgba(0, 0, 0, 0)"
+    },
+    "width": 894,
+    "scrollWidth": 894,
+    "text": "# 1. Mail a sign-in code to your human's address, keeping the 202's request_id.\nDUET_API_URL=\"https://service.example.invalid\"\nDUET_REQUEST_ID=$(curl -fsS -X POST \\\n  \"$DUET_API_URL/v1/auth/email/start\" \\\n  -H 'content-type: application/json' \\\n  -d '{\n    \"email\":\"user@example.invalid\",\n    \"client_name\":\"Claude Code\"\n  }' \\\n  | node -pe 'JSON.parse(\n      require(\"fs\").readFileSync(\n        0, \"utf8\",\n      ),\n    ).request_id')\nexport DUET_REQUEST_ID\n\n# 2. Exchange the code your human read back. Same shell as step 1, whose export it reads.\nDUET_API_URL=\"https://service.example.invalid\" DUET_CODE=\"<the code they read back>\" \\\nnode --input-type=module <<'NODE'\nimport {\n  chmodSync, existsSync, mkdirSync,\n  readFileSync, writeFileSync,\n} from \"node:fs\";\nimport { join } from \"node:path\";\nconst {\n  DUET_API_URL: apiUrl,\n  DUET_REQUEST_ID, DUET_CODE,\n} = process.env;\nconst response = await fetch(\n  `${apiUrl}/v1/auth/email/verify`, {\n  method: \"POST\",\n  headers: { \"content-type\": \"application/json\" },\n  body: JSON.stringify({\n    request_id: DUET_REQUEST_ID,\n    code: DUET_CODE,\n  }),\n});\nconst body = await response.json();\nif (!response.ok) throw new Error(`${response.status} ${JSON.stringify(body)}`);\nconst duetDir = join(process.env.HOME, \".duet\");\nmkdirSync(duetDir, { recursive: true, mode: 0o700 });\nconst outPath = join(duetDir, \"config.json\");\nconst config = existsSync(outPath)\n  ? JSON.parse(readFileSync(\n      outPath, \"utf8\",\n    ))\n  : {};\nObject.assign(config, {\n  apiKey: body.access_token,\n  defaultWorkspace:\n    body.workspace.slug,\n  apiUrl,\n});\nwriteFileSync(\n  outPath,\n  JSON.stringify(config, null, 2)\n    + \"\\n\",\n  { mode: 0o600 },\n);\nchmodSync(outPath, 0o600);\nconsole.log(`Signed in to ${body.workspace.slug}. Wrote ${outPath}; key not printed.`);\nNODE\n\n# 3. Inspect your current workspaces and roles.\nduet whoami"
+  },
+  {
+    "name": "desktop",
+    "route": "agents",
+    "document": {
+      "height": 11777,
+      "scrollY": 10877,
+      "footerVisible": true,
+      "documentWidth": 1440,
+      "viewport": 1440
+    }
+  },
+  {
+    "name": "desktop",
+    "route": "reference",
+    "document": {
+      "height": 71735,
+      "scrollY": 70835,
+      "footerVisible": true,
+      "documentWidth": 1440,
+      "viewport": 1440
+    }
+  },
+  {
+    "name": "desktop",
+    "route": "sessions",
+    "document": {
+      "height": 18664,
+      "scrollY": 17764,
+      "footerVisible": true,
+      "documentWidth": 1440,
+      "viewport": 1440
+    }
+  },
+  {
+    "name": "desktop",
+    "route": "train",
+    "document": {
+      "height": 13388,
+      "scrollY": 12488,
+      "footerVisible": true,
+      "documentWidth": 1440,
+      "viewport": 1440
+    }
+  },
+  {
+    "name": "desktop",
+    "route": "workspaces",
+    "document": {
+      "height": 16705,
+      "scrollY": 15805,
+      "footerVisible": true,
+      "documentWidth": 1440,
+      "viewport": 1440
+    }
+  },
+  {
+    "name": "mobile",
+    "route": "/install",
+    "pre": {
+      "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace, ui-monospace, monospace",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "fontStretch": "100%",
+      "fontSynthesis": "weight style small-caps",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "whiteSpace": "pre-wrap",
+      "overflowWrap": "normal",
+      "paddingLeft": "16px",
+      "color": "oklch(0.239603 0.02332 257)",
+      "backgroundColor": "rgba(0, 0, 0, 0)"
+    },
+    "code": {
+      "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace, ui-monospace, monospace",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "fontStretch": "100%",
+      "fontSynthesis": "weight style small-caps",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "whiteSpace": "pre-wrap",
+      "overflowWrap": "normal",
+      "paddingLeft": "0px",
+      "color": "oklch(0.239603 0.02332 257)",
+      "backgroundColor": "rgba(0, 0, 0, 0)"
+    },
+    "step": {
+      "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace, ui-monospace, monospace",
+      "fontSize": "14px",
+      "fontWeight": "600",
+      "fontStretch": "100%",
+      "fontSynthesis": "weight style small-caps",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "whiteSpace": "pre-wrap",
+      "overflowWrap": "normal",
+      "paddingLeft": "0px",
+      "color": "oklch(0.239603 0.02332 257)",
+      "backgroundColor": "rgba(0, 0, 0, 0)"
+    },
+    "width": 340,
+    "scrollWidth": 340,
+    "text": "# 1. Mail a sign-in code to your human's address, keeping the 202's request_id.\nDUET_API_URL=\"https://service.example.invalid\"\nDUET_REQUEST_ID=$(curl -fsS -X POST \\\n  \"$DUET_API_URL/v1/auth/email/start\" \\\n  -H 'content-type: application/json' \\\n  -d '{\n    \"email\":\"user@example.invalid\",\n    \"client_name\":\"Claude Code\"\n  }' \\\n  | node -pe 'JSON.parse(\n      require(\"fs\").readFileSync(\n        0, \"utf8\",\n      ),\n    ).request_id')\nexport DUET_REQUEST_ID\n\n# 2. Exchange the code your human read back. Same shell as step 1, whose export it reads.\nDUET_API_URL=\"https://service.example.invalid\" DUET_CODE=\"<the code they read back>\" \\\nnode --input-type=module <<'NODE'\nimport {\n  chmodSync, existsSync, mkdirSync,\n  readFileSync, writeFileSync,\n} from \"node:fs\";\nimport { join } from \"node:path\";\nconst {\n  DUET_API_URL: apiUrl,\n  DUET_REQUEST_ID, DUET_CODE,\n} = process.env;\nconst response = await fetch(\n  `${apiUrl}/v1/auth/email/verify`, {\n  method: \"POST\",\n  headers: { \"content-type\": \"application/json\" },\n  body: JSON.stringify({\n    request_id: DUET_REQUEST_ID,\n    code: DUET_CODE,\n  }),\n});\nconst body = await response.json();\nif (!response.ok) throw new Error(`${response.status} ${JSON.stringify(body)}`);\nconst duetDir = join(process.env.HOME, \".duet\");\nmkdirSync(duetDir, { recursive: true, mode: 0o700 });\nconst outPath = join(duetDir, \"config.json\");\nconst config = existsSync(outPath)\n  ? JSON.parse(readFileSync(\n      outPath, \"utf8\",\n    ))\n  : {};\nObject.assign(config, {\n  apiKey: body.access_token,\n  defaultWorkspace:\n    body.workspace.slug,\n  apiUrl,\n});\nwriteFileSync(\n  outPath,\n  JSON.stringify(config, null, 2)\n    + \"\\n\",\n  { mode: 0o600 },\n);\nchmodSync(outPath, 0o600);\nconsole.log(`Signed in to ${body.workspace.slug}. Wrote ${outPath}; key not printed.`);\nNODE\n\n# 3. Inspect your current workspaces and roles.\nduet whoami"
+  },
+  {
+    "name": "mobile",
+    "route": "/playground/lander-install-code",
+    "pre": {
+      "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace, ui-monospace, monospace",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "fontStretch": "100%",
+      "fontSynthesis": "weight style small-caps",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "whiteSpace": "pre-wrap",
+      "overflowWrap": "normal",
+      "paddingLeft": "16px",
+      "color": "oklch(0.239603 0.02332 257)",
+      "backgroundColor": "rgba(0, 0, 0, 0)"
+    },
+    "code": {
+      "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace, ui-monospace, monospace",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "fontStretch": "100%",
+      "fontSynthesis": "weight style small-caps",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "whiteSpace": "pre-wrap",
+      "overflowWrap": "normal",
+      "paddingLeft": "0px",
+      "color": "oklch(0.239603 0.02332 257)",
+      "backgroundColor": "rgba(0, 0, 0, 0)"
+    },
+    "step": {
+      "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace, ui-monospace, monospace",
+      "fontSize": "14px",
+      "fontWeight": "600",
+      "fontStretch": "100%",
+      "fontSynthesis": "weight style small-caps",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "whiteSpace": "pre-wrap",
+      "overflowWrap": "normal",
+      "paddingLeft": "0px",
+      "color": "oklch(0.239603 0.02332 257)",
+      "backgroundColor": "rgba(0, 0, 0, 0)"
+    },
+    "width": 340,
+    "scrollWidth": 340,
+    "text": "# 1. Mail a sign-in code to your human's address, keeping the 202's request_id.\nDUET_API_URL=\"https://service.example.invalid\"\nDUET_REQUEST_ID=$(curl -fsS -X POST \\\n  \"$DUET_API_URL/v1/auth/email/start\" \\\n  -H 'content-type: application/json' \\\n  -d '{\n    \"email\":\"user@example.invalid\",\n    \"client_name\":\"Claude Code\"\n  }' \\\n  | node -pe 'JSON.parse(\n      require(\"fs\").readFileSync(\n        0, \"utf8\",\n      ),\n    ).request_id')\nexport DUET_REQUEST_ID\n\n# 2. Exchange the code your human read back. Same shell as step 1, whose export it reads.\nDUET_API_URL=\"https://service.example.invalid\" DUET_CODE=\"<the code they read back>\" \\\nnode --input-type=module <<'NODE'\nimport {\n  chmodSync, existsSync, mkdirSync,\n  readFileSync, writeFileSync,\n} from \"node:fs\";\nimport { join } from \"node:path\";\nconst {\n  DUET_API_URL: apiUrl,\n  DUET_REQUEST_ID, DUET_CODE,\n} = process.env;\nconst response = await fetch(\n  `${apiUrl}/v1/auth/email/verify`, {\n  method: \"POST\",\n  headers: { \"content-type\": \"application/json\" },\n  body: JSON.stringify({\n    request_id: DUET_REQUEST_ID,\n    code: DUET_CODE,\n  }),\n});\nconst body = await response.json();\nif (!response.ok) throw new Error(`${response.status} ${JSON.stringify(body)}`);\nconst duetDir = join(process.env.HOME, \".duet\");\nmkdirSync(duetDir, { recursive: true, mode: 0o700 });\nconst outPath = join(duetDir, \"config.json\");\nconst config = existsSync(outPath)\n  ? JSON.parse(readFileSync(\n      outPath, \"utf8\",\n    ))\n  : {};\nObject.assign(config, {\n  apiKey: body.access_token,\n  defaultWorkspace:\n    body.workspace.slug,\n  apiUrl,\n});\nwriteFileSync(\n  outPath,\n  JSON.stringify(config, null, 2)\n    + \"\\n\",\n  { mode: 0o600 },\n);\nchmodSync(outPath, 0o600);\nconsole.log(`Signed in to ${body.workspace.slug}. Wrote ${outPath}; key not printed.`);\nNODE\n\n# 3. Inspect your current workspaces and roles.\nduet whoami"
+  },
+  {
+    "name": "mobile",
+    "route": "agents",
+    "document": {
+      "height": 18059,
+      "scrollY": 17215,
+      "footerVisible": true,
+      "documentWidth": 390,
+      "viewport": 390
+    }
+  },
+  {
+    "name": "mobile",
+    "route": "reference",
+    "document": {
+      "height": 107153,
+      "scrollY": 106309,
+      "footerVisible": true,
+      "documentWidth": 390,
+      "viewport": 390
+    }
+  },
+  {
+    "name": "mobile",
+    "route": "sessions",
+    "document": {
+      "height": 28881,
+      "scrollY": 28037,
+      "footerVisible": true,
+      "documentWidth": 390,
+      "viewport": 390
+    }
+  },
+  {
+    "name": "mobile",
+    "route": "train",
+    "document": {
+      "height": 20100,
+      "scrollY": 19256,
+      "footerVisible": true,
+      "documentWidth": 390,
+      "viewport": 390
+    }
+  },
+  {
+    "name": "mobile",
+    "route": "workspaces",
+    "document": {
+      "height": 24848,
+      "scrollY": 24004,
+      "footerVisible": true,
+      "documentWidth": 390,
+      "viewport": 390
+    }
+  }
+]

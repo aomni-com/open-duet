@@ -1,0 +1,59 @@
+export const metadata = {
+  title: 'Getting started',
+  description: 'Prepare a workspace-scoped Duet API request.',
+  alternates: { canonical: '/getting-started/' },
+}
+
+<p className="eyebrow">Start here</p>
+
+# Make the first request boring
+
+Keep the API origin, credential, and workspace selection explicit. A small request helper makes
+authentication consistent without hiding status codes or response headers that callers need for
+errors, pagination, and streaming.
+
+## Configure the client
+
+Store keys in a secret manager or local environment file outside source control. Duet accepts a
+Bearer credential; never place a key in a URL, query string, build artifact, or browser bundle.
+
+```bash
+export DUET_API_URL="https://ctl.duet.so"
+export DUET_API_KEY="duet_sk_replace_with_your_key"
+```
+
+```ts
+export async function duetRequest(path: `/v1/${string}`, init: RequestInit = {}) {
+  const response = await fetch(`${process.env.DUET_API_URL}${path}`, {
+    ...init,
+    headers: {
+      authorization: `Bearer ${process.env.DUET_API_KEY}`,
+      ...init.headers,
+    },
+  })
+
+  if (!response.ok) throw new Error(`Duet request failed: ${response.status}`)
+  return response
+}
+```
+
+## Inspect the credential
+
+Start with `GET /v1/whoami`. It returns the person, current workspace memberships and roles, and
+effective access without changing state. Human access follows those live memberships; it is not
+a fixed list of permissions saved on the key.
+
+```bash
+curl --fail-with-body \
+  --header "Authorization: Bearer $DUET_API_KEY" \
+  "$DUET_API_URL/v1/whoami"
+```
+
+Then open the [endpoint reference](/reference) and select an operation whose required scope is
+available to the caller in the selected workspace.
+
+## Preserve the response
+
+Do not immediately flatten every response into application-specific data. Status, headers, cursor
+fields, and event identifiers are part of the protocol and often carry the information needed to
+recover after a failure.

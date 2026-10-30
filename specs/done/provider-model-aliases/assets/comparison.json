@@ -1,0 +1,203 @@
+{
+  "initial-mobile": [
+    {
+      "id": "compose-bar-quality-menu",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "mae": 18.49485,
+      "pixelMismatchRatio": 0.09801,
+      "edgeEnergyRatio": 1.01304,
+      "distance": 0.07762
+    },
+    {
+      "id": "agent-surface-busy",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "mae": 0,
+      "pixelMismatchRatio": 0,
+      "edgeEnergyRatio": 1,
+      "distance": 0
+    },
+    {
+      "id": "settings-default-tier-subscribed",
+      "dimensions": {
+        "width": 358,
+        "height": 232
+      },
+      "mae": 0,
+      "pixelMismatchRatio": 0,
+      "edgeEnergyRatio": 1,
+      "distance": 0
+    }
+  ],
+  "layout-mobile": [
+    {
+      "id": "compose-bar-provider-models",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "mae": 31.59313,
+      "pixelMismatchRatio": 0.17183,
+      "edgeEnergyRatio": 1.10404,
+      "distance": 0.14845
+    },
+    {
+      "id": "settings-provider-models",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "mae": 14.69644,
+      "pixelMismatchRatio": 0.08663,
+      "edgeEnergyRatio": 0.96313,
+      "distance": 0.08182
+    }
+  ],
+  "layout-desktop": [
+    {
+      "id": "settings-provider-models",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "mae": 0.51935,
+      "pixelMismatchRatio": 0.00566,
+      "edgeEnergyRatio": 1.00488,
+      "distance": 0.0069
+    },
+    {
+      "id": "compose-bar-provider-models",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "mae": 0,
+      "pixelMismatchRatio": 0,
+      "edgeEnergyRatio": 1,
+      "distance": 0
+    }
+  ],
+  "scores-desktop": [
+    {
+      "id": "compose-bar-provider-models",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "mae": 0.3657,
+      "pixelMismatchRatio": 0.0039,
+      "edgeEnergyRatio": 1.0858,
+      "distance": 0.02158
+    },
+    {
+      "id": "settings-provider-models",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "mae": 0.44991,
+      "pixelMismatchRatio": 0.00395,
+      "edgeEnergyRatio": 1.0681,
+      "distance": 0.01831
+    },
+    {
+      "id": "compose-bar-quality-menu",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "mae": 0.95483,
+      "pixelMismatchRatio": 0.00747,
+      "edgeEnergyRatio": 1.02717,
+      "distance": 0.01386
+    },
+    {
+      "id": "settings-default-tier-subscribed",
+      "dimensions": {
+        "width": 896,
+        "height": 220
+      },
+      "mae": 0.60438,
+      "pixelMismatchRatio": 0.00631,
+      "edgeEnergyRatio": 1.02764,
+      "distance": 0.01209
+    }
+  ],
+  "scores-mobile": [
+    {
+      "id": "settings-provider-models",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "mae": 0.78526,
+      "pixelMismatchRatio": 0.00863,
+      "edgeEnergyRatio": 1.14689,
+      "distance": 0.0384
+    },
+    {
+      "id": "compose-bar-provider-models",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "mae": 0.78529,
+      "pixelMismatchRatio": 0.00863,
+      "edgeEnergyRatio": 1.13198,
+      "distance": 0.03557
+    },
+    {
+      "id": "settings-default-tier-subscribed",
+      "dimensions": {
+        "width": 358,
+        "height": 232
+      },
+      "mae": 0.2018,
+      "pixelMismatchRatio": 0.00241,
+      "edgeEnergyRatio": 1.00904,
+      "distance": 0.00405
+    },
+    {
+      "id": "compose-bar-quality-menu",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "mae": 0.28322,
+      "pixelMismatchRatio": 0.00338,
+      "edgeEnergyRatio": 1.00001,
+      "distance": 0.00319
+    }
+  ],
+  "narrow-label": [
+    {
+      "id": "selection",
+      "dimensions": {
+        "width": 520,
+        "height": 68
+      },
+      "mae": 3.30097,
+      "pixelMismatchRatio": 0.03908,
+      "edgeEnergyRatio": 1.04879,
+      "distance": 0.04833
+    }
+  ],
+  "narrow-mobile": [
+    {
+      "id": "selection",
+      "dimensions": {
+        "width": 520,
+        "height": 68
+      },
+      "mae": 3.30097,
+      "pixelMismatchRatio": 0.03908,
+      "edgeEnergyRatio": 1.04879,
+      "distance": 0.04833
+    }
+  ]
+}

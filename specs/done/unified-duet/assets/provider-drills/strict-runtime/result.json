@@ -1,0 +1,125 @@
+{
+  "status": "complete",
+  "provenance": {
+    "fixtureId": "staging-e2e-synthetic",
+    "vmName": "duet-test-staging-e2e-synthetic",
+    "execution": "provider-vm",
+    "controlPlane": "controlled-loopback"
+  },
+  "observation": {
+    "status": "pass",
+    "provenance": {
+      "environment": "staging",
+      "disposable": true,
+      "fixtureId": "staging-e2e-synthetic",
+      "vmName": "duet-test-staging-e2e-synthetic",
+      "execution": "provider-vm",
+      "controlPlane": "controlled-loopback",
+      "targetVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+      "status": "pass"
+    },
+    "drills": [
+      {
+        "environment": "staging",
+        "disposable": true,
+        "fixtureId": "staging-e2e-synthetic",
+        "vmName": "duet-test-staging-e2e-synthetic",
+        "execution": "provider-vm",
+        "controlPlane": "controlled-loopback",
+        "targetVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+        "status": "pass",
+        "kind": "live-work-deferral",
+        "observations": {
+          "adoptionStatus": "deferred",
+          "workContinued": true,
+          "sessionId": "fixture-staging-e2e-synthetic",
+          "runnerExecutable": {
+            "executablePath": "/opt/duet/releases/0.0.0+373f0d4dcb530705e3ad400e4f7be5fb55ddc0edb75cedfae3753522a8a36788/duet",
+            "executableSha256": "62e5980fc3c6741624ebdf597213220521a32cb6d79f341d2eea30a92dc7100b"
+          }
+        }
+      },
+      {
+        "environment": "staging",
+        "disposable": true,
+        "fixtureId": "staging-e2e-synthetic",
+        "vmName": "duet-test-staging-e2e-synthetic",
+        "execution": "provider-vm",
+        "controlPlane": "controlled-loopback",
+        "targetVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+        "status": "pass",
+        "kind": "agent-only-update",
+        "observations": {
+          "changedArtifacts": [
+            "duet"
+          ],
+          "fromVersion": "0.0.0+373f0d4dcb530705e3ad400e4f7be5fb55ddc0edb75cedfae3753522a8a36788",
+          "installedVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+          "gatewayBeforeSha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+          "gatewayAfterSha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+          "native": {
+            "version": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+            "executablePath": "/opt/duet/releases/0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176/duet",
+            "executableSha256": "3fa652fae3264ff8f79607da9e29e1c11278f478bafd970eb07af66890eaa3ae",
+            "nativeMemoryVerified": true
+          }
+        }
+      },
+      {
+        "environment": "staging",
+        "disposable": true,
+        "fixtureId": "staging-e2e-synthetic",
+        "vmName": "duet-test-staging-e2e-synthetic",
+        "execution": "provider-vm",
+        "controlPlane": "controlled-loopback",
+        "targetVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+        "status": "pass",
+        "kind": "missing-asset-repair",
+        "observations": {
+          "artifactName": "initdb.wasm",
+          "missingBefore": true,
+          "expectedSha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+          "repairedSha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+          "installedVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+          "native": {
+            "version": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+            "executablePath": "/opt/duet/releases/0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176/duet",
+            "executableSha256": "3fa652fae3264ff8f79607da9e29e1c11278f478bafd970eb07af66890eaa3ae",
+            "nativeMemoryVerified": true
+          }
+        }
+      },
+      {
+        "environment": "staging",
+        "disposable": true,
+        "fixtureId": "staging-e2e-synthetic",
+        "vmName": "duet-test-staging-e2e-synthetic",
+        "execution": "provider-vm",
+        "controlPlane": "controlled-loopback",
+        "targetVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+        "status": "pass",
+        "kind": "matched-rollback",
+        "observations": {
+          "rollbackVersion": "0.0.0+373f0d4dcb530705e3ad400e4f7be5fb55ddc0edb75cedfae3753522a8a36788",
+          "installedVersion": "0.0.0+373f0d4dcb530705e3ad400e4f7be5fb55ddc0edb75cedfae3753522a8a36788",
+          "rollbackInventorySha256": "049381a1b8a1b9d0480c00a9ee69344fbad0c6c81b402acceafb7312cabdf886",
+          "installedInventorySha256": "049381a1b8a1b9d0480c00a9ee69344fbad0c6c81b402acceafb7312cabdf886",
+          "native": {
+            "version": "0.0.0+373f0d4dcb530705e3ad400e4f7be5fb55ddc0edb75cedfae3753522a8a36788",
+            "executablePath": "/opt/duet/releases/0.0.0+373f0d4dcb530705e3ad400e4f7be5fb55ddc0edb75cedfae3753522a8a36788/duet",
+            "executableSha256": "62e5980fc3c6741624ebdf597213220521a32cb6d79f341d2eea30a92dc7100b",
+            "nativeMemoryVerified": true
+          }
+        }
+      }
+    ],
+    "bootIdBefore": "3efca0f8-ed42-4e68-91e7-46d3646a13b4",
+    "bootIdAfter": "3efca0f8-ed42-4e68-91e7-46d3646a13b4",
+    "preservedStateSha256": "73046c1193e1d6745d6bb929f2b5a6749fcf3a4add81e456a8e4ed1577f30688",
+    "preservedCredentialSha256": "1eebad1dc3b2d21ad489e621e86610d813f9fdef778564526dcfe379b4bb8c30",
+    "nativeMemoryVerified": true
+  },
+  "cleanup": {
+    "verifiedAbsent": true
+  }
+}

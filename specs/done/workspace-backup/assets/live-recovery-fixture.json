@@ -1,0 +1,34 @@
+{
+  "marker": "BACKUP-staging-e2e-synthetic",
+  "agent": {
+    "kind": "agent",
+    "key": "r573mj2619w062cnbjnyygzpsn8fcf4h",
+    "path": "agents/backup-6fd6a2",
+    "slug": "backup-6fd6a2",
+    "name": "Backup fixture agent",
+    "disabled": false
+  },
+  "app": {
+    "kind": "app",
+    "key": "jn7fn6ahbvbzvxpgd30q2g2rms8fdqd7",
+    "path": "backup-fixture/app",
+    "slug": "backup-6fd6a2",
+    "disabled": false,
+    "command": "bun app.ts",
+    "port": 4123,
+    "apiScopes": [],
+    "visibility": "folder"
+  },
+  "policy": {
+    "kind": "toolkitPolicy",
+    "toolkitSlug": "github",
+    "allowedAgentIds": [
+      "r573mj2619w062cnbjnyygzpsn8fcf4h"
+    ]
+  },
+  "sourceFiles": {
+    "backup-fixture/.env": "BACKUP-staging-e2e-synthetic",
+    "agents/backup-6fd6a2/AGENTS.md": "# Backup fixture agent\n\nPortable backup recreation fixture.\n",
+    "backup-fixture/app/app.ts": "Bun.serve({port:Number(process.env.PORT),fetch:()=>new Response(\"BACKUP-staging-e2e-synthetic\")})\n"
+  }
+}

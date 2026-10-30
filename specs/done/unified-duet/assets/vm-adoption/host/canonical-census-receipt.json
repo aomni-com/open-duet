@@ -1,0 +1,28 @@
+{
+  "status": "local-canonical-host-census-proof",
+  "parentCommit": "6cee5f651",
+  "liveActions": false,
+  "contract": "WorkspaceAttachment admits optional runtimeVersion plus gatewayVersion as temporary old-production input; MigrationItem emits oldRuntimeVersion = runtimeVersion ?? gatewayVersion.",
+  "choices": [
+    "Canonical observations win even when a superseded gateway report is present",
+    "Legacy-only production rows remain readable until their fleet adoption",
+    "Raw table typing derives historical input fields from WorkspaceAttachment, independent of the strict persisted schema",
+    "The temporary legacy input retires with the one-shot controller after both waves; no dual persisted identity"
+  ],
+  "redEvidence": [
+    "Real ConvexHttpClient HTTP reader dropped runtimeVersion from the canonical row",
+    "After fixing projection, the same tracer still failed because planning chose superseded-report instead of the canonical runtime token"
+  ],
+  "greenEvidence": {
+    "httpReaderToPlannerTracer": { "tests": 1, "assertions": 3 },
+    "hostAndHelper": { "tests": 35, "assertions": 91 },
+    "scopedTypes": "TypeScript 7.0.1-rc, host/helper plus gateway text-asset declarations passed",
+    "formatAndLint": "focused changed files and diff checks passed"
+  },
+  "independentReview": "No actionable regressions. Reviewer ran 22 host tests; its sandbox blocked six HTTP-server tests. Implementing checkout ran all 35 host/helper tests successfully.",
+  "limits": [
+    "HTTP fixtures are disposable local servers, not a live deployment census",
+    "No live writes, root checkout changes, or VM operations performed",
+    "Root integrates this focused patch with its newer host/helper operational changes"
+  ]
+}

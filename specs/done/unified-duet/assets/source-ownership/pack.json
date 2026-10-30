@@ -1,0 +1,85 @@
+{
+  "package": "@duetso/agent",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "LICENSE",
+      "size": 10702,
+      "mode": 420
+    },
+    {
+      "path": "README.md",
+      "size": 949,
+      "mode": 420
+    },
+    {
+      "path": "dist/cli-entry.js",
+      "size": 16233542,
+      "mode": 493,
+      "sha256": "bd09abe208effd201c725e9b9ef5703af0e39b7c2b6313babb85503b323d51a6"
+    },
+    {
+      "path": "dist/highlights-eq9cgrbb.scm",
+      "size": 9832,
+      "mode": 420
+    },
+    {
+      "path": "dist/highlights-ghv9g403.scm",
+      "size": 2863,
+      "mode": 420
+    },
+    {
+      "path": "dist/highlights-hk7bwhj4.scm",
+      "size": 3479,
+      "mode": 420
+    },
+    {
+      "path": "dist/highlights-r812a2qc.scm",
+      "size": 3444,
+      "mode": 420
+    },
+    {
+      "path": "dist/highlights-x6tmsnaa.scm",
+      "size": 2149,
+      "mode": 420
+    },
+    {
+      "path": "dist/injections-73j83es3.scm",
+      "size": 815,
+      "mode": 420
+    },
+    {
+      "path": "dist/tree-sitter-javascript-nd0q4pe9.wasm",
+      "size": 411770,
+      "mode": 420
+    },
+    {
+      "path": "dist/tree-sitter-markdown_inline-j5349f42.wasm",
+      "size": 426020,
+      "mode": 420
+    },
+    {
+      "path": "dist/tree-sitter-markdown-411r6y9b.wasm",
+      "size": 421534,
+      "mode": 420
+    },
+    {
+      "path": "dist/tree-sitter-typescript-zxjzwt75.wasm",
+      "size": 1413849,
+      "mode": 420
+    },
+    {
+      "path": "dist/tree-sitter-zig-e78zbjpm.wasm",
+      "size": 691726,
+      "mode": 420
+    },
+    {
+      "path": "package.json",
+      "size": 1219,
+      "mode": 420
+    }
+  ],
+  "privateWorkspaceRuntimeImports": 0,
+  "privateWorkspaceDependencyRemainsUntil09": true,
+  "scope": "bundle content only; external install/publication belongs to09"
+}

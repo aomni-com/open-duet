@@ -1,0 +1,5 @@
+{
+  "inputSeq": 17,
+  "terminalType": "complete",
+  "result": "{\"seq\":17,\"timestamp\":\"2026-08-04T20:55:24.889Z\",\"user_email\":\"user@example.invalid\"}"
+}

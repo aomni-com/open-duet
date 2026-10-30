@@ -1,0 +1,59 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+
+# Testing
+coverage
+apps/web/playwright-report/
+apps/web/test-results/
+apps/docs/playwright-report/
+apps/docs/test-results/
+apps/lander/playwright-report/
+apps/lander/test-results/
+# The seed package runs Playwright too, and drops a .last-run.json nobody
+# should commit — it was the one visual owner missing from this list.
+packages/official-agents-seed/playwright-report/
+packages/official-agents-seed/test-results/
+
+# Turbo
+.turbo
+
+# Build Outputs
+.pnpm-store/
+.next/
+next-env.d.ts
+out/
+build
+dist
+
+# exe-sandbox local benchmark state
+packages/exe-sandbox/.exe-state/
+
+# Debug
+npm-debug.log*
+*.log*
+
+# Misc
+.DS_Store
+*.pem
+tmp
+
+# exe.dev probe state (VM names cached by packages/exe scripts)
+.exe-state/
+.vercel
+.worktrees/
+.env*
+
+# Temporary run output; durable implementation records belong under specs/.
+/artifacts/

@@ -1,0 +1,76 @@
+{
+  "image": "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+  "containerName": "duet-syncthing-extract-379de691ff",
+  "operation": "create/cp/remove only; container not started",
+  "source": "/usr/bin/syncthing",
+  "destination": "/Users/synthetic-user/.codex/worktrees/232f/duet/artifacts/unified-duet/live-acceptance/syncthing-linux-amd64",
+  "containerId": "fbe5e2637bfc571184e5c66987c8790b60113445e1ef691d1a333f58d10febda",
+  "cleanupVerifiedAbsent": true,
+  "sha256": "d5aa7b869042518ae62e35fd40a1ada84d3c7f970863c396da1db0d318509e89",
+  "byteLength": 26933720,
+  "mode": "0o755",
+  "file": "/Users/synthetic-user/.codex/worktrees/232f/duet/artifacts/unified-duet/live-acceptance/syncthing-linux-amd64: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, stripped",
+  "sourceHashes": {
+    "packages/vm-image/Dockerfile": "960128c7320e2622cae714bf49428f9575e674b834e07947f6e3681873422512",
+    "packages/vm-image/scripts/verify-image.ts": "383f19a79f5b29167b78bc9490964bafff404058eb7f1591bb0a75d857e00915",
+    "scripts/staging-e2e-synthetic": "59bfa676a58c3db3ab48ddcafaa1d9bc0e2d76c701563757f1fe955de7710fed"
+  },
+  "versionProbeCommand": [
+    "docker",
+    "run",
+    "--rm",
+    "--pull=never",
+    "--name",
+    "duet-syncthing-version-69e42e60f2",
+    "--cidfile",
+    "/tmp/duet-syncthing-version-69e42e60f2.cid",
+    "--platform",
+    "linux/amd64",
+    "--network",
+    "none",
+    "--entrypoint",
+    "/usr/bin/timeout",
+    "-v",
+    "/Users/synthetic-user/.codex/worktrees/232f/duet/artifacts/unified-duet/live-acceptance/syncthing-linux-amd64:/probe/syncthing:ro",
+    "-e",
+    "HOME=/tmp/version-fixture",
+    "-e",
+    "STNOUPGRADE=1",
+    "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+    "5s",
+    "/probe/syncthing",
+    "--version"
+  ],
+  "versionProbe": {
+    "exitCode": 0,
+    "stdout": "syncthing v2.1.2 \"Hafnium Hornet\" (go1.26.5 linux-amd64) user@example.invalid 2026-06-26 05:22:40 UTC [stnoupgrade]",
+    "stderr": ""
+  },
+  "versionProbeContainerId": "3c988505b830b45e32ff690d0a2c858c409ae7fdbd1466d18a2a1a383ccdf9fb",
+  "versionProbeCleanupVerifiedAbsent": true,
+  "ownerPin": {
+    "version": "v2.1.2",
+    "upstreamArchive": "syncthing-linux-amd64-v2.1.2.tar.gz",
+    "upstreamArchiveSha256": "0cea24660ac7d8df19f01da979827b5c9463a8a60042e296829293cf80213ee4"
+  },
+  "runnerCompatibility": {
+    "owner": "scripts/staging-e2e-synthetic",
+    "image": "mcr.microsoft.com/playwright:v1.61.0-jammy",
+    "requiredHostEnvironment": {
+      "DOCKER_DEFAULT_PLATFORM": "linux/amd64",
+      "DUET_SYNCTHING_BIN": "artifacts/unified-duet/live-acceptance/syncthing-linux-amd64"
+    },
+    "pathMapping": "/work/artifacts/unified-duet/live-acceptance/syncthing-linux-amd64",
+    "binary": "Static ELF Linuxx86_64; no runner libc dependency",
+    "existingCachedPlaywrightVariant": "multi-platform store; default inspection selects arm64, explicit amd64 inspection accepted",
+    "runnerExecuted": false,
+    "sourceUnchanged": true,
+    "amd64RunnerImageAvailable": true,
+    "amd64RunnerImageId": "sha256:19298da4a542f9823673f35f64690518abae7cb07ec925fcf4383b89e2766341",
+    "platformInspection": "docker image inspect --platform linux/amd64"
+  },
+  "status": "prepared stockLinuxbinary; finaljourney not executed",
+  "liveJourneyExecuted": false,
+  "liveVmMutation": false,
+  "binaryCommitted": false
+}

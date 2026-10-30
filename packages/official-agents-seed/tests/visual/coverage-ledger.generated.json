@@ -1,0 +1,47 @@
+[
+  {
+    "target": "account-researcher/account-board",
+    "kind": "fixture",
+    "fixture": "agent-app-account-board-populated"
+  },
+  {
+    "target": "brand-designer/setup-brand",
+    "kind": "fixture",
+    "fixture": "agent-app-setup-brand-completed"
+  },
+  {
+    "target": "code-reviewer/connect-repos",
+    "kind": "fixture",
+    "fixture": "agent-app-connect-repos-completed"
+  },
+  {
+    "target": "people-researcher/dossier-board",
+    "kind": "fixture",
+    "fixture": "agent-app-dossier-board-populated"
+  },
+  {
+    "target": "seo-specialist/connect-search-console",
+    "kind": "fixture",
+    "fixture": "agent-app-connect-search-console-completed"
+  },
+  {
+    "target": "seo-specialist/content-board",
+    "kind": "fixture",
+    "fixture": "agent-app-content-board-populated"
+  },
+  {
+    "target": "social-media-manager/connect-accounts",
+    "kind": "fixture",
+    "fixture": "agent-app-connect-accounts-completed"
+  },
+  {
+    "target": "support-agent/connect-helpdesk",
+    "kind": "fixture",
+    "fixture": "agent-app-connect-helpdesk-completed"
+  },
+  {
+    "target": "writer/setup-voice",
+    "kind": "fixture",
+    "fixture": "agent-app-setup-voice-completed"
+  }
+]

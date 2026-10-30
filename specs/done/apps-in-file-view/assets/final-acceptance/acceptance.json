@@ -1,0 +1,46 @@
+{
+  "runId": "staging-e2e-synthetic",
+  "date": "2026-07-17",
+  "provenance": {
+    "producer": "packages/test-harness/src/staging-e2e-synthetic",
+    "featureOwner": "packages/test-harness/src/staging-e2e-synthetic",
+    "sourceArtifact": "tmp/staging-e2e-synthetic/staging-e2e-synthetic/timeline.json",
+    "projection": "Human-reviewed, sanitized projection of the raw composed-run timeline; no credentials or disposable resource identifiers are retained."
+  },
+  "identityMode": "tagged-fallback",
+  "deployed": {
+    "apiCommit": "7532d60e3f4accae507d2ac26b583b3bb826f9e9",
+    "webCommit": "b36e704ea1ee4433ac18c47b1feccd19f587c12a",
+    "apiDeployment": "dpl_8UTnLqqSaz5cRvxWZMQ2mTBRXHe8",
+    "webDeployment": "dpl_8nr6FcZ9qD2udAu6XCxYm9ySvGBK",
+    "edgeDeployment": "dpl_Gskjrp2keGfXnzqgeykJ29QKd8JT"
+  },
+  "appsInFileView": {
+    "status": "pass",
+    "identityPreserved": true,
+    "initialPath": "welcome/hello-app",
+    "renamedPath": "welcome/hello2",
+    "uiRepairPath": "welcome/hello-repaired",
+    "directRepairPath": "welcome/hello-final",
+    "renameConvergenceMs": 4967,
+    "desktopScreenshot": "desktop.png",
+    "mobileScreenshot": "mobile.png"
+  },
+  "visualComparison": {
+    "desktopParityDistance": 0.08604,
+    "mobileParityDistance": 0.19388,
+    "purpose": "Layout and responsive continuity against the approved exhaustive playground fixture; content intentionally differs."
+  },
+  "cleanup": {
+    "status": "pass",
+    "orphanCount": 0
+  },
+  "composedRunner": {
+    "status": "fail",
+    "unrelatedFailure": "ZlibError while fetching the Firecrawl Composio integration after the apps and share legs had passed."
+  },
+  "postAcceptanceReview": {
+    "commit": "b49ef6b7",
+    "scope": "Workspace-hint authorization and bounded historical share state; focused API/backend tests, type checks, linters, and formatter passed."
+  }
+}

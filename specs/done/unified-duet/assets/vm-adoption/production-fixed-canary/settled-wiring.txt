@@ -1,0 +1,10 @@
+MainPID=0
+Result=success
+ActiveState=inactive
+SubState=dead
+MainPID=137860
+ExecStartPre={ path=/opt/duet/gateway-runtime/bin/bun ; argv[]=/opt/duet/gateway-runtime/bin/bun /opt/duet/bin/runtime-bootstrap.js ; ignore_errors=no ; start_time=[Sun 2026-10-04 23:08:12 UTC] ; stop_time=[Sun 2026-10-04 23:08:13 UTC] ; pid=137837 ; code=exited ; status=0 }
+ExecStart={ path=/opt/duet/gateway-runtime/bin/bun ; argv[]=/opt/duet/gateway-runtime/bin/bun /opt/duet/current/index.js ; ignore_errors=no ; start_time=[Sun 2026-10-04 23:08:14 UTC] ; stop_time=[n/a] ; pid=137860 ; code=(null) ; status=0/0 }
+ActiveState=active
+SubState=running
+7f362cf0-3ec6-46be-a6e5-1e8488688455

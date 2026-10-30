@@ -1,0 +1,26 @@
+{
+  "model": "openai/gpt-6-luna",
+  "providerModel": "openai/gpt-6-luna",
+  "elapsedMs": 3324,
+  "recommendations": [
+    {
+      "agentName": "writer",
+      "reason": "You want to launch a blog; this agent writes articles and newsletters."
+    },
+    {
+      "agentName": "brand-designer",
+      "reason": "You want a clear visual brand; this agent designs brand visuals."
+    },
+    {
+      "agentName": "social-media-manager",
+      "reason": "You want to promote your blog; this agent plans social posts."
+    },
+    {
+      "agentName": "seo-specialist",
+      "reason": "You want your blog to reach more readers; this agent improves search visibility."
+    }
+  ],
+  "scope": "Direct live AI Gateway call through production recommendation core, prompt and schema; synthetic four-entry catalog; no deployment claim.",
+  "maxRetries": 0,
+  "timeoutMs": 10000
+}

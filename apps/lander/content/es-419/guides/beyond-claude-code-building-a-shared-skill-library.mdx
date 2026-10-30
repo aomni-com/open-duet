@@ -1,0 +1,774 @@
+---
+title: 'Cómo construir una biblioteca de skills de AI compartida para Claude Code'
+description: 'Deja de copiar y pegar prompts. Aprende a construir, compartir y mantener una biblioteca de skills de agentes de AI entre Claude.ai, Claude Code y todo tu equipo.'
+date: '2026-02-17'
+updatedAt: '2026-05-08'
+author:
+  name: 'Sawyer Middeleer'
+  avatar: '/authors/sawyer-middeleer.png'
+  link: 'https://www.linkedin.com/in/sawyer-middeleer/'
+category: 'guides'
+tags: ['claude-code', 'skills', 'mcp', 'api', 'agent-sdk', 'automation']
+type: 'guide'
+image: '/guides/beyond-claude-code-building-a-shared-skill-library/cover.png'
+cta:
+  title: 'La biblioteca de skills de tu equipo, compartida por defecto.'
+  subtitle: 'Guarda instrucciones revisadas en un workspace compartido y úsalas desde sesiones duraderas. Sin copiar prompts ni ocultar versiones.'
+  buttonText: 'Comparte instrucciones con Duet'
+  href: '/sign-in?from=guide-skill-library'
+locale: es-419
+translationKey: 'beyond-claude-code-building-a-shared-skill-library'
+---
+
+Escribiste el prompt perfecto.
+
+Corre el resumen de tu standup semanal, arma tu PRD en exactamente el formato correcto o genera reportes de clientes con las métricas que de verdad le importan a tu equipo.
+
+Luego alguien más en tu equipo lo necesita. O tú lo necesitas en otra herramienta. O quieres correrlo de forma programática.
+
+Así que copias y pegas. Lo ajustas. Copias y pegas otra vez.
+
+Seis meses después, hay nueve versiones del mismo workflow regadas en hilos de Slack, Google Docs y conversaciones a medias que apenas recuerdas.
+
+Las skills resuelven esto.
+
+Esta guía te llevará por el panorama completo: qué son las skills, dónde corren, en qué se diferencian entre las distintas superficies de Claude y cómo construir una biblioteca de skills compartida que tu equipo de verdad pueda mantener.
+
+Cubriremos las skills prearmadas (el camino más rápido al valor), las skills personalizadas (empaquetar la experiencia de tu equipo) y los patrones que hacen que skills y MCP trabajen juntos sin desmoronarse.
+
+Si no has leído nuestras guías anteriores, aquí va la versión corta: las **tools** le dan a Claude acceso a acciones (leer un archivo, llamar a una API), **MCP** estandariza cómo se conectan esas tools, y las **skills** empaquetan el _método_: las instrucciones, plantillas y verificaciones que convierten el acceso crudo a tools en workflows confiables. Para el desglose completo, mira [Agent Skills 101: Tools vs MCP vs Skills](/guides/agent-skills-101-tools-vs-mcp-vs-skills).
+
+Esta guía profundiza específicamente en las skills.
+
+<GuideTOC
+  items={[
+    {
+      number: 1,
+      title: 'Por qué importan las skills compartidas',
+      href: '#why-shared-skills-matter',
+    },
+    { number: 2, title: 'Dónde corren las skills', href: '#where-skills-run' },
+    { number: 3, title: 'Skills prearmadas vía la API', href: '#pre-built-skills-via-the-api' },
+    {
+      number: 4,
+      title: 'Skills personalizadas',
+      href: '#custom-skills-packaging-your-teams-expertise',
+    },
+    { number: 5, title: 'Skills + MCP', href: '#skills--mcp' },
+    {
+      number: 6,
+      title: 'Eficiencia y privacidad',
+      href: '#efficiency-and-privacy-code-execution-with-mcp',
+    },
+    { number: 7, title: 'Operacionalizar las skills', href: '#operationalizing-skills-for-a-team' },
+    {
+      number: 8,
+      title: 'El ecosistema más amplio',
+      href: '#the-broader-ecosystem-skills-beyond-claude',
+    },
+    { number: 9, title: 'Qué construir primero', href: '#what-to-build-first' },
+    {
+      number: 10,
+      title: 'Recursos y plantillas',
+      href: '#assets-skill-spec-template-and-governance-checklist',
+    },
+  ]}
+/>
+
+---
+
+## Por qué importan las skills compartidas
+
+Todo equipo tiene conocimiento tribal. La forma en que estructuras un PRD. El formato que tus inversionistas esperan en los board decks. Las verificaciones específicas que corres antes de lanzar un deploy. La rúbrica que tu equipo usa para la investigación de clientes.
+
+Este conocimiento vive en las cabezas de la gente, en docs dispersos y en prompts que se reconstruyen desde cero cada vez que alguien inicia una conversación nueva.
+
+Las skills son la capa de empaquetado que convierte los prompts tribales en capacidad reutilizable.
+
+### El problema
+
+_Un workflow, diez implementaciones_
+
+Sin skills, esto es lo que pasa:
+
+- **La persona A** escribe un prompt que genera reportes semanales en la terminal con Claude Code
+- **La persona B** reescribe el mismo prompt en Claude.ai porque no usa la terminal
+- **La persona C** lo necesita en su integración de API, así que mete las instrucciones a mano en un system prompt
+- **La persona D** se une al equipo y empieza desde cero
+
+Cada versión se desvía. Nadie sabe cuál es la actual. Cuando cambia el formato del reporte, actualizas una versión y olvidas las demás.
+
+### La meta
+
+_Crear una vez, reutilizar en todas partes_
+
+Una skill es un directorio con un archivo `SKILL.md`. Eso es todo. La misma skill funciona en:
+
+- **Claude.ai:** para humanos que prefieren la interfaz web
+- **Claude Code:** para workflows centrados en la terminal y contexto específico del repo
+- **Claude API:** para sistemas, automatizaciones e integraciones de producto
+- **Claude Agent SDK:** para orquestación programática de agentes en TypeScript o Python
+
+Una sola fuente de verdad. Múltiples superficies. Cuando actualizas la skill, todos reciben la actualización.
+
+<DuetCTA />
+
+---
+
+## Dónde corren las skills
+
+Las skills no son idénticas en todas partes. Cada superficie tiene modelos de compartición distintos, restricciones distintas y pasos de configuración distintos.
+
+Entender estas diferencias es como evitas construir algo que solo funciona en un lugar.
+
+### Comparación rápida
+
+|                             | **Claude.ai**                  | **Claude Code**                | **Claude API**                         | **Agent SDK**                  |
+| --------------------------- | ------------------------------ | ------------------------------ | -------------------------------------- | ------------------------------ |
+| **Skills prearmadas**       | Sí (automático)                | No                             | Sí (vía `skill_id`)                    | No                             |
+| **Skills personalizadas**   | Sí (subir zip)                 | Sí (sistema de archivos)       | Sí (subir vía API)                     | Sí (sistema de archivos)       |
+| **Alcance de compartición** | Solo por usuario               | Por proyecto o personal        | Toda la organización                   | Por proyecto                   |
+| **Configuración requerida** | Subir en Ajustes               | Crear directorio + SKILL.md    | Subida por API + beta headers          | Directorio + config            |
+| **Acceso a red**            | Varía según ajustes            | Completo (tu máquina)          | Ninguno (sandboxed)                    | Completo (tu máquina)          |
+| **Mejor para**              | Uso individual, tareas rápidas | Workflows específicos del repo | Sistemas de producción, automatización | Apps de agentes personalizadas |
+
+### Claude.ai
+
+El punto de partida más simple. Claude.ai soporta tanto skills prearmadas como skills personalizadas que tú mismo subes.
+
+**Cómo agregar una skill personalizada:**
+
+1. Ve a Ajustes: Features
+2. Sube tu skill como un archivo zip
+3. La skill queda disponible en tus conversaciones
+
+**El detalle:** las skills personalizadas en Claude.ai son por usuario. Tu compañero no puede ver las skills que subiste. No hay panel de administración, no hay despliegue a toda la organización, no hay gestión central. Si tu equipo tiene cinco personas, cada persona sube la skill por separado.
+
+Esto importa menos de lo que crees para las skills de productividad personal. Importa mucho si estás tratando de estandarizar workflows en un equipo. Para consistencia a nivel de equipo, usa la API o Claude Code con un repo compartido.
+
+**Requisitos:** plan Pro, Max, Team o Enterprise con ejecución de código habilitada.
+
+### Claude Code
+
+Claude Code es donde la mayoría de los builders empieza con skills personalizadas. Las skills viven en tu sistema de archivos como directorios: sin paso de subida, sin llamadas a la API, sin archivos zip. Si eres nuevo en Claude Code, empieza con [La guía definitiva para principiantes](/guides/claude-code-for-founders).
+
+```
+.claude/skills/weekly-report/
+├── SKILL.md           # Main instructions (required)
+├── template.md        # Report template
+└── examples/
+    └── sample.md      # Example output
+```
+
+Claude descubre las skills automáticamente y las usa cuando son relevantes para tu solicitud. O invocas una directamente con `/weekly-report`.
+
+**Dónde viven las skills determina quién las ve:**
+
+| **Ubicación** | **Ruta**                             | **Quién puede usarla**                  |
+| ------------- | ------------------------------------ | --------------------------------------- |
+| Personal      | `~/.claude/skills/my-skill/SKILL.md` | Tú, en todos tus proyectos              |
+| Proyecto      | `.claude/skills/my-skill/SKILL.md`   | Cualquiera que trabaje en este proyecto |
+| Enterprise    | Ajustes gestionados                  | Todos en tu organización                |
+
+**Funciones clave de Claude Code:**
+
+- **Control de autoinvocación:** agrega `disable-model-invocation: true` a tu frontmatter si solo quieres que la skill corra cuando la llames explícitamente (como `/deploy`: no quieres que Claude decida hacer un deploy porque tu código se ve listo)
+- **Restricciones de tools:** usa `allowed-tools` en el frontmatter para limitar lo que Claude puede hacer cuando una skill está activa. `allowed-tools: Read, Grep, Glob` crea un modo de solo lectura
+- **Ejecución en subagente:** agrega `context: fork` para correr una skill en un subagente aislado, útil para tareas de investigación o cualquier cosa que no deba contaminar el contexto de tu conversación principal
+- **Contexto dinámico:** la sintaxis `!command` corre comandos de shell antes de que el contenido de la skill llegue a Claude. `!gh pr diff` inyecta el diff real del PR en el prompt de la skill
+
+Para una guía práctica de cómo configurar skills con `CLAUDE.md` y comandos, mira [El Playbook de Claude Code](/guides/claude-code-playbook-building-a-skill-first-workflow-that-actually-sticks#skills-giving-claude-deep-expertise).
+
+### Claude API
+
+La API es donde las skills se vuelven infraestructura. Subes skills personalizadas vía el endpoint `/v1/skills`, referencias skills prearmadas por su `skill_id`, y todo corre en un contenedor de ejecución de código sandboxed.
+
+**El diferenciador:** las skills personalizadas subidas vía la API se comparten en toda la organización. Todos en tu workspace pueden usarlas. Esto es lo opuesto al modelo por usuario de Claude.ai, y es por eso que la API es la opción correcta para la estandarización a nivel de equipo.
+
+**Usar una skill prearmada (Python):**
+
+```python
+import anthropic
+
+client = anthropic.Anthropic()
+
+response = client.beta.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=4096,
+    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+    container={
+        "skills": [
+            {"type": "anthropic", "skill_id": "pptx", "version": "latest"}
+        ]
+    },
+    messages=[
+        {"role": "user", "content": "Create a quarterly review presentation"}
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
+```
+
+**Subir una skill personalizada:**
+
+```python
+from anthropic.lib import files_from_dir
+
+skill = client.beta.skills.create(
+    display_title="Weekly Report Generator",
+    files=files_from_dir("/path/to/weekly-report-skill"),
+    betas=["skills-2025-10-02"],
+)
+
+print(f"Skill ID: {skill.id}")
+```
+
+**Restricciones importantes:**
+
+- Requiere tres beta headers: `code-execution-2025-08-25`, `skills-2025-10-02`, `files-api-2025-04-14`
+- Sin acceso a red dentro del contenedor: tu skill no puede llamar a APIs externas
+- Sin instalación de paquetes en tiempo de ejecución: solo están disponibles los paquetes preinstalados
+- Hasta 8 skills por solicitud
+- Tamaño máximo de subida de 8MB por skill
+
+### Claude Agent SDK
+
+El SDK soporta skills personalizadas a través del mismo enfoque basado en sistema de archivos que Claude Code. Guarda las skills en `.claude/skills/` e incluye `"Skill"` en tu configuración de `allowedTools`.
+
+```tsx
+const agent = new Agent({
+  model: 'claude-sonnet-4-6',
+  allowedTools: ['Read', 'Write', 'Bash', 'Skill'],
+})
+```
+
+**Algo que notar:** las restricciones de tools funcionan distinto en el SDK. El campo de frontmatter `allowed-tools` es una función de la CLI de Claude Code. En el SDK, usas `allowedTools` en la configuración de tu agente en su lugar.
+
+---
+
+## Skills prearmadas vía la API
+
+Antes de construir algo personalizado, revisa si una skill prearmada ya hace lo que necesitas. Anthropic mantiene skills para los tipos de documento sobre los que corre el trabajo real.
+
+### Lo que obtienes de fábrica
+
+| **Skill ID** | **Qué hace**                                          |
+| ------------ | ----------------------------------------------------- |
+| `pptx`       | Crea y edita presentaciones de PowerPoint             |
+| `xlsx`       | Crea hojas de cálculo, analiza datos, genera gráficas |
+| `docx`       | Crea y edita documentos de Word                       |
+| `pdf`        | Genera documentos y reportes PDF con formato          |
+
+Estas existen porque el trabajo real produce artefactos reales (decks, hojas de cálculo, docs), no solo texto de chat. Si tu workflow termina con "ahora copia esto en Google Slides", una skill prearmada puede saltarse ese paso por completo.
+
+### El desbloqueo práctico
+
+Piensa en los entregables que tu equipo produce repetidamente:
+
+- **Generación de board decks** — la skill `pptx` toma datos estructurados y produce una presentación con formato
+- **Pack mensual de KPIs** — la skill `xlsx` crea una hoja de cálculo con gráficas y formato condicional
+- **Generador de PRDs o specs** — la skill `docx` produce un documento con formato listo para compartir
+- **Reportes listos para el cliente** — la skill `pdf` produce PDFs pulidos
+
+El patrón es el mismo: entran entradas estructuradas, salen archivos con formato. La Files API maneja las subidas y descargas.
+
+**Descargar un archivo generado:**
+
+```python
+for file_id in extract_file_ids(response):
+    file_metadata = client.beta.files.retrieve_metadata(
+        file_id=file_id, betas=["files-api-2025-04-14"]
+    )
+    file_content = client.beta.files.download(
+        file_id=file_id, betas=["files-api-2025-04-14"]
+    )
+    file_content.write_to_file(file_metadata.filename)
+```
+
+### Cuándo construir vs. cuándo usar una prearmada
+
+**Usa skills prearmadas cuando:**
+
+- El formato de salida es estándar (pptx, xlsx, docx, pdf)
+- Quieres velocidad y confiabilidad por encima de un formato personalizado
+- No necesitas lógica profunda específica del dominio en la generación
+
+**Construye una personalizada cuando:**
+
+- Necesitas una plantilla, estructura o rúbrica específica
+- El workflow implica varios pasos con validación
+- Estás combinando generación de documentos con lógica de dominio (tu modelo DCF, tus guías de marca, tus verificaciones de cumplimiento)
+
+También puedes combinar ambas: usa una skill personalizada para la lógica de análisis y una skill prearmada para la salida final:
+
+```python
+response = client.beta.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=4096,
+    betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+    container={
+        "skills": [
+            {"type": "anthropic", "skill_id": "xlsx", "version": "latest"},
+            {"type": "custom", "skill_id": dcf_skill.id, "version": "latest"},
+        ]
+    },
+    messages=[
+        {"role": "user", "content": "Run the DCF analysis and output to Excel"}
+    ],
+    tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+)
+```
+
+---
+
+## Skills personalizadas: empaquetar la experiencia de tu equipo
+
+Las skills prearmadas manejan los formatos estándar. Las skills personalizadas manejan todo lo demás: los workflows, las convenciones y el conocimiento institucional que hacen distinto el trabajo de tu equipo.
+
+### Qué es realmente una skill personalizada
+
+Una skill es un directorio. El único archivo requerido es `SKILL.md`. Todo lo demás es opcional.
+
+```
+incident-report/
+├── SKILL.md              # Main instructions (required)
+├── template.md           # Your incident report template
+├── severity-rubric.md    # How to classify severity
+├── examples/
+│   └── sample-report.md  # A good example report
+└── scripts/
+    └── validate.py       # Script to check completeness
+```
+
+`SKILL.md` usa frontmatter YAML para la metadata y markdown para las instrucciones:
+
+```yaml
+---
+name: incident-report
+description: Generates incident postmortem reports following our team format.
+  Use when writing incident reports, postmortems, or analyzing outages.
+---
+
+# Incident Report Generator
+
+## Process
+1. Gather timeline from provided logs or description
+2. Classify severity using severity-rubric.md
+3. Fill in template.md with structured findings
+4. Run validation: python scripts/validate.py report.md
+5. If validation fails, fix issues and re-validate
+
+## Key rules
+- Every finding must cite a specific log entry or timestamp
+- Action items must have an owner and a due date
+- Never classify severity below the actual impact
+```
+
+### Por qué existen las skills personalizadas
+
+Codifican el "cómo lo hacemos aquí":
+
+- **La estructura de tu PRD** — no un PRD genérico, sino las secciones que tu equipo de verdad usa, las preguntas que los stakeholders siempre hacen, el formato que tu PM espera
+- **El formato de tu postmortem de incidentes** — el formato de timeline específico, la rúbrica de severidad que acordó tu equipo de on-call, la plantilla de action items que de verdad se sigue
+- **Tu checklist de lanzamiento** — las 47 cosas que tienen que pasar antes de lanzar, incluidas las tres que todos olvidan
+- **Tu rúbrica de investigación de clientes** — cómo sintetizar las notas de entrevistas en el formato que tu equipo de producto lee
+
+Sin skills, este conocimiento vive en "pregúntale a Sarah, ella sabe el formato" o "revisa la página del wiki de 2024 que tal vez siga vigente".
+
+### La palanca de diseño clave: descripciones que se activan correctamente
+
+El campo `description` es lo más importante que escribes. No es documentación para humanos: es metadata que Claude usa para decidir cuándo cargar una skill sin cargar todo en el contexto.
+
+**Buena descripción:**
+
+```yaml
+description: Generates incident postmortem reports following our team format.
+  Use when writing incident reports, postmortems, or analyzing outages.
+```
+
+**Mala descripción:**
+
+```yaml
+description: Helps with documents
+```
+
+Incluye: qué hace + cuándo usarla + frases de activación que un usuario podría decir naturalmente. Escribe en tercera persona ("Genera reportes", no "Puedo ayudarte a generar reportes").
+
+**Probar tu descripción:** después de crear una skill, pruébala pidiéndole a Claude cosas que la skill debería manejar. Pídeselo con distintas formulaciones, las obvias y las parafraseadas. También prueba que _no_ se active en solicitudes no relacionadas. Una skill que se activa demasiado seguido es casi tan mala como una que nunca se activa.
+
+### Cómo la revelación progresiva mantiene el contexto ligero
+
+Las skills usan un sistema de carga de tres niveles que mantiene limpia tu ventana de contexto:
+
+| **Nivel**         | **Cuándo se carga**       | **Costo en tokens**     | **Qué incluye**                           |
+| ----------------- | ------------------------- | ----------------------- | ----------------------------------------- |
+| **Metadata**      | Siempre (al arrancar)     | ~100 tokens por skill   | `name` y `description` del frontmatter    |
+| **Instrucciones** | Cuando se activa la skill | Menos de 5K tokens      | Cuerpo del SKILL.md                       |
+| **Recursos**      | Cuando se necesita        | Prácticamente ilimitado | Archivos adicionales, scripts, plantillas |
+
+Esto significa que puedes instalar docenas de skills sin penalización. Claude ve la metadata de todas al arrancar (ligero), lee el SKILL.md completo solo cuando es relevante (moderado) y accede a los archivos de soporte solo cuando se necesita (por demanda).
+
+**Implicación práctica:** no trates de meter todo en el SKILL.md. Mantenlo en menos de 500 líneas. Mueve el material de referencia detallado, los ejemplos y los datos a archivos separados y referénciálos:
+
+```markdown
+## Additional resources
+
+- For API details, see reference.md
+- For usage examples, see examples.md
+```
+
+Claude lee esos archivos solo cuando la tarea los requiere.
+
+### Seguridad: trata las skills como código
+
+Las skills le dan a Claude instrucciones y código ejecutable. Una skill maliciosa puede dirigir a Claude a hacer cosas que no coinciden con su propósito declarado.
+
+<Callout type="warning" title="Prácticas no negociables">
+  - **Usa solo skills de fuentes confiables** — skills que construiste tú o que obtuviste de
+  Anthropic - **Audita las skills de terceros a fondo** — revisa cada archivo, busca llamadas de red
+  inesperadas o patrones de acceso a archivos - **Revisa las skills en los PRs** — el mismo proceso
+  que la revisión de código - **Versiona y hazte dueño de ellas** — cada skill debe tener un dueño
+  claro y un changelog
+</Callout>
+
+**Restricciones del frontmatter YAML (impuestas por el sistema):**
+
+- `name`: máximo 64 caracteres, solo letras minúsculas/números/guiones, sin etiquetas XML
+- `description`: máximo 1024 caracteres, sin etiquetas XML
+- Las palabras reservadas "anthropic" y "claude" no pueden aparecer en el nombre
+
+**El riesgo de la cadena de suministro es real.** La investigación ToxicSkills de Snyk encontró que el 36% de las skills de agentes de AI en directorios públicos contienen fallas de seguridad. Quédate con skills de fuentes conocidas con mantenedores visibles. Esto no es teórico: ha habido payloads maliciosos activos disfrazados de skills legítimas en directorios públicos de skills.
+
+<DuetCTA />
+
+---
+
+## Skills + MCP
+
+Si leíste nuestra [guía Agent Skills 101](/guides/agent-skills-101-tools-vs-mcp-vs-skills), conoces la distinción central: MCP te da acceso, las skills te dan método. Juntos son más confiables que prompts gigantes cosidos con integraciones improvisadas.
+
+### Por qué importa la separación
+
+**MCP** = acceso estandarizado a tools y datos. Es la plomería: conectar Claude a Jira, Slack, BigQuery, GitHub, tu base de datos, lo que sea.
+
+**Skills** = workflows reutilizables. El método, las plantillas y las verificaciones que convierten el acceso crudo a tools en algo consistente y confiable.
+
+**Juntos:** menos frágiles que las integraciones improvisadas. Cuando cambias tu sistema de tickets de Jira a Linear, intercambias el servidor MCP. La skill que genera tu resumen ejecutivo semanal sigue igual porque define el _proceso_, no la _plomería_.
+
+Para un recorrido práctico de cómo conectar tools MCP a tu workflow, mira [Conectar herramientas externas con MCP](/guides/claude-code-playbook-building-a-skill-first-workflow-that-actually-sticks#connecting-external-tools-with-mcp).
+
+### El patrón de traer, transformar, producir
+
+Las skills más útiles siguen el mismo patrón de tres pasos:
+
+1. **Traer** — las tools MCP traen las entradas crudas (tickets, docs, métricas, logs)
+2. **Transformar** — la Skill aplica el método (rúbrica, reglas de formato, verificaciones de validación)
+3. **Producir** — la skill prearmada de documento emite el artefacto final (pptx, xlsx, docx, pdf) cuando se desea un archivo con formato como salida
+
+### Ejemplos prácticos
+
+<Callout type="info" title="Workflow ejecutivo semanal">
+**Traer:** Jira MCP — obtén los tickets del sprint + cambios de estado. Slack MCP — obtén los resúmenes de hilos clave.
+
+**Transformar:** skill de reporte semanal — normaliza los datos, aplica la plantilla, resalta los bloqueos.
+
+**Producir:** skill docx — documento de Word con formato listo para los stakeholders.
+
+</Callout>
+
+<Callout type="info" title="Workflow de board deck">
+**Traer:** BigQuery MCP — obtén métricas de ingresos, churn, NPS. Stripe MCP — obtén datos de pagos y tendencias.
+
+**Transformar:** skill de board deck — agrega métricas, crea narrativas, marca anomalías.
+
+**Producir:** skill pptx — PowerPoint con formato y gráficas.
+
+</Callout>
+
+<Callout type="info" title="Workflow de reporte de incidentes">
+**Traer:** Datadog MCP — obtén logs y timeline relevantes. PagerDuty MCP — obtén el timeline del incidente y los responders.
+
+**Transformar:** skill de reporte de incidentes — estructura el timeline, clasifica la severidad, valida los hallazgos.
+
+**Producir:** skills docx + pdf — reporte con formato para revisión interna y stakeholders externos.
+
+</Callout>
+
+### Referenciar tools MCP en las skills
+
+Cuando tu skill usa tools MCP, usa siempre nombres completamente calificados para evitar errores de "tool not found":
+
+```markdown
+Use the Jira:get_sprint_issues tool to retrieve current sprint tickets.
+Use the Slack:get_channel_messages tool to pull key thread updates.
+```
+
+El formato es `ServerName:tool_name`. Sin el prefijo del servidor, Claude puede fallar al localizar la tool, sobre todo cuando hay varios servidores MCP disponibles.
+
+---
+
+## Eficiencia y privacidad: ejecución de código con MCP
+
+A medida que tu equipo conecta más servidores MCP, surge un problema de escalamiento. Esta sección cubre el patrón que Anthropic recomienda para mantener las cosas rápidas y rentables.
+
+### El problema de escalamiento
+
+Cuando un agente tiene acceso a cientos de tools MCP, dos costos explotan:
+
+1. **Las definiciones de tools sobrecargan la ventana de contexto:** el nombre, la descripción y el schema de parámetros de cada tool tiene que caber en el contexto. Cientos de tools significan miles de tokens gastados antes de que Claude procese un solo mensaje.
+2. **Los resultados intermedios inflan los tokens:** cuando Claude llama a una tool que devuelve un documento grande, ese resultado completo entra a la ventana de contexto. Si el siguiente paso implica otra llamada a una tool, el resultado grande se queda en el contexto, quemando tokens y haciendo más lentas las respuestas.
+
+### El patrón recomendado: trata las tools MCP como APIs de código
+
+La guía de eficiencia de Anthropic: usa ejecución de código para que el agente pueda procesar resultados intermedios grandes _dentro_ del entorno de ejecución y devolver solo el resultado final pequeño al modelo.
+
+En lugar de esto (costoso):
+
+```
+Claude → MCP tool → [large result enters context] → Claude reasons →
+MCP tool → [another large result enters context] → Claude generates final answer
+```
+
+Haz esto (eficiente):
+
+```
+Claude → code execution [
+  → load only needed tool definitions via filesystem
+  → call MCP tool
+  → process large result locally
+  → extract relevant data
+] → small final result enters context → Claude generates answer
+```
+
+### Por qué a los equipos les debería importar
+
+- **Menos latencia y costo:** los resultados intermedios grandes nunca entran a la ventana de contexto
+- **Workflows más robustos:** menos modos de falla del tipo "copia el blob enorme en la siguiente llamada a la tool"
+- **Mejor escalamiento:** agregar más servidores MCP no aumenta proporcionalmente el consumo de contexto
+
+Este patrón es especialmente relevante al combinar skills con MCP. El código de tu skill puede orquestar las llamadas MCP de forma eficiente dentro del entorno de ejecución, procesando los datos localmente y exponiendo solo lo que importa.
+
+---
+
+## Operacionalizar las skills para un equipo
+
+Construir una skill es la parte fácil. Mantener sana una biblioteca de skills con el tiempo: ahí es donde la mayoría de los equipos falla. Esta sección cubre las prácticas operativas que separan el "probamos las skills una vez" del "las skills son cómo trabajamos".
+
+Para la disciplina a nivel de fundador que hace que las skills se queden (curaduría de memoria, briefs basados en resultados, ciclos de revisión), mira [Duet AI para fundadores: el modo fundador como sistema operativo](/guides/duet-ai-for-founders).
+
+### Modelo de propiedad
+
+Cada skill necesita:
+
+- **Un dueño:** alguien responsable de mantenerla vigente
+- **Una versión:** para que sepas qué está desplegado y qué cambió
+- **Un camino de deprecación:** para que las skills viejas no se rompan en silencio
+
+Guarda esto en tu frontmatter o en un archivo de metadata acompañante:
+
+```yaml
+---
+name: weekly-report
+description: Generates weekly team report with metrics and highlights.
+  Use when creating weekly reports or team updates.
+---
+```
+
+Para las skills gestionadas por API, las versiones son marcas de tiempo autogeneradas. Fija versiones específicas en producción y usa `"latest"` solo en desarrollo:
+
+```python
+# Production: pin version
+{"type": "custom", "skill_id": "skill_01Abc...", "version": "1759178010641129"}
+
+# Development: use latest
+{"type": "custom", "skill_id": "skill_01Abc...", "version": "latest"}
+```
+
+### Proceso de revisión y release
+
+Trata las skills como código:
+
+1. **Revisión de PR:** seguridad (¿esta skill accede a algo inesperado?) + corrección (¿produce la salida correcta?)
+2. **Prueba con escenarios reales:** no entradas sintéticas, sino tareas reales que tu equipo corre
+3. **Rollout escalonado:** piloto con un integrante del equipo, luego la organización más amplia
+4. **Para skills de API:** gestiona las versiones vía la Claude Console o los endpoints de la API
+
+### Checklist de pruebas
+
+Antes de compartir cualquier skill, verifica:
+
+**Descubrimiento y activación:**
+
+- La skill se activa con solicitudes obvias ("genera un reporte semanal")
+- La skill se activa con solicitudes parafraseadas ("escribe las actualizaciones de esta semana")
+- La skill NO se activa con solicitudes no relacionadas
+- La descripción es lo bastante específica para evitar falsos positivos
+
+**Corrección funcional:**
+
+- La salida coincide con el formato y la estructura esperados
+- Los pasos de validación pasan (si la skill incluye scripts)
+- Funciona con Haiku, Sonnet y Opus (si planeas usarla entre modelos)
+- Los archivos de soporte se cargan correctamente cuando se referencian
+
+**Integración:**
+
+- Las referencias a tools MCP usan nombres completamente calificados
+- Los paquetes requeridos están disponibles en el entorno objetivo
+- Funciona de principio a fin en la superficie objetivo (Claude.ai, Code, API)
+
+**Posempaquetado:**
+
+- La estructura del archivo zip es correcta (para subir a Claude.ai o a la API)
+- La skill sigue funcionando después de volver a subirla
+- Los integrantes del equipo pueden acceder a ella (revisa el alcance de compartición)
+
+### Patrón de documentación que se compone
+
+Las bibliotecas de skills más fuertes comparten un patrón común: la skill ES la documentación. Cuando tu skill incluye instrucciones, plantillas y ejemplos claros, no necesitas una página de wiki aparte que explique "cómo generar un reporte semanal". La skill misma es el doc vivo.
+
+Para acelerar esto:
+
+- **Aloja tu repo de skills públicamente** (o internamente vía Git) para que las skills sean descubribles
+- **Usa nombres consistentes:** la forma de gerundio funciona bien — `generating-reports`, `reviewing-code`, `analyzing-data`
+- **Cruza referencias entre skills relacionadas** en cada SKILL.md: "Para análisis de datos, mira la skill `analyzing-metrics`"
+
+### Cuando las cosas salen mal
+
+Modos de falla comunes y sus soluciones:
+
+| **Problema**                                        | **Causa probable**                                    | **Solución**                                                                      |
+| --------------------------------------------------- | ----------------------------------------------------- | --------------------------------------------------------------------------------- |
+| La skill nunca se activa                            | Descripción demasiado vaga                            | Agrega frases de activación y keywords específicas                                |
+| La skill se activa con todo                         | Descripción demasiado amplia                          | Acota la descripción, agrega restricciones                                        |
+| El formato de salida se desvía                      | Instrucciones demasiado sueltas                       | Agrega una plantilla estricta con estructura explícita                            |
+| La skill funciona en Claude Code pero falla vía API | Dependencia de red o de paquete                       | Quita las llamadas a APIs externas; verifica que los paquetes estén preinstalados |
+| La ventana de contexto se llena                     | SKILL.md demasiado largo o demasiadas skills cargadas | Divide en archivos separados; mantén el SKILL.md en menos de 500 líneas           |
+
+---
+
+## El ecosistema más amplio: skills más allá de Claude
+
+Las skills ya no son solo una función de Claude. Se están convirtiendo en un estándar multiplataforma, y esto tiene implicaciones en cómo inviertes en tu biblioteca de skills.
+
+### El estándar abierto Agent Skills
+
+Las skills de Claude Code siguen el estándar abierto Agent Skills ([agentskills.io](https://agentskills.io)), que funciona en múltiples herramientas de AI. Esto significa que una skill que escribes para Claude Code potencialmente puede funcionar en otras herramientas que soporten el estándar: Cursor, Codex, OpenCode y otras.
+
+### El directorio skills.sh de Vercel
+
+En enero de 2026, Vercel lanzó [skills.sh](https://skills.sh), un directorio abierto donde los desarrolladores publican e instalan skills para agentes de AI. Crece a un ritmo de unas 147 skills nuevas por día y soporta Claude Code, Codex, Cursor y otras herramientas. Piensa en él como el npm de las skills de agentes.
+
+### Consideraciones de seguridad para las skills públicas
+
+El ecosistema es joven y los riesgos de la cadena de suministro son reales. La investigación de Snyk encontró payloads maliciosos activos en directorios públicos de skills: skills disfrazadas de herramientas de trading de cripto que en realidad roban credenciales.
+
+<Callout type="warning" title="Reglas prácticas para las skills públicas">
+  - Quédate con skills de repositorios conocidos con mantenedores visibles - Audita siempre antes de
+  habilitar — lee cada archivo, no solo el SKILL.md - Para las skills de tu propio equipo, mantenlas
+  en un repo privado con revisión de código - Cuando sí publiques skills públicamente, incluye
+  documentación clara y tu compromiso de mantenimiento
+</Callout>
+
+---
+
+## Qué construir primero
+
+Si estás empezando desde cero, aquí va una secuencia práctica:
+
+1. **Elige un workflow que tu equipo repite cada semana.** El resumen del standup semanal. La preparación del sprint review. El reporte de cliente. Algo que todos hacen, que todos hacen un poco distinto.
+2. **Constrúyelo primero como una skill de Claude Code.** Basado en sistema de archivos, sin configuración de API requerida. Pruébalo con tu propio trabajo por una semana.
+3. **Compártelo como una skill de proyecto.** Haz commit de `.claude/skills/your-skill/` a tu repo. Ahora todos en el proyecto la tienen.
+4. **Si funciona, promuévelo a la API.** Súbelo vía `/v1/skills` para que esté disponible en toda la organización y accesible desde las automatizaciones.
+5. **Agrega conexiones MCP según se necesite.** Empieza primero con la lógica de la skill. Suma fuentes de datos MCP una vez que el workflow esté comprobado.
+
+No trates de construir una biblioteca de skills completa el primer día. Construye la única skill que ahorra más tiempo esta semana. Luego construye otra la próxima semana. La biblioteca crece a partir del uso real, no de sesiones de planeación.
+
+---
+
+## Recursos: plantilla de spec de skill y checklist de gobernanza
+
+### Plantilla de spec de skill
+
+Usa esta plantilla para cada skill nueva. Te obliga a definir el alcance, las entradas, los guardrails y los criterios de éxito antes de escribir las instrucciones.
+
+```markdown
+# Skill Spec: [Skill Name]
+
+## Scope
+
+- **What this skill does:** [one sentence]
+- **What this skill does NOT do:** [boundaries]
+- **Target surfaces:** [Claude.ai / Claude Code / API / SDK]
+
+## Inputs
+
+- **Required:** [what the user must provide]
+- **Optional:** [what enhances the output]
+- **MCP dependencies:** [which MCP servers/tools, if any]
+
+## Guardrails
+
+- **Must always:** [non-negotiable rules]
+- **Must never:** [hard constraints]
+- **Validation:** [how to verify the output is correct]
+
+## Success criteria
+
+- Output matches expected format
+- Triggers on relevant requests
+- Does NOT trigger on unrelated requests
+- Tested with Haiku / Sonnet / Opus
+- Reviewed by [owner name]
+
+## Owner
+
+- **Created by:** [name]
+- **Version:** [x.y]
+- **Last updated:** [date]
+```
+
+### Checklist de gobernanza de la biblioteca de skills
+
+Para los equipos que gestionan más de un puñado de skills:
+
+**Inventario:**
+
+- Todas las skills rastreadas en un registro central (directorio de repo o hoja de cálculo)
+- Cada skill tiene un dueño nombrado
+- Cada skill tiene una versión y una fecha de última actualización
+- Las skills sin uso identificadas y marcadas para deprecación
+
+**Calidad:**
+
+- Las skills nuevas requieren revisión de PR antes de hacer merge
+- Las skills probadas con escenarios reales (no solo entradas sintéticas)
+- Las descripciones revisadas para la precisión de activación
+- Auditoría de seguridad para cualquier skill que ejecute código
+
+**Mantenimiento:**
+
+- Las skills revisadas trimestralmente para verificar su precisión
+- Las skills deprecadas removidas o archivadas (no abandonadas a que se pudran)
+- Los cambios disruptivos comunicados a los usuarios antes del despliegue
+- Fijación de versiones usada en las integraciones de API de producción
+
+**Distribución:**
+
+- El alcance personal vs. proyecto vs. toda la organización es intencional para cada skill
+- Las skills subidas por API tienen historial de versiones documentado
+- Los usuarios de Claude.ai saben cómo instalar las skills del equipo (hasta que llegue la compartición a toda la organización)
+- Los nuevos integrantes del equipo saben dónde encontrar y cómo usar la biblioteca de skills
+
+---
+
+## Para cerrar
+
+Las skills son la diferencia entre "Claude es útil cuando le doy el prompt correcto" y "Claude sabe cómo trabaja nuestro equipo".
+
+La inversión es pequeña. Un archivo SKILL.md con las convenciones de tu equipo. Unas cuantas plantillas. Tal vez un script de validación. El retorno se compone cada vez que alguien en tu equipo evita reconstruir un workflow desde cero.
+
+Empieza con una. Ese único workflow que estás más cansado de volver a explicar.
+
+---
+
+_Esta es la Parte 3 de la serie de Guías de Duet. La Parte 1 cubre [Agent Skills 101: Tools vs MCP vs Skills](/guides/agent-skills-101-tools-vs-mcp-vs-skills), y la Parte 2 cubre [La guía definitiva para principiantes de Claude Code](/guides/claude-code-for-founders). Para la configuración práctica de CLAUDE.md, comandos y skills en Claude Code, mira [El Playbook de Claude Code](/guides/claude-code-playbook-building-a-skill-first-workflow-that-actually-sticks)._

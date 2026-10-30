@@ -1,0 +1,80 @@
+{
+  "status": "passed immutable target-OS container execution",
+  "sourceRevision": "cef66f48401f2419a1b8cc71675c250291295090",
+  "targetVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+  "predecessorVersion": "0.0.0+373f0d4dcb530705e3ad400e4f7be5fb55ddc0edb75cedfae3753522a8a36788",
+  "releaseDir": "/tmp/unified-duet-strict-predecessor-built-cef66f48401f/runtime-release",
+  "nativeCliSha256": "62e5980fc3c6741624ebdf597213220521a32cb6d79f341d2eea30a92dc7100b",
+  "input": {
+    "image": "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+    "releaseDir": "/tmp/unified-duet-strict-predecessor-built-cef66f48401f/runtime-release",
+    "predecessorVersion": "0.0.0+373f0d4dcb530705e3ad400e4f7be5fb55ddc0edb75cedfae3753522a8a36788",
+    "probe": "/Users/synthetic-user/.codex/worktrees/232f/duet/specs/unified-duet/assets/packaging/probe.ts",
+    "probeSha256": "ffde098160ad6d1f6c1bc29ad50f4c53acf74593d92d7ce558839c0a4075a061",
+    "tuiOwner": "/Users/synthetic-user/.codex/worktrees/232f/duet/specs/unified-duet/assets/public-distribution/final-candidate/verify-linux.sh",
+    "tuiOwnerSha256": "4af13c4404ec35e80d9ccd1f91f1b75ac2ea28b2bda7b0cee17a5482da6344c7",
+    "releaseManifestSha256": "3c71db38b9a0ad7e7bb85e91196dc8fa293e9befd25625e215096d3ba6f670b7",
+    "noExternalNetwork": true,
+    "releaseReadOnly": true,
+    "hardTimeoutSeconds": {
+      "host": 600,
+      "container": 540,
+      "nativeProbe": 90,
+      "tui": 4
+    },
+    "fixtureName": "duet-strict-predecessor-cef66-physical-official",
+    "imageDecision": "Actual final target OS, including image-owned ripgrep; supersedes minimal9074 fixture for compiled CLI proof"
+  },
+  "result": {
+    "status": "passed",
+    "fixtureName": "duet-strict-predecessor-cef66-physical-official",
+    "cleanupVerifiedAbsent": true,
+    "missingCorruptSidecarBranch": "not executed: retained probe branch requires legacy duet-linux-x64 filename",
+    "exitCode": 0,
+    "containerId": "b5904327ca510c1b4f95b687c580f37ade6e6b61dd64c9bc3c76afc061576cb5"
+  },
+  "checks": [
+    "source-built help marker",
+    "version/help and relay skill/provider initialization",
+    "native durable memory reopen and pgvector semantic recall with controlled embedding",
+    "RPC first and second prompt accepted; exactly one completed turn; four controlled model requests",
+    "actual image-owned ripgrep14.1.0 execution with exact needle output",
+    "actual Photon image resize4096x4 to2000x2",
+    "native TUI labels DUET AGENT/todos/relays/context and no fatal native errors",
+    "post-run existing inspectRelease confirms exact predecessor identity",
+    "original cef source restored and Git clean",
+    "exact container removed and absent in inspect plus exact-ID list"
+  ],
+  "skipped": [
+    "Legacy retained-probe missing/corrupt sidecar branch requires duet-linux-x64 filename; no such assertions executed; generic PASS log wording does not prove them"
+  ],
+  "negativeControls": [
+    "Leading global flag in PROBE_COMMAND caused skills to dispatch as a prompt; corrected by standard env prefix without changing CLI/probe",
+    "Minimal9074 image lacks rg; unchanged native assertion failed; actual target-image OS owns real ripgrep and same assertion passed"
+  ],
+  "physicalLimits": [
+    "Linux amd64 Docker execution on ARM Mac; no provider VM was allocated",
+    "Immutable image target OS used with timeout entrypoint instead of starting systemd; full VM/gateway lifecycle proof belongs to provider drills",
+    "Controlled synthetic model/embedding edges; no real model account or registry install",
+    "No claim for negative sidecar branch or actual provider/image deployment acceptance"
+  ],
+  "evidenceSha256": {
+    "after-inspection.json": "37dc64d1712c2673aeb5b08e2aff56c99e763bf6c23d7e836d26976be9df7057",
+    "command.json": "aa0bf03eb1c08c08b4541bfeb869cb93a556c29623fed1767b64b52f4c5c02c4",
+    "help.txt": "b66682849407e3c969aca8c1445631e25094b20bdb56fd78f3706d12d41c72ec",
+    "initial-cleanup-reconciliation.json": "0aea95f5acbda9d555706f018149b6f2a8e3485aa6040b2be3695d293661f7f7",
+    "input.json": "83064e1f570c8825038490e769e368567297b6cb935381c648dbc74b771a2075",
+    "invalid-flag-prefix-result.json.gz": "b67189f6a716429db60a2ac873193410b80763a4516a7750e4786183ca6f89eb",
+    "invalid-flag-prefix-run.log.gz": "53652bfeb5650c4ac622443c5669a0bb52d3b08876e5b305f0b26c09209b3f64",
+    "minimal-image-missing-rg-result.json.gz": "ce41f6716a64c0d497ae6164153dfd6733cc8c8739099776207442af4f8ec378",
+    "minimal-image-missing-rg-run.log.gz": "bc1d961606d6843a76251dfe384d2193382db55c298c76cf8e25df2553085041",
+    "process.json": "f9b4dec85f0b6545179a63567ada66564ab327a4ce779abe3263f5e87b65ca1f",
+    "result.json": "8007668bf3a83cbcc988766f478c4a3a48c66ec5a040ad069dba9bb99605282d",
+    "rg.txt": "100bf49b23f1041f11bb4543e25dbb4254c0e93a74ad80d8b6cc371d61a23ef3",
+    "run.log.gz": "1afbae7db23a722493921bb18b0a533deb2db8ed127f3bd985239bc800028b63",
+    "run.py": "d1aea22206ba568927a134ed548a69b623907a43132175f09c1bc691e62723b9",
+    "runtime.json.gz": "cbc78d28e8234a2f6f6038e544f1192a67829c4f5165fd17b53b80a3e3719bea",
+    "tui.ansi.gz": "ee497257007d52346401b552cf6bc54f488dc2269818fe4073db21934fa5ccfa",
+    "tui.stderr.gz": "efeb2f880ffcffc4830b3342626cfe3b4736363ed3bd331703a9b6d664a959c8"
+  }
+}

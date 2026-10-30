@@ -1,0 +1,42 @@
+{
+  "publishedVersion": "0.3.30",
+  "publishedGitHead": "0583f6d485f7655b0b6f78ad6d1ccee298c236d5",
+  "releaseWorkflow": 36519375209,
+  "releaseConclusion": "success",
+  "referenceTarballSha256": "ac62f4214bc961cccf265945648cca33a52bbc7c069a5e7dcbf280b7ad980b42",
+  "comparedFiles": 677,
+  "differentFiles": [],
+  "duetIntegration": "Real registry installation and generated routing; no local registry URL or unrelated lockfile drift",
+  "checks": [
+    {
+      "name": "routing export and check",
+      "exitCode": 0
+    },
+    {
+      "name": "fresh/resumed managed routing and receipt replay",
+      "exitCode": 0,
+      "passes": 4,
+      "assertions": 38
+    },
+    {
+      "name": "tier contracts",
+      "exitCode": 0,
+      "passes": 23,
+      "assertions": 88
+    },
+    {
+      "name": "gateway typecheck",
+      "exitCode": 0
+    },
+    {
+      "name": "test-harness typecheck",
+      "exitCode": 0
+    }
+  ],
+  "evidenceDirectory": "/tmp/workflow-published-0330",
+  "limitations": [
+    "Controlled responses prove process routing/persistence, not paid-provider output quality.",
+    "Historical advisor-enabled checkpoint coverage remains in agent deterministic tests.",
+    "Broader backend/API local suite and both deployed staging journeys remain unqualified."
+  ]
+}

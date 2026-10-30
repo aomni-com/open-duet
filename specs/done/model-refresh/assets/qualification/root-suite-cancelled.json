@@ -1,0 +1,49 @@
+{
+  "outcome": "user-directed cancellation; NOT GREEN",
+  "source": "0cbb71854fc90c86c0e70395fdbf5ee12fa76ab2",
+  "agentVersion": "0.3.29",
+  "remoteJobExitCode": 143,
+  "localOrchestratorExitCode": 1,
+  "turboSummary": {
+    "successful": 20,
+    "total": 23,
+    "elapsed": "1h17m40.626s",
+    "backendExitCode": 137,
+    "gatewayExitCode": 1,
+    "api": "force killed during cancellation"
+  },
+  "completedStages": [
+    "install\t0\t6",
+    "check-types\t0\t54",
+    "lint\t0\t4"
+  ],
+  "distinctObservedFailures": [
+    "@repo/gateway:test: (fail) gateway slice04 routes and phone-home loop seams > a sync skills descriptor starts a detached verified install [113.33ms]",
+    "@repo/backend:test: (fail) auth workspaces > magic-link and Google identities create or link users and create one first workspace [2469.63ms]",
+    "@repo/backend:test: (fail) api keys > a concurrent API burst spends its budget without losing requests to write conflicts [4893.93ms]",
+    "@repo/backend:test: (fail) agent session state machine > deleting an agent terminalizes only its work and converges across more than one batch [35735.26ms]",
+    "@repo/backend:test: (fail) agent session state machine > stale dispatches are no-ops and cleanup crosses its batch boundary [25636.65ms]",
+    "@repo/backend:test: (fail) custom MCP servers on the turn launch marker > refuses dispatch for a session whose agent row is gone [1387.88ms]",
+    "@repo/backend:test: (fail) workspace invitations and authenticated bootstrap > concurrent competing handoffs commit one acquisition and one signup event [1365.21ms]",
+    "@repo/backend:test: (fail) workspace invitations and authenticated bootstrap > accepted invitations can be retried after expiry without changing membership [2281.27ms]"
+  ],
+  "vmName": "duet-model-refresh-root-muko7spa",
+  "cleanup": {
+    "removed": true,
+    "listAbsenceVerified": true
+  },
+  "followup": "cancelled; runner throws before any action",
+  "finalCacheSha256": "069ef59ade05e4b729ff9a28052349d9b848e49442117abbd60e62080f8bfb80",
+  "resources250msSamples": 5888,
+  "samplerStopped": "2026-09-28T04:30:42Z",
+  "cancellation": [
+    "user-directed cancellation; not green",
+    "2026-09-28T04:30:41Z",
+    "stopped backend group5325; stopping owning job group384; API began during cancellation"
+  ],
+  "limitations": [
+    "Root did not complete; backend interrupted and API force killed.",
+    "Eight distinct observed test failures remain in original source run.",
+    "Subsequent root visual union/assets steps did not execute."
+  ]
+}

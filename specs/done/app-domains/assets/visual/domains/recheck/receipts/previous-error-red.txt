@@ -1,0 +1,23 @@
+bun test v1.3.14 (0d9b296a)
+
+spa/apps/app-domain-dialog.test.tsx:
+ 95 |           </TooltipProvider>
+ 96 |         </SpaContext.Provider>
+ 97 |       </QueryClientProvider>
+ 98 |     </NextIntlClientProvider>,
+ 99 |   )
+100 |   expect(markup).toContain('Previous check')
+                       ^
+error: expect(received).toContain(expected)
+
+Expected to contain: "Previous check"
+Received: "<div class=\"space-y-4\" data-app-domain-panel=\"site\"><div class=\"space-y-4\"><div class=\"space-y-2\"><p class=\"break-all font-medium\">portal.example.com</p><p class=\"flex items-center gap-2 text-sm\" role=\"status\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" fill=\"currentColor\" viewBox=\"0 0 256 256\" aria-hidden=\"true\" class=\"animate-spin\"><path d=\"M136,32V64a8,8,0,0,1-16,0V32a8,8,0,0,1,16,0Zm88,88H192a8,8,0,0,0,0,16h32a8,8,0,0,0,0-16Zm-45.09,47.6a8,8,0,0,0-11.31,11.31l22.62,22.63a8,8,0,0,0,11.32-11.32ZM128,184a8,8,0,0,0-8,8v32a8,8,0,0,0,16,0V192A8,8,0,0,0,128,184ZM77.09,167.6,54.46,190.22a8,8,0,0,0,11.32,11.32L88.4,178.91A8,8,0,0,0,77.09,167.6ZM72,128a8,8,0,0,0-8-8H32a8,8,0,0,0,0,16H64A8,8,0,0,0,72,128ZM65.78,54.46A8,8,0,0,0,54.46,65.78L77.09,88.4A8,8,0,0,0,88.4,77.09Z\"></path></svg>Rechecking…</p><p class=\"text-sm text-muted-foreground\">Duet is checking this domain again. Updated results will appear here when it finishes.</p></div><p class=\"break-words rounded-md border border-destructive/30 p-3 text-sm text-red-700 dark:text-red-300\" role=\"alert\">Domain verification could not be completed. Check your DNS records and recheck.</p><div class=\"space-y-3\"><div class=\"flex flex-wrap gap-2\"><button class=\"inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3 py-1.5\" disabled=\"\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" fill=\"currentColor\" viewBox=\"0 0 256 256\" aria-hidden=\"true\" class=\"animate-spin\"><path d=\"M136,32V64a8,8,0,0,1-16,0V32a8,8,0,0,1,16,0Zm88,88H192a8,8,0,0,0,0,16h32a8,8,0,0,0,0-16Zm-45.09,47.6a8,8,0,0,0-11.31,11.31l22.62,22.63a8,8,0,0,0,11.32-11.32ZM128,184a8,8,0,0,0-8,8v32a8,8,0,0,0,16,0V192A8,8,0,0,0,128,184ZM77.09,167.6,54.46,190.22a8,8,0,0,0,11.32,11.32L88.4,178.91A8,8,0,0,0,77.09,167.6ZM72,128a8,8,0,0,0-8-8H32a8,8,0,0,0,0,16H64A8,8,0,0,0,72,128ZM65.78,54.46A8,8,0,0,0,54.46,65.78L77.09,88.4A8,8,0,0,0,88.4,77.09Z\"></path></svg>Rechecking…</button><button class=\"inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3 py-1.5\">Remove domain</button></div></div></div></div>"
+
+      at <anonymous> (/private/tmp/duet-app-domains-ui/apps/web/spa/apps/app-domain-dialog.test.tsx:100:18)
+(fail) a queued failed-domain recheck identifies the retained diagnostic as a previous result [10.46ms]
+
+ 0 pass
+ 2 filtered out
+ 1 fail
+ 1 expect() calls
+Ran 1 test across 1 file. [241.00ms]

@@ -1,0 +1,53 @@
+{
+  "status": "prepared-not-executed",
+  "actualRetryB": "Failed before observing held target; exact provider cleanup verified by root. Prior evidence lacks helper result/job metadata; no helper defect is established.",
+  "freeze": {
+    "phase": "interrupted",
+    "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "archive": "/tmp/unified-duet-provider-interrupted-packet-diagnostic-reviewed-20261004.tar",
+    "archiveSha256": "6f3e97804f30fe329ab3089b5d582880d98793dad085ea859d5ab3d799e4ff3b",
+    "outputDir": "/tmp/unified-duet-provider-interrupted-packet-diagnostic-reviewed-20261004",
+    "files": {
+      "runtime-bootstrap.js": "b33587a373136cdac66b78cf74f2e05eb2ee7341207d7adafef49045f0b4e1ab",
+      "duet-gateway.service": "84677a224fe0385b335a36dc8cb4e9609424a75f49ed138ab671a4f9c8e3b867",
+      "gateway-bun": "a83d263767d839e4d2649ca8e35d07159c7afc99afdc96d731ced29e056dda0c",
+      "platform-helper.js": "e8603337408bad602fbff58f82d928a96982bf2e1b709c82aa48814b1558f5ed",
+      "legacy/index.js": "01212abf6ba1d20de0604a0b615a4cd5a442036f49ccc915b44e6afa7c43ec63",
+      "legacy/helper.js": "66d30a1884b07751b6ef127849af8b59c566b1677035e8179cb6292aa1331be7",
+      "legacy/gateway-bootstrap.js": "14c6ba68a04abd340b29bf1110c7437ed31ac601c1f0e0955fbb0eac4c674b43",
+      "legacy/duet-gateway.service": "e6456457eca9fa5cafc1d75a4116a8ee3f2abcba9a997a7b6f796e500c34daa6",
+      "fixture-driver.js": "b9d57eb0890035043003270f9c35a1320a300c1c6804d23b94b8faf2c4a1cbd1"
+    }
+  },
+  "equivalence": {
+    "oldArchiveSha256": "050c2ebcf16d736a88ae9e44b87a68cca845814b532b9246527eb1144bd3a189",
+    "changedFiles": [
+      "packet.json",
+      "fixture-driver.js"
+    ],
+    "immutablePayloadFilesCompared": 17
+  },
+  "checks": {
+    "tests": 5,
+    "assertions": 17,
+    "typecheck": "passed",
+    "lint": "passed"
+  },
+  "review": {
+    "log": "/tmp/unified-duet-adoption-progress-review.txt",
+    "findings": [
+      "nested durable receipt",
+      "partial descriptor on executable hash error",
+      "unbounded diagnostic commands"
+    ],
+    "resolution": "All resolved: whitelisted nested receipt without settlement claim, independent hash results, GNU timeout5s on diagnostic systemctl/journalctl only."
+  },
+  "sourceSha256": {
+    "adoption-progress.ts": "b24b461d28c46b35dd0ee9f55217c2b9bcf71a51d8255d5664c74b7b77803f5e",
+    "adoption-progress.test.ts": "8584e54996b89725eb13f658db9904b4d9f7d62a8def1eb70eb67a02691123f5",
+    "fixture-driver.ts": "1c6e2a1c5dd78009064e4b28bcf00fda58f0d11692ab04fc76edf79c122d4122"
+  },
+  "liveOperationsByThisLane": false,
+  "runtimeOrHelperChanges": false,
+  "provisionalArchiveRetained": "/tmp/unified-duet-provider-interrupted-packet-diagnostic-20261004.tar"
+}

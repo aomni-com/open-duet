@@ -1,0 +1,11 @@
+{
+  "triggers": [],
+  "tags": [
+    "marketing",
+    "engineering"
+  ],
+  "onboarding": {
+    "kind": "chat"
+  },
+  "suggestedFirstMessage": "Hi — I’m your SEO Specialist. I read what your site already ranks for, and I won’t write a word until I can name a search job no page of yours does. Shall I start with the gaps costing you the most traffic?"
+}

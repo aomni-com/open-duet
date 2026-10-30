@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chat File Attachments — Quadrant Map</title>
+    <style>
+      :root {
+        --ink: #1c2333;
+        --sub: #64748b;
+        --line: #e2e8f0;
+        --bg: #f6f8fb;
+        --card: #fff;
+        --ok: #047857;
+        --warn: #b45309;
+        --bad: #b91c1c;
+        --accent: #3b5bdb;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      body {
+        font:
+          14.5px/1.55 -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+        padding: 32px 20px 80px;
+      }
+      main {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 24px;
+      }
+      .sub {
+        color: var(--sub);
+        margin: 4px 0 24px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      @media (max-width: 800px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      section {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 18px 20px;
+      }
+      section h2 {
+        font-size: 15px;
+        margin-bottom: 2px;
+      }
+      section .q {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--sub);
+      }
+      ul {
+        padding-left: 18px;
+        margin-top: 10px;
+      }
+      li {
+        margin-bottom: 7px;
+      }
+      code {
+        font-family: ui-monospace, monospace;
+        font-size: 12.5px;
+        background: #f1f5f9;
+        padding: 1px 5px;
+        border-radius: 4px;
+      }
+      .cite {
+        color: var(--sub);
+        font-size: 12px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        font-size: 13.5px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 6px 8px;
+        border-top: 1px solid var(--line);
+        vertical-align: top;
+      }
+      th {
+        color: var(--sub);
+        font-weight: 600;
+        font-size: 12px;
+        border-top: none;
+      }
+      .tag {
+        display: inline-block;
+        font-size: 10.5px;
+        font-weight: 700;
+        padding: 1px 7px;
+        border-radius: 999px;
+      }
+      .t-user {
+        background: #eef2ff;
+        color: var(--accent);
+      }
+      .t-terr {
+        background: #ecfdf5;
+        color: var(--ok);
+      }
+      .t-edge {
+        background: #fffbeb;
+        color: var(--warn);
+      }
+      .t-fixed {
+        background: #fef2f2;
+        color: var(--bad);
+      }
+      .full {
+        grid-column: 1 / -1;
+      }
+      .plan li b {
+        font-weight: 600;
+      }
+      .alt {
+        color: var(--sub);
+        font-size: 12.5px;
+      }
+      .prompt {
+        background: #0f172a;
+        color: #e2e8f0;
+        border-radius: 12px;
+        padding: 16px 18px;
+        margin-top: 14px;
+        font-family: ui-monospace, monospace;
+        font-size: 13px;
+        white-space: pre-wrap;
+      }
+      .prompt b {
+        color: #7dd3fc;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Chat File Attachments — the map</h1>
+      <p class="sub">
+        Quadrant walk closed 2026-08-12 · rationale at
+        <code>specs/done/chat-file-attachments/</code> · this page preserves the walk that selected
+        the shipped direction
+      </p>
+
+      <div class="grid">
+        <section>
+          <div class="q">Quadrant 1</div>
+          <h2>Known knowns — settled ground</h2>
+          <ul>
+            <li>
+              Files land in the target agent's folder; paths ride the prompt; the agent organizes.
+              Images keep the inline rail (dual rails, your call).
+            </li>
+            <li>
+              Transport = train-uploads grant generalized to the drive's own
+              <code>PUT /v1/files/*</code> — the Files-surface rail is double-Vercel-proxied at
+              ~20MB <span class="cite">(specs/done/train-uploads/MAP.md:79)</span>.
+            </li>
+            <li>
+              Prompt injection has one owner: <code>renderRunnerInput</code>
+              <span class="cite">(runnerEnvelope.ts:152)</span> — zero gateway changes.
+            </li>
+            <li>
+              <b>Kill-gate retired pre-build:</b> live probe pushed 30/60MB PUTs through the exe.dev
+              proxy (201, streamed, preflight survives). Ceiling is ours, not theirs.
+            </li>
+            <li>
+              Drive PUT mkdir-p's safely <span class="cite">(files.ts:1219)</span>; dir move is one
+              rename but needs its parent pre-made <span class="cite">(files.ts:986)</span>.
+            </li>
+            <li>
+              Agents must <b>never</b> send a person to the files page to drop files off (your
+              directive, verbatim in slice 08).
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <div class="q">Quadrant 2</div>
+          <h2>Known unknowns — decision ledger</h2>
+          <table>
+            <tr>
+              <th>#</th>
+              <th>Question</th>
+              <th>Decision</th>
+              <th></th>
+            </tr>
+            <tr>
+              <td>①</td>
+              <td>Actor identity</td>
+              <td>
+                Browser self-declares <code>x-duet-actor-context</code>; nothing bound in grants
+              </td>
+              <td><span class="tag t-user">you</span></td>
+            </tr>
+            <tr>
+              <td>②</td>
+              <td>Long-upload UX</td>
+              <td>Send gated until ready; queue-send rejected</td>
+              <td><span class="tag t-user">you</span></td>
+            </tr>
+            <tr>
+              <td>③</td>
+              <td>Progress</td>
+              <td>"Uploading · 42%" in the status label; no UI-kit bar</td>
+              <td><span class="tag t-user">you</span></td>
+            </tr>
+            <tr>
+              <td>④</td>
+              <td>v1 extras</td>
+              <td>Both: page-wide drop scrim + big-paste→.txt</td>
+              <td><span class="tag t-user">you</span></td>
+            </tr>
+            <tr>
+              <td>⑤</td>
+              <td>Poisoned hub VM</td>
+              <td>Code fix ships; release restart heals (task #6)</td>
+              <td><span class="tag t-user">you</span></td>
+            </tr>
+            <tr>
+              <td>⑥</td>
+              <td>Bubble look</td>
+              <td><b>A — rich preview cards</b>, v1 parity</td>
+              <td><span class="tag t-user">you</span></td>
+            </tr>
+            <tr>
+              <td>⑦</td>
+              <td>Folder shape</td>
+              <td>One flat <code>uploads/</code> per agent</td>
+              <td><span class="tag t-user">you</span></td>
+            </tr>
+          </table>
+          <p class="cite" style="margin-top: 8px">
+            No OPEN items. Every question closed in front of you.
+          </p>
+        </section>
+
+        <section>
+          <div class="q">Quadrant 3</div>
+          <h2>Unknown knowns — extracted taste</h2>
+          <ul>
+            <li>
+              <b>"Don't overcomplicate it"</b> is the governing ethos — it decided ①, ⑦, and the
+              collision policy (stat-then-"(2)", racing duplicates last-write-wins).
+            </li>
+            <li>
+              Rich <b>preview cards</b> beat quiet chips — v1's card richness is the feel you want,
+              even in Duet's calmer language. Reshaped slice 07 from "chip extraction" to a real
+              type-aware card (which turned out ~80% built already).
+            </li>
+            <li>
+              Folder paths are user-facing prose: <code>uploads/</code>, no dates, no batch hashes.
+            </li>
+            <li>
+              Context probes (unchallenged, treated settled): non-technical consumers; "done" =
+              brand-designer onboarding takes logo+font files in chat on staging; typical files
+              &lt;20MB.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <div class="q">Quadrant 4</div>
+          <h2>Unknown unknowns — landmines</h2>
+          <table>
+            <tr>
+              <th>Card</th>
+              <th>One-liner</th>
+              <th>Status</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>
+                CORS allowlist lacks the actor header → hard preflight fail; probe result doesn't
+                transfer
+              </td>
+              <td><span class="tag t-fixed">slice 00</span></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Notes have no wire kind — attachments render per-row or vanish</td>
+              <td><span class="tag t-fixed">slice 04</span></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Real ceiling = min(1GiB, uplink×255s idleTimeout) → wire timeout extender</td>
+              <td><span class="tag t-fixed">slice 00</span></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>
+                No filename sanitizer anywhere; ENAMETOOLONG = post-upload 500 →
+                <code>attachmentFileName()</code>
+              </td>
+              <td><span class="tag t-fixed">slice 01</span></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>
+                9 idempotency fingerprints + retry key are attachment-blind → edited retry silently
+                dedupes
+              </td>
+              <td><span class="tag t-fixed">slices 03/06</span></td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>
+                Read tool sees png/jpeg/webp/gif only; vision routing is reactive on economy tier
+              </td>
+              <td><span class="tag t-fixed">slices 05/08</span></td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>
+                Disk guard: flat 1GiB, 3s stale, pre-body; <code>.duet/uploads</code> never swept →
+                boot sweep
+              </td>
+              <td><span class="tag t-fixed">slice 00</span></td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>
+                Upload fan-out is benign (1 feed row, 1 scan, no badges); analytics userId is
+                client-asserted
+              </td>
+              <td><span class="tag t-edge">sharp edge</span></td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>
+                <code>uploads/</code> collides with nothing; don't confuse with
+                <code>.duet/uploads</code> staging
+              </td>
+              <td><span class="tag t-edge">sharp edge</span></td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Grant TTL bounds when an upload may <i>begin</i>, not how long it takes</td>
+              <td><span class="tag t-terr">safe</span></td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>
+                No prior attempts; the card component is ~80% built
+                (<code>ComposeBarAttachmentCard</code>)
+              </td>
+              <td><span class="tag t-terr">reuse</span></td>
+            </tr>
+          </table>
+        </section>
+
+        <section class="full plan">
+          <div class="q">Rides along</div>
+          <h2>Tweakable plan — sorted by likelihood you'd tweak, not build order</h2>
+          <ul>
+            <li>
+              <b>Racing filename collisions are last-write-wins.</b>
+              <span class="alt"
+                >Alt: If-None-Match on first PUT per name (gateway supports ETag machinery) — one
+                header if silent overwrites ever bite.</span
+              >
+            </li>
+            <li>
+              <b>HEIC/AVIF/SVG land vision-less as plain files.</b>
+              <span class="alt"
+                >Alt: client-side transcode to png before upload (canvas can do HEIC on Safari only
+                — messy; that's why it lost).</span
+              >
+            </li>
+            <li>
+              <b>Optimistic bubble stays text-only until the durable event.</b>
+              <span class="alt"
+                >Alt: optimistic cards from local state — parity argument won, cheap to
+                revisit.</span
+              >
+            </li>
+            <li>
+              <b>Big-paste threshold ~10k chars</b> (v1's constant).
+              <span class="alt">Tune freely; it's one constant.</span>
+            </li>
+            <li>
+              <b>Mechanical sequence used:</b> grants + CORS + sweeps → mint + name transform →
+              upload client ∥ wire model → envelope → composer state → wiring + scrim + paste →
+              bubble cards → prompts → live journey.
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,153 @@
+{
+  "scope": "slice06 runtime API artifact transport; source-only partial integration, no rollout approval",
+  "baseRootRevision": "a7688e48294ea843a2b68c38e945ea93479f1610",
+  "constructorCommit": "fefbec34d",
+  "sourceSha256": {
+    "apps/api/README.md": "e4664e4aaa21b485097adf805a302555f4a01905b4b8610aaf184f235d23cac2",
+    "apps/api/package.json": "40082ee8a9dd86e5f6667dd082b16bb7622d13663f664dd353040f9503d430ab",
+    "apps/api/scripts/build-runtime-release.mjs": "0fb95d904c220316aa846b99893043fa49ca9a248961c177788f6be2accbdc29",
+    "apps/api/src/auth.test.ts": "b7137e4eba0f8e79e3d33c50b3b293dcc856e0aac11f55f7b1c942b34ba41a7f",
+    "apps/api/src/config.ts": "1e8bde65a4cb15e97d2a3cd2d9ecf8cdeec5b5fa752ebe9e422c4831fc9112c7",
+    "apps/api/src/gateway/app-configs.test.ts": "1d4093ab9adb2e6de9ef3eb7a6c67eab48484c07727e1de817d9b2b306ba4af9",
+    "apps/api/src/index-suite.ts": "34a02bb7718d24b3017a563a65d192355f5534faeb307277e86b0897cabe977c",
+    "apps/api/src/index.ts": "2da3fa188b9a7a96de61b86072500870b2a33862c74a770f31499506654d06bd",
+    "apps/api/src/routes/backup-restore.test.ts": "553eface97fda1ba08a7d77e7a7371421c61f9bb4b49bd9774e5e69536ac3c78",
+    "apps/api/src/routes/vm.ts": "5576a5c43c3116c2049fbf51c7a0400bd89d4abe4e65bd5753c479a3d5a974f0",
+    "apps/api/src/runtime-release-build.test.ts": "0e8afb988bb04f651008c82e5115fa78e6098c4887c3b0676137134400044668",
+    "apps/api/src/shared.ts": "76488af546b4413527157cc87a5275f2ce00a30ea4a520d0089a19230540662e",
+    "apps/api/src/vercel-bundle-config.test.ts": "8d7fcd853e9f26c011aa4322c883d85ec7f4c4d8dbb3b6907c20c4ce264c50f8",
+    "apps/api/src/vm.test.ts": "2a853bf1aaed6c2ff33df9be3e08a913a82d31bb644c215d66359bc36361e7bb",
+    "packages/agent/benchmarks/swebench/src/packaging.ts": "46a7aadeb82b4512e456163fb607fd57556d46b78e66fe04b9445b264fb3aa83",
+    "packages/agent/benchmarks/swebench/test/swebench-packaging.test.ts": "929eb9049d5bd369aef6bfad830e7d6c9c71b907f41a4aabb047fcfb69b44794",
+    "scripts/vercel-bundle.mjs": "8def5558045165ec97ef505a24dd2c19997a48f57637e61f5a263ef59de4c848",
+    "apps/api/src/runtime/release.test.ts": "f1b21cf5019c6a06f6821ae331c00b95532f11dc12119d89081ecc9510c34ad3",
+    "apps/api/src/runtime/release.fixture.ts": "b50b43214425080d19774ffc537def35f3254722f63f9e8fa31f0da34bdd3e43",
+    "apps/api/src/runtime/transport.test.ts": "6e005ce3ee6564d581645aa874126dc83811e6cbffd48b8d73d8fd29b3a54d73",
+    "apps/api/src/runtime/release.ts": "a30c5918113919391bae15a9a64f61b5045d950dc4d93e9b826137e4e2d6897e"
+  },
+  "temporaryDependencyInputs": {
+    "packages/contract/src/vm/index.ts": "02aaea83552f6d07e3bd455265e4e908f74f56226053c7ecd6736de4e0ca15d1",
+    "bun.lock": "4715aefe68878916552d2387ad14a58a798a6eba965d8950245149871cb915c8"
+  },
+  "excludedCopies": "shared contract source and local lock update restored before commit; root owns schema/lock integration",
+  "lockDelta": "only apps/api workspace devDependency @duetso/agent:workspace:*; no package graph/patch changes",
+  "manifest": {
+    "formatVersion": 1,
+    "version": "0.0.0+fedeb17ada3f6dd7e8032582a6a90c4f1060fff7f0c5c43f84643c2095792c9b",
+    "artifacts": [
+      {
+        "name": "duet",
+        "sha256": "684746f8af3ded60d9e106ca2e1bbb66c830a2261dcbee5ef466b36d4198dcda",
+        "byteLength": 118032512,
+        "mode": 493
+      },
+      {
+        "name": "helper.js",
+        "sha256": "6c4addd2d6d65edc3c296bac5b56d6f57f19ff9543c07b17c2729ccc5eede9df",
+        "byteLength": 908839,
+        "mode": 420
+      },
+      {
+        "name": "index.js",
+        "sha256": "cf6e320136d80c1d2e7eac4736b2004a6d5949a11cb3ba642c4c00a611aa566f",
+        "byteLength": 2241241,
+        "mode": 420
+      },
+      {
+        "name": "initdb.wasm",
+        "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+        "byteLength": 169969,
+        "mode": 420
+      },
+      {
+        "name": "pglite.data",
+        "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+        "byteLength": 5289109,
+        "mode": 420
+      },
+      {
+        "name": "pglite.wasm",
+        "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+        "byteLength": 8739902,
+        "mode": 420
+      },
+      {
+        "name": "photon_rs_bg.wasm",
+        "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+        "byteLength": 1881634,
+        "mode": 420
+      },
+      {
+        "name": "vector.tar.gz",
+        "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+        "byteLength": 46108,
+        "mode": 420
+      }
+    ]
+  },
+  "gates": {
+    "fastTests": "26 pass,0 fail,209 assertions across7 API files; actual default constructor and Vercel fixture",
+    "realConvexVm": "7 pass,0 fail,62 assertions, authenticated artifacts through servicing pause; sync active/paused/missing/invalid manifest; runtime registration/report diagnostic persistence",
+    "realConvexDeployment": "1 pass,0 fail,3 assertions",
+    "apiTypes": "green with latest runtime-only temporary shared contract",
+    "lint": "green",
+    "actualVercel": "build:vercel succeeds; exact manifested inventory/sha/length/modes copied; emitted Nodev24.14.0 API streams all8 exact artifact bytes and rejects no-token request with controlled backend query",
+    "actualCompiledNative": "frozen exact Vercel output; full physical + current/duet memory/image/RPC/native probes, all missing/corrupt PGlite controls, missing/corrupt Photon exact image assertion exit1, TUI content+timeout124",
+    "sourceScanner": "stale non-workspace directory ENOENT red, fixed source scanner and manifest stubbing green"
+  },
+  "review": {
+    "tool": "configured codex review completed",
+    "findings": [
+      {
+        "severity": "P1",
+        "finding": "old gateway consumer reads removed per-package update targets",
+        "ownership": "root desired-state/runtime composition integration; root reports new-source gates green, still requires joined gate"
+      },
+      {
+        "severity": "P1",
+        "finding": "already deployed gateways cannot consume new envelope or removed routes",
+        "ownership": "operational bootstrap/fleet gate; freeze old updates, idle-fenced transition install with old API, offline recovery and activation-path census before new API/backend promotion"
+      },
+      {
+        "severity": "P2",
+        "finding": "deployment contract and live harness retain gateway field/routes",
+        "ownership": "root contract/harness migration; API deployment integration green, joined harness pending"
+      }
+    ]
+  },
+  "limitations": [
+    "no live staging/provider/deployment writes",
+    "not independently deployable until root-owned consumers and bootstrap/fleet gates complete",
+    "not a repeatable-binary-bytes claim",
+    "one initial native attempt raced reconstruction of its mounted release directory; excluded and rerun successfully on frozen copy",
+    "node transport uses controlled backend query; real VM auth is separately proven by local Convex integration"
+  ],
+  "evidenceSha256": {
+    "types.log": "b2e92930f4432b7a5ec6e2af13cd0e0c527d579c374a889fd79e2aeff32e886e",
+    "vercel-red.log.gz": "27e0598ae45d733cb20537fc4e17d6004a4a3c9a9bde91f8e90990b3e5dd3db8",
+    "codex-review.log.gz": "ea8f5ad86d73180f7a73d2fe7fa0b500fa4dbf4c640ce6cb348174a03551c7a8",
+    "physical-runtime.json.gz": "58efd76d063675a8c494435317609cda88a67e8d06db72aa34e2523d79f62147",
+    "native-reproducer.log.gz": "c87ea63abda372e2682403d85a62b8f61f50c1919bf69e61d4990d1a56fa95a9",
+    "stale-workspace-green.log": "7fbd525e6d46426d4efc9573a383d82de7035c9dc1a042c73a91c594c5cae5a2",
+    "execpath.log": "8b81045067d459665f0130674f7a2b77b0559ae1aa8c1d81902b735628ee628d",
+    "stale-workspace-red.log.gz": "abc70a5aa7bd2a84d77c5750e2f21d5915b3110bbc8df844d089d23017926d62",
+    "lint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tui.ansi.gz": "c29a000f5853d350d1ada29ddbf4cbd656fc336edd7751b16d32086c232df942",
+    "reader-red.log.gz": "95533923682ec6956953446c0675ff45361d3432b156234b56485c695d470dc9",
+    "choices.md": "e91f6e67652eeb936f2e210e36622dda973d93b747550ff82fb62d2fde6b5e5d",
+    "fast-tests.log.gz": "887229f872a5251b053b2c5e8dc5bcafcca13ccddb6afe496a7e58b862b65591",
+    "README.md": "c05d7cc1ed970df0900968cdccc7dbdc3fa1bdddf17fc4e73ffa769709d16b21",
+    "symlink-runtime.json.gz": "5018e98d3aed136552a331c93e144a3a5dfcd3c9819f26255fe1306c2680f10f",
+    "node-function-probe.mjs": "c5c50af66affa1324d6cad70d2bee43998c6ff4a3b988447e8ba288e76d707e1",
+    "diagnostic-red.log.gz": "edad6d042acb687f2ae5a82d7a3043c4215d41a9557f29f8bc774d4453613afc",
+    "manifest.json": "d1d166a1a758bf2c07a4792388076631d9336de18aa8618ebcf77ef444a45b9b",
+    "vm-integration.log.gz": "3541285636a615789dad23f67f7f891e5d553431fd0c7cb18df351f612387a24",
+    "actual-vercel-build.log.gz": "4f90214a1c47df84179e15f829952321fb66fc12af688c561a68e7abf78a0ef6",
+    "node-function.log.gz": "fd22caa03640445fce2983e779b20151aabe83281f7515a8decb4037ebd69c24",
+    "deployment-integration.log.gz": "f3266ee714460a296e85e89723443ff09d1b1e31e4ba1fde586a586f9bbc74c4",
+    "photon-missing.log.gz": "b7bfa01d8dfd7e7d977b8d7935816747f3287320d12265331985bb68d3e053ee",
+    "tui.json": "b3933290d5cb6600e7fbda582c80d0e0f57fa9b685ca74e3e22b454ca24754bb",
+    "photon-corrupt.log.gz": "b7bfa01d8dfd7e7d977b8d7935816747f3287320d12265331985bb68d3e053ee",
+    "routes-red.log.gz": "c3822da91ff514235cbe7e9c72d20024897ccaf1851ec2b2f7215ec5499b3098"
+  }
+}

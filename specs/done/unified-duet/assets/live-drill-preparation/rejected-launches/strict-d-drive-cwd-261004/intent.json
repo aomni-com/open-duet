@@ -1,0 +1,13 @@
+{
+  "runId": "staging-e2e-synthetic",
+  "phase": "strict",
+  "vmName": "duet-test-staging-e2e-synthetic",
+  "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+  "tags": [
+    "duet-test",
+    "duet-ephemeral",
+    "duet-fixture-staging",
+    "duet-run-staging-e2e-synthetic"
+  ],
+  "effectAttempted": true
+}

@@ -1,0 +1,95 @@
+{
+  "baselineRevision": "a2fcdd2d03a1108579fd779dc776132908f15e61",
+  "sourceRevision": "cad4c4ee7ab6ad822e11e9f64bf296cc2acd05b4",
+  "liveLockSha256": "3fab016bfcb0bdca49440b9bae8c05fea97dee939244ec31a32c18795b45c3cc",
+  "closure": {
+    "agent": {
+      "comparedNodes": 372,
+      "differences": []
+    },
+    "agentWithPeers": {
+      "comparedNodes": 372,
+      "differences": []
+    },
+    "duet": {
+      "comparedNodes": 291,
+      "differences": []
+    },
+    "duetWithPeers": {
+      "comparedNodes": 375,
+      "differences": [
+        {
+          "route": [
+            "@opentui/core",
+            "bun-ffi-structs",
+            "typescript"
+          ],
+          "sourceKey": "typescript",
+          "liveKey": "typescript",
+          "source": "typescript@5.9.3",
+          "live": "typescript@7.0.1-rc"
+        }
+      ]
+    }
+  },
+  "ownedWorkspaceDependencies": {
+    "agent": [],
+    "duet": [
+      "@repo/agent",
+      "@repo/contract",
+      "@repo/importers",
+      "@repo/sync-tunnel"
+    ]
+  },
+  "existingWorkspaceDirectRanges": {
+    "checked": 266,
+    "invalid": []
+  },
+  "changedExistingDirectDependencies": [
+    {
+      "workspace": "apps/api",
+      "dependency": "ai",
+      "old": "ai@7.0.36",
+      "live": "ai@7.0.105"
+    },
+    {
+      "workspace": "apps/api",
+      "dependency": "hono",
+      "old": "hono@4.12.31",
+      "live": "hono@4.12.18"
+    },
+    {
+      "workspace": "apps/mcp",
+      "dependency": "ai",
+      "old": "ai@7.0.36",
+      "live": "ai@7.0.105"
+    },
+    {
+      "workspace": "apps/mcp",
+      "dependency": "hono",
+      "old": "hono@4.12.31",
+      "live": "hono@4.12.18"
+    },
+    {
+      "workspace": "apps/model-gateway",
+      "dependency": "hono",
+      "old": "hono@4.12.31",
+      "live": "hono@4.12.18"
+    },
+    {
+      "workspace": "packages/backend",
+      "dependency": "ai",
+      "old": "ai@7.0.36",
+      "live": "ai@7.0.105"
+    },
+    {
+      "workspace": "packages/gateway",
+      "dependency": "hono",
+      "old": "hono@4.12.31",
+      "live": "hono@4.12.18"
+    }
+  ],
+  "probeRegistryAbsent": true,
+  "piPatchSha256": "0bf942aa04e9a499f19771bc27e28467f33419dee89323598d96e116889adaac",
+  "piPatchMatchesFrozenSource": true
+}

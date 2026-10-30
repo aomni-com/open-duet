@@ -1,0 +1,823 @@
+{
+  "status": "staging-create-fix-live-and-both-existing-vms-certified",
+  "observedAt": "2026-10-04T20:06:17.849763+00:00",
+  "deployment": {
+    "revision": "58de37f119cde7553de0461e572ef0bbf83606eb",
+    "backend": {
+      "revision": "58de37f119cde7553de0461e572ef0bbf83606eb",
+      "schema": 1
+    },
+    "runtime": {
+      "version": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176"
+    }
+  },
+  "deploymentId": "dpl_2F6eiXxQNbWXxHzP7XbNMkJs172C",
+  "deploymentUrl": "https://service.example.invalid",
+  "allSevenAppsReady": true,
+  "servedManifest": {
+    "formatVersion": 1,
+    "version": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+    "artifacts": [
+      {
+        "name": "duet",
+        "sha256": "3fa652fae3264ff8f79607da9e29e1c11278f478bafd970eb07af66890eaa3ae",
+        "byteLength": 117078144,
+        "mode": 493
+      },
+      {
+        "name": "helper.js",
+        "sha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+        "byteLength": 908569,
+        "mode": 420
+      },
+      {
+        "name": "index.js",
+        "sha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+        "byteLength": 2226400,
+        "mode": 420
+      },
+      {
+        "name": "initdb.wasm",
+        "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+        "byteLength": 169969,
+        "mode": 420
+      },
+      {
+        "name": "pglite.data",
+        "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+        "byteLength": 5289109,
+        "mode": 420
+      },
+      {
+        "name": "pglite.wasm",
+        "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+        "byteLength": 8739902,
+        "mode": 420
+      },
+      {
+        "name": "photon_rs_bg.wasm",
+        "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+        "byteLength": 1881634,
+        "mode": 420
+      },
+      {
+        "name": "vector.tar.gz",
+        "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+        "byteLength": 46108,
+        "mode": 420
+      }
+    ]
+  },
+  "servedArtifacts": [
+    {
+      "name": "duet",
+      "sha256": "3fa652fae3264ff8f79607da9e29e1c11278f478bafd970eb07af66890eaa3ae",
+      "byteLength": 117078144,
+      "targetMode": 493,
+      "seconds": 3.726
+    },
+    {
+      "name": "helper.js",
+      "sha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+      "byteLength": 908569,
+      "targetMode": 420,
+      "seconds": 0.136
+    },
+    {
+      "name": "index.js",
+      "sha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+      "byteLength": 2226400,
+      "targetMode": 420,
+      "seconds": 0.159
+    },
+    {
+      "name": "initdb.wasm",
+      "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+      "byteLength": 169969,
+      "targetMode": 420,
+      "seconds": 0.119
+    },
+    {
+      "name": "pglite.data",
+      "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+      "byteLength": 5289109,
+      "targetMode": 420,
+      "seconds": 0.233
+    },
+    {
+      "name": "pglite.wasm",
+      "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+      "byteLength": 8739902,
+      "targetMode": 420,
+      "seconds": 0.346
+    },
+    {
+      "name": "photon_rs_bg.wasm",
+      "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+      "byteLength": 1881634,
+      "targetMode": 420,
+      "seconds": 0.135
+    },
+    {
+      "name": "vector.tar.gz",
+      "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+      "byteLength": 46108,
+      "targetMode": 420,
+      "seconds": 0.065
+    }
+  ],
+  "desiredRuntimeMatchesPublishedImageSeed": true,
+  "currentVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+  "previousVersion": "0.0.0+9bf3ec593e72f4c041bbfb5f7449adfeb44b9628cb7d33083063ae99ef9a5177",
+  "fenceIntervalCensus": {
+    "environment": "staging",
+    "since": "2026-10-04T12:11:35.000Z",
+    "observedAt": "2026-10-04T19:58:12.431Z",
+    "backendIdentity": {
+      "revision": "58de37f119cde7553de0461e572ef0bbf83606eb",
+      "schema": 1
+    },
+    "fenceClosed": true,
+    "runtimeUpdatesPaused": false,
+    "plan": {
+      "environment": "staging",
+      "items": [
+        {
+          "workspaceId": "ns769tvfcsmvzhfab4bshkpcjx8btf8d",
+          "slug": "official-agents-hub",
+          "vmName": "workspace-redacted",
+          "sshDest": "service.example.invalid",
+          "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+          "oldRuntimeVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+          "workspaceStatus": "active",
+          "servicingStatus": "active",
+          "providerStatus": "running",
+          "appAnchorPaths": [
+            "agents/account-researcher/apps/account-board",
+            "agents/code-reviewer/apps/connect-repos",
+            "agents/seo-specialist/apps/content-board",
+            "agents/seo-specialist/apps/connect-search-console",
+            "agents/social-media-manager/apps/connect-accounts",
+            "agents/support-agent/apps/connect-helpdesk",
+            "agents/people-researcher/apps/dossier-board",
+            "agents/brand-designer/apps/setup-brand",
+            "agents/writer/apps/setup-voice"
+          ],
+          "blockers": [],
+          "warnings": []
+        },
+        {
+          "workspaceId": "ns7bkd20x918mfvwjftzgp1zm98bxrek",
+          "slug": "Example User-zhang-s-workspace",
+          "vmName": "workspace-redacted",
+          "sshDest": "service.example.invalid",
+          "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+          "oldRuntimeVersion": "0.0.0+9bf3ec593e72f4c041bbfb5f7449adfeb44b9628cb7d33083063ae99ef9a5177",
+          "workspaceStatus": "active",
+          "servicingStatus": "active",
+          "providerStatus": "running",
+          "appAnchorPaths": [],
+          "blockers": [],
+          "warnings": []
+        }
+      ],
+      "unprovisionedWorkspaces": [
+        {
+          "workspaceId": "ns79wjv4acec9t9vnefmexw1vx8by5zn",
+          "slug": "duet-so-abuse-mshd4nyl-s-workspace",
+          "status": "provisioning",
+          "appAnchorPaths": [
+            "welcome/hello-app"
+          ],
+          "servicingStatus": "paused"
+        },
+        {
+          "workspaceId": "ns7dq1pfat2phkj18gxbsx27a98d0s8h",
+          "slug": "duet",
+          "status": "provisioning",
+          "appAnchorPaths": [
+            "welcome/hello-app"
+          ],
+          "servicingStatus": "paused"
+        }
+      ],
+      "otherEnvironmentVms": [
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted"
+      ],
+      "unattributedProviderVms": []
+    },
+    "lifecycle": {
+      "paused": true,
+      "cpuExecutions": [
+        {
+          "id": "mc22x8pcw12k5s4h2qtxvk6h1n8bha2b",
+          "state": "pending",
+          "nextTs": "1791152116129915748"
+        }
+      ],
+      "blockers": []
+    },
+    "tableProofs": {
+      "stripeWebhookEvents": {
+        "pagesRead": 1,
+        "completeTable": true,
+        "completeSinceCutoff": true,
+        "selectedRows": 0
+      },
+      "workspaces": {
+        "pagesRead": 1,
+        "completeTable": true,
+        "completeSinceCutoff": true,
+        "selectedRows": 602
+      },
+      "creditTransactions": {
+        "pagesRead": 1,
+        "completeTable": false,
+        "completeSinceCutoff": true,
+        "selectedRows": 0
+      },
+      "auditEvents": {
+        "pagesRead": 1,
+        "completeTable": false,
+        "completeSinceCutoff": true,
+        "selectedRows": 18
+      }
+    },
+    "lifecycleEvents": [],
+    "recentBilling": [],
+    "webhookMetadata": [],
+    "changedWorkspaces": [],
+    "historicalComparison": [
+      {
+        "workspaceId": "ns79wjv4acec9t9vnefmexw1vx8by5zn",
+        "beforeStatus": "provisioning",
+        "beforeServicingStatus": "paused",
+        "afterStatus": "provisioning",
+        "afterServicingStatus": "paused",
+        "afterHasVm": false,
+        "newlyAcceptedResume": false
+      },
+      {
+        "workspaceId": "ns7dq1pfat2phkj18gxbsx27a98d0s8h",
+        "beforeStatus": "provisioning",
+        "beforeServicingStatus": "paused",
+        "afterStatus": "provisioning",
+        "afterServicingStatus": "paused",
+        "afterHasVm": false,
+        "newlyAcceptedResume": false
+      }
+    ],
+    "limits": [
+      "Provider list is read-only; no VM SSH/boot identity was remeasured.",
+      "No replay follows from provisioning status alone; root decides only from explicit interval acceptance metadata.",
+      "Recent table scans paginate creation order down through cutoff; full workspaces and existing owner attachment/anchor pagination are complete."
+    ],
+    "comparisonToPrior": {
+      "source": "/tmp/unified-duet-staging-accepted-lifecycle-prior-create-fix.json",
+      "observedAt": "2026-10-04T19:09:06.127Z",
+      "priorBackendRevision": "cd504d0ea843044d02960a8540fea1507f01eaa6",
+      "sameAttachmentsAndLifecycleMetadata": false,
+      "sameHistoricalVmLess": true,
+      "newAcceptedLifecycleEvents": [],
+      "newSubscriptionTransactions": [],
+      "newProcessedWebhooks": [],
+      "sameAttachmentAndLifecycleExcludingRuntimeReport": true,
+      "runtimeReportChanges": [
+        {
+          "workspaceId": "ns769tvfcsmvzhfab4bshkpcjx8btf8d",
+          "before": "0.0.0+9bf3ec593e72f4c041bbfb5f7449adfeb44b9628cb7d33083063ae99ef9a5177",
+          "after": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176"
+        }
+      ]
+    },
+    "intervalCoverage": {
+      "since": "2026-10-04T12:11:35.000Z",
+      "includesBriefOpenWindow": "2026-10-04T19:12:00Z\u20132026-10-04T19:32:00Z",
+      "method": "Full workspace census plus descending creation-order audit/credit pagination through interval cutoff and full Stripe metadata table; no acceptance derives from historical provisioning status."
+    }
+  },
+  "openControl": {
+    "environment": "staging",
+    "backendRevision": "58de37f119cde7553de0461e572ef0bbf83606eb",
+    "schema": 1,
+    "updates": {
+      "id": "q57e21rf0x0nr5f3tf51fh2z058fnf1r",
+      "paused": false,
+      "updatedAt": 1791135869418,
+      "reason": "unified-duet verified runtime artifact routes; resume ordinary rollout"
+    },
+    "lifecycleFence": "0",
+    "observedAt": "2026-10-04T20:03:01.549Z"
+  },
+  "acceptedBirthsReplayed": [],
+  "acceptedPayersReplayed": [],
+  "providerRestartResizeReprovision": false,
+  "privateOriginalsRemainHeldUntilBothFleetsSettled": true,
+  "vms": [
+    {
+      "role": "canary",
+      "observation": {
+        "manifest": {
+          "formatVersion": 1,
+          "version": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+          "artifacts": [
+            {
+              "name": "duet",
+              "sha256": "3fa652fae3264ff8f79607da9e29e1c11278f478bafd970eb07af66890eaa3ae",
+              "byteLength": 117078144,
+              "mode": 493
+            },
+            {
+              "name": "helper.js",
+              "sha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+              "byteLength": 908569,
+              "mode": 420
+            },
+            {
+              "name": "index.js",
+              "sha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+              "byteLength": 2226400,
+              "mode": 420
+            },
+            {
+              "name": "initdb.wasm",
+              "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+              "byteLength": 169969,
+              "mode": 420
+            },
+            {
+              "name": "pglite.data",
+              "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+              "byteLength": 5289109,
+              "mode": 420
+            },
+            {
+              "name": "pglite.wasm",
+              "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+              "byteLength": 8739902,
+              "mode": 420
+            },
+            {
+              "name": "photon_rs_bg.wasm",
+              "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+              "byteLength": 1881634,
+              "mode": 420
+            },
+            {
+              "name": "vector.tar.gz",
+              "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+              "byteLength": 46108,
+              "mode": 420
+            }
+          ]
+        },
+        "artifactsVerified": [
+          {
+            "name": "duet",
+            "sha256": "3fa652fae3264ff8f79607da9e29e1c11278f478bafd970eb07af66890eaa3ae",
+            "byteLength": 117078144,
+            "mode": 493
+          },
+          {
+            "name": "helper.js",
+            "sha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+            "byteLength": 908569,
+            "mode": 420
+          },
+          {
+            "name": "index.js",
+            "sha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+            "byteLength": 2226400,
+            "mode": 420
+          },
+          {
+            "name": "initdb.wasm",
+            "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+            "byteLength": 169969,
+            "mode": 420
+          },
+          {
+            "name": "pglite.data",
+            "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+            "byteLength": 5289109,
+            "mode": 420
+          },
+          {
+            "name": "pglite.wasm",
+            "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+            "byteLength": 8739902,
+            "mode": 420
+          },
+          {
+            "name": "photon_rs_bg.wasm",
+            "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+            "byteLength": 1881634,
+            "mode": 420
+          },
+          {
+            "name": "vector.tar.gz",
+            "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+            "byteLength": 46108,
+            "mode": 420
+          }
+        ],
+        "health": {
+          "runtimeVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+          "imageVersion": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187"
+        },
+        "bootHealthCertified": true,
+        "bootId": "855c30d4-5d04-4a2f-b028-2f77ce617e4b",
+        "current": "/opt/duet/releases/0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+        "cli": "/usr/local/bin/duet",
+        "cliPhysicalPath": "/opt/duet/releases/0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176/duet",
+        "cliVersion": "1.0.0",
+        "gatewayBun": "1.4.2",
+        "workspaceBun": "1.3.14",
+        "oldCliRailExists": false,
+        "duetfsOnPath": null,
+        "bootstrapSha256": "b33587a373136cdac66b78cf74f2e05eb2ee7341207d7adafef49045f0b4e1ab",
+        "gatewayUnitSha256": "84677a224fe0385b335a36dc8cb4e9609424a75f49ed138ab671a4f9c8e3b867",
+        "bootState": {
+          "attemptedVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+          "previousVersion": "0.0.0+9bf3ec593e72f4c041bbfb5f7449adfeb44b9628cb7d33083063ae99ef9a5177",
+          "healthyVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+          "healthyAt": 1791144182244,
+          "consecutiveFailures": 0,
+          "quarantinedVersion": null
+        },
+        "previous": "/opt/duet/releases/0.0.0+9bf3ec593e72f4c041bbfb5f7449adfeb44b9628cb7d33083063ae99ef9a5177",
+        "previousManifest": {
+          "formatVersion": 1,
+          "version": "0.0.0+9bf3ec593e72f4c041bbfb5f7449adfeb44b9628cb7d33083063ae99ef9a5177",
+          "artifacts": [
+            {
+              "name": "duet",
+              "sha256": "8da5a93533047fad8134e792756db85661b64a91552e50b4c356c21a8e9affa1",
+              "byteLength": 117078144,
+              "mode": 493
+            },
+            {
+              "name": "helper.js",
+              "sha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+              "byteLength": 908569,
+              "mode": 420
+            },
+            {
+              "name": "index.js",
+              "sha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+              "byteLength": 2226400,
+              "mode": 420
+            },
+            {
+              "name": "initdb.wasm",
+              "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+              "byteLength": 169969,
+              "mode": 420
+            },
+            {
+              "name": "pglite.data",
+              "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+              "byteLength": 5289109,
+              "mode": 420
+            },
+            {
+              "name": "pglite.wasm",
+              "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+              "byteLength": 8739902,
+              "mode": 420
+            },
+            {
+              "name": "photon_rs_bg.wasm",
+              "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+              "byteLength": 1881634,
+              "mode": 420
+            },
+            {
+              "name": "vector.tar.gz",
+              "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+              "byteLength": 46108,
+              "mode": 420
+            }
+          ]
+        },
+        "previousArtifactsVerified": [
+          {
+            "name": "duet",
+            "sha256": "8da5a93533047fad8134e792756db85661b64a91552e50b4c356c21a8e9affa1",
+            "byteLength": 117078144,
+            "mode": 493
+          },
+          {
+            "name": "helper.js",
+            "sha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+            "byteLength": 908569,
+            "mode": 420
+          },
+          {
+            "name": "index.js",
+            "sha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+            "byteLength": 2226400,
+            "mode": 420
+          },
+          {
+            "name": "initdb.wasm",
+            "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+            "byteLength": 169969,
+            "mode": 420
+          },
+          {
+            "name": "pglite.data",
+            "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+            "byteLength": 5289109,
+            "mode": 420
+          },
+          {
+            "name": "pglite.wasm",
+            "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+            "byteLength": 8739902,
+            "mode": 420
+          },
+          {
+            "name": "photon_rs_bg.wasm",
+            "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+            "byteLength": 1881634,
+            "mode": 420
+          },
+          {
+            "name": "vector.tar.gz",
+            "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+            "byteLength": 46108,
+            "mode": 420
+          }
+        ],
+        "privateOriginalRollback": {
+          "path": "/home/synthetic-user/.duet/runtime-adoption/0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2/original",
+          "exists": true,
+          "snapshotExists": true,
+          "releasesExists": true,
+          "readMethod": "sudo stat metadata only"
+        },
+        "heldManagedReleaseExists": false
+      }
+    },
+    {
+      "role": "hub",
+      "observation": {
+        "manifest": {
+          "formatVersion": 1,
+          "version": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+          "artifacts": [
+            {
+              "name": "duet",
+              "sha256": "3fa652fae3264ff8f79607da9e29e1c11278f478bafd970eb07af66890eaa3ae",
+              "byteLength": 117078144,
+              "mode": 493
+            },
+            {
+              "name": "helper.js",
+              "sha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+              "byteLength": 908569,
+              "mode": 420
+            },
+            {
+              "name": "index.js",
+              "sha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+              "byteLength": 2226400,
+              "mode": 420
+            },
+            {
+              "name": "initdb.wasm",
+              "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+              "byteLength": 169969,
+              "mode": 420
+            },
+            {
+              "name": "pglite.data",
+              "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+              "byteLength": 5289109,
+              "mode": 420
+            },
+            {
+              "name": "pglite.wasm",
+              "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+              "byteLength": 8739902,
+              "mode": 420
+            },
+            {
+              "name": "photon_rs_bg.wasm",
+              "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+              "byteLength": 1881634,
+              "mode": 420
+            },
+            {
+              "name": "vector.tar.gz",
+              "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+              "byteLength": 46108,
+              "mode": 420
+            }
+          ]
+        },
+        "artifactsVerified": [
+          {
+            "name": "duet",
+            "sha256": "3fa652fae3264ff8f79607da9e29e1c11278f478bafd970eb07af66890eaa3ae",
+            "byteLength": 117078144,
+            "mode": 493
+          },
+          {
+            "name": "helper.js",
+            "sha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+            "byteLength": 908569,
+            "mode": 420
+          },
+          {
+            "name": "index.js",
+            "sha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+            "byteLength": 2226400,
+            "mode": 420
+          },
+          {
+            "name": "initdb.wasm",
+            "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+            "byteLength": 169969,
+            "mode": 420
+          },
+          {
+            "name": "pglite.data",
+            "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+            "byteLength": 5289109,
+            "mode": 420
+          },
+          {
+            "name": "pglite.wasm",
+            "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+            "byteLength": 8739902,
+            "mode": 420
+          },
+          {
+            "name": "photon_rs_bg.wasm",
+            "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+            "byteLength": 1881634,
+            "mode": 420
+          },
+          {
+            "name": "vector.tar.gz",
+            "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+            "byteLength": 46108,
+            "mode": 420
+          }
+        ],
+        "health": {
+          "runtimeVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+          "imageVersion": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187"
+        },
+        "bootHealthCertified": true,
+        "bootId": "d5ac9140-04e7-4ec9-8074-4b10d86f67d3",
+        "current": "/opt/duet/releases/0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+        "cli": "/usr/local/bin/duet",
+        "cliPhysicalPath": "/opt/duet/releases/0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176/duet",
+        "cliVersion": "1.0.0",
+        "gatewayBun": "1.4.2",
+        "workspaceBun": "1.3.14",
+        "oldCliRailExists": false,
+        "duetfsOnPath": null,
+        "bootstrapSha256": "b33587a373136cdac66b78cf74f2e05eb2ee7341207d7adafef49045f0b4e1ab",
+        "gatewayUnitSha256": "84677a224fe0385b335a36dc8cb4e9609424a75f49ed138ab671a4f9c8e3b867",
+        "bootState": {
+          "attemptedVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+          "previousVersion": "0.0.0+9bf3ec593e72f4c041bbfb5f7449adfeb44b9628cb7d33083063ae99ef9a5177",
+          "healthyVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+          "healthyAt": 1791144176376,
+          "consecutiveFailures": 0,
+          "quarantinedVersion": null
+        },
+        "previous": "/opt/duet/releases/0.0.0+9bf3ec593e72f4c041bbfb5f7449adfeb44b9628cb7d33083063ae99ef9a5177",
+        "previousManifest": {
+          "formatVersion": 1,
+          "version": "0.0.0+9bf3ec593e72f4c041bbfb5f7449adfeb44b9628cb7d33083063ae99ef9a5177",
+          "artifacts": [
+            {
+              "name": "duet",
+              "sha256": "8da5a93533047fad8134e792756db85661b64a91552e50b4c356c21a8e9affa1",
+              "byteLength": 117078144,
+              "mode": 493
+            },
+            {
+              "name": "helper.js",
+              "sha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+              "byteLength": 908569,
+              "mode": 420
+            },
+            {
+              "name": "index.js",
+              "sha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+              "byteLength": 2226400,
+              "mode": 420
+            },
+            {
+              "name": "initdb.wasm",
+              "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+              "byteLength": 169969,
+              "mode": 420
+            },
+            {
+              "name": "pglite.data",
+              "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+              "byteLength": 5289109,
+              "mode": 420
+            },
+            {
+              "name": "pglite.wasm",
+              "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+              "byteLength": 8739902,
+              "mode": 420
+            },
+            {
+              "name": "photon_rs_bg.wasm",
+              "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+              "byteLength": 1881634,
+              "mode": 420
+            },
+            {
+              "name": "vector.tar.gz",
+              "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+              "byteLength": 46108,
+              "mode": 420
+            }
+          ]
+        },
+        "previousArtifactsVerified": [
+          {
+            "name": "duet",
+            "sha256": "8da5a93533047fad8134e792756db85661b64a91552e50b4c356c21a8e9affa1",
+            "byteLength": 117078144,
+            "mode": 493
+          },
+          {
+            "name": "helper.js",
+            "sha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+            "byteLength": 908569,
+            "mode": 420
+          },
+          {
+            "name": "index.js",
+            "sha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+            "byteLength": 2226400,
+            "mode": 420
+          },
+          {
+            "name": "initdb.wasm",
+            "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+            "byteLength": 169969,
+            "mode": 420
+          },
+          {
+            "name": "pglite.data",
+            "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+            "byteLength": 5289109,
+            "mode": 420
+          },
+          {
+            "name": "pglite.wasm",
+            "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+            "byteLength": 8739902,
+            "mode": 420
+          },
+          {
+            "name": "photon_rs_bg.wasm",
+            "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+            "byteLength": 1881634,
+            "mode": 420
+          },
+          {
+            "name": "vector.tar.gz",
+            "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+            "byteLength": 46108,
+            "mode": 420
+          }
+        ],
+        "privateOriginalRollback": {
+          "path": "/home/synthetic-user/.duet/runtime-adoption/0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2/original",
+          "exists": true,
+          "snapshotExists": true,
+          "releasesExists": true,
+          "readMethod": "sudo stat metadata only"
+        },
+        "heldManagedReleaseExists": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "baseRevision": "dbeb2f0e2",
+  "phase": "canonical-writers-additive-schema",
+  "liveActions": false,
+  "migration": "migrations:migrateWorkspaceRuntimeIdentity041026",
+  "deploymentOrdering": {
+    "package": "1.42.3",
+    "sourceSha256": "bf1353b51c929fc0cb88416271ea42d344a896196186d5b5a8ab1c8fed70b8db",
+    "commandBeforeFunctionPush": true,
+    "seedPublicationAbiUnchangedAgainst": "dbb28fe"
+  },
+  "gates": {
+    "gatewayChanged": {
+      "tests": 240,
+      "assertions": 1181
+    },
+    "contractVm": {
+      "tests": 34,
+      "assertions": 84
+    },
+    "backendMigrationObservationFleet": {
+      "tests": 4,
+      "assertions": 17
+    },
+    "backendPlanning": {
+      "tests": 4,
+      "assertions": 11
+    },
+    "backendObservationIntegration": {
+      "tests": 2,
+      "assertions": 6
+    },
+    "apiRegistrationDriftIntegration": {
+      "tests": 4,
+      "assertions": 54
+    },
+    "apiHeldAliasRegistration": {
+      "tests": 1,
+      "assertions": 16
+    },
+    "apiArtifactTransport": {
+      "tests": 3,
+      "assertions": 77
+    },
+    "harnessSelectionReleaseEvidence": {
+      "tests": 27,
+      "assertions": 65
+    },
+    "vmImageLocal": {
+      "tests": 25,
+      "assertions": 332
+    },
+    "seedPublication": {
+      "tests": 3,
+      "assertions": 9
+    },
+    "exeProbe": {
+      "tests": 7,
+      "assertions": 18
+    }
+  },
+  "types": [
+    "backend",
+    "gateway",
+    "contract",
+    "api",
+    "test-harness",
+    "exe",
+    "vm-image"
+  ],
+  "lint": "focused changed source passed",
+  "independentReview": {
+    "initialFindings": 4,
+    "resolved": [
+      "direct runtime registration snapshot completeness",
+      "strict image verifier outgoing report consumer",
+      "old serving API required fleet projection",
+      "callback-mutated token type narrowing"
+    ],
+    "followup": "clean"
+  },
+  "limits": [
+    "Root full gate not run",
+    "No native strict image build/verify or live staging journey run",
+    "No deployment or migration executed",
+    "Web operator consumer/visual proof is separately owned"
+  ]
+}

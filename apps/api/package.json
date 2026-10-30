@@ -1,0 +1,46 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "backup:probe": "bun scripts/workspace-backup-blob-probe.ts",
+    "build": "bun run --cwd ../../packages/gateway build && bun scripts/build-runtime-release.mjs",
+    "build:vercel": "bun run build && node ../../scripts/vercel-bundle.mjs",
+    "check-types": "tsc --noEmit -p tsconfig.check.json",
+    "lint": "oxlint",
+    "test": "bun test --parallel=2 --timeout 60000"
+  },
+  "dependencies": {
+    "@composio/client": "0.1.0-alpha.76",
+    "@composio/core": "0.18.1",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@repo/contract": "*",
+    "@repo/exe": "*",
+    "@repo/fake-oauth-issuer": "*",
+    "@repo/official-agents-seed": "*",
+    "@repo/service-catalog": "*",
+    "@repo/skills-registry": "*",
+    "@repo/web-locale": "*",
+    "@vercel/blob": "2.8.0",
+    "@vercel/functions": "^3.1.0",
+    "ai": "^7",
+    "convex": "^1.42.1",
+    "hono": "^4.10.8",
+    "zod": "^4.4.3",
+    "@repo/agent": "workspace:*"
+  },
+  "devDependencies": {
+    "@repo/backend": "*",
+    "@repo/gateway": "*",
+    "@repo/test-harness": "*",
+    "@repo/typescript-config": "*",
+    "@types/bun": "catalog:",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "@duetso/agent": "workspace:*"
+  }
+}

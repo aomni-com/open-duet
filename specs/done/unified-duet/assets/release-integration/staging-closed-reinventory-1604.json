@@ -1,0 +1,138 @@
+{
+  "environment": "staging",
+  "items": [
+    {
+      "workspaceId": "ns769tvfcsmvzhfab4bshkpcjx8btf8d",
+      "slug": "official-agents-hub",
+      "vmName": "workspace-redacted",
+      "sshDest": "service.example.invalid",
+      "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+      "oldRuntimeVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "workspaceStatus": "active",
+      "servicingStatus": "active",
+      "providerStatus": "running",
+      "appAnchorPaths": [
+        "agents/account-researcher/apps/account-board",
+        "agents/code-reviewer/apps/connect-repos",
+        "agents/seo-specialist/apps/content-board",
+        "agents/seo-specialist/apps/connect-search-console",
+        "agents/social-media-manager/apps/connect-accounts",
+        "agents/support-agent/apps/connect-helpdesk",
+        "agents/people-researcher/apps/dossier-board",
+        "agents/brand-designer/apps/setup-brand",
+        "agents/writer/apps/setup-voice"
+      ],
+      "blockers": [],
+      "warnings": []
+    },
+    {
+      "workspaceId": "ns7bkd20x918mfvwjftzgp1zm98bxrek",
+      "slug": "Example User-zhang-s-workspace",
+      "vmName": "workspace-redacted",
+      "sshDest": "service.example.invalid",
+      "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+      "oldRuntimeVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "workspaceStatus": "active",
+      "servicingStatus": "active",
+      "providerStatus": "running",
+      "appAnchorPaths": [],
+      "blockers": [],
+      "warnings": []
+    }
+  ],
+  "unprovisionedWorkspaces": [
+    {
+      "workspaceId": "ns79wjv4acec9t9vnefmexw1vx8by5zn",
+      "slug": "duet-so-abuse-mshd4nyl-s-workspace",
+      "status": "provisioning",
+      "appAnchorPaths": [
+        "welcome/hello-app"
+      ],
+      "servicingStatus": "paused"
+    },
+    {
+      "workspaceId": "ns7dq1pfat2phkj18gxbsx27a98d0s8h",
+      "slug": "duet",
+      "status": "provisioning",
+      "appAnchorPaths": [
+        "welcome/hello-app"
+      ],
+      "servicingStatus": "paused"
+    }
+  ],
+  "otherEnvironmentVms": [
+    "workspace-redacted",
+    "workspace-redacted",
+    "workspace-redacted",
+    "workspace-redacted",
+    "workspace-redacted",
+    "workspace-redacted",
+    "workspace-redacted",
+    "workspace-redacted",
+    "workspace-redacted",
+    "workspace-redacted",
+    "workspace-redacted",
+    "workspace-redacted",
+    "workspace-redacted",
+    "workspace-redacted"
+  ],
+  "unattributedProviderVms": [],
+  "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+  "apply": false,
+  "lifecycle": {
+    "paused": true,
+    "cpuExecutions": [
+      {
+        "id": "mc22x8pcw12k5s4h2qtxvk6h1n8bha2b",
+        "state": "pending",
+        "nextTs": "1791130516129915748"
+      }
+    ],
+    "blockers": []
+  },
+  "outcomes": [
+    {
+      "workspaceId": "ns769tvfcsmvzhfab4bshkpcjx8btf8d",
+      "slug": "official-agents-hub",
+      "vmName": "workspace-redacted",
+      "sshDest": "service.example.invalid",
+      "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+      "oldRuntimeVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "workspaceStatus": "active",
+      "servicingStatus": "active",
+      "providerStatus": "running",
+      "appAnchorPaths": [
+        "agents/account-researcher/apps/account-board",
+        "agents/code-reviewer/apps/connect-repos",
+        "agents/seo-specialist/apps/content-board",
+        "agents/seo-specialist/apps/connect-search-console",
+        "agents/social-media-manager/apps/connect-accounts",
+        "agents/support-agent/apps/connect-helpdesk",
+        "agents/people-researcher/apps/dossier-board",
+        "agents/brand-designer/apps/setup-brand",
+        "agents/writer/apps/setup-voice"
+      ],
+      "blockers": [],
+      "warnings": [],
+      "status": "planned",
+      "phase": "inventory"
+    },
+    {
+      "workspaceId": "ns7bkd20x918mfvwjftzgp1zm98bxrek",
+      "slug": "Example User-zhang-s-workspace",
+      "vmName": "workspace-redacted",
+      "sshDest": "service.example.invalid",
+      "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+      "oldRuntimeVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "workspaceStatus": "active",
+      "servicingStatus": "active",
+      "providerStatus": "running",
+      "appAnchorPaths": [],
+      "blockers": [],
+      "warnings": [],
+      "status": "planned",
+      "phase": "inventory"
+    }
+  ],
+  "observedAt": "2026-10-04T16:01:22.158Z"
+}

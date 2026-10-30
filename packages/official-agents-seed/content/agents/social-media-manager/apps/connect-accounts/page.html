@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Account scope</title>
+    <script>
+      const requestedTheme = new URLSearchParams(location.search).get('theme')
+      if (requestedTheme === 'light' || requestedTheme === 'dark') {
+        document.documentElement.dataset.theme = requestedTheme
+      }
+    </script>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --canvas: #f4f1ec;
+        --surface: #fffdf9;
+        --ink: #1c1a24;
+        --muted: #6b6878;
+        --line: rgba(28, 26, 36, 0.14);
+        --accent: #4f46b8;
+        --accent-soft: #e7e5fb;
+        --good: #12805c;
+        --good-soft: #d9f3e7;
+        --warn: #b25e09;
+        --warn-soft: #fdeed8;
+        --shadow: 0 18px 50px rgba(37, 33, 66, 0.09);
+      }
+      :root[data-theme='dark'] {
+        --canvas: #131219;
+        --surface: #1d1c26;
+        --ink: #efedf6;
+        --muted: #a3a0b3;
+        --line: rgba(239, 237, 246, 0.14);
+        --accent: #a5a0f2;
+        --accent-soft: #2c2a4a;
+        --good: #55d6a4;
+        --good-soft: #17382c;
+        --warn: #f0a558;
+        --warn-soft: #40301a;
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) {
+          --canvas: #131219;
+          --surface: #1d1c26;
+          --ink: #efedf6;
+          --muted: #a3a0b3;
+          --line: rgba(239, 237, 246, 0.14);
+          --accent: #a5a0f2;
+          --accent-soft: #2c2a4a;
+          --good: #55d6a4;
+          --good-soft: #17382c;
+          --warn: #f0a558;
+          --warn-soft: #40301a;
+          --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        min-height: 100vh;
+        margin: 0;
+        overflow-x: hidden;
+        background: var(--canvas);
+        color: var(--ink);
+        font: 16px/1.55 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+      button { color: inherit; font: inherit; }
+      .shell { width: min(100% - 2rem, 42rem); margin: 0 auto; padding: 1.6rem 0 4rem; }
+      header { padding: .6rem 0 1.4rem; }
+      h1 { margin: 0 0 .45rem; font: 600 clamp(1.7rem, 5vw, 2.3rem)/1.1 ui-serif, Georgia, serif; letter-spacing: -.03em; }
+      .lede { margin: 0; color: var(--muted); }
+      .banner { display: none; margin: 0 0 1rem; padding: .85rem 1rem; border-radius: .9rem; background: var(--warn-soft); color: var(--warn); font-weight: 600; }
+      .banner.show { display: block; }
+      .done-banner { display: none; align-items: center; gap: .6rem; margin: 0 0 1rem; padding: .95rem 1.1rem; border-radius: .9rem; background: var(--good-soft); color: var(--good); font-weight: 650; }
+      .done-banner.show { display: flex; }
+      .card { margin-bottom: 1rem; border: 1px solid var(--line); border-radius: 1.15rem; background: var(--surface); box-shadow: var(--shadow); }
+      .card-head { padding: 1.05rem 1.15rem .35rem; }
+      .step { color: var(--accent); font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+      h2 { margin: .2rem 0 .2rem; font-size: 1.15rem; }
+      .hint { margin: 0; color: var(--muted); font-size: .88rem; }
+      .card-body { padding: .7rem .7rem 1rem; }
+      .provider, .choice { display: flex; align-items: center; gap: .85rem; min-height: 3.4rem; padding: .55rem .45rem; border-radius: .85rem; }
+      .provider + .provider, .choice + .choice { border-top: 1px solid var(--line); border-radius: 0; }
+      .provider-name { flex: 1; min-width: 0; font-weight: 640; }
+      .pill { flex: 0 0 auto; padding: .28rem .7rem; border-radius: 999px; font-size: .78rem; font-weight: 700; }
+      .pill.on { background: var(--good-soft); color: var(--good); }
+      /* The neutral third state. A bare `.pill` carries padding and radius but
+         no colour, so "not connected" read as naked text beside two siblings
+         that are chips. Neutral rather than warn: nothing is in flight. */
+      .pill.off { background: var(--line); color: var(--muted); }
+      .pill.waiting { background: var(--warn-soft); color: var(--warn); }
+      .provider-note { display: block; color: var(--muted); font-size: .8rem; font-weight: 450; }
+      .choice { cursor: pointer; }
+      .choice input { width: 1.35rem; height: 1.35rem; margin: 0; accent-color: var(--accent); }
+      .choice-label { flex: 1; min-width: 0; font-weight: 600; }
+      .choice-detail { display: block; color: var(--muted); font-size: .8rem; font-weight: 450; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .empty { padding: 1.1rem .45rem; color: var(--muted); }
+      .save-row { display: flex; align-items: center; gap: .8rem; padding: .35rem 1.15rem 1.15rem; }
+      .save-button { min-height: 2.8rem; padding: .55rem 1.3rem; border: 0; border-radius: .85rem; background: var(--accent); color: #fff; font-weight: 700; cursor: pointer; }
+      :root[data-theme='dark'] .save-button { color: #211219; }
+      @media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .save-button { color: #211219; } }
+      :root .save-button:disabled { cursor: default; opacity: 1; border-color: var(--line); background: color-mix(in srgb, var(--ink) 7%, transparent); color: var(--muted); }
+      .save-note { color: var(--muted); font-size: .85rem; }
+      footer { color: var(--muted); font-size: .85rem; }
+      @media (max-width: 30rem) {
+        .provider { align-items: stretch; flex-direction: column; }
+        .provider .pill { align-self: flex-start; }
+        .save-row { flex-wrap: wrap; }
+        .save-row .save-button { width: 100%; }
+        .save-row .save-note { width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <h1>The accounts your social media manager may use</h1>
+        <p class="lede">
+          Your social media manager runs a posting calendar for you. This page is where you see which
+          platforms are connected and tick exactly which accounts it may post to — every post still
+          waits for your approval.
+        </p>
+      </header>
+
+      <div id="problem" class="banner"></div>
+      <div id="done" class="done-banner">All set. Your agent can only post to the accounts you ticked below.</div>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="step">Step 1</span>
+          <h2>The places you post</h2>
+          <p class="hint">Connecting happens in chat — ask your agent and it will send you the link.</p>
+        </div>
+        <div id="providers" class="card-body"><div class="empty">Checking what is connected…</div></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="step">Step 2</span>
+          <h2>Choose the accounts your agent may post to</h2>
+          <p class="hint">Only ticked accounts are ever used. Come back here whenever you want to change that.</p>
+        </div>
+        <div id="choices" class="card-body"><div class="empty">Once a platform is connected, its account appears here.</div></div>
+        <div class="save-row">
+          <button id="save" class="save-button" type="button" disabled>Save my choices</button>
+          <span id="save-note" class="save-note"></span>
+        </div>
+      </section>
+
+      <footer>Nothing is posted until you approve it. Your agent sees only the accounts you tick here.</footer>
+    </main>
+    <script type="module">
+      const providersNode = document.querySelector('#providers')
+      const choicesNode = document.querySelector('#choices')
+      const saveButton = document.querySelector('#save')
+      const saveNote = document.querySelector('#save-note')
+      const problemNode = document.querySelector('#problem')
+      const doneNode = document.querySelector('#done')
+      let current
+      let ticked = new Set()
+      let tickedInitialized = false
+
+      const el = (tag, className, text) => {
+        const node = document.createElement(tag)
+        if (className) node.className = className
+        if (text !== undefined) node.textContent = text
+        return node
+      }
+
+      async function load(fresh) {
+        try {
+          const response = await fetch(fresh ? '/api/refresh' : '/api/status', {
+            method: fresh ? 'POST' : 'GET',
+          })
+          if (!response.ok) throw new Error('status ' + response.status)
+          current = await response.json()
+          if (!tickedInitialized) {
+            ticked = new Set(current.selection.map(item => item.id))
+            tickedInitialized = true
+          }
+          render()
+        } catch {
+          problemNode.textContent = 'This page could not load just now. It will keep trying.'
+          problemNode.classList.add('show')
+        }
+      }
+
+      function render() {
+        problemNode.classList.toggle('show', !current.ready)
+        if (!current.ready) problemNode.textContent = current.message || 'This page could not check your connections.'
+        doneNode.classList.toggle('show', current.complete)
+
+        providersNode.replaceChildren(
+          ...current.providers.map(provider => {
+            const row = el('div', 'provider')
+            const name = el('span', 'provider-name', provider.name)
+            // This page dropped the discovery message entirely, so a platform whose
+            // account could not be read looked identical to one that read fine.
+            const discovery = current.discovery.find(d => d.integration === provider.integration)
+            if (discovery && discovery.state === 'failed' && discovery.message) {
+              name.append(el('span', 'provider-note', discovery.message))
+            }
+            row.append(name)
+            // A green 'Connected' beside "could not be loaded" tells the user two
+            // opposite things. Connected-but-unreadable is its own state, and the
+            // 25s poll is what clears it.
+            const unreadable = discovery !== undefined && discovery.state === 'failed'
+            if (provider.connected) {
+              row.append(unreadable
+                ? el('span', 'pill waiting', 'Connected, still reading…')
+                : el('span', 'pill on', 'Connected'))
+            }
+            else if (provider.status === 'pending') {
+              /* An authorization that started and never came back. Nothing
+                 clears it on its own, and this page cannot start a new one:
+                 the authorization page refuses to render in Duet's app frame,
+                 so a button here could only open a stray tab that returns to
+                 this app rather than to the product. The whole flow lives in
+                 chat, where the agent hands over a link that comes back into
+                 Duet. */
+              row.append(el('span', 'pill waiting', 'Finishing up…'), el('span', 'provider-note', 'Ask your agent for a fresh link.'))
+            }
+            else {
+              // No per-row note: the card's own hint already says connecting
+              // happens in chat, and repeating it under every provider turned
+              // one instruction into five lines of the same sentence.
+              row.append(el('span', 'pill off', 'Not connected'))
+            }
+            return row
+          }),
+        )
+
+        if (current.options.length === 0) {
+          choicesNode.replaceChildren(
+            el('div', 'empty', 'Once a platform is connected, its account appears here.'),
+          )
+        } else {
+          choicesNode.replaceChildren(
+            ...current.options.map(option => {
+              const row = el('label', 'choice')
+              const box = document.createElement('input')
+              box.type = 'checkbox'
+              box.checked = ticked.has(option.id)
+              box.addEventListener('change', () => {
+                if (box.checked) ticked.add(option.id)
+                else ticked.delete(option.id)
+                updateSave()
+              })
+              const label = el('span', 'choice-label', option.label)
+              if (option.detail) label.append(el('span', 'choice-detail', option.detail))
+              row.append(box, label)
+              return row
+            }),
+          )
+        }
+        updateSave()
+      }
+
+      function updateSave() {
+        const saved = new Set(current.selection.map(item => item.id))
+        const dirty = ticked.size !== saved.size || [...ticked].some(id => !saved.has(id))
+        saveButton.disabled = !dirty || current.options.length === 0
+        if (current.complete && !dirty) saveNote.textContent = 'Saved.'
+        else if (ticked.size === 0) saveNote.textContent = 'Tick at least one to finish.'
+        else saveNote.textContent = ''
+      }
+
+      saveButton.addEventListener('click', async () => {
+        saveButton.disabled = true
+        saveNote.textContent = 'Saving…'
+        try {
+          const response = await fetch('/api/selection', {
+            method: 'PUT',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ ids: [...ticked] }),
+          })
+          if (!response.ok) {
+            const body = await response.json().catch(() => ({}))
+            throw new Error(body.error || 'save failed')
+          }
+          current = await response.json()
+          ticked = new Set(current.selection.map(item => item.id))
+          render()
+        } catch (error) {
+          saveNote.textContent = error.message
+          saveButton.disabled = false
+        }
+      })
+
+      new EventSource('/events').onmessage = () => load(false)
+      setInterval(() => load(false), 25000)
+      load(true)
+    </script>
+  </body>
+</html>

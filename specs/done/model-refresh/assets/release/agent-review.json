@@ -1,0 +1,79 @@
+{
+  "base": "6d12f7547d1c5f847d13c280579e99b5ded05e5d",
+  "head": "3181c05455deb28279811259fffe634307b86f10",
+  "includes_uncommitted": false,
+  "review_scope": "Whole feature from pre-refresh published baseline plus final working tree",
+  "own_three_lens": {
+    "shape": "Catalog owns one closed retired-selection map; turn-state recovery owns saved executable field traversal after table load; generic option resolution stays pure precedence; SessionManager owns fresh-launch preferences. No new schema, migration registry, or old executable model catalog.",
+    "diff": "Saved options.model and memoryModel plus both workflow definition homes recover. Valid custom virtual names retain precedence for chat, memory remains concrete. Fresh/different explicit advanced provider pins remain exact. Historical messages and workflow history untouched. Current probe and benchmark inputs updated; historical telemetry retained.",
+    "docs": "Root README states saved execution versus history rule; fixture README documents immutable baseline provenance and actual consumer regressions. Benchmark README links generator/output surface; no duplicated current model roster added."
+  },
+  "focused": [
+    {
+      "log": "/tmp/agent-selections-final-focused.log",
+      "pass": 119,
+      "fail": 0,
+      "assertions": 764
+    },
+    {
+      "log": "/tmp/agent-selections-final-neighbors.log",
+      "pass": 180,
+      "fail": 0,
+      "assertions": 537
+    },
+    {
+      "log": "/tmp/agent-selections-fable-report-green.log",
+      "pass": 13,
+      "fail": 0,
+      "assertions": 59
+    },
+    {
+      "log": "/tmp/agent-selections-current-campaigns-green.log",
+      "pass": 3,
+      "fail": 0,
+      "assertions": 79
+    }
+  ],
+  "checks": {
+    "types": "/tmp/agent-selections-final-types.log",
+    "lint": "/tmp/agent-selections-final-lint.log",
+    "build": "/tmp/agent-selections-final-build.log",
+    "format": "/tmp/agent-selections-final-format.log"
+  },
+  "independent_review": {
+    "log": "/tmp/agent-selections-final3-whole-review.log",
+    "status": "clean",
+    "scope": "6d12f7547d1c5f847d13c280579e99b5ded05e5d through final3181c05 equivalent working tree",
+    "limitations": "Read-only static and bounded offline checks only; one sandbox-blocked heredoc was unexecuted, not qualification evidence. No broad tests or paid calls."
+  },
+  "full_gate": "Passed exact final main3181c05 existing CI Docker full suite",
+  "ci": {
+    "green": {
+      "sha": "3181c05455deb28279811259fffe634307b86f10",
+      "run": 36371498403,
+      "status": "success",
+      "passed": 1384,
+      "failed": 0,
+      "files": 148,
+      "seconds": 235.43,
+      "log": "/tmp/agent-selections-ci-green.log",
+      "url": "https://github.com/Example User/duet-agent/actions/runs/36371498403"
+    },
+    "red": {
+      "sha": "ac81d283100ed0ba52898d640809fbed01711f5d",
+      "run": 36371512239,
+      "status": "expected_failure",
+      "delta": "Only CLI inline provenance fix reverted; tests identical",
+      "passed": 1383,
+      "failed": 1,
+      "files": 148,
+      "seconds": 293.63,
+      "log": "/tmp/agent-selections-ci-red.log",
+      "url": "https://github.com/Example User/duet-agent/actions/runs/36371512239",
+      "failure": "inline model override matching the fresh default wins on resume: expected frontier, actual saved sol",
+      "remote_branch_deleted": true
+    }
+  },
+  "sibling_merge": "954f2a33c657afd501a49cb4499a60283cbb1c31",
+  "docker_cleanup": "Confirmed absent by responsive daemon: docker rm -f agent-selections-last returned No such container"
+}

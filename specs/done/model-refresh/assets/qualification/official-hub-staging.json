@@ -1,0 +1,63 @@
+{
+  "target": "staging",
+  "api": "https://service.example.invalid",
+  "startedAt": "2026-09-28T00:56:36.248Z",
+  "expectedPlanSha256": "21fd6eb850084e3f88558f7f4e2df2c9227c5e19e626e941b0701eca1e5a311c",
+  "expectedFiles": [
+    {
+      "path": "agents/writer/apps/setup-voice/duet.ts",
+      "sha256": "41d0100bae4ffc35097ee716fcf43b70df278cb39c2e0f51d48f68a1852108ab"
+    },
+    {
+      "path": "agents/writer/apps/setup-voice/README.md",
+      "sha256": "8b27b4c5229c283cf99666c4ae6514a4b5cfcbe35a86a04f9812e700a182bd71"
+    },
+    {
+      "path": "agents/brand-designer/apps/setup-brand/duet.ts",
+      "sha256": "cc453e1593507a949398b8cbf9f621804ea3cf35e884c0e86105fb0b9ee09af6"
+    },
+    {
+      "path": "agents/brand-designer/apps/setup-brand/README.md",
+      "sha256": "d08cb4e32c26b0d1de17a501e3bf31de9c2eab941ddaf6ffae8ce16cdfb95baa"
+    }
+  ],
+  "status": "verified",
+  "sync": {
+    "workspaceSlug": "official-agents-hub",
+    "written": [
+      "agents/brand-designer/apps/setup-brand/README.md",
+      "agents/brand-designer/apps/setup-brand/duet.ts",
+      "agents/writer/apps/setup-voice/README.md",
+      "agents/writer/apps/setup-voice/duet.ts"
+    ],
+    "deleted": [],
+    "retiredAgents": []
+  },
+  "hubFiles": [
+    {
+      "path": "agents/writer/apps/setup-voice/duet.ts",
+      "sha256": "41d0100bae4ffc35097ee716fcf43b70df278cb39c2e0f51d48f68a1852108ab",
+      "expectedSha256": "41d0100bae4ffc35097ee716fcf43b70df278cb39c2e0f51d48f68a1852108ab",
+      "matches": true
+    },
+    {
+      "path": "agents/writer/apps/setup-voice/README.md",
+      "sha256": "8b27b4c5229c283cf99666c4ae6514a4b5cfcbe35a86a04f9812e700a182bd71",
+      "expectedSha256": "8b27b4c5229c283cf99666c4ae6514a4b5cfcbe35a86a04f9812e700a182bd71",
+      "matches": true
+    },
+    {
+      "path": "agents/brand-designer/apps/setup-brand/duet.ts",
+      "sha256": "cc453e1593507a949398b8cbf9f621804ea3cf35e884c0e86105fb0b9ee09af6",
+      "expectedSha256": "cc453e1593507a949398b8cbf9f621804ea3cf35e884c0e86105fb0b9ee09af6",
+      "matches": true
+    },
+    {
+      "path": "agents/brand-designer/apps/setup-brand/README.md",
+      "sha256": "d08cb4e32c26b0d1de17a501e3bf31de9c2eab941ddaf6ffae8ce16cdfb95baa",
+      "expectedSha256": "d08cb4e32c26b0d1de17a501e3bf31de9c2eab941ddaf6ffae8ce16cdfb95baa",
+      "matches": true
+    }
+  ],
+  "completedAt": "2026-09-28T00:56:46.302Z"
+}

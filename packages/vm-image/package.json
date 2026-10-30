@@ -1,0 +1,24 @@
+{
+  "name": "@repo/vm-image",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build-image": "bun run scripts/build.ts",
+    "build-image:staging": "DUET_IMAGE_ENV_FILE=../../.env.staging IMAGE_REF=ghcr.io/aomni-com/duet-vm-image:staging bun run scripts/build.ts",
+    "promote-image:production": "bun run scripts/promote.ts",
+    "verify-image": "bun run scripts/verify-image.ts",
+    "check-types": "tsc --noEmit",
+    "lint": "oxlint",
+    "test": "bun test src"
+  },
+  "dependencies": {
+    "@repo/contract": "*"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "@types/bun": "catalog:",
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
+  }
+}

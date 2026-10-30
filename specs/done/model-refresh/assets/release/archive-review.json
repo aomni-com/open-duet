@@ -1,0 +1,32 @@
+{
+  "review": "close-spec final independent claim audits",
+  "agentRelease": "a8676bc7f10fece825b4e82bd2d65d6dcdd0e072",
+  "productionSource": "e5b29f63ee91afe45667f45b3448cbfe8305315a",
+  "reviewers": [
+    {
+      "name": "archive_principles_final",
+      "scope": "overview, reasons, invariants, rejected approaches, saved state and provider choices",
+      "verdict": "clean after two editorial fixes; changed claims re-audited"
+    },
+    {
+      "name": "archive_provenance_final",
+      "scope": "code pointers, visual provenance, accounting/distribution choices, final deployment and cleanup receipts",
+      "verdict": "clean"
+    }
+  ],
+  "checks": {
+    "markdownRelativeLinks": 28,
+    "missingLinks": 0,
+    "visualArtifactsUnchanged": 35,
+    "runtimeChangesDuringArchive": false
+  },
+  "limitations": [
+    "Read-only code/evidence audit; no new broad tests or live generation.",
+    "Cancelled root suite remains NOT GREEN; separately scheduled CPU-headroom follow-up remains pending."
+  ],
+  "documents": {
+    "README.md": "d8e004f5d465cfbe63c24cff011af10d091dfb26a839f80ba8975337bf460690",
+    "choices.md": "0803d9824515cb2de0ad3448dad30224d362ff8e0806b7662baca8a92d52ef98",
+    "evidence.md": "c3213a0ef70031251014a2848138724e5db10aa2646dd99b4b5cfc95b39c53bd"
+  }
+}

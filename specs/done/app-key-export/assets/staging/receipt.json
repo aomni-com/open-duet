@@ -1,0 +1,120 @@
+{
+  "journey": "app-key-export",
+  "runId": "staging-e2e-synthetic",
+  "evidence": {
+    "managedAuthenticated": true,
+    "cliVersion": "1.0.1",
+    "buildAppsSkillHash": "313eeed958f67decd0b896fa34dfdd2d2b6a49909cd56929c33c7dd84a5acd9c",
+    "appIds": [
+      "jn7exs8b1s6kwcwm22jasb8cad8fqp74",
+      "jn76pw8t53ssjz8mvdaynsf6ss8fp75n"
+    ],
+    "credentialIds": [
+      "jh71g94txm39zvfte8v4bepe0s8fqxzz",
+      "jh752e7avbd26xdydwr3ec8qdx8fpdrg",
+      "jh71tzykp57zbggepqxfgnqxmh8fqzs2",
+      "jh72mp09drrqzsfzy0cj57tj8s8fp777",
+      "jh7bk7qrzxb33xd40ey6b7wc998fpd62",
+      "jh78pk2ee8j0rks164axc1jynd8fq3wc",
+      "jh706d9wpx0qp3zz8dhf427r5d8fqs7c",
+      "jh753565xe31hjw1saynqbh0es8fqmje"
+    ],
+    "exportsOverlap": true,
+    "individualRevocation": true,
+    "capacityBounded": true,
+    "capacityRecovered": true,
+    "scopeChangePermanent": true,
+    "rowBindingPermanent": true,
+    "catalogAuthenticated": true,
+    "skillsBundleHash": "a80e411ad9eb257862e45ae010d52726b6a2ee04812924917cda1c89fa005acb"
+  },
+  "vmNames": [
+    "workspace-redacted"
+  ],
+  "cleanup": {
+    "status": "pass",
+    "resources": [
+      {
+        "kind": "user",
+        "id": "n9736j7fd2pahvyekve7jg22nn8fpj3m",
+        "status": "deleted"
+      },
+      {
+        "kind": "workspace",
+        "id": "ns7c65fjmnh2ht75hv8gp89z058fqp47",
+        "status": "deleted"
+      },
+      {
+        "kind": "app",
+        "id": "jn7exs8b1s6kwcwm22jasb8cad8fqp74",
+        "status": "deleted"
+      },
+      {
+        "kind": "api-key",
+        "id": "jh71g94txm39zvfte8v4bepe0s8fqxzz",
+        "status": "deleted"
+      },
+      {
+        "kind": "api-key",
+        "id": "jh752e7avbd26xdydwr3ec8qdx8fpdrg",
+        "status": "deleted"
+      },
+      {
+        "kind": "api-key",
+        "id": "jh71tzykp57zbggepqxfgnqxmh8fqzs2",
+        "status": "deleted"
+      },
+      {
+        "kind": "api-key",
+        "id": "jh72mp09drrqzsfzy0cj57tj8s8fp777",
+        "status": "deleted"
+      },
+      {
+        "kind": "api-key",
+        "id": "jh7bk7qrzxb33xd40ey6b7wc998fpd62",
+        "status": "deleted"
+      },
+      {
+        "kind": "api-key",
+        "id": "jh78pk2ee8j0rks164axc1jynd8fq3wc",
+        "status": "deleted"
+      },
+      {
+        "kind": "api-key",
+        "id": "jh706d9wpx0qp3zz8dhf427r5d8fqs7c",
+        "status": "deleted"
+      },
+      {
+        "kind": "api-key",
+        "id": "jh753565xe31hjw1saynqbh0es8fqmje",
+        "status": "deleted"
+      },
+      {
+        "kind": "app",
+        "id": "jn76pw8t53ssjz8mvdaynsf6ss8fp75n",
+        "status": "deleted"
+      }
+    ],
+    "orphans": []
+  },
+  "release": {
+    "deploymentId": "dpl_8qPRagbMGNyEpvnQGNjLds3Qik4H",
+    "previewUrl": "https://service.example.invalid",
+    "apiUrl": "https://service.example.invalid",
+    "revision": "9bc5d3063ae8de25a646d147e08eb88328247bb0",
+    "backend": {
+      "revision": "9bc5d3063ae8de25a646d147e08eb88328247bb0",
+      "schema": 1
+    },
+    "runtimeVersion": "0.0.0+35411e3e7fd9221e7dc412562f62315f99926503005678a491f33e124ca5eccb"
+  },
+  "publicPackage": {
+    "version": "1.0.1",
+    "status": "built-and-tested-not-published",
+    "sha256": "47cb75961ac49900d2e6546e69110c1ff57e4b0ffc719b9286afa7e170eb0e71",
+    "dockerTests": 10,
+    "assertions": 68,
+    "dryRunStatus": "validated",
+    "registryLatestObserved": "1.0.0"
+  }
+}

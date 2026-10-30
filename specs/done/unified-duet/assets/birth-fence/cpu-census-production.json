@@ -1,0 +1,22 @@
+{
+  "environment": "production",
+  "observedAt": "2026-10-04T09:32:11.224Z",
+  "source": "_system/frontend/listCronJobs",
+  "jobs": [
+    {
+      "name": "resize undersized workspace VMs to the current floor",
+      "functionPath": "domains/workspaces/vmSize.js:reconcileWorkspaceVmSizes",
+      "state": "pending",
+      "nextTs": "1791111411963158647",
+      "prevTs": "1791100611963158647",
+      "nextRunId": "mc2aggzapk26df1j4s2ckxep3n8bgttn",
+      "lastRunStatusType": "success"
+    }
+  ],
+  "scheduledFunctions": {
+    "source": "_system/frontend/paginatedScheduledJobs",
+    "table": "_scheduled_jobs",
+    "rowsRead": 0,
+    "executions": []
+  }
+}

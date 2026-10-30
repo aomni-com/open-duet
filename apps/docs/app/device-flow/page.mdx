@@ -1,0 +1,48 @@
+import { EndpointReference } from '../../components/endpoint-reference'
+
+export const metadata = {
+  title: 'Device flow',
+  description: 'Sign a terminal in as the approving person.',
+  alternates: { canonical: '/device-flow/' },
+}
+
+<p className="eyebrow">Authorization</p>
+
+# Approval signs the terminal in as you
+
+Device flow lets a command-line tool show a short verification code and poll while the user
+approves or denies it in a signed-in browser. The tool receives a human identity key; it never
+receives the user's browser credentials.
+
+## Request a login
+
+The request describes the client with `client_name`. It does not request scopes, select a
+workspace or register a sync machine. The browser approves the person signing in. Current
+workspace membership and role determine access after approval, just as they do in the app.
+
+```bash
+duet login
+duet whoami
+```
+
+The CLI saves the approved key in `~/.duet/config.json`, preserving its existing workspace
+preference and machine identity. Select a workspace for an operation afterwards; approval does
+not bind the key to a single workspace. See [workspace selection](/workspaces).
+
+## Sync uses that same login
+
+`duet sync install` uses the saved human key and registers the Mac's separate, non-secret machine
+identity. There is no additional sync login. Replacing a key keeps the Mac's certificate and
+identity, while removing that Mac stops its mirrors without revoking your other logins.
+See [Mac sync](/sync) and [mirror devices](/mirror-devices) for the transfer lifecycle.
+
+## Poll until a terminal result
+
+Pending, approved, denied and expired are different states. Honor the returned polling interval
+and rate-limit response, and stop on denial or expiry. Save an approved credential before reporting
+success so the next command can use it.
+
+Verification codes are temporary correlation values, not credentials. Keep the resulting key out
+of logs and transcripts, and do not reuse a code after a terminal result.
+
+<EndpointReference category="device" />

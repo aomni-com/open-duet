@@ -1,0 +1,24 @@
+[probe] VM device 2F52T5T up on 192.0.2.1:55287 (BEP 55288)
+[probe] Mac device 6OG6WGL up on 192.0.2.1:55293 (dial-only)
+[probe] ok: both workspace instances use one Mac peer identity
+[probe] ok: both workspace instances copy the same certificate
+[probe] Two workspace instances share one Mac certificate and Syncthing peer ID
+[probe] ok: Mac config is dial-only (no default listener)
+[probe] Bridge on 192.0.2.1:55307 (mint #1)
+[probe]   snapshot: connected=true state=idle global=0 need=0 remote=100%
+[probe]   snapshot: connected=true state=sync-waiting global=4 need=0 remote=100%
+[probe]   snapshot: connected=true state=idle global=4 need=0 remote=100%
+[probe] ok: converged (connected=true)
+[probe] ok: README.md cloned to the Mac
+[probe] ok: src/app.ts cloned to the Mac
+[probe] ok: link.ts cloned as a SYMLINK
+[probe] ok: .git excluded (G1)
+[probe] ok: node_modules excluded (G1)
+[probe] ok: bridge re-minted the tunnel token (mints=2, remints=1)
+[probe] ok: conflict surfaced (never auto-resolved): README.sync-conflict-20261003-212235-6OG6WGL.md
+[probe] kill -9 83390 (Mac Syncthing)
+[probe] ok: clean resume after kill -9 (Syncthing owns resumability)
+[probe] duet sync run exits cleanly (supervisor stopped, bridge closed)
+[probe] ok: a mirror registration refusal reaches the caller
+[probe] ok: registration failure stops the already-started Syncthing process
+[probe] ALL E2E ASSERTIONS PASSED

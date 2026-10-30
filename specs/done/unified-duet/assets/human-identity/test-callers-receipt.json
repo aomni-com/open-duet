@@ -1,0 +1,367 @@
+{
+  "baseCommit": "667840376ee9fd4a646e20eb879f9e09cf35e68b",
+  "recordedAtUtc": "2026-10-04T05:12:08.299121+00:00",
+  "contract": {
+    "issuer": "issueKey(client, options?: { name?: string; expiresAt?: number })",
+    "storedHumanScopes": false,
+    "humanAuthorization": "current membership and role",
+    "deviceApproval": "human identity, no grants or workspace"
+  },
+  "environment": {
+    "bun": "1.3.14",
+    "dependencyInstall": "own bun install --frozen-lockfile succeeded; node_modules is not a main-worktree symlink",
+    "bunLockSha256": "0a9741ee09e13d737a4e513d1a5a518970071e03cd30a7b12c6391a28e558a75",
+    "dependencyAndPatchEdits": false,
+    "declarationSetup": "packages/core: bun run check-types emits the declarations needed by fresh consumers"
+  },
+  "inventory": {
+    "baseline": "667840376ee9fd4a646e20eb879f9e09cf35e68b",
+    "previous": {
+      "total": 262,
+      "files": {
+        "apps/api/src/app-domains.test.ts": 5,
+        "apps/api/src/apps.test.ts": 32,
+        "apps/api/src/auth.test.ts": 17,
+        "apps/api/src/billing.test.ts": 16,
+        "apps/api/src/internal-admin-users.test.ts": 1,
+        "apps/api/src/internal-admin.test.ts": 4,
+        "apps/api/src/marketplace.test.ts": 5,
+        "apps/api/src/provisioning-real-vm.test.ts": 10,
+        "apps/api/src/routes/file-activity.test.ts": 4,
+        "apps/api/src/routes/services/index.test.ts": 4,
+        "apps/api/src/sessions.test.ts": 101,
+        "apps/api/src/train.test.ts": 43,
+        "apps/api/src/vm.test.ts": 16,
+        "apps/api/src/workspace-create-failure.test.ts": 1,
+        "packages/backend/src/file-activity.test.ts": 1,
+        "packages/backend/src/service-proxy.test.ts": 1,
+        "packages/test-harness/src/demo-60s.ts": 1
+      },
+      "legacyArrayCount": 262
+    },
+    "current": {
+      "total": 270,
+      "files": {
+        "apps/api/src/app-domains.test.ts": 5,
+        "apps/api/src/apps.test.ts": 32,
+        "apps/api/src/auth.test.ts": 16,
+        "apps/api/src/billing.test.ts": 16,
+        "apps/api/src/internal-admin-users.test.ts": 1,
+        "apps/api/src/internal-admin.test.ts": 4,
+        "apps/api/src/marketplace.test.ts": 5,
+        "apps/api/src/provisioning-real-vm.test.ts": 10,
+        "apps/api/src/routes/file-activity.test.ts": 4,
+        "apps/api/src/routes/services/index.test.ts": 3,
+        "apps/api/src/sessions.test.ts": 100,
+        "apps/api/src/train.test.ts": 43,
+        "apps/api/src/vm.test.ts": 16,
+        "apps/api/src/workspace-create-failure.test.ts": 1,
+        "packages/backend/src/api-keys.test.ts": 11,
+        "packages/backend/src/file-activity.test.ts": 1,
+        "packages/backend/src/service-proxy.test.ts": 1,
+        "packages/test-harness/src/demo-60s.ts": 1
+      },
+      "legacyArrayCount": 0,
+      "invalidCalls": []
+    }
+  },
+  "inventoryReplay": "bun specs/unified-duet/assets/human-identity/test-callers-inventory.mjs 667840376ee9fd4a646e20eb879f9e09cf35e68b",
+  "redEvidence": [
+    {
+      "capture": "duet-key-api-auth.log",
+      "passed": 19,
+      "failed": 17,
+      "meaning": "Old human scope, workspace/device grant and browser-only assumptions fail against the new production contract."
+    },
+    {
+      "capture": "duet-key-backend-auth-red.log",
+      "passed": 0,
+      "failed": 9,
+      "meaning": "Selected old issuance and credential-as-machine cases fail."
+    },
+    {
+      "capture": "duet-key-api-billing-isolation-red.log",
+      "passed": 13,
+      "failed": 2,
+      "meaning": "Independent review reproduction: leftover viewer fixture breaks later directory pagination; a viewer also correctly fails payer authorization before payment configuration."
+    }
+  ],
+  "gates": [
+    {
+      "cwd": "packages/backend",
+      "command": "bun test --timeout 60000 src/api-keys.test.ts",
+      "capture": "duet-key-backend-auth-green.log",
+      "passed": 33,
+      "failed": 0,
+      "assertions": 410,
+      "note": "Full key suite before final unused-input/type cleanup; affected human device paths rerun below."
+    },
+    {
+      "cwd": "packages/backend",
+      "command": "bun test --timeout 60000 src/api-keys.test.ts -t 'one human key follows|named human-key revocation|funding|credit recovery'",
+      "capture": "duet-key-backend-role-final.log",
+      "passed": 3,
+      "failed": 0,
+      "assertions": 30
+    },
+    {
+      "cwd": "apps/api",
+      "command": "bun test --timeout 60000 src/auth.test.ts",
+      "capture": "duet-key-api-auth-green.log",
+      "passed": 30,
+      "failed": 0,
+      "assertions": 337,
+      "note": "Full auth suite before fixture reset follow-up; invitation path rerun below."
+    },
+    {
+      "cwd": "apps/api",
+      "command": "bun test --timeout 60000 src/apps.test.ts src/train.test.ts src/billing.test.ts",
+      "capture": "duet-key-api-topics.log",
+      "passed": 81,
+      "failed": 1,
+      "assertions": 1285,
+      "note": "This was a failing wide run, not an 82-case green result. Its sole scrape-URL grant-only refusal was repaired and rerun separately; billing was then strengthened and rerun in full."
+    },
+    {
+      "cwd": "apps/api",
+      "command": "bun test --timeout 60000 src/train.test.ts -t 'adds a scraped URL'",
+      "capture": "duet-key-api-url-green.log",
+      "passed": 1,
+      "failed": 0,
+      "assertions": 16
+    },
+    {
+      "cwd": "apps/api",
+      "command": "bun test --timeout 60000 src/billing.test.ts",
+      "capture": "duet-key-api-billing-final-green.log",
+      "passed": 15,
+      "failed": 0,
+      "assertions": 194,
+      "note": "Final full billing file after actual-viewer and fixture isolation fixes."
+    },
+    {
+      "cwd": "apps/api",
+      "command": "bun test --timeout 60000 src/auth.test.ts src/train.test.ts src/apps.test.ts -t 'workspace invite API|files proxy enforces scopes|anchors list uses'",
+      "capture": "duet-key-api-fixture-final-green.log",
+      "passed": 3,
+      "failed": 0,
+      "assertions": 63
+    },
+    {
+      "cwd": "apps/api",
+      "command": "bun test --timeout 60000 src/sessions.test.ts",
+      "capture": "duet-key-api-sessions-all.log",
+      "passed": 88,
+      "failed": 0,
+      "assertions": 1029
+    },
+    {
+      "cwd": "apps/api",
+      "command": "bun test --timeout 60000 src/internal-admin-users.test.ts src/internal-admin.test.ts src/marketplace.test.ts src/workspace-create-failure.test.ts src/routes/services/index.test.ts src/app-domains.test.ts",
+      "capture": "duet-key-api-ordinary.log",
+      "passed": 64,
+      "failed": 0,
+      "assertions": 648
+    },
+    {
+      "cwd": "apps/api",
+      "command": "bun test src/routes/users.test.ts src/shared.test.ts",
+      "capture": "duet-key-api-account-unit.log",
+      "passed": 11,
+      "failed": 0,
+      "assertions": 74
+    },
+    {
+      "cwd": "packages/backend",
+      "command": "bun test --timeout 60000 src/service-proxy.test.ts -t 'billing bursts preserve preflights'",
+      "capture": "duet-key-backend-burst-final-green.log",
+      "passed": 1,
+      "failed": 0,
+      "assertions": 35
+    },
+    {
+      "cwd": "packages/test-harness",
+      "command": "bun test src/demo-60s.test.ts -t 'mode selection|local leg|ledger debit'",
+      "capture": "duet-key-harness-demo.log",
+      "passed": 6,
+      "failed": 0,
+      "assertions": 12,
+      "note": "Pure/local helper cases. Neither real VM/install/pair demo was executed.",
+      "skipped": 2
+    }
+  ],
+  "otherFocusedCaptures": [
+    "duet-key-api-activity-green.log",
+    "duet-key-api-vm-domain-green.log",
+    "duet-key-api-service-green.log"
+  ],
+  "staticGates": {
+    "packages/backend: bun run check-types": "passed",
+    "apps/api: bun run check-types": "passed",
+    "packages/test-harness: bun run check-types": "passed",
+    "oxlint affected sources": "passed",
+    "git diff --check": "passed"
+  },
+  "independentReview": {
+    "command": "codex review --uncommitted",
+    "model": "gpt-6.1-sol",
+    "completed": true,
+    "finding": "P2: viewer fixture memberships survive into shared billing directory pagination",
+    "resolution": "Suite reset drains exact helper-created membership generations using the existing backend testing endpoint before owner cleanup. Full billing red 13/2 becomes green 15/0.",
+    "reviewerExecutionLimit": "Reviewer type checks passed; its integration execution was blocked by sandbox listening-socket restrictions. The captured local integration gates ran successfully in this managed checkout."
+  },
+  "review": {
+    "shape": "One shared issuer; no drop-scopes bridge or private duplicated issuer; fixture owns its created membership cleanup.",
+    "diff": "Grant-only cases removed or replaced by real people/current roles; managed VM/app/OAuth contracts retained. Dead device-code scope testing helper removed with its last callers.",
+    "docs": "No affected README principle required an edit. Choices and evidence are scoped pass artifacts; root spec/global choices remain with the root owner."
+  },
+  "limits": [
+    "No root test suite or live staging journey was run.",
+    "Opted-in real VM provisioning callers were migrated and typechecked, not executed.",
+    "The full Docker/exe.dev demo is not green evidence; root slice 05 owns remaining duetfs package/name/entry/config and CLI composition migration.",
+    "Hosted checkout and portal tests reach local billing_not_configured (503); they prove human admission, not a live payment URL or charge.",
+    "Backend file-activity and API file-activity full files were not rerun; the affected API guard case was run.",
+    "The inventory and local gates do not complete slices 02\u201305 or replace final live staging closeout."
+  ],
+  "sourceSha256": {
+    "apps/api/src/app-domains.test.ts": "1592aa332f46cea6c644908de9f6406cf07b3c3045249e59cf0a229f5d4b908a",
+    "apps/api/src/apps.test.ts": "ad6b52e2ab4c54d13e8cec4095e227cd54213b6f1b85cfe655cb2402b8052c2c",
+    "apps/api/src/auth.test.ts": "d3f35b5eda2be94310e0d81ef8d0eaaa2d8817499ab17a267ee66a2a919a1cc9",
+    "apps/api/src/billing.test.ts": "1ec2387f30cc0734b9ac599ef72c0a43e1d8aa3f619d63a0f8259ec025eae672",
+    "apps/api/src/index-suite.ts": "f6181ec4485766773c2a7c74d5c4ecf915c889dd0a94c9392d463388ce411254",
+    "apps/api/src/internal-admin-users.test.ts": "fa1af8e3f42aa6ad0ee02799dc1bc3a0c0bcd0ce40e618696b141bee4038b6be",
+    "apps/api/src/internal-admin.test.ts": "7f0154ccb56a8555e429231894141f01457fcf57fdbb96cdf77ae6590df70f6b",
+    "apps/api/src/marketplace.test.ts": "58b86c91251914ea6f44d5a21b40f1056cb2e22e33cedd4b672b80d5ca0e7362",
+    "apps/api/src/provisioning-real-vm.test.ts": "b33ad49b5264481e159dad57c7ca453b5379e249e7bb619a672933f65a0ce495",
+    "apps/api/src/routes/auth.test.ts": "05901c706fe9dc4cea81d3e27858f3eace0b7ae1ba5f35529424d3959a9a52ef",
+    "apps/api/src/routes/file-activity.test.ts": "660a8a4d64789d33c7a58ed54d4ea7405e6b5eb024e565e09ead29594136e87d",
+    "apps/api/src/routes/services/index.test.ts": "a121f700b41b35f9103089bdc75227afbff42bf9c27a85a3ec313ee324d92802",
+    "apps/api/src/sessions.test.ts": "4f93d2379e51998bb5acb198c11d4bd8cf8f79d9568708f599845d3bfcbc08b1",
+    "apps/api/src/train.test.ts": "d98c90fdbfc7370ed03e703d302c1ce19bb8c6056b30c9e57cc6398e87723848",
+    "apps/api/src/vm.test.ts": "ca7d20d44bafe758a0eebf33e8bd2c14ded74195b446aa0d181db1f4bdf8c70f",
+    "apps/api/src/workspace-create-failure.test.ts": "f89823b6f85e57c6bd4ddcfd293068142245f811a5c9e585d9120ca37a00102e",
+    "packages/backend/convex/testing/apiKeys.ts": "329528225413320396198a8a7f3a9cce5a1f67082352c836ee20718b53f7f606",
+    "packages/backend/src/api-keys.test.ts": "27262e0d70150a1d000709aeea4b713c12dd3984d19fcf03d8d3fcb7dbc5ff40",
+    "packages/backend/src/file-activity.test.ts": "8a7cde32a96ecec0223a1c57471f663b8267ecfa19e49428c0402dba2a2593bd",
+    "packages/backend/src/service-proxy.test.ts": "ce66024cc9d16f3495210855d55814788b97a7c7dbc6ad3eb9e244d0892a59e4",
+    "packages/test-harness/src/convex-testing.ts": "e822c41c15e1bda0a5a23c2535d1ebc1e0ef4521a5bdce14bbe86c632f6e3058",
+    "packages/test-harness/src/demo-60s.ts": "cff698412c2e7287cfc8e3599d688e04d8e47863020cbf2d60c7c5d104a282cb"
+  },
+  "captureArchive": {
+    "path": "test-callers-gates.txt.gz",
+    "sha256": "624b5e03c0f8d2ddbc7e2797492771f887e0f6306728fd343852af84c12e9868",
+    "format": "gzip UTF-8; sections named by original capture filename",
+    "captures": [
+      {
+        "name": "duet-key-api-auth.log",
+        "bytes": 15068,
+        "sha256": "a8b698f04fa732a923138d2ca5c9db72d7d2f360c4609f4d90fa4ad12a62b311"
+      },
+      {
+        "name": "duet-key-backend-auth-red.log",
+        "bytes": 10533,
+        "sha256": "ab7345e1f90c9e443bcf70e0b5320993dfeac3010719539e3b15c4977dc2f3ac"
+      },
+      {
+        "name": "duet-key-api-topics.log",
+        "bytes": 12487,
+        "sha256": "904454ed6f37e6aa88a00802e26007ac9b43b1f5c09731800829d400ae3f46bb"
+      },
+      {
+        "name": "duet-key-api-billing-isolation-red.log",
+        "bytes": 3682,
+        "sha256": "dcb60f408909429c5131e58211636b7eda341f52744cfdc3664addbe505da662"
+      },
+      {
+        "name": "duet-key-api-auth-green.log",
+        "bytes": 3644,
+        "sha256": "1ddcc3c36dc0fcf96c820acb52091a32b272a3a9a0ef390b132d3bc7f7f35b29"
+      },
+      {
+        "name": "duet-key-backend-auth-green.log",
+        "bytes": 3537,
+        "sha256": "73d3b80f3fbbe7b2a470b95054d05cea8833a09314321b8b148e189227da4b56"
+      },
+      {
+        "name": "duet-key-api-sessions-all.log",
+        "bytes": 12862,
+        "sha256": "5c124f8e7b591fd41e72c5c42783467948467170e8cf59a89d9301eceb8f8d26"
+      },
+      {
+        "name": "duet-key-api-ordinary.log",
+        "bytes": 8009,
+        "sha256": "7aa03f9e90005ba3f5556d6fa2b819be9a7725a0bdf87abc1b839e1a104045e8"
+      },
+      {
+        "name": "duet-key-api-url-green.log",
+        "bytes": 270,
+        "sha256": "ffb96a621345f945536c4acfb965c3a8d3e5d1541ff46b9dadb4612f9e8b0512"
+      },
+      {
+        "name": "duet-key-api-billing-final-green.log",
+        "bytes": 2313,
+        "sha256": "01448770a36ab562240e733508281e0df97cf662e582db5c44e5239740dcffd9"
+      },
+      {
+        "name": "duet-key-api-fixture-final-green.log",
+        "bytes": 570,
+        "sha256": "ac8219430a47f8341c94bd3c1c9b622704cb43ce49589cdfd21d417f19e7940a"
+      },
+      {
+        "name": "duet-key-backend-role-final.log",
+        "bytes": 430,
+        "sha256": "a2e38966394b3e3de538c280354bdaac4d6193afb8caf90c311ef84fb0d46751"
+      },
+      {
+        "name": "duet-key-backend-burst-final-green.log",
+        "bytes": 263,
+        "sha256": "c5018cda46a1c6bf4ee91f60eae2e566759074d13a9b8b55f1f40e9500e95e63"
+      },
+      {
+        "name": "duet-key-api-account-unit.log",
+        "bytes": 1231,
+        "sha256": "8cb48fae1b344088aeaf0eb858280ae2d1d56723a6e5473b6f396c9acfcfe064"
+      },
+      {
+        "name": "duet-key-api-activity-green.log",
+        "bytes": 253,
+        "sha256": "3994f1afcb96779657f66422126b27a2ad72342368a521678a8c0c66248b1291"
+      },
+      {
+        "name": "duet-key-api-vm-domain-green.log",
+        "bytes": 418,
+        "sha256": "a923f294b25105fa1a1abeb00d603f210ecaa446386769bc957d20034c28a4c7"
+      },
+      {
+        "name": "duet-key-api-service-green.log",
+        "bytes": 260,
+        "sha256": "ec9fdaaeb0b318fbe8e023552260bdfcf0f9bbd49e6b18dc73e64599000115ec"
+      },
+      {
+        "name": "duet-key-harness-demo.log",
+        "bytes": 1167,
+        "sha256": "0829ca367719379658ebfd77616d20b85a09ece05d7a7f11851092257578f9d8"
+      },
+      {
+        "name": "duet-key-api-types.log",
+        "bytes": 38,
+        "sha256": "b2e92930f4432b7a5ec6e2af13cd0e0c527d579c374a889fd79e2aeff32e886e"
+      },
+      {
+        "name": "duet-key-backend-types.log",
+        "bytes": 55,
+        "sha256": "275cd6edeed412bf468510b7ae1fa591679d39ee8104c8765c681630946cded0"
+      },
+      {
+        "name": "duet-key-harness-types.log",
+        "bytes": 15,
+        "sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92"
+      },
+      {
+        "name": "duet-key-callers-lint.log",
+        "bytes": 14,
+        "sha256": "796a1b14f90687777cfe7bacaca40279414e3f346d9a6b9b208b7a660be6ade5"
+      }
+    ]
+  }
+}

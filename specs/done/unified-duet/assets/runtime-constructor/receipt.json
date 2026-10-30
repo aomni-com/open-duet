@@ -1,0 +1,150 @@
+{
+  "scope": "slice 06 runtime constructor and compiled payload closure; not complete runtime delivery",
+  "testedRootRevision": "e8285fa0d2ce001ad89be6bd75d482a928e9c698",
+  "rootInputs": "inputs.json.gz",
+  "constructorSourceSha256": {
+    "apps/api/scripts/build-runtime-release.mjs": "7b8e0e8adb6081c8b6ef634f447744312a515d368f7ac3a7bc88365caace67df",
+    "apps/api/src/runtime-release-build.test.ts": "b101f1707f812951483c938668d352975f01b04cfb2c770dee10ecd9c5880267",
+    "apps/api/package.json": "323714d04b33b90b0cd323973c15227fd185ccd58a473902de4b33811ab20f87",
+    "packages/agent/src/runtime-assets.ts": "e4082e2bdd8783b28898fd799ec40b281bef8cad96db5fe507730fc92c387a39",
+    "packages/agent/src/memory/pglite.ts": "6f5dfb2df6507dbd34e298d45945ee078f0da67b4e7ff30d76af13abfb95513a",
+    "packages/agent/benchmarks/swebench/src/packaging.ts": "28f73c46cbce7708478db50b828847d8008819fcf1cab7f979df5c261534b176"
+  },
+  "manifest": {
+    "formatVersion": 1,
+    "version": "0.0.0+ef465c68b12dbe07cf7040ae8647d76a26c062aea7387de51864164b03725804",
+    "artifacts": [
+      {
+        "name": "duet",
+        "sha256": "2a807e8551238b7ce61792d95bf6842181962eaea5faf10ab02fd5e518566a5b",
+        "byteLength": 117078144,
+        "mode": 493
+      },
+      {
+        "name": "helper.js",
+        "sha256": "aaa2c3f8097c6e66d07321e1fa00df613b3432f6fc09e977dd9a2f646d42a395",
+        "byteLength": 907383,
+        "mode": 420
+      },
+      {
+        "name": "index.js",
+        "sha256": "2ae5bb1015fc5dcbccbee6ce39efa38c2585edc51665dc40698e8ea955cf76f0",
+        "byteLength": 2238497,
+        "mode": 420
+      },
+      {
+        "name": "initdb.wasm",
+        "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+        "byteLength": 169969,
+        "mode": 420
+      },
+      {
+        "name": "pglite.data",
+        "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+        "byteLength": 5289109,
+        "mode": 420
+      },
+      {
+        "name": "pglite.wasm",
+        "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+        "byteLength": 8739902,
+        "mode": 420
+      },
+      {
+        "name": "photon_rs_bg.wasm",
+        "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+        "byteLength": 1881634,
+        "mode": 420
+      },
+      {
+        "name": "vector.tar.gz",
+        "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+        "byteLength": 46108,
+        "mode": 420
+      }
+    ]
+  },
+  "identityRecipe": "SHA256(UTF8(JSON.stringify({formatVersion:1,artifacts}))); ASCII sorted names; each artifact key order name,sha256,byteLength,mode; version=0.0.0+digest",
+  "nativeEnvironment": {
+    "bun": "1.3.14",
+    "platform": "Linux amd64 under Docker emulation on macOS",
+    "executionNetwork": "none; controlled loopback fixtures",
+    "osPrerequisite": "ripgrep",
+    "mountedRuntime": "exact constructed inventory; no checkout or node_modules"
+  },
+  "gates": {
+    "apiBuild": "actual default API build emits only manifest + eight artifacts, Linux constructor uses no Docker; temporary root05 input copies restored",
+    "apiTests": "2 pass, 0 fail, 49 assertions",
+    "packagingAndE2B": "20 pass, 0 fail, 45 assertions; command fixtures, no live E2B calls",
+    "assetConsumers": "16 pass, 0 fail, 50 assertions",
+    "types": "own core and API green; core declaration compiler remains TS5.9.3",
+    "native": "version/help, maintained skills/provider initialization, durable memory reopen, 3072-dimensional pgvector recall, RPC continuation/image resize/grep",
+    "symlink": "same full native probe through /tmp/current/duet; actual embedded Bun reports /release/duet",
+    "pgliteControls": "all four required assets individually missing and corrupt; actual code1 with expected initialization diagnostics",
+    "photonControls": "missing and corrupt exact final Photon asset: code1, PHOTON_INLINE_IMAGE_REQUIRED and omitted-image diagnostic",
+    "tui": "timeout124 plus DUET AGENT/todos/relays/context content and no loader error; PTY initialization, no visual review",
+    "outputBoundary": "only manifested files and manifest; temporary compiled payload/build-input removed",
+    "durableReproducer": "probe-release.sh executed successfully against the exact final inventory: both full native probes, actual execPath, both Photon failure controls, TUI content"
+  },
+  "redEvidence": {
+    "closure": "old two-source constructor omitted transitive workspace source",
+    "identity": "old gateway-only manifest lacks whole-runtime format",
+    "nestedOutput": "in-output stable build path caused actual recursive copy; fixed external stable path"
+  },
+  "review": {
+    "tool": "configured codex review --uncommitted completed",
+    "ownFinding": "P2 nested output recursion fixed with actual red/green regression",
+    "rootOwnedFindings": [
+      "P1 Vercel bundler/API default directory still refer to gateway release",
+      "P1 old API manifest readers reject the inventory schema"
+    ],
+    "capture": "codex-review.log.gz"
+  },
+  "unresolvedIntegration": [
+    "root owns lightweight canonical manifest contract and descriptor href",
+    "API readers/routes and Vercel bundler must consume runtime-release",
+    "API build dependency must declare the public CLI workspace",
+    "gateway activation/probation/rollback/bootstrap and VM image must consume one exact inventory",
+    "global exploration old builder link requires root update",
+    "full spec live staging journey not run in this constructor pass"
+  ],
+  "limitations": [
+    "no assertion of repeatable executable bytes",
+    "not deployable before root integration",
+    "native compile closure exercises runtime memory/image/RPC, not live external providers",
+    "initial wider corrupt-Photon attempt timed out in unrelated memory recall; excluded, controls narrowed to actual RPC image assertion and rerun"
+  ],
+  "evidenceSha256": {
+    "codex-review.log.gz": "e7fbbcc9cbf2bac9b21482753a7acca8719d5873b1b11856df387d87927bea25",
+    "physical-runtime.json.gz": "323c3d460d9c30a23ce96b31e612a09d852faad6a6b26e135e064b213d837f31",
+    "api-tests.log": "9c5b6a5969d0986293acba604a9d0291c41e4822e140b631e6a42fdb858b59fd",
+    "photon-missing.log": "3f1587dc106f2eb0425a5dfefe056a5243e6e45e78c73a731f9f0e21c3ce92c2",
+    "build.log.gz": "b70b2ee3641a1dde5cf1712d66e4eb120e497e24ab5b4e9cec1c708b3e3a5e5e",
+    "focused-tests.log": "d3df3909f2cf02aa0db41fbc6eb6b9a970a63415c55a5c83a8e96d83d50b8f69",
+    "execpath.log": "8b81045067d459665f0130674f7a2b77b0559ae1aa8c1d81902b735628ee628d",
+    "symlink-native.log": "80af30979450f5d9a744726439a0752f7b12cc048e98eaa211592cbe1d102b14",
+    "closure-red.log.gz": "dc76c47450732e8c4bd024987bc2c760f4a046f127dafa84be5d390e2f16c5f7",
+    "photon-corrupt.log": "3f1587dc106f2eb0425a5dfefe056a5243e6e45e78c73a731f9f0e21c3ce92c2",
+    "core-types.log": "b1cfa34097ad84b77cc4dbfbe3f96007b9fd22fb596abe281c48858bdd3e8c5b",
+    "tui.ansi.gz": "24d095df1ac0f5d960fccd9698a6502cb903e6dbdbbaeed14c1e48da4a03a479",
+    "probe.ts": "342834d41413b9503aebd8080881d1bd9054d54ad68d142ee9b695d3ed2e1af1",
+    "choices.md": "4ed63ccc839ced5d64883d210dd34350e2682733e1d9603d1fb590d1242a9c47",
+    "identity-red.log.gz": "c00b72f7b8e57a1b5c5fcd112222a45729e809960bd2914f8e4687bc2013813c",
+    "probe-release.sh": "ab92a9719f8eefd53e7eb1f50c8fabb2ae735d63747035bd0d6d293fc607a77b",
+    "README.md": "10808d996643e5411cb4be337216dd86871034ef5d3f2c1e23af61cf4e718125",
+    "symlink-runtime.json.gz": "9dfdc2fa99572cad855ccdbfeac1300112f18b350b9b0113684d1437a3b4ffbb",
+    "native.log": "80af30979450f5d9a744726439a0752f7b12cc048e98eaa211592cbe1d102b14",
+    "api-types.log": "b2e92930f4432b7a5ec6e2af13cd0e0c527d579c374a889fd79e2aeff32e886e",
+    "manifest.json": "d9a9a49896ecc7776f2c594ecc3f487cb13956f14883b10d84e45ddc35db2ed2",
+    "reproducer.log.gz": "b9f99410a7b17ab42c85a8a3d87adf8655b400093281ee1834c0a3afa405377b",
+    "inputs.json.gz": "140761b4a4f66b93b2ac966b25358e0f96c22da256840bf1d8fbd00e621ea5ed",
+    "tui.json": "d5a624d2a78529fedfa9810ce62b484b1626f5ac46f191e952250799407ee087",
+    "consumer-tests.log": "ffa5e29a1e1df6474eeb53fb33a0edf42126f38f1e1558f1577a10c40c560585",
+    "nested-output-red.log.gz": "7d7383c85bd8c679f6d4c0d29ba8bf3a40b31776f8fa59b8adc0868a7f071caf"
+  },
+  "unchangedPatchSha256": {
+    "patches/README.md": "769cbb6c91c4051bac01f492a35826cbb8fec08138c38e0a511e455ae9c4e77f",
+    "patches/@user@example.invalid": "b797d8aa1ac2ba9fa25338a9f6e83014aa41f945415d9763bf5f10372544ff48",
+    "patches/@user@example.invalid": "0bf942aa04e9a499f19771bc27e28467f33419dee89323598d96e116889adaac"
+  }
+}

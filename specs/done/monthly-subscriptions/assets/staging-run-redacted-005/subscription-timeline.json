@@ -1,0 +1,38 @@
+{
+  "runId": "staging-e2e-synthetic",
+  "legs": {
+    "subscription-01-trial-generation": {
+      "status": "pass"
+    },
+    "subscription-02-exhaustion-wall-pause": {
+      "status": "pass"
+    },
+    "subscription-03-checkout": {
+      "status": "pass"
+    },
+    "subscription-04-activation-resume": {
+      "status": "pass"
+    },
+    "subscription-05-monthly-first-spend": {
+      "status": "pass"
+    },
+    "subscription-06-idempotency-and-topup-invoice": {
+      "status": "pass"
+    },
+    "subscription-07-upgrade-and-portal": {
+      "status": "pass"
+    },
+    "subscription-08-downgrade-scheduled": {
+      "status": "pass"
+    },
+    "subscription-09-cancel-at-period-end": {
+      "status": "pass"
+    },
+    "subscription-10-clock-lapse": {
+      "status": "pass"
+    },
+    "subscription-11-full-stop-archive-resume": {
+      "status": "pass"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "@repo/gateway",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./building-page": "./src/apps/building-page.ts",
+    "./train-runner": "./src/train-runner.ts"
+  },
+  "scripts": {
+    "build": "bun run --cwd ../agent build && bun run routing:export && bun build src/index.ts --target=bun --outdir=dist --entry-naming=index.js && bun build src/attribution/helper-main.ts --target=bun --outfile=dist/helper.js && bun build src/runtime-bootstrap.ts --target=bun --outfile=dist/runtime-bootstrap.js",
+    "check-types": "tsc --noEmit -p tsconfig.check.json",
+    "lint": "oxlint",
+    "test": "bun run routing:check && bun test --timeout 60000 src",
+    "routing:export": "bun scripts/export-routing-table.mjs",
+    "routing:check": "bun scripts/export-routing-table.mjs --check",
+    "backup:fixture": "bun scripts/backup-fixture.ts",
+    "backup:probe": "python3 scripts/backup-boundary-probe.py",
+    "prompt:print": "bun scripts/print-system-prompt.ts"
+  },
+  "dependencies": {
+    "@repo/agent": "workspace:*",
+    "@repo/contract": "*",
+    "@repo/sync-tunnel": "*",
+    "@vercel/blob": "2.8.0",
+    "fflate": "^0.8.3",
+    "hono": "^4.10.8",
+    "proper-lockfile": "4.1.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.0",
+    "@repo/seed-drive": "*",
+    "@repo/typescript-config": "*",
+    "@types/bun": "catalog:",
+    "@types/node": "catalog:",
+    "@types/proper-lockfile": "^4.1.4",
+    "typescript": "catalog:"
+  }
+}

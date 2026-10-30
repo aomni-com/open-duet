@@ -1,0 +1,163 @@
+{
+  "status": "both-existing-staging-vms-r1-certified",
+  "observedAt": "2026-10-04T17:54:49.572Z",
+  "apiRevision": "7b3404fbe0da1627b7a7f82f0b49d15f040a648f",
+  "backendRevision": "7b3404fbe0da1627b7a7f82f0b49d15f040a648f",
+  "targetRuntimeVersion": "0.0.0+0414c0bb488220259a527d8f2ce2fd6ba0eb9a2782fa7c490e5bd9b2a3ba8584",
+  "servedProof": {
+    "path": "/tmp/unified-duet-staging-served-r1.json",
+    "sha256": "e13fedbbefcd1d15baffa2f3ddb604c31f5ba4c2db219d01f9913b572e735143"
+  },
+  "servedManifest": {
+    "formatVersion": 1,
+    "version": "0.0.0+0414c0bb488220259a527d8f2ce2fd6ba0eb9a2782fa7c490e5bd9b2a3ba8584",
+    "artifacts": [
+      {
+        "name": "duet",
+        "sha256": "898f660c32acbae47fdbb7671ec81f23854cef4bdbbbcee5ef95dc770dc57281",
+        "byteLength": 117078144,
+        "mode": 493
+      },
+      {
+        "name": "helper.js",
+        "sha256": "8a406955e5ddad65cce3cc2c916f52911bfea0d1b97de5928429ad7cc6c67935",
+        "byteLength": 908586,
+        "mode": 420
+      },
+      {
+        "name": "index.js",
+        "sha256": "822bf2d2e6d2a345cfd7b26acea97809c30057ed3cebe1d6f35ea132dc8cb7f4",
+        "byteLength": 2226419,
+        "mode": 420
+      },
+      {
+        "name": "initdb.wasm",
+        "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+        "byteLength": 169969,
+        "mode": 420
+      },
+      {
+        "name": "pglite.data",
+        "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+        "byteLength": 5289109,
+        "mode": 420
+      },
+      {
+        "name": "pglite.wasm",
+        "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+        "byteLength": 8739902,
+        "mode": 420
+      },
+      {
+        "name": "photon_rs_bg.wasm",
+        "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+        "byteLength": 1881634,
+        "mode": 420
+      },
+      {
+        "name": "vector.tar.gz",
+        "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+        "byteLength": 46108,
+        "mode": 420
+      }
+    ]
+  },
+  "ordinaryRosterRefreshRequestsPerVm": 2,
+  "credentialBytesEmitted": false,
+  "providerRestartResizeReprovision": false,
+  "forcedGatewayTermination": false,
+  "manualRuntimeInstallOrLinkRewrite": false,
+  "privateOriginalRollbacksRetired": false,
+  "vms": [
+    {
+      "label": "canary",
+      "vmName": "workspace-redacted",
+      "workspaceId": "ns7bkd20x918mfvwjftzgp1zm98bxrek",
+      "sourceAudit": {
+        "path": "/tmp/unified-duet-staging-r1-canary-certified-audit.json",
+        "sha256": "47decb6deb225f30766ce23737bee8adf275021ab1976cbe054900dca86a241d"
+      },
+      "current": "/opt/duet/releases/0.0.0+0414c0bb488220259a527d8f2ce2fd6ba0eb9a2782fa7c490e5bd9b2a3ba8584",
+      "runtimeVersion": "0.0.0+0414c0bb488220259a527d8f2ce2fd6ba0eb9a2782fa7c490e5bd9b2a3ba8584",
+      "installedInventoryDigest": "0414c0bb488220259a527d8f2ce2fd6ba0eb9a2782fa7c490e5bd9b2a3ba8584",
+      "installedArtifactCount": 8,
+      "allInstalledDigestsLengthsModesMatchServedManifest": true,
+      "bootIdBefore": "855c30d4-5d04-4a2f-b028-2f77ce617e4b",
+      "bootIdAfter": "855c30d4-5d04-4a2f-b028-2f77ce617e4b",
+      "bootHealthCertified": true,
+      "bootState": {
+        "attemptedVersion": "0.0.0+0414c0bb488220259a527d8f2ce2fd6ba0eb9a2782fa7c490e5bd9b2a3ba8584",
+        "previousVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+        "healthyVersion": "0.0.0+0414c0bb488220259a527d8f2ce2fd6ba0eb9a2782fa7c490e5bd9b2a3ba8584",
+        "healthyAt": 1791136236841,
+        "consecutiveFailures": 0,
+        "quarantinedVersion": null
+      },
+      "workspaceBun": "1.3.14",
+      "gatewayBun": "1.4.2",
+      "cliVersion": "1.0.0",
+      "cliPhysicalPath": "/opt/duet/releases/0.0.0+0414c0bb488220259a527d8f2ce2fd6ba0eb9a2782fa7c490e5bd9b2a3ba8584/duet",
+      "duetfsOnPath": null,
+      "oldCliRailExists": false,
+      "imageVersion": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+      "bootstrapSha256": "b33587a373136cdac66b78cf74f2e05eb2ee7341207d7adafef49045f0b4e1ab",
+      "gatewayUnitSha256": "84677a224fe0385b335a36dc8cb4e9609424a75f49ed138ab671a4f9c8e3b867",
+      "previous": "/opt/duet/releases/0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "previousVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "previousInventoryDigest": "0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "previousArtifactCount": 8,
+      "privateOriginalRollback": {
+        "path": "/home/synthetic-user/.duet/runtime-adoption/0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2/original",
+        "exists": true,
+        "snapshotExists": true,
+        "releasesExists": true,
+        "readMethod": "sudo stat metadata only"
+      }
+    },
+    {
+      "label": "hub",
+      "vmName": "workspace-redacted",
+      "workspaceId": "ns769tvfcsmvzhfab4bshkpcjx8btf8d",
+      "sourceAudit": {
+        "path": "/tmp/unified-duet-staging-r1-hub-certified-audit.json",
+        "sha256": "2934c69330661c532f3dfcf714020d738ecd1ffc5769426a8b42013406f1615b"
+      },
+      "current": "/opt/duet/releases/0.0.0+0414c0bb488220259a527d8f2ce2fd6ba0eb9a2782fa7c490e5bd9b2a3ba8584",
+      "runtimeVersion": "0.0.0+0414c0bb488220259a527d8f2ce2fd6ba0eb9a2782fa7c490e5bd9b2a3ba8584",
+      "installedInventoryDigest": "0414c0bb488220259a527d8f2ce2fd6ba0eb9a2782fa7c490e5bd9b2a3ba8584",
+      "installedArtifactCount": 8,
+      "allInstalledDigestsLengthsModesMatchServedManifest": true,
+      "bootIdBefore": "d5ac9140-04e7-4ec9-8074-4b10d86f67d3",
+      "bootIdAfter": "d5ac9140-04e7-4ec9-8074-4b10d86f67d3",
+      "bootHealthCertified": true,
+      "bootState": {
+        "attemptedVersion": "0.0.0+0414c0bb488220259a527d8f2ce2fd6ba0eb9a2782fa7c490e5bd9b2a3ba8584",
+        "previousVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+        "healthyVersion": "0.0.0+0414c0bb488220259a527d8f2ce2fd6ba0eb9a2782fa7c490e5bd9b2a3ba8584",
+        "healthyAt": 1791136236735,
+        "consecutiveFailures": 0,
+        "quarantinedVersion": null
+      },
+      "workspaceBun": "1.3.14",
+      "gatewayBun": "1.4.2",
+      "cliVersion": "1.0.0",
+      "cliPhysicalPath": "/opt/duet/releases/0.0.0+0414c0bb488220259a527d8f2ce2fd6ba0eb9a2782fa7c490e5bd9b2a3ba8584/duet",
+      "duetfsOnPath": null,
+      "oldCliRailExists": false,
+      "imageVersion": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+      "bootstrapSha256": "b33587a373136cdac66b78cf74f2e05eb2ee7341207d7adafef49045f0b4e1ab",
+      "gatewayUnitSha256": "84677a224fe0385b335a36dc8cb4e9609424a75f49ed138ab671a4f9c8e3b867",
+      "previous": "/opt/duet/releases/0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "previousVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "previousInventoryDigest": "0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "previousArtifactCount": 8,
+      "privateOriginalRollback": {
+        "path": "/home/synthetic-user/.duet/runtime-adoption/0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2/original",
+        "exists": true,
+        "snapshotExists": true,
+        "releasesExists": true,
+        "readMethod": "sudo stat metadata only"
+      }
+    }
+  ]
+}

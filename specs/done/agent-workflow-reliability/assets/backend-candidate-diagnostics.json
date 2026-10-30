@@ -1,0 +1,73 @@
+{
+  "identity": {
+    "duetHead": "ab8b7f07582840d37b5c97c4ae0f62afdddf2e9a",
+    "agentSource": "0cd51fb9130ff6a9d095b8dc6e70288bfcce7c40",
+    "agentVersion": "0.3.30",
+    "agentPackageFile": "/Users/synthetic-user/dev/duet/node_modules/@duetso/agent/package.json",
+    "allPackageFilesMatchTarball": 677,
+    "hashes": {
+      "package.json": "64ea293e728ada8339dcb997817e4acddfa706102cee2c829aa9fbe90a584cdb",
+      "bun.lock": "9afded0e296d695c5a5852927168e506337e9d3465c487f3dcc6190571daeae4",
+      "packages/backend/src/agent-sessions.test.ts": "515933312ced011c2fa18081067447048a3c5e252ac40093b4aa690ff056ebf1"
+    }
+  },
+  "checks": [
+    {
+      "command": "bun test src/agent-sessions.test.ts --parallel=1 --timeout 60000 -t 'deleting an agent terminalizes only its work and converges across more than one batch'",
+      "exitCode": 1,
+      "elapsedSeconds": 67.56,
+      "passes": 0,
+      "failures": 1,
+      "assertions": 952,
+      "log": "/tmp/workflow-candidate-root/backend-deletion.log",
+      "result": "All nine sessions remained running; expected interrupted after agent deletion."
+    },
+    {
+      "command": "bun test src/agent-sessions.test.ts --parallel=1 --timeout 60000 -t 'reaches terminal state complete and preserves event sequence'",
+      "exitCode": 0,
+      "elapsedSeconds": 14.92,
+      "passes": 1,
+      "failures": 0,
+      "assertions": 2,
+      "log": "/tmp/workflow-candidate-root/backend-terminal.log"
+    }
+  ],
+  "limitation": "Focused checks only. The full backend suite is not qualified. No timeout or assertion changed.",
+  "publishedControl": {
+    "agentVersion": "0.3.29",
+    "sameSource": true,
+    "sameCommandAndTimeout": true,
+    "exitCode": 0,
+    "elapsedSeconds": 23.71,
+    "passes": 1,
+    "failures": 0,
+    "assertions": 19,
+    "log": "/tmp/workflow-candidate-root/backend-deletion-published.log",
+    "limitation": "One passing old-package control versus one failing candidate run does not establish a package cause."
+  },
+  "restoration": {
+    "originalManifestsRestored": true,
+    "installedAgentVersion": "0.3.29",
+    "phase": "After uninstrumented candidate checks and published control; candidate temporarily reinstalled for later continuation."
+  },
+  "instrumentedCandidate": {
+    "exitCode": 0,
+    "elapsedSeconds": 56.4,
+    "passes": 1,
+    "failures": 0,
+    "assertions": 18,
+    "log": "/tmp/workflow-candidate-root/backend-deletion-instrumented.log",
+    "schedulerLog": "/tmp/workflow-candidate-root/backend-scheduler.log",
+    "patchSha256": "7b5e0a0fefdf7f3d2526f2afb5166b14c55ae3e72ffade84a15fc4b7fa57c41a",
+    "observations": [
+      "All nine sessions had the intended agentId, running bucket, and active archive state before deletion.",
+      "Immediately after deletion, the matching terminalization job was pending.",
+      "Original deletion assertion passed; final diagnostic snapshot query hit Convex maximum duration 1s."
+    ],
+    "limitations": [
+      "Temporary log streaming and snapshot queries can alter timing.",
+      "This passing sample does not identify the earlier failure cause.",
+      "No production logic, assertion, or timeout changed; all four instrumented files restored to original hashes."
+    ]
+  }
+}

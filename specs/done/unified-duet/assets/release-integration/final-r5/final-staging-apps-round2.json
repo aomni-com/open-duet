@@ -1,0 +1,158 @@
+{
+  "observedAt": "2026-10-05T03:23:43.427Z",
+  "environment": "staging",
+  "revision": "dbd37f6d1377571375af892f3a4e8f882fde6126",
+  "apps": [
+    {
+      "app": "api",
+      "projectId": "prj_XNhS93vciHGDEc8dZBHg2q4Kzo5o",
+      "deployments": [
+        {
+          "id": "dpl_3VMntt2di2BmLfY6B5JiDzoPSctu",
+          "url": "https://service.example.invalid",
+          "state": "READY",
+          "target": null,
+          "createdAt": 1791170349664,
+          "gitRevision": "dbd37f6d1377571375af892f3a4e8f882fde6126",
+          "branch": "staging",
+          "aliases": [
+            "service.example.invalid",
+            "service.example.invalid"
+          ],
+          "aliasAssigned": true
+        }
+      ]
+    },
+    {
+      "app": "docs",
+      "projectId": "prj_wvuQfH1nRLYeMWzOm9fzXxPTUZ0S",
+      "deployments": [
+        {
+          "id": "dpl_33SdET3fdP8DVzhGusjJVYbVjZpP",
+          "url": "https://service.example.invalid",
+          "state": "READY",
+          "target": null,
+          "createdAt": 1791170349705,
+          "gitRevision": "dbd37f6d1377571375af892f3a4e8f882fde6126",
+          "branch": "staging",
+          "aliases": [
+            "service.example.invalid",
+            "service.example.invalid"
+          ],
+          "aliasAssigned": true
+        }
+      ]
+    },
+    {
+      "app": "edge",
+      "projectId": "prj_mPNx8yJ4JRlThnK3NMZOIpeenJjM",
+      "deployments": [
+        {
+          "id": "dpl_2pG4giLHFrxGsA5SY1pCRjvrcq5V",
+          "url": "https://service.example.invalid",
+          "state": "READY",
+          "target": null,
+          "createdAt": 1791170349757,
+          "gitRevision": "dbd37f6d1377571375af892f3a4e8f882fde6126",
+          "branch": "staging",
+          "aliases": [
+            "staging.example.invalid",
+            "*.staging.example.invalid",
+            "service.example.invalid"
+          ],
+          "aliasAssigned": true
+        }
+      ]
+    },
+    {
+      "app": "lander",
+      "projectId": "prj_nl8WcdsUoJuZ0MdF25Rm6VakI5Ox",
+      "deployments": [
+        {
+          "id": "dpl_EUGPj9eDWsJEXFMqCS4hCbJYVKMS",
+          "url": "https://service.example.invalid",
+          "state": "READY",
+          "target": null,
+          "createdAt": 1791170349674,
+          "gitRevision": "dbd37f6d1377571375af892f3a4e8f882fde6126",
+          "branch": "staging",
+          "aliases": [
+            "service.example.invalid",
+            "service.example.invalid"
+          ],
+          "aliasAssigned": true
+        }
+      ]
+    },
+    {
+      "app": "mcp",
+      "projectId": "prj_t7djXKlxTOVTOHFrz6UIMRoXPXJh",
+      "deployments": [
+        {
+          "id": "dpl_2Xqv1mHcqqjoQRJUff2Lx8cBvayE",
+          "url": "https://service.example.invalid",
+          "state": "READY",
+          "target": null,
+          "createdAt": 1791170349638,
+          "gitRevision": "dbd37f6d1377571375af892f3a4e8f882fde6126",
+          "branch": "staging",
+          "aliases": [
+            "service.example.invalid",
+            "service.example.invalid"
+          ],
+          "aliasAssigned": true
+        }
+      ]
+    },
+    {
+      "app": "model-gateway",
+      "projectId": "prj_1yJD4yEM2ICWxSTpnHe81huWxPq5",
+      "deployments": [
+        {
+          "id": "dpl_Dy81X7bDdcJEnYypj8YpGbSJVyBT",
+          "url": "https://service.example.invalid",
+          "state": "READY",
+          "target": null,
+          "createdAt": 1791170349632,
+          "gitRevision": "dbd37f6d1377571375af892f3a4e8f882fde6126",
+          "branch": "staging",
+          "aliases": [
+            "service.example.invalid",
+            "service.example.invalid"
+          ],
+          "aliasAssigned": true
+        }
+      ]
+    },
+    {
+      "app": "web",
+      "projectId": "prj_hMsHoNDEoYaGdBgdr3Nin3RvAwpf",
+      "deployments": [
+        {
+          "id": "dpl_HbV3nmWfgic2a2vuzLCnSrf1wxbh",
+          "url": "https://service.example.invalid",
+          "state": "READY",
+          "target": null,
+          "createdAt": 1791170349651,
+          "gitRevision": "dbd37f6d1377571375af892f3a4e8f882fde6126",
+          "branch": "staging",
+          "aliases": [
+            "service.example.invalid",
+            "service.example.invalid"
+          ],
+          "aliasAssigned": true
+        }
+      ]
+    }
+  ],
+  "canonicalDeployment": {
+    "revision": "dbd37f6d1377571375af892f3a4e8f882fde6126",
+    "backend": {
+      "revision": "dbd37f6d1377571375af892f3a4e8f882fde6126",
+      "schema": 1
+    },
+    "runtime": {
+      "version": "0.0.0+1f6cae5ff4257948977b076170e652555fd019511c47fb327685f1c6335094ed"
+    }
+  }
+}

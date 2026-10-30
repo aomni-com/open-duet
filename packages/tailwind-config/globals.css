@@ -1,0 +1,533 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0.992259 0.005 257;
+  --foreground: 0.239603 0.02332 257;
+  --card: 0.980323 0.005 257;
+  --card-foreground: 0.239603 0.02332 257;
+  --popover: 0.980323 0.005 257;
+  --popover-foreground: 0.239603 0.02332 257;
+  /* Primary actions stay neutral so blue remains a scarce signal for focus
+     and live state. Selection is a neutral wash (`accent`), never blue: a
+     selected row painted blue reads as a row that is running. */
+  --primary: 0.276468 0.025678 257;
+  --primary-foreground: 1 0 0;
+  --primary-rgb: 32, 41, 53;
+  --secondary: 0.955583 0.006914 257;
+  --secondary-foreground: 0.239603 0.02332 257;
+  --muted: 0.955583 0.006914 257;
+  --muted-foreground: 0.500845 0.01614 257;
+  --accent: 0.955583 0.006914 257;
+  --accent-foreground: 0.239603 0.02332 257;
+  --brand: 214 65% 56%;
+  --brand-foreground: 0 0% 100%;
+  --brand-subtle-alpha: 0.92;
+  /* What a piece of work is doing, one hue each, everywhere it is drawn: the
+     map, the sidebars, the composer, the jobs panel. `live` is work in flight,
+     `ask` is work waiting on the reader, `unread` is something that happened
+     while they were away. The map chose them (knowledge-map.css says why each
+     one sits where it does on the wheel); they live here so a surface outside
+     the map, and the shared UI package, draw the same three rather than
+     reaching for a nearby Tailwind hue. HSL channels, like the brand. */
+  --live: 210 90% 43%;
+  --ask: 9 69% 44%;
+  --unread: 29 82% 47%;
+  --destructive: 0.6368 0.2078 25.3313;
+  --destructive-foreground: 1 0 0;
+  --success: 142.1 76.2% 36.3%;
+  --success-foreground: 223.8136 -172.5242% 100%;
+  --warning: 38 92% 50%;
+  --warning-foreground: 26 83% 14%;
+  --border: 0.885758 0.007046 257;
+  --input: 0.850813 0.010306 257;
+  --ring: 0.791459 0.010492 257;
+  --chart-1: 0.6231 0.188 259.8145;
+  --chart-2: 0.5461 0.2152 262.8809;
+  --chart-3: 0.4882 0.2172 264.3763;
+  --chart-4: 0.4244 0.1809 265.6377;
+  --chart-5: 0.3791 0.1378 265.5222;
+  /* The global header is the strongest structural plane: slightly darker
+     than the sidebar, while staying in the same slate-neutral family. */
+  --header: 0.948 0.018 257;
+  --header-foreground: 0.239603 0.02332 257;
+  --header-accent: 0.986 0.006 257;
+  --header-accent-foreground: 0.239603 0.02332 257;
+  --header-border: 0.86 0.016 257;
+  --header-ring: 0.489032 0.019808 257;
+  /* Contextual navigation sits between the structural header and the clean
+     content canvas. */
+  --sidebar: 0.969 0.01 257;
+  --sidebar-foreground: 0.239603 0.02332 257;
+  --sidebar-primary: 0.276468 0.025678 257;
+  --sidebar-primary-foreground: 1 0 0;
+  --sidebar-accent: 0.923494 0.016204 257;
+  --sidebar-accent-foreground: 0.239603 0.02332 257;
+  --sidebar-border: 0.87319 0.017728 257;
+  --sidebar-ring: 0.489032 0.019808 257;
+  /* Highlight colour for `.shell-skeleton`'s mount sweep. Light-mode reads
+     as a bright bg-tinted sheen across the tinted skeleton; the dark-mode
+     override below lifts a faint foreground tint instead. */
+  --shell-skeleton-highlight: oklch(var(--background) / 0.55);
+  /* Inset surface hairline — left as `none` for now; the bg-color shift
+     between --sidebar (chrome) and --background (content) provides enough
+     visual separation. Override here to add a subtle inner shadow back if
+     more depth is needed. */
+  --inset-hairline: none;
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --radius: 0.625rem;
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
+  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+  --app-shell-safe-area-top: env(safe-area-inset-top);
+  /* Resolve `env(safe-area-inset-bottom)` once at `:root` and have
+     consumers reference the variable via `var()`. Raw `env()` inside
+     arbitrary-value `max()` / `calc()` expressions (Tailwind
+     `pb-[max(env(...), ...)]`) resolves intermittently on Chrome
+     (Android Chrome with gesture-nav and iOS Chrome/WebKit) — most
+     visibly during keyboard dismiss / URL-bar transitions — and the
+     composer's send button clips behind the home indicator. The
+     `--app-shell-safe-area-top` variable above exists for the same
+     reason. Browsers that don't understand `env()` collapse the
+     variable; consumers pass `env()` as the `var()` fallback so they
+     still get the modern resolution. */
+  --app-shell-safe-area-bottom: env(safe-area-inset-bottom);
+  /* Latched copy of the device's *real* bottom safe-area inset, written
+     from JS in `use-mobile-viewport-vars.ts` (max-seen per orientation).
+     `env(safe-area-inset-bottom)` transiently reports `0` on iOS during
+     keyboard-dismiss / URL-bar transitions; this var holds the true inset
+     across that collapse so the compose-bar floor below never drops. The
+     `env()` initializer keeps SSR / first paint correct before JS runs,
+     and stays `0` on devices that genuinely have no inset. */
+  --app-shell-safe-area-bottom-stable: env(safe-area-inset-bottom);
+  --visual-viewport-bottom-inset: 0px;
+  /* Pixel height of the actually-visible area, written from JS in
+     `use-mobile-viewport-vars.ts` once the SPA hydrates. Falls back to
+     `100dvh` for SSR / pre-hydration paint and for the (very rare)
+     browser without the VisualViewport API. Used as the `height` of
+     every SPA shell root so the layout always fits the visible area —
+     in particular, this fixes iPhone Chrome where the bottom URL bar
+     overlays the viewport and `100dvh` / `100svh` / `100lvh` all
+     collapse to the full screen height, hiding the chat composer
+     behind the toolbar. Consumers reference it as
+     `h-[var(--app-shell-height,100dvh)]`. */
+  --app-shell-height: 100dvh;
+  /* Single source of truth for any pinned-to-bottom UI *inside* the
+     SPA shell (chat composer, onboarding CTA, etc.). The shell itself
+     is sized to the visible area via `--app-shell-height`, so the only
+     bottom obstruction left for in-shell elements is the OS home
+     indicator / gesture-nav bar — hence just `env(safe-area-inset-
+     bottom)`. Browser-chrome and keyboard overlap are absorbed by the
+     shell-height itself.
+
+     For *fixed-position* overlays that sit outside the shell
+     (`shell-drawer`, popovers anchored to the viewport edge), use
+     `--visual-viewport-bottom-inset` directly — they need to pad away
+     from browser chrome too.
+
+     The `max(live, stable)` floor guards iOS: `env(safe-area-inset-
+     bottom)` transiently collapses to `0` during keyboard-dismiss and
+     URL-bar transitions, which left the chat composer's send button
+     clipped under the home indicator. `--app-shell-safe-area-bottom-
+     stable` latches the device's real inset (max-seen per orientation,
+     written from JS), so the resolved value never drops below the true
+     inset mid-transition. Both vars are `0` on devices that genuinely
+     have no inset (desktop, home-button iPhones, iPads, Android without
+     gesture nav), so those stay un-padded — no fixed constant needed. */
+  --app-shell-safe-bottom: max(
+    var(--app-shell-safe-area-bottom),
+    var(--app-shell-safe-area-bottom-stable)
+  );
+}
+
+.dark {
+  --background: 0.115 0.006 257;
+  --foreground: 0.94731 0.005022 257;
+  --card: 0.21084 0.007274 257;
+  --card-foreground: 0.94731 0.005022 257;
+  --popover: 0.21084 0.007274 257;
+  --popover-foreground: 0.94731 0.005022 257;
+  --primary: 0.92497 0.00644 257;
+  --primary-foreground: 0.22037 0.018162 257;
+  --primary-rgb: 227, 230, 235;
+  --secondary: 0.249477 0.006982 257;
+  --secondary-foreground: 0.94731 0.005022 257;
+  --muted: 0.249477 0.006982 257;
+  --muted-foreground: 0.765879 0.019766 257;
+  --accent: 0.249477 0.006982 257;
+  --accent-foreground: 0.94731 0.005022 257;
+  --brand: 214 65% 56%;
+  --brand-foreground: 0 0% 100%;
+  --brand-subtle-alpha: 0.5;
+  /* Lifted for the dark ground: here these are the marks meant to look lit. */
+  --live: 200 100% 67%;
+  --ask: 6 72% 62%;
+  --unread: 37 91% 55%;
+  --destructive: 0.6368 0.2078 25.3313;
+  --destructive-foreground: 1 0 0;
+  --success: 142.1 70.6% 45.3%;
+  --success-foreground: 223.8136 0% 9.0527%;
+  --warning: 48 96% 53%;
+  --warning-foreground: 26 83% 14%;
+  --border: 0.347774 0.012832 257;
+  --input: 0.400084 0.014672 257;
+  --ring: 0.489032 0.019808 257;
+  --chart-1: 0.7137 0.1434 254.624;
+  --chart-2: 0.6231 0.188 259.8145;
+  --chart-3: 0.5461 0.2152 262.8809;
+  --chart-4: 0.4882 0.2172 264.3763;
+  --chart-5: 0.4244 0.1809 265.6377;
+  /* Dark mode preserves the same hierarchy by lifting chrome away from the
+     deep canvas instead of adding saturation, glow, or heavy shadows. */
+  --header: 0.205 0.018 257;
+  --header-foreground: 0.94731 0.005022 257;
+  --header-accent: 0.255 0.016 257;
+  --header-accent-foreground: 0.94731 0.005022 257;
+  --header-border: 0.31 0.016 257;
+  --header-ring: 0.489032 0.019808 257;
+  --sidebar: 0.165 0.012 257;
+  --sidebar-foreground: 0.94731 0.005022 257;
+  --sidebar-primary: 0.92497 0.00644 257;
+  --sidebar-primary-foreground: 0.22037 0.018162 257;
+  --sidebar-accent: 0.205 0.014 257;
+  --sidebar-accent-foreground: 0.94731 0.005022 257;
+  --sidebar-border: 0.255 0.014 257;
+  --sidebar-ring: 0.489032 0.019808 257;
+  /* Dark mode relies on bg contrast alone — no hairline needed. */
+  --inset-hairline: none;
+  /* Inherits to .shell-skeleton — see the `.shell-skeleton::before` rule.
+     Light-mode highlight is a bright bg tint; dark-mode lifts a faint
+     foreground sheen instead so the sweep stays visible without glaring. */
+  --shell-skeleton-highlight: oklch(var(--foreground) / 0.05);
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --radius: 0.625rem;
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
+  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: oklch(var(--border)) transparent;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  @keyframes progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  /* Remove backticks from prose inline code */
+  .prose :where(code):not(:where([class~='not-prose'], [class~='not-prose'] *))::before,
+  .prose :where(code):not(:where([class~='not-prose'], [class~='not-prose'] *))::after {
+    content: none;
+  }
+  .theme {
+    --animate-ripple: ripple var(--duration, 2s) ease calc(var(--i, 0) * 0.2s) infinite;
+  }
+}
+
+@layer components {
+  /*
+   * Canonical app-shell inset surface.
+   *
+   * The route content surface — flat against the page now. The visual
+   * separation from the surrounding sidebar tone is provided by
+   * `.app-shell-header` above, which fades from --sidebar into
+   * --background so the tinted header dissolves into the white content.
+   *
+   * Used by AppShellPage, ChatLayout, and FilesSkeleton.
+   */
+  .app-shell-inset {
+    @apply flex-1 min-h-0 bg-background overflow-hidden;
+  }
+
+  /*
+   * Canonical first-paint entrance for app-shell regions.
+   *
+   *  - `.shell-fade-in-strip`   for the frosted header strip (settles in
+   *    from y:-4 → 0 with a tight cubic ease).
+   *  - `.shell-fade-in-inset`   for the inset content surface (fades in
+   *    with a 2px → 0 blur so cards/lists feel like they resolve into
+   *    focus rather than pop in).
+   *
+   * Both run once on mount only — no infinite loops, no per-frame cost
+   * after settle. Honour `prefers-reduced-motion`.
+   */
+  /* `will-change` is scoped to the animation duration so we don't keep the
+     compositor layer pinned forever (which would waste memory and disable
+     subpixel rendering on text). Browsers honour `will-change` while the
+     animation is in flight, then collapse the layer back on `animationend`
+     once the property is no longer declared. */
+  .shell-fade-in-strip {
+    animation: shell-fade-in-strip 0.34s cubic-bezier(0.16, 1, 0.3, 1) both;
+    will-change: transform, opacity;
+  }
+  .shell-fade-in-inset {
+    animation: shell-fade-in-inset 0.42s cubic-bezier(0.16, 1, 0.3, 1) 0.06s both;
+    will-change: transform, opacity;
+  }
+  @keyframes shell-fade-in-strip {
+    from {
+      opacity: 0;
+      transform: translate3d(0, -4px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  /* Compositor-only entrance: opacity + transform, no `filter: blur`.
+     Blur forces a per-frame GPU rasterize of the entire inset surface;
+     a tiny y-shift plus opacity reads as the same "resolves into focus"
+     gesture at a fraction of the cost. */
+  @keyframes shell-fade-in-inset {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 2px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .shell-fade-in-strip,
+    .shell-fade-in-inset {
+      animation: none;
+    }
+  }
+
+  /*
+   * Skeleton primitive — calm, breathing placeholder used while a region's
+   * real content resolves. Two layers:
+   *
+   *   1. A slow ambient breath (3.6s ease-in-out, infinite) that swaps
+   *      opacity between 60% and 100% — half the tempo of Tailwind's
+   *      `animate-pulse`, so it reads as "waiting patiently" rather than
+   *      "spinning forever."
+   *   2. A one-shot mount sweep (1.4s) that travels a soft highlight
+   *      across the surface exactly once, signalling "this just appeared
+   *      and is filling in." Driven by a `::before` pseudo-element so the
+   *      shimmer never affects layout or contrast.
+   *
+   * Honours `prefers-reduced-motion` by suppressing both animations and
+   * holding a static, tinted neutral.
+   */
+  .shell-skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: oklch(var(--sidebar-accent));
+    animation: shell-skeleton-breath 3.6s ease-in-out infinite;
+    /* `contain: paint` clips painting to the skeleton's box so the
+       infinite breath/opacity loop doesn't invalidate ancestor regions.
+       `will-change: opacity` keeps the breath on its own compositor layer
+       so the animation is a property change rather than a repaint. */
+    contain: paint;
+    will-change: opacity;
+  }
+  .shell-skeleton::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--shell-skeleton-highlight) 50%,
+      transparent 100%
+    );
+    /* translate3d forces a compositor layer so the sweep is a pure transform
+       (no per-frame paint). */
+    transform: translate3d(-100%, 0, 0);
+    animation: shell-skeleton-sweep 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.05s 1 forwards;
+    will-change: transform;
+    pointer-events: none;
+  }
+  @keyframes shell-skeleton-breath {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.62;
+    }
+  }
+  @keyframes shell-skeleton-sweep {
+    from {
+      transform: translate3d(-100%, 0, 0);
+    }
+    to {
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .shell-skeleton {
+      animation: none;
+      opacity: 0.85;
+    }
+    .shell-skeleton::before {
+      display: none;
+    }
+  }
+
+  /*
+   * Frosted header strip that overlays `.app-shell-inset`. Paints a
+   * translucent vertical gradient from the sidebar tone (top) into the
+   * content background (bottom) and applies a backdrop blur so content
+   * scrolling beneath shows through as frosted glass — replacing the
+   * previous rounded inset-card cutoff.
+   *
+   * Pair with a `relative` parent and a `pt-11` (LayoutHeaderHeight) on
+   * `.app-shell-inset` so content tucks under the header.
+   */
+  .app-shell-header {
+    /* Use Tailwind's first-class backdrop utilities so the right vendor
+       prefixes and stacking-context primitives are guaranteed. The 60%
+       tint keeps the frost layer readable when nothing varied is behind
+       it (e.g. fresh chat with no scrolled content yet), and the heavy
+       blur + saturation makes the glass effect obvious as soon as colored
+       content moves underneath. */
+    @apply bg-background/85 backdrop-blur-md backdrop-saturate-150 sm:bg-sidebar/55;
+    /* Backdrop blur is the single most expensive thing the chat surface
+       paints. Each scroll frame the GPU has to re-sample every pixel
+       behind the strip through a Gaussian kernel. Three measures keep it
+       cheap:
+         1. `transform: translateZ(0)` promotes the strip to its own
+            compositor layer, so the blur is computed once per frame on
+            an isolated layer instead of being baked into the inset's
+            paint pass.
+         2. `contain: layout paint` prevents the strip from invalidating
+            ancestor regions when its own paint changes.
+         3. `will-change: backdrop-filter` hints to the browser to keep
+            the backdrop on a GPU surface ready for re-sampling. (Kept
+            on permanently here because this surface is always painting
+            backdrop content — scoping it would yo-yo the layer.) */
+    transform: translateZ(0);
+    contain: layout paint;
+    will-change: backdrop-filter;
+  }
+}
+
+/*
+ * Ensure Radix popper portals (dropdowns, popovers, tooltips, selects)
+ * render above desktop windows (z-index 100+).
+ */
+[data-radix-popper-content-wrapper] {
+  z-index: 9999 !important;
+}
+
+@theme inline {
+  @keyframes ripple {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(0.9);
+    }
+  }
+}
+
+/*
+ * Compose-bar focus stage — when the editor takes focus on a mobile
+ * viewport, three colored aurora blobs drift behind the compose bar and a
+ * conic-gradient light traces its rounded border. The animations are pure
+ * `transform` / custom-property changes so they stay on the compositor and
+ * cost nothing to paint.
+ *
+ * Each blob has its own slow loop so they desync over time — that's what
+ * gives the aurora its "alive" feel instead of looking like a uniform
+ * pulse. Drifts are kept small (≤14%) so the glow stays anchored to the
+ * compose bar rather than wandering across the screen.
+ *
+ * `@property` lets the conic-gradient `--beam-angle` animate as a real
+ * angle on browsers that support it (Safari 16.4+, Chromium 85+). Older
+ * browsers degrade to a static gradient ring, which still looks fine.
+ */
+@property --beam-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes compose-aurora-1 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(8%, -6%, 0) scale(1.1);
+  }
+  66% {
+    transform: translate3d(-6%, 9%, 0) scale(0.94);
+  }
+}
+
+@keyframes compose-aurora-2 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  40% {
+    transform: translate3d(-9%, 5%, 0) scale(1.12);
+  }
+  75% {
+    transform: translate3d(6%, -8%, 0) scale(0.9);
+  }
+}
+
+@keyframes compose-aurora-3 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  35% {
+    transform: translate3d(7%, 8%, 0) scale(0.92);
+  }
+  70% {
+    transform: translate3d(-8%, -7%, 0) scale(1.14);
+  }
+}
+
+@keyframes compose-border-beam {
+  to {
+    --beam-angle: 360deg;
+  }
+}
+
+.compose-aurora-blob {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .compose-aurora-blob,
+  .compose-border-beam {
+    animation: none !important;
+  }
+}

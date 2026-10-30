@@ -1,0 +1,54 @@
+{
+  "status": "pass",
+  "runId": "staging-e2e-synthetic",
+  "journey": "unified-duet",
+  "sourceDeployment": {
+    "revision": "1bd5a61acc87e842725a165a84692a5fd863d04b",
+    "backend": {
+      "revision": "1bd5a61acc87e842725a165a84692a5fd863d04b",
+      "schema": 1
+    },
+    "runtime": {
+      "version": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec"
+    }
+  },
+  "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:2e97be2b9c4937800689895d2743a43f4a2adfcfeccd846f873d438eb723d72f",
+  "runtimeVersion": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+  "externalDrillKinds": [
+    "interrupted-adoption",
+    "live-work-deferral",
+    "agent-only-update",
+    "missing-asset-repair",
+    "matched-rollback"
+  ],
+  "nativeCommandExitCodes": [
+    {
+      "command": "skills",
+      "exitCode": 0
+    },
+    {
+      "command": "memory",
+      "exitCode": 0
+    },
+    {
+      "command": "memory",
+      "exitCode": 0
+    },
+    {
+      "command": "--rpc",
+      "exitCode": 0
+    }
+  ],
+  "realNativeRpcCompleted": true,
+  "remoteAgentStreamCompleted": true,
+  "persistedNativeMemoryVerified": true,
+  "resourceDeletionVerified": true,
+  "orphans": [],
+  "filesSha256": {
+    "journey.json": "08b887f4d04b903d481c63b47dd971515598b57ac635c98e461be3db1d16df2e",
+    "unified-duet.json": "cc902e5a662b5d6c1439875565ce6a154324198ee06b7940a07009e90f53b53c",
+    "unified-managed-command.json": "a06c8d4fe302cd18575dfd293e2b87cecd6814f6903ce480ba654dbb0bce1209",
+    "api-timing.json": "f244b2d60666dcb87873c59aca95ff887ca9078b965e5dd1cbc644e3624d5e1d",
+    "browser-errors.json": "44ac5dbc631778d1ae2c0b17d8cb2d8c4258c1617f6d3bf37802cbab6d7061c5"
+  }
+}

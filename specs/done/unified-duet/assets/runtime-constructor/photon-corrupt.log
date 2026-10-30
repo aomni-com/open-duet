@@ -1,0 +1,17 @@
+107 |     assert.equal(events.filter((e) => e.type === "complete").length, 1);
+108 |     assert(requests.filter((r) => r.path.endsWith("/messages")).length >= 4);
+109 |     const toolResults = requests.filter((r) => r.path.endsWith("/messages")).flatMap((r) =>
+110 |       (r.body as { messages: Array<{ content: Array<Record<string, unknown>> }> }).messages.flatMap((m) => m.content),
+111 |     ).filter((c) => c.type === "tool_result");
+112 |     if (!rpcOnly) assert(toolResults.some((c) => c.is_error === false && c.content === `needle.txt:${note}\n`), JSON.stringify(toolResults));
+                                                                                                                           ^
+AssertionError: PHOTON_INLINE_IMAGE_REQUIRED: [{"type":"tool_result","tool_use_id":"tool_fixture_1","content":"Read image file [image/png]\n[Image omitted: could not be resized below the inline image size limit.]","is_error":false,"cache_control":{"type":"ephemeral"}},{"type":"tool_result","tool_use_id":"tool_fixture_1","content":"Read image file [image/png]\n[Image omitted: could not be resized below the inline image size limit.]","is_error":false},{"type":"tool_result","tool_use_id":"tool_fixture_2","content":"needle.txt:The harbor lighthouse is violet.\n","is_error":false,"cache_control":{"type":"ephemeral"}},{"type":"tool_result","tool_use_id":"tool_fixture_1","content":"Read image file [image/png]\n[Image omitted: could not be resized below the inline image size limit.]","is_error":false},{"type":"tool_result","tool_use_id":"tool_fixture_2","content":"needle.txt:The harbor lighthouse is violet.\n","is_error":false}]
+ generatedMessage: false,
+     actual: false,
+   expected: true,
+   operator: "==",
+       code: "ERR_ASSERTION"
+
+      at /probe.ts:112:118
+
+Bun v1.3.14 (Linux x64 baseline)

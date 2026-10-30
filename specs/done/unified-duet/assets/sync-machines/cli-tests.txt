@@ -1,0 +1,98 @@
+bun test v1.3.14 (0d9b296a)
+
+src/sync/release.test.ts:
+(pass) platform packages match the Syncthing pin > @duetso/syncthing-darwin-arm64 is a darwin/arm64 package pinned to 2.1.2 [0.40ms]
+(pass) platform packages match the Syncthing pin > @duetso/syncthing-darwin-x64 is a darwin/x64 package pinned to 2.1.2 [0.18ms]
+(pass) platform packages match the Syncthing pin > duet publishes every platform package as an exact optional dependency [0.09ms]
+
+src/sync/binary.test.ts:
+(pass) syncthing binary pin > the Mac pin equals the VM image pin (one version, both sides) [0.02ms]
+(pass) syncthing binary pin > both macOS arches carry a pinned package + 64-hex sha256 [0.05ms]
+(pass) syncthing binary pin > verifySha256 accepts matching bytes and rejects tampering [0.28ms]
+(pass) syncthing binary pin > resolve sha-verifies the bundled binary against its pin [0.16ms]
+(pass) syncthing binary pin > the override path skips sha but still version-pins [0.14ms]
+(pass) syncthing binary pin > refuses an unexpected major [0.05ms]
+(pass) syncthing binary pin > tolerates an opportunistic minor within the major [0.02ms]
+(pass) syncthing binary pin > rejects a non-darwin platform without an override [0.03ms]
+(pass) syncthing binary pin > reports an unreadable version [0.03ms]
+
+src/sync/mirror.test.ts:
+(pass) workspaceSyncHome > namespaces each workspace under ~/.duet/sync/workspaces/<slug> [0.02ms]
+(pass) reposMissingRemoteUnder (G1 nag, read-only) > flags a root repo with no remote [0.66ms]
+(pass) reposMissingRemoteUnder (G1 nag, read-only) > a repo with a remote is not flagged [0.31ms]
+(pass) reposMissingRemoteUnder (G1 nag, read-only) > scans immediate children and names the remoteless one [0.64ms]
+(pass) reposMissingRemoteUnder (G1 nag, read-only) > a dir with no repos at all is clean [0.20ms]
+(pass) freeLoopbackPort > allocates distinct usable loopback ports [3.75ms]
+
+src/sync/status.test.ts:
+(pass) isConflictPath > matches Syncthing conflict copies by basename [0.04ms]
+(pass) readConvergence > converged when peer connected, folder idle, and remote 100% [0.21ms]
+(pass) readConvergence > not converged while disconnected even if local is idle [0.03ms]
+(pass) readConvergence > waitForConvergence polls until quiet [0.12ms]
+(pass) listConflicts > finds .sync-conflict-* files and skips node_modules/.git [1.12ms]
+
+src/sync/bridge.test.ts:
+(pass) mirror bridge re-minting (L23) > never caches a token: each re-mint dials with a fresh grant on a stable port [1006.88ms]
+(pass) mirror bridge re-minting (L23) > a terminal mint refusal closes the existing bridge and exposes the failure [1006.90ms]
+(pass) mirror bridge re-minting (L23) > bridges real bytes through @repo/sync-tunnel to the peer [20.74ms]
+
+src/sync/run.test.ts:
+(pass) the daemon observes replacement login and origin through the shared config [439.13ms]
+(pass) the daemon preserves explicit key and API-origin overrides after saved login changes [100.79ms]
+(pass) sync run rejects conflicting workspace targets before HTTP or mirror filesystem mutation [3.78ms]
+
+src/sync/machine.test.ts:
+(pass) explicit registration reuses the Mac identity and canonical machine ID after key replacement [176.69ms]
+(pass) concurrent first starts publish one complete Mac certificate pair [119.23ms]
+(pass) machine removal lookup follows account pages and ignores another live Mac [0.33ms]
+
+src/sync/launchd.test.ts:
+(pass) renderLaunchAgentPlist > runs the daemon at login with keep-alive [0.03ms]
+(pass) renderLaunchAgentPlist > is deterministic (re-install writes byte-identical XML) [0.03ms]
+(pass) renderLaunchAgentPlist > escapes XML-significant characters in paths [0.03ms]
+(pass) install / uninstall idempotence > install writes the plist, loads it, and replaces cleanly on re-run [1.22ms]
+(pass) install / uninstall idempotence > uninstall boots out, removes the plist, and is a quiet no-op the second time [0.43ms]
+(pass) install / uninstall idempotence > a bootstrap failure is surfaced, not swallowed [0.33ms]
+
+src/sync/orchestrator.test.ts:
+(pass) registerMirror > POSTs to the Duet mirror-devices route and parses the grant [0.63ms]
+(pass) configureLocalMirror > upserts the VM peer device and the mirror folder with pinned knobs [0.47ms]
+(pass) configureLocalMirror > sets an ignore set = shared mirror ignores + macOS junk (Q7) [0.16ms]
+(pass) configureLocalMirror > is idempotent: re-running on a new bridge port updates in place, no duplicates [0.11ms]
+
+src/sync/daemon.test.ts:
+(pass) daemon reconcile > starts a mirror per active workspace and lists it in the snapshot [1.71ms]
+(pass) daemon reconcile > removal of this Mac stops every mirror without registering it again [0.49ms]
+(pass) daemon reconcile > live whoami permissions add and detach mirrors while both memberships remain [0.36ms]
+(pass) daemon reconcile > a new membership on a later reconcile is picked up (no restart of existing) [0.23ms]
+(pass) daemon reconcile > losing membership stops the mirror and drops it from the snapshot [0.17ms]
+(pass) daemon reconcile > retired is surfaced but never mirrored, and never auto-un-retired [0.29ms]
+(pass) daemon reconcile > a workspace 404 stops its failed mirror and recovers without disabling the other workspace [0.39ms]
+(pass) daemon reconcile > a start failure surfaces as error and retries only after backoff [0.25ms]
+(pass) daemon reconcile > provisioning workspaces are ignored until active [0.08ms]
+(pass) daemon status aggregation > poll maps convergence to up-to-date / syncing and counts conflicts [0.11ms]
+(pass) daemon status aggregation > a repo with no remote surfaces a nag note [0.11ms]
+(pass) daemon status aggregation > a transient poll error surfaces without tearing the mirror down [0.14ms]
+
+src/sync/supervisor.test.ts:
+(pass) hardenMacSyncthingConfig > is dial-only: one empty listener, no default, no stray addresses (L24) [0.10ms]
+(pass) hardenMacSyncthingConfig > applies the full isolation set (discovery/relays/NAT/reporting/upgrade off) [0.02ms]
+(pass) hardenMacSyncthingConfig > pins the GUI/API to loopback and sets our api key (L14) [0.02ms]
+(pass) hardenMacSyncthingConfig > leaves the device identity and defaults untouched [0.02ms]
+(pass) hardenMacSyncthingConfig > is idempotent [0.08ms]
+(pass) supervisor lifecycle > ensureConfig generates + hardens a fresh isolated home [0.91ms]
+(pass) supervisor lifecycle > workspace instances copy the Mac identity before generating independent configs [1.55ms]
+(pass) supervisor lifecycle > restarts on crash and stops cleanly [41.32ms]
+
+src/sync/daemon-status.test.ts:
+(pass) defaultMirrorDir > is ~/duet/<slug> [0.01ms]
+(pass) formatStatusHuman > one line per workspace, each state legible [0.06ms]
+(pass) formatStatusHuman > empty snapshot says nothing is mirrored yet [0.01ms]
+(pass) formatStatusHuman > surfaces a note in parentheses [0.03ms]
+(pass) snapshot persistence > write then read round-trips, atomically [0.77ms]
+(pass) snapshot persistence > a corrupt status file reads as null, not a throw [0.66ms]
+
+ 68 pass
+ 0 fail
+ 210 expect() calls
+Ran 68 tests across 12 files. [3.01s]

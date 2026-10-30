@@ -1,0 +1,50 @@
+{
+  "desktop-app-menu": {
+    "beforeSize": [
+      240,
+      206
+    ],
+    "afterSize": [
+      240,
+      234
+    ],
+    "byteIdentical": false,
+    "comparison": "same production state and viewport; semantic menu/field labels and truthful provider instructions changed"
+  },
+  "desktop-dns": {
+    "beforeSize": [
+      576,
+      508
+    ],
+    "afterSize": [
+      576,
+      510
+    ],
+    "byteIdentical": false,
+    "comparison": "same production state and viewport; semantic menu/field labels and truthful provider instructions changed"
+  },
+  "mobile-app-menu": {
+    "beforeSize": [
+      240,
+      206
+    ],
+    "afterSize": [
+      240,
+      234
+    ],
+    "byteIdentical": false,
+    "comparison": "same production state and viewport; semantic menu/field labels and truthful provider instructions changed"
+  },
+  "mobile-dns": {
+    "beforeSize": [
+      390,
+      544
+    ],
+    "afterSize": [
+      390,
+      544
+    ],
+    "byteIdentical": false,
+    "comparison": "same production state and viewport; semantic menu/field labels and truthful provider instructions changed"
+  }
+}

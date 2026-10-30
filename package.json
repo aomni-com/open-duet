@@ -1,0 +1,90 @@
+{
+  "name": "duet",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ],
+    "catalog": {
+      "@phosphor-icons/react": "2.1.10",
+      "@tanstack/query-async-storage-persister": "5.100.11",
+      "@tanstack/react-query": "5.100.11",
+      "@tanstack/react-query-persist-client": "5.100.11",
+      "@types/react": "19.2.17",
+      "@types/react-dom": "19.2.3",
+      "@types/bun": "1.3.14",
+      "@types/node": "26.1.0",
+      "clsx": "2.1.1",
+      "framer-motion": "11.18.2",
+      "next": "16.2.10",
+      "next-themes": "0.4.6",
+      "postcss": "8.4.47",
+      "react": "19.2.7",
+      "react-dom": "19.2.7",
+      "remark-gfm": "4.0.1",
+      "tailwindcss-animate": "1.0.7",
+      "typescript": "7.0.1-rc",
+      "vaul": "1.1.2"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "build": "turbo build",
+    "assets:verify": "bun scripts/verify-asset-ownership.ts",
+    "agent-apps:approve": "bash scripts/ui-playground.sh approve --official-apps",
+    "agent-apps:check": "bash scripts/ui-playground.sh check --official-apps",
+    "check-types": "turbo check-types",
+    "clean:artifacts": "rimraf --glob '**/{.turbo,.next}'",
+    "clean:modules": "rimraf --glob '**/{node_modules,.turbo,.next}'",
+    "dev": "dotenvx run -f .env.local -f .env.staging --ignore=MISSING_ENV_FILE -- turbo dev",
+    "e2e:onboarding:local": "bun run --cwd packages/test-harness e2e:onboarding:local",
+    "e2e:staging": "bash scripts/staging-live.sh",
+    "format": "oxfmt --write --no-error-on-unmatched-pattern",
+    "format:check": "oxfmt --check --no-error-on-unmatched-pattern",
+    "lint": "turbo lint",
+    "promote:main": "bun scripts/promote-staging.ts",
+    "test": "bun test scripts/*.test.ts tools/*/*.test.ts && turbo test --continue --concurrency=1 && bun --cwd=packages/ui run verify:visual-coverage && bun visual:union && bun assets:verify",
+    "try": "dotenvx run -q -f .env.staging -- bun scripts/try.ts",
+    "ui:approve": "bash scripts/ui-playground.sh approve",
+    "ui:approve:force:in-docker": "turbo run visual:approve:force --filter=lander --filter=web --filter=docs --filter=@repo/official-agents-seed",
+    "ui:approve:in-docker": "turbo run visual:approve --filter=lander --filter=web --filter=docs --filter=@repo/official-agents-seed",
+    "ui:check": "bash scripts/ui-playground.sh check",
+    "ui:check:in-docker": "bash scripts/ui-visual-preflight.sh --filter=lander --filter=web --filter=docs --filter=@repo/ui --filter=@repo/official-agents-seed && VISUAL_PREBUILT=1 turbo run visual --filter=lander --filter=web --filter=docs --filter=@repo/official-agents-seed",
+    "visual:union": "bun scripts/verify-visual-owner-union.ts",
+    "visual:union:write": "bun scripts/verify-visual-owner-union.ts --write",
+    "secrets:edit": "bun tools/secrets-editor/server.ts",
+    "secrets:encrypt": "dotenvx encrypt -f .env.production -f .env.staging",
+    "secrets:push:prod": "dotenvx run -f .env.production -- node scripts/secrets-push.mjs production",
+    "secrets:push:staging": "dotenvx run -f .env.staging -- node scripts/secrets-push.mjs staging",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@dotenvx/dotenvx": "^2.2.0",
+    "@typescript/native-preview": "^7.0.0-dev.20260630.1",
+    "convex": "^1.42.1",
+    "next": "catalog:",
+    "oxfmt": "^0.57.0",
+    "oxlint": "^1.72.0",
+    "pixelmatch": "^7.1.0",
+    "pngjs": "^7.0.0",
+    "rimraf": "^6.0.1",
+    "turbo": "^2.10.3",
+    "typescript": "catalog:",
+    "linguist-languages": "9.5.0",
+    "husky": "9.1.7",
+    "lint-staged": "17.6.0"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "bun@1.3.14",
+  "patchedDependencies": {
+    "@earendil-works/pi-ai@0.85.1": "patches/@earendil-works%2Fpi-ai@0.85.1.patch",
+    "@convex-dev/action-retrier@0.3.1": "patches/@convex-dev%2Faction-retrier@0.3.1.patch"
+  },
+  "lint-staged": {
+    "*": "node scripts/check-file-size.mjs"
+  }
+}

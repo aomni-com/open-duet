@@ -1,0 +1,21 @@
+{
+  "runtimeRevision": "0cd51fb9130ff6a9d095b8dc6e70288bfcce7c40",
+  "image": "sha256:d891540b4c93f3a053ceb5d802fdf4cadcddea066ed248fa245229768c662d7b",
+  "evalSha256": "a9732327bd2353df5f288c3e7e444d9314f2024f6869b569608e103ea2102404",
+  "contractSource": "specs/done/model-router/README.md per-route vision fallback section; originating commit3f298fa",
+  "retainedOriginalFailure": "/tmp/workflow-preservation-866-final-shard0/22-model-routing-step-trigger/output.log",
+  "budget": "one repaired live case; original600000ms timeout; no retry",
+  "falsification": "offline controlledstream uses real read, then unsupported visionclaim; existing seventh assertion rejected it; fetch forbidden",
+  "integratedCommit": "0583f6d",
+  "exitCode": 0,
+  "passes": 1,
+  "assertions": 7,
+  "elapsedSeconds": 7.89,
+  "models": [
+    "zai/glm-5.3"
+  ],
+  "classifierDecisions": [],
+  "switches": [],
+  "evidenceDirectory": "/tmp/workflow-no-fallback-repair",
+  "limitation": "Exercises explicit text-only route degradation, not classifier quality. Original failing multi-route attempt is retained; no runtime change."
+}

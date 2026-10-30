@@ -1,0 +1,30 @@
+FIXTURE OPERATIONS
+1 explicit Files move: draft.md -> final.md (rename)
+2 atomic replacement: note.md destination survives (write only)
+3 folder move: old-folder -> new-folder (folder rename)
+4 copied folder root: copied-folder (folder create)
+5-7 noisy .git descendants: two changes plus one view
+
+RAW OPERATIONAL TAP
+1. {"kind":"rename","entryKind":"file","fromPath":"draft.md","path":"final.md","actor":"session:watcher-checkpoint","at":1}
+2. {"kind":"write","path":"note.md","actor":"session:watcher-checkpoint","at":2}
+3. {"kind":"rename","entryKind":"folder","fromPath":"old-folder","path":"new-folder","actor":"session:watcher-checkpoint","at":3}
+4. {"kind":"create","entryKind":"folder","path":"copied-folder","actor":"session:watcher-checkpoint","at":4}
+5. {"kind":"write","path":".git/objects/a","actor":"session:watcher-checkpoint","at":5}
+6. {"kind":"write","path":".git/objects/b","actor":"session:watcher-checkpoint","at":6}
+7. {"kind":"read","path":".git/HEAD","actor":"session:watcher-checkpoint","at":7}
+
+SEALED PERSISTENCE BATCH
+{
+  "batchId": "watcher-checkpoint-1",
+  "events": [
+    {"kind":"rename","entryKind":"file","fromPath":"draft.md","path":"final.md","actor":"session:watcher-checkpoint","at":1},
+    {"kind":"write","path":"note.md","actor":"session:watcher-checkpoint","at":2},
+    {"kind":"rename","entryKind":"folder","fromPath":"old-folder","path":"new-folder","actor":"session:watcher-checkpoint","at":3},
+    {"kind":"create","entryKind":"folder","path":"copied-folder","actor":"session:watcher-checkpoint","at":4},
+    {"kind":"changed-summary","path":".git","actor":"session:watcher-checkpoint","at":6,"count":2},
+    {"kind":"viewed-summary","path":".git","actor":"session:watcher-checkpoint","at":7,"count":1}
+  ],
+  "droppedReads": 0,
+  "overflow": 0
+}

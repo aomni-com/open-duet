@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.check.json",
+  "include": [
+    "src/runtime-release.ts",
+    "src/runtime-release.test.ts",
+    "src/runtime-bootstrap.ts",
+    "src/runtime-bootstrap.test.ts",
+    "src/runtime-update.ts",
+    "src/runtime-update.test.ts",
+    "src/boot-health.ts",
+    "src/boot-health.test.ts",
+    "src/testing/runtime-release-fixture.ts"
+  ]
+}

@@ -1,0 +1,587 @@
+bun test v1.3.14 (0d9b296a)
+--changed: 29 changed files, running 54/248 test files
+
+scripts/message-leaf-key-parity.test.ts:
+(pass) web message catalogs > app.json has matching English and Spanish leaf keys [2.26ms]
+(pass) web message catalogs > auth.json has matching English and Spanish leaf keys [0.02ms]
+
+spa/workspace-refusal.test.ts:
+(pass) workspace refusal codes select complete English and Spanish copy [0.53ms]
+
+spa/connected-providers/connected-providers-management.test.tsx:
+(pass) renders a disconnected provider from props with a connect affordance [3.81ms]
+(pass) renders every provider state from props and honors server disconnect authorization [5.14ms]
+
+spa/shell/create-workspace-dialog.test.tsx:
+(pass) a plan limit refusal preserves the server-supplied plan and limit [1.50ms]
+(pass) every other failure stays the unexplained one, so an outage never reads as a bill [0.35ms]
+(pass) the plan limit refusal names its plan, server-supplied limit, and upgrade path [1.85ms]
+(pass) an unexplained failure keeps the plain sentence and offers no billing errand [0.08ms]
+
+spa/shell/session-expired.test.ts:
+(pass) signing back in lands on the page the session expired on [0.42ms]
+(pass) a page sign-in cannot return to falls back to the product root [0.15ms]
+
+spa/shell/version-checker.test.tsx:
+(pass) the update notice offers a reload in both supported locales [0.41ms]
+(pass) the update notice outlives the auto-dismiss every other toast gets [0.01ms]
+
+spa/publishes/publishes-management.test.tsx:
+(pass) makes pending freeze visible while the reversible switch is optimistic [0.56ms]
+(pass) labels a committed paused publish as frozen and offers Resume [0.19ms]
+
+spa/desktop/desktop-pane.test.tsx:
+(pass) DesktopPane > renders a self-resolving connecting state instead of an empty state [0.36ms]
+(pass) DesktopPane > lets hermetic fixtures replace the live credential-bearing frame source [0.28ms]
+(pass) DesktopPane > names each owner once and distinguishes the focused browser window [0.31ms]
+(pass) DesktopPane > reserves one status rail whether or not an agent is driving [0.26ms]
+(pass) DesktopPane > renders an unhealthy refusal instead of the connecting state in both locales [0.26ms]
+
+spa/publish/publish-viewer-shell.test.tsx:
+(pass) a nested folder view offers a quiet download-as-zip link in the banner [2.05ms]
+(pass) the publish root folder shows no download affordance [0.37ms]
+(pass) no archive link renders when the surface supplies no archive URL [0.34ms]
+(pass) dotfile entries are hidden by default, with a show-hidden toggle offered [0.29ms]
+(pass) a paged public folder offers an explicit continuation control [0.38ms]
+
+spa/entitlements/subscribe-wall.test.tsx:
+(pass) workspace entitlement wall > the wall never softens the shutdown with a reassurance about saved data [0.05ms]
+(pass) workspace entitlement wall > paused payers can open the billing portal beside logout, including while billing loads [0.99ms]
+(pass) workspace entitlement wall > members cannot open another payer’s portal [0.40ms]
+(pass) workspace entitlement wall > offers a way to another workspace, and only when there is one to go to [1.68ms]
+(pass) workspace entitlement wall > SUBS-IMPL-11 walls an entitled viewer of a paused payer workspace without a purchase action [0.29ms]
+(pass) workspace entitlement wall > SUBS-IMPL-11 does not wall a lapsed member of an active payer workspace
+(pass) workspace entitlement wall > projects the three payer variants and keeps Pro preselected [0.72ms]
+(pass) workspace entitlement wall > covers a paused payer immediately while its billing projection loads [0.27ms]
+(pass) workspace entitlement wall > SUBS-IMPL-FIX2 gives an active subscriber a billing recovery wall without subscribe [0.31ms]
+(pass) workspace entitlement wall > polls the root workspace identity inside the accepted propagation bound [0.01ms]
+(pass) workspace entitlement wall > keeps the active-route momentum honest for a later paused wall [0.09ms]
+(pass) the decommission notice > counts the days actually left, from the instant the sweep measures [0.02ms]
+(pass) the decommission notice > the last day says today rather than "in 0 days"
+(pass) the decommission notice > a workspace already torn down says so, in the past tense
+(pass) the decommission notice > a row with no timestamp says soon rather than inventing a date
+
+spa/entitlements/spend-refusal.test.tsx:
+(pass) an out-of-credits send names the refusal and offers billing, not a generic failure [0.58ms]
+(pass) every spend refusal is recognized, and nothing else is [0.08ms]
+(pass) every spend refusal renders real copy in every supported locale [0.93ms]
+(pass) a reached spending limit never reads as an empty balance [0.14ms]
+(pass) the two spending limits are different problems and say so [0.23ms]
+(pass) the billing route never unmounts the composer holding the rejected draft [0.08ms]
+
+spa/entitlements/storage-surfaces.test.tsx:
+(pass) storage usage keeps an absent sample distinct from sampled zero [0.11ms]
+(pass) the plan card renders one labeled storage meter per payer workspace [0.52ms]
+(pass) storage warning stays silent at 89.99% and fires at 90% [0.02ms]
+(pass) dismissal stays latched until cleanup or usable storage growth re-arms the workspace [0.04ms]
+(pass) 507 file errors and storage_full session events converge on one destructive toast [0.08ms]
+(pass) an in-app upgrade action can navigate without replacing the document [0.05ms]
+(pass) Max storage surfaces give cleanup guidance without an upgrade action [0.04ms]
+
+spa/entitlements/low-credit-gate.test.tsx:
+(pass) subscribe recovery renders the locked urgent-stop headings [0.53ms]
+(pass) all recovery states render complete localized copy [1.05ms]
+(pass) payer recovery exposes only the approved choices and member recovery exposes no action [0.40ms]
+(pass) pending and recoverable error states remain visibly blocked [0.37ms]
+(pass) member recovery leads to another workspace when there is one [0.44ms]
+
+spa/sessions/archive-default-chat-control.test.tsx:
+(pass) the archive control is labelled in each locale’s own words [0.25ms]
+(pass) the English archive control uses the short label
+(pass) the confirm says the same things in both catalogues [0.02ms]
+(pass) both catalogues still name the agent in the reassurance [0.01ms]
+
+spa/sessions/session-controls.test.tsx:
+(pass) lifecycle labels follow stored causes rather than the effective reason [0.04ms]
+(pass) the lifecycle menu renders actions solely from public permissions [0.60ms]
+(pass) both catalogues own every word the lifecycle menu can render [0.03ms]
+(pass) put-away follows the server effective transition, not the requested toggle [0.02ms]
+
+spa/sessions/session-message.test.tsx:
+(pass) shows when an assistant message started [6.14ms]
+(pass) a teammate authored row names the teammate, never the reader [3.78ms]
+(pass) every author class carries its own attribution and announced name [2.70ms]
+(pass) a message from another agent is named by that agent and flies the reader to it [0.56ms]
+(pass) a session with nowhere to go keeps its chip as plain text, not a dead link [0.43ms]
+(pass) an app is recognized by its own icon, and one without an icon keeps the generic mark [0.93ms]
+(pass) a system row is named by this workspace, not by the constant the product ships [0.40ms]
+(pass) a deleted app or session degrades to its own short id, and a missing human never does [1.03ms]
+(pass) a nameless human is named by email, in full, and a named one is not [1.09ms]
+(pass) note, answer, and pending are metadata beside the author, never instead of it [2.41ms]
+(pass) renders durable attachments below inline images as linked preview cards [1.24ms]
+(pass) renders uploaded images uncropped at their intrinsic aspect ratio [0.47ms]
+(pass) fits an overflow image inside its submitted attachment thumbnail without cropping [0.51ms]
+(pass) does not mount an arbitrarily large drive attachment as an image preview [0.45ms]
+(pass) an optimistic row keeps no durable time and converges without changing its author [1.26ms]
+(pass) an optimistic row renders its local image and landed file card while sending [0.68ms]
+(pass) a row whose roster has not loaded waits without naming or blaming anyone [0.46ms]
+(pass) a settled turn says how long it thought and offers its usage [1.11ms]
+(pass) a turn that settled without usage still tells its duration, and one without a clock stays silent [0.68ms]
+(pass) the usage panel reads the turn tally in humane units [0.22ms]
+(pass) a running turn counts out loud, pinned still when the clock is a prop [0.73ms]
+
+spa/sessions/session-audience-manager.test.tsx:
+(pass) the closed header renders only the server specific-audience preview and count [0.89ms]
+(pass) workspace conversations show the human roster in the closed header [0.40ms]
+(pass) a ten-person workspace keeps the closed header bounded at every breakpoint [0.81ms]
+(pass) a failed workspace roster stays actionable without claiming the conversation is empty [0.06ms]
+
+spa/sessions/ordered-agent-parts.test.tsx:
+(pass) renders projected AI parts in source order without creating message rows [1.23ms]
+(pass) pending text leaves working status to the composer [0.24ms]
+(pass) keeps pending, image, ask, system, and lifecycle states inside the part owner [0.59ms]
+(pass) reads a control-plane interrupt reason as prose [0.07ms]
+(pass) keeps an unrecognized interrupt reason visible rather than swallowing it [0.06ms]
+(pass) tool rows settle to quiet glyphs: a checkbox for complete, a dash for error, never red [0.52ms]
+(pass) an MCP tool wears its server as a chip beside the tool name [0.20ms]
+(pass) a failed terminal is a real error affordance, not a divider [0.07ms]
+(pass) interrupted and sleep terminals stay quiet dividers [0.07ms]
+(pass) an unbreakable error cannot push the transcript sideways [0.07ms]
+(pass) closed tools do not serialize or mount stored payloads [0.10ms]
+
+spa/sessions/session-markdown.test.tsx:
+(pass) a skill tag in a sent message reads as the chip the composer showed [1.47ms]
+(pass) a message that merely talks about a tag is left alone [0.37ms]
+(pass) a stray backtick cannot make a skill disappear [0.35ms]
+(pass) resolves a cwd-relative image through the authenticated file URL seam [0.47ms]
+(pass) resolves user and agent text through the same session media owner [0.80ms]
+(pass) an agent mention chips in both directions and points at that agent [0.70ms]
+(pass) an agent mention without a workspace to point at still reads as a chip [0.23ms]
+(pass) keeps a remote file link on the ordinary link behavior [0.23ms]
+(pass) renders nested cwd image with the resolved element and URL [0.22ms]
+(pass) renders video with the resolved element and URL [0.20ms]
+(pass) renders audio with the resolved element and URL [0.17ms]
+(pass) renders remote image with the resolved element and URL [0.17ms]
+(pass) renders non-media embed fallback with the resolved element and URL [0.28ms]
+(pass) renders PDF file link with the resolved element and URL [0.24ms]
+(pass) renders unknown-extension file link with the resolved element and URL [0.21ms]
+(pass) renders encoded-space file with the resolved element and URL [0.17ms]
+(pass) renders outside-drive absolute file with the resolved element and URL [0.20ms]
+(pass) keeps extensionless product paths as ordinary links [0.17ms]
+(pass) keeps literal percent escapes in logical Drive filenames [0.19ms]
+(pass) enables native controls and inline playback on embedded media [0.59ms]
+(pass) keeps raw HTML inert [0.41ms]
+(pass) does not change Markdown consumers that omit component overrides [0.20ms]
+(pass) a link the drive cannot address stays a link instead of failing the render [0.53ms]
+
+spa/sessions/compose-placeholder.test.tsx:
+(pass) every prompt in the pool is reachable, and no roll falls off either end [0.05ms]
+(pass) a composer greets you in its own locale, and never with a stray key [0.62ms]
+1 | import{cloneElement as e,isValidElement as t}from"react";import r from"use-intl/format-message";import{I as n,a as o,c as a,b as s}from"./formatters-CJcico0N.js";function c(...e){return e.filter(Boolean).join(".")}function i(e){return c(e.namespace,e.key)}function u(e){console.error(e)}function m(e,t,r,n){const o=c(n,r);if(!t)throw new Error(o);let a=t;return r.split(".").forEach((t=>{const r=a[t];if(null==t||null==r)throw new Error(o+` (${e})`);a=r})),a}function f(a){const s=function(e,t,r){try{if(!t)throw new Error(void 0);const n=r?m(e,t,r):t;if(!n)throw new Error(r);return n}catch(e){return new n(o.MISSING_MESSAGE,e.message)}}(a.locale,a.messages,a.namespace);return function({cache:a,formats:s,formatters:u,getMessageFallback:f=i,locale:l,messagesOrError:g,namespace:y,onError:h,timeZone:w}){const E=g instanceof n;function d(e,t,r,o){const a=new n(t,r);return h(a),o??f({error:a,key:e,namespace:y})}function p(i,p,S,M){const T=M;let N;if(E){if(!T)return h(g),f({error:g,key:i,namespace:y});N=T}else{const e=g;t
+
+MISSING_MESSAGE: duetApp.sessionProduct.taskPlaceholders (es-419)
+ originalMessage: "duetApp.sessionProduct.taskPlaceholders (es-419)",
+       code: "MISSING_MESSAGE"
+
+      at d (/private/tmp/duet-app-domains-ui/node_modules/use-intl/dist/esm/production/initializeConfig-CHgjheii.js:1:857)
+      at useComposePlaceholder (/private/tmp/duet-app-domains-ui/apps/web/spa/sessions/compose-placeholder.ts:53:7)
+      at Probe (/private/tmp/duet-app-domains-ui/apps/web/spa/sessions/compose-placeholder.test.tsx:24:15)
+      at renderWithHooks (/private/tmp/duet-app-domains-ui/node_modules/react-dom/cjs/react-dom-server-legacy.browser.development.js:5062:19)
+      at renderElement (/private/tmp/duet-app-domains-ui/node_modules/react-dom/cjs/react-dom-server-legacy.browser.development.js:5497:23)
+      at retryNode (/private/tmp/duet-app-domains-ui/node_modules/react-dom/cjs/react-dom-server-legacy.browser.development.js:6428:21)
+      at renderNodeDestructive (/private/tmp/duet-app-domains-ui/node_modules/react-dom/cjs/react-dom-server-legacy.browser.development.js:6367:11)
+      at renderElement (/private/tmp/duet-app-domains-ui/node_modules/react-dom/cjs/react-dom-server-legacy.browser.development.js:6063:15)
+      at retryNode (/private/tmp/duet-app-domains-ui/node_modules/react-dom/cjs/react-dom-server-legacy.browser.development.js:6428:21)
+      at renderNodeDestructive (/private/tmp/duet-app-domains-ui/node_modules/react-dom/cjs/react-dom-server-legacy.browser.development.js:6367:11)
+
+(pass) a locale that has not translated the pool still gets a sentence [0.23ms]
+(pass) a pinned roll holds the bar still, so a screenshot gate photographs one prompt [0.04ms]
+
+spa/files/spreadsheet-preview.test.tsx:
+(pass) an unreadable workbook offers the original file instead of a blank preview [0.60ms]
+
+spa/files/share-dialog.test.tsx:
+(pass) share dialog request boundary > maps product permission copy and newline patterns to the API contract [0.08ms]
+(pass) share dialog request boundary > keeps literal percent paths exact at the share API boundary [0.03ms]
+(pass) an incomplete subtree preview keeps loaded apps and says they are not the whole share [0.25ms]
+(pass) a cached subtree being refreshed stays disclosed without inventing a continuation [0.06ms]
+
+spa/files/live-file-messages.test.ts:
+(pass) live file status and recovery copy is explicit in English and Spanish [0.55ms]
+
+spa/files/drive-view.test.tsx:
+(pass) splits rows into A-to-Z folders and documents and filters by query [0.23ms]
+(pass) app cards keep the surface app contract: status labels and a folder chevron [0.92ms]
+(pass) card times come from the injected attribution clock, not the wall clock [0.60ms]
+(pass) folder cards treat Unix-epoch mtimes as unavailable metadata [0.26ms]
+(pass) an empty drive still shows the hero with its built-in actions [0.30ms]
+(pass) renders the drive hero with folder cards, document tiles, and no root breadcrumb [0.47ms]
+(pass) subfolders get the in-drive breadcrumb trail with an up affordance [0.43ms]
+(pass) authenticated mode carries the write chrome and the show-hidden toggle [0.96ms]
+(pass) public mode renders no write, menu, activity, or show-hidden chrome [0.32ms]
+(pass) a hero override replaces the Drive heading and tagline (public publish identity) [0.32ms]
+(pass) the breadcrumb root follows the hero heading off-root (publish never says Drive) [0.32ms]
+
+spa/files/attribution.test.ts:
+(pass) formatActor > labels all seven actor kinds [0.20ms]
+(pass) formatActor > unknown identities degrade to the context label [0.02ms]
+(pass) formatActor > web actors resolve through the context userId when the row has none
+(pass) formatActor > an unparseable context is shown raw — no product label exists
+(pass) relativeTimeLabel > scales from minutes to years [0.12ms]
+(pass) seen-by overflow stays a lower bound when the first page has a cursor [0.02ms]
+(pass) an incomplete seen-by presentation labels its visible count as a lower bound [0.33ms]
+(pass) RestAttributionSource > member attribution requests the complete bounded workspace roster [0.09ms]
+(pass) RestAttributionSource > seen-by hits the slice-06 route and parses the contract shape [0.73ms]
+(pass) RestAttributionSource > failures surface as errors for the presentation layer to isolate [0.05ms]
+(pass) MockAttributionSource > failAll makes every surface throw so degradation paths are testable [0.11ms]
+(pass) MockAttributionSource > fileHistory pages the seeded seq stream without duplicating the cursor row [0.22ms]
+(pass) MockAttributionSource > history keeps reads by default while the feed drops them [0.07ms]
+(pass) RestAttributionSource history and feed > fileHistory hits the slice-06 route with path, cursor, and reads flag [0.19ms]
+(pass) RestAttributionSource history and feed > workspaceActivity hits the feed route and omits reads flag when unset [0.11ms]
+(pass) RestAttributionSource history and feed > workspaceActivity sends newest-first folder scope to the feed [0.05ms]
+(pass) RestAttributionSource under the browser fetch rule > every read reaches the network instead of throwing on an illegal receiver [0.07ms]
+(pass) file activity freshness > a continuation failure keeps loaded timeline rows and offers a page-local retry [0.24ms]
+(pass) file activity freshness > file timelines keep loaded events and retry the failed cursor [7.23ms]
+(pass) file activity freshness > the activity query requests newest-first events for its selected folder [0.17ms]
+(pass) file activity freshness > a reopened history drawer reads the drive again inside the shared stale window [0.15ms]
+(pass) file activity freshness > loading older activity freezes that historical snapshot instead of polling every page [0.02ms]
+(pass) historyLabels > a single save names the verb and nothing else [0.03ms]
+(pass) historyLabels > repeated saves state how many
+(pass) historyLabels > a server-folded folder states files; a gateway-folded tree states events [0.01ms]
+
+spa/api/app-domains.test.ts:
+(pass) domain client addresses the single slot through REST and preserves accepted cleanup [1.46ms]
+(pass) domain acceptance updates its slot and refreshes app addresses and workspace inventory together [0.87ms]
+(pass) domain polling stops at terminal states, exhausted cleanup, operator repair, and panel unmount [13161.52ms]
+(pass) inventory observes queued recheck completion after its app manager closes, then stops polling [4367.97ms]
+(pass) queued manual rechecks retain admission while queued and observe successful provider completion [12588.00ms]
+
+spa/relay/relay-status.test.tsx:
+(pass) renders the chat-app relay header contract from the classified definition path [2.38ms]
+(pass) announces unknown progress before the backend classifies a current step [0.43ms]
+(pass) renders the retained definition path from stable backend item identity [0.81ms]
+(pass) discloses the active machine prompt, state configuration, and grouped outcomes [1.09ms]
+
+spa/drive/bootstrap-shell.test.tsx:
+(pass) Drive bootstrap shell > renders every workspace destination before the interactive shell hydrates [2.04ms]
+(pass) Drive bootstrap shell > streams Work Home in Work chrome rather than the Build tab bar [1.06ms]
+
+spa/shares/shares-management.test.tsx:
+(pass) renders the sharer source path and configuration status without a recipient mount path [0.81ms]
+(pass) does not offer pause switches for pending or terminal shares [0.24ms]
+
+spa/team-space/work-loading.test.tsx:
+(pass) only asking sessions reserve the blocking-input tray [3.76ms]
+(pass) the session skeleton keeps its composer docked at the bottom with a floating inset [0.14ms]
+(pass) Work App keeps the iframe placeholder silhouette from route wait through app paint [0.41ms]
+
+spa/apps/app-frame-body.test.tsx:
+(pass) a reconciled app renders the launch frame with its title and exact sandbox boundary [0.56ms]
+(pass) a reconciled app carries a placeholder under the frame until the app paints [0.20ms]
+(pass) a reconciled app paints the gap in the theme, never in white [0.16ms]
+(pass) a reconciling app renders the starting presentation instead of a frame [0.16ms]
+(pass) a reconcile-failed app renders its failure and diagnostic instead of a frame [0.07ms]
+(pass) a disabled app renders its switched-off presentation instead of a frame [0.05ms]
+(pass) an app still waiting for its files says so, rather than offering a switch [0.04ms]
+(pass) a broken app explains itself, never a blank frame and never a runtime error [0.07ms]
+
+spa/apps/app-domain-dialog.test.tsx:
+(pass) operator-required domain repair preserves diagnostics and suppresses ordinary mutation controls [1.61ms]
+(pass) an accepted active-domain recheck keeps its address, disables duplicate checks, and permits removal [0.76ms]
+(pass) a queued failed-domain recheck identifies the retained diagnostic as a previous result [0.37ms]
+
+spa/routes/sessions.test.tsx:
+(pass) a confirmed session denial outranks the still-pending sibling read [0.04ms]
+(pass) editing attachments after a rejected send creates a new request identity [0.08ms]
+(pass) request identity follows the normalized effective audience [0.02ms]
+(pass) re-homing attachments after a rejected send creates a new request identity
+(pass) changing the creation scope rotates request identity even when submitted paths are pinned [0.01ms]
+(pass) only an explicit client refusal returns attachment cleanup ownership to the draft [0.03ms]
+(pass) a direct visit to an agent surface has no onboarding celebration [0.02ms]
+(pass) drops per-turn complete markers while keeping meaningful lifecycle rows [1.59ms]
+(pass) a settled turn does not echo its answer back as a completion row [2.34ms]
+(pass) renders the persisted root assistant name on authored messages [0.49ms]
+(pass) renders a registered agent’s canonical identity on authored messages [0.95ms]
+(pass) keeps a registered agent’s portrait stable when its display name changes [1.67ms]
+(pass) renders every projected message as a complete authored row [1.18ms]
+(pass) a run of prompts from one person is announced once and stays one stack [1.12ms]
+(pass) does not merge adjacent prompt, note, and answer messages from the user [1.45ms]
+(pass) passes a persisted session cwd through to timeline media [0.60ms]
+(pass) treats a missing persisted cwd as drive root [0.88ms]
+(pass) does not invent a cwd for a pending create [0.02ms]
+(pass) hides the session state inspector off localhost [0.12ms]
+(pass) offers the session state inspector trigger when served from localhost [0.39ms]
+(pass) classifies only loopback hosts as session debug hosts [0.01ms]
+
+spa/routes/marketplace.test.tsx:
+(pass) renders the catalog and its workspace-scoped detail route [6.30ms]
+(pass) the catalog heading has a way back to the agents map [0.95ms]
+(pass) an empty intermediate catalog page invites continuation without claiming the category is empty [0.45ms]
+(pass) uses the canonical generated avatar in cards and details [1.81ms]
+(pass) renders the dimensional badge for a verified publisher only [3.41ms]
+(pass) separates the community section from the verified one [1.82ms]
+(pass) two publishers of the same agent name render as two distinct listings [2.19ms]
+(pass) an uninstalled card carries a real Install button, an installed one only status [1.31ms]
+(pass) a card lists the apps it comes with, ahead of skills [0.60ms]
+(pass) the detail page gets an Included apps block above the skills, only when apps exist [1.93ms]
+(pass) greys an unavailable listing and refuses its install [1.60ms]
+(pass) renders an installed agent with Add another [1.10ms]
+(pass) groups every installed instance on one listing without turning the gallery into a manager [1.90ms]
+(pass) a viewer sees installed instances without marketplace write actions [2.44ms]
+(pass) instance rows target joined slugs and never guess for a missing roster row [1.80ms]
+(pass) gallery issues outrank the listing update signal [0.71ms]
+(pass) announces a catalog-shaped loading surface without exposing decorative detail [0.54ms]
+(pass) announces a detail-shaped loading surface on a listing route [0.33ms]
+(pass) the tag rail offers every server-supported tag, including ones beyond the loaded page [0.87ms]
+(pass) the tag rail stays available when the first page carries only one tag [0.60ms]
+
+spa/routes/workspace-settings.test.tsx:
+(pass) Members holds the whole roster: the invite field, the members, and who has not answered [3.02ms]
+(pass) a non-owner reads the roster and is offered nothing an owner alone may do [0.86ms]
+(pass) Members renders an open invite loaded beyond the first 100 history rows [1.29ms]
+(pass) backup exports have their own Settings tab and are absent from General [3.42ms]
+(pass) App domains overview names its app, hostname and read-only inspection action [0.98ms]
+
+spa/routes/agents.test.tsx:
+(pass) resolves a known slug from the cached roster and renders its canvas [3.23ms]
+(pass) agent settings builds the avatar URL from one canonical roster record [1.13ms]
+(pass) root settings uses the same authored Duet avatar as the selected roster row [0.75ms]
+(pass) keeps a pending installed agent inside a detail-shaped loading surface [0.59ms]
+(pass) the roster and detail app groups hide a completed onboarding app but keep sibling apps [3.01ms]
+(pass) agent detail groups an app loaded beyond the first 100 workspace rows [1.28ms]
+(pass) an unknown slug lands on the not-found seam, not a crash (slice 16 adds the refetch) [0.38ms]
+
+spa/routes/user-settings.test.ts:
+(pass) automatic top-up threshold accepts five dollars and rejects anything lower [0.06ms]
+(pass) VM-COMPUTE-08 a VM compute fee is labelled apart from model spend in both locales [0.13ms]
+(pass) VM-COMPUTE-08 usageKind only renames usage rows, never the other transaction types [0.05ms]
+(pass) VM-COMPUTE-08 every transaction type resolves to distinct copy, not a message key [0.08ms]
+
+spa/routes/train.test.tsx:
+(pass) keeps every Train scope inside the canonical computer hierarchy [0.05ms]
+(pass) invalidates the shared memory counts after a root memory changes [0.32ms]
+(pass) accepts a bare website hostname by normalizing it to https [0.13ms]
+(pass) a retrain target lives in the URL, so it survives a retry and can be cancelled [0.09ms]
+(pass) redirects legacy Train query links to canonical memory routes [0.02ms]
+(pass) renders a root memory detail as its own route instead of inside Train [2.41ms]
+(pass) renders memory content as markdown and lists what it was trained from [2.40ms]
+(pass) a pruned archive disables Retrain and says why [1.25ms]
+(pass) uses the canonical nested route to select one agent for both Train panes [3.26ms]
+(pass) keeps global training beside global memory, with the roster rail as the picker [1.27ms]
+(pass) attributes inherited memories and links each one to its owner Train page [0.69ms]
+(pass) an inherited-memory prefix labels its count as loaded [0.18ms]
+(pass) attributes an inherited memory to its owner display name and avatar [0.77ms]
+(pass) renders replica and inherited details without mutation controls [1.27ms]
+(pass) record detail trusts bounded upload metadata when a running job is absent from the jobs page [0.86ms]
+(pass) links trained memory cards to dedicated root and agent routes [0.77ms]
+(pass) a failed first upload page keeps Train staging disabled and offers retry [0.48ms]
+(pass) a later upload-list failure keeps the valid quota prefix and offers retry [0.74ms]
+(pass) renders real upload progress, cancellation, and quota rejections [0.84ms]
+(pass) renders staged URLs as URLs and pending or failed URL attempts distinctly [0.74ms]
+(pass) offers explicit bounded-page continuation for sources and job history [1.40ms]
+(pass) continuation failures preserve loaded Train rows and name the retry [0.28ms]
+(pass) keeps an in-flight URL as the single owner while its refreshed upload arrives [0.49ms]
+(pass) renders localized coarse copy instead of raw active job phases [0.31ms]
+(pass) keeps staging and Start available while another training job is running [0.76ms]
+(pass) notes silently restored sources from the initial non-running listing [0.35ms]
+(pass) observes each nonterminal-to-done transition once and stays silent after reload [0.08ms]
+(pass) aligns active job polling to the five-second status rail [0.02ms]
+(pass) re-selecting a filename overwrites the queued source and aborts only its old PUT [0.15ms]
+(pass) rejects a file locally when overwrite-aware budget math cannot fit it [0.03ms]
+(pass) defers an unloaded possible replacement to the authoritative upload store [0.02ms]
+(pass) keeps the destructive banner and retry for records errors [0.47ms]
+(pass) the website field takes a bare hostname and says so [0.36ms]
+(pass) a bad URL is reported at the field, not at the far end of the card [0.34ms]
+(pass) a file-count refusal is reported at the file picker, not at the URL field [0.30ms]
+(pass) the page names the scope you are editing, at both scopes [2.08ms]
+
+spa/routes/internal-admin.test.tsx:
+(pass) offers email-based user creation only on the allowed admin surface [2.04ms]
+(pass) queued VM backup notice distinguishes acceptance from completion [0.26ms]
+
+spa/routes/route-metadata.test.ts:
+(pass) SPA route metadata > an app has no workspace-level address, and a session keeps its own [0.02ms]
+(pass) SPA route metadata > the agent page is one splat, and the graph and the agent document are their own [0.02ms]
+(pass) SPA route metadata > rejects arbitrary settings surfaces instead of accepting the first one [0.04ms]
+(pass) SPA route metadata > the retired invites address is no longer a settings surface [0.02ms]
+(pass) SPA route metadata > recognizes connected providers as a workspace-settings surface
+(pass) App domains is an addressable workspace Settings surface [0.08ms]
+
+spa/onboarding/onboarding-chain-orchestrator.test.tsx:
+(pass) names the waiting agent and distinguishes install wait from mid-chain hand-off [0.48ms]
+(pass) a chain seeded at step zero survives losing its server projection [0.12ms]
+
+spa/onboarding/onboarding-experience.test.tsx:
+(pass) partitionCatalog splits recommended picks (in recommendation order) from the rest [0.12ms]
+(pass) partitionCatalog leaves the catalog whole until both sides are ready [0.02ms]
+(pass) partitionCatalog collapses the whole rail when a pick has left the catalog [0.02ms]
+(pass) introduces the real Duet identity before marketplace selection [1.80ms]
+(pass) the header carries an options menu next to the step progress [0.52ms]
+(pass) keeps the identity action available while starter agents load [0.47ms]
+(pass) keeps Continue available when the optional agent catalog is still loading [0.73ms]
+(pass) the primary button counts down the selection floor instead of a hint line [1.94ms]
+(pass) Continue re-enables once the floor is met, and the hint disappears [1.94ms]
+(pass) the floor fails open on a catalog error — Continue stays enabled with no hint [0.76ms]
+(pass) ready recommendations render the picked-for-you rail with each reason [1.89ms]
+(pass) pending recommendations show a skeleton band that a settled empty result removes [3.03ms]
+(pass) a paged onboarding catalog labels its mobile count as loaded [1.56ms]
+(pass) the goal step offers every preset goal and a write-your-own path [1.39ms]
+(pass) a follow-up question opens with its smart default already selected [1.15ms]
+(pass) a tapped answer moves the selection off the default chip [0.48ms]
+(pass) the ready summary echoes the picked goal beside the team roster [0.77ms]
+(pass) a write-your-own goal echoes the user's words in the ready summary [0.47ms]
+(pass) uses the renamed assistant in the no-specialist summary [0.45ms]
+(pass) each goal tile carries the Duet that holds its tool [0.56ms]
+(pass) the header mark follows the chosen goal [1.65ms]
+(pass) the follow-up names the assistant and recaps the goal it belongs to [0.48ms]
+(pass) an untouched question shows its smart default as pressed, not a blank [0.84ms]
+(pass) the summary recaps every answer that went into the purpose [0.73ms]
+(pass) the custom path has no chips to recap on the summary [0.52ms]
+(pass) a written-in goal keeps its summary row, having no chips to lead with [0.55ms]
+(pass) the campaign ready step counts the agents the campaign brought, not the ones nobody picked [1.37ms]
+(pass) a campaign arrival is celebrated without the catalog ever answering [0.93ms]
+(pass) every face in the ready stack says who it is without a pointer [0.96ms]
+
+spa/onboarding/onboarding-purpose.test.ts:
+(pass) composePurpose defaults-only (the no-typing guarantee) > grow-business composes the spec golden paragraph [0.10ms]
+(pass) composePurpose defaults-only (the no-typing guarantee) > launch-project composes from its defaults [0.03ms]
+(pass) composePurpose defaults-only (the no-typing guarantee) > replace-software composes from its defaults [0.03ms]
+(pass) composePurpose defaults-only (the no-typing guarantee) > mid-sentence casing lowers plain capitals but leaves acronyms alone [0.03ms]
+(pass) composePurpose with tapped chips and details > changed chips replace their sentence answers [0.01ms]
+(pass) composePurpose with tapped chips and details > an unknown chip id falls back to the smart default [0.02ms]
+(pass) composePurpose with tapped chips and details > a detail appends in parentheses inside its sentence [0.01ms]
+(pass) composePurpose with tapped chips and details > details are trimmed, and blank details are ignored [0.02ms]
+(pass) composePurpose with tapped chips and details > a runaway detail clamps the paragraph to the schema max [0.04ms]
+(pass) composePurpose speaks the locale of the labels it is given > es-419 labels compose with Unicode-aware mid-sentence casing [0.02ms]
+(pass) composePurpose speaks the locale of the labels it is given > es-419 resolves every sentence template — no leftover placeholders [0.48ms]
+(pass) customPurpose ("Write your own") > stores typed text verbatim, trimmed
+(pass) customPurpose ("Write your own") > clamps to the schema max and changes nothing else [0.01ms]
+
+spa/onboarding/onboarding-goals.test.ts:
+(pass) the goal catalog shape (spec invariants the compiler cannot see) > three goals, one question each, 3-5 chips per question [0.06ms]
+(pass) the goal catalog shape (spec invariants the compiler cannot see) > question ids are unique across goals, not just within one [0.02ms]
+(pass) the goal catalog shape (spec invariants the compiler cannot see) > tag hints stay within the recommendation request cap of 3 [0.02ms]
+(pass) every catalog id has copy in both locales (es-419 must not trail en) > en resolves every label, description, title, sentence, and chip [0.09ms]
+(pass) every catalog id has copy in both locales (es-419 must not trail en) > es-419 resolves every label, description, title, sentence, and chip [0.04ms]
+
+spa/files/lib/timeline.test.ts:
+(pass) mergeEventPages > dedupes on seq across a page boundary and re-sorts ascending [0.09ms]
+(pass) buildHistoryRows > equal timestamps keep server seq order — seq is the only total order [0.09ms]
+(pass) buildHistoryRows > a rename row carries both the old and new path [0.02ms]
+(pass) buildHistoryRows > a deleted path stays a visible history row [0.01ms]
+(pass) buildHistoryRows > a workspace restore row has no path and stays inline [0.02ms]
+(pass) buildHistoryRows > reads collapse per actor per 6h bucket and never carry a count [0.08ms]
+(pass) buildHistoryRows > a write between two same-bucket reads splits them — order is never bent [0.02ms]
+(pass) buildFeedRows > newest-first feeds keep newest grouped activity first [0.10ms]
+(pass) buildFeedRows > adjacent same-actor writes group into one row with every path [0.02ms]
+(pass) buildFeedRows > mirror and terminal writes are never grouped away or hidden [0.02ms]
+(pass) buildFeedRows > renames and deletes stand alone between grouped bursts [0.03ms]
+(pass) buildFeedRows > a group of only creates is flagged so the feed can say "created" [0.03ms]
+(pass) buildFeedRows > canonical summaries remain separate counted rows at the noisy root [0.02ms]
+
+spa/routes/agents/agent-detail-canvas.test.tsx:
+(pass) the default agent on the shared canvas > names the drive root instead of echoing an empty path [1.72ms]
+(pass) the default agent on the shared canvas > carries the root scope on Train and session links, not a slug [1.27ms]
+(pass) the default agent on the shared canvas > offers rename and Open in Drive, and nothing it cannot do [1.26ms]
+(pass) the default agent on the shared canvas > still prints a registered agent’s slug and folder [1.45ms]
+(pass) renders identity, anchor path, rendered AGENTS.md, skills, apps, and sessions without an agent mode [1.05ms]
+(pass) renders an agent icon from its versioned drive-file URL [0.86ms]
+(pass) uses the canonical generated avatar when the agent has no icon [0.93ms]
+(pass) links the anchor path to its exact Drive folder URL [0.87ms]
+(pass) links each session row to the conversation on this agent, on the map [0.91ms]
+(pass) links a delegated session row through the conversation that spawned it [1.27ms]
+(pass) links the Train affordance to the agent-scoped memory surface [1.10ms]
+(pass) Train affordances follow the trainable projection whether the agent is locked or unlocked [2.14ms]
+(pass) a locked detail keeps its header and menu but collapses the body to one onboarding CTA [0.38ms]
+(pass) a broken agent still renders the canvas with its status pill [0.63ms]
+(pass) a missing AGENTS.md degrades to a readable note, never a crash [0.45ms]
+(pass) an empty AGENTS.md is treated the same as missing [0.37ms]
+(pass) empty skills, apps, and sessions each show their own readable empty state [0.69ms]
+(pass) an empty agent-session page with a cursor stays continuable instead of claiming no sessions [0.92ms]
+(pass) agent-session failures distinguish an unavailable first page from a retained prefix [1.48ms]
+(pass) the apps card names continuation loading and retry without hiding loaded apps [2.12ms]
+
+spa/routes/agents-map/agent-drive.test.tsx:
+(pass) the agent card mounts the drive itself, apps context and all [2.17ms]
+(pass) the Files owner exposes an explicit continuation control for folder apps [2.86ms]
+(pass) an incomplete directory reports a loaded prefix instead of an exact footer count [2.10ms]
+(pass) client-hidden entries do not make a known nonempty folder claim it is empty [1.03ms]
+
+spa/routes/agents-map/knowledge-map-home.test.tsx:
+(pass) a drive with no agents draws the map, not a paragraph about it [1.52ms]
+(pass) a map still waiting on its reads draws the shape of one, not a partial one [0.47ms]
+
+spa/routes/integrations/integrations-surface.test.tsx:
+(pass) materializes all other visible principals when one child leaves All agents [0.08ms]
+(pass) All agents clears or creates the policy without collapsing explicit children [0.02ms]
+(pass) drops stale principals on the next visible child edit
+(pass) binds an optimistic policy save to the workspace where it began [0.04ms]
+(pass) an optimistic save cannot mutate the active workspace after a workspace switch [0.25ms]
+(pass) renders the trigger summary and a save error from explicit policy state [0.76ms]
+(pass) a server row carries its identity, cost and per-agent access on a locator of its own [1.07ms]
+(pass) a custom-server background failure keeps saved servers and offers retry [0.41ms]
+(pass) an unreachable server says so, because the health line is its only channel [0.35ms]
+(pass) suggests a server name only when the host yields a legal one [0.20ms]
+(pass) refuses a draft the add route would refuse, and says which part [0.12ms]
+(pass) a server awaiting authorization shows no tool numbers it does not have [0.35ms]
+(pass) offers the remedy on exactly the states that can be consented to [1.03ms]
+(pass) names the server whose in-flight consent is running, and only that one [0.33ms]
+(pass) a refused consent says what to do about it, in Duet words per code [0.46ms]
+(pass) renders the provider catalog logo for a known integration [0.87ms]
+(pass) a failed disconnect says so instead of leaving the row unexplained [0.51ms]
+(pass) an integration background failure keeps saved rows and offers retry [0.28ms]
+(pass) connected integration management exposes its continuation [0.32ms]
+(pass) an empty intermediate connection page is incomplete, not an empty collection [0.22ms]
+(pass) a catalog continuation failure keeps loaded integrations and offers a page-local retry [0.23ms]
+(pass) an empty intermediate catalog page does not claim there are no integrations [0.22ms]
+(pass) the integration catalog retries a failed continuation with the same cursor [0.39ms]
+
+spa/routes/train/train-rail.test.tsx:
+(pass) the Train rail lists only trainable scopes — no drive-roster affordances [1.89ms]
+(pass) Duet leads the rail and is the scope Train opens on [0.71ms]
+(pass) Duet is labelled global; the agents are not [0.63ms]
+(pass) every scope previews its memory depth, including a real zero [0.75ms]
+(pass) Duet leads whatever the roster contains [0.05ms]
+(pass) a memory route keeps its owning scope selected [0.05ms]
+(pass) exactly one scope is selected at a time [0.02ms]
+(pass) scope matching respects slug encoding [0.01ms]
+(pass) agent Settings and Train share one rail and its canonical portrait [1.44ms]
+
+spa/routes/agents-map/agents-rail/list.test.tsx:
+(pass) the column lists carriers and never their work [0.86ms]
+(pass) the workspace-sidebar variant is the same claim, one line per carrier [0.26ms]
+(pass) an agent nobody has written to is listed, and claims nothing [0.21ms]
+(pass) a roster that failed says so and offers the retry, rather than an empty drive [0.10ms]
+(pass) a roster still arriving shows its own shape, not an empty list [0.09ms]
+(pass) a partial roster names its loaded prefix and offers explicit continuation [0.45ms]
+(pass) a failed continuation preserves rows and offers retry [0.30ms]
+(pass) an agent shows two of the apps it can reach, and no more [0.46ms]
+(pass) an agent that reaches nothing draws no apps strip [0.25ms]
+(pass) the agent’s last word is the row’s one line of prose [0.27ms]
+(pass) a row nobody has written to says what the agent is [0.22ms]
+(pass) a person’s last word is prefixed with the person, not with “you” [0.28ms]
+(pass) an unresolvable person leaves the words alone [0.21ms]
+(pass) the row the reader is on says so [0.19ms]
+(pass) nothing is marked when the reader is not on any of these rows [0.34ms]
+(pass) the mark on a row answers for the agent’s own chat [0.38ms]
+(pass) work in flight puts no mark on the row it cannot be reached from [0.22ms]
+(pass) an agent nobody has written to wears no mark [0.18ms]
+(pass) a row draws the agent face the rest of the product draws for that agent [0.44ms]
+(pass) a row draws an uploaded icon rather than the generated face [0.19ms]
+
+spa/routes/agents-map/agents-rail/rail.test.tsx:
+(pass) the rail carries the control that folds it, open or shut [1.15ms]
+(pass) a folded rail is inert and hidden [0.29ms]
+(pass) an open rail is neither [0.27ms]
+(pass) drawing the rail never reports itself as the reader touching it [0.26ms]
+(pass) the desktop Build rail keeps the full Work-sidebar footprint [0.23ms]
+(pass) the desktop column stays present even when the drawer is closed [0.23ms]
+
+spa/routes/agents-map/agent-surface/setup-stage.test.tsx:
+(pass) the setup wait reads as active progress and says it will resolve automatically [0.57ms]
+(pass) setup without an action is a passive owner-or-editor handoff [0.11ms]
+
+spa/routes/agents-map/agent-surface/surface-copy.test.tsx:
+(pass) setup takes the whole surface, and the panes it cannot fill are not drawn [1.12ms]
+(pass) a locked agent wears the onboarding in its own header, and gets no second one [0.36ms]
+(pass) the header line follows what is actually under it [1.00ms]
+(pass) an agent that is ready keeps both columns [2.11ms]
+(pass) a failed Files continuation keeps loaded rows and offers retry [0.74ms]
+(pass) an arrangeable row says what dragging does, in words rather than in a key [0.43ms]
+(pass) an agent that answers to another name wears it under the one it shows [1.02ms]
+(pass) the surface asks for no message the catalogue does not have [0.64ms]
+
+ 455 pass
+ 0 fail
+ 1647 expect() calls
+Ran 455 tests across 54 files. [31.04s]

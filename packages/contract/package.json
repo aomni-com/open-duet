@@ -1,0 +1,24 @@
+{
+  "name": "@repo/contract",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "lint": "oxlint",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-ai": "0.79.10",
+    "@repo/typescript-config": "*",
+    "@types/bun": "^1.3.14",
+    "typescript": "catalog:",
+    "@repo/agent": "workspace:*"
+  }
+}

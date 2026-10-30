@@ -1,0 +1,123 @@
+{
+  "status": "published-and-local-verified",
+  "sourceRevision": "e5dc6ba510c2be2ebfbb6899b789fe81ba05b2d0",
+  "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:2e97be2b9c4937800689895d2743a43f4a2adfcfeccd846f873d438eb723d72f",
+  "imageSeedRuntimeVersion": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+  "imageSeedManifest": {
+    "formatVersion": 1,
+    "version": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+    "artifacts": [
+      {
+        "name": "duet",
+        "sha256": "a0defe4e706387c251d55a4b4dc18994ec2fdcebbbe27142024b99028dfd1551",
+        "byteLength": 117078144,
+        "mode": 493
+      },
+      {
+        "name": "helper.js",
+        "sha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+        "byteLength": 908569,
+        "mode": 420
+      },
+      {
+        "name": "index.js",
+        "sha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+        "byteLength": 2226400,
+        "mode": 420
+      },
+      {
+        "name": "initdb.wasm",
+        "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+        "byteLength": 169969,
+        "mode": 420
+      },
+      {
+        "name": "pglite.data",
+        "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+        "byteLength": 5289109,
+        "mode": 420
+      },
+      {
+        "name": "pglite.wasm",
+        "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+        "byteLength": 8739902,
+        "mode": 420
+      },
+      {
+        "name": "photon_rs_bg.wasm",
+        "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+        "byteLength": 1881634,
+        "mode": 420
+      },
+      {
+        "name": "vector.tar.gz",
+        "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+        "byteLength": 46108,
+        "mode": 420
+      }
+    ]
+  },
+  "manifestSha256": "0183796fe7ca0b55e27b2816e3a609a6a56280d95721317e95efac2f70db5919",
+  "bootstrapSha256": "e857f023ab6801ace9d898e61132c51c56a3d94d72d35b83822b5594f080c6d0",
+  "construction": "Existing image owner consumed exact authenticated API-served bytes; no separate application rebuild",
+  "localVerification": "Existing complete verify-image gate passed, including fresh registration/model handoff/native RPC and memory, OS/browser/desktop/tools, sidecar failures and streaming",
+  "registryIndex": {
+    "schemaVersion": 2,
+    "mediaType": "application/vnd.oci.image.index.v1+json",
+    "manifests": [
+      {
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "size": 18504,
+        "digest": "sha256:250824cce45b4ed00610b07e5a23ba5a01badb45df6400e1ed5a08f77792eed4",
+        "platform": {
+          "architecture": "amd64",
+          "os": "linux"
+        }
+      },
+      {
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "size": 564,
+        "digest": "sha256:d932275e1e5d959f7d42456521380e056914fe131ba9bbae243fbc84e7b8eef3",
+        "platform": {
+          "architecture": "unknown",
+          "os": "unknown"
+        }
+      }
+    ]
+  },
+  "sourceAndTargets": {
+    "environment": "staging",
+    "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:2e97be2b9c4937800689895d2743a43f4a2adfcfeccd846f873d438eb723d72f",
+    "convexValueVerified": true,
+    "vercelPreviewValueVerified": true,
+    "sourceValueVerified": true,
+    "temporaryTargetEnvRemoved": true,
+    "observedAt": "2026-10-04T21:38:51.333Z"
+  },
+  "stagingBranchTarget": {
+    "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:2e97be2b9c4937800689895d2743a43f4a2adfcfeccd846f873d438eb723d72f",
+    "branch": "staging",
+    "target": "preview",
+    "exactValueVerified": true,
+    "credentialValuesEmitted": false,
+    "observedAt": "2026-10-04T21:46:13.112Z"
+  },
+  "stagingFanout": {
+    "set": 80,
+    "skippedAbsentSource": 7,
+    "failed": 0
+  },
+  "providerAcceptance": "Matching-target strict drills and unified-duet journey passed with verified resource cleanup; ../provider-drills/strict-runtime-r4 and ../staging-journeys/unified-duet-final",
+  "productionPromotion": "pending staging acceptance",
+  "stagingDeployment": {
+    "revision": "1bd5a61acc87e842725a165a84692a5fd863d04b",
+    "backend": {
+      "revision": "1bd5a61acc87e842725a165a84692a5fd863d04b",
+      "schema": 1
+    },
+    "runtime": {
+      "version": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec"
+    }
+  },
+  "existingStagingVms": "Both certified at exact R4 with unchanged OS boot IDs; staging-r4-certification.json"
+}

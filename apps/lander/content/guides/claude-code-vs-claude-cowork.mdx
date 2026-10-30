@@ -1,0 +1,325 @@
+---
+title: 'Claude Code vs Claude Cowork Comparison'
+description: 'Compare Claude Code and Claude Cowork — what each does best, key differences, and when to use which for your workflow.'
+date: '2026-03-05'
+updatedAt: '2026-05-08'
+author:
+  name: 'Sawyer Middeleer'
+  avatar: '/authors/sawyer-middeleer.png'
+  link: 'https://www.linkedin.com/in/sawyer-middeleer/'
+category: 'guides'
+tags: ['claude-code', 'claude-cowork', 'comparison', 'productivity']
+type: 'guide'
+image: '/guides/claude-code-vs-claude-cowork/cover.png'
+cta:
+  title: 'Get both, in one workspace.'
+  subtitle: 'Duet runs Claude Code for the engineering side and a Cowork-style agent for ops, sales, and content. Same Claude brain, every job covered.'
+  buttonText: 'Try Duet free'
+  href: '/sign-in?from=guide-cc-vs-cowork'
+---
+
+Claude Code and Claude Cowork are both agentic AI tools from Anthropic, but they're built for completely different users and workflows. Code is a developer tool that lives in your terminal and writes software. Cowork is a productivity tool that lives in the Desktop app and handles knowledge work — documents, research, file management, and business workflows. Same Claude brain, different hands.
+
+This guide breaks down what each does, where each excels, and how to decide which one fits your work.
+
+<GuideTOC
+  items={[
+    { number: 1, title: 'Quick Comparison', href: '#1-quick-comparison' },
+    { number: 2, title: 'What is Claude Code?', href: '#2-what-is-claude-code' },
+    { number: 3, title: 'What is Claude Cowork?', href: '#3-what-is-claude-cowork' },
+    { number: 4, title: 'Key Differences', href: '#4-key-differences' },
+    { number: 5, title: 'Where Claude Code Excels', href: '#5-where-claude-code-excels' },
+    { number: 6, title: 'Where Cowork Excels', href: '#6-where-cowork-excels' },
+    { number: 7, title: 'Use Case Breakdown', href: '#7-use-case-breakdown' },
+    { number: 8, title: 'Can You Use Both?', href: '#8-can-you-use-both' },
+    { number: 9, title: 'FAQ', href: '#9-faq' },
+  ]}
+/>
+
+---
+
+## 1. Quick Comparison
+
+|                            | Claude Code                       | Claude Cowork                                     |
+| -------------------------- | --------------------------------- | ------------------------------------------------- |
+| **Built for**              | Software developers               | Knowledge workers (marketing, ops, finance, etc.) |
+| **Interface**              | Terminal CLI, VS Code, JetBrains  | Claude Desktop app (macOS, Windows)               |
+| **Primary output**         | Code, git commits, PRs, tests     | Documents, spreadsheets, presentations, research  |
+| **File access**            | Full codebase via terminal        | Granted folders via Desktop app                   |
+| **External tools**         | MCP servers (manual setup)        | Connectors (built-in marketplace)                 |
+| **Extensibility**          | Skills, hooks, plugins, subagents | Skills, plugins, connectors, slash commands       |
+| **Automation**             | CI/CD, git hooks, external cron   | Built-in `/schedule` command                      |
+| **Runs on**                | Your machine (terminal session)   | Your machine (Desktop app VM)                     |
+| **Subscription**           | Pro ($20/mo), Max, or API         | Pro ($20/mo), Max, Team, or Enterprise            |
+| **Technical skill needed** | Moderate to high                  | None                                              |
+
+---
+
+## 2. What is Claude Code?
+
+[Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) is Anthropic's agentic coding tool. It connects Claude directly to your terminal, giving it the ability to read entire codebases, write and edit files across multiple directories, run commands, manage git workflows, and execute complex multi-step development tasks.
+
+You describe what you want built — a feature, a bug fix, a refactor — and Claude plans the implementation, writes the code, runs tests, and commits the changes. You stay in control through approval steps, but the tool handles the heavy lifting.
+
+Claude Code runs in the terminal (CLI) and integrates with VS Code, JetBrains, and GitHub. It's designed for people who already write code and want an AI partner that understands their codebase deeply.
+
+For the full setup walkthrough, see [Claude Code for Founders](/guides/claude-code-for-founders).
+
+---
+
+## 3. What is Claude Cowork?
+
+[Claude Cowork](https://support.claude.com/en/articles/13345190-get-started-with-cowork) is Anthropic's agentic productivity tool for knowledge work. It runs inside the Claude Desktop app and can read your files, create polished documents, research the web, build Excel spreadsheets with working formulas, generate PowerPoint presentations, and coordinate complex multi-step workflows.
+
+You describe the outcome you want — organize these files, turn meeting notes into a report, research competitors and build a comparison matrix — and Claude breaks the work into subtasks, executes them (often in parallel), and delivers finished output directly to your file system.
+
+Cowork runs in an isolated virtual machine on your desktop. No terminal required, no coding knowledge needed. It's designed for marketers, operations leads, analysts, founders, and anyone who does knowledge work on a computer.
+
+For the full setup walkthrough, see [Claude Cowork: Complete Beginner's Guide](/guides/claude-cowork-for-beginners).
+
+<DuetCTA />
+
+---
+
+## 4. Key Differences
+
+### Interface and Access
+
+The most obvious difference is where you interact with each tool.
+
+**Claude Code** lives in the terminal. You type commands, read output, and approve file changes through a text-based interface. It also embeds into VS Code and JetBrains as an IDE extension. If you're comfortable with `cd`, `git`, and `npm`, Code will feel natural.
+
+**Cowork** lives in the Claude Desktop app. You switch to the Cowork tab, grant folder access through a GUI, and describe tasks in plain English. The interface shows task progress visually. If you can use a chat app, you can use Cowork.
+
+### File System Access
+
+**Claude Code** has unrestricted access to your project directory and can navigate your entire file system through the terminal. It reads codebases, modifies source files, creates directories, and runs any shell command you approve.
+
+**Cowork** only accesses folders you explicitly grant permission to. It runs inside a sandboxed VM, which adds a layer of safety but limits it to designated working directories.
+
+### Output Types
+
+**Claude Code** produces code. JavaScript, Python, TypeScript, Rust, SQL, Terraform — any programming language or config format. Its output goes into source files, gets committed to git, and ships through CI/CD pipelines.
+
+**Cowork** produces documents. Excel spreadsheets with formulas, PowerPoint decks, formatted PDFs, research reports, organized file structures. Its output goes into your file system as finished deliverables.
+
+### Extensibility Model
+
+Both tools support extensibility, but through different mechanisms:
+
+**Claude Code** extends via MCP servers (manual setup in config files), skills (Markdown files in `.claude/skills/`), hooks (shell commands triggered by events), subagents (specialized agents for delegation), and plugins (bundles of all the above). The ecosystem is developer-oriented — you configure things via JSON files and the terminal.
+
+**Cowork** extends via connectors (browse and install from a built-in marketplace), plugins (bundles of skills, connectors, and slash commands), and context files (Markdown instructions in your folders). The ecosystem is user-oriented — most setup happens through the app's settings UI.
+
+### Automation
+
+**Claude Code** has no built-in scheduling. To run tasks automatically, you need external tooling — cron jobs, CI/CD triggers, or a wrapper like the Claude Agent SDK. This gives developers maximum flexibility but requires setup.
+
+**Cowork** has built-in scheduling via the `/schedule` slash command. You can set up recurring tasks directly in the app. The catch: your computer must be awake and the app must be open for scheduled tasks to execute.
+
+---
+
+## 5. Where Claude Code Excels
+
+### Complex Software Development
+
+This is Claude Code's core strength. It reads entire codebases — understanding file relationships, import chains, type systems, and architectural patterns — then plans and executes multi-file changes. Ask it to refactor an authentication system, add a new API endpoint with tests, or migrate a database schema, and it will work through the entire task methodically.
+
+### Git Workflow Integration
+
+Claude Code understands git deeply. It creates branches, stages changes, writes commit messages, pushes to remotes, and can even create pull requests via the GitHub CLI. For developers, this means the full loop from "describe the feature" to "PR ready for review" happens in one session.
+
+### Terminal and System Operations
+
+Because Code runs in the terminal, it can do anything your shell can do — run test suites, start dev servers, install packages, check logs, debug build failures, query databases. This makes it invaluable for DevOps work, debugging, and system administration.
+
+### IDE Integration
+
+The VS Code and JetBrains extensions bring Claude Code into your existing workflow. You don't have to leave your editor — invoke Claude inline, see file changes in diff view, and approve modifications without switching windows.
+
+### Agent SDK and Custom Agents
+
+The Claude Agent SDK lets developers build entirely custom agentic systems on top of Claude Code's infrastructure. If you're building an AI product or internal tool, Code provides the foundation — context management, tool registration, session handling, and multi-agent orchestration.
+
+For deeper coverage of Claude Code's capabilities, see [Claude Code for Founders](/guides/claude-code-for-founders) and the [skills architecture guide](/guides/agent-skills-101-tools-vs-mcp-vs-skills).
+
+---
+
+## 6. Where Cowork Excels
+
+### Document Creation
+
+Cowork generates real files — not text descriptions of files. Ask for an Excel spreadsheet and you get a `.xlsx` with working formulas, formatted cells, and multiple sheets. Ask for a presentation and you get a `.pptx` with proper layouts. Claude Code can't do this; it produces code, not office documents.
+
+### Non-Technical Accessibility
+
+Cowork requires zero technical knowledge. No terminal, no command line, no configuration files (unless you want them). The entire experience — from granting folder access to reviewing task output — happens through a visual interface. This opens Claude's agentic capabilities to marketing teams, operations leads, executives, and anyone who doesn't code.
+
+### File Organization and Management
+
+Cowork excels at the kind of file work that's tedious for humans: sorting hundreds of files by type, renaming with consistent conventions, deduplicating, creating indexes, and restructuring folder hierarchies. Claude Code technically can do this through shell commands, but Cowork makes it a natural first-class workflow.
+
+### Research and Synthesis
+
+Give Cowork a research question and it breaks it into sub-queries, searches the web, synthesizes findings across multiple sources, and produces a structured report with citations. It handles the entire pipeline — from question to deliverable — without you needing to guide each step.
+
+### Built-In Connectors
+
+Cowork's connector marketplace makes external integrations accessible without technical setup. Browse available connectors, click to authenticate, and Claude can pull data from Salesforce, Notion, Slack, or dozens of other tools. Claude Code's MCP integrations offer more flexibility but require manual configuration.
+
+### Scheduled Automation
+
+The `/schedule` command gives non-technical users access to recurring automation without writing cron expressions or setting up external services. "Generate a weekly expense summary every Monday" is all it takes.
+
+For the full Cowork walkthrough, see [Claude Cowork: Complete Beginner's Guide](/guides/claude-cowork-for-beginners).
+
+<DuetCTA />
+
+---
+
+## 7. Use Case Breakdown
+
+### Use Claude Code When...
+
+| Use Case                    | Why Code                                                    |
+| --------------------------- | ----------------------------------------------------------- |
+| Building a web app or API   | Full codebase understanding, git integration, test running  |
+| Fixing bugs in production   | Can read logs, check error traces, modify source, run tests |
+| Refactoring a codebase      | Multi-file changes with type system awareness               |
+| Setting up CI/CD pipelines  | Terminal access, infrastructure config files                |
+| Building custom AI agents   | Agent SDK, tool registration, context management            |
+| DevOps and system admin     | Shell access, log analysis, service management              |
+| Contributing to open source | Git workflow, PR creation, code review                      |
+
+### Use Cowork When...
+
+| Use Case                                 | Why Cowork                                                   |
+| ---------------------------------------- | ------------------------------------------------------------ |
+| Creating reports and presentations       | Real `.xlsx` and `.pptx` output with formulas and formatting |
+| Organizing messy file systems            | First-class file management with visual progress             |
+| Market research and competitive analysis | Web research, synthesis, structured output                   |
+| Meeting notes to action items            | Document parsing, email drafting, task extraction            |
+| Expense tracking and data entry          | Receipt processing, spreadsheet creation                     |
+| Content drafting and editing             | Document creation in your brand voice (via context files)    |
+| CRM data pulls and analysis              | Built-in connectors to Salesforce, HubSpot, etc.             |
+| Recurring business workflows             | Built-in scheduling without technical setup                  |
+
+### When Either Could Work
+
+Some tasks sit in the overlap zone:
+
+- **Data analysis** — Code if you're writing Python/R scripts; Cowork if you want Excel output
+- **Automation** — Code if you need 24/7 reliability with external cron; Cowork if desktop-hours scheduling is sufficient
+- **Web scraping** — Code via terminal tools; Cowork via web browsing capabilities
+- **Writing** — Code can generate Markdown content for static sites; Cowork produces formatted documents
+
+---
+
+## 8. Can You Use Both?
+
+Yes, and many power users do. The typical split:
+
+- **Claude Code** for anything that involves a codebase, git, or the terminal
+- **Cowork** for everything else — documents, research, file management, business workflows
+
+They share the same Claude subscription and the same underlying models. The difference is the interface and the type of work each is optimized for.
+
+<Callout type="info" title="Usage Limits">
+  Claude Code and Cowork share your subscription's usage allocation. Heavy use of one reduces what's
+  available for the other. If you're hitting limits, consider Claude Max ($100-200/month) for higher
+  caps.
+</Callout>
+
+### What Neither Does Well
+
+Both tools run locally and stop when you close the session (Code) or the Desktop app (Cowork). Neither provides:
+
+- **Persistent 24/7 operation** without your machine running
+- **Team collaboration** where multiple people interact with the same agent
+- **Cloud-native deployment** of apps and services
+
+For always-on AI agents with persistent memory, durable team sessions, and cloud infrastructure, a platform like [Duet](/) fills that gap — running coding agents and other models on a dedicated cloud server that does not depend on your laptop.
+
+---
+
+## 9. FAQ
+
+<Accordion type="single" collapsible className="w-full">
+
+<AccordionItem value="subscription">
+  <AccordionTrigger>Do I need separate subscriptions for Code and Cowork?</AccordionTrigger>
+  <AccordionContent>
+    No. Both are included with any paid Claude subscription — Pro ($20/month), Max ($100-200/month),
+    Team, or Enterprise. They share the same usage allocation, so heavy use of one affects
+    availability of the other.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="same-model">
+  <AccordionTrigger>Do they use the same AI model?</AccordionTrigger>
+  <AccordionContent>
+    Yes. Both Claude Code and Cowork run on the same Claude models (Opus, Sonnet, Haiku). The
+    difference is the interface and tooling, not the underlying intelligence. A task given to Code
+    and Cowork with the same prompt would get the same quality reasoning — just different output
+    formats.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="switch">
+  <AccordionTrigger>Can I switch between Code and Cowork in the same session?</AccordionTrigger>
+  <AccordionContent>
+    Not in the same session — they're separate modes in the Claude Desktop app (Chat, Cowork, Code
+    tabs). However, you can switch modes freely between tasks. There's no penalty or setup cost for
+    going back and forth.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="cowork-code">
+  <AccordionTrigger>Can Cowork write code?</AccordionTrigger>
+  <AccordionContent>
+    Cowork can generate code files and scripts, but it's not designed for software development. It
+    doesn't understand codebases holistically, doesn't integrate with git, and can't run test suites
+    or dev servers. For anything beyond simple scripts, use Claude Code.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="code-docs">
+  <AccordionTrigger>Can Claude Code create Excel or PowerPoint files?</AccordionTrigger>
+  <AccordionContent>
+    Claude Code can generate files through code — for example, writing a Python script that uses
+    `openpyxl` to create an Excel file. But it doesn't natively produce office documents the way
+    Cowork does. If you want a formatted spreadsheet without writing code to generate it, use
+    Cowork.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="team">
+  <AccordionTrigger>Which is better for teams?</AccordionTrigger>
+  <AccordionContent>
+    Neither is built for team collaboration — both run locally on individual machines. Claude Code
+    has no sharing mechanism at all. Cowork on Team and Enterprise plans adds admin controls and
+    connector approval, but sessions themselves aren't shared. For team-based AI workflows where
+    multiple people interact with the same agent, you'd need a cloud-based solution like [Duet](/).
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="learning">
+  <AccordionTrigger>I'm not technical — should I start with Cowork?</AccordionTrigger>
+  <AccordionContent>
+    Yes. Cowork is designed for non-technical users and requires no coding knowledge. Start with
+    simple tasks (file organization, document creation), build up your context files, and explore
+    plugins as you get comfortable. If you later want to try Claude Code, the [beginner's
+    guide](/guides/claude-code-for-founders) walks you through setup step by step.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="mobile">
+  <AccordionTrigger>Can I use either on mobile?</AccordionTrigger>
+  <AccordionContent>
+    No. Claude Code requires a terminal (macOS, Linux, Windows with WSL). Cowork requires the Claude
+    Desktop app (macOS or Windows x64). Neither has a mobile or web interface. The regular Claude
+    chat at claude.ai works on mobile, but it doesn't have Code or Cowork's agentic capabilities.
+  </AccordionContent>
+</AccordionItem>
+
+</Accordion>

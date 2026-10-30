@@ -1,0 +1,122 @@
+{
+  "capture-install.py.gz": {
+    "originalSha256": "1767c24a8b64a393898bbfb6d27c5bcc2bcc0716f2ef0d9f5473fafa9150021b",
+    "storedSha256": "601607e6ccf8d45490448eb9d9e52e528cc5f7b913d3f6e240ac4b7d446e0c5e",
+    "originalBytes": 8351,
+    "compressed": true
+  },
+  "evidence-sha256.json": {
+    "originalSha256": "921edb9b4115691328f445b10b310e253862480b5dd4211bc8aaf05afcadeb50",
+    "storedSha256": "921edb9b4115691328f445b10b310e253862480b5dd4211bc8aaf05afcadeb50",
+    "originalBytes": 2297,
+    "compressed": false
+  },
+  "node-SHASUMS256.txt.gz": {
+    "originalSha256": "f410428039e2c922a14058df067a4482691c9304a5c01a75847f9f3f2d3307f6",
+    "storedSha256": "81a5921ab3c9e2e39ef63e2229b9fe3d58b4db6790b80da74249ab9ee28ad041",
+    "originalBytes": 3171,
+    "compressed": true
+  },
+  "original-artifacts.json": {
+    "originalSha256": "244563f989470892c537c9a4622920af0d228ee4528f7d00c64a06d6cd95856c",
+    "storedSha256": "244563f989470892c537c9a4622920af0d228ee4528f7d00c64a06d6cd95856c",
+    "originalBytes": 32,
+    "compressed": false
+  },
+  "original-attempt1.json": {
+    "originalSha256": "3229a650010cdaf2c8f1cf04822bc92e019c709ad828a042213175aaa808b01a",
+    "storedSha256": "3229a650010cdaf2c8f1cf04822bc92e019c709ad828a042213175aaa808b01a",
+    "originalBytes": 11500,
+    "compressed": false
+  },
+  "original-run-metadata.json.gz": {
+    "originalSha256": "0e2a90840b5e3dc313abb837d857baa80374f4e23098cf8592b5cac9e5bd120c",
+    "storedSha256": "f8dbf7da4b6f8d1d51db79967dbc95b071cccefe7dab7e5b6ff120d8fe7508bb",
+    "originalBytes": 11478,
+    "compressed": true
+  },
+  "original-run.log.gz": {
+    "originalSha256": "3ae1c82bfc1abf7ede778351b8c58abf81921434eb51cb1c26b6be710659c126",
+    "storedSha256": "04d784b8a1977cfd6617b95b2231e5dfb2e94735cdc63fc55364cce13389650e",
+    "originalBytes": 42363,
+    "compressed": true
+  },
+  "rebuilt/hashes.json": {
+    "originalSha256": "ea4df53f35f80f433dc9058b897c83f13a1703be2204d1b9444180eb50ec12ef",
+    "storedSha256": "ea4df53f35f80f433dc9058b897c83f13a1703be2204d1b9444180eb50ec12ef",
+    "originalBytes": 443,
+    "compressed": false
+  },
+  "rebuilt/npm-pack.json.gz": {
+    "originalSha256": "b01f51bc7e05b50080ce96a8e3e0ce3f6b2f131313326140c94229669232520b",
+    "storedSha256": "a33f9a49055c9ad20b68e4e0322a9020803eb6dc965857764f2a5eb91c58582f",
+    "originalBytes": 992,
+    "compressed": true
+  },
+  "rebuilt/package.json.gz": {
+    "originalSha256": "abf488e9bb4486160ac3c13d964fc804728dac0bbdc46582079e028896b45840",
+    "storedSha256": "1e5e16a44af6b44503163e42e4516c30ac95ef84e9b78c5278dfb6a67cb7701c",
+    "originalBytes": 871,
+    "compressed": true
+  },
+  "reconstruct.log.gz": {
+    "originalSha256": "3ee013541568d12b1194d44d9f86344402e430e7569dd4d32ee835edf7e19a36",
+    "storedSha256": "2e34d7a1bd0100b8bee6059436cad27b2c93f2456274c340058dadcb761a3740",
+    "originalBytes": 544,
+    "compressed": true
+  },
+  "reconstruct.sh.gz": {
+    "originalSha256": "483cdcddda5448ac89a793978562b8d85d2a566826ddbb0c0867d224758fd6c2",
+    "storedSha256": "646c3f70c9a0eb557d1c46ed7a49d104756066c414144eb2532b332e6c4c5d6d",
+    "originalBytes": 820,
+    "compressed": true
+  },
+  "recovered-verification.json": {
+    "originalSha256": "b20f36bbfd3b35bf53118fd2db03a7d00c149514810197e0ede71fa2c665952c",
+    "storedSha256": "b20f36bbfd3b35bf53118fd2db03a7d00c149514810197e0ede71fa2c665952c",
+    "originalBytes": 5431,
+    "compressed": false
+  },
+  "registry-agent-1.0.0.tgz.gz": {
+    "originalSha256": "2c41eff13547087d8d9e4ccec4f56442112213ef00bb1c91cc1cba541fed4630",
+    "storedSha256": "bc3e0f9bec0026080896a1217e7a277c4714359da2ef858924b68219ce34e566",
+    "originalBytes": 2525030,
+    "compressed": true
+  },
+  "registry-hashes.json": {
+    "originalSha256": "469ec7e102e4265d1475840eba0a805c8cd5e39b782fbe142df428309a7e8bd4",
+    "storedSha256": "469ec7e102e4265d1475840eba0a805c8cd5e39b782fbe142df428309a7e8bd4",
+    "originalBytes": 382,
+    "compressed": false
+  },
+  "registry-package.json": {
+    "originalSha256": "abf488e9bb4486160ac3c13d964fc804728dac0bbdc46582079e028896b45840",
+    "storedSha256": "abf488e9bb4486160ac3c13d964fc804728dac0bbdc46582079e028896b45840",
+    "originalBytes": 871,
+    "compressed": false
+  },
+  "registry-packument.json.gz": {
+    "originalSha256": "b898943fff7c7c135c46bbae5c15070e97a250047475d98ba1bb6540184f8a50",
+    "storedSha256": "b3a4d3f235ecf9ba0fe25ae38b92373d5d1370157ea8fe4f22ff1f153507758e",
+    "originalBytes": 785327,
+    "compressed": true
+  },
+  "registry-version.json": {
+    "originalSha256": "131f2e97da2a2c19e61051b403ac766688f3dea0d39aab5ef38448d3b16203c0",
+    "storedSha256": "131f2e97da2a2c19e61051b403ac766688f3dea0d39aab5ef38448d3b16203c0",
+    "originalBytes": 2355,
+    "compressed": false
+  },
+  "source-workflow-runs.json.gz": {
+    "originalSha256": "f2ac22bb360524aca7e9dbb4726857db036bfa8ee27f896c74a42cd8f78231e8",
+    "storedSha256": "c6d789f3962e79f358c6d9a251e86c450f2c8887cd061927323030702f4c5b10",
+    "originalBytes": 275,
+    "compressed": true
+  },
+  "test-capture-install.py.gz": {
+    "originalSha256": "0683f126168346dfa4cbb16375df7dee058d3aa0edc70ae6712585413ef5ccb0",
+    "storedSha256": "e24d56d43b888467c1687e0b650dc948a3a34714fffc14eadb4b14f645719c49",
+    "originalBytes": 4696,
+    "compressed": true
+  }
+}

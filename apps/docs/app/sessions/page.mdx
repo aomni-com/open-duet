@@ -1,0 +1,315 @@
+import { EndpointReference } from '../../components/endpoint-reference'
+
+export const metadata = {
+  title: 'Sessions',
+  description: 'Start, continue, observe, and interrupt Duet agent sessions.',
+  alternates: { canonical: '/sessions/' },
+}
+
+<p className="eyebrow">Resource guide</p>
+
+# Sessions are durable work, not requests
+
+Starting a session creates an identity that outlives the initiating HTTP response. Store that
+identity immediately, then follow events to render progress and terminal state. Messages, notes,
+answers, and interrupts all target the same session timeline.
+
+Session lifecycle routes require the `sessions` capability. An app that starts or controls sessions
+must declare `"sessions"` in its `apiScopes` and use its runtime `DUET_APP_API_KEY`; registration is
+where the app requests that authority, without a separate install-consent grant. The attachment
+upload-session mint on this page is the exception: it writes to the drive and therefore requires
+`files:write`.
+
+Every durable input records who sent it, and that author is derived from the credential — never
+supplied by the caller. A browser session, personal API key, or OAuth token authors as that person;
+a registered app's `DUET_APP_API_KEY` authors as the app; the workspace VM's own key authors as
+Duet itself. The one caller-visible attribution field is `sourceSessionId` on message, note, and
+answer requests, which attributes the input to another session in the same workspace after the
+server validates it exists there.
+
+Some sessions acquire a runner state machine; the product calls those Jobs, but they are the same
+resource on the same route. There is one list, and every session in it carries a `bucket` saying
+what it is doing right now — `asking`, `running`, `scheduled`, or `done`. That reading prefers the
+machine where there is one and the turn where there is not, so a session whose turn reported
+`complete` while its machine keeps working still buckets as `running`. Page any subset with
+`?bucket=`; omit it to page everything, newest first. A machine-backed session additionally carries
+a `machine` projection, and the canonical Session detail URL exposes the full snapshot. List rows
+arrive in `{ items, nextCursor }`; authorization, search, and personal state can make a page short
+or empty, so only a `null` cursor means the walk is complete.
+
+Use `?topLevel=true` on that collection to page only roots. To walk lineage, request
+`GET /agent/sessions/{parentSessionId}/sessions`; it returns exactly that readable parent's direct
+children in the same summary envelope. A grandchild appears only when its own parent is queried.
+Children may belong to another agent, have no agent, or carry a machine—the relationship is the
+parent ID, not inherited agent scope. Each parent and each bucket/archive choice has an independent
+opaque cursor; never reuse a cursor from the root list or another parent.
+
+Parent readability is only the entry check. The server still evaluates every child through the
+caller's current discovery lanes, so a specific-audience child can be omitted and a personal
+archive can differ between readers. Archiving a parent does not archive its children: use the
+child collection's `archived=only` mode to page archived children independently. As with all session
+pages, a short or empty page may still have a continuation; stop only at `nextCursor: null`.
+
+## Start with a bounded prompt
+
+The request schema requires a non-empty prompt. Start, message, note, and answer inputs may carry
+a small bounded inline image set or attachment metadata for files already landed in the workspace
+drive; attachment bytes do not travel through the session API. Durable input history keeps the
+file's path, display name, byte count, and optional media type so clients can render the same file
+reference later. Send only context the task needs. `tier`, when present on a start or message
+request, selects an automatic router (`frontier` or `balanced`) or a stable provider
+alias (`openai-frontier`, `openai-max`, `anthropic-frontier`, `anthropic-max`, or
+`anthropic-balanced`). The Anthropic balanced choice currently runs Claude Sonnet 5.5. Provider aliases
+follow model upgrades on subsequent turns without changing the saved choice. An unavailable model
+fails through the ordinary session error path; it does not switch to another model.
+Answers deliberately have no tier field because they resume the session's persisted choice.
+
+{/* schema: AgentStartSessionRequestSchema */}
+
+```json
+{
+  "prompt": "Summarize release notes.",
+  "tier": "balanced"
+}
+```
+
+Omitting `behavior` resolves to `steer`. On a newly created session there is no active turn yet,
+so steer and follow-up have the same initial delivery boundary. You can still state the choice
+explicitly:
+
+{/* schema: AgentStartSessionRequestSchema */}
+
+```json
+{
+  "prompt": "Summarize release notes after indexing finishes.",
+  "behavior": "follow_up"
+}
+```
+
+An explicit tier becomes sticky for later messages in that session. Each queued prompt keeps the
+effective tier resolved when it was accepted, so retries and later workspace-default changes cannot alter
+work already waiting to run.
+
+The create response is the durable handoff point: it returns the new session identity plus its
+canonical snapshot and initial history after one immediate delivery attempt. Cache those values
+under the session's detail and history keys, navigate to the session URL immediately, and continue
+from the event stream there. Its `delivery` field is `accepted` when the runner acknowledged the
+initial prompt and `queued` when the durable timeline still owns a later retry.
+
+History uses the universal page envelope `{ items, nextCursor }`, with at most 100 timeline rows per
+page. Omit `order` for newest-first reading, or use `order=asc` for replay. `afterSeq` is accepted only
+with ascending order and starts strictly after that durable sequence. Continuations are opaque:
+pass `nextCursor` back unchanged, continue through short or empty pages, and stop only when it is
+`null`. A page may be shorter than its requested limit when the next event would cross the bounded
+database-read or serialized-response budget; its cursor still resumes at that first unconsumed
+event. A chronological UI reverses each newest-first wire page before merging it into its local
+timeline. The event stream resumes independently from the last committed sequence, so reconnecting
+never requires walking old history again.
+
+Create, message, note, and answer requests may include a stable `clientRequestId`. The web creates
+one UUID per submission; retrying the same request ID returns the already-created session or input
+instead of duplicating it.
+
+File attachments use the workspace drive rather than the inline image body: mint a grant and send
+the bytes to the VM, then name the resulting drive path on the message. See
+[Files](/files#mint-a-grant-for-direct-uploads).
+
+## Wait for foreground work
+
+Use a `/wait` route when the caller needs the result of the submitted turn. The request stays open
+until the durable timeline contains the terminal caused by that input. Use the existing routes
+without `/wait` for background work: they return after durable submission so the caller can surface
+the session link immediately.
+
+An initial wait request requires one UUID. Generate it once per logical submission and reuse it if
+the connection ends ambiguously.
+
+{/* schema: AgentStartSessionWaitRequestSchema */}
+
+```json
+{
+  "prompt": "Summarize release notes and report the conclusion.",
+  "behavior": "follow_up",
+  "clientRequestId": "4b27f182-b3e8-47c4-9fb8-5a488243ab92"
+}
+```
+
+Use the corresponding explicit route for the operation: `/sessions/wait` for root creation,
+`/{parentSessionId}/sessions/wait` for child creation, `/{sessionId}/messages/wait` for a message,
+and `/{sessionId}/answer/wait` for an answer. Root and agent default aliases add `/wait` to their
+ordinary message path. Notes remain fire-and-forget and have no wait variant.
+
+A terminal returns HTTP 200 with the canonical `sessionId`, the submitted `inputSeq`, and the exact
+durable terminal marker. `complete`, `ask`, `interrupted`, and `sleep` all complete the wait; runner
+failure or cancellation remains event content rather than becoming an HTTP error. Fetch history
+after `inputSeq` when the caller needs transcript context about how that result was produced—the
+wait response deliberately does not copy history.
+
+If no terminal is durable at the server deadline, HTTP 202 means observation timed out while the
+turn continued. Retry the same path with the identical request body. Its `clientRequestId` resumes
+observation of the original durable input before any mutable parent or default alias is resolved.
+
+Disconnecting a wait stops only observation—the already-durable input continues normally. Clients
+that cannot hold a foreground connection open can use ordinary async submission plus history
+polling instead.
+
+## Start related work from a session
+
+Use the session-keyed create route when one session starts another. The parent identity comes from
+the path; the body stays the ordinary create shape. Omitted working directory and tier inherit from
+the parent, while explicit values override them. The resulting snapshot carries
+`createdBySessionId` even if that parent is later deleted.
+
+Cross-session messages, notes, and answers may set `sourceSessionId` so the timeline attributes the
+injected input to the sending session instead of the credential's owner. Omit the field for ordinary
+input. There is no request field for claiming user, app, or system authorship — those are always
+derived from the credential.
+
+{/* schema: AgentMessageRequestSchema */}
+
+```json
+{
+  "prompt": "What is your current result and what remains?",
+  "behavior": "follow_up",
+  "sourceSessionId": "js7a92k3fd0q1m8v6x4tz5nwr"
+}
+```
+
+History exposes each input's typed `sender` — `{"kind":"user","userId":…}`, `{"kind":"app","appId":…}`,
+`{"kind":"session","sessionId":…}`, or `{"kind":"system"}` — as stored identity only; current names,
+emails, slugs, and titles are resolved at read time and never snapshotted into events. The row's
+`createdAt` is the input's one timestamp, and its `seq` is the same value
+`history?order=asc&afterSeq=<seq>` accepts to begin strictly later, so the sequence a model sees in
+its message envelope is a ready-made replay boundary.
+
+## Use the default alias when identity should be stable
+
+The `default` path is a server-resolved alias for one ordinary session belonging to an owner — an
+agent, or the drive root under the reserved `root` slug. Reading it before the first message returns
+`{ "session": null }` on a `200`, because having no chat yet is the alias's ordinary state rather
+than an error; only `/history` answers `no_default_session`. Posting the first message creates and
+binds the session atomically, while later messages resolve the same real identity.
+
+The binding is a pointer on the owner, not a property of the session, and three things move it.
+Posting a first message sets it. Permanent deletion clears it. `PUT` sets it to any session that
+owner already has, or to `null` — which demotes the current default to an ordinary session without
+touching it: it stops being excluded from `excludeDefault` listings, keeps running whatever it was
+running, and the owner's next message starts a fresh default. Archiving a session does **not** move
+the binding.
+
+The default message body is the ordinary message shape and deliberately has no `mode`: defaults
+always launch in automatic mode. Responses expose the resolved session ID whether the request
+created the session or continued it, so clients may switch to canonical ID-addressed routes whenever
+they need another session operation.
+
+Message and answer responses return `{ "ok": true, "delivery": "accepted" | "queued" }`.
+The request waits for one correlated runner acknowledgement: `accepted` means the agent runner has taken
+the input, while `queued` means the input is already durable and the normal session drain will retry
+it. A queued response is therefore a delivery state, not a rejected message.
+
+## Treat audience and archive as response-driven state
+
+Choosing **Specific people** changes which humans participate in a session and who receives its
+noise. It is not an isolation boundary for agents, memory, installed apps, workspace VM processes,
+or workspace owners. Those resources remain in the workspace trust domain; use the response's
+audience and permission fields instead of inferring authority from a role, submitting actor, or
+audience kind.
+
+Discover audience IDs through the existing paginated workspace member directory. That collection
+accepts either `sessions` or `files:read`, so a sessions-only app or workspace process can select
+people without requesting unrelated file access. Use each returned member's `id` in creation's
+`memberUserIds` or an audience update's `add` and `remove` arrays; continue through `nextCursor`
+exactly like every other collection.
+
+Archive is two independent desired states. A person may archive a session only for themselves, while
+an authorized editor or owner may archive it for everyone. The response preserves both timestamps;
+the workspace-wide cause dominates effective visibility without erasing the personal cause beneath
+it. Restoring the dominant cause can therefore reveal the preserved cause rather than making the
+session active. Clients should render actions from `permissions.personalArchive`,
+`permissions.globalArchive`, and `permissions.delete`, send the desired cause, then commit the
+returned summary. They must not manufacture timestamps or recompute the effective reason locally.
+
+Archiving never moves the default alias and never cascades to child sessions. Permanent deletion
+includes the selected session and every descendant. It may clear a default alias only when that alias
+still points at a deleted session; the server makes that comparison and the client never chooses a
+replacement.
+
+An empty `204` means the selected root is already sealed from public reads and its recursive deletion
+work is durable; descendant sealing, runner disposal, and physical cleanup continue asynchronously.
+Successful, missing, hidden, and retried deletion all return that same empty response, so retrying
+after a lost response is safe. An unavailable runner delays hidden physical cleanup instead of
+restoring visibility or turning the accepted request into `502`. Connected-provider cleanup is best
+effort and never retains Duet session data once runner disposal succeeds. A caller that can still see
+the session but lacks lifecycle authority receives `403` and should refresh detail to learn the
+current response-driven permissions.
+
+## Continue with steer or follow-up
+
+Messages also default to `steer`, which lets the running agent incorporate the new user message
+immediately.
+
+{/* schema: AgentMessageRequestSchema */}
+
+```json
+{
+  "prompt": "Use the latest deployment logs.",
+  "tier": "frontier"
+}
+```
+
+Choose `follow_up` when the message should wait for the agent to finish its current task. The
+message is still accepted and persisted immediately; its delivery behavior is part of the user
+message rather than gateway policy.
+
+{/* schema: AgentMessageRequestSchema */}
+
+```json
+{
+  "prompt": "After the current task, compare staging and production.",
+  "behavior": "follow_up"
+}
+```
+
+## Move the next turn to another directory
+
+A session's working directory is a relative path beneath its workspace drive. Moving it updates the
+app pane immediately and takes effect for the agent on its next turn. The gateway validates the real
+directory before Duet commits the canonical path, so aliases such as `projects/drafts/../release`
+are stored as `projects/release`.
+
+```bash
+curl -sS -X POST \
+  -H "Authorization: Bearer $DUET_API_KEY" \
+  -H "Content-Type: application/json" \
+  "$DUET_API_URL/v1/ws/$DUET_WORKSPACE_SLUG/agent/sessions/$DUET_SESSION_ID/cwd" \
+  --data '{"cwd":"projects/drafts/../release"}'
+
+curl -sS \
+  -H "Authorization: Bearer $DUET_API_KEY" \
+  "$DUET_API_URL/v1/ws/$DUET_WORKSPACE_SLUG/agent/sessions/$DUET_SESSION_ID"
+```
+
+An invalid filesystem target returns `422` with `error: "invalid_cwd"` and a machine-readable
+`reason`; correct the path and retry in the same turn.
+
+```bash
+curl -sS -X POST \
+  -H "Authorization: Bearer $DUET_API_KEY" \
+  -H "Content-Type: application/json" \
+  "$DUET_API_URL/v1/ws/$DUET_WORKSPACE_SLUG/agent/sessions/$DUET_SESSION_ID/cwd" \
+  --data '{"cwd":"this-directory-does-not-exist"}'
+```
+
+A `409` with `error: "cwd_conflict"` means another move won the compare-and-swap; read the session
+again before retrying. If the gateway accepted a move but the metadata write fails, the next
+dispatch re-projects the durable session row and restores the gateway to that authoritative path.
+
+## Project events deterministically
+
+Persist canonical events, tolerate ephemeral progress, and treat document patches as updates to
+their owned state rather than chat messages. Follow [SSE and resume](/events) for reconnection.
+A machine-backed session's detail response carries a compact `machine` projection, already
+classified into stable ordered-path items. Clients should not infer the current step by matching state labels or
+treat the following definition item as a predicted transition.
+
+<EndpointReference category="sessions" />

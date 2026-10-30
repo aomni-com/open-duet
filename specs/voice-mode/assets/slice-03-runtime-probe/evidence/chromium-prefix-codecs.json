@@ -1,0 +1,11 @@
+{
+  "acknowledged_playout_ms": 1201,
+  "browser": "Google Chrome",
+  "browser_version": "150.0.7871.187",
+  "can_play_type": "probably",
+  "fixture_duration_ms": 1207,
+  "media_recorder_capture_completed": false,
+  "media_recorder_supported": false,
+  "mime": "audio/ogg;codecs=opus",
+  "playout_wall_ms": 1417
+}

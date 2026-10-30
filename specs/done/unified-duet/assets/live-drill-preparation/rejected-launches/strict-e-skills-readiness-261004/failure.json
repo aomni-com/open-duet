@@ -1,0 +1,42 @@
+{
+  "status": "failed",
+  "message": "The socket connection was closed unexpectedly. For more information, pass `verbose: true` in the second argument to fetch()",
+  "gatewayMainPid": 718,
+  "health": {
+    "instanceId": "f7a23b95-53c9-428d-b1f8-a908f618836c",
+    "bootId": "1e69d572-5026-473f-a72c-cf208b76d9af",
+    "imageVersion": "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+    "runtimeVersion": "0.0.0+373f0d4dcb530705e3ad400e4f7be5fb55ddc0edb75cedfae3753522a8a36788",
+    "uptimeSeconds": 316,
+    "diagnostics": {
+      "runtimeUpdateInFlight": false,
+      "attribution": {
+        "rawEventsObserved": 0,
+        "droppedReads": 0,
+        "overflow": 0,
+        "mirrorReadsSkipped": 0,
+        "cgroupMisses": 11,
+        "helperRestarts": 0
+      },
+      "scanNudge": {
+        "scans": 0,
+        "failures": 0,
+        "loopGuardSkips": 0,
+        "rawPathsObserved": 0,
+        "latestPaths": []
+      },
+      "anchorReconcile": {
+        "path": "fast",
+        "anchorCount": 0,
+        "anchorProbes": 0,
+        "walkEntries": 0,
+        "markerResolutionOperations": 0,
+        "excludedSubtrees": 0,
+        "durationMs": 0.03585600003134459
+      },
+      "restoreInFlight": false,
+      "backup": null,
+      "bootHealthCertified": true
+    }
+  }
+}

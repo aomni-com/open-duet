@@ -1,0 +1,11 @@
+{
+  "triggers": [],
+  "tags": [
+    "engineering",
+    "product"
+  ],
+  "onboarding": {
+    "kind": "chat"
+  },
+  "suggestedFirstMessage": "Hi — I’m your Code Reviewer. I read the whole codebase around a change, and I only comment when I can show you a concrete failure. Shall I start with what’s open, or do you have a pull request in mind?"
+}

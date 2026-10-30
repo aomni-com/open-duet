@@ -1,0 +1,95 @@
+{
+  "environment": "staging",
+  "observedAt": "2026-10-04T12:53:04.824Z",
+  "helperSourceCommit": "c60585536ccb472d8fb5d070eeec3918324bc057",
+  "helperSha256": "7a59ac7e413979640b263243c56313f675b4b8b5b953eebebaafc267b0570f3f",
+  "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+  "outcomes": [
+    {
+      "workspaceId": "ns769tvfcsmvzhfab4bshkpcjx8btf8d",
+      "slug": "official-agents-hub",
+      "vmName": "workspace-redacted",
+      "sshDest": "service.example.invalid",
+      "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+      "oldRuntimeVersion": "0.0.0+4955b7a09dde",
+      "workspaceStatus": "active",
+      "servicingStatus": "active",
+      "providerStatus": "running",
+      "appAnchorPaths": [
+        "agents/account-researcher/apps/account-board",
+        "agents/code-reviewer/apps/connect-repos",
+        "agents/seo-specialist/apps/content-board",
+        "agents/seo-specialist/apps/connect-search-console",
+        "agents/social-media-manager/apps/connect-accounts",
+        "agents/support-agent/apps/connect-helpdesk",
+        "agents/people-researcher/apps/dossier-board",
+        "agents/brand-designer/apps/setup-brand",
+        "agents/writer/apps/setup-voice"
+      ],
+      "blockers": [],
+      "warnings": [],
+      "status": "deferred",
+      "phase": "inventory",
+      "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "reason": "canary-holdback"
+    },
+    {
+      "workspaceId": "ns7bkd20x918mfvwjftzgp1zm98bxrek",
+      "slug": "Example User-zhang-s-workspace",
+      "vmName": "workspace-redacted",
+      "sshDest": "service.example.invalid",
+      "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+      "oldRuntimeVersion": "0.0.0+4955b7a09dde",
+      "workspaceStatus": "active",
+      "servicingStatus": "active",
+      "providerStatus": "running",
+      "appAnchorPaths": [],
+      "blockers": [],
+      "warnings": [],
+      "status": "failed",
+      "phase": "restored",
+      "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "restored": true,
+      "reason": "Target runtime did not certify before the adoption deadline",
+      "previousGatewayVersion": "0.0.0+4955b7a09dde",
+      "bootIdBefore": "855c30d4-5d04-4a2f-b028-2f77ce617e4b",
+      "bootIdAfter": "855c30d4-5d04-4a2f-b028-2f77ce617e4b"
+    }
+  ],
+  "preservation": {
+    "bootId": true,
+    "credentialSha256": true,
+    "runtimeCredentials": true,
+    "savedCredentials": true,
+    "stateInventory": true,
+    "stateSha256": true,
+    "workspaceBun": true
+  },
+  "servicesBefore": {
+    "duet-desktop-browser.service": "0",
+    "duet-desktop.service": "0",
+    "duet-gateway.service": "1284726",
+    "duet-syncthing.service": "401"
+  },
+  "servicesAfter": {
+    "duet-desktop-browser.service": "0",
+    "duet-desktop.service": "0",
+    "duet-gateway.service": "1387711",
+    "duet-syncthing.service": "401"
+  },
+  "stateEntries": 343,
+  "diagnosis": {
+    "actualTargetBootState": {
+      "attemptedVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "consecutiveFailures": 0
+    },
+    "bootHealthCertified": false,
+    "newTargetSyncAcceptanceObservedAt": "2026-10-04T12:49:56.657Z",
+    "originalGatewaySyncAcceptanceAfterRestoreAt": "2026-10-04T12:53:02.570Z",
+    "oldApiDefaultIdlePollMs": 300000,
+    "requiredSuccessfulSyncs": 3,
+    "requiredMinUptimeMs": 60000,
+    "certificationDeadlineMs": 180000,
+    "fixPending": "Use existing authenticated gateway roster refresh to obtain real complete sync acceptance; preserve thresholds and frozen payload."
+  }
+}

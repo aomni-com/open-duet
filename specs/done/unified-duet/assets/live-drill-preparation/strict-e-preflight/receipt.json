@@ -1,0 +1,13 @@
+{
+  "status": "prepared-and-launched",
+  "reviewedSourceRevision": "f3276e077",
+  "mergedDriverTests": {
+    "passed": 4,
+    "assertions": 13
+  },
+  "independentSourceReview": "no actionable findings",
+  "archiveVerifiedByRoot": true,
+  "nativeApplicationBytesRebuilt": false,
+  "providerAcceptance": "pending",
+  "productionUnchanged": true
+}

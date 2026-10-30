@@ -1,0 +1,127 @@
+{
+  "capturedAt": "2026-10-04T02:07:40.179Z",
+  "sourceRevision": "0f997d60df1a3abd86eaf75ab11926b06e46f15c",
+  "artifacts": [
+    {
+      "name": "duet-linux-x64",
+      "byteLength": 116000896,
+      "sha256": "08ccfbbc3c0a5616ca5aa6b43dd2f0d9e5baae4bce681718dadfd2fcf4140af3",
+      "download": {
+        "status": 200,
+        "byteLength": 116000896,
+        "sha256": "08ccfbbc3c0a5616ca5aa6b43dd2f0d9e5baae4bce681718dadfd2fcf4140af3",
+        "timeToFirstByteSeconds": 1.647191,
+        "totalSeconds": 8.819505,
+        "vercelId": "sfo1::iad1::rlrt6-1791079676658-69656182e39b"
+      }
+    },
+    {
+      "name": "initdb.wasm",
+      "byteLength": 169969,
+      "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+      "download": {
+        "status": 200,
+        "byteLength": 169969,
+        "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+        "timeToFirstByteSeconds": 0.2882,
+        "totalSeconds": 0.41728,
+        "vercelId": "sfo1::iad1::2v9nh-1791079686262-446d4ec2c846"
+      }
+    },
+    {
+      "name": "pglite.data",
+      "byteLength": 5289109,
+      "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+      "download": {
+        "status": 200,
+        "byteLength": 5289109,
+        "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+        "timeToFirstByteSeconds": 0.343091,
+        "totalSeconds": 1.188274,
+        "vercelId": "sfo1::iad1::6zjqt-1791079687294-cf79d600b557"
+      }
+    },
+    {
+      "name": "pglite.wasm",
+      "byteLength": 8739902,
+      "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+      "download": {
+        "status": 200,
+        "byteLength": 8739902,
+        "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+        "timeToFirstByteSeconds": 0.314415,
+        "totalSeconds": 0.850314,
+        "vercelId": "sfo1::iad1::4p7l6-1791079689226-3e5ec868ab1b"
+      }
+    },
+    {
+      "name": "photon_rs_bg.wasm",
+      "byteLength": 1881634,
+      "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+      "download": {
+        "status": 200,
+        "byteLength": 1881634,
+        "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+        "timeToFirstByteSeconds": 0.292929,
+        "totalSeconds": 0.473435,
+        "vercelId": "sfo1::iad1::6zjqt-1791079690770-d205a6ebaff9"
+      }
+    },
+    {
+      "name": "vector.tar.gz",
+      "byteLength": 46108,
+      "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+      "download": {
+        "status": 200,
+        "byteLength": 46108,
+        "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+        "timeToFirstByteSeconds": 0.185878,
+        "totalSeconds": 0.196131,
+        "vercelId": "sfo1::iad1::cmvwz-1791079691861-ec745ab1b90e"
+      }
+    }
+  ],
+  "controls": {
+    "unauthorized": {
+      "status": 401,
+      "byteLength": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeToFirstByteSeconds": 0.400348,
+      "totalSeconds": 0.400593,
+      "vercelId": "sfo1::iad1::sdhw7-1791079674786-6fb88918fbb5"
+    },
+    "corrupt": {
+      "status": 503,
+      "byteLength": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeToFirstByteSeconds": 0.306343,
+      "totalSeconds": 0.306548,
+      "vercelId": "sfo1::iad1::b6jm5-1791079675762-97238421bbe4"
+    }
+  },
+  "apiBaseline": {
+    "byteLength": 8781471,
+    "sha256": "dccecc002d3d19e4a80bcb65c1990f3c49605dabe0153aa95db824cc2b4acc1e"
+  },
+  "apiStreamReaderSha256": "53c911d10d670bc167aba056212abf157d7d1fc2eb0193058cdaac468ee56de7",
+  "functionBytes": 145740400,
+  "functionConfiguration": {
+    "handler": "index.mjs",
+    "runtime": "nodejs24.x",
+    "supportsResponseStreaming": true,
+    "launcherType": "Nodejs",
+    "shouldAddHelpers": false,
+    "framework": {
+      "slug": "hono"
+    },
+    "environment": {
+      "DUET_GATEWAY_RELEASE_DIR": "gateway-release"
+    },
+    "maxDuration": 800
+  },
+  "deployment": "https://service.example.invalid",
+  "deploymentId": "dpl_DRmtyoPHEkTNKE6eVXKC66LRTffB",
+  "transport": "authenticated-api-stream",
+  "deploymentRemoved": true,
+  "deploymentRemovalVerifiedByGetNotFound": true
+}

@@ -1,0 +1,7 @@
+{
+  "hostPid": 46811,
+  "action": "Terminate suspended local batch host before launching further unchanged helpers",
+  "remoteSignalsSent": false,
+  "lastBatchPlatformJobs": "Not launched; exact VM metadata has no job or operation",
+  "observedAt": "2026-10-04T22:31:25.109930+00:00"
+}

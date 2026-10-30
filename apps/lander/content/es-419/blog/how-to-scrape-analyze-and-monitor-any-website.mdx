@@ -1,0 +1,654 @@
+---
+title: 'Haz scraping, analiza y monitorea cualquier sitio web con AI'
+description: 'Convierte cualquier sitio web en un feed de datos en vivo. Haz scraping, analiza y monitorea competidores o prospectos con AI. Totalmente automatizado.'
+date: '2026-03-01'
+updatedAt: '2026-05-08'
+author:
+  name: 'David'
+  role: 'Founder'
+  link: '/'
+category: 'ai'
+tags: ['web-scraping', 'monitoring', 'data-analysis', 'automation']
+type: 'article'
+readTime: '16 min read'
+image: '/blog/how-to-scrape-analyze-and-monitor-any-website/cover.png'
+relatedPosts:
+  - 'how-to-use-ai-as-personal-research-assistant'
+  - 'how-to-automate-competitive-intelligence-startup'
+  - 'how-to-use-ai-for-market-research-before-launch'
+cta:
+  title: 'Cualquier sitio, en un feed en vivo.'
+  subtitle: 'Duet hace scraping, parsea y vuelve a ejecutar contra cualquier sitio web según un calendario. Te avisa en el momento en que cambia un precio, un listado o una página.'
+  buttonText: 'Configura el scrape'
+  href: '/sign-in?from=blog-web-scrape'
+locale: es-419
+translationKey: 'how-to-scrape-analyze-and-monitor-any-website'
+---
+
+# Cómo hacer scraping, analizar y monitorear cualquier sitio web automáticamente
+
+Hay una versión de la inteligencia competitiva que ocurre una vez por trimestre en un Google Doc.
+
+Y hay una versión que ocurre de forma continua, automática, y hace aflorar exactamente la señal que necesitas antes de que importe.
+
+La diferencia es si tienes un agente de AI vigilando la web por ti.
+
+El web scraping solía requerir un desarrollador, un presupuesto y tolerancia a scrapers frágiles que se rompían cada vez que un sitio actualizaba su CSS.
+
+La AI cambia todo eso. Ahora puedes configurar agentes que hacen scraping, analizan y monitorean cualquier sitio web (precios de competidores, listados de productos, páginas de contratación, cambios de contenido) y te alertan cuando algo significativo cambia.
+
+Esta guía cubre cómo hacerlo, qué es legal y qué herramientas realmente aguantan en producción.
+
+<Callout emoji="💡">
+Resumen rápido
+
+Esta guía cubre cómo usar AI para hacer scraping, analizar y monitorear cualquier sitio web. Configurar un agente de AI que vigile los sitios de competidores, las páginas de precios o las fuentes de noticias y te alerte cuando algo cambie.
+
+</Callout>
+
+<Callout emoji="❓">
+Preguntas que responde esta página
+
+- Cómo hacer scraping de sitios web con AI
+- Mejores herramientas de AI para el monitoreo de sitios web
+- Cómo monitorear sitios web de competidores con AI
+- ¿Puede la AI rastrear automáticamente los cambios en un sitio web?
+- ¿Cuál es la forma más fácil de monitorear un sitio web en busca de cambios?
+
+</Callout>
+
+Las herramientas modernas de web scraping con AI pueden extraer datos de precios, rastrear cambios de competidores y agregar reseñas de miles de páginas. Luego analizan patrones y te alertan sobre cambios significativos. Puedes automatizar el monitoreo de precios, el scraping de bolsas de empleo o la investigación de contenido con ejecuciones programadas que manejan el renderizado de JavaScript, la autenticación y la detección de cambios sin escribir parsers personalizados.
+
+## ¿Qué es el web scraping potenciado por AI y por qué importa?
+
+El web scraping potenciado por AI combina técnicas de extracción tradicionales con modelos de lenguaje que entienden la estructura de la página, limpian datos desordenados e identifican cambios significativos sin selectores CSS frágiles.
+
+Los scrapers tradicionales se rompen cuando un sitio rediseña su HTML. Los scrapers con AI se adaptan al entender el contenido de forma semántica. Preguntar "encuentra todos los precios de los productos" en lugar de apuntar a `.price-container > span.amount`. Herramientas como Firecrawl renderizan JavaScript, eluden las protecciones anti-bot y devuelven markdown limpio o JSON estructurado.
+
+**Casos de uso que generan valor de negocio:**
+
+El equipo de ecommerce promedio que usa el monitoreo automatizado de precios reduce el tiempo de respuesta a los cambios de precio de los competidores de 72 horas a menos de 4 horas.
+
+## ¿Cómo funciona realmente el web scraping moderno?
+
+El scraping moderno maneja tres capas: obtener la página, renderizar el contenido dinámico y extraer datos estructurados.
+
+**El enfoque tradicional:**
+
+1. Enviar la petición HTTP
+1. Parsear el HTML estático
+1. Extraer datos con selectores CSS o XPath
+1. Almacenar los resultados crudos
+   **El enfoque potenciado por AI:**
+
+1. Un navegador headless renderiza el JavaScript
+1. Un modelo de AI identifica la estructura del contenido
+1. Extracción en lenguaje natural ("get all pricing tiers")
+1. Limpieza y normalización automáticas
+1. Detección de cambios y diff semántico
+   Herramientas como Puppeteer y Playwright controlan Chrome o Firefox headless para renderizar las páginas exactamente como las ven los usuarios. BeautifulSoup y lxml parsean el HTML de manera eficiente. Firecrawl envuelve estas capacidades con extracción potenciada por AI que devuelve markdown limpio, capturas de pantalla y datos estructurados.
+
+**Lo que agrega la AI:**
+
+- Comprensión semántica: "find contact information" funciona en distintos diseños de sitio
+- Selectores adaptativos: se ajustan automáticamente cuando cambia la estructura del HTML
+- Normalización de datos: convierte "$1,299.00" y "1299 USD" a un formato consistente
+- Filtrado de ruido: elimina la navegación, los anuncios y el contenido repetitivo automáticamente
+  La ventaja clave es la resiliencia. Un selector CSS como `.product-card > .price` se rompe cuando el sitio actualiza sus clases. Una instrucción de AI como "extract product name and price" sigue funcionando.
+
+## Cómo hacer scraping de la página de precios de un competidor paso a paso
+
+Así puedes extraer datos de precios de un competidor SaaS y rastrearlos a lo largo del tiempo.
+
+**Paso 1: Elige tu herramienta de scraping**
+
+Para scrapes puntuales, usa las DevTools del navegador o scripts simples de Python. Para el monitoreo de producción, usa un servicio:
+
+- **Firecrawl:** API-first, maneja JavaScript, devuelve markdown/JSON
+- **Browserless:** navegadores headless alojados con anti-detección
+- **ScrapingBee:** proxies rotativos, resolución de CAPTCHA
+- **Apify:** scrapers prefabricados para sitios comunes
+  **Paso 2: Prueba el scrape manualmente**
+
+```plaintext
+curl -X POST https://api.firecrawl.dev/v1/scrape \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://competitor.com/pricing",
+    "formats": ["markdown", "html"],
+    "onlyMainContent": true
+  }'
+```
+
+Inspecciona la respuesta. Deberías ver datos limpios de los niveles de precio sin navegación ni pies de página.
+
+**Paso 3: Extrae datos estructurados**
+
+Usa la AI para parsear el markdown a JSON:
+
+```plaintext
+curl -X POST https://api.firecrawl.dev/v1/scrape \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://competitor.com/pricing",
+    "formats": ["extract"],
+    "extract": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "plans": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {"type": "string"},
+                "price": {"type": "number"},
+                "billing": {"type": "string"},
+                "features": {"type": "array", "items": {"type": "string"}}
+              }
+            }
+          }
+        }
+      }
+    }
+  }'
+```
+
+Respuesta:
+
+```plaintext
+{
+  "plans": [
+    {
+      "name": "Starter",
+      "price": 29,
+      "billing": "monthly",
+      "features": ["5 users", "10GB storage", "Email support"]
+    },
+    {
+      "name": "Pro",
+      "price": 99,
+      "billing": "monthly",
+      "features": ["25 users", "100GB storage", "Priority support"]
+    }
+  ]
+}
+```
+
+**Paso 4: Configura la detección de cambios**
+
+Almacena los resultados en una base de datos o un archivo JSON. En cada ejecución, compara los nuevos datos con la captura anterior:
+
+```plaintext
+import json
+import difflib
+
+def detect_changes(old_data, new_data):
+    old_json = json.dumps(old_data, indent=2)
+    new_json = json.dumps(new_data, indent=2)
+
+    diff = difflib.unified_diff(
+        old_json.splitlines(),
+        new_json.splitlines(),
+        lineterm=''
+    )
+
+    changes = '\n'.join(diff)
+    return changes if changes else None
+```
+
+**Paso 5: Valida y limpia los datos**
+
+Verifica los errores comunes de scraping:
+
+- Campos requeridos faltantes
+- Precios que se multiplicaron por 10 (probable error de parseo)
+- Entradas duplicadas
+- URLs o información de contacto mal formadas
+  Agrega reglas de validación:
+
+```plaintext
+def validate_plan(plan):
+    required = ['name', 'price', 'billing']
+    if not all(k in plan for k in required):
+        raise ValueError(f"Missing required fields: {plan}")
+
+    if plan['price'] < 0 or plan['price'] > 10000:
+        raise ValueError(f"Invalid price: {plan['price']}")
+
+    return True
+```
+
+La mayoría de las fallas de scraping vienen de errores de parseo, no de fallas de extracción. Valida siempre antes de almacenar.
+
+## Cómo automatizar el web scraping según un calendario
+
+Los scrapes puntuales son útiles para la investigación. El monitoreo automatizado ofrece inteligencia continua.
+
+**Opción 1: Cron jobs en un servidor persistente**
+
+Programa un script para que corra cada 6 horas:
+
+```plaintext
+# crontab -e
+0 */6 * * * /usr/bin/python3 /home/scripts/scrape_competitor.py >> /var/log/scraper.log 2>&1
+```
+
+**Opción 2: GitHub Actions (capa gratuita: 2.000 minutos/mes)**
+
+```plaintext
+name: Scrape Competitor Pricing
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Every 6 hours
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run scraper
+        run: python scrape.py
+      - name: Commit results
+        run: |
+          git config user.name "Bot"
+          git config user.email "bot@example.com"
+          git add data/pricing.json
+          git commit -m "Update pricing data"
+          git push
+```
+
+**Opción 3: Funciones serverless (AWS Lambda, Vercel, Cloudflare Workers)**
+
+Despliega una función disparada por CloudWatch Events (AWS) o Vercel Cron:
+
+```plaintext
+// vercel.json
+{
+  "crons": [{
+    "path": "/api/scrape",
+    "schedule": "0 */6 * * *"
+  }]
+}
+
+// api/scrape.js
+export default async function handler(req, res) {
+  const response = await fetch('https://api.firecrawl.dev/v1/scrape', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.FIRECRAWL_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      url: 'https://competitor.com/pricing',
+      formats: ['extract'],
+      extract: { /* schema */ }
+    })
+  });
+
+  const data = await response.json();
+  // Store in database, check for changes, send alerts
+
+  res.status(200).json({ success: true });
+}
+```
+
+**Opción 4: Herramientas especializadas de monitoreo**
+
+- **Visualping:** detección visual de cambios, alertas por email
+- **ChangeTower:** rastrea elementos específicos de la página
+- **Distill:** extensión de navegador para monitoreo personal
+  Para sistemas de producción que monitorean más de 50 sitios, usa un servicio dedicado. Para 5 a 10 competidores, un cron job es suficiente.
+
+**Configurar alertas inteligentes:**
+
+No alertes por cada cambio. Filtra los cambios significativos:
+
+```plaintext
+def is_significant_change(old_price, new_price):
+    # Alert if price changes by more than 5%
+    pct_change = abs(new_price - old_price) / old_price
+    return pct_change > 0.05
+
+def check_pricing_changes(old_data, new_data):
+    alerts = []
+    for old_plan, new_plan in zip(old_data['plans'], new_data['plans']):
+        if is_significant_change(old_plan['price'], new_plan['price']):
+            alerts.append(f"{new_plan['name']}: ${old_plan['price']} → ${new_plan['price']}")
+
+    if alerts:
+        send_slack_notification('\n'.join(alerts))
+```
+
+## Cómo analizar los datos extraídos para la inteligencia competitiva
+
+Los datos crudos son ruido. El análisis estructurado produce insight.
+
+**Patrón 1: Tendencias de posicionamiento de precios**
+
+Rastrea cómo se compara tu precio con el de los competidores a lo largo del tiempo:
+
+```plaintext
+SELECT
+  competitor,
+  plan_name,
+  AVG(price) as avg_price,
+  MIN(price) as lowest_price,
+  MAX(price) as highest_price
+FROM pricing_snapshots
+WHERE scraped_at > NOW() - INTERVAL '90 days'
+GROUP BY competitor, plan_name
+ORDER BY avg_price DESC;
+```
+
+**Patrón 2: Análisis de paridad de funciones**
+
+Identifica las funciones que ofrecen los competidores y tú no:
+
+```plaintext
+our_features = set(["SSO", "API access", "Custom integrations"])
+competitor_features = set(["SSO", "API access", "White labeling", "Advanced analytics"])
+
+gaps = competitor_features - our_features
+# Result: {"White labeling", "Advanced analytics"}
+```
+
+**Patrón 3: Frecuencia de cambios de precio**
+
+Los competidores que cambian los precios con frecuencia pueden estar testeando o teniendo dificultades con el posicionamiento:
+
+```plaintext
+import pandas as pd
+
+df = pd.DataFrame(pricing_history)
+df['price_changed'] = df['price'] != df['price'].shift(1)
+
+changes_by_competitor = df.groupby('competitor')['price_changed'].sum()
+print(changes_by_competitor.sort_values(ascending=False))
+```
+
+**Patrón 4: Ajustes estacionales**
+
+Algunas industrias muestran una clara estacionalidad de precios:
+
+```plaintext
+df['month'] = pd.to_datetime(df['scraped_at']).dt.month
+seasonal = df.groupby('month')['price'].mean()
+
+# E.g., B2B SaaS often increases prices in Q4 for budget season
+```
+
+**Usar AI para resumir los cambios:**
+
+En lugar de revisar diffs crudos, pide a un LLM que los resuma:
+
+```plaintext
+prompt = f"""
+Compare these two pricing pages:
+
+OLD:
+{old_pricing_data}
+
+NEW:
+{new_pricing_data}
+
+Summarize what changed and why it might matter for our pricing strategy.
+"""
+
+response = openai.ChatCompletion.create(
+    model="gpt-4",
+    messages=[{"role": "user", "content": prompt}]
+)
+
+summary = response.choices[0].message.content
+```
+
+La AI identifica los cambios estratégicos (nuevo nivel enterprise, funciones agrupadas) frente a las actualizaciones cosméticas (color de botón, diseño).
+
+## ¿Cuáles son las reglas legales y éticas para el web scraping?
+
+El web scraping ocupa una zona gris entre lo legal y lo ilegal según qué scrapees, cómo lo scrapees y qué hagas con ello.
+
+**Precedente legal: hiQ Labs v. LinkedIn (2019-2022)**
+
+El Noveno Circuito dictaminó que hacer scraping de datos de acceso público no viola la Computer Fraud and Abuse Act (CFAA). LinkedIn intentó impedir que hiQ hiciera scraping de perfiles públicos. El tribunal determinó que hacer scraping de datos públicos no es "acceso no autorizado" bajo la CFAA.
+
+**Conclusión clave:** hacer scraping de datos públicos es generalmente legal en EE. UU. La Corte Suprema declinó escuchar la apelación de LinkedIn en 2022, dejando en pie el fallo del Noveno Circuito.
+
+**Las reglas que debes seguir:**
+
+1. **Respeta robots.txt**: revisa `/robots.txt` antes de hacer scraping. Aunque no es legalmente vinculante, violarlo puede desencadenar violaciones de los ToS o bloqueos de IP.
+1. **Rate limiting**: no envíes 1.000 peticiones por segundo. Espacia las peticiones de 1 a 5 segundos. La mayoría de los baneos de scraping vienen del comportamiento agresivo de tasa, no del scraping en sí.
+1. **Solo datos públicos**: no hagas scraping de datos detrás de autenticación a menos que tengas permiso explícito. Hacer scraping de cuentas personales viola los ToS.
+1. **Atribución y uso justo**: si republicas datos extraídos, atribuye la fuente. Hacer scraping para análisis es más seguro que la republicación al por mayor.
+1. **No eludas las barreras técnicas**: usar credenciales robadas o romper CAPTCHAs puede violar la CFAA.
+1. **Términos de servicio**: violar los ToS es un asunto contractual, no penal, pero puede derivar en demandas civiles o baneos permanentes.
+   **Lo que puedes hacer scraping de forma segura:**
+
+- Páginas de precios públicas
+- Catálogos de productos
+- Artículos de noticias y entradas de blog
+- Listados de empleo en bolsas públicas
+- Reseñas y calificaciones en plataformas públicas
+- Presentaciones gubernamentales y regulatorias
+  **Lo que deberías evitar:**
+
+- Datos personales de usuarios (emails, números de teléfono) sin consentimiento
+- Contenido detrás de paywalls o logins
+- Sitios que prohíben explícitamente el scraping en sus ToS
+- Datos protegidos por derechos de autor (artículos completos, imágenes)
+  **Consideraciones de GDPR y CCPA:**
+
+Si haces scraping de datos personales de residentes de la UE o California, puedes estar sujeto a las leyes de protección de datos. No hagas scraping de emails, números de teléfono o direcciones personales para marketing sin consentimiento.
+
+**Mejores prácticas:**
+
+- Identifica tu user agent: `User-Agent: YourCompany Bot (contact@yourcompany.com)`
+- Honra `robots.txt` y las etiquetas `meta`
+- Cachea las respuestas para evitar volver a hacer scraping
+- Ofrece un mecanismo de opt-out si haces scraping de directorios de empresas
+  Ante la duda, consulta a un abogado. El scraping es de bajo riesgo para la inteligencia competitiva pero de mayor riesgo para la reventa de datos o la generación de leads.
+
+## Cómo construir un sistema de monitoreo completo con AI
+
+Un sistema de monitoreo de producción combina scraping, almacenamiento, análisis y alertas.
+
+**Resumen de la arquitectura:**
+
+1. **Scheduler**: un cron job o función serverless dispara los scrapes
+1. **Scraper**: Firecrawl o Puppeteer obtiene y extrae los datos
+1. **Almacenamiento**: PostgreSQL, MongoDB o S3 para los datos históricos
+1. **Motor de diff**: compara los nuevos datos con la captura anterior
+1. **Analizador**: un LLM resume los cambios e identifica su significancia
+1. **Alertador**: Slack, email o un webhook envía las notificaciones
+   **Ejemplo con Duet:**
+
+Duet ofrece ejecución persistente, cron jobs programados y análisis con AI en un solo lugar. Puedes configurar Firecrawl para hacer scraping de los sitios de competidores, almacenar los resultados en un archivo JSON en el servidor persistente y usar cron para verificar cambios cada 6 horas. Cuando los precios cambian, la AI de Duet analiza el diff y envía un resumen a tu canal de Slack.
+
+Así se ve en la práctica:
+
+```plaintext
+// scrape_monitor.js - runs every 6 hours via cron
+const previousData = JSON.parse(fs.readFileSync('data/pricing.json'))
+
+const response = await fetch('https://api.firecrawl.dev/v1/scrape', {
+  method: 'POST',
+  headers: { Authorization: `Bearer ${FIRECRAWL_KEY}` },
+  body: JSON.stringify({
+    url: 'https://competitor.com/pricing',
+    formats: ['extract'],
+    extract: {
+      /* schema */
+    },
+  }),
+})
+
+const currentData = await response.json()
+
+if (JSON.stringify(previousData) !== JSON.stringify(currentData)) {
+  // Send to AI for analysis
+  const summary = await analyzePricingChange(previousData, currentData)
+  await sendSlackAlert(summary)
+  fs.writeFileSync('data/pricing.json', JSON.stringify(currentData))
+}
+```
+
+El resumen de la AI podría verse así:
+
+> **Competitor X Pricing Update**
+
+>
+
+> - Pro plan increased from $99/mo to $119/mo (+20%)
+
+> - New "Enterprise" tier added at $299/mo
+
+> - Features moved: "Advanced analytics" now exclusive to Enterprise
+
+>
+
+> **Strategic implications:** They're pushing high-value customers to a new premium tier. Consider whether we should introduce a similar high-touch offering or emphasize our competitive pricing advantage.
+
+Como Duet ofrece un servidor persistente con programación por cron y contexto de AI a través de las ejecuciones, no necesitas unir servicios separados para el scraping, el almacenamiento y el análisis. Obtén más información en [duet.so](/).
+
+## ¿Con qué frecuencia deberías hacer scraping y qué deberías rastrear?
+
+La frecuencia de scraping depende de qué tan rápido se mueve tu mercado.
+
+**Qué rastrear más allá del precio:**
+
+- **Lanzamientos de producto**: nuevas funciones, integraciones o SKUs
+- **Estrategia de contenido**: frecuencia de entradas de blog, temas, targeting de keywords
+- **Cambios SEO**: etiquetas de título, meta descriptions, datos estructurados
+- **Prueba social**: cantidad de reseñas, calificaciones, testimonios
+- **Crecimiento del equipo**: ofertas de empleo, cambios de liderazgo (vía LinkedIn)
+- **Stack técnico**: tecnologías usadas (vía Wappalyzer o BuiltWith)
+  **Almacenamiento y retención:**
+
+No almacenes volcados completos de HTML indefinidamente. Extrae datos estructurados y conserva:
+
+- Capturas diarias de los últimos 30 días
+- Capturas semanales del último año
+- Capturas mensuales para el análisis histórico
+  Un sistema típico de monitoreo de competidores que rastrea 10 sitios almacena 5 a 10 MB por día.
+
+## Solución de problemas comunes de scraping
+
+**Problema 1: el JavaScript no se renderiza**
+
+Muchos sitios cargan el contenido de forma dinámica. Usa un navegador headless o un servicio que renderice JavaScript:
+
+```plaintext
+from playwright.sync_api import sync_playwright
+
+with sync_playwright() as p:
+    browser = p.chromium.launch()
+    page = browser.new_page()
+    page.goto('https://example.com/pricing')
+    page.wait_for_selector('.pricing-tier')  # Wait for content to load
+    html = page.content()
+    browser.close()
+```
+
+**Problema 2: te bloquean o te limitan la tasa**
+
+Rota los user agents y agrega retardos:
+
+```plaintext
+import time
+import random
+
+headers = {'User-Agent': 'Mozilla/5.0 (compatible; YourBot/1.0)'}
+time.sleep(random.uniform(2, 5))  # 2-5 second delay between requests
+```
+
+Usa proxies residenciales o servicios como ScrapingBee que manejan la rotación automáticamente.
+
+**Problema 3: desafíos de CAPTCHA**
+
+Opciones:
+
+- Usa servicios de resolución de CAPTCHA (2Captcha, Anti-Captcha)
+- Reduce la frecuencia de scraping para evitar disparar CAPTCHAs
+- Usa acceso autenticado a la API si está disponible
+- Enruta a través de servicios como Browserless que ofrecen navegadores con anti-detección
+  **Problema 4: fallas de extracción de datos**
+
+Los sitios rediseñan su HTML. Haz la extracción más resiliente:
+
+```plaintext
+# Brittle
+price = soup.select_one('.price-container > span.amount').text
+
+# More resilient
+price = soup.find(string=re.compile(r'\$\d+')) or \
+        soup.select_one('[data-testid="price"]') or \
+        soup.find('span', class_=re.compile('price'))
+```
+
+O usa extracción basada en AI que no depende de selectores CSS.
+
+**Problema 5: formato de datos inconsistente**
+
+Normaliza los datos extraídos:
+
+```plaintext
+def normalize_price(price_string):
+    # "$1,299.00" → 1299.0
+    # "1299 USD" → 1299.0
+    # "€1.299,00" → 1299.0
+
+    # Remove currency symbols and letters
+    cleaned = re.sub(r'[^\d,.]', '', price_string)
+
+    # Handle European format (. for thousands, , for decimal)
+    if ',' in cleaned and '.' in cleaned:
+        if cleaned.rindex(',') > cleaned.rindex('.'):
+            # European: 1.299,00
+            cleaned = cleaned.replace('.', '').replace(',', '.')
+        else:
+            # US: 1,299.00
+            cleaned = cleaned.replace(',', '')
+    elif ',' in cleaned:
+        # Could be either format, use position to guess
+        if len(cleaned.split(',')[1]) == 2:
+            # Likely decimal: 1299,00
+            cleaned = cleaned.replace(',', '.')
+        else:
+            # Likely thousands: 1,299
+            cleaned = cleaned.replace(',', '')
+
+    return float(cleaned)
+```
+
+## Preguntas frecuentes
+
+### ¿Es legal el web scraping?
+
+Hacer scraping de datos públicos es generalmente legal en EE. UU. tras el fallo hiQ v. LinkedIn (2022). Sin embargo, debes respetar los términos de servicio, evitar hacer scraping de datos personales sin consentimiento y seguir las reglas de GDPR/CCPA si recolectas información sobre residentes de la UE o California. Haz scraping siempre de forma responsable, con rate limiting y atribución.
+
+### ¿Cuál es el mejor web scraper con AI para principiantes?
+
+Firecrawl es la opción más fácil para principiantes: maneja el renderizado de JavaScript, devuelve markdown o JSON limpio y ofrece extracción potenciada por AI sin escribir parsers. Para más control, Playwright o Puppeteer con Python te dan automatización completa del navegador. Apify ofrece scrapers prefabricados para sitios populares como Amazon, LinkedIn y Twitter.
+
+### ¿Cómo puedo monitorear los precios de los competidores automáticamente?
+
+Usa una herramienta de scraping como Firecrawl para extraer los datos de precios, prográmala para que corra cada 6 a 24 horas con cron o GitHub Actions, almacena los resultados en una base de datos o archivo JSON, compara los nuevos datos con las capturas anteriores y envía alertas cuando los precios cambien más de un 5 %. Servicios como Visualping o ChangeTower ofrecen alternativas no-code.
+
+### ¿Puedo hacer scraping de sitios web para la generación de leads?
+
+Puedes hacer scraping de información pública de empresas (nombres de empresas, sitios web, cargos) de directorios y de LinkedIn. Sin embargo, hacer scraping de emails personales o números de teléfono para outreach en frío puede violar GDPR/CCPA y los términos de servicio del sitio. Enfócate en hacer scraping de datos públicos y enriquecerlos a través de APIs legítimas como Clearbit o Apollo.
+
+### ¿Cómo evito que me bloqueen mientras hago scraping?
+
+Agrega retardos de 2 a 5 segundos entre peticiones, rota los user agents, usa proxies residenciales, respeta robots.txt y haz scraping durante las horas de menor actividad. Servicios como ScrapingBee y Bright Data ofrecen anti-detección integrada. Si te bloquean de forma consistente, reduce tu tasa o usa la API oficial del sitio si está disponible.
+
+### ¿Cuál es la diferencia entre el web scraping y usar una API?
+
+Las APIs ofrecen datos estructurados a través de endpoints oficiales con límites de tasa y términos de uso. El web scraping extrae datos de páginas HTML diseñadas para personas. Prefiere siempre las APIs cuando estén disponibles. Son más rápidas, más confiables y legalmente más claras. Haz scraping solo cuando no exista una API o cuando necesites datos que la API no expone.
+
+### ¿Qué tan preciso es el web scraping potenciado por AI?
+
+Los scrapers con AI logran una precisión del 85 al 95 % en sitios bien estructurados, frente al 95 al 99 % de los selectores CSS manuales. La compensación es la resiliencia: la extracción con AI sigue funcionando después de los rediseños del sitio mientras que los selectores CSS se rompen. Para datos de misión crítica, combina la extracción con AI con reglas de validación y verificaciones manuales puntuales.

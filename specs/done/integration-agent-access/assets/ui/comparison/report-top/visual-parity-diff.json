@@ -1,0 +1,91 @@
+{
+  "kind": "screenshot-parity-diff",
+  "generatedAt": "2026-08-01T16:59:35.450Z",
+  "note": "Lower parityDistance means the candidate is closer to the reference for this fixed pair. This is a distance metric, not an acceptance gate.",
+  "pairCount": 2,
+  "worstPair": "mobile",
+  "results": [
+    {
+      "id": "mobile",
+      "current": "specs/done/integration-agent-access/assets/ui/comparison/normal-full/mobile.png",
+      "candidate": "specs/done/integration-agent-access/assets/ui/comparison/overflow-top/mobile.png",
+      "dimensions": {
+        "width": 356,
+        "height": 390
+      },
+      "parityDistance": 0.12552,
+      "grayscale": {
+        "mae": 8.34935,
+        "rmse": 33.75129,
+        "diffRatio16": 0.05979,
+        "diffRatio32": 0.04656,
+        "diffRatio64": 0.03701,
+        "pixelmatchRatio": 0.05807
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.98058,
+        "terrainLikeRatioCandidate": 0.97882,
+        "avgLuminanceCurrent": 244.91112,
+        "avgLuminanceCandidate": 245.47418,
+        "avgLuminanceDelta": 0.56307,
+        "edgeEnergyCurrent": 0.05539,
+        "edgeEnergyCandidate": 0.07645,
+        "edgeEnergyRatio": 1.38029,
+        "edgeDiffRatio32": 0.09984
+      },
+      "artifacts": {
+        "sideBySide": "report-top/mobile-side-by-side.png",
+        "currentGray": "report-top/mobile-current-gray.png",
+        "candidateGray": "report-top/mobile-candidate-gray.png",
+        "absDiff": "report-top/mobile-absdiff.png",
+        "pixelmatch": "report-top/mobile-pixelmatch.png",
+        "currentEdges": "report-top/mobile-current-edges.png",
+        "candidateEdges": "report-top/mobile-candidate-edges.png",
+        "edgeDiff": "report-top/mobile-edge-diff.png"
+      }
+    },
+    {
+      "id": "desktop",
+      "current": "specs/done/integration-agent-access/assets/ui/comparison/normal-full/desktop.png",
+      "candidate": "specs/done/integration-agent-access/assets/ui/comparison/overflow-top/desktop.png",
+      "dimensions": {
+        "width": 958,
+        "height": 358
+      },
+      "parityDistance": 0.0834,
+      "grayscale": {
+        "mae": 2.71511,
+        "rmse": 13.11666,
+        "diffRatio16": 0.01581,
+        "diffRatio32": 0.01135,
+        "diffRatio64": 0.00695,
+        "pixelmatchRatio": 0.01529
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.99368,
+        "terrainLikeRatioCandidate": 0.99169,
+        "avgLuminanceCurrent": 247.79422,
+        "avgLuminanceCandidate": 248.79901,
+        "avgLuminanceDelta": 1.00479,
+        "edgeEnergyCurrent": 0.02868,
+        "edgeEnergyCandidate": 0.03936,
+        "edgeEnergyRatio": 1.3723,
+        "edgeDiffRatio32": 0.02847
+      },
+      "artifacts": {
+        "sideBySide": "report-top/desktop-side-by-side.png",
+        "currentGray": "report-top/desktop-current-gray.png",
+        "candidateGray": "report-top/desktop-candidate-gray.png",
+        "absDiff": "report-top/desktop-absdiff.png",
+        "pixelmatch": "report-top/desktop-pixelmatch.png",
+        "currentEdges": "report-top/desktop-current-edges.png",
+        "candidateEdges": "report-top/desktop-candidate-edges.png",
+        "edgeDiff": "report-top/desktop-edge-diff.png"
+      }
+    }
+  ]
+}

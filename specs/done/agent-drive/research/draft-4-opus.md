@@ -1,0 +1,1 @@
+(Independent draft produced by an Opus Plan agent from the same brief as drafts 1-3; recorded verbatim for synthesis provenance. Key unique contributions adopted: ledger-core/billing-full split; "v1 already implements hold/settle/release" finding. Its MCP-last ordering was NOT adopted — recorded as the alternative in the README.)

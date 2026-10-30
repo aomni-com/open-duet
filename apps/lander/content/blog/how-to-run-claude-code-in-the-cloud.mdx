@@ -1,0 +1,418 @@
+---
+title: 'Run Claude Code in the Cloud 24/7 (No Laptop Needed)'
+description: 'Run Claude Code on a persistent cloud server — sessions stay alive for days, work from your phone, no laptop required. Full setup in 5 minutes.'
+date: '2026-03-01'
+updatedAt: '2026-05-07'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/2.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'guides'
+tags: ['claude-code', 'cloud', 'setup', 'ai-coding']
+type: 'article'
+image: '/blog/how-to-run-claude-code-in-the-cloud/cover.png'
+relatedPosts:
+  - slug: 'claude-code-pricing'
+    context: 'Claude Code Pro vs Max vs API costs: full pricing breakdown and real monthly scenarios'
+  - slug: 'codex-vs-claude-code'
+    context: 'Codex vs Claude Code: feature comparison, benchmarks, and which agent to use'
+  - slug: 'claude-code-vs-cursor-vs-codex'
+    context: 'Compare local AI coding tools and when to use cloud-hosted alternatives'
+  - slug: 'how-to-set-up-a-24-7-ai-agent'
+    context: 'Configure persistent AI agents that run continuously without supervision'
+  - slug: 'how-to-build-and-deploy-a-web-app-using-only-ai'
+    context: 'Use cloud-hosted AI agents to ship full applications'
+  - slug: 'openclaw-vs-managed-ai-agent-platforms'
+    context: 'When to self-host vs. use a managed service'
+  - slug: 'how-to-use-ai-to-run-startup-operations-with-a-3-person-team'
+    context: 'Leverage persistent cloud agents for operational workflows'
+  - slug: 'how-to-scrape-analyze-and-monitor-any-website'
+    context: 'Run long-duration scraping jobs on cloud-hosted agents'
+cta:
+  title: 'Claude Code in the cloud, one click.'
+  subtitle: 'Duet ships Claude Code on a persistent sandbox you can resume from web, mobile, or desktop. No VPS to provision, no tmux to babysit.'
+  buttonText: 'Run Claude Code in the cloud'
+  href: '/sign-in?from=blog-cc-cloud'
+---
+
+# How to Run Claude Code in the Cloud Without Installing Anything
+
+You can run Claude Code on a cloud-hosted Linux server instead of installing it locally. This gives you persistent coding sessions that run for hours or days without draining your laptop battery, access from any device, and the ability to share the same AI agent with your entire team. Cloud-hosted Claude Code eliminates the Node.js setup, keeps sessions alive when you close your laptop, and works exactly like the CLI but in a remote environment. For the operator playbook of running a company this way, see [Duet AI for Founders: Founder Mode as an Operating System](/guides/duet-ai-for-founders).
+
+**Want it running now without the setup?** <ProductLink path="/sign-in?from=blog-cc-cloud-top">Run Claude Code in the cloud on Duet →</ProductLink> Persistent sandbox, resume from any device, nothing to install.
+
+> **If you already use Duet:** Start a durable session and assign the coding task. The agent runs on the workspace's persistent cloud VM, so the session history, files, and resulting app remain available after your laptop closes.
+
+## Why Your Claude Code Cloud Environment Matters
+
+A Claude Code cloud environment is a remote Linux server that runs the Claude Code CLI continuously. Instead of running the agent on your laptop and losing context every time you close the lid, a hosted Claude Code environment keeps the session alive on a server you connect to from anywhere. The cloud environment persists your git state, agent memory, and MCP integrations between sessions, so the agent picks up exactly where it left off.
+
+Teams adopt a Claude Code cloud setup for three reasons: persistence (sessions survive browser closes and laptop reboots), access (any device, any location), and collaboration (multiple team members can work with the same agent through shared session history and files). If you're evaluating whether to move your Claude Code workflow off your local machine, the rest of this guide walks through exactly how to set it up.
+
+## Why Running Claude Code Locally Has Limitations
+
+The standard Claude Code CLI runs on your local machine and stops when you close your laptop or lose battery. Every session is tied to your terminal window. When your computer sleeps, the agent stops working.
+
+Here are the core limitations:
+
+- **Battery drain:** Long coding sessions consume significant power
+- **Session interruption:** Closing your laptop kills the agent mid-task
+- **Single-device access:** Can't switch between your laptop, tablet, or phone
+- **No team access:** Other team members can't see or interact with the agent's work
+- **Local resource constraints:** Large repos and concurrent operations slow down your machine
+- **No persistence:** Agent memory and context reset when you restart
+
+If you're running multi-hour refactoring sessions or want your agent to keep working overnight, local execution doesn't work. You need a persistent server.
+
+## What Cloud-Hosted Claude Code Actually Means
+
+Cloud-hosted Claude Code is the same CLI running on a remote Linux server instead of your laptop. The server stays on 24/7, maintains session state, and multiple users can connect to the same instance.
+
+The technical setup:
+
+| Component           | Local Claude Code            | Cloud-Hosted Claude Code          |
+| ------------------- | ---------------------------- | --------------------------------- |
+| Runtime environment | Your macOS/Windows laptop    | Linux server (Ubuntu 22.04+)      |
+| Session persistence | Ends when you close terminal | Runs until you explicitly stop it |
+| Access method       | Terminal on your machine     | Web interface or SSH              |
+| Resource limits     | Your laptop's CPU/RAM        | Server specs (configurable)       |
+| Team collaboration  | Not possible                 | Multiple users can connect        |
+| Cost                | API usage only               | API usage + server hosting        |
+
+The cloud server has Node.js pre-installed, the Claude Code CLI configured, and a web UI for interaction. Your GitHub repos clone to the server, and the agent makes commits/PRs from there. If you're weighing Claude Code against other CLI agents, see [Codex vs Claude Code: features, pricing, and benchmarks compared](/blog/codex-vs-claude-code).
+
+## Claude Code Cloud Setup in 5 Minutes
+
+If you want a hosted Claude Code instance running right now, the fastest path is a managed platform:
+
+1. Create an account on [Duet](/) (or your preferred cloud host)
+2. Connect your GitHub account and add your Anthropic API key
+3. Start a session with your first task
+
+That's it. The platform provisions a persistent Linux server with Claude Code pre-installed, your repos cloned, and MCP integrations ready. No Node.js install, no SSH, no tmux. You are not installing Claude Code on top of Duet. Duet is Claude Code running in the cloud. Your setup is live and the agent keeps working even after you close the browser.
+
+Weighing a managed platform against rolling your own? See [Duet vs OpenClaw: managed vs self-hosted AI agents](/guides/duet-vs-openclaw). For self-hosted options (AWS, DigitalOcean) or a deeper walkthrough of each step, keep reading.
+
+## Step-by-Step: Setting Up Cloud-Hosted Claude Code
+
+Here's how to get Claude Code running in the cloud without touching your local terminal.
+
+### Option 1: Using a Managed Platform
+
+The fastest way is to use a platform that pre-configures everything. [Duet](/) provides cloud-hosted Claude Code as part of its core product.
+
+**Sign-up flow:**
+
+1. Go to duet.so and create an account
+2. Connect your GitHub account (the platform needs repo access)
+3. Add your Anthropic API key in settings
+4. Start a new session and assign the task
+
+The platform provisions a persistent Linux sandbox with Claude Code pre-installed. The agent has access to your repos and can open PRs directly.
+
+**What you get:**
+
+- Claude Code running natively, not a wrapper or plugin. Duet is Claude Code in the cloud
+- Web-based interface (no terminal needed)
+- Persistent sessions that survive browser closes
+- Built-in memory system across conversations
+- Team access (multiple people can interact with the same agent)
+- MCP integration support for Linear, GitHub, Notion, and 500+ other tools
+
+The server persists indefinitely. You can start a task, close your browser, and come back hours later to see the agent's progress.
+
+### Option 2: Self-Hosted on AWS/DigitalOcean
+
+If you want to manage the infrastructure yourself, spin up a Linux server and install Claude Code manually.
+
+**Prerequisites:**
+
+- Ubuntu 22.04 or later
+- 4GB+ RAM recommended
+- Node.js 18+
+- Git installed
+
+**Installation steps:**
+
+1. Launch an EC2 instance or DigitalOcean droplet (Ubuntu 22.04)
+2. SSH into the server
+3. Install Node.js: `curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - && sudo apt-get install -y nodejs`
+4. Install Claude Code CLI: `npm install -g @anthropic-ai/claude-code`
+5. Set your Anthropic API key: `export ANTHROPIC_API_KEY=your_key_here`
+6. Clone your repo: `git clone https://github.com/your-org/your-repo.git`
+7. Start Claude Code: `cd your-repo && claude-code`
+
+To keep sessions persistent, run Claude Code in a `tmux` or `screen` session:
+
+```bash
+tmux new -s coding
+claude-code
+# Detach with Ctrl+B, then D
+# Reattach later with: tmux attach -t coding
+```
+
+The drawback: you're managing the server, security, updates, and tooling yourself. No web UI unless you build one.
+
+## Connecting Your GitHub Repo to the Cloud Instance
+
+Once your cloud server is running, you need to give it GitHub access.
+
+**For managed platforms:**
+
+The platform handles GitHub OAuth during sign-up. You authorize repo access once, and the agent can clone/commit/PR on your behalf.
+
+**For self-hosted servers:**
+
+Generate a GitHub personal access token with `repo` scope:
+
+1. Go to GitHub Settings → Developer settings → Personal access tokens
+2. Create a token with `repo` and `workflow` permissions
+3. On your server, configure Git to use the token:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+git config --global credential.helper store
+echo "https://YOUR_TOKEN@github.com" > ~/.git-credentials
+```
+
+Now when Claude Code runs `git push`, it authenticates automatically.
+
+**Repo cloning:**
+
+If your repo is private, make sure the token has access. Clone with HTTPS (not SSH unless you've set up keys):
+
+```bash
+git clone https://github.com/your-org/your-repo.git
+```
+
+The agent can now read files, create branches, commit changes, and open pull requests.
+
+## Starting Your First Cloud Coding Session
+
+With the server configured and GitHub connected, you can start a coding task.
+
+**On a managed platform:**
+
+Open the web UI, start a session in your project workspace, and assign the task:
+
+```
+@agent refactor the user authentication module to use JWT tokens instead of session cookies
+```
+
+The agent will:
+
+1. Read the current auth code
+2. Create a new git branch
+3. Implement the JWT changes
+4. Run tests (if configured)
+5. Open a PR against your main branch
+
+The session persists even if you close the browser. You can check back later, and the agent will still be working or have finished.
+
+**On a self-hosted server:**
+
+SSH into your server, attach to your tmux session, and run:
+
+```bash
+claude-code "refactor the user authentication module to use JWT tokens instead of session cookies"
+```
+
+Claude Code will execute the task and stay running in the tmux session. Detach and check back later.
+
+## Setting Up MCP Integrations on Your Cloud Instance
+
+The Model Context Protocol (MCP) lets Claude Code integrate with external tools like Linear, GitHub, Notion, and Slack. Setting up MCP on a cloud instance works the same as locally, but you configure it on the server.
+
+**What MCP provides:**
+
+- Read Linear issues and update their status
+- Fetch GitHub PRs and review comments
+- Query Notion databases
+- Search Slack messages
+- Access 500+ other integrations through managed connectors
+
+For a deep dive on extending the agent with custom commands, SKILL.md files, and when to use MCP vs built-in tools, see [Claude Code Skills: the complete guide](/guides/claude-code-skills-complete-guide).
+
+**Configuration on self-hosted servers:**
+
+Create an MCP config file at `~/.claude/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "linear": {
+      "command": "npx",
+      "args": ["-y", "@linear/mcp-server"],
+      "env": {
+        "LINEAR_API_KEY": "your_linear_api_key"
+      }
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@github/mcp-server"],
+      "env": {
+        "GITHUB_TOKEN": "your_github_token"
+      }
+    }
+  }
+}
+```
+
+Restart Claude Code, and the agent will have access to those integrations.
+
+**On managed platforms:**
+
+Platforms like Duet come with MCP pre-configured. You connect integrations through the web UI:
+
+1. Go to Settings → Integrations
+2. Click "Connect Linear" (or GitHub, Notion, etc.)
+3. Authorize via OAuth
+4. The agent immediately has access
+
+In the session, you can say:
+
+```
+@agent check Linear for all P0 bugs assigned to me, then open a PR fixing the authentication issue
+```
+
+The agent queries Linear via MCP, identifies the issue, makes the code changes, and opens the PR—all in one cloud-hosted session.
+
+## Running Multi-Hour Sessions Without Interruption
+
+Cloud-hosted Claude Code excels at long-running tasks that would be impractical on a laptop.
+
+**Example use cases:**
+
+- **Large codebase refactoring:** Agent spends 6 hours renaming a core module across 200 files
+- **Dependency upgrades:** Agent updates React 17 → 18, fixes breaking changes, runs full test suite
+- **Database migration:** Agent writes migration scripts, tests them, updates all ORM models
+- **Security audit:** Agent scans for vulnerabilities, patches them, and opens individual PRs for each fix
+
+On a local machine, these tasks would drain your battery or force you to keep your laptop open and plugged in. On a cloud server, you start the task and walk away.
+
+**How to monitor long sessions:**
+
+On managed platforms, the web UI shows real-time progress. You'll see:
+
+- Current file being edited
+- Git branches created
+- PRs opened
+- Errors encountered
+
+On self-hosted servers, check the tmux session:
+
+```bash
+tmux attach -t coding
+```
+
+You'll see the Claude Code terminal output showing its current task.
+
+**Handling errors mid-session:**
+
+If the agent hits an error (failing test, API rate limit, merge conflict), cloud sessions let you intervene without losing context. On a managed platform, you reply in the chat:
+
+```
+The test is failing because the mock data is outdated. Update the fixture in tests/mocks/user.json
+```
+
+The agent continues from where it left off. On a self-hosted server, you can SSH in, fix the issue manually, and resume:
+
+```bash
+# Attach to tmux
+tmux attach -t coding
+# Agent is waiting on a failed test
+# Exit Claude Code (Ctrl+C)
+# Fix the mock data
+vim tests/mocks/user.json
+# Restart Claude Code
+claude-code "continue the refactoring"
+```
+
+The persistent environment means you don't lose git state, file changes, or agent context.
+
+## Team Collaboration on a Shared Cloud Instance
+
+One major advantage of cloud-hosted Claude Code is team access. Multiple people can interact with the same agent in the same session.
+
+**How it works on managed platforms:**
+
+Each project or repo gets a dedicated workspace. Everyone on your team can start or review sessions there, and the agent maintains context through shared files and durable session history.
+
+Example workflow:
+
+1. **Sarah (designer):** "@agent implement the new dashboard layout from Figma"
+2. **Agent:** Creates a branch, builds the UI components, opens PR #247
+3. **Tom (backend engineer):** "@agent the API endpoint for dashboard data is returning 404"
+4. **Agent:** Debugs the backend, finds the missing route, opens PR #248
+5. **Sarah:** "@agent merge PR #247 and deploy to staging"
+6. **Agent:** Merges the PR and triggers the deployment
+
+The agent remembers the entire conversation history. Tom doesn't need to re-explain what Sarah asked for. The cloud server maintains state across team members.
+
+**On self-hosted servers:**
+
+Team collaboration requires custom tooling. You could:
+
+- Set up a shared tmux session (multiple users SSH in and attach)
+- Build a web UI on top of the Claude Code CLI
+- Use SSH multiplexing with shared git repos
+
+The managed platform approach is far easier for most teams.
+
+## Cost Comparison: Local vs. Cloud
+
+Here's how the economics break down.
+
+| Cost Factor    | Local Claude Code            | Cloud-Hosted (Managed)       | Cloud-Hosted (Self-Hosted)   |
+| -------------- | ---------------------------- | ---------------------------- | ---------------------------- |
+| Anthropic API  | $15 per million input tokens | $15 per million input tokens | $15 per million input tokens |
+| Server hosting | $0                           | Included in platform fee     | $20-100/month (AWS/DO)       |
+| Setup time     | 30 minutes                   | 5 minutes                    | 2-4 hours                    |
+| Maintenance    | None                         | None                         | Ongoing (security, updates)  |
+| Team access    | Not available                | Included                     | Requires custom tooling      |
+
+For individual developers running occasional sessions, local is cheaper. For teams running persistent agents or multi-hour sessions, cloud-hosted is more practical.
+
+A typical startup with 5 engineers might spend:
+
+- **API costs:** $200-500/month (depending on usage)
+- **Managed platform:** $50-200/user/month (if using Duet or similar)
+- **Self-hosted server:** $50/month (single DigitalOcean droplet)
+
+The managed platform cost includes the server, web UI, MCP integrations, and team collaboration. Self-hosted is cheaper but requires engineering time to maintain. For a full breakdown of Claude Code plan tiers beyond API costs, see [Claude Code pricing: Pro vs Max vs API explained](/blog/claude-code-pricing).
+
+## FAQ
+
+**I signed up for Duet. Do I still need to install Claude Code?**
+
+No separate local installation is required for Duet's managed agent. Start a session and the task runs on the persistent workspace VM, with its files and event history available through the web app and API.
+
+**Can I run Claude Code in the cloud without a credit card?**
+
+Most managed platforms require payment info upfront because they provision server resources. Self-hosted options require you to pay AWS or DigitalOcean directly for the server. There's no free-tier option for persistent cloud hosting since the server runs 24/7, but you can start with a small instance ($5-10/month) and scale up if needed.
+
+**Does cloud-hosted Claude Code support MCP integrations like Linear and GitHub?**
+
+Yes, MCP integrations work on cloud instances exactly like local. On self-hosted servers, you configure the MCP servers in `~/.claude/mcp.json` with your API keys. On managed platforms, you connect integrations through OAuth in the web UI. The agent can query Linear issues, fetch GitHub PRs, read Notion pages, and use 500+ other tools through managed MCP integrations.
+
+**How do I secure a cloud-hosted Claude Code instance?**
+
+For self-hosted servers, follow standard Linux security practices: disable root SSH login, use SSH keys instead of passwords, enable UFW firewall, keep packages updated, and restrict inbound ports to only SSH (22) and your web UI port if applicable. For managed platforms, security is handled by the provider—they manage server hardening, API key encryption, and access control.
+
+**Can I switch between local and cloud-hosted Claude Code for the same repo?**
+
+Yes, but you need to keep git state in sync. If you start work locally and want to continue in the cloud, push your branch to GitHub first. Then on the cloud instance, pull the branch and resume. The reverse works too: pull cloud changes locally. Just avoid working on the same branch in both environments simultaneously to prevent merge conflicts.
+
+**What happens if my cloud server crashes mid-session?**
+
+On managed platforms, the provider monitors server health and restarts automatically. You may lose a few minutes of agent output, but git commits are safe (they're pushed to GitHub). On self-hosted servers, set up automatic restarts via systemd or supervisor. Always run Claude Code in a tmux session so you can reattach after a crash and see the last state before failure.
+
+**How do I give team members access to a cloud-hosted Claude Code instance?**
+
+On managed platforms, invite team members through the web UI—they get access to the same project workspace, files, and session history. On self-hosted servers, you'd need to create SSH accounts for each team member or build a shared web interface. The managed platform approach is far simpler for teams larger than 2-3 people.
+
+**Can I run multiple Claude Code agents simultaneously on one cloud server?**
+
+Yes, each agent runs in its own process. On self-hosted servers, start separate tmux sessions for different repos or tasks. On managed platforms, each project workspace gets its own agent instance automatically. Resource limits depend on your server specs—4GB RAM can handle 2-3 concurrent agents, 8GB can handle 5-7. Monitor CPU and memory usage to avoid slowdowns.

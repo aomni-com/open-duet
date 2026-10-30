@@ -1,0 +1,43 @@
+name: Staging end-to-end acceptance
+
+on:
+  workflow_dispatch:
+    inputs:
+      journey:
+        description: Optional focused journey name; empty runs full acceptance
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exercise staging through its public and browser surfaces
+        env:
+          DOTENV_PRIVATE_KEY_STAGING: ${{ secrets.DOTENV_PRIVATE_KEY_STAGING }}
+          DUET_E2E_ALLOW_GOOGLE_OAUTH_SKIP: '1'
+          DUET_E2E_ARTIFACT_DIR: tmp/staging-live
+          DUET_E2E_HEADLESS: '1'
+          STAGING_JOURNEY: ${{ inputs.journey }}
+        run: |
+          if [ -n "$STAGING_JOURNEY" ]; then
+            bash scripts/staging-live.sh --journey "$STAGING_JOURNEY"
+          else
+            bash scripts/staging-live.sh
+          fi
+      - name: Make container evidence readable to the runner
+        if: always()
+        run: if [ -d tmp ]; then sudo chown -R "$(id -u):$(id -g)" tmp; fi
+      - name: Upload sanitized staging evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: staging-e2e-${{ github.run_id }}
+          path: tmp/staging-live/
+          if-no-files-found: error
+          retention-days: 7

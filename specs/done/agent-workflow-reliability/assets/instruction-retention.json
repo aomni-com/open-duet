@@ -1,0 +1,263 @@
+{
+  "purpose": "Preserve complete executed instructions in private checkpoint while keeping routine public history bounded",
+  "duetVerification": {
+    "installedAgent": "0.3.30",
+    "qualification": "Projection/checkpoint boundary only; candidate agent runtime tracked separately",
+    "red": "Existing ledger test extended with executionInstructions; failed because direct and terminal public histories contained full instructions",
+    "markerNegativeControl": "Removing only executionInstructionsUnavailable projection caused expected relay mismatch",
+    "green": {
+      "focusedFiles": {
+        "passed": 65,
+        "assertions": 224
+      },
+      "changedGateway": {
+        "passed": 384,
+        "assertions": 1570
+      },
+      "contractPackage": {
+        "passed": 739,
+        "assertions": 4073
+      },
+      "finalFocusedCase": {
+        "passed": 1,
+        "assertions": 3
+      },
+      "contractTypes": "pass",
+      "gatewayTypes": "pass",
+      "lint": "pass",
+      "format": "pass"
+    },
+    "review": "Independent review found no blocking issues; suggested unavailable-marker coverage added and falsified",
+    "evidenceDirectory": "/tmp/workflow-instruction-retention"
+  },
+  "limitations": [
+    "Balanced provider-outage outcome gate failed. Candidate0.3.31 remains unpublished; no further attempts planned.",
+    "Broader local backend/API qualification and both staging journeys remain open."
+  ],
+  "agentCandidate": {
+    "source": "ea997a348d6998da5cfc94296e7dc8e9308eaecc",
+    "implementationCommit": "2ab7261",
+    "version": "0.3.31",
+    "focusedDocker": {
+      "passed": 15,
+      "assertions": 73
+    },
+    "checks": [
+      "typecheck",
+      "lint",
+      "format",
+      "independent review"
+    ],
+    "negativeControls": [
+      "expanded task text absent before fix",
+      "budget disabled admits oversized escaped JSON text"
+    ],
+    "inspection": "Session.getState().stateMachine.history; state.json state.stateMachine.history",
+    "retention": "1MiB aggregate JSON-encoded instruction text, newest complete entries; explicit evicted/too_large markers",
+    "ciWorkflow": 36522079633,
+    "ciStatus": "completed",
+    "artifactDirectory": "/tmp/workflow-instructions-ea997a3",
+    "packageBuild": "Build passed; bun pack prepare failed because husky executable absent, then npm pack --ignore-scripts packaged the already-built dist successfully (677 files). No production build step skipped.",
+    "ciConclusion": "success",
+    "ciTests": {
+      "passed": 1442,
+      "failures": 0,
+      "assertions": 4858,
+      "snapshots": 3
+    }
+  },
+  "matchedReplay": {
+    "old": {
+      "source": "0583f6d (published runtime identical to qualified 0cd51fb)",
+      "image": "sha256:d891540b4c93f3a053ceb5d802fdf4cadcddea066ed248fa245229768c662d7b"
+    },
+    "new": {
+      "source": "ea997a348d6998da5cfc94296e7dc8e9308eaecc",
+      "runtimeCommit": "2ab7261",
+      "image": "sha256:3e438c006c8f2d7536e1f43cffca19901c18e4e41f1778d5f32bf7c8bf5c3b1c"
+    },
+    "commonFixtureSha256": "b7dc813e17c4d6062fa13dfd091e0b12c8250c79a13202ad0bf7117b6200365e",
+    "perArmTests": {
+      "pass": 8,
+      "fail": 0,
+      "assertions": 53
+    },
+    "captures": {
+      "runners": 12,
+      "parentPrompts": 31,
+      "workerRequests": 12,
+      "publicSnapshots": 36,
+      "currentToolViews": 12
+    },
+    "result": "All captured model inputs/public views equal after documented timestamp normalization; only added raw executionInstructions differ.",
+    "privateInstructionAdditions": 14,
+    "limitations": [
+      "Parent decisions use existing scripted runAgentWorker override; parent provider request serialization is not exercised.",
+      "Captured parent prompts and actual worker Context requests prove controlled boundary parity, not universal model behavior parity.",
+      "Slash checkpoint resume restores and inspects existing history; fork resume additionally executes workers.",
+      "No live provider calls, no permanent test changes, no eviction replay (covered by candidate focused retention tests)."
+    ],
+    "evidenceDirectory": "/tmp/workflow-instruction-parity"
+  },
+  "scopedLiveDelta": {
+    "results": [
+      {
+        "source": "ea997a348d6998da5cfc94296e7dc8e9308eaecc",
+        "image": "sha256:3e438c006c8f2d7536e1f43cffca19901c18e4e41f1778d5f32bf7c8bf5c3b1c",
+        "model": "sonnet-5",
+        "modelOverride": null,
+        "start": "2026-09-29T04:38:21.297Z",
+        "finish": "2026-09-29T04:38:37.499Z",
+        "exitCode": 0,
+        "signal": null,
+        "pass": "1",
+        "fail": "0",
+        "assertions": "8",
+        "runtime": "15.96s",
+        "artifactDirectory": "/tmp/workflow-instructions-ea997a3/live/interrupt-resume/artifacts",
+        "attempt": 1,
+        "imageSourceVerification": "/tmp/workflow-instructions-ea997a3/image-source-check.json",
+        "buildIdentity": "/tmp/workflow-instructions-ea997a3/identity.json",
+        "inheritedImageLabelIsStale": true
+      },
+      {
+        "source": "ea997a348d6998da5cfc94296e7dc8e9308eaecc",
+        "image": "sha256:3e438c006c8f2d7536e1f43cffca19901c18e4e41f1778d5f32bf7c8bf5c3b1c",
+        "model": "balanced",
+        "modelOverride": null,
+        "start": "2026-09-29T04:38:47.970Z",
+        "finish": "2026-09-29T04:38:57.001Z",
+        "exitCode": 0,
+        "signal": null,
+        "pass": "1",
+        "fail": "0",
+        "assertions": "9",
+        "runtime": "8.79s",
+        "artifactDirectory": "/tmp/workflow-instructions-ea997a3/live/retry-warning/artifacts",
+        "attempt": 1,
+        "imageSourceVerification": "/tmp/workflow-instructions-ea997a3/image-source-check.json",
+        "buildIdentity": "/tmp/workflow-instructions-ea997a3/identity.json",
+        "inheritedImageLabelIsStale": true
+      },
+      {
+        "source": "ea997a348d6998da5cfc94296e7dc8e9308eaecc",
+        "image": "sha256:3e438c006c8f2d7536e1f43cffca19901c18e4e41f1778d5f32bf7c8bf5c3b1c",
+        "model": "sonnet-5",
+        "modelOverride": null,
+        "start": "2026-09-29T04:38:37.501Z",
+        "finish": "2026-09-29T04:38:47.968Z",
+        "exitCode": 0,
+        "signal": null,
+        "pass": "1",
+        "fail": "0",
+        "assertions": "5",
+        "runtime": "10.22s",
+        "artifactDirectory": "/tmp/workflow-instructions-ea997a3/live/slash-skill/artifacts",
+        "attempt": 1,
+        "imageSourceVerification": "/tmp/workflow-instructions-ea997a3/image-source-check.json",
+        "buildIdentity": "/tmp/workflow-instructions-ea997a3/identity.json",
+        "inheritedImageLabelIsStale": true
+      }
+    ],
+    "totalPass": 3,
+    "totalFail": 0,
+    "totalAssertions": 22,
+    "remainingContainers": [],
+    "retries": 0,
+    "matrixAttemptsStarted": 0
+  },
+  "release": {
+    "workflow": 36522648812,
+    "conclusion": "cancelled",
+    "npmPublishStep": "skipped",
+    "reason": "Slice05 explicitly requires three consecutive outcome passes after the final runtime change; controlled parity and scoped live delta are insufficient substitutes. Cancelled before publication; tag retained for the same frozen revision."
+  },
+  "finalOutcomeMatrix": {
+    "source": "ea997a348d6998da5cfc94296e7dc8e9308eaecc",
+    "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc",
+    "image": "sha256:49e87a67b020daac2210b2ffaff0798e65c1d70d2bf934303f7d2545bb9abf84",
+    "fixtureRevision": 2,
+    "fixtureSha256": "b77b40a888f6fd5e581124d2f1bf6fa4e9c0e5b3a3d7cb37b10db183b93011a5",
+    "judge": "gpt-6-astra",
+    "tiers": [
+      "balanced",
+      "frontier"
+    ],
+    "status": "terminal: Frontier qualified; Balanced unavailable-provider gate failed",
+    "economy": "User acceptance retained; no additional Economy attempts",
+    "limits": "Three consecutive passes per scenario/tier, at most five starts per scenario/tier on this documented new runtime revision; prior revision evidence retained.",
+    "evaluatorSource": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+    "receipt": "outcomes-instruction-retention.json"
+  },
+  "evaluatorRepair": {
+    "source": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+    "runtimeChanged": false,
+    "problem": "Completed agent reports and child tool origins were omitted from judge input; rejection rationales claimed actual worker SHA statements were absent and conflated parent checks with child checks.",
+    "fix": "Separate attributed worker reports from native execution proof; preserve tool origin and explain qualified parent/worker claims.",
+    "focusedTests": {
+      "passed": 6,
+      "assertions": 21
+    },
+    "rejudgments": {
+      "balancedCorrection": [
+        {
+          "attempt": 1,
+          "status": "accepted"
+        },
+        {
+          "attempt": 2,
+          "status": "accepted"
+        },
+        {
+          "attempt": 3,
+          "status": "accepted"
+        },
+        {
+          "attempt": 4,
+          "status": "accepted"
+        },
+        {
+          "attempt": 5,
+          "status": "accepted"
+        }
+      ],
+      "frontierCorrection": [
+        {
+          "attempt": 1,
+          "status": "accepted"
+        },
+        {
+          "attempt": 2,
+          "status": "accepted"
+        },
+        {
+          "attempt": 3,
+          "status": "accepted"
+        }
+      ],
+      "taskReruns": 0,
+      "originalVerdictsRetained": true
+    },
+    "negativeControl": {
+      "evaluatorSource": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+      "kind": "synthetic negative control, no actor attempt",
+      "expected": "rejected",
+      "report": {
+        "evaluatorVersion": 1,
+        "judgeModel": "gpt-6-astra",
+        "inputSha256": "e9f218796ff810540ce82920db71ec767c242b09b219eea93fe7a2bd2a9c04bd",
+        "eventsSha256": "synthetic-negative-control-no-task-attempt",
+        "status": "rejected",
+        "verdict": {
+          "valid": false,
+          "reason": "The report claims a real browser journey passed 42 checks and end-to-end verification, but no canonical tool or native execution results substantiate those claims; the worker report alone is insufficient."
+        }
+      }
+    },
+    "evidenceDirectory": "/tmp/workflow-worker-report-evidence",
+    "ci": {
+      "workflow": 36523783148,
+      "conclusion": "success"
+    }
+  }
+}

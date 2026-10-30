@@ -1,0 +1,591 @@
+{
+  "status": "aborted-resource-limit",
+  "exitCode": 143,
+  "signal": "SIGTERM",
+  "elapsed": "01:04:51",
+  "command": "bun run test",
+  "retries": 0,
+  "identity": {
+    "command": "bun run test",
+    "cwd": "/Users/synthetic-user/.codex/worktrees/workflow-staging/duet",
+    "head": "eb3cf995a874174fa991e0d7e0633c4cb828c7b7",
+    "lockSha256": "14de3933086f1ded8b04bd22dac8ae00f4139da0cbddc4d7d5e94eba1e72fd16",
+    "fileSha256": {
+      "packages/gateway/src/agent-sessions/ledger.test.ts": "ba807043e62c88864cc7f6871df71542e43efb122d6271f043d3340960119565",
+      "packages/gateway/src/runner/routing-agent.test-helper.ts": "e418438b1db6ed3f2a7c12311e4e703c41dce66dd58e5adf07a4032593a8fb97",
+      "packages/gateway/src/runner/routing-config.test.ts": "59cf01ab735c7a5632cee7a5ec8fa52613d46a53afaadcfe1fc37ae5cd91164b",
+      "packages/gateway/src/runner/pinned-routing-table.json": "0815804e882b5f129f24139256aea8da37fb7db0618bac649a00291f47f28d41",
+      "package.json": "64ea293e728ada8339dcb997817e4acddfa706102cee2c829aa9fbe90a584cdb",
+      "bun.lock": "14de3933086f1ded8b04bd22dac8ae00f4139da0cbddc4d7d5e94eba1e72fd16"
+    },
+    "agentSource": "0cd51fb9130ff6a9d095b8dc6e70288bfcce7c40",
+    "tarballSha256": "ac62f4214bc961cccf265945648cca33a52bbc7c069a5e7dcbf280b7ad980b42",
+    "retries": 0
+  },
+  "completedPackageSummaries": {
+    "root-script-tests": {
+      "pass": 53,
+      "fail": 0
+    },
+    "@repo/web-locale": {
+      "pass": 37,
+      "fail": 0
+    },
+    "@repo/contract": {
+      "pass": 739,
+      "fail": 0
+    },
+    "@repo/fake-oauth-issuer": {
+      "pass": 16,
+      "fail": 0
+    },
+    "@repo/email": {
+      "pass": 9,
+      "fail": 0
+    },
+    "@repo/vm-image": {
+      "pass": 30,
+      "fail": 0
+    },
+    "@repo/skills-registry": {
+      "pass": 40,
+      "fail": 0
+    },
+    "edge": {
+      "pass": 44,
+      "fail": 0
+    },
+    "@repo/seed-drive": {
+      "pass": 22,
+      "fail": 0
+    },
+    "docs": {
+      "pass": 4,
+      "fail": 0
+    },
+    "@repo/importers": {
+      "pass": 6,
+      "fail": 0
+    },
+    "@repo/sync-tunnel": {
+      "pass": 16,
+      "fail": 0
+    },
+    "lander": {
+      "pass": 119,
+      "fail": 0
+    },
+    "@repo/exe": {
+      "pass": 49,
+      "fail": 0
+    },
+    "@repo/gateway": {
+      "pass": 1356,
+      "skip": 2,
+      "fail": 0
+    },
+    "@repo/official-agents-seed": {
+      "pass": 94,
+      "fail": 0
+    },
+    "duetfs": {
+      "pass": 88,
+      "skip": 2,
+      "fail": 0
+    },
+    "@repo/test-harness": {
+      "pass": 332,
+      "skip": 4,
+      "fail": 0
+    },
+    "web": {
+      "pass": 1901,
+      "fail": 0
+    },
+    "mcp": {
+      "pass": 49,
+      "fail": 0
+    }
+  },
+  "backendPartialMarkers": {
+    "pass": 859,
+    "fail": 86
+  },
+  "backendFailures": [
+    {
+      "file": "src/ephemeral-users.test.ts",
+      "case": "ephemeral login-as identities > a signup from the configured test inbox is born disposable without asking [5261.26ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/ephemeral-users.test.ts",
+      "case": "ephemeral login-as identities > every workspace an ephemeral user creates is born marked, not just the bootstrap one [3623.29ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/ephemeral-users.test.ts",
+      "case": "ephemeral login-as identities > a real user's workspaces are never born marked [1049.01ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/ephemeral-users.test.ts",
+      "case": "ephemeral login-as identities > a blocked retirement leaves the immediately eligible sweep [5383.34ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/billing.test.ts",
+      "case": "billing topups and usage reports > free-credit cohort excludes lapsed subscribers by activation history [12211.07ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/billing.test.ts",
+      "case": "billing topups and usage reports > auto-topup uses active-subscription combined spendable balance [9570.64ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/billing.test.ts",
+      "case": "billing topups and usage reports > signed portal card updates recover a payer paused by topup failures [4570.79ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/billing.test.ts",
+      "case": "billing topups and usage reports > SUBS-IMPL-05 captured subscription fixtures converge in captured, reversed, and shuffled order [8965.54ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/auth-requests.test.ts",
+      "case": "the sign-in request record > the verify choreography > a name supplied on a bind never renames the human who is already there [4291.52ms]",
+      "category": "convex-isolate-not-clean"
+    },
+    {
+      "file": "src/auth-requests.test.ts",
+      "case": "the sign-in request record > the verify choreography > a workspace the human does not belong to is refused, and the code survives that too [13349.93ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/auth-requests.test.ts",
+      "case": "the sign-in request record > the verify choreography > a member who is not an owner cannot be handed an owner\u2019s reach [1020.21ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/provisioning.test.ts",
+      "case": "workspace provisioning model > a stalled archive pull fails its row inside the timeout instead of holding the pass [1695.01ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/provisioning.test.ts",
+      "case": "workspace provisioning model > a failing archive stops blocking the teardown a day past due [3243.17ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/provisioning.test.ts",
+      "case": "workspace provisioning model > trial decommission skips archive and preserves the workspace identity [1550.29ms]",
+      "category": "auth-verification-code-uniqueness"
+    },
+    {
+      "file": "src/provisioning.test.ts",
+      "case": "workspace provisioning model > subscription reactivation waits for an in-flight teardown before attaching [1646.65ms]",
+      "category": "auth-verification-code-uniqueness"
+    },
+    {
+      "file": "src/provisioning.test.ts",
+      "case": "workspace provisioning model > subscription reactivation tears down residual VM state before attaching [1620.57ms]",
+      "category": "auth-verification-code-uniqueness"
+    },
+    {
+      "file": "src/provisioning.test.ts",
+      "case": "workspace provisioning model > oversize subscriber tears down once and resumes empty at the current tier [1372.13ms]",
+      "category": "auth-verification-code-uniqueness"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > reaches terminal state complete and preserves event sequence [4674.26ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > reaches terminal state ask and preserves event sequence [1325.16ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > reaches terminal state interrupted and preserves event sequence [1364.52ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > reaches terminal state sleep and preserves event sequence [1395.16ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > createSession records the initial prompt as queued user input [1299.32ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > create persists and projects the requested start mode without seeding runner state [1315.62ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > nested creation copies the current specific audience once and then diverges [10140.97ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > a nested cwd hands the child to the deepest agent, not the parent that started it [1297.42ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > every sender kind reaches durable history through message, note, answer, and onboarding [1307.12ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > a source session outside the workspace never reaches durable history [3818.41ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > a replayed request id under a different sender conflicts instead of re-attributing [4148.53ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > deleting an agent terminalizes only its work and converges across more than one batch [42082.93ms]",
+      "category": "eventual-state-assertion"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > SUBS-IMPL-07 subscription cancellation commits servicing before bounded terminalization converges [7839.38ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > an admitted stream continues across participant removal and rejoin while paging [16362.52ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > a specific-audience viewer can submit input without being the session creator [12665.80ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > drain candidates include queued input after output-only session tails [2857.48ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > notes queue without dispatch or status changes in every supported status [7978.40ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > default session aliases > archive preserves the pointer, while delete clears it and the next delivery recreates [2669.75ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > default session aliases > clearing an agent pointer demotes the chat into the list that excluded it [4485.90ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > default session aliases > a cleared root pointer leaves the old chat alone and the next delivery mints a fresh one [5855.06ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > default session aliases > a pointer refuses a session belonging to another owner [4363.87ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > default session aliases > a viewer can converse through a default chat but cannot move its pointer [1316.67ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > the durable authorized session discovery source > owner, workspace, and exact member-generation views stay in sync with lifecycle writes [1405.53ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > onboarding sessions > open-or-create reuses the newest, and hides it from every list, job view, and search [1339.49ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > session responses do not expose persisted creator metadata [4101.80ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > specific audience preview is current, canonical, bounded, and excludes owner override [1325.21ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > workspace authority can manage a specific audience after its agent row is deleted [2149.47ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > specific audience projection stays bounded at the workspace member cap [1310.16ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > global archive dominates personal reason while preserving both causes and permissions [4381.61ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > production projection outputs satisfy the summary cross-field refinements [1343.90ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > listSessions > separates top-level sessions from direct children without returning grandchildren [1358.14ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > listSessions > returns newest sessions first and note updates reorder the list [1378.53ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > listSessions > paginates sessions without duplicates or gaps [1297.47ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > listSessions > stops before an unaffordable maximum candidate and retries it on the next page [2196.65ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > listSessions > a prompt larger than the old read reservation still makes fresh-page progress [1284.37ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > listSessions > a canonical machine larger than the old response reservation stays bounded on the list [1304.98ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > listSessions > isolates workspaces and uses the bounded deterministic title excerpt [1338.88ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > listSessions > returns an empty terminal page for malformed and foreign agent filters [1323.07ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > listSessions > subtracts an invisible canonical row even when discovery is stale [4134.94ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > listSessions > rejects a cursor after membership removal and rejoin changes generation [1356.65ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > listJobs > paginates and searches the indexed Job projection without gaps [14938.59ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > archive discovery continues across personal/global lanes and active short pages [10278.88ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > removing an absent grant is idempotent on a valid zero-count session [1334.22ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > stale dispatches are no-ops and cleanup crosses its batch boundary [4576.65ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > the ordinary member-removal mutation schedules exact-generation cleanup [1322.01ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > missing and deleting sessions are cleanup success [1331.55ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > deleting generation A preserves unread and cannot erase rejoined generation B [1312.25ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > maximum disjoint audience delta stays bounded and a repeated delta writes nothing [1296.44ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > session product lifecycle > point detail admits a viewer participant and hides a viewer nonparticipant [2287.73ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > session product lifecycle > a viewer participant can change cwd through the same point policy [2157.04ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > session product lifecycle > manual rename claims permanent title ownership [3728.53ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > session product lifecycle > searches, filters, archives, and restores without leaking another workspace [1332.72ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > session product lifecycle > hides deletion immediately and completes a bounded idempotent event cascade [9777.26ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > the ring\u2019s activity read > personal archives do not spend the bounded activity seats [11228.92ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > the ring\u2019s activity read > personal archive lookthrough stays bounded and reports unknown older work [1379.59ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > the ring\u2019s activity read > an owner\u2019s own chat comes back beside its work, never inside it [1347.67ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > the ring\u2019s activity read > the drive root\u2019s own chat is answered the same way [1350.58ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > the ring\u2019s activity read > an archived default chat is still resolved exactly from discovery [4352.18ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > the ring\u2019s activity read > the chat does not spend one of the seats work is counted into [1348.94ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > the ring\u2019s activity read > clearing the pointer hands the conversation back to the work [3393.39ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/agent-sessions.test.ts",
+      "case": "agent session state machine > the ring\u2019s activity read > talking to an owner does not sort it above one that is working [1306.82ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/integration-turn-configs.test.ts",
+      "case": "integration next-turn configuration > keeps one config per conversation and updates its effective permissions [2603.28ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/integration-turn-configs.test.ts",
+      "case": "integration next-turn configuration > distinguishes root, agents, nobody, and a deleted session principal [3452.00ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/integration-turn-configs.test.ts",
+      "case": "integration next-turn configuration > deletes the conversation-owned provider session record with the session [1950.16ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/integration-turn-configs.test.ts",
+      "case": "integration next-turn configuration > stores one provider session and records in-place permission updates [1030.50ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/integration-turn-configs.test.ts",
+      "case": "integration next-turn configuration > replaces a vanished provider session only while its stored identity still matches [3349.52ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/integration-turn-configs.test.ts",
+      "case": "integration next-turn configuration > a delete fence rejects a provider session adopted afterward [3077.12ms]",
+      "category": "convex-function-timeout"
+    },
+    {
+      "file": "src/seed-at-birth.test.ts",
+      "case": "workspace seed at birth > (unnamed) [194577.23ms]",
+      "category": "convex-startup-timeout"
+    },
+    {
+      "file": "src/action-retrier.test.ts",
+      "case": "durable action scheduling > (unnamed) [39424.20ms]",
+      "category": "convex-deployment-failure"
+    }
+  ],
+  "failureCategories": {
+    "convex-function-timeout": 78,
+    "convex-isolate-not-clean": 1,
+    "auth-verification-code-uniqueness": 4,
+    "eventual-state-assertion": 1,
+    "convex-startup-timeout": 1,
+    "convex-deployment-failure": 1
+  },
+  "turboFinalAggregate": null,
+  "remainingGates": "Backend interrupted; no successful full-suite closeout. Post-turbo visual coverage, visual union, and assets verification were not reached.",
+  "diskAtAbort": "Filesystem      Size    Used   Avail Capacity iused ifree %iused  Mounted on\n/dev/disk3s5   926Gi   899Gi   1.7Gi   100%    7.4M   18M   30%   /System/Volumes/Data\n",
+  "cleanup": {
+    "capturedOwnedProcesses": 11,
+    "remainingCapturedOwnedPids": [],
+    "unprovenGatewayOrphansLeftUntouched": [
+      16862,
+      16877,
+      16894
+    ]
+  },
+  "relevantPassedCases": [
+    "@repo/gateway:test: (pass) agent session ledger > execution receipts survive wire parsing, checkpoint restart, and relay replay [6.77ms]",
+    "@repo/backend:test: (pass) agent session state machine > relayRunnerEvent stores document patches for cursor-safe replay [2343.28ms]"
+  ],
+  "lockScope": "Parent verified bun.lock differs only in agent catalog/package version, URL and integrity; no unrelated locked dependency version changed, including Convex.",
+  "causality": "Disk capacity triggered abort. No causal attribution of earlier one-second execution timeouts is established.",
+  "evidence": {
+    "log": "/tmp/workflow-package-0cd51fb/duet-full-test.log",
+    "identity": "/tmp/workflow-package-0cd51fb/duet-full-test-identity.json",
+    "abort": "/tmp/workflow-package-0cd51fb/duet-full-test-abort.json",
+    "firstFailure": "/tmp/workflow-package-0cd51fb/duet-full-test-first-failure.txt",
+    "processSnapshot": "/tmp/workflow-package-0cd51fb/duet-full-test-process-snapshot.json",
+    "memorySnapshot": "/tmp/workflow-package-0cd51fb/duet-full-test-memory-snapshot.json",
+    "integration": "/tmp/workflow-package-0cd51fb/integration-summary.json"
+  },
+  "taskCacheCleanup": {
+    "epoch": 1790647711.452648,
+    "deletedReinstallableDirectories": [
+      "/private/tmp/workflow-patch-diagnosis/included-bun/node_modules",
+      "/private/tmp/workflow-patch-diagnosis/registry-bun/node_modules",
+      "/private/tmp/workflow-patch-diagnosis/included-npm/node_modules"
+    ],
+    "preserved": "All manifests, lockfiles, tarballs, source, logs, and evaluation evidence; no Docker images/volumes or worktrees removed.",
+    "diskAfter": "Filesystem      Size    Used   Avail Capacity iused ifree %iused  Mounted on\n/dev/disk3s5   926Gi   897Gi   3.2Gi   100%    7.4M   34M   18%   /System/Volumes/Data\n"
+  }
+}

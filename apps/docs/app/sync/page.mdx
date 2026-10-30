@@ -1,0 +1,218 @@
+export const metadata = {
+  title: 'Sync to your Mac',
+  description: 'Mirror every workspace drive to a folder on your Mac and keep it live.',
+  alternates: { canonical: '/sync/' },
+}
+
+<p className="eyebrow">Resource guide</p>
+
+# Keep your workspaces on your Mac
+
+`duet sync` mirrors every workspace where your role permits writing into a folder on your Mac.
+It keeps both sides live: edits in the web app or by an agent land in your local mirror within seconds, and
+edits you make locally flow back. Install it once as a login service and forget it — new
+writable workspaces you join appear on their own, and the mirror reconnects by itself across sleep, network
+drops, and reboots.
+
+This page installs and runs the daemon. The lower-level transfer API it drives — registering a
+device as a whole-drive replica — is documented under [mirror devices](/mirror-devices); you do not
+call it directly.
+
+macOS only. The bundled transfer engine ships for macOS in this release.
+
+## Before you start
+
+You need a Duet account with write access to a workspace, Bun 1.3.14 and Node 22 or newer,
+and the public `duet` CLI on your Mac:
+
+```bash
+npm install -g @duetso/agent
+```
+
+The transfer engine is bundled with the CLI for your Mac's architecture; there is nothing else to
+install.
+
+## Install
+
+Sync uses the same human login as ordinary Duet commands. Sign in once through the
+[device flow](/device-flow):
+
+```bash
+duet login
+```
+
+The CLI saves the human key in `~/.duet/config.json` with owner-only permissions. Current
+membership and role determine access; joining or leaving workspaces does not require a new key.
+If you already signed in for another Duet command, reuse that login.
+
+Each Mac keeps a separate non-secret machine ID and Syncthing certificate pair. Sync installation
+registers that identity with the computer's name. Replacing the user key preserves the Mac identity;
+removing a lost Mac stops its mirrors while your login on other computers keeps working.
+
+Then install the login service:
+
+```bash
+duet sync install
+```
+
+This registers a per-user launchd agent that starts the daemon at login and keeps it running. It
+touches only your own login items; a Syncthing you already run, and any other launch agents on the
+machine, are left alone. The command is idempotent — run it again after an upgrade and it replaces
+its own agent in place.
+
+The daemon starts mirroring immediately. Give it a minute on the first run: it downloads a full copy
+of each writable workspace drive.
+
+## What lands on your Mac
+
+Each workspace mirrors into its own folder under `~/duet` as a **whole-drive replica** —
+everything on the drive, in both directions, not a curated subset. Run `duet sync status` to find
+each folder. Its stable name identifies the server and workspace, so unrelated workspaces with the
+same display name keep separate files. Replacing your login key preserves the folder.
+
+Three classes of path are always
+held back so machine-local state never crosses between machines:
+
+- **`.git` directories** and **`node_modules`** — excluded on both sides. See
+  [Git repositories](#git-repositories) below for why, and how history still reaches your Mac.
+- **`.duet`** — Duet's own per-workspace state directory.
+
+Those three are the shared exclusions the workspace itself enforces (the same list shown under
+[mirror devices](/mirror-devices)). On top of them, the daemon adds a Mac-local exclusion for Finder
+and Spotlight clutter — `.DS_Store`, AppleDouble `._*` sidecars, `.Spotlight-V100`, `.Trashes` — so
+that macOS junk created on your laptop never travels up into the workspace.
+
+Everything else replicates, including `.env` files and other secrets. A mirror is a private replica
+of your own workspace, so its environment files come with it — unlike a workspace
+[share](/shares-publishes), which withholds them. Treat the folder on your Mac as holding every
+secret the drive holds.
+
+You will also see two small bookkeeping directories the transfer engine keeps inside each mirror,
+`.stfolder` and `.stversions`. Leave them in place; they are how it marks the folder and stashes
+old versions, and they are not synced anywhere.
+
+## Check status
+
+`duet sync status` reports every workspace the daemon is tracking, one line each:
+
+```bash
+duet sync status
+```
+
+Each row names the workspace, its transfer state and its actual local folder.
+
+- **up to date** — the local copy and the workspace agree and the connection is live.
+- **syncing** — a transfer is in flight; the percentage and remaining bytes come straight from the
+  transfer engine.
+- **conflicts** — both sides changed the same file before they could reconcile; see
+  [Conflicts](#conflicts).
+- **retired** — the workspace is idle-retired on the server and is not currently mirrored; see
+  [Retired workspaces](#retired-workspaces).
+
+Add `--json` for machine-readable status, including remaining bytes and conflict counts.
+Errors and repository setup reminders also appear in status without changing which files replicate.
+
+## Conflicts
+
+If a file changes on your Mac and on the workspace before the two reconcile, the transfer engine
+keeps **both** copies rather than picking a winner or losing your bytes. Your local copy is renamed
+alongside the incoming one, following the engine's convention:
+
+```text
+report.md
+report.sync-conflict-20260713-142230-K5MNBGJ.md
+```
+
+`status` counts these per workspace so you can find and resolve them. Open both, keep what you want,
+and delete the `.sync-conflict-*` copy. Nothing is deleted for you, and a conflict never blocks the
+rest of the folder from syncing. The engine keeps up to ten conflict copies of a single file before
+it starts pruning the oldest, so resolve them rather than letting them pile up.
+
+## Retired workspaces
+
+A workspace that no one touches for a while is **retired** on the server: its drive is archived and
+it stops mirroring. The daemon does not delete your local mirror folder — it keeps it,
+marks the workspace `retired` in `status`, and re-checks on a slow cadence so that if the workspace
+comes back the mirror resumes on its own.
+
+Retirement is not un-done by editing your local copy. Local edits to a retired workspace wait on
+your Mac; to bring the workspace back, open it from the web app, then let the next status re-check
+pick it up.
+
+## Git repositories
+
+A repository's working files sync live — edit `src/app.ts` on either side and it lands on the other
+in seconds. What does **not** sync is the `.git` directory itself (and `node_modules`). This is
+deliberate, and understanding it is the difference between a mirror you trust and a corrupted repo.
+
+**Why `.git` is excluded.** A Git repository is not safe to replicate byte-for-byte between two
+machines that both write to it. Its index caches inode numbers that differ per machine, its refs and
+pack files have ordering rules no file-syncer honors, and two sides committing concurrently produce a
+repository that is valid on neither. Syncing `.git` does not give you shared history — it gives you
+conflict copies of `HEAD` and a repo you have to delete and re-clone. So the mirror leaves `.git`
+alone on each machine.
+
+**Why `node_modules` is excluded.** Installed dependencies are platform-specific and rebuildable.
+Copying them across machines clobbers one architecture's binaries with another's. Run your installer
+(`bun install`, `npm install`) on each side instead.
+
+**How your work still reaches your Mac.** Two ways, and they complement each other:
+
+- **As files, immediately.** Every file an agent or the web app writes appears in your local folder
+  within seconds — before any commit. You see work in progress live, which is the whole point of the
+  mirror.
+- **As history, on `git pull`.** Commits travel through a real Git remote, not through the mirror.
+  Push from the workspace (or let an agent push), then `git pull` on your Mac. Because the committed
+  files are already sitting in your working tree from the live sync, the pull is fast and mostly
+  updates Git's own bookkeeping to match.
+
+**Give every repo a remote.** History can only reach your Mac if the repository has a real remote to
+travel through. A repo with no remote has no path for its commits to cross — you will see the working
+files but never the history. `duet sync status` flags a mirrored repository that has no remote so
+you can add one:
+
+```bash
+git remote add origin <your-remote-url>
+```
+
+**Work one branch at a time, together.** Because the working tree is shared but each side keeps its
+own `.git`, keep the **same branch checked out on both machines**. A branch switch rewrites the
+working files, and that rewrite syncs — checking out a different branch on one side rewrites the tree
+the other side is also using. Decide on a branch, work it on both, and switch together. After pulling
+new commits, a `git pull` on the other side catches its local Git bookkeeping up to the files that
+already synced.
+
+**Harden repos for two machines.** Two settings keep a shared checkout from breaking on paths that
+differ between your Mac and the workspace:
+
+- Use **relative worktree paths** so a linked worktree does not pin an absolute path that only exists
+  on one machine:
+
+  ```bash
+  git config --global worktree.useRelativePaths true
+  ```
+
+- Keep **absolute machine-specific paths out of repo-local config** (`.git/config`, hooks). They
+  resolve on one side and break on the other.
+
+For the fuller picture — auto-bootstrapping remotes and following branches safely — that is planned,
+not shipped. Today the discipline above is the contract.
+
+## Uninstall
+
+Remove the login service at any time:
+
+```bash
+duet sync uninstall
+```
+
+This stops the daemon and removes its launchd agent. It leaves your mirrored folders under
+`~/duet/` exactly as they are — uninstalling stops syncing, it does not erase your files. Re-running
+`uninstall` when nothing is installed succeeds quietly.
+
+The daemon mirrors every workspace where your role permits writing. There is no per-workspace off
+switch in this version, and detaching a workspace by hand would only see it re-added on the next reconcile while
+your write access holds. To stop mirroring one workspace, **leave that workspace** from the
+[web app](/api-keys) — losing membership detaches its mirror on its own. To cut a lost machine off
+everywhere at once, remove that machine from the web machine settings or the user sync-machine API.
+Your human login remains available on other computers.

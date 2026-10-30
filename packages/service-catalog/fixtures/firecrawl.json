@@ -1,0 +1,4 @@
+[
+  {"route":"/v2/scrape","request":{"method":"POST","json":{"url":"https://example.com","formats":["markdown"]}},"response":{"status":200,"json":{"creditsUsed":1}}},
+  {"route":"/v2/crawl/job-1","request":{"method":"GET"},"response":{"status":200,"json":{"status":"completed","creditsUsed":1}}}
+]

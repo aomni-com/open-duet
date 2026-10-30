@@ -1,0 +1,77 @@
+{
+  "runtimeRevision": "3bc0ea503c2fc1b945de3e0c79c4c967d42a38b4",
+  "evalSourceRevision": "0cd51fb9130ff6a9d095b8dc6e70288bfcce7c40",
+  "runtimeArchiveSha256": "d4d0459c1f437e38828d12ba38db042095c7772a67c34e0647f2c7833e0f572e",
+  "overlaySha256": {
+    "evals/goal-command.eval.ts": "87f269b21593be4afe4a12c31df7e330cab7401177f409a6c6c3b842df7e8021",
+    "evals/state-machine-interrupt-resume.eval.ts": "817feb877c3e8586fb2e456fc3d1c170c30a5a6bf0bef94263b05066a4949bd0",
+    "evals/advisor-trigger.eval.ts": "708c501b0f53be615bc5c2a8d1e670d035766778ab6f687eb508fefdb100b0ff",
+    "evals/advisor-context-compaction.eval.ts": "b0dcd09d507f6d9dec9ee74e041dc9dc5d6919fdf78794b70e904363c3ecfcfa",
+    "evals/model-routing-step-trigger.eval.ts": "95cdf74112fd6dd12176618465e108d0d272942aa70592cacf4a309cd40081c0",
+    "test/helpers/best-of.ts": "897225862d74962de798f708b1ea8a0c27aa482445b0be516c17efafc4c758e0"
+  },
+  "results": [
+    {
+      "file": "evals/goal-command.eval.ts",
+      "group": "baseline",
+      "kind": "live",
+      "testName": "builds a work/evaluate state machine",
+      "startedAt": "2026-09-29T00:54:55.369950+00:00",
+      "finishedAt": "2026-09-29T00:55:32.404967+00:00",
+      "status": "failed",
+      "exitCode": 1
+    },
+    {
+      "file": "evals/state-machine-interrupt-resume.eval.ts",
+      "group": "baseline",
+      "kind": "live",
+      "testName": "reruns an interrupted script state with the same transition input",
+      "startedAt": "2026-09-29T00:55:32.407123+00:00",
+      "finishedAt": "2026-09-29T00:55:53.681915+00:00",
+      "status": "passed",
+      "exitCode": 0
+    },
+    {
+      "file": "evals/advisor-trigger.eval.ts",
+      "group": "baseline",
+      "kind": "live",
+      "testName": "challenging underspecified architecture work consults the advisor and reclassifies",
+      "startedAt": "2026-09-29T00:55:53.685124+00:00",
+      "finishedAt": "2026-09-29T00:57:18.578372+00:00",
+      "status": "failed",
+      "exitCode": 1
+    },
+    {
+      "file": "evals/advisor-context-compaction.eval.ts",
+      "group": "baseline",
+      "kind": "live",
+      "testName": "uses observations for older work and retains a bounded recent transcript",
+      "startedAt": "2026-09-29T00:57:18.581732+00:00",
+      "finishedAt": "2026-09-29T00:57:32.979100+00:00",
+      "status": "passed",
+      "exitCode": 0
+    },
+    {
+      "file": "evals/model-routing-step-trigger.eval.ts",
+      "group": "baseline",
+      "kind": "live",
+      "testName": "lets glm complete with graceful degradation when implement has no vision fallback",
+      "startedAt": "2026-09-29T00:57:32.979646+00:00",
+      "finishedAt": "2026-09-29T00:57:38.866468+00:00",
+      "status": "passed",
+      "exitCode": 0
+    }
+  ],
+  "interpretation": {
+    "preFeatureSymptomsReproduced": [
+      "initial park omitted",
+      "explicit opt-in advisor not consulted on one retained internal attempt"
+    ],
+    "baselinePassedCandidateFailed": [
+      "interrupted script transition input preserved",
+      "advisor archived marker retained",
+      "no-fallback implementation route selected"
+    ],
+    "limitation": "One bounded comparison establishes occurrences, not failure rates or causal regression attribution."
+  }
+}

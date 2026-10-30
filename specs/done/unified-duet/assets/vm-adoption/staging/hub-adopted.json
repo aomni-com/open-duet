@@ -1,0 +1,207 @@
+{
+  "environment": "staging",
+  "observedAt": "2026-10-04T13:41:13.403Z",
+  "helperSourceCommit": "8333811bd",
+  "helperSha256": "e8603337408bad602fbff58f82d928a96982bf2e1b709c82aa48814b1558f5ed",
+  "outcome": {
+    "workspaceId": "ns769tvfcsmvzhfab4bshkpcjx8btf8d",
+    "slug": "official-agents-hub",
+    "vmName": "workspace-redacted",
+    "sshDest": "service.example.invalid",
+    "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+    "oldRuntimeVersion": "0.0.0+4955b7a09dde",
+    "workspaceStatus": "active",
+    "servicingStatus": "active",
+    "providerStatus": "running",
+    "appAnchorPaths": [
+      "agents/account-researcher/apps/account-board",
+      "agents/code-reviewer/apps/connect-repos",
+      "agents/seo-specialist/apps/content-board",
+      "agents/seo-specialist/apps/connect-search-console",
+      "agents/social-media-manager/apps/connect-accounts",
+      "agents/support-agent/apps/connect-helpdesk",
+      "agents/people-researcher/apps/dossier-board",
+      "agents/brand-designer/apps/setup-brand",
+      "agents/writer/apps/setup-voice"
+    ],
+    "blockers": [],
+    "warnings": [],
+    "status": "complete",
+    "phase": "complete",
+    "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "restored": false,
+    "previousGatewayVersion": "0.0.0+4955b7a09dde",
+    "bootIdBefore": "d5ac9140-04e7-4ec9-8074-4b10d86f67d3",
+    "bootIdAfter": "d5ac9140-04e7-4ec9-8074-4b10d86f67d3"
+  },
+  "preservation": {
+    "bootId": true,
+    "credentialSha256": true,
+    "savedCredentials": true,
+    "stateInventory": true,
+    "stateSha256": true,
+    "workspaceBun": true
+  },
+  "runtimeCredentialFiles": [
+    {
+      "exists": true,
+      "path": ".duet/vm-token",
+      "sha256": "bd7b0ea5fd4f25aa76fcbfc27136d529c3549f6cd097c77efc9831ec4bbf4501",
+      "unchanged": true
+    },
+    {
+      "exists": true,
+      "path": ".duet/model-credentials.json",
+      "sha256": "f97e17328508a79069b571b315d1f0613afc0259ffb5bb8223cb85c4527c58c0",
+      "unchanged": true
+    },
+    {
+      "exists": true,
+      "path": ".duet/app-credentials.json",
+      "sha256": "afd4abc53e594a5fd1f206b836b2bbe4e83f7cb2046ca5b2d92b94d871f6f26b",
+      "unchanged": false
+    }
+  ],
+  "servicesBefore": {
+    "duet-desktop-browser.service": "0",
+    "duet-desktop.service": "0",
+    "duet-gateway.service": "3765118",
+    "duet-syncthing.service": "344"
+  },
+  "servicesAfter": {
+    "duet-desktop-browser.service": "0",
+    "duet-desktop.service": "0",
+    "duet-gateway.service": "4071812",
+    "duet-syncthing.service": "344"
+  },
+  "stateEntries": 333,
+  "runtimeAudit": {
+    "manifest": {
+      "formatVersion": 1,
+      "version": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "artifacts": [
+        {
+          "name": "duet",
+          "sha256": "d9c30028f372633e5362e8fbd4a0bcbcf085a27e54e71ab6a5b2a041d900afe8",
+          "byteLength": 118032512,
+          "mode": 493
+        },
+        {
+          "name": "helper.js",
+          "sha256": "be30a10df4306952bc4f62c5de4f8438478952c83bf8889a38bd8c473a705613",
+          "byteLength": 908603,
+          "mode": 420
+        },
+        {
+          "name": "index.js",
+          "sha256": "f078537ef517100cfa4d084c765439ff273be8abe0d7fe837a880b100fa548ae",
+          "byteLength": 2225490,
+          "mode": 420
+        },
+        {
+          "name": "initdb.wasm",
+          "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+          "byteLength": 169969,
+          "mode": 420
+        },
+        {
+          "name": "pglite.data",
+          "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+          "byteLength": 5289109,
+          "mode": 420
+        },
+        {
+          "name": "pglite.wasm",
+          "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+          "byteLength": 8739902,
+          "mode": 420
+        },
+        {
+          "name": "photon_rs_bg.wasm",
+          "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+          "byteLength": 1881634,
+          "mode": 420
+        },
+        {
+          "name": "vector.tar.gz",
+          "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+          "byteLength": 46108,
+          "mode": 420
+        }
+      ]
+    },
+    "artifactsVerified": [
+      {
+        "name": "duet",
+        "sha256": "d9c30028f372633e5362e8fbd4a0bcbcf085a27e54e71ab6a5b2a041d900afe8",
+        "byteLength": 118032512,
+        "mode": 493
+      },
+      {
+        "name": "helper.js",
+        "sha256": "be30a10df4306952bc4f62c5de4f8438478952c83bf8889a38bd8c473a705613",
+        "byteLength": 908603,
+        "mode": 420
+      },
+      {
+        "name": "index.js",
+        "sha256": "f078537ef517100cfa4d084c765439ff273be8abe0d7fe837a880b100fa548ae",
+        "byteLength": 2225490,
+        "mode": 420
+      },
+      {
+        "name": "initdb.wasm",
+        "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+        "byteLength": 169969,
+        "mode": 420
+      },
+      {
+        "name": "pglite.data",
+        "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+        "byteLength": 5289109,
+        "mode": 420
+      },
+      {
+        "name": "pglite.wasm",
+        "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+        "byteLength": 8739902,
+        "mode": 420
+      },
+      {
+        "name": "photon_rs_bg.wasm",
+        "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+        "byteLength": 1881634,
+        "mode": 420
+      },
+      {
+        "name": "vector.tar.gz",
+        "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+        "byteLength": 46108,
+        "mode": 420
+      }
+    ],
+    "health": {
+      "runtimeVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "imageVersion": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187"
+    },
+    "bootHealthCertified": true,
+    "bootId": "d5ac9140-04e7-4ec9-8074-4b10d86f67d3",
+    "current": "/opt/duet/releases/0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "cli": "/usr/local/bin/duet",
+    "cliPhysicalPath": "/opt/duet/releases/0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2/duet",
+    "cliVersion": "1.0.0",
+    "gatewayBun": "1.4.2",
+    "workspaceBun": "1.3.14",
+    "oldCliRailExists": false,
+    "duetfsOnPath": null,
+    "bootstrapSha256": "b33587a373136cdac66b78cf74f2e05eb2ee7341207d7adafef49045f0b4e1ab",
+    "gatewayUnitSha256": "84677a224fe0385b335a36dc8cb4e9609424a75f49ed138ab671a4f9c8e3b867"
+  },
+  "noProviderRestartResizeOrReprovision": true,
+  "managedAppCredentialRenewal": {
+    "confirmedActiveKeys": 8,
+    "receipt": "hub-app-key-audit.json",
+    "cause": "Existing startup demand query prunes saved App credentials against the supervisor\u2019s initially empty desired map before the first authoritative roster.",
+    "strictSourceCorrection": "6cee5f651 makes demand read-only and prunes only after accepted desired apps. Frozen transition payload is unchanged."
+  }
+}

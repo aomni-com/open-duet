@@ -1,0 +1,315 @@
+---
+title: 'Loops vs Duet Boards — How to Run Autonomous Workflows Without Writing a Single Script'
+metaTitle: 'No-Code AI Agent Workflows: Loops vs Duet Boards'
+description: "Peter Steinberger says design loops, not prompts. Here's what that means if you're not a developer — and how Duet Boards let you run it without code."
+date: '2026-06-08'
+updatedAt: '2026-06-08'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/1.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'ai'
+tags: ['no-code', 'ai agents', 'workflow automation', 'automation', 'duet boards']
+type: 'article'
+image: '/blog/loops-vs-duet-boards/cover.png'
+howTo:
+  name: 'How to Build a No-Code AI Agent Workflow with Duet Boards'
+  description: 'Build an autonomous AI workflow using Duet Boards without writing any code — the same loop architecture developers use, designed for operators.'
+  steps:
+    - name: 'Map your workflow as stages'
+      text: 'Identify the natural stages your workflow moves through — the same way you would design a Kanban board. Each stage becomes a column. Determine which stages involve repeatable AI-executable work and which require a human decision.'
+    - name: 'Create a Board in Duet and name the columns'
+      text: 'Set up your Board in Duet and name the columns to match your workflow stages. Add terminal columns (Published, Shelved, Blocked) to define your stop conditions.'
+    - name: 'Assign AI agents to automated columns'
+      text: 'For each column that involves repeatable work, assign an agent and describe in plain English what it should do when a card lands there.'
+    - name: 'Define handoff criteria'
+      text: 'For each column, describe when the AI should advance the card to the next stage and when it should escalate to the Blocked column for human review.'
+    - name: 'Start the loop'
+      text: 'Add a card to the first column. Duet cloud takes over — the workflow runs persistently, advances through stages automatically, and surfaces human decisions to the Blocked column when needed.'
+relatedPosts:
+  - slug: '6-best-ai-agent-builders-in-2026'
+    context: 'Compare all major no-code AI agent builders'
+  - slug: 'how-to-automate-content-creation-one-person-business'
+    context: 'Build a content pipeline with AI'
+cta:
+  title: 'Design the loop. Skip the code.'
+  subtitle: 'Duet Boards turn your Kanban columns into an autonomous AI workflow — persistent, durable, and running while you sleep.'
+  buttonText: 'Build your first board'
+  href: '/sign-in?from=blog-loops-vs-duet-boards'
+---
+
+> You shouldn't be prompting coding agents anymore. You should be designing loops that prompt your agents.
+> — Peter Steinberger, [June 7, 2026](https://x.com/steipete/status/2063697162748260627)
+
+That tweet [cleared 2.2 million views](https://x.com/mvanhorn/article/2063865685558903149) in under 24 hours. Boris Cherny, who created Claude Code (which reportedly accounts for ~4% of all public commits on GitHub), put it more bluntly at a conference days earlier: "I don't prompt Claude anymore. I have loops running that prompt Claude and figure out what to do. My job is to write loops."
+
+Here's the problem: both Steinberger and Cherny are developers. They're talking about writing code — server processes, cron jobs, state variables, cloud deployments. The "design loops" moment is real and it matters. But the entire conversation has been in developer.
+
+This article is the translation layer. Duet Boards are that translation.
+
+A loop, as Cherny described it, is conceptually simple: a small program that prompts the agent, reads the output, decides if the task is done, and re-prompts if not. That's the whole thing. The intelligence lives inside the body of that cycle — not in the cycle itself.
+
+The AI industry is moving through three stages. First: manually prompting one agent at a time. You're the engine — every step requires your attention. Second: parallel sessions — multiple agents running simultaneously, but you're still steering each one. Third: loops with self-verification — agents that prompt themselves on triggers, check their own output, and advance without you. Most operators are stuck at stage one or two. Steinberger and Cherny have already moved to three.
+
+A Kanban board is a loop. You've been designing them for years. Duet just adds the AI.
+
+---
+
+## What Is a No-Code AI Agent?
+
+<AnswerBox
+  title="What is a no-code AI agent?"
+  summary="A no-code AI agent is an autonomous workflow that runs itself through a defined sequence of tasks — without any programming required. Instead of writing scripts, you design stages on a visual board. The AI executes each stage, makes decisions, and advances the workflow automatically — the same way a developer's loop works, but built for operators."
+  bullets={[
+    'No programming required — describe each stage in plain English',
+    'AI reasons at each step instead of following predetermined script branches',
+    'Persistent across sessions — the workflow keeps running when you close your laptop',
+    'Human-approval gates surface decisions that genuinely need a human',
+  ]}
+  queries={[
+    'what is a no-code ai agent',
+    'no code ai agent builder',
+    'how to build ai agent without coding',
+  ]}
+/>
+
+That distinction matters. Most people who hear "AI agent" picture a chatbot — one question, one answer, conversation over. Or they picture a Zapier automation — if X happens, do Y, branch stops. An AI agent is neither.
+
+[Simon Willison](https://simonwillison.net/2025/Sep/30/designing-agentic-loops/), one of the most cited practitioners on how AI systems actually work, defines an agent as "something that runs tools in a loop to achieve a goal. The art of using them well is to carefully design the tools and loop for them to use." The key word is loop.
+
+The contrast that makes it click:
+
+- **Chatbot:** You ask → it answers → done. One shot, no persistence.
+- **Automation tool (Zapier, Make):** Trigger fires → follow the script → stop. Predetermined branches, no reasoning.
+- **AI agent:** Goal set → agent acts → agent checks → agent decides next step → continues until done. Adaptive, self-directing, persistent.
+
+No-code just means you build it on a visual board instead of writing Python. The underlying architecture — what Boris Cherny calls a "loop" — is identical.
+
+<DuetCTA />
+
+---
+
+## Wait — Isn't a Kanban Board Already a Loop?
+
+Yes, literally.
+
+Every well-designed Kanban board is already a state machine. Each column is a state, each card is a unit of work moving through states, and moving a card is a state transition. Exit criteria define when the card can advance. A "Blocked" column is an escalation path. A "Done" column is the stop condition.
+
+Boris Cherny designs loops to manage software. You already design loops to manage your business — you just call them Kanban boards.
+
+The translation is exact:
+
+| Developer says…     | Operator calls it…   | In Duet it's…                            |
+| ------------------- | -------------------- | ---------------------------------------- |
+| "Write a loop"      | "Set up a workflow"  | "Create a Board"                         |
+| "State"             | "Stage / column"     | "Board column"                           |
+| "State transition"  | "Moving a card"      | "Card moves to next column"              |
+| "Agent"             | "Person responsible" | "AI assigned to this column"             |
+| "Stop condition"    | "Exit criteria"      | "Terminal column (Done/Blocked)"         |
+| "Durable execution" | "It runs itself"     | "Duet cloud keeps it going"              |
+| "Escalation path"   | "Needs a human"      | "`Blocked` column surfaces the decision" |
+
+The two sides have been describing the same pattern in different languages. The only difference is who — or what — executes the transitions. Duet makes the columns executable by an AI agent instead of a person.
+
+---
+
+## What Makes an AI Loop Different From Regular Automation?
+
+If you already use Zapier or Make, you have a reasonable question: isn't this just the same thing with better branding?
+
+It isn't. Here's the precise difference.
+
+Zapier follows a predetermined code path. You define every branch in advance: if field contains "billing," route to billing@. The script is complete before any email arrives. If an angry enterprise trial user emails asking how to export their data before canceling — Zapier routes it to billing@. Because that's what the script says.
+
+An AI loop reasons at each step. It reads the full email, checks account tier, scores sentiment, identifies the real intent — and routes based on understanding, not keyword matching. Situations the original script never anticipated get handled. They're not errors; they're just inputs.
+
+[Oracle's breakdown of the agent loop architecture](https://blogs.oracle.com/developers/what-is-the-ai-agent-loop-the-core-architecture-behind-autonomous-ai-systems) puts the technical structure plainly:
+
+```
+while not done:
+    response = call_llm(messages)
+    if response has tool_calls:
+        results = execute_tools(response.tool_calls)
+        messages.append(results)
+    else:
+        done = True
+```
+
+Non-technical translation: "While the task isn't finished — ask the AI what to do next, do it, remember what happened, then loop back."
+
+The decision-making inside each iteration is what separates a loop from a script. Zapier executes instructions. An AI loop exercises judgment.
+
+A related objection comes up with developers: "isn't this just a cron job with rebranding?" Close, but no. A cron job runs a fixed script on a schedule. A loop uses the same trigger mechanism but puts a decision-maker — an LLM — in the body. Same heartbeat. Fundamentally different body. The cron job executes whatever you wrote. The loop reads the current state, reasons about the best next action, and adapts to what it finds. That reasoning step is the entire difference between automation and agency.
+
+If you want to compare the full landscape, the [no-code AI agent builders](/blog/6-best-ai-agent-builders-in-2026) category now runs from simple trigger-and-action tools to platforms that reason at each stage — and the gap between them is exactly this.
+
+<DuetCTA />
+
+---
+
+## What Are the Four Things That Make a Loop Actually Work?
+
+Every real AI loop has the same four mechanics. Miss any one and you get something that either breaks mid-task, spins endlessly, or stops the moment you close your laptop.
+
+### 1. Persistent State — the loop remembers where it is
+
+The loop carries what it knows forward. Each iteration builds on the last.
+
+In a content pipeline, when a card moves from "Written" to "Revision," the editor's feedback travels with it. The AI revising the piece isn't guessing what needs to change — it's reading the specific feedback that accumulated in the previous stage. A chatbot doesn't do this. A cron script starts from zero every time. A loop accumulates.
+
+### 2. Decision at Each Step — AI reasons, doesn't just follow branches
+
+At every iteration, the agent evaluates what it sees and chooses what to do next. This is the core break from if-this-then-that automation.
+
+The support ticket example is clean: a rules-based system routes by keyword. An AI loop reads the whole email, checks account tier, reads tone, identifies the actual question — and routes based on that reasoning. "Angry enterprise trial user asking how to export data before canceling" is not a branch the original script covered. The loop figures it out.
+
+### 3. Conditional Continuation — AI decides whether to keep going or stop
+
+A loop that never stops is AutoGPT circa 2023. A well-designed loop knows its exit conditions.
+
+Geoffrey Huntley's [ralph technique](https://ghuntley.com/ralph/) — a structured methodology of piping a fixed anchor prompt file into the agent on repeat, resetting context to fixed specification files each iteration — produced an entire programming language for roughly $297. The loop ran until the specs were met. Then it stopped. Clear exit conditions are what made that possible and what keep loops from becoming runaway processes.
+
+### 4. Durable Execution — runs even when you're not watching
+
+Boris Cherny closed his laptop. 259 PRs landed in 30 days. That doesn't happen if the loop only runs while someone is watching the terminal.
+
+Real loops run on a server. They persist across sessions, execute on a schedule, and pick up where they left off if something interrupts them. You get involved when a decision requires human judgment — not to press "go again" every morning.
+
+---
+
+## How Do Duet Boards Run All Four Mechanics Without Code?
+
+When a card lands in the "Research" column of a content pipeline board, the agent assigned to that column reads the brief, runs web searches, pulls competitor data, and writes a structured research summary — then moves the card to "Draft" automatically. You didn't write a function. You didn't configure a webhook. You described what should happen in plain English, and Duet turned it into a running workflow.
+
+Every column maps to one of the four loop mechanics. The card itself is the persistent state — every piece of context the agent adds accumulates and is available to the next stage. The agent at each column is the decision-maker — it reasons about what the card contains, not a script. The terminal columns (Published, Shelved, Blocked) are the stop conditions — the loop knows when it's done. And the whole thing runs on Duet's cloud, not your laptop — durable execution that keeps going over the weekend.
+
+Prefer an [always-on AI agent](/blog/how-to-set-up-a-24-7-ai-agent) approach? Start from [setting up Duet](/guides/how-to-set-up-duet) and build your first board in under 10 minutes.
+
+<DuetCTA />
+
+---
+
+## What Workflows Can I Actually Build This Way?
+
+Loops work best for tasks with a clear goal, natural stages, and a mix of AI-executable steps and human judgment calls at key decision points.
+
+| Workflow               | Columns                                                        | AI handles                                     | Human handles                         |
+| ---------------------- | -------------------------------------------------------------- | ---------------------------------------------- | ------------------------------------- |
+| **Content pipeline**   | Research → Draft → Review → Revise → Published                 | Research, drafting, revision edits             | Final approval, editorial escalations |
+| **Support triage**     | Inbox → Classify → Route → Respond → Closed / Escalated        | Classification, routing, draft responses       | Escalated tickets, enterprise issues  |
+| **Lead qualification** | New Lead → Enrich → Score → Qualified → In Sequence → Won/Lost | Enrichment, scoring, sequencing                | ICP edge cases, high-value deals      |
+| **Invoice processing** | Received → Extract → Match → Approved / Flagged → Paid         | Extraction, line-item matching, approval queue | Flagged invoices, vendor disputes     |
+
+Each of these runs the same way: describe what should happen at each column in plain English, assign an AI to the automated steps, and define when a card should advance or escalate.
+
+For teams that want to [automate content creation without a team](/blog/how-to-automate-content-creation-one-person-business), the content pipeline is usually the fastest to build — the stages already exist in your head, you just haven't made them executable yet.
+
+Once you're running multiple workflows, keeping everything in one place makes the difference between a few working automations and a real operating system for your business. Building an [AI command center](/guides/how-to-build-your-ai-command-center) — all your boards, agents, and scheduled tasks in a single workspace — is what that looks like in practice.
+
+---
+
+## Do I Actually Need to Understand AI to Design a Loop?
+
+No. You need to understand the workflow, not the AI.
+
+A developer building a loop from scratch writes a trigger, system prompts for each step, tool call definitions, state variables, stop conditions, failure handling, and cloud deployment. That's hours to days of work, and it requires knowing Python or Node.js.
+
+A Duet user building the same loop: creates a Board, names the columns, assigns an agent to each automated column, and writes a plain-English description of what the agent should do. Duet handles the state machine, the scheduling, the cloud runtime, and the execution.
+
+Even experienced developers prefer simpler loop-design interfaces when they're available. Geoffrey Huntley's [ralph technique](https://ghuntley.com/ralph/) wasn't born from a love of complexity — it replaced manual, repetitive iteration with a structured repeatable pattern precisely because simpler is always preferable when simple works.
+
+Peter Steinberger said "you should be designing loops." He didn't say you need to write them. Duet writes them for you.
+
+The skill that matters isn't programming. It's knowing your workflow well enough to describe what should happen at each stage.
+
+---
+
+## Frequently Asked Questions
+
+<Accordion type="single" collapsible className="w-full">
+
+<AccordionItem value="what-is-no-code-ai-agent">
+  <AccordionTrigger>What is a no-code AI agent?</AccordionTrigger>
+  <AccordionContent>
+    A no-code AI agent is an autonomous workflow that runs itself through a defined set of tasks
+    without any programming required. You design the stages on a visual board; the AI executes each
+    one, makes decisions, and advances the workflow automatically — the same architecture developers
+    call an "AI loop," built for operators instead of engineers.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="ai-loop-vs-automation">
+  <AccordionTrigger>
+    What is the difference between an AI loop and regular workflow automation?
+  </AccordionTrigger>
+  <AccordionContent>
+    Regular workflow automation (like Zapier or Make) follows predetermined branches — if condition
+    A, take action B, as scripted in advance. An AI loop reasons at each step: it reads the current
+    state, evaluates context, and decides what to do next — including handling situations the
+    original workflow never anticipated. The decision-making in the middle is the difference. Zapier
+    automates scripts; AI loops automate judgment calls.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="need-to-code">
+  <AccordionTrigger>Do I need to code to build an AI agent workflow?</AccordionTrigger>
+  <AccordionContent>
+    No. Platforms like Duet let you describe what each stage of a workflow should do in plain
+    English. You name your columns, assign an agent to each automated step, and define the handoff
+    criteria. Duet handles the state machine, scheduling, cloud runtime, and execution. No script
+    required.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="best-no-code-builder">
+  <AccordionTrigger>What is the best no-code AI agent builder?</AccordionTrigger>
+  <AccordionContent>
+    It depends on what you're automating. For simple trigger-and-action tasks, Zapier or Make work
+    well. For multi-stage workflows that run autonomously over hours or days — with persistent
+    memory, reasoning at each step, and human-approval gates — Duet is purpose-built for that use
+    case. See the full comparison of [no-code AI agent
+    builders](/blog/6-best-ai-agent-builders-in-2026) for a detailed breakdown of the category.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="how-duet-runs-workflows">
+  <AccordionTrigger>How does Duet run autonomous workflows?</AccordionTrigger>
+  <AccordionContent>
+    Duet uses a board-based state machine where each column is a workflow stage and each card is the
+    unit of work moving through it. An AI agent assigned to each column reads the card, takes
+    action, and advances or escalates based on the handoff criteria you define in plain English. The
+    whole thing runs on Duet's cloud — persistent, durable, and scheduled.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="what-workflows-can-i-automate">
+  <AccordionTrigger>
+    What business workflows can I automate with a no-code AI agent?
+  </AccordionTrigger>
+  <AccordionContent>
+    Any workflow with clear stages and a mix of repeatable steps and judgment-heavy exceptions.
+    Common patterns: content pipelines (research → draft → review → publish), support triage
+    (classify → route → respond → close), lead qualification (enrich → score → sequence → won/lost),
+    and invoice processing (extract → match → approve → pay). The AI handles repeatable steps;
+    humans handle the exceptions.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="ai-loop-simple-terms">
+  <AccordionTrigger>What is an AI loop in simple terms?</AccordionTrigger>
+  <AccordionContent>
+    An AI loop is a workflow where an AI agent takes an action, checks what happened, decides
+    whether the job is done — and if not, takes the next action entirely on its own. You define the
+    goal and the stages once. The AI keeps going until the work is finished or until it surfaces a
+    decision that genuinely needs a human. Then it stops and waits.
+  </AccordionContent>
+</AccordionItem>
+
+</Accordion>
+
+<DuetCTA
+  title="Start designing loops, not prompts."
+  subtitle="Duet Boards are the no-code interface for the autonomous AI workflows developers are already running. Build yours in minutes."
+  buttonText="Build your first board free"
+/>

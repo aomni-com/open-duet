@@ -1,0 +1,8 @@
+{
+  "before": "runtime-header-end-before.png",
+  "after": "fleet-mobile-runtime-end.png",
+  "beforeSha256": "8ce4d9215719655c896264d5702e2645a3e4f7a6aa4b2df67a2b361b82a27666",
+  "afterSha256": "8f7d2969010e0608ce4fc55b28aca09eca3ce5db5a2346bc55cbbf8a42ed2cc2",
+  "diffRatio32": 0.00037187521520556433,
+  "mae": 0.03721506783279389
+}

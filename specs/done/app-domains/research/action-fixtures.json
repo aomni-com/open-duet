@@ -1,0 +1,1156 @@
+[
+  {
+    "id": "add-immediate-activation",
+    "action": "sandboxAddDomain",
+    "args": {
+      "gatewayToken": "REDACTED",
+      "domain": "  HTTPS://EXAMPLE.COM///  ",
+      "appSlug": "dashboard"
+    },
+    "initialRows": [],
+    "providerCaseIds": [
+      "add-ready"
+    ],
+    "expected": {
+      "requests": [
+        {
+          "method": "POST",
+          "pathname": "/v10/projects/project-placeholder/domains",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": "{\"name\":\"example.com\"}"
+        },
+        {
+          "method": "GET",
+          "pathname": "/v6/domains/example.com/config",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": null
+        }
+      ],
+      "outcome": {
+        "kind": "return",
+        "value": {
+          "domainId": "domain-1",
+          "status": "active"
+        }
+      },
+      "rows": [
+        {
+          "_id": "domain-1",
+          "organizationId": "org-1",
+          "appSlug": "dashboard",
+          "domain": "example.com",
+          "status": "active",
+          "createdAt": 1800000000000,
+          "vercelDomainId": "example.com",
+          "verifiedAt": 1800000000000,
+          "lastCheckedAt": 1800000000000
+        }
+      ]
+    }
+  },
+  {
+    "id": "add-verifying",
+    "action": "sandboxAddDomain",
+    "args": {
+      "gatewayToken": "REDACTED",
+      "domain": "tools.example.com",
+      "appSlug": "dashboard"
+    },
+    "initialRows": [],
+    "providerCaseIds": [
+      "read-subdomain-txt-cname"
+    ],
+    "expected": {
+      "requests": [
+        {
+          "method": "POST",
+          "pathname": "/v10/projects/project-placeholder/domains",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": "{\"name\":\"tools.example.com\"}"
+        },
+        {
+          "method": "GET",
+          "pathname": "/v6/domains/tools.example.com/config",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": null
+        }
+      ],
+      "outcome": {
+        "kind": "return",
+        "value": {
+          "domainId": "domain-1",
+          "status": "verifying"
+        }
+      },
+      "rows": [
+        {
+          "_id": "domain-1",
+          "organizationId": "org-1",
+          "appSlug": "dashboard",
+          "domain": "tools.example.com",
+          "status": "verifying",
+          "createdAt": 1800000000000,
+          "vercelDomainId": "tools.example.com",
+          "verification": [
+            {
+              "type": "TXT",
+              "domain": "_vercel.tools.example.com",
+              "value": "ownership-placeholder",
+              "reason": "pending-ownership"
+            },
+            {
+              "type": "CNAME",
+              "domain": "tools.example.com",
+              "value": "preferred.vercel-dns.example"
+            }
+          ],
+          "conflicts": [
+            {
+              "name": "tools.example.com",
+              "type": "CNAME",
+              "value": "old.example"
+            }
+          ],
+          "lastCheckedAt": 1800000000000
+        }
+      ]
+    }
+  },
+  {
+    "id": "add-failed",
+    "action": "sandboxAddDomain",
+    "args": {
+      "gatewayToken": "REDACTED",
+      "domain": "tools.example.com",
+      "appSlug": "dashboard"
+    },
+    "initialRows": [],
+    "providerCaseIds": [
+      "add-conflict"
+    ],
+    "expected": {
+      "requests": [
+        {
+          "method": "POST",
+          "pathname": "/v10/projects/project-placeholder/domains",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": "{\"name\":\"tools.example.com\"}"
+        }
+      ],
+      "outcome": {
+        "kind": "throw",
+        "error": {
+          "name": "Error",
+          "message": "Vercel addDomain failed (409): {\"error\":{\"code\":\"domain_taken\",\"message\":\"Already assigned\"}}"
+        }
+      },
+      "rows": [
+        {
+          "_id": "domain-1",
+          "organizationId": "org-1",
+          "appSlug": "dashboard",
+          "domain": "tools.example.com",
+          "status": "failed",
+          "createdAt": 1800000000000,
+          "lastError": "Vercel addDomain failed (409): {\"error\":{\"code\":\"domain_taken\",\"message\":\"Already assigned\"}}",
+          "lastCheckedAt": 1800000000000
+        }
+      ]
+    }
+  },
+  {
+    "id": "refresh-clears-diagnostics",
+    "action": "refreshDomain",
+    "args": {
+      "domainId": "domain-1"
+    },
+    "initialRows": [
+      {
+        "_id": "domain-1",
+        "organizationId": "org-1",
+        "appSlug": "dashboard",
+        "domain": "tools.example.com",
+        "status": "verifying",
+        "verification": [
+          {
+            "type": "TXT",
+            "domain": "_vercel.tools.example.com",
+            "value": "stale-challenge"
+          }
+        ],
+        "conflicts": [
+          {
+            "name": "tools.example.com",
+            "type": "CNAME",
+            "value": "old.example"
+          }
+        ],
+        "lastError": "old failure"
+      }
+    ],
+    "providerCaseIds": [
+      "verify-ready"
+    ],
+    "expected": {
+      "requests": [
+        {
+          "method": "POST",
+          "pathname": "/v9/projects/project-placeholder/domains/tools.example.com/verify",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": null
+        },
+        {
+          "method": "GET",
+          "pathname": "/v6/domains/tools.example.com/config",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": null
+        }
+      ],
+      "outcome": {
+        "kind": "return",
+        "value": {
+          "status": "active"
+        }
+      },
+      "rows": [
+        {
+          "_id": "domain-1",
+          "organizationId": "org-1",
+          "appSlug": "dashboard",
+          "domain": "tools.example.com",
+          "status": "active",
+          "verification": [
+            {
+              "type": "TXT",
+              "domain": "_vercel.tools.example.com",
+              "value": "stale-challenge"
+            }
+          ],
+          "verifiedAt": 1800000000000,
+          "lastCheckedAt": 1800000000000
+        }
+      ]
+    }
+  },
+  {
+    "id": "refresh-failure",
+    "action": "refreshDomain",
+    "args": {
+      "domainId": "domain-1"
+    },
+    "initialRows": [
+      {
+        "_id": "domain-1",
+        "organizationId": "org-1",
+        "appSlug": "dashboard",
+        "domain": "tools.example.com",
+        "status": "active",
+        "verification": [
+          {
+            "type": "TXT",
+            "domain": "_vercel.tools.example.com",
+            "value": "stale-challenge"
+          }
+        ],
+        "conflicts": [
+          {
+            "name": "tools.example.com",
+            "type": "CNAME",
+            "value": "old.example"
+          }
+        ],
+        "lastError": "old failure",
+        "verifiedAt": 123
+      }
+    ],
+    "providerCaseIds": [
+      "verify-provider-failure"
+    ],
+    "expected": {
+      "requests": [
+        {
+          "method": "POST",
+          "pathname": "/v9/projects/project-placeholder/domains/tools.example.com/verify",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": null
+        }
+      ],
+      "outcome": {
+        "kind": "throw",
+        "error": {
+          "name": "Error",
+          "message": "Vercel verifyDomain failed (500): verify unavailable"
+        }
+      },
+      "rows": [
+        {
+          "_id": "domain-1",
+          "organizationId": "org-1",
+          "appSlug": "dashboard",
+          "domain": "tools.example.com",
+          "status": "failed",
+          "verification": [
+            {
+              "type": "TXT",
+              "domain": "_vercel.tools.example.com",
+              "value": "stale-challenge"
+            }
+          ],
+          "conflicts": [
+            {
+              "name": "tools.example.com",
+              "type": "CNAME",
+              "value": "old.example"
+            }
+          ],
+          "lastError": "Vercel verifyDomain failed (500): verify unavailable",
+          "verifiedAt": 123,
+          "lastCheckedAt": 1800000000000
+        }
+      ]
+    }
+  },
+  {
+    "id": "remove-provider-failure-local-delete",
+    "action": "removeDomain",
+    "args": {
+      "domainId": "domain-1"
+    },
+    "initialRows": [
+      {
+        "_id": "domain-1",
+        "organizationId": "org-1",
+        "appSlug": "dashboard",
+        "domain": "tools.example.com",
+        "status": "verifying",
+        "verification": [
+          {
+            "type": "TXT",
+            "domain": "_vercel.tools.example.com",
+            "value": "stale-challenge"
+          }
+        ],
+        "conflicts": [
+          {
+            "name": "tools.example.com",
+            "type": "CNAME",
+            "value": "old.example"
+          }
+        ],
+        "lastError": "old failure"
+      }
+    ],
+    "providerCaseIds": [
+      "remove-provider-failure"
+    ],
+    "expected": {
+      "requests": [
+        {
+          "method": "DELETE",
+          "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": null
+        }
+      ],
+      "outcome": {
+        "kind": "return",
+        "value": {
+          "removed": true
+        }
+      },
+      "rows": []
+    }
+  },
+  {
+    "id": "remove-provider-404-local-delete",
+    "action": "removeDomain",
+    "args": {
+      "domainId": "domain-1"
+    },
+    "initialRows": [
+      {
+        "_id": "domain-1",
+        "organizationId": "org-1",
+        "appSlug": "dashboard",
+        "domain": "tools.example.com",
+        "status": "verifying",
+        "verification": [
+          {
+            "type": "TXT",
+            "domain": "_vercel.tools.example.com",
+            "value": "stale-challenge"
+          }
+        ],
+        "conflicts": [
+          {
+            "name": "tools.example.com",
+            "type": "CNAME",
+            "value": "old.example"
+          }
+        ],
+        "lastError": "old failure"
+      }
+    ],
+    "providerCaseIds": [
+      "remove-missing"
+    ],
+    "expected": {
+      "requests": [
+        {
+          "method": "DELETE",
+          "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": null
+        }
+      ],
+      "outcome": {
+        "kind": "return",
+        "value": {
+          "removed": true
+        }
+      },
+      "rows": []
+    }
+  },
+  {
+    "id": "remove-missing-local",
+    "action": "removeDomain",
+    "args": {
+      "domainId": "missing"
+    },
+    "initialRows": [],
+    "providerCaseIds": [],
+    "expected": {
+      "requests": [],
+      "outcome": {
+        "kind": "return",
+        "value": {
+          "removed": false
+        }
+      },
+      "rows": []
+    }
+  },
+  {
+    "id": "poll-active",
+    "action": "pollVerifications",
+    "args": {},
+    "initialRows": [
+      {
+        "_id": "domain-1",
+        "organizationId": "org-1",
+        "appSlug": "dashboard",
+        "domain": "tools.example.com",
+        "status": "verifying",
+        "verification": [
+          {
+            "type": "TXT",
+            "domain": "_vercel.tools.example.com",
+            "value": "stale-challenge"
+          }
+        ],
+        "conflicts": [
+          {
+            "name": "tools.example.com",
+            "type": "CNAME",
+            "value": "old.example"
+          }
+        ],
+        "lastError": "old failure"
+      }
+    ],
+    "providerCaseIds": [
+      "verify-ready"
+    ],
+    "expected": {
+      "requests": [
+        {
+          "method": "GET",
+          "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": null
+        },
+        {
+          "method": "GET",
+          "pathname": "/v6/domains/tools.example.com/config",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": null
+        }
+      ],
+      "outcome": {
+        "kind": "return",
+        "value": {
+          "checked": 1,
+          "activated": 1
+        }
+      },
+      "rows": [
+        {
+          "_id": "domain-1",
+          "organizationId": "org-1",
+          "appSlug": "dashboard",
+          "domain": "tools.example.com",
+          "status": "active",
+          "verification": [
+            {
+              "type": "TXT",
+              "domain": "_vercel.tools.example.com",
+              "value": "stale-challenge"
+            }
+          ],
+          "verifiedAt": 1800000000000,
+          "lastCheckedAt": 1800000000000
+        }
+      ]
+    }
+  },
+  {
+    "id": "poll-missing",
+    "action": "pollVerifications",
+    "args": {},
+    "initialRows": [
+      {
+        "_id": "domain-1",
+        "organizationId": "org-1",
+        "appSlug": "dashboard",
+        "domain": "tools.example.com",
+        "status": "verifying",
+        "verification": [
+          {
+            "type": "TXT",
+            "domain": "_vercel.tools.example.com",
+            "value": "stale-challenge"
+          }
+        ],
+        "conflicts": [
+          {
+            "name": "tools.example.com",
+            "type": "CNAME",
+            "value": "old.example"
+          }
+        ],
+        "lastError": "old failure"
+      }
+    ],
+    "providerCaseIds": [
+      "read-missing"
+    ],
+    "expected": {
+      "requests": [
+        {
+          "method": "GET",
+          "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": null
+        }
+      ],
+      "outcome": {
+        "kind": "return",
+        "value": {
+          "checked": 1,
+          "activated": 0
+        }
+      },
+      "rows": [
+        {
+          "_id": "domain-1",
+          "organizationId": "org-1",
+          "appSlug": "dashboard",
+          "domain": "tools.example.com",
+          "status": "failed",
+          "verification": [
+            {
+              "type": "TXT",
+              "domain": "_vercel.tools.example.com",
+              "value": "stale-challenge"
+            }
+          ],
+          "conflicts": [
+            {
+              "name": "tools.example.com",
+              "type": "CNAME",
+              "value": "old.example"
+            }
+          ],
+          "lastError": "Domain no longer exists on Vercel project",
+          "lastCheckedAt": 1800000000000
+        }
+      ]
+    }
+  },
+  {
+    "id": "poll-transient",
+    "action": "pollVerifications",
+    "args": {},
+    "initialRows": [
+      {
+        "_id": "domain-1",
+        "organizationId": "org-1",
+        "appSlug": "dashboard",
+        "domain": "tools.example.com",
+        "status": "verifying",
+        "verification": [
+          {
+            "type": "TXT",
+            "domain": "_vercel.tools.example.com",
+            "value": "stale-challenge"
+          }
+        ],
+        "conflicts": [
+          {
+            "name": "tools.example.com",
+            "type": "CNAME",
+            "value": "old.example"
+          }
+        ],
+        "lastError": "old failure"
+      }
+    ],
+    "providerCaseIds": [
+      "read-rate-limit"
+    ],
+    "expected": {
+      "requests": [
+        {
+          "method": "GET",
+          "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": null
+        }
+      ],
+      "outcome": {
+        "kind": "return",
+        "value": {
+          "checked": 1,
+          "activated": 0
+        }
+      },
+      "rows": [
+        {
+          "_id": "domain-1",
+          "organizationId": "org-1",
+          "appSlug": "dashboard",
+          "domain": "tools.example.com",
+          "status": "verifying",
+          "verification": [
+            {
+              "type": "TXT",
+              "domain": "_vercel.tools.example.com",
+              "value": "stale-challenge"
+            }
+          ],
+          "conflicts": [
+            {
+              "name": "tools.example.com",
+              "type": "CNAME",
+              "value": "old.example"
+            }
+          ],
+          "lastError": "Vercel getDomain failed (429): rate limit",
+          "lastCheckedAt": 1800000000000
+        }
+      ]
+    }
+  },
+  {
+    "id": "poll-unverified-get-only",
+    "action": "pollVerifications",
+    "args": {},
+    "initialRows": [
+      {
+        "_id": "domain-1",
+        "organizationId": "org-1",
+        "appSlug": "dashboard",
+        "domain": "tools.example.com",
+        "status": "verifying",
+        "verification": [
+          {
+            "type": "TXT",
+            "domain": "_vercel.tools.example.com",
+            "value": "stale-challenge"
+          }
+        ],
+        "conflicts": [
+          {
+            "name": "tools.example.com",
+            "type": "CNAME",
+            "value": "old.example"
+          }
+        ],
+        "lastError": "old failure"
+      }
+    ],
+    "providerCaseIds": [
+      "read-ownership-pending-routing-ready"
+    ],
+    "expected": {
+      "requests": [
+        {
+          "method": "GET",
+          "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": null
+        },
+        {
+          "method": "GET",
+          "pathname": "/v6/domains/tools.example.com/config",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": null
+        }
+      ],
+      "outcome": {
+        "kind": "return",
+        "value": {
+          "checked": 1,
+          "activated": 0
+        }
+      },
+      "rows": [
+        {
+          "_id": "domain-1",
+          "organizationId": "org-1",
+          "appSlug": "dashboard",
+          "domain": "tools.example.com",
+          "status": "verifying",
+          "verification": [
+            {
+              "type": "TXT",
+              "domain": "_vercel.tools.example.com",
+              "value": "ownership-placeholder",
+              "reason": "pending-ownership"
+            }
+          ],
+          "lastCheckedAt": 1800000000000
+        }
+      ]
+    }
+  },
+  {
+    "id": "poll-prefix-limit",
+    "action": "pollVerifications",
+    "args": {
+      "limit": 1
+    },
+    "initialRows": [
+      {
+        "_id": "domain-1",
+        "organizationId": "org-1",
+        "appSlug": "dashboard",
+        "domain": "tools.example.com",
+        "status": "verifying"
+      },
+      {
+        "_id": "domain-2",
+        "organizationId": "org-1",
+        "appSlug": "dashboard",
+        "domain": "second.example.com",
+        "status": "verifying"
+      }
+    ],
+    "providerCaseIds": [
+      "read-ownership-pending-routing-ready"
+    ],
+    "expected": {
+      "requests": [
+        {
+          "method": "GET",
+          "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": null
+        },
+        {
+          "method": "GET",
+          "pathname": "/v6/domains/tools.example.com/config",
+          "query": [
+            [
+              "teamId",
+              "team-placeholder"
+            ]
+          ],
+          "headers": {
+            "authorization": "REDACTED",
+            "content-type": "application/json"
+          },
+          "body": null
+        }
+      ],
+      "outcome": {
+        "kind": "return",
+        "value": {
+          "checked": 1,
+          "activated": 0
+        }
+      },
+      "rows": [
+        {
+          "_id": "domain-1",
+          "organizationId": "org-1",
+          "appSlug": "dashboard",
+          "domain": "tools.example.com",
+          "status": "verifying",
+          "verification": [
+            {
+              "type": "TXT",
+              "domain": "_vercel.tools.example.com",
+              "value": "ownership-placeholder",
+              "reason": "pending-ownership"
+            }
+          ],
+          "lastCheckedAt": 1800000000000
+        },
+        {
+          "_id": "domain-2",
+          "organizationId": "org-1",
+          "appSlug": "dashboard",
+          "domain": "second.example.com",
+          "status": "verifying"
+        }
+      ]
+    }
+  },
+  {
+    "id": "add-duplicate",
+    "action": "sandboxAddDomain",
+    "args": {
+      "gatewayToken": "REDACTED",
+      "domain": "tools.example.com",
+      "appSlug": "dashboard"
+    },
+    "initialRows": [
+      {
+        "_id": "domain-1",
+        "organizationId": "org-1",
+        "appSlug": "dashboard",
+        "domain": "tools.example.com",
+        "status": "verifying"
+      }
+    ],
+    "providerCaseIds": [],
+    "expected": {
+      "requests": [],
+      "outcome": {
+        "kind": "throw",
+        "error": {
+          "name": "Error",
+          "message": "Domain tools.example.com is already registered"
+        }
+      },
+      "rows": [
+        {
+          "_id": "domain-1",
+          "organizationId": "org-1",
+          "appSlug": "dashboard",
+          "domain": "tools.example.com",
+          "status": "verifying"
+        }
+      ]
+    }
+  },
+  {
+    "id": "normalize-reject-localhost",
+    "action": "sandboxAddDomain",
+    "args": {
+      "gatewayToken": "REDACTED",
+      "domain": "localhost",
+      "appSlug": "dashboard"
+    },
+    "initialRows": [],
+    "providerCaseIds": [],
+    "expected": {
+      "requests": [],
+      "outcome": {
+        "kind": "throw",
+        "error": {
+          "name": "Error",
+          "message": "Invalid domain: localhost"
+        }
+      },
+      "rows": []
+    }
+  },
+  {
+    "id": "normalize-reject-bad..example.com",
+    "action": "sandboxAddDomain",
+    "args": {
+      "gatewayToken": "REDACTED",
+      "domain": "bad..example.com",
+      "appSlug": "dashboard"
+    },
+    "initialRows": [],
+    "providerCaseIds": [],
+    "expected": {
+      "requests": [],
+      "outcome": {
+        "kind": "throw",
+        "error": {
+          "name": "Error",
+          "message": "Invalid domain: bad..example.com"
+        }
+      },
+      "rows": []
+    }
+  },
+  {
+    "id": "normalize-reject-bad-.example.com",
+    "action": "sandboxAddDomain",
+    "args": {
+      "gatewayToken": "REDACTED",
+      "domain": "bad-.example.com",
+      "appSlug": "dashboard"
+    },
+    "initialRows": [],
+    "providerCaseIds": [],
+    "expected": {
+      "requests": [],
+      "outcome": {
+        "kind": "throw",
+        "error": {
+          "name": "Error",
+          "message": "Invalid domain: bad-.example.com"
+        }
+      },
+      "rows": []
+    }
+  },
+  {
+    "id": "normalize-reject-tools.example.com_path",
+    "action": "sandboxAddDomain",
+    "args": {
+      "gatewayToken": "REDACTED",
+      "domain": "tools.example.com/path",
+      "appSlug": "dashboard"
+    },
+    "initialRows": [],
+    "providerCaseIds": [],
+    "expected": {
+      "requests": [],
+      "outcome": {
+        "kind": "throw",
+        "error": {
+          "name": "Error",
+          "message": "Invalid domain: tools.example.com/path"
+        }
+      },
+      "rows": []
+    }
+  },
+  {
+    "id": "normalize-reject-ftp:__tools.example.com",
+    "action": "sandboxAddDomain",
+    "args": {
+      "gatewayToken": "REDACTED",
+      "domain": "ftp://tools.example.com",
+      "appSlug": "dashboard"
+    },
+    "initialRows": [],
+    "providerCaseIds": [],
+    "expected": {
+      "requests": [],
+      "outcome": {
+        "kind": "throw",
+        "error": {
+          "name": "Error",
+          "message": "Invalid domain: ftp://tools.example.com"
+        }
+      },
+      "rows": []
+    }
+  },
+  {
+    "id": "service.example.invalid",
+    "action": "sandboxAddDomain",
+    "args": {
+      "gatewayToken": "REDACTED",
+      "domain": "service.example.invalid",
+      "appSlug": "dashboard"
+    },
+    "initialRows": [],
+    "providerCaseIds": [],
+    "expected": {
+      "requests": [],
+      "outcome": {
+        "kind": "throw",
+        "error": {
+          "name": "Error",
+          "message": "Cannot register a service.example.invalid / duet.chat domain"
+        }
+      },
+      "rows": []
+    }
+  },
+  {
+    "id": "normalize-reject-tools.duet.chat",
+    "action": "sandboxAddDomain",
+    "args": {
+      "gatewayToken": "REDACTED",
+      "domain": "tools.duet.chat",
+      "appSlug": "dashboard"
+    },
+    "initialRows": [],
+    "providerCaseIds": [],
+    "expected": {
+      "requests": [],
+      "outcome": {
+        "kind": "throw",
+        "error": {
+          "name": "Error",
+          "message": "Cannot register a service.example.invalid / duet.chat domain"
+        }
+      },
+      "rows": []
+    }
+  }
+]

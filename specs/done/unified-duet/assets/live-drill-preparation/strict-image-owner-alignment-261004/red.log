@@ -1,0 +1,49 @@
+
+174 |     }
+175 |     return { path, remove, [Symbol.asyncDispose]: remove };
+176 |   },
+177 |   statfs: asyncWrap(fs.statfs, "statfs"),
+178 |   open: async (path, flags = "r", mode = 438) => {
+179 |     return new private_symbols.FileHandle(await fs.open(path, flags, mode), flags, pathForDiag);
+                                ^
+EACCES: permission denied, open '/tmp/strict-owner-probe/runtime/releases/0.0.0+25da1a815656f01f4650e0d19b969fa658cbba24c107bd807a3bc1aa97c4e438/duet.partial'
+    path: "/tmp/strict-owner-probe/runtime/releases/0.0.0+25da1a815656f01f4650e0d19b969fa658cbba24c107bd807a3bc1aa97c4e438/duet.partial",
+ syscall: "open",
+   errno: -13,
+    code: "EACCES"
+
+      at async <anonymous> (node:fs/promises:179:56)
+      at async writeSyncedFile (/tmp/strict-owner-probe.js:24385:27)
+      at async installRuntimeRelease (/tmp/strict-owner-probe.js:24288:39)
+      at async <anonymous> (/tmp/strict-owner-probe.js:24225:60)
+      at async withFileLock (/tmp/strict-owner-probe.js:24213:24)
+      at async withReleaseLock (/tmp/strict-owner-probe.js:24260:30)
+      at async applyRuntimeRelease (/tmp/strict-owner-probe.js:24223:31)
+note: missing sourcemaps for /tmp/strict-owner-probe.js
+note: consider bundling with '--sourcemap' to get unminified traces
+
+Bun v1.4.2 (Linux x64)
+
+24583 |   await installStrictFixtureRelease({ runtimeRoot, sourceDir: previousDir, manifest: previous.manifest });
+24584 |   const child = Bun.spawn(["runuser", "-u", "exedev", "--", "/opt/duet/gateway-runtime/bin/bun", "/tmp/strict-owner-probe.js", "--as-gateway"], { stdout: "pipe", stderr: "pipe" });
+24585 |   const [out, err, code] = await Promise.all([new Response(child.stdout).text(), new Response(child.stderr).text(), child.exited]);
+24586 |   console.log(out);
+24587 |   console.error(err);
+24588 |   assert2.equal(code, 0, "Root fixture setup must permit ordinary exedev updater");
+                       ^
+AssertionError: Root fixture setup must permit ordinary exedev updater
+
+1 !== 0
+
+ generatedMessage: false,
+     actual: 1,
+   expected: 0,
+   operator: "strictEqual",
+       diff: "simple",
+       code: "ERR_ASSERTION"
+
+      at /tmp/strict-owner-probe.js:24588:16
+note: missing sourcemaps for /tmp/strict-owner-probe.js
+note: consider bundling with '--sourcemap' to get unminified traces
+
+Bun v1.4.2 (Linux x64)

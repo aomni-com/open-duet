@@ -1,0 +1,121 @@
+{
+  "status": "disposable-systemd-regression-complete",
+  "observedAt": "2026-10-04T22:57:05.924707+00:00",
+  "sourceBaseRevision": "c37b1f3b0cfdd7cf84d16f88f29fb0b82a2f4596",
+  "helperSourceSha256": "99aa5245e1858677e0c1b5c1336e122a056f0040fc479aceb8e908a9b033e134",
+  "helperBundleSha256": "af16bf408c572f7d8fc8466be578ec9072187e2b78aa4557c35aa0e8bce733d8",
+  "oldHelperBundleSha256": "e8603337408bad602fbff58f82d928a96982bf2e1b709c82aa48814b1558f5ed",
+  "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+  "targetManifestSha256": "953423e2a2d83506770e3df675ba0ab4bfd3dd746978c359dc3a386e930ab3f8",
+  "bootstrapSha256": "b33587a373136cdac66b78cf74f2e05eb2ee7341207d7adafef49045f0b4e1ab",
+  "gatewayBunSha256": "a83d263767d839e4d2649ca8e35d07159c7afc99afdc96d731ced29e056dda0c",
+  "targetUnitSha256": "84677a224fe0385b335a36dc8cb4e9609424a75f49ed138ab671a4f9c8e3b867",
+  "legacyOverrideSha256": "14551d3dcee64fe8d54e1174e0d2525584836bb61a6a272531cfc2536414992f",
+  "oldBundles": {
+    "index.js": "01212abf6ba1d20de0604a0b615a4cd5a442036f49ccc915b44e6afa7c43ec63",
+    "helper.js": "66d30a1884b07751b6ef127849af8b59c566b1677035e8179cb6292aa1331be7",
+    "gateway-bootstrap.js": "14c6ba68a04abd340b29bf1110c7437ed31ac601c1f0e0955fbb0eac4c674b43"
+  },
+  "fixture": {
+    "container": "duet-adoption-full-drill",
+    "containerId": "7335494aef14b5e1b6ad847928d4cd8343fc53c9b235a20c4c36ee1b3beaecc0",
+    "imageId": "sha256:e0f573cb051e16bb0a6d311c2a29f8caba9a38f957cc7d6c69095502e4292b85",
+    "platform": "Ubuntu 24 real systemd; ARM Docker kernel; x64 runtime/CLI through Rosetta",
+    "syncthing": "synthetic sleep process marker; no stock protocol proof",
+    "credentials": "synthetic",
+    "legacyCliVersion": "0.3.36",
+    "productionTimeoutsUnchanged": {
+      "cutLeaseMs": 60000,
+      "certifyTimeoutMs": 180000
+    }
+  },
+  "red": {
+    "productAssertion": "adoption completes with known legacy override present",
+    "actualStatus": "failed",
+    "actualReason": "Native memory CLI probe failed",
+    "legacyBootstrapReAdoptedOldCohort": true,
+    "exactLiveErrnoReproduced": false
+  },
+  "proofs": {
+    "success": "certified held target, exact effective commands, native memory golden row survives",
+    "rollback": "parent SIGKILL during held started phase; exact legacy override bytes/mode/uid/gid restored",
+    "unexpectedOverride": "deferred and restored; no target sync admitted",
+    "noop": "complete with same open gateway MainPID"
+  },
+  "checks": {
+    "helperTests": {
+      "passed": 10,
+      "failed": 0,
+      "assertions": 25
+    },
+    "typecheck": "pass",
+    "lint": "pass; no warnings",
+    "diffCheck": "pass",
+    "independentReview": "no actionable defects; reviewer sandbox could not bind two HTTP tests, owning host independently passes all ten"
+  },
+  "cleanup": {
+    "jobInactiveWithZeroMainAndControlPids": true,
+    "remainingJobMutators": 0,
+    "containerStopped": true,
+    "dockerStopExitCode": 137,
+    "note": "container stopped after settled/no-mutator census; no graceful container exit claim"
+  },
+  "liveOperations": false,
+  "vmRestartOrReprovision": false,
+  "runtimePayloadRebuilt": false,
+  "referenceInvocation": {
+    "reset": [
+      "docker",
+      "exec",
+      "duet-adoption-full-drill",
+      "bash",
+      "/tmp/reset-fixture.sh"
+    ],
+    "driver": [
+      "docker",
+      "exec",
+      "duet-adoption-full-drill",
+      "/tmp/transfer/gateway-bun",
+      "/tmp/dropin-drill.ts",
+      "<mode>"
+    ],
+    "oldHelper": "copy frozen e860 to /tmp/transfer/platform-helper.js for red; use separately built helper for subsequent modes",
+    "prerequisites": "retained full-setup fixture, /tmp/old-source, source-identified old CLI/memory, unchanged held target input; reference driver/reset are fixture-only"
+  },
+  "evidenceSha256": {
+    "40-bun-runtime.conf": "14551d3dcee64fe8d54e1174e0d2525584836bb61a6a272531cfc2536414992f",
+    "README.md": "c2ee0a7561771d5ba17bf82c876320d2a90d38ccadf22c3092684440cb6e8b40",
+    "complete-gate-red.txt": "6a1808ebdfd94b215eb55f10dabb7719d47a6f0e39d099a6868e62354f9d0fed",
+    "container-after.json": "cec5c88a1c8b5aec3e32052db94bb400d3f0d80b5332f6ac4ff8fcaa10898e62",
+    "fixture-api.js": "467df38c776a76e24459984dad5965d190a6d45a264a7a14125cdd8a05e87c01",
+    "frozen-runtime-inspection.json": "f8457d4607e9084de6e5d802b059b50f6b754163586f2cfd61ae72253f305c50",
+    "legacy-bootstrap-red.txt": "4930adb5da967bcbdf4bb0be6678495c95321c289c04d32df35a919cf800041a",
+    "mutator-census.json": "2178331fb887d542e479923212b87d69698809532f903a0c60c37e463755080f",
+    "old-helper-terminal-records.ndjson": "0888f28b6b7e69af4c793341b39e0ad7e24a0a257dc3e81ed56f15e658a9e286",
+    "reset-fixture.sh": "99ddb2445fe3075bbf1d4faa0c643a5e6f5f44b1ba22680e713cb09814be9830",
+    "review.txt.gz": "bd805e2f45b9a0e3e842b8487c9a864caf9a18c8be269c4352dfcfc445c4a887",
+    "systemd-drill.ts": "526a803d2503cd019ec6bfcc1534ea804728ddb6332e5cc90bd6cf1d704f483e",
+    "systemd-green.json": "334858b4e408f847e811b27caedc447986f3a2dbd70d65a89a401e06f055da70",
+    "systemd-noop.json": "4847979808abca3398b191848ecdc3268359a213e24fdf30d71c65318aa5a81c",
+    "systemd-rollback.json": "5be3f1184789a1b03e640326adf87af14fcabf19ed2b3def6b6edc3a6ca5cd74",
+    "systemd-unexpected.json": "33bb204d34e796c77d5b8460c19245263ae437d34398ce5f111a924e90eda668",
+    "tests.txt.gz": "c0ba482b101d1158d47a969506ac59ed2a6d52d3fecfac8c2e14ea5ac4240107"
+  },
+  "referenceArchives": {
+    "fixture-api.js": {
+      "path": "fixture-api.js.reference.gz",
+      "originalSha256": "467df38c776a76e24459984dad5965d190a6d45a264a7a14125cdd8a05e87c01",
+      "archiveSha256": "5686132956681238d92eeb3e14cf7a506479b88c4b5af6218bd186fe55657be7"
+    },
+    "reset-fixture.sh": {
+      "path": "reset-fixture.sh.reference.gz",
+      "originalSha256": "99ddb2445fe3075bbf1d4faa0c643a5e6f5f44b1ba22680e713cb09814be9830",
+      "archiveSha256": "6cb4ffffd527217dd3f2057b64a01402922914b6b0523dc3226bda0bdacff429"
+    },
+    "systemd-drill.ts": {
+      "path": "systemd-drill.ts.reference.gz",
+      "originalSha256": "526a803d2503cd019ec6bfcc1534ea804728ddb6332e5cc90bd6cf1d704f483e",
+      "archiveSha256": "6f129f7daef1c6b6e76a32e25e27b32d406c07ad7c10102f53003fc897e668c9"
+    }
+  }
+}

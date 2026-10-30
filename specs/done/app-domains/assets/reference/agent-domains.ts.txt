@@ -1,0 +1,108 @@
+import type { Hono } from 'hono'
+
+import { api } from '@repo/backend/convex/_generated/api'
+
+import type { AppContext } from '../app'
+import { loadCredentials } from '../utils/credentials'
+
+interface AddDomainRequest {
+  domain: string
+  appSlug: string
+}
+
+interface RemoveDomainRequest {
+  domain: string
+}
+
+/**
+ * In-sandbox custom domain management.
+ * Lets agents add, list, and remove custom domains without needing user auth —
+ * authenticates via the gateway credentials token.
+ */
+export function registerPublicDomainsRoutes(
+  app: Hono,
+  ctx: Pick<AppContext, 'config' | 'convexClient'>,
+) {
+  app.get('/public/domains', async c => {
+    const credentials = loadCredentials(ctx.config.credentialsPath)
+    if (!credentials?.token) {
+      return c.json({ error: 'Gateway credentials not available' }, 500)
+    }
+
+    try {
+      const domains = await ctx.convexClient.action(
+        api.domains.customDomains.actions.sandboxListDomains,
+        { gatewayToken: credentials.token },
+      )
+      return c.json({ domains })
+    } catch (error) {
+      return c.json({ error: (error as Error).message }, 500)
+    }
+  })
+
+  app.post('/public/domains', async c => {
+    const credentials = loadCredentials(ctx.config.credentialsPath)
+    if (!credentials?.token) {
+      return c.json({ error: 'Gateway credentials not available' }, 500)
+    }
+
+    let body: AddDomainRequest
+    try {
+      body = await c.req.json<AddDomainRequest>()
+    } catch {
+      return c.json({ error: 'Invalid JSON body' }, 400)
+    }
+
+    if (!body.domain) {
+      return c.json({ error: 'Missing domain' }, 400)
+    }
+    if (!body.appSlug) {
+      return c.json({ error: 'Missing appSlug' }, 400)
+    }
+
+    try {
+      const result = await ctx.convexClient.action(
+        api.domains.customDomains.actions.sandboxAddDomain,
+        {
+          gatewayToken: credentials.token,
+          domain: body.domain,
+          appSlug: body.appSlug,
+        },
+      )
+      return c.json({ success: true, ...result })
+    } catch (error) {
+      return c.json({ error: (error as Error).message }, 400)
+    }
+  })
+
+  app.delete('/public/domains', async c => {
+    const credentials = loadCredentials(ctx.config.credentialsPath)
+    if (!credentials?.token) {
+      return c.json({ error: 'Gateway credentials not available' }, 500)
+    }
+
+    let body: RemoveDomainRequest
+    try {
+      body = await c.req.json<RemoveDomainRequest>()
+    } catch {
+      return c.json({ error: 'Invalid JSON body' }, 400)
+    }
+
+    if (!body.domain) {
+      return c.json({ error: 'Missing domain' }, 400)
+    }
+
+    try {
+      const result = await ctx.convexClient.action(
+        api.domains.customDomains.actions.sandboxRemoveDomain,
+        {
+          gatewayToken: credentials.token,
+          domain: body.domain,
+        },
+      )
+      return c.json(result)
+    } catch (error) {
+      return c.json({ error: (error as Error).message }, 400)
+    }
+  })
+}

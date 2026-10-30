@@ -1,0 +1,992 @@
+<title>File attribution — four surfaces to react to</title>
+<style>
+  :root {
+    --paper: #fafbfc;
+    --panel: #ffffff;
+    --ink: #1b1f24;
+    --muted: #5c6470;
+    --line: #dde2e8;
+    --line-soft: #eaeef2;
+    --accent: #3b6ef0;
+    --accent-ink: #ffffff;
+    --chip-bg: #f1f4f7;
+    --human: #3b6ef0;
+    --agent: #0ca678;
+    --apikey: #d97e0b;
+    --terminal: #79808a;
+    --sync: #8e6fe8;
+    --human-bg: #e9effd;
+    --agent-bg: #e2f6f0;
+    --apikey-bg: #fdf0dd;
+    --terminal-bg: #eef0f2;
+    --sync-bg: #f0eafd;
+    --steal-bg: #0ca678;
+    --skip-bg: #79808a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #15181d;
+      --panel: #1c2027;
+      --ink: #e7eaee;
+      --muted: #9aa3ae;
+      --line: #323945;
+      --line-soft: #262c35;
+      --accent: #6e93f5;
+      --accent-ink: #10131a;
+      --chip-bg: #242a33;
+      --human: #7d9ef7;
+      --agent: #37c99e;
+      --apikey: #eda23f;
+      --terminal: #98a0ab;
+      --sync: #ab90f2;
+      --human-bg: #232f4d;
+      --agent-bg: #1a3a31;
+      --apikey-bg: #423014;
+      --terminal-bg: #272c33;
+      --sync-bg: #322950;
+    }
+  }
+  :root[data-theme='dark'] {
+    --paper: #15181d;
+    --panel: #1c2027;
+    --ink: #e7eaee;
+    --muted: #9aa3ae;
+    --line: #323945;
+    --line-soft: #262c35;
+    --accent: #6e93f5;
+    --accent-ink: #10131a;
+    --chip-bg: #242a33;
+    --human: #7d9ef7;
+    --agent: #37c99e;
+    --apikey: #eda23f;
+    --terminal: #98a0ab;
+    --sync: #ab90f2;
+    --human-bg: #232f4d;
+    --agent-bg: #1a3a31;
+    --apikey-bg: #423014;
+    --terminal-bg: #272c33;
+    --sync-bg: #322950;
+  }
+  :root[data-theme='light'] {
+    --paper: #fafbfc;
+    --panel: #ffffff;
+    --ink: #1b1f24;
+    --muted: #5c6470;
+    --line: #dde2e8;
+    --line-soft: #eaeef2;
+    --accent: #3b6ef0;
+    --accent-ink: #ffffff;
+    --chip-bg: #f1f4f7;
+    --human: #3b6ef0;
+    --agent: #0ca678;
+    --apikey: #d97e0b;
+    --terminal: #79808a;
+    --sync: #8e6fe8;
+    --human-bg: #e9effd;
+    --agent-bg: #e2f6f0;
+    --apikey-bg: #fdf0dd;
+    --terminal-bg: #eef0f2;
+    --sync-bg: #f0eafd;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font:
+      15px/1.55 ui-sans-serif,
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      sans-serif;
+  }
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 24px 96px;
+  }
+  header.intro {
+    margin-bottom: 36px;
+    max-width: 64ch;
+  }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-size: 26px;
+    line-height: 1.25;
+    margin: 0 0 10px;
+    text-wrap: balance;
+    font-weight: 650;
+  }
+  .intro p {
+    color: var(--muted);
+    margin: 0;
+  }
+  code,
+  .mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.92em;
+  }
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+
+  section.direction {
+    margin: 44px 0;
+  }
+  .dir-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .dir-key {
+    font-family: ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 700;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 4px;
+    padding: 2px 7px;
+  }
+  .dir-head h2 {
+    font-size: 18px;
+    margin: 0;
+    font-weight: 650;
+  }
+  .dir-sub {
+    color: var(--muted);
+    margin: 0 0 14px;
+    max-width: 68ch;
+  }
+  .dir-sub strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .screen {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--panel);
+    overflow: hidden;
+  }
+  .titlebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .titlebar .crumb b {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .scroller {
+    overflow-x: auto;
+  }
+
+  table.files {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 640px;
+    font-size: 13.5px;
+  }
+  table.files th {
+    text-align: left;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  table.files td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--line-soft);
+    white-space: nowrap;
+  }
+  table.files tr:last-child td {
+    border-bottom: 0;
+  }
+  .fname {
+    font-weight: 550;
+  }
+  .fname .dirmark {
+    color: var(--muted);
+  }
+  td.dim {
+    color: var(--muted);
+  }
+
+  .actor {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 999px;
+    padding: 2px 10px 2px 6px;
+    font-size: 12px;
+    font-weight: 550;
+  }
+  .actor .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex: none;
+  }
+  .actor.human {
+    background: var(--human-bg);
+    color: var(--human);
+  }
+  .actor.agent {
+    background: var(--agent-bg);
+    color: var(--agent);
+  }
+  .actor.apikey {
+    background: var(--apikey-bg);
+    color: var(--apikey);
+  }
+  .actor.terminal {
+    background: var(--terminal-bg);
+    color: var(--terminal);
+  }
+  .actor.sync {
+    background: var(--sync-bg);
+    color: var(--sync);
+  }
+  .actor.human .dot {
+    background: var(--human);
+  }
+  .actor.agent .dot {
+    background: var(--agent);
+  }
+  .actor.apikey .dot {
+    background: var(--apikey);
+  }
+  .actor.terminal .dot {
+    background: var(--terminal);
+  }
+  .actor.sync .dot {
+    background: var(--sync);
+  }
+
+  .pv {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    min-height: 250px;
+  }
+  .pv-list {
+    border-right: 1px solid var(--line-soft);
+    font-size: 13px;
+    padding: 6px 0;
+  }
+  .pv-list div {
+    padding: 6px 14px;
+    color: var(--muted);
+  }
+  .pv-list div.sel {
+    background: var(--chip-bg);
+    color: var(--ink);
+    font-weight: 550;
+  }
+  .pv-main {
+    padding: 0;
+  }
+  .pv-attrib {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--line-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    font-size: 12.5px;
+    color: var(--muted);
+    align-items: center;
+  }
+  .pv-attrib .lbl {
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-right: -8px;
+  }
+  .pv-body {
+    padding: 16px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .pv-body h3 {
+    color: var(--ink);
+    font-size: 15px;
+    margin: 0 0 8px;
+  }
+  @media (max-width: 620px) {
+    .pv {
+      grid-template-columns: 1fr;
+    }
+    .pv-list {
+      display: none;
+    }
+  }
+
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+    font-size: 13px;
+  }
+  .timeline li {
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    gap: 12px;
+    padding: 8px 16px;
+  }
+  .timeline li + li {
+    border-top: 1px solid var(--line-soft);
+  }
+  .timeline .t {
+    color: var(--muted);
+    font-family: ui-monospace, monospace;
+    font-size: 12px;
+    padding-top: 2px;
+  }
+  .timeline .what b {
+    font-weight: 600;
+  }
+  .timeline .meta {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 2px;
+  }
+  .timeline a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .timeline a:hover,
+  .timeline a:focus-visible {
+    text-decoration: underline;
+  }
+  .seenby {
+    padding: 12px 16px;
+    border-top: 1px solid var(--line-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .seenby .lbl {
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    margin-right: 4px;
+  }
+
+  .feed {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+    font-size: 13.5px;
+  }
+  .feed li {
+    display: flex;
+    gap: 12px;
+    padding: 10px 16px;
+    align-items: flex-start;
+  }
+  .feed li + li {
+    border-top: 1px solid var(--line-soft);
+  }
+  .feed .t {
+    flex: none;
+    width: 60px;
+    color: var(--muted);
+    font-family: ui-monospace, monospace;
+    font-size: 12px;
+    padding-top: 3px;
+  }
+  .feed .body p {
+    margin: 0;
+  }
+  .feed .files-touched {
+    color: var(--muted);
+    font-size: 12.5px;
+    font-family: ui-monospace, monospace;
+    margin-top: 3px;
+  }
+
+  .react {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  button.chip {
+    font:
+      600 13px/1 ui-sans-serif,
+      system-ui,
+      sans-serif;
+    letter-spacing: 0.01em;
+    border: 1px solid var(--line);
+    background: var(--chip-bg);
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  button.chip:focus-visible,
+  .probe button:focus-visible,
+  #copybtn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  button.chip[aria-pressed='true'].steal {
+    background: var(--steal-bg);
+    border-color: var(--steal-bg);
+    color: #fff;
+  }
+  button.chip[aria-pressed='true'].skip {
+    background: var(--skip-bg);
+    border-color: var(--skip-bg);
+    color: #fff;
+  }
+  .react input[type='text'] {
+    flex: 1 1 220px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--panel);
+    color: var(--ink);
+    padding: 8px 10px;
+    font:
+      13px ui-sans-serif,
+      system-ui,
+      sans-serif;
+  }
+
+  .probes {
+    margin-top: 56px;
+    border-top: 1px solid var(--line);
+    padding-top: 32px;
+  }
+  .probes h2 {
+    font-size: 18px;
+    margin: 0 0 4px;
+  }
+  .probes > p {
+    color: var(--muted);
+    margin: 0 0 20px;
+    max-width: 64ch;
+  }
+  .probe {
+    margin: 18px 0;
+  }
+  .probe h3 {
+    font-size: 14px;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  .probe .opts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .probe button {
+    font:
+      550 13px/1.3 ui-sans-serif,
+      system-ui,
+      sans-serif;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--ink);
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    text-align: left;
+  }
+  .probe button[aria-pressed='true'] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  .assemble {
+    margin-top: 48px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--panel);
+    padding: 20px;
+  }
+  .assemble h2 {
+    font-size: 15px;
+    margin: 0 0 4px;
+  }
+  .assemble p {
+    color: var(--muted);
+    font-size: 13px;
+    margin: 0 0 12px;
+  }
+  #reply {
+    width: 100%;
+    min-height: 130px;
+    resize: vertical;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 12px;
+    font:
+      13px/1.6 ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      monospace;
+  }
+  #copybtn {
+    margin-top: 10px;
+    font:
+      600 13px ui-sans-serif,
+      system-ui,
+      sans-serif;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: 0;
+    border-radius: 6px;
+    padding: 9px 18px;
+    cursor: pointer;
+  }
+</style>
+
+<div class="wrap">
+  <header class="intro">
+    <p class="eyebrow">duet · file attribution · stage 3 of the quadrant walk</p>
+    <h1>The same data, four surfaces. Steal what resonates, skip what doesn't.</h1>
+    <p>
+      Every mock below renders the <em>same</em> fake drive (<code>aomni/growth</code>) and the same
+      event data the pipeline will produce. The only variable is where attribution shows up. Mark
+      each direction, answer the three probes, and the reply box at the bottom writes your next
+      message for you.
+    </p>
+  </header>
+
+  <!-- A: list column -->
+  <section class="direction" id="dir-A">
+    <div class="dir-head">
+      <span class="dir-key">A</span>
+      <h2>“Edited by” column in the file list</h2>
+    </div>
+    <p class="dir-sub">
+      The lightest touch: one more column in the existing <code>files-surface</code> table. Answers
+      <strong>“who touched this last”</strong> at a glance, says nothing about history or reads.
+    </p>
+    <div class="screen">
+      <div class="titlebar">
+        <span class="crumb"><b>aomni/growth</b> · drive</span><span>4 items</span>
+      </div>
+      <div class="scroller">
+        <table class="files">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Size</th>
+              <th>Modified</th>
+              <th>Edited by</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="fname"><span class="dirmark">▸ </span>q3-outbound/</td>
+              <td class="dim num">—</td>
+              <td class="dim num">today 14:12</td>
+              <td>
+                <span class="actor agent"><span class="dot"></span>Example User · agent</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="fname">report-draft.md</td>
+              <td class="dim num">18 KB</td>
+              <td class="dim num">today 14:02</td>
+              <td>
+                <span class="actor agent"><span class="dot"></span>Example User · agent</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="fname">pipeline.csv</td>
+              <td class="dim num">204 KB</td>
+              <td class="dim num">today 11:47</td>
+              <td>
+                <span class="actor sync"><span class="dot"></span>sync · marketing share</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="fname">deploy-notes.txt</td>
+              <td class="dim num">2 KB</td>
+              <td class="dim num">yesterday</td>
+              <td>
+                <span class="actor terminal"><span class="dot"></span>terminal</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="react" data-dir="A">
+      <button class="chip steal" aria-pressed="false">Steal</button>
+      <button class="chip skip" aria-pressed="false">Skip</button>
+      <input type="text" placeholder="note (optional)" aria-label="note for direction A" />
+    </div>
+  </section>
+
+  <!-- B: preview pane header -->
+  <section class="direction" id="dir-B">
+    <div class="dir-head">
+      <span class="dir-key">B</span>
+      <h2>Attribution strip on the open file</h2>
+    </div>
+    <p class="dir-sub">
+      Lives in the preview pane, where a person is already looking at one file. Adds the read side:
+      <strong>“who has seen this.”</strong> This is the only direction where
+      <code>fileAccess</code> is user-facing.
+    </p>
+    <div class="screen">
+      <div class="titlebar">
+        <span class="crumb"><b>aomni/growth</b> · report-draft.md</span><span>preview</span>
+      </div>
+      <div class="pv">
+        <div class="pv-list">
+          <div>q3-outbound/</div>
+          <div class="sel">report-draft.md</div>
+          <div>pipeline.csv</div>
+          <div>deploy-notes.txt</div>
+        </div>
+        <div class="pv-main">
+          <div class="pv-attrib">
+            <span class="lbl">Edited</span>
+            <span
+              ><span class="actor agent"><span class="dot"></span>Example User · agent</span>
+              <span class="num">12 min ago</span></span
+            >
+            <span class="lbl">Seen by</span>
+            <span class="actor human"><span class="dot"></span>Example User</span>
+            <span class="actor human"><span class="dot"></span>Nia</span>
+            <span class="actor apikey"><span class="dot"></span>zapier-prod key</span>
+          </div>
+          <div class="pv-body">
+            <h3>Q3 outbound draft</h3>
+            <p>Pipeline coverage is 2.4× target. The two segments behind plan are…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="react" data-dir="B">
+      <button class="chip steal" aria-pressed="false">Steal</button>
+      <button class="chip skip" aria-pressed="false">Skip</button>
+      <input type="text" placeholder="note (optional)" aria-label="note for direction B" />
+    </div>
+  </section>
+
+  <!-- C: history drawer -->
+  <section class="direction" id="dir-C">
+    <div class="dir-head">
+      <span class="dir-key">C</span>
+      <h2>Per-file history drawer</h2>
+    </div>
+    <p class="dir-sub">
+      The full <code>fileEvents</code> record for one file: every write, who, and — for agent edits
+      — a <strong>link into the session transcript</strong>. This is the direction that pays for
+      per-session read rows.
+    </p>
+    <div class="screen">
+      <div class="titlebar">
+        <span class="crumb"><b>report-draft.md</b> · history</span><span>5 events</span>
+      </div>
+      <ul class="timeline">
+        <li>
+          <span class="t num">14:02</span>
+          <div class="what">
+            <b>Edited</b> by <span class="actor agent"><span class="dot"></span>Example User · agent</span>
+            <div class="meta">
+              session <a href="#" onclick="return false" class="mono">#a1f3</a> — “tighten the exec
+              summary”
+            </div>
+          </div>
+        </li>
+        <li>
+          <span class="t num">13:58</span>
+          <div class="what">
+            <b>Edited</b> by <span class="actor human"><span class="dot"></span>Example User</span>
+            <div class="meta">via web editor</div>
+          </div>
+        </li>
+        <li>
+          <span class="t num">11:47</span>
+          <div class="what">
+            <b>Renamed</b> from <span class="mono">draft-v2.md</span> by
+            <span class="actor agent"><span class="dot"></span>Example User · agent</span>
+            <div class="meta">
+              session <a href="#" onclick="return false" class="mono">#a1f3</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <span class="t num">Wed</span>
+          <div class="what">
+            <b>Edited</b> by <span class="actor terminal"><span class="dot"></span>terminal</span>
+            <div class="meta">unattributed — SSH session</div>
+          </div>
+        </li>
+        <li>
+          <span class="t num">Tue</span>
+          <div class="what">
+            <b>Created</b> by
+            <span class="actor apikey"><span class="dot"></span>zapier-prod key</span>
+            <div class="meta">via MCP</div>
+          </div>
+        </li>
+      </ul>
+      <div class="seenby">
+        <span class="lbl">Seen by</span>
+        <span class="actor human"
+          ><span class="dot"></span>Example User · <span class="num">14:05</span></span
+        >
+        <span class="actor human"
+          ><span class="dot"></span>Nia · <span class="num">12:20</span></span
+        >
+        <span class="actor agent"
+          ><span class="dot"></span>agent #a1f3 · <span class="num">×7</span></span
+        >
+      </div>
+    </div>
+    <div class="react" data-dir="C">
+      <button class="chip steal" aria-pressed="false">Steal</button>
+      <button class="chip skip" aria-pressed="false">Skip</button>
+      <input type="text" placeholder="note (optional)" aria-label="note for direction C" />
+    </div>
+  </section>
+
+  <!-- D: activity feed -->
+  <section class="direction" id="dir-D">
+    <div class="dir-head">
+      <span class="dir-key">D</span>
+      <h2>Workspace activity feed</h2>
+    </div>
+    <p class="dir-sub">
+      Drive-level, grouped by actor + burst: <strong>“what happened while I was away.”</strong> Same
+      events, aggregated across files instead of per file. Naturally tolerant of noisy agents — a
+      40-file sweep is one line.
+    </p>
+    <div class="screen">
+      <div class="titlebar">
+        <span class="crumb"><b>aomni/growth</b> · activity</span><span>today</span>
+      </div>
+      <ul class="feed">
+        <li>
+          <span class="t num">14:02</span>
+          <div class="body">
+            <p>
+              <span class="actor agent"><span class="dot"></span>Example User · agent</span> edited
+              <b>3 files</b> in session <span class="mono">#a1f3</span>
+            </p>
+            <p class="files-touched">report-draft.md · q3-outbound/plan.md · q3-outbound/todo.md</p>
+          </div>
+        </li>
+        <li>
+          <span class="t num">12:20</span>
+          <div class="body">
+            <p>
+              <span class="actor human"><span class="dot"></span>Nia</span> read
+              <b>report-draft.md</b>
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="t num">11:47</span>
+          <div class="body">
+            <p>
+              <span class="actor sync"><span class="dot"></span>sync · marketing share</span>
+              updated <b>pipeline.csv</b>
+            </p>
+            <p class="files-touched">from workspace aomni/marketing</p>
+          </div>
+        </li>
+        <li>
+          <span class="t num">09:14</span>
+          <div class="body">
+            <p>
+              <span class="actor apikey"><span class="dot"></span>zapier-prod key</span> read
+              <b>pipeline.csv</b> via MCP
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="t num">08:30</span>
+          <div class="body">
+            <p>
+              <span class="actor terminal"><span class="dot"></span>terminal</span> edited
+              <b>deploy-notes.txt</b>
+            </p>
+            <p class="files-touched">unattributed — SSH session</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="react" data-dir="D">
+      <button class="chip steal" aria-pressed="false">Steal</button>
+      <button class="chip skip" aria-pressed="false">Skip</button>
+      <input type="text" placeholder="note (optional)" aria-label="note for direction D" />
+    </div>
+  </section>
+
+  <!-- probes -->
+  <section class="probes">
+    <h2>Three context probes</h2>
+    <p>
+      These decide retention pressure, cross-workspace joins, and which slice ships first — the
+      things a mock can't show. Multi-select where it makes sense.
+    </p>
+
+    <div class="probe" data-probe="consumers" data-multi="true">
+      <h3>1 · Who consumes attribution in the next ~6 months?</h3>
+      <div class="opts">
+        <button aria-pressed="false">Just me, debugging what my agents did</button>
+        <button aria-pressed="false">Teammates in shared workspaces</button>
+        <button aria-pressed="false">Share/publish recipients (external viewers)</button>
+        <button aria-pressed="false">Programmatic (MCP/API consumers query it)</button>
+      </div>
+    </div>
+
+    <div class="probe" data-probe="surface" data-multi="false">
+      <h3>2 · Where does it appear first?</h3>
+      <div class="opts">
+        <button aria-pressed="false">Files SPA (list + preview)</button>
+        <button aria-pressed="false">Agent session view (files this session touched)</button>
+        <button aria-pressed="false">API only — UI comes later</button>
+      </div>
+    </div>
+
+    <div class="probe" data-probe="done" data-multi="false">
+      <h3>3 · Six months from now, this feature succeeded if…</h3>
+      <div class="opts">
+        <button aria-pressed="false">I never wonder “which agent did this” again</button>
+        <button aria-pressed="false">
+          Teams trust shared drives because edits are accountable
+        </button>
+        <button aria-pressed="false">It's the audit substrate other features build on</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- assembler -->
+  <section class="assemble">
+    <h2>Your reply, assembled</h2>
+    <p>Updates as you click. Copy it back into the chat — edit anything.</p>
+    <textarea id="reply" spellcheck="false" aria-label="assembled reply"></textarea>
+    <button id="copybtn">Copy reply</button>
+  </section>
+</div>
+
+<script>
+  const state = { dirs: {}, notes: {}, probes: {} }
+  const DIR_NAMES = {
+    A: 'list column',
+    B: 'preview attribution strip',
+    C: 'history drawer',
+    D: 'activity feed',
+  }
+
+  document.querySelectorAll('.react').forEach(row => {
+    const dir = row.dataset.dir
+    const steal = row.querySelector('.steal'),
+      skip = row.querySelector('.skip')
+    const note = row.querySelector('input')
+    steal.addEventListener('click', () => {
+      setDir(dir, state.dirs[dir] === 'steal' ? null : 'steal')
+    })
+    skip.addEventListener('click', () => {
+      setDir(dir, state.dirs[dir] === 'skip' ? null : 'skip')
+    })
+    note.addEventListener('input', () => {
+      state.notes[dir] = note.value.trim()
+      render()
+    })
+    function setDir(d, v) {
+      state.dirs[d] = v
+      steal.setAttribute('aria-pressed', String(v === 'steal'))
+      skip.setAttribute('aria-pressed', String(v === 'skip'))
+      render()
+    }
+  })
+
+  document.querySelectorAll('.probe').forEach(probe => {
+    const key = probe.dataset.probe,
+      multi = probe.dataset.multi === 'true'
+    state.probes[key] = []
+    probe.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const label = btn.textContent.trim()
+        const on = btn.getAttribute('aria-pressed') === 'true'
+        if (!multi)
+          probe.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false'))
+        btn.setAttribute('aria-pressed', String(!on))
+        if (multi) {
+          state.probes[key] = on
+            ? state.probes[key].filter(l => l !== label)
+            : [...state.probes[key], label]
+        } else {
+          state.probes[key] = on ? [] : [label]
+        }
+        render()
+      })
+    })
+  })
+
+  function render() {
+    const lines = []
+    const marked = Object.keys(DIR_NAMES).filter(d => state.dirs[d])
+    if (marked.length) {
+      lines.push(
+        'Directions: ' +
+          marked
+            .map(d => {
+              let s = `${d} (${DIR_NAMES[d]}) — ${state.dirs[d]}`
+              if (state.notes[d]) s += `: ${state.notes[d]}`
+              return s
+            })
+            .join('; '),
+      )
+    }
+    if (state.probes.consumers?.length)
+      lines.push('Consumers: ' + state.probes.consumers.join('; '))
+    if (state.probes.surface?.length) lines.push('First surface: ' + state.probes.surface[0])
+    if (state.probes.done?.length) lines.push('Done looks like: ' + state.probes.done[0])
+    document.getElementById('reply').value =
+      lines.join('\n') || '(click chips above to assemble your reply)'
+  }
+  render()
+
+  document.getElementById('copybtn').addEventListener('click', async () => {
+    const btn = document.getElementById('copybtn')
+    try {
+      await navigator.clipboard.writeText(document.getElementById('reply').value)
+      btn.textContent = 'Copied'
+    } catch {
+      document.getElementById('reply').select()
+      document.execCommand('copy')
+      btn.textContent = 'Copied'
+    }
+    setTimeout(() => {
+      btn.textContent = 'Copy reply'
+    }, 1500)
+  })
+</script>

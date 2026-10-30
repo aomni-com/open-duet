@@ -1,0 +1,467 @@
+---
+title: 'Claude Cowork: la guía completa para principiantes'
+description: 'Aprende Claude Cowork desde cero. Configuración, archivos de contexto, plugins, conectores, tareas programadas y workflows prácticos para usuarios no técnicos.'
+date: '2026-03-05'
+updatedAt: '2026-05-08'
+author:
+  name: 'Sawyer Middeleer'
+  avatar: '/authors/sawyer-middeleer.png'
+  link: 'https://www.linkedin.com/in/sawyer-middeleer/'
+category: 'guides'
+tags: ['claude-cowork', 'tutorial', 'getting-started', 'beginner']
+type: 'guide'
+image: '/guides/claude-cowork-for-beginners/cover.png'
+locale: es-419
+translationKey: 'claude-cowork-for-beginners'
+relatedPosts:
+  ['claude-code-vs-claude-cowork', 'duet-vs-claude-code', 'how-to-build-your-ai-command-center']
+cta:
+  title: 'Cowork en la nube, sin app de escritorio.'
+  subtitle: 'Duet ejecuta agentes estilo Cowork en un workspace compartido con memoria, ejecuciones programadas y traspasos de equipo. Configuración en minutos, sin instalación.'
+  buttonText: 'Prueba Duet'
+  href: '/sign-in?from=guide-cowork-beginners'
+---
+
+<Callout emoji="💡">
+Resumen rápido
+
+Esta guía para principiantes cubre todo lo que necesitas saber sobre Claude Cowork. Qué es, en qué se diferencia de Claude Code, cómo configurarlo y cómo correr tu primer workflow de agente sin necesidad de experiencia previa con agentes de AI.
+
+</Callout>
+
+<Callout emoji="❓">
+Preguntas que responde esta página
+
+- ¿Qué es Claude Cowork?
+- ¿Cómo funciona Claude Cowork?
+- Guía de Claude Cowork para principiantes
+- Cómo empezar con Claude Cowork
+- ¿Cuál es la diferencia entre Claude Code y Claude Cowork?
+
+</Callout>
+
+Claude Cowork es un workspace colaborativo construido sobre Claude que permite a los equipos interactuar con la AI en sesiones compartidas y persistentes, en vez de chats individuales y aislados. A diferencia del Claude estándar, Cowork mantiene el contexto entre sesiones, soporta a varios miembros del equipo en el mismo workspace y se puede configurar con instrucciones y herramientas a medida para tus workflows específicos.
+
+## ¿Qué es Claude Cowork? Una guía para principiantes sobre AI agéntica para quienes no programan
+
+Claude Cowork es la herramienta de productividad agéntica de Anthropic integrada en la app de escritorio Claude. Convierte a Claude de un chatbot en un compañero de trabajo digital que puede leer tus archivos, crear documentos, investigar en la web y ejecutar tareas de varios pasos en tu computadora, todo sin escribir una sola línea de código.
+
+A diferencia del chat estándar de Claude, donde van y vienen un mensaje a la vez, Cowork puede tomar la iniciativa. Pídele que organice tu carpeta de descargas, que convierta notas de reunión en un reporte con formato, o que investigue competidores y arme una hoja de cálculo comparativa, y planeará el trabajo, lo ejecutará en múltiples pasos y entregará el resultado terminado directamente a tu sistema de archivos.
+
+### ¿Por qué usar Claude Cowork en vez del chat estándar de Claude?
+
+En el chat estándar de Claude, pegas contenido y copias respuestas. En Cowork, describes lo que quieres hacer, apuntas a Claude hacia tus archivos y supervisas mientras hace el trabajo. Puede leer carpetas enteras, crear hojas de cálculo de Excel pulidas con fórmulas funcionales, armar presentaciones de PowerPoint y coordinar investigación compleja, el tipo de trabajo que normalmente toma horas de esfuerzo manual.
+
+Si Claude Code está hecho para desarrolladores, Cowork está hecho para todos los demás. Para un desglose detallado lado a lado, lee Claude Code vs Claude Cowork.
+
+---
+
+## Cómo instalar y configurar Claude Cowork en Mac o Windows
+
+Empezar con Cowork toma unos cinco minutos. Necesitas la app de escritorio Claude y una suscripción paga.
+
+### Lo que necesitas para empezar con Claude Cowork
+
+1. App de escritorio Claude: descárgala desde [claude.ai/download](https://claude.ai/download)
+1. Suscripción paga de Claude: Pro ($20/mes), Max ($100-200/mes), Team o Enterprise
+   Cowork está disponible en macOS y Windows (x64). Si estás en Windows con un procesador ARM, tendrás que esperar al soporte para ARM.
+
+### Cómo instalar Claude Cowork en Mac y Windows
+
+Mac:
+
+1. Ve a [claude.ai/download](https://claude.ai/download) y descarga el instalador de macOS
+1. Abre el archivo `.dmg` y arrastra Claude a tu carpeta de Aplicaciones
+1. Inicia Claude Desktop e inicia sesión con tu cuenta paga
+   Windows:
+
+1. Ve a [claude.ai/download](https://claude.ai/download) y descarga el instalador de Windows
+1. Ejecuta el instalador y sigue las indicaciones
+1. Inicia Claude Desktop e inicia sesión
+
+### Cómo cambiar al modo Cowork en Claude Desktop
+
+Una vez que Claude Desktop esté abierto, verás pestañas en la parte superior de la ventana: Chat, Cowork y Code. Haz clic en Cowork para cambiar de modo.
+
+Eso es todo. Ya estás en Cowork.
+
+---
+
+## Cómo empezar con Claude Cowork: tu primera tarea en 5 minutos
+
+### Tu primera tarea en Claude Cowork: una guía paso a paso
+
+La mejor forma de aprender Cowork es darle algo real que hacer. Pero empieza con una carpeta de prueba; no lo apuntes a archivos críticos mientras todavía estás aprendiendo.
+
+1. Crea una carpeta llamada `Claude_Test` en tus Documentos
+1. Agrega algunos archivos no sensibles, documentos viejos, hojas de cálculo de muestra, notas al azar
+1. En Cowork, concede acceso a esta carpeta cuando se te pida
+1. Prueba una tarea simple: "Organiza estos archivos por tema y crea un documento de resumen que liste lo que hay en cada categoría"
+   Claude analizará tus archivos, creará un plan y lo ejecutará. Verás su progreso en tiempo real y podrás guiarlo si hace falta.
+
+### Cómo conceder a Claude Cowork acceso a tus archivos y carpetas
+
+Cowork corre dentro de una máquina virtual aislada en tu computadora por seguridad. Solo puede acceder a las carpetas a las que le concedas permiso explícitamente. Cuando empieces una tarea que involucra archivos, Claude te preguntará con qué carpetas puede trabajar.
+
+Empieza acotado. Concede acceso a una carpeta de proyecto específica en vez de a todo tu directorio de
+
+Documentos. Siempre puedes agregar más carpetas después.
+
+### Lo que Claude Cowork puede hacer: 5 áreas de capacidad clave
+
+Cowork sobresale en cinco categorías de trabajo:
+
+## Cómo trabajar con Claude Cowork: tareas, prompts y aprobaciones
+
+### Cómo funcionan las tareas de Claude Cowork: planear, ejecutar, entregar
+
+Cuando describes una tarea, Cowork sigue un patrón consistente:
+
+1. Analiza tu solicitud y hace preguntas aclaratorias si es necesario
+1. Planea el trabajo, dividiéndolo en subtareas
+1. Ejecuta cada subtarea, a menudo corriendo varias en paralelo
+1. Entrega el resultado directamente a tu sistema de archivos
+   Mantienes la visibilidad en todo momento. Cowork te muestra lo que hace en cada paso, y puedes redirigirlo a mitad de tarea si algo no está bien.
+
+### Prompting en Claude Cowork: cómo escribir instrucciones que dan resultados
+
+Interactuar con Cowork es parecido a chatear con Claude, pero con una diferencia clave: describes resultados, no haces preguntas.
+
+Los buenos prompts describen lo que quieres hacer:
+
+- "Toma estas 12 transcripciones de entrevistas con clientes y extrae los 5 temas recurrentes principales con citas de apoyo"
+- "Crea una hoja de cálculo de Excel que registre nuestro gasto de marketing del Q1 por canal, con fórmulas para totales y cambio mes a mes"
+- "Investiga las 10 mejores herramientas de gestión de proyectos, compara funciones y precios, y crea un memo de recomendación"
+  Los prompts menos efectivos son vagos:
+
+- "Ayúdame con mis archivos" (¿cuáles archivos? ¿qué ayuda?)
+- "Haz algo con estos datos" (¿qué salida quieres?)
+  Cowork consume más de tu asignación de uso que el chat estándar porque corre workflows agénticos de varios pasos. Para preguntas simples, usa el modo Chat estándar en su lugar.
+
+### Pasos de aprobación en Claude Cowork: mantén el control de tu agent
+
+Cowork pide tu aprobación antes de tomar acciones significativas, sobre todo cualquier cosa que borre archivos o acceda a datos sensibles. Revísalas con cuidado.
+
+Un buen valor por defecto: siempre dile a Claude "no borres nada" a menos que quieras borrados específicamente. Esto evita la pérdida accidental de datos mientras estás aprendiendo.
+
+### El flujo Alcance-Plan-Ejecución: la mejor forma de correr tareas complejas en Cowork
+
+Para el trabajo complejo, el enfoque más confiable refleja cómo le darías un brief a una nueva contratación:
+
+Alcance: empieza teniendo una conversación sobre lo que necesitas. Comparte contexto, muestra ejemplos de buenos resultados, aclara las restricciones.
+
+Plan: pídele a Claude que escriba su plan antes de ejecutar. Revísalo. Ajusta cualquier cosa que se vea fuera de lugar.
+
+Ejecución: una vez que el plan se ve bien, dile a Claude que proceda. Monitorea los primeros pasos y luego déjalo correr.
+
+Esto es iterativo. Después del primer pase, revisa el resultado, da feedback y haz que Claude lo refine.
+
+## Archivos de contexto de Claude Cowork: cómo darle a tu agent instrucciones persistentes
+
+Esta es la sección más importante de toda la guía. Cowork de fábrica es mediocre. Cowork con archivos de contexto apropiados es una herramienta completamente distinta. La diferencia entre esas dos experiencias son unos 30 minutos de configuración.
+
+### Por qué los archivos de contexto son la parte más importante de Claude Cowork
+
+Cowork no tiene memoria entre sesiones. Cada conversación empieza completamente de cero. No sabe quién eres, qué hace tu empresa ni cómo te gusta que se dé formato a las cosas. Sin contexto, produce resultados genéricos.
+
+La solución son los archivos de contexto, documentos que viven en tus carpetas de proyecto y le dicen a Claude todo lo que necesita saber para hacer un buen trabajo.
+
+### Instrucciones globales en Claude Cowork: configúralas una vez, aplican en todas partes
+
+Ve a Settings > Cowork y haz clic en Edit junto a Global Instructions. Estas aplican a cada sesión de Cowork sin importar en qué carpeta estés trabajando.
+
+Las buenas instrucciones globales incluyen:
+
+```markdown
+# About Me
+
+- Name: [Your name]
+- Role: [Your role] at [Company]
+- I prefer concise, direct communication
+
+# Output Preferences
+
+- Always use tables for comparisons
+- Default to bullet points over paragraphs
+- Include sources when citing research
+- Save output files with descriptive names (not "output.xlsx")
+
+# Safety
+
+- Never delete files without asking first
+- Always confirm before sending any emails or messages
+```
+
+### Instrucciones a nivel de carpeta: contexto específico de proyecto para Claude Cowork
+
+Cuando concedes a Cowork acceso a una carpeta, puedes agregar instrucciones específicas de esa carpeta. Actúan como un brief de proyecto que Claude lee al inicio de cada sesión que involucra esa carpeta.
+
+Por ejemplo, una carpeta de marketing podría incluir:
+
+```markdown
+# Marketing Team Context
+
+- Brand voice: Professional but approachable. Never use jargon.
+- Target audience: SMB founders (1-50 employees)
+- Competitors: [list]
+- Style guide: See brand-guidelines.pdf in this folder
+
+# Common Tasks
+
+- Weekly reports use the template in /templates/weekly-report.xlsx
+- Blog drafts go in /drafts/ with the naming format YYYY-MM-DD-title.md
+```
+
+Los archivos de contexto se componen con el tiempo. Empieza básico, luego agrega notas cada vez que Claude produzca un resultado
+
+que no esté del todo bien. Después de unas pocas sesiones, la calidad del resultado mejora drásticamente.
+
+### Qué incluir en tus archivos de contexto de Claude Cowork
+
+## Skills de Claude Cowork: cómo enseñarle a tu agent workflows a medida
+
+### ¿Qué son los skills de Claude Cowork y cómo funcionan?
+
+Los skills son instrucciones escritas que le enseñan a Claude cómo hacer algo específico. Piénsalos como SOPs (procedimientos operativos estándar) que Claude sigue cuando se encuentra con una tarea que coincide.
+
+Un skill podría enseñarle a Claude cómo:
+
+- Escribir posts de blog en la voz de tu empresa
+- Dar formato a reportes financieros siguiendo tu plantilla
+- Correr un workflow de investigación específico paso a paso
+- Preparar agendas de reunión a partir de tu calendario
+  Los skills son solo archivos Markdown. No se requiere programación. Describes el proceso en lenguaje natural, y Claude sigue las instrucciones cada vez que el skill es relevante.
+
+### Cómo funcionan los skills dentro de las sesiones de Claude Cowork
+
+Los skills viven dentro de los plugins (más sobre eso en la sección 7). Cuando instalas un plugin, sus skills quedan disponibles para Claude automáticamente. También puedes activar skills de forma explícita usando slash commands: escribe / seguido del nombre del comando.
+
+Por ejemplo, los knowledge-work-plugins de código abierto de Anthropic incluyen skills para:
+
+- Ventas: preparación de llamadas, análisis de deals, revisiones de pipeline
+- Marketing: creación de contenido, análisis competitivo, planeación de campañas
+- Finanzas: categorización de gastos, generación de reportes, conciliación
+- Investigación: revisiones de literatura, análisis de mercado, síntesis de tendencias
+
+### Cómo crear tus propios skills de Claude Cowork (sin programación)
+
+No necesitas ser técnico para crear skills. El enfoque más simple:
+
+1. Haz una tarea manualmente con Claude una vez y deja el resultado bien
+1. Pídele a Claude: "Convierte lo que acabamos de hacer en un skill reutilizable"
+1. Claude genera el archivo Markdown del skill
+1. Instálalo como parte de un plugin
+   Para profundizar en el diseño de skills, lee Agent Skills 101: Tools vs MCP vs Skills.
+
+## Conectores de Claude Cowork: cómo enlazar tu agent con Slack, Gmail y más
+
+### ¿Qué son los conectores de Claude Cowork? (MCP explicado de forma simple)
+
+Los conectores enlazan a Claude con servicios y fuentes de datos externos. Sin conectores, Cowork solo puede trabajar con archivos en tu computadora y navegar la web. Con conectores, puede traer datos de tu CRM, publicar en Slack, consultar bases de datos e interactuar con docenas de herramientas de negocio.
+
+Los conectores usan el Model Context Protocol (MCP), el mismo estándar que potencia las integraciones de herramientas en todo el ecosistema de Claude.
+
+### Conectores disponibles de Claude Cowork: herramientas y servicios soportados
+
+Cowork soporta conectores para muchas herramientas populares:
+
+### Cómo configurar un conector de Claude Cowork paso a paso
+
+1. Abre Claude Desktop y ve a Settings > Connectors
+1. Haz clic en Browse connectors para ver qué hay disponible
+1. Selecciona un conector y sigue el flujo de autenticación
+1. Una vez conectado, Claude puede acceder a ese servicio durante las tareas de Cowork
+   En los planes Team y Enterprise, los conectores pueden requerir aprobación del administrador antes de que los usuarios individuales puedan
+
+conectarse. Consulta con tu administrador de TI si un conector no está disponible.
+
+### Cómo usar los conectores de Claude Cowork en workflows reales
+
+Una vez que un conector está configurado, solo refiérelo de forma natural en tus tareas:
+
+- "Trae nuestros datos de ventas del Q1 desde Salesforce y crea un análisis de tendencias"
+- "Revisa Slack #marketing en busca de mensajes sobre el lanzamiento del producto y resume las decisiones clave"
+- "Crea un ticket de Jira por cada item de acción en estas notas de reunión"
+  Claude sabe qué conector usar según el contexto. No necesitas especificar detalles técnicos.
+
+## Plugins de Claude Cowork: cómo agrupar skills, conectores y slash commands
+
+### ¿Qué son los plugins de Claude Cowork y por qué importan?
+
+Los plugins son paquetes que agrupan skills, conectores, slash commands y subagentes en una sola unidad instalable. Si los skills son SOPs individuales, los plugins son departamentos enteros.
+
+Un plugin de ventas podría incluir:
+
+- Skills: cómo investigar cuentas, prepararse para llamadas, escribir correos de seguimiento
+- Conectores: integración con CRM, datos de LinkedIn, correo
+- Slash commands: `/sales:call-prep`, `/sales:deal-review`, `/sales:pipeline`
+- Subagentes: instancias de Claude especializadas para subtareas específicas
+
+### Por qué los plugins son la mejor forma de compartir skills en tu equipo
+
+Sin plugins, tendrías que configurar cada skill, conector y workflow manualmente. Los plugins resuelven tres problemas:
+
+1. Agrupamiento: todo lo que un workflow necesita en un solo paquete
+1. Uso compartido: instala el mismo plugin en la máquina de cada miembro del equipo
+1. Versionado: actualiza el plugin cuando los workflows cambien, en vez de editar archivos de config
+
+### Cómo encontrar e instalar plugins de Claude Cowork
+
+Anthropic mantiene un repositorio de código abierto de plugins en github.com/anthropics/knowledge-work-plugins. Estos cubren tareas comunes de trabajo de conocimiento en ventas, marketing, finanzas y productividad general.
+
+Para instalar un plugin desde el marketplace:
+
+1. Abre el explorador de plugins en Claude Desktop
+1. Busca o explora los plugins disponibles
+1. Haz clic para instalar
+   Para instalar desde la línea de comandos:
+
+```bash
+claude plugins add knowledge-work-plugins/sales
+```
+
+### Cómo entender la estructura y configuración de un plugin de Claude Cowork
+
+Por dentro, los plugins son solo carpetas que contienen archivos Markdown y un poco de configuración en JSON:
+
+```plaintext
+my-plugin/
+├── plugin.json          # Plugin metadata
+├── mcp.json             # Connector configuration
+├── commands/            # Slash commands
+│   ├── call-prep.md
+│   └── deal-review.md
+└── skills/              # Skills and instructions
+    ├── research.md
+    └── email-drafting.md
+```
+
+Puedes inspeccionar, editar y personalizar cualquier plugin después de instalarlo. Están diseñados para ser transparentes y modificables.
+
+### Cómo construir un plugin de Claude Cowork a medida para tu equipo
+
+La forma más rápida de construir un plugin es usar el plugin cowork-plugin-management (sí, hay un plugin para gestionar plugins). Instálalo y luego pídele a Claude que te ayude a crear un nuevo plugin para tu workflow específico.
+
+Para la guía completa de cómo construir plugins, lee Más allá de Claude Code: cómo crear una biblioteca de skills compartida; los mismos principios que aplican a los skills de Claude Code aplican a los plugins de Cowork.
+
+## Tareas programadas de Claude Cowork: cómo automatizar workflows recurrentes
+
+### ¿Qué son las tareas programadas de Claude Cowork?
+
+Las tareas programadas le permiten a Claude correr workflows automáticamente de forma recurrente: reportes diarios, extracciones de datos semanales, organización automatizada de archivos o cualquier otra tarea repetible.
+
+### Cómo configurar tareas programadas en Claude Cowork
+
+Usa el slash command /schedule dentro de cualquier tarea de Cowork para configurar automatización:
+
+- "Genera un resumen semanal de gastos cada lunes a las 9am a partir de los recibos en mi carpeta /finances"
+- "Cada viernes, compila un reporte de estado a partir de mis notas de proyecto y guárdalo en /reports"
+  Puedes gestionar las tareas programadas desde la opción Scheduled en la barra lateral de Cowork.
+
+### Limitaciones de las tareas programadas de Claude Cowork: lo que debes saber antes de automatizar
+
+Las tareas programadas solo corren cuando:
+
+- Tu computadora está despierta (no en suspensión ni apagada)
+- La app de escritorio Claude está abierta
+  Si tu máquina está apagada cuando una tarea está programada, no se ejecutará. Para workflows que necesitan correr 24/7 sin importar si tu computadora está encendida, necesitas un entorno en la nube.
+
+Las tareas programadas de Cowork dependen de que tu escritorio esté abierto. Si necesitas automatización siempre activa, cron jobs, escuchas de webhooks, monitoreo en segundo plano, un entorno de agente basado en la nube como Duet provee un servidor persistente que corre incluso cuando tu laptop está cerrada.
+
+## 10 workflows prácticos de Claude Cowork para trabajadores del conocimiento
+
+Aquí tienes workflows prácticos que muestran lo que Cowork hace mejor. Cada uno se puede configurar en menos de 30 minutos.
+
+### Claude Cowork para organizar archivos: ordena y renombra a escala
+
+Apunta a Cowork hacia una carpeta desordenada (tus Descargas, el Escritorio o un drive compartido) y pídele que:
+
+- Ordene archivos por tipo, proyecto o fecha
+- Renombre archivos con convenciones de nombres consistentes
+- Cree un documento índice que liste todo y a dónde fue
+- Identifique y marque los duplicados
+
+### Claude Cowork para notas de reunión: convierte transcripciones en items de acción
+
+Después de una reunión, deja la transcripción o tus notas en bruto en una carpeta y pídele a Cowork que:
+
+- Extraiga items de acción con responsables y fechas límite
+- Cree borradores de correos de seguimiento para cada participante
+- Actualice tu tracker de proyecto (vía conectores)
+- Genere un resumen con formato para los stakeholders
+
+### Claude Cowork para investigación y análisis: de la pregunta al reporte
+
+Dale a Cowork una pregunta de investigación y deja que:
+
+- Busque en la web fuentes relevantes
+- Sintetice los hallazgos en un reporte estructurado
+- Cree tablas comparativas con puntos de datos específicos
+- Genere gráficos y visualizaciones a partir de los datos
+
+### Claude Cowork para reportes de gastos: extrae, categoriza y resume
+
+Deja recibos (fotos, PDFs, correos) en una carpeta y pídele a Cowork que:
+
+- Extraiga proveedor, monto, fecha y categoría de cada recibo
+- Arme una hoja de cálculo de Excel con todos los gastos categorizados
+- Agregue fórmulas para subtotales por categoría y el gran total
+- Marque cualquier posible duplicado o información faltante
+
+### Claude Cowork para inteligencia competitiva: workflows de investigación y análisis
+
+Pídele a Cowork que investigue competidores y puede:
+
+- Analizar los sitios web, las páginas de precios y las listas de funciones de los competidores
+- Armar una matriz comparativa en Excel
+- Identificar huecos y oportunidades
+- Redactar un memo con recomendaciones estratégicas
+
+## Preguntas frecuentes
+
+### ¿Cuánto cuesta Claude Cowork?
+
+Cowork requiere una suscripción paga de Claude. Claude Pro ($20/mes) te da acceso a Cowork con límites de uso estándar. Claude Max ($100-200/mes) provee límites de uso considerablemente más altos, vale la pena si corres tareas de Cowork a diario. Los planes Team y Enterprise también incluyen acceso a Cowork. Ten en cuenta que las tareas de Cowork consumen más asignación de uso que el chat estándar porque involucran procesamiento agéntico de varios pasos.
+
+### ¿Necesitas saber programar para usar Cowork?
+
+No. Cowork está diseñado específicamente para trabajadores del conocimiento que no son desarrolladores. Interactúas con él en lenguaje natural, describes lo que quieres hacer y Claude maneja la ejecución. Crear archivos de contexto y skills requiere escribir Markdown (texto con formato simple), pero no conocimientos de programación. Si puedes escribir un Google Doc, puedes configurar Cowork.
+
+### ¿Cuál es la diferencia entre Cowork y Claude Code?
+
+Claude Code está hecho para el desarrollo de software: lee codebases, escribe código, corre pruebas y gestiona repositorios de git. Corre en la terminal y requiere conocimientos técnicos. Cowork está hecho para el trabajo de conocimiento: gestiona archivos, crea documentos, hace investigación y automatiza workflows de negocio. Corre en la app de escritorio y no requiere ningún trasfondo técnico. El mismo cerebro Claude, interfaces distintas para tareas distintas.
+
+### ¿Cowork recuerda sesiones anteriores?
+
+No, cada sesión de Cowork empieza completamente de cero. Claude no retiene ninguna memoria de conversaciones o tareas anteriores. Por eso los archivos de contexto son tan importantes: proveen la continuidad que la memoria de sesión no da. Buenos archivos de contexto en tus carpetas de proyecto significan que Claude puede producir resultados consistentes y de alta calidad cada vez, incluso sin recordar sesiones pasadas.
+
+### ¿Mis datos están seguros con Cowork?
+
+Cowork corre dentro de una máquina virtual aislada en tu computadora. Tus archivos se quedan locales, no se suben a los servidores de Anthropic para entrenamiento. Claude pide permiso explícito antes de acceder a carpetas, y solicita aprobación antes de borrar cualquier archivo. El historial de conversaciones se almacena localmente en tu máquina. Dicho esto, Cowork sigue siendo un "research preview", así que Anthropic recomienda no usarlo para cargas de trabajo reguladas. Para industrias sensibles, consulta a tu equipo de cumplimiento antes de adoptarlo.
+
+### ¿Qué plataformas soporta Cowork?
+
+Cowork corre en macOS y Windows x64 vía la app de escritorio Claude. Las máquinas Windows basadas en ARM aún no están soportadas. No hay versión web, móvil ni de Linux, solo escritorio. Tu computadora debe permanecer despierta y la app abierta para que las tareas corran.
+
+### ¿Por qué Cowork consume tanto de mi asignación de uso?
+
+Las tareas de Cowork son intensivas en cómputo porque Claude está corriendo workflows agénticos de varios pasos: planeando, ejecutando subtareas, leyendo archivos, navegando la web y coordinando salidas. Una sola tarea de Cowork podría involucrar docenas de pasos internos. Para gestionar el uso: agrupa el trabajo relacionado en sesiones únicas, usa el modo Chat estándar para preguntas simples y monitorea tu uso en Settings > Usage. Si llegas a los límites con regularidad, considera subir a Claude Max.
+
+### ¿Cómo conecto Cowork con mis herramientas?
+
+Ve a Settings > Connectors > Browse connectors en Claude Desktop. Selecciona la herramienta que quieres conectar (Slack, Notion, Salesforce, etc.) y sigue el flujo de autenticación OAuth. Una vez conectado, Claude puede acceder a ese servicio durante cualquier tarea de Cowork. En los planes Team y Enterprise, tu administrador quizá necesite aprobar los conectores antes de que estén disponibles. Lee la sección de herramientas MCP para más sobre cómo funcionan los conectores por dentro.
+
+### ¿Puedo correr tareas de Cowork cuando mi computadora está apagada?
+
+No. Cowork corre localmente en tu máquina, así que requiere que tu computadora esté despierta y la app de escritorio Claude abierta. Las tareas programadas no se ejecutarán si tu máquina está en suspensión o apagada. Si necesitas automatización siempre activa que corra 24/7, necesitarás una solución basada en la nube: un servidor de AI persistente como Duet puede correr tareas programadas, responder a webhooks y procesar datos a toda hora sin depender de tu laptop.
+
+### ¿Puede Cowork crear archivos de Excel con fórmulas reales?
+
+Sí. A diferencia de pedirle a Claude en el chat que "cree una hoja de cálculo" (lo que te da una descripción en texto), Cowork genera archivos .xlsx reales con fórmulas funcionales, formato, múltiples hojas y gráficos. También puede leer archivos de Excel existentes, modificarlos y crear presentaciones de PowerPoint. La integración de Excel/PowerPoint está en research preview para usuarios de Mac en los planes Max, Team y Enterprise.
+
+## Sigue leyendo
+
+- Claude Code vs Claude Cowork: comparación detallada lado a lado.
+- Claude Code para empresas: la contraparte enfocada en desarrolladores de Cowork.
+- Cómo automatizar la creación de contenido: workflows prácticos de contenido para operadores en solitario.
+- Cómo usar la AI como asistente personal de investigación: workflows de investigación que funcionan tanto en Cowork como en Code.

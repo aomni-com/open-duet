@@ -1,0 +1,27 @@
+{
+  "runtimeRevision": "0cd51fb9130ff6a9d095b8dc6e70288bfcce7c40",
+  "image": "sha256:d891540b4c93f3a053ceb5d802fdf4cadcddea066ed248fa245229768c662d7b",
+  "originalEvalSha256": "817feb877c3e8586fb2e456fc3d1c170c30a5a6bf0bef94263b05066a4949bd0",
+  "overlayEvalSha256": "b0b0aedfbcf5c2802aba716057babdd6b9caa933372ce6e15cbff1f239bfa724",
+  "model": "sonnet-5",
+  "testTimeoutMs": 150000,
+  "attemptLimit": 1,
+  "exitCode": 0,
+  "passes": 1,
+  "assertions": 8,
+  "elapsedSeconds": 15.51,
+  "evidenceDirectory": "/tmp/workflow-interrupt-input-diagnostic",
+  "emittedSelectionInputs": [
+    {
+      "value": "same-input"
+    },
+    {
+      "value": "same-input"
+    }
+  ],
+  "observedScriptOutput": {
+    "rerun": true,
+    "value": "same-input"
+  },
+  "limitation": "One unchanged live case with logging passed; it did not reproduce or identify the cause of the original extra-input-field failure. No retry."
+}

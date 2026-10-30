@@ -1,0 +1,405 @@
+---
+title: 'The 10 Steps of AI Transformation: Why Only 1 of Them Is Actually AI'
+metaTitle: 'AI Transformation: The 10-Step Playbook (Only 1 Step Is AI)'
+description: 'AI transformation is 9 parts process, 1 part AI. The 10-step playbook for making any workflow AI-native — and where most teams quietly get stuck.'
+date: '2026-06-08'
+updatedAt: '2026-06-08'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/4.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'guides'
+tags:
+  [
+    'ai-transformation',
+    'ai-native',
+    'workflow-automation',
+    'ai-agents',
+    'process-automation',
+    'duet',
+  ]
+type: 'guide'
+image: '/guides/ai-transformation-10-steps/cover.png'
+relatedPosts:
+  [
+    'how-to-build-your-ai-command-center',
+    'duet-ai-for-founders',
+    'beyond-claude-code-building-a-shared-skill-library',
+  ]
+howTo:
+  name: 'How to Make a Process or Product AI-Native'
+  description: 'A 10-step sequence for turning a manual process or product into an AI-native one, where only one step is the AI itself and the other nine are the hard part.'
+  steps:
+    - name: 'Identify the problem'
+      text: 'Find the manual process worth automating. Run your "suck meter" over the work you and your team do every week.'
+    - name: 'Understand the workflow'
+      text: 'Map how people actually work today, step by step, before you reimagine anything.'
+    - name: 'Collect the data'
+      text: 'Gather sample inputs, documents, and edge cases the workflow has to handle.'
+    - name: 'Build the prototype'
+      text: 'Prove there is a better way by building for yourself as customer zero. This is the one step that is actually AI.'
+    - name: 'Test and iterate'
+      text: 'Validate with real users and edge cases until the workflow is a self-improving loop.'
+    - name: 'Integrate with systems'
+      text: 'Swap point-in-time test data for live data so the workflow can run in production.'
+    - name: 'Roll out and train'
+      text: 'Onboard your peers and users onto the new workflow with hand-holding.'
+    - name: 'Drive adoption'
+      text: 'Embed the workflow in existing behavior and team culture so it actually gets used.'
+    - name: 'Empower contribution'
+      text: 'Treat the workflow like an open-source project where users become contributors.'
+    - name: 'Measure and capture value'
+      text: 'Track outcomes — loosely in the experimental phase, rigorously when you scale.'
+cta:
+  title: 'The prototype is the easy part.'
+  subtitle: 'Most AI tools help with the one step that is AI, then leave. Duet builds the workflow and runs all 10 steps, with your team, every day. No technical setup.'
+  buttonText: 'Build and run it with Duet'
+  href: '/sign-in?from=guide-ai-transformation'
+---
+
+It's not sexy to say, but most of AI transformation has nothing to do with AI.
+
+Turning an internal process or an external product into something AI-native takes about ten steps. Exactly one of them is the AI. The other nine — understanding the work, collecting the data, integrating the systems, driving adoption, capturing the value — are the harder part, and they are where almost every team quietly stalls.
+
+This is the trap of the demo era. It is easy to wire up a model, get a slick result, and call it transformation. Then nothing reaches production, nobody adopts it, and the ROI never shows up. The model was never the bottleneck. The other nine steps were.
+
+This guide walks through all ten, with credit to [Alex Lieberman](https://x.com/businessbarista/status/2064089261121626531) (co-founder of Morning Brew), whose sequence framed the problem cleanly. We'll go deeper on the nine non-AI steps, because that's where the work actually lives — and where the workspace you run it in starts to matter a lot.
+
+<AnswerBox
+  title="Why is only 1 of the 10 AI transformation steps actually AI?"
+  summary="Making a process AI-native is mostly process work: mapping the workflow, collecting data, integrating systems, rolling out, driving adoption, and measuring value. Only the prototype step uses a model directly. The other nine determine whether the AI ever reaches production or delivers ROI, which is why they are the hard part."
+  bullets={[
+    'Step 4 — building the prototype — is the only step that is the AI itself.',
+    'Steps 1–3 are process discovery: find the problem, map the workflow, collect the data.',
+    'Steps 6–10 are production reality: integrate live systems, roll out, drive adoption, and measure value.',
+    'Most AI projects fail not at the model but at integration, adoption, and measurement.',
+  ]}
+  queries={[
+    'What are the steps of AI transformation?',
+    'How do you make a process AI-native?',
+    'Why do most AI projects fail to reach production?',
+    'What is the hardest part of AI adoption?',
+    'How to turn a manual workflow into an AI workflow',
+  ]}
+/>
+
+<GuideTOC
+  items={[
+    { number: 1, title: 'Identify the problem', href: '#step-1-identify-the-problem' },
+    { number: 2, title: 'Understand the workflow', href: '#step-2-understand-the-workflow' },
+    { number: 3, title: 'Collect the data', href: '#step-3-collect-the-data' },
+    {
+      number: 4,
+      title: 'Build the prototype (the AI part)',
+      href: '#step-4-build-the-prototype-the-ai-part',
+    },
+    { number: 5, title: 'Test and iterate', href: '#step-5-test-and-iterate' },
+    {
+      number: 6,
+      title: 'Integrate with your systems',
+      href: '#step-6-integrate-with-your-systems',
+    },
+    { number: 7, title: 'Roll out and train', href: '#step-7-roll-out-and-train' },
+    { number: 8, title: 'Drive adoption', href: '#step-8-drive-adoption' },
+    { number: 9, title: 'Empower contribution', href: '#step-9-empower-contribution' },
+    { number: 10, title: 'Measure and capture value', href: '#step-10-measure-and-capture-value' },
+    { number: 11, title: 'FAQ', href: '#faq' },
+  ]}
+/>
+
+---
+
+## Step 1: Identify the problem
+
+Find the manual process worth automating. Turn your brain off autopilot and turn on your "suck meter" — the instinct for which parts of the week are repetitive, draining, and low-judgment.
+
+The funny part: your company gets more efficient just by mapping out its processes, even if you never introduce AI. Naming the work forces you to see the duplication and the dead ends you'd stopped noticing.
+
+Be honest about which problems are worth it. The best first candidates share a shape:
+
+- **High frequency.** Something you or your team do weekly or daily, not once a quarter.
+- **Clear inputs and outputs.** You can describe what goes in and what "done" looks like.
+- **Low irreversibility.** A wrong result is annoying, not catastrophic, so you can iterate safely.
+
+<Callout emoji="🎯">
+  **Customer zero is you.** The strongest first project is one where you are the user. You'll feel
+  every flaw immediately, and you won't need anyone's permission to keep iterating.
+</Callout>
+
+Don't start with the company's most glamorous, highest-stakes workflow. Start with the one that annoys you most and is easy to reason about.
+
+---
+
+## Step 2: Understand the workflow
+
+This is the least sexy step and the most important one. Map how people _actually_ work today, not how the org chart says they do. Grab a sheet of paper or [Excalidraw](https://excalidraw.com) and draw the flow from beginning to end — every handoff, every decision point, every place it stalls.
+
+The people driving transformation — the forward-deployed engineer, the GTM engineer, the operator — should spend the majority of their time right here. Before you reimagine a process, you have to become an expert in it. That means either holding the business context yourself or absorbing it through osmosis by sitting close to the people who do the work.
+
+As one reply to Lieberman's thread put it: _"The detailed process is where the product hides. Who touches the work, where it stalls, what 'done' actually means."_ If you can't map it on paper, you don't understand it well enough to know which part AI should even touch.
+
+This is also the step where most context gets lost — and lost context is what makes AI feel dumb later. The process map, the edge cases, the "we always do X except when Y" rules: these need to live somewhere durable, not in one person's head or one chat thread that scrolls away.
+
+<Callout type="tip" title="Write the map down where the AI can read it">
+  A persistent memory layer matters more than it sounds. In Duet, every workspace has a memory and a
+  filesystem that survive across sessions, so the workflow map you create here becomes context your
+  agent reads on every future run — instead of something you re-explain every morning. We go deep on
+  this in [AI Amnesia: Why Your AI Keeps
+  Forgetting](/guides/ai-amnesia-why-your-ai-keeps-forgetting).
+</Callout>
+
+---
+
+## Step 3: Collect the data
+
+Gather the raw material the workflow has to handle: sample inputs, real documents, and the weird edge cases that break naive solutions.
+
+The goal is to assemble a representative set, not a perfect one. A handful of real examples — including the ugly ones — teaches you more than a hundred clean synthetic ones.
+
+Concretely, that looks like:
+
+- **Sample inputs.** The actual emails, tickets, transcripts, or files the process starts from.
+- **Reference material.** Past outputs that represent "good," so you can capture voice, format, and quality.
+- **Edge cases.** The 10% of inputs that don't fit the happy path. These define whether the workflow survives contact with reality.
+
+For a content workflow, for example, that might mean pulling past Slack messages and Notion docs to test idea generation, plus past posts to build `.md` files that capture your voice. For a support workflow, it's a stack of real tickets and the replies that resolved them.
+
+Keep this material in one place. The closer your data sits to where the workflow will run, the less AI slop, dumb responses, and breaking flows you'll experience later.
+
+---
+
+## Step 4: Build the prototype (the AI part)
+
+This is it. The one step out of ten that is actually about AI.
+
+Whether it's led by an engineer or a domain expert, the goal is narrow: prove the hypothesis that there's a better way of doing this, for yourself as customer zero. Don't worry about polish. Don't worry about scale. Worry only about proving there's a _there_ there.
+
+Because this is the easy step — the one every tool is racing to own — the temptation is to over-invest here and declare victory. Resist it. A working prototype is a milestone, not a finish line. It proves the idea; it does not deliver the value.
+
+The faster you can get from idea to working draft, the more cycles you get on the nine harder steps. This is where building inside an agent workspace pays off: you describe the workflow in plain language, the agent drafts it, and you're testing a real version in minutes instead of scheduling an engineering sprint.
+
+<Callout type="warning" title="Don't confuse a prototype with a product">
+  The prototype proves the idea works once, for one person, with hand-picked inputs. Everything that
+  makes it real — live data, other users, adoption, measurement — is still ahead of you. Teams that
+  stop here have a demo, not a transformation.
+</Callout>
+
+<DuetCTA />
+
+---
+
+## Step 5: Test and iterate
+
+Validate with real users and real edge cases. Before you take the process from single-player (just you) to multiplayer (many users), beat it up with as many rounds of work, feedback, and edge cases as you can stand.
+
+The objective of this step is to turn the workflow into a self-improving loop _before_ you scale it. A fragile workflow that works for you and breaks for everyone else is worse than no workflow, because it burns trust you'll need for adoption.
+
+What "iterate" actually means in practice:
+
+- Run the workflow on inputs you didn't design for and watch where it breaks.
+- Capture each fix as a durable rule, not a one-off tweak you'll forget.
+- Keep the loop tight enough that improving the workflow is cheaper than working around it.
+
+The teams that win here treat every correction as a permanent upgrade to the system. In a skill-based setup, that means encoding the fix into a reusable [skill](/guides/agent-skills-101-tools-vs-mcp-vs-skills) so the improvement compounds for everyone — instead of living in the head of whoever caught the bug.
+
+---
+
+## Step 6: Integrate with your systems
+
+Point-in-time data is fine for testing. Live data is mandatory for production.
+
+Your prototype ran on a folder of sample files. The real workflow has to read from and write to the systems where the work actually happens — your inbox, your CRM, your docs, your databases. This is the step where "cool demo" becomes "thing my team relies on," and it's also where a lot of projects die, because integration is unglamorous, fiddly, and never quite finished.
+
+For a content workflow, integration might mean hooking into Notion, Gmail, and Slack for ideation, then into X and LinkedIn to publish once a piece is ready. For an operations workflow, it's the ticketing system, the billing system, and the data warehouse.
+
+Two things make or break this step:
+
+- **Breadth of connections.** The more systems you can reach without custom code, the faster you get to live.
+- **Always-on execution.** Integrations are only useful if something is actually running to use them — not just when you happen to have a tab open.
+
+<Callout type="tip" title="This is where 'cloud-native' stops being a buzzword">
+  Duet runs each workspace on its own persistent cloud server with hundreds of prebuilt
+  integrations, so the workflow stays connected and keeps running whether or not you're online.
+  That's the difference between an assistant that helps when you ask and a workflow that runs on its
+  own. See [How to Build Your AI Command Center](/guides/how-to-build-your-ai-command-center) for
+  the full setup.
+</Callout>
+
+---
+
+## Step 7: Roll out and train
+
+Whether the new workflow lives on a live link, in a repo, or in an internal library, the next step is hand-holding your peers and users through onboarding.
+
+A workflow that's obvious to the person who built it is rarely obvious to anyone else. Rollout is a teaching problem, not a technical one. The smoother the first-run experience, the higher the odds anyone comes back for a second run.
+
+Good rollout has a few traits:
+
+- **One place to start.** A single link or channel, not a scavenger hunt across tools.
+- **A worked example.** Show the workflow doing something real and useful on the first try.
+- **A human nearby.** Someone to answer the first round of "wait, how do I…" questions.
+
+This step is dramatically easier when the workflow lives where people already collaborate. If your team has to learn a new tool _and_ a new workflow at the same time, you've doubled the friction. If the workflow shows up inside the place they already talk and work, you've halved it.
+
+<DuetCTA />
+
+---
+
+## Step 8: Drive adoption
+
+Adoption is simple, but it isn't easy.
+
+The formula: introduce a workflow that saves someone real time, and make it integrate with behavior they already have so they don't have to relearn anything. People adopt what reduces their effort and reject what adds to it — no matter how impressive the underlying tech.
+
+The deeper move is cultural. Embed the workflow where adoption is visible, where ideas and feedback are celebrated, and where new and creative use cases become social currency in your business. When using the workflow earns status, adoption stops being something you have to push.
+
+A few things that reliably drive adoption:
+
+- **Default placement.** The workflow lives in the path of existing work, not in a separate app nobody opens.
+- **Visible wins.** People see colleagues getting time back, which is the most persuasive demo there is.
+- **Shared surface.** Humans and the AI work in the same space, so using it is collaboration, not a context switch.
+
+This is exactly why running AI inside a shared, team-native workspace beats bolting a private assistant onto each person's laptop. Adoption is a team behavior, so the workflow has to live in a team place.
+
+---
+
+## Step 9: Empower contribution
+
+Treat your new workflow like an open-source project. Let users become contributors.
+
+That doesn't mean everyone has to be technical. Some people will build improvements directly — a new skill, a new automation — while others simply drop ideas and feedback onto a board the agent works through. The point is to make everyone feel like a builder, because a workflow with many contributors improves faster than one guarded by a single owner.
+
+Contribution shows up two ways:
+
+- **Direct.** Power users extend the workflow themselves — new skills, new automations, new edge-case handling.
+- **Indirect.** Everyone else files ideas and reports gaps on a shared board that gets triaged and shipped.
+
+The mechanics matter here. You want a place to capture contributions (a kanban board), a way to encode improvements so they stick (reusable skills), and a culture that rewards both. When a fix becomes a skill the whole team inherits, every contributor's work compounds instead of evaporating. That's the thesis behind [building a shared skill library](/guides/beyond-claude-code-building-a-shared-skill-library).
+
+<Callout emoji="🛠️">
+  **Everyone's a builder, literally.** In Duet, teammates can start durable sessions for
+  long-running jobs, inspect the event history, and turn useful results into shared files, apps, or
+  trained context. The workflow stops being one person's project and becomes shared infrastructure.
+</Callout>
+
+---
+
+## Step 10: Measure and capture value
+
+Everyone is ROI-obsessed right now. The right answer depends on which phase you're in.
+
+**If you're in the experimental phase**, forget ROI. The goal is to empower people to throw a lot of ideas at the wall and see what sticks. You don't need to be scientific here — intuition is more than enough to tell what's working from what isn't. Premature ROI demands kill experiments before they have a chance to prove themselves.
+
+**If you're in the scale-up phase** and need to realize hard ROI, the value has to show up as one of three things:
+
+- **Reskilled people.** Employees attached to the old process move to higher-leverage work.
+- **Headcount you didn't add.** You undershoot the hiring roadmap you'd otherwise have approved.
+- **Measurable business gains.** Higher ACV, better conversion, or a faster sales cycle.
+
+The teams that capture value here have one advantage: the workflow is _running_, continuously, where its output is visible. You can't measure a prototype that only fires when someone remembers to open it. You can measure a workflow that runs on a schedule, posts its results to a channel, and leaves a trail.
+
+This is the half of AI transformation the industry under-sells. Anyone can _build_ an AI workflow. The value comes from _running_ it — reliably, in production, long enough for the compounding to show up.
+
+<Callout type="success" title="Build is one step. Run is the other nine.">
+  Lovable builds you an app and leaves. Duet builds you an app and runs it. Every workspace is a
+  persistent cloud server with memory, files, scheduled jobs, integrations, and a team around it —
+  so the workflow you prototype in step 4 is the same one still running, and still being measured,
+  in step 10.
+</Callout>
+
+<DuetCTA />
+
+---
+
+## FAQ
+
+<Accordion type="single" collapsible className="w-full">
+
+<AccordionItem value="why-one-step-ai">
+  <AccordionTrigger>Why is only one of the ten steps actually AI?</AccordionTrigger>
+  <AccordionContent>
+    Because the model is the easy part. Building a working prototype (step 4) is the only step that
+    uses AI directly. The other nine — finding the problem, mapping the workflow, collecting data,
+    integrating live systems, rolling out, driving adoption, enabling contribution, and measuring
+    value — are process and organizational work. They determine whether the AI ever reaches
+    production or delivers ROI, which is why they're harder and more important than the model
+    itself.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="where-projects-fail">
+  <AccordionTrigger>Where do most AI transformation projects fail?</AccordionTrigger>
+  <AccordionContent>
+    Rarely at the model. They fail at integration (the workflow never connects to live systems),
+    adoption (people don't change their behavior to use it), and measurement (no one can show the
+    value, so the project loses support). A great prototype that never gets past step 4 is the most
+    common failure mode of all.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="where-to-start">
+  <AccordionTrigger>What process should I start with?</AccordionTrigger>
+  <AccordionContent>
+    Pick something high-frequency, with clear inputs and outputs, where a wrong result is annoying
+    rather than catastrophic — and ideally one where you are the user. Being customer zero means you
+    feel every flaw immediately and don't need anyone's permission to iterate. Avoid starting with
+    your most glamorous, highest-stakes workflow.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="map-the-workflow">
+  <AccordionTrigger>Do I really need to map the workflow on paper first?</AccordionTrigger>
+  <AccordionContent>
+    Yes. If you can't draw the workflow from beginning to end, you don't understand it well enough
+    to know which part AI should touch. Mapping it also makes the process more efficient on its own,
+    by exposing duplication and dead ends. This is the step where transformation leads should spend
+    most of their time, and the step most people rush.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="prototype-vs-product">
+  <AccordionTrigger>
+    What's the difference between a prototype and a real workflow?
+  </AccordionTrigger>
+  <AccordionContent>
+    A prototype proves the idea works once, for one person, on hand-picked inputs. A real workflow
+    runs on live data, serves many users, survives edge cases, and produces measurable value over
+    time. The gap between them is steps 5 through 10 — and it's where the actual work, and the
+    actual value, lives.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="how-duet-helps">
+  <AccordionTrigger>How does Duet help with AI transformation?</AccordionTrigger>
+  <AccordionContent>
+    Most AI tools help with step 4 — the prototype — and stop. Duet is built for the other nine.
+    Every workspace is a persistent cloud server with memory and a filesystem (so the workflow map
+    and context survive), hundreds of prebuilt integrations (so it connects to live systems),
+    scheduled jobs (so it can run continuously), durable shared sessions (so people can inspect and
+    continue the work), trained context and files (so useful knowledge compounds), and a persistent
+    agent (so the workflow you build is the workflow that runs). In short: it builds the workflow
+    and runs it.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="ai-native-meaning">
+  <AccordionTrigger>What does "AI-native" actually mean?</AccordionTrigger>
+  <AccordionContent>
+    An AI-native process is one where the AI is part of how the work runs day to day, not a one-off
+    tool you reach for occasionally. It reads from and writes to your real systems, runs on its own
+    without being prompted each time, improves as the team contributes, and produces output you can
+    measure. The model is a component; the system around it is what makes it native.
+  </AccordionContent>
+</AccordionItem>
+
+</Accordion>
+
+---
+
+## Keep reading
+
+- [How to Build Your AI Command Center with Duet](/guides/how-to-build-your-ai-command-center). The full setup for the workspace that runs your workflows.
+- [Duet AI for Founders](/guides/duet-ai-for-founders). Run Founder Mode as an operating system, with agents instead of middle management.
+- [AI Amnesia: Why Your AI Keeps Forgetting](/guides/ai-amnesia-why-your-ai-keeps-forgetting). Why persistent memory is the difference between a demo and a system.
+- [Beyond Claude Code: Building a Shared Skill Library](/guides/beyond-claude-code-building-a-shared-skill-library). How to turn fixes into capability the whole team inherits.

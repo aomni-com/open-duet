@@ -1,0 +1,101 @@
+export const metadata = {
+  title: 'API keys and scopes',
+  description: 'Use one human identity key; workspace access follows current membership and role.',
+  alternates: { canonical: '/api-keys/' },
+}
+
+<p className="eyebrow">Authorization</p>
+
+# A human key identifies you
+
+An ordinary Duet key identifies a person. It is not bound to a workspace or a saved list of
+permissions. CLI login, REST requests and Mac sync use that same identity; current workspace
+membership and role determine what each request may do.
+
+Joining a workspace makes it available to your existing key. Leaving removes access, and a role
+change changes allowed operations without replacing the key. Named keys can be revoked separately,
+but they all use this same credential model. The CLI saves one login in `~/.duet/config.json`.
+
+## Workspace selection is an operation parameter
+
+Select the workspace in a resource address or request, rather than signing in again for each one.
+`GET /v1/whoami` returns your reachable workspaces and their current roles. Its effective scopes
+are a projection of that access, not permissions stored on a human key.
+
+The capability vocabulary still names what an endpoint requires:
+
+```text
+ws:acme:files:read
+ws:acme:files:write
+ws:acme:apps
+```
+
+For human callers Duet derives those capabilities from the current role. A refused operation needs
+a membership or role change; requesting a more powerful human key does not change access.
+
+## Delegated credentials retain their boundaries
+
+An OAuth grant or installed app credential has its own explicit workspace and capability boundary.
+Use only the authority the integration needs. The same-workspace `admin` capability satisfies other
+capabilities, so reserve it for an integration that actually needs administration.
+
+OAuth client registration validates and stores the client identity. The grant keeps that identity
+and the authorized workspace snapshot; consumers do not refetch mutable client documents while
+listing grants. Account operations require a human credential rather than an app or OAuth grant.
+
+## App declarations bind runtime authority
+
+An app registration declares bare capability names in `apiScopes`; it does not contain a secret.
+Use only the capabilities required by API routes the app's server calls, or `[]` when it calls none.
+Apps cannot declare `admin`.
+
+A non-empty declaration supports two independent instances of the same `app` credential. Duet
+manages a renewable key for its local service, injecting `DUET_APP_API_KEY` and `DUET_API_URL`
+into the spawned process, never its install command. An externally hosted server can instead
+receive a fresh exported app key through its host's server-side secret store. Export never
+reveals the managed key or earlier plaintext. A shared or installed copy owns its own workspace
+identity and keys; source and shares never transport authority.
+
+Both purposes authenticate as the durable app row, with exactly its declared workspace scopes
+and no dependency on the exporter's membership. Model requests require `services` and use the
+app key through standard bearer authentication. The credential already identifies the workspace.
+Keep credentials out of browser bundles, source, `.env*`, SQLite, logs and Drive files.
+
+Export requires an explicit lifetime: `never` or a duration in seconds. Up to five exported keys
+may be live for one app, allowing replacement deployment before revoking the previous key. Export
+and individual revocation use ordinary app-management authority with `apps`, including the
+workspace agent; inspection permits viewers with `apps`. The operation needs no browser-only
+consent step. See [externally hosted apps](/apps#externally-hosted-apps) for the deployment flow.
+
+Changing the actual `apiScopes` set permanently revokes existing exports, even if the declaration
+later changes back. Export a new key and reconfigure the host after such a change. Reordering or
+deduplicating the same capabilities preserves authority. Managed refresh and rotation leave
+exports alone; revoking one export leaves its siblings and managed key alone. App deletion and
+existing disable/removal lifecycles revoke both purposes, and re-enabling does not resurrect old
+keys. There is no app-install consent grant alongside the live row and its declaration.
+
+## A sync machine identifies a computer
+
+`duet sync` uses your ordinary saved login. The Mac also has a non-secret machine ID and its own
+Syncthing certificate pair. Those describe the computer; they are not a second login or a grant
+attached to your key. Two Macs can use the same human key and still have separate machine identities.
+
+The daemon mirrors workspaces where your current role permits writing. Joining, leaving and role
+changes update that set. Replacing the human key preserves the Mac identity and certificate.
+Removing a lost machine detaches its mirrors without revoking your login on other computers.
+
+Machine operations are described under [mirror devices](/mirror-devices). File activity uses
+`mirror:<machineId>` and resolves that identity to the machine's user, including after removal.
+Replication reads do not flood each file's seen-by history; the machine's last-use time is the
+read-side signal.
+
+## Store, inspect and revoke the login
+
+Use `Authorization: Bearer <key>` over HTTPS. Keep keys out of source and logs. The CLI's saved
+configuration uses owner-only permissions; explicit environment overrides remain available for
+programmatic clients. A key's `duet_sk_` prefix helps identify its format but is not authentication.
+
+List or revoke named human keys in the app's key settings or through the user API-key endpoints in
+[the reference](/reference). Revoking a key refuses subsequent requests through ordinary
+authentication. Removing a machine and revoking a login are separate operations with different
+consequences.

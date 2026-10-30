@@ -1,0 +1,41 @@
+import { EndpointReference } from '../../components/endpoint-reference'
+
+export const metadata = {
+  title: 'Integrations',
+  description: 'Connect and manage workspace-scoped provider accounts through the Duet API.',
+  alternates: { canonical: '/integrations/' },
+}
+
+<p className="eyebrow">Resource guide</p>
+
+# Connections are workspace-scoped provider state
+
+Catalog browsing and connection lifecycle share one workspace capability. Duet derives the provider
+entity from the authenticated workspace. Clients never send an entity ID or arbitrary return
+destination, and every connected-account ID is verified against that workspace before deletion.
+
+## Keep credentials and connection state at the provider
+
+Start a connection with an integration slug and a same-origin product path. Duet validates that
+path and returns a hosted authorization URL. Credentials go directly from the browser to the
+integration provider; Duet does not receive or store them. When the browser returns, treat its
+status parameter as a notice and refetch the catalog and connection list. The provider remains the
+sole source of truth; Duet does not mirror pending, active, failed, or disconnected integration rows.
+
+Every accepted catalog or connection page contains at most 100 rows. Provider identities,
+descriptions, and URLs must fit the public UTF-8 contract. Invalid optional logos are omitted; any
+other invalid or oversized provider page fails as `integration_provider_failed` instead of leaking
+a partial page. These bounds apply before provider data reaches the public API, including both
+provider and public continuation tokens.
+
+Agent access is separate durable Duet policy keyed by integration slug, so it survives disconnect
+and reconnect. An omitted `allowedAgentIds` field means every agent, including future agents; an
+explicit empty array means no agent; and a non-empty array names the exact durable agent IDs that
+receive the toolkit. The reserved `root` ID selects default Duet. Send an empty object to restore
+the all-agents default.
+
+Canceled authorization is a successful lifecycle outcome with no active connection. It is safe to
+show the catalog again. Disconnect is idempotent, so cleanup code may repeat it when a prior response
+was lost.
+
+<EndpointReference category="integrations" />

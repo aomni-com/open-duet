@@ -1,0 +1,12 @@
+{
+  "triggers": [],
+  "tags": [
+    "personal",
+    "marketing"
+  ],
+  "onboarding": {
+    "kind": "app",
+    "app": "apps/setup-voice"
+  },
+  "suggestedFirstMessage": "Hi — I'm your Writer. I've studied your writing, so drafts come out sounding like you, not like a model. Give me a brief and I'll draft it in your voice, or paste a draft and I'll strengthen it without flattening what's yours."
+}

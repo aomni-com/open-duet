@@ -1,0 +1,267 @@
+---
+title: 'Claude Opus 4.7, GPT-5.4 y pensamiento extendido: elige el modelo de tu agente de AI en Duet'
+metaTitle: 'Claude Opus 4.7 + GPT-5.4 en Duet: elige el modelo de tu agente de AI'
+description: 'La mayoría de las fallas de agentes de AI vienen de usar el modelo equivocado. Duet te deja elegir el modelo y la profundidad de pensamiento por agente: Claude Opus 4.7, GPT-5.4 y más.'
+date: '2026-04-25'
+updatedAt: '2026-05-08'
+readTime: '8 min read'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/5.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'updates'
+tags:
+  [
+    'ai-models',
+    'claude-opus',
+    'claude-opus-4-7',
+    'gpt-5',
+    'gpt-5-4',
+    'ai-agents',
+    'extended-thinking',
+  ]
+type: 'article'
+image: '/blog/claude-opus-4-7-gpt-5-4-extended-thinking-duet/cover.png'
+locale: es-419
+translationKey: 'claude-opus-4-7-gpt-5-4-extended-thinking-duet'
+relatedPosts:
+  - 'how-to-run-claude-code-in-the-cloud'
+  - 'claude-code-pricing'
+  - 'how-to-set-up-a-24-7-ai-agent'
+  - 'how-to-build-internal-tool-in-a-day-with-ai'
+  - '6-best-ai-agent-builders-in-2026'
+cta:
+  title: 'Elige el modelo para cada agente.'
+  subtitle: 'Pon en marcha tu primer agente de Duet con Opus 4.7, GPT-5.4 o cualquier modelo de frontera, con la profundidad de pensamiento ajustada a cada trabajo.'
+  buttonText: 'Pon en marcha un agente'
+  href: '/sign-in?from=blog-model-picker'
+---
+
+Duet corre Claude Opus 4.7 por defecto y soporta GPT-5.4 a través del runner de Codex, con control por agente sobre el modelo y cuántos tokens de razonamiento (hasta 32,000) usa el agente antes de actuar.
+
+La mayoría de las plataformas de agentes de AI eligen un modelo por ti. Te toca lo que la plataforma decidió que era "suficientemente bueno", y cuando tu agente alucina a lo largo de un workflow de varios pasos o quema tokens en una búsqueda simple, no tienes recurso.
+
+Eso es un problema. Porque el modelo detrás de tu agente es el factor más determinante de si produce algo útil o algo que pasas 20 minutos arreglando.
+
+Distintas tareas necesitan distintos cerebros. Un scraper de precios de la competencia no necesita la misma profundidad de razonamiento que una herramienta que genera resúmenes financieros semanales a partir de tres fuentes de datos distintas. Un agente que escribe un bot de Slack no necesita el mismo modelo que uno que depura un pipeline de deploy en producción.
+
+Duet ahora te da dos controles que la mayoría de las plataformas de agentes no tienen: **selección de modelo** y **profundidad de pensamiento**. Por agente. Cambiable en cualquier momento.
+
+<AnswerBox
+  title="Claude Opus 4.7, GPT-5.4 y Extended Thinking en Duet"
+  summary="Duet ahora usa Claude Opus 4.7 por defecto para cada agente y suma GPT-5.4 mediante el runner de Codex a $2.50 por millón de tokens de entrada. Elige el modelo y la profundidad de pensamiento por agente, con un nuevo nivel xhigh que le da al agente hasta 32,000 tokens de razonamiento antes de actuar. Cambia de modelo a mitad de sesión sin perder el historial de conversación, las herramientas ni la memoria."
+  bullets={[
+    'Claude Opus 4.7 es el nuevo modelo por defecto para cada agente de Duet, con mejor razonamiento de cadena larga y generación de código.',
+    'GPT-5.4 ya está disponible mediante el runner de Codex a $2.50 por millón de tokens de entrada.',
+    'Cuatro niveles de pensamiento: low, medium, high y xhigh con hasta 32,000 tokens de razonamiento antes de que el agente actúe.',
+    'Cambia de modelo o de profundidad de pensamiento a mitad de sesión. Sin reinicios, sin perder contexto, sin herramientas rotas.',
+    'Modelo por defecto a nivel de workspace, con overrides por agente.',
+  ]}
+  queries={[
+    '¿Qué modelo usa Duet?',
+    '¿Cuánto cuesta GPT-5.4 en Duet?',
+    '¿Qué es extended thinking en Claude Opus 4.7?',
+    '¿Puedo usar Claude y GPT en el mismo workspace?',
+    '¿Qué es el pensamiento xhigh?',
+    'Claude Opus 4.7 vs GPT-5.4 para agentes',
+    'Selección de modelo para agentes de AI',
+  ]}
+  faq={[
+    {
+      question: '¿Necesito actualizar algo para usar Claude Opus 4.7?',
+      answer:
+        'No. Opus 4.7 es el modelo por defecto para todos los agentes de Duet. Los agentes existentes se actualizaron automáticamente. No necesitas cambiar ninguna configuración a menos que quieras cambiar a un modelo distinto.',
+    },
+    {
+      question: '¿Cuándo debería usar pensamiento xhigh en vez de high?',
+      answer:
+        'El pensamiento high funciona para la mayoría de las tareas complejas, incluyendo workflows de varios pasos, herramientas con lógica condicional e integraciones entre dos o tres sistemas. Usa xhigh cuando la tarea falló en niveles de pensamiento más bajos, o cuando sabes de antemano que la tarea implica depuración profunda, más de 10 rutas condicionales o construir sistemas con múltiples componentes interdependientes. xhigh cuesta más en tokens pero ahorra tiempo al lograr la salida correcta en el primer intento.',
+    },
+    {
+      question: '¿Puedo usar GPT-5.4 y Claude en el mismo workspace?',
+      answer:
+        'Sí. Cada agente en tu workspace puede correr un modelo distinto. Podrías tener un agente en GPT-5.4 para tareas diarias rápidas y otro en Claude Opus 4.7 para builds complejos. Cambia de modelo en cualquier momento sin volver a crear el agente.',
+    },
+    {
+      question: '¿Cuánto cuesta GPT-5.4 en Duet?',
+      answer:
+        'GPT-5.4 está disponible en todos los planes mensuales de Duet. Su trabajo usa primero los créditos mensuales y después la reserva pagada para uso adicional.',
+    },
+    {
+      question: '¿Puedo cambiar de modelo en medio de una sesión?',
+      answer:
+        'Sí. Cambia de modelo o de nivel de pensamiento en cualquier punto durante una sesión. La sesión conserva todo su historial de eventos, herramientas, contexto de Train y archivos del workspace. Nada se reinicia y puedes usar distintos modelos sin empezar de cero.',
+    },
+    {
+      question: '¿Cómo afecta la selección de modelo a las herramientas y la memoria de mi agente?',
+      answer:
+        'No las afecta. El historial de la sesión, las herramientas, la configuración y los archivos del workspace se mantienen iguales. Solo cambia el motor de razonamiento, así que puedes experimentar sin perder la configuración.',
+    },
+    {
+      question: '¿Hay una forma de fijar un modelo por defecto para todos los agentes nuevos?',
+      answer:
+        'Sí. Hay configuraciones de modelo por defecto a nivel de workspace. Fija tu modelo preferido una vez y todos los agentes nuevos en ese workspace lo usarán. Los agentes individuales aún se pueden sobreescribir.',
+    },
+  ]}
+/>
+
+## El problema con los agentes de un-solo-modelo-para-todo
+
+Cada modelo de AI hace concesiones. Algunos son más rápidos pero más superficiales. Algunos razonan profundamente pero cuestan más por token. Algunos sobresalen en generación de código pero batallan con el análisis de formato largo. Algunos manejan bien la ambigüedad pero piensan de más en tareas sencillas.
+
+Cuando una plataforma te encierra en un solo modelo, te quedas atascado con esas concesiones para cada tarea que maneja tu agente. Eso significa:
+
+- **Gastar de más en tareas simples.** Tu agente usa máxima potencia de razonamiento para renombrar una variable o enviar una notificación. Estás pagando por un cirujano para poner una curita.
+- **Quedarte corto de potencia en trabajo complejo.** El mismo agente que maneja búsquedas rápidas también intenta construir un pipeline de datos de varios pasos. No tiene la profundidad de razonamiento, así que alucina pasos, se salta casos límite, y pasas más tiempo arreglando la salida del que habría tomado hacerlo tú mismo.
+- **Sin forma de optimizar.** No puedes ajustar el agente para la tarea. Te toca lo que te toca.
+
+Por esto la selección de modelo no es un lujo. Es la diferencia entre un agente que funciona de forma confiable y uno que funciona "casi siempre, más o menos". Si has estado [corriendo Claude Code en la nube](/blog/how-to-run-claude-code-in-the-cloud) a escala, ya lo sentiste en sesiones largas.
+
+## Claude Opus 4.7: qué cambió en realidad
+
+Cada agente de Duet ahora usa Claude Opus 4.7 por defecto, el modelo más capaz de Anthropic. Esto no es un cambio menor de versión.
+
+Esto es lo que es materialmente distinto para el trabajo de agentes:
+
+**Cadenas de razonamiento más largas sin desviarse.** Los modelos anteriores tienden a perder el hilo en tareas con muchos pasos secuenciales. Opus 4.7 mantiene la coherencia a lo largo de cadenas mucho más largas. Si tu agente está construyendo una herramienta que extrae datos de una API, los transforma, genera un reporte y lo envía por email, cada paso se mantiene consistente con los anteriores.
+
+**Mejor seguimiento de instrucciones.** Cuando le das a tu agente una restricción específica como "usa este esquema exacto", "no modifiques la base de datos" o "formatea la salida como un CSV con estos encabezados", Opus 4.7 respeta esas restricciones de forma más confiable. Menos momentos de "interpreté tu solicitud de otra manera".
+
+**Generación de código más precisa.** Para los agentes que construyen y publican herramientas, esto es lo que más importa. Opus 4.7 produce código que corre al primer intento con más frecuencia. Menos errores de sintaxis, menos llamadas a API equivocadas, menos salidas "casi pero no del todo" que requieren corrección manual.
+
+**Conciencia de casos límite.** Esto es sutil pero se acumula con el tiempo. Opus 4.7 es mejor anticipando lo que podría salir mal, incluyendo valores nulos, límites de tasa, respuestas vacías y problemas de zona horaria, y manejándolos de forma proactiva. Tus agentes producen salidas más robustas sin que tengas que especificar cada verificación defensiva.
+
+Si ya estás usando [Claude Duet](/guides/duet-ai-for-founders), no necesitas cambiar nada. Tus agentes ya están en Opus 4.7.
+
+## Pensamiento extendido: cuando tu agente necesita planear antes de actuar
+
+La mayoría de las fallas de agentes ocurren en los primeros segundos. El agente lee tu prompt, elige una dirección y empieza a ejecutar. Si esa dirección inicial está mal, todo lo que sigue también está mal.
+
+El pensamiento extendido cambia esto. Antes de que tu agente escriba una sola línea de código o tome cualquier acción, razona el problema en una fase de pensamiento dedicada. Planea el enfoque, identifica problemas potenciales y traza los pasos antes de comprometerse con la ejecución.
+
+Duet ahora soporta cuatro niveles de pensamiento:
+
+| Nivel     | Tokens de razonamiento | Cuándo usarlo                                                                                                                                 |
+| --------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Low       | Mínimo                 | Tareas rápidas: renombrar archivos, búsquedas simples, enviar un mensaje.                                                                     |
+| Medium    | Estándar               | Trabajo de propósito general: construir una herramienta básica, escribir un script.                                                           |
+| High      | Extendido              | Builds complejos: workflows de varios pasos, herramientas con lógica condicional.                                                             |
+| **xhigh** | **Hasta 32,000**       | **Problemas difíciles: depurar issues de producción, construir sistemas con múltiples integraciones, transformaciones de datos intrincadas.** |
+
+El nuevo nivel **xhigh** le da a tu agente hasta 32,000 tokens de razonamiento antes de actuar. Esa es una ventana significativa. En la práctica, significa que tu agente puede:
+
+- **Trazar una arquitectura completa** antes de escribir cualquier código. En vez de construir una herramienta de forma incremental y darse cuenta a mitad de camino de que el modelo de datos está mal, el agente planea toda la estructura por adelantado.
+- **Anticipar modos de falla.** Con suficientes tokens de pensamiento, el agente puede razonar sobre qué pasa cuando una API devuelve un error, cuando faltan datos o cuando un usuario provee una entrada inesperada, antes de que algo de eso ocurra.
+- **Depurar de forma sistemática.** En vez de hacer cambios al azar para arreglar un bug, el agente puede rastrear la lógica, formar hipótesis y probarlas metódicamente.
+
+No necesitas xhigh para la mayoría de las tareas. Si tu agente está haciendo una búsqueda rápida o una transformación de texto simple, el pensamiento low o medium es más rápido y barato. Pero cuando estás construyendo algo complejo, como un dashboard de inteligencia competitiva que extrae de cinco fuentes, una herramienta de reportes financieros con lógica de conciliación o un pipeline de deploy con manejo de rollback, xhigh es la diferencia entre "el agente construyó algo que más o menos funciona" y "el agente construyó algo que yo publicaría".
+
+### Cuándo usar cada nivel de pensamiento
+
+**Low.** La tarea es directa y el agente no necesita planear. "Envía esto a Slack". "Renombra estos archivos". "Verifica si esta URL devuelve 200".
+
+**Medium.** Por defecto para la mayoría del trabajo. Construir una herramienta interna simple, escribir un script, crear una automatización básica.
+
+**High.** La tarea tiene varios pasos que dependen entre sí, lógica condicional o requiere integrar dos o más sistemas. "Construye una herramienta que haga scraping de los precios de la competencia, los compare con nuestros datos y envíe un resumen".
+
+**xhigh.** Intentaste la tarea en un nivel de pensamiento más bajo y la salida no estuvo bien. O sabes de antemano que la tarea es genuinamente compleja: múltiples fuentes de datos, manejo de errores entre sistemas, herramientas con más de 10 rutas condicionales, o depurar algo que requiere leer y entender un codebase grande.
+
+## GPT-5.4: cuando la velocidad importa más que la profundidad
+
+No todas las tareas de un agente necesitan máximo razonamiento. Algunas tareas necesitan ser rápidas y baratas.
+
+GPT-5.4 ahora está disponible en Duet a través del runner de Codex a **$2.50 por millón de tokens de entrada**. Es un modelo sólido de propósito general con inferencia rápida. (Para un desglose completo de las concesiones de costo frente a Anthropic, mira nuestra [guía de precios de Claude Code](/blog/claude-code-pricing).)
+
+Dónde tiene sentido GPT-5.4:
+
+- **Tareas de alto volumen y baja complejidad.** Agentes que procesan cientos de elementos, como categorizar tickets de soporte, extraer campos de documentos o generar descripciones cortas. La tarea es simple por elemento, pero la corres a escala.
+- **Workflows sensibles a la latencia.** Si tu agente necesita responder rápido, como un bot de Slack que responde preguntas o una herramienta que muestra datos en tiempo real, una inferencia más rápida significa una mejor experiencia.
+- **Operaciones sensibles al costo.** Correr un agente 24/7 en tareas de monitoreo o alertas. El trabajo no es complejo, pero necesita ser continuo y asequible.
+
+Dónde GPT-5.4 es la elección equivocada:
+
+- Construcción de herramientas de varios pasos donde la corrección importa más que la velocidad.
+- Tareas que requieren razonamiento profundo sobre requisitos ambiguos.
+- Generación de código para sistemas complejos con muchas interdependencias.
+
+El punto no es que un modelo sea mejor. Es que **distintos agentes en el mismo workspace pueden correr distintos modelos**, y deberías aprovechar eso.
+
+## Cómo funciona la selección de modelo en la práctica
+
+### Cambia de modelo a mitad de sesión. Conserva todo.
+
+Esta es la parte que la mayoría de las plataformas de agentes hacen mal. Cuando quieres cambiar de modelo, te obligan a iniciar una nueva sesión. Pierdes el historial de conversación, el contexto que el agente construyó y todo el progreso que logró. Así que no cambias. Te quedas en el modelo equivocado porque el costo de cambiar es demasiado alto.
+
+En Duet, cambias de modelo a mitad de sesión. Sin reinicio. Sin perder contexto. La sesión conserva su historial de eventos, sus herramientas, el contexto de Train y los archivos del workspace. Solo cambia el motor de razonamiento.
+
+Esto importa más de lo que suena. Digamos que tu agente está a mitad de construir una herramienta interna compleja en Claude Opus 4.7. Tiene el modelo de datos correcto, la API funciona, pero ahora está atascado en un problema simple de layout de CSS. Puedes bajar a GPT-5.4 para esa única tarea (más rápido, más barato) y luego volver a Opus para el siguiente paso complejo. Sin perder progreso.
+
+O al revés: empezaste una tarea en pensamiento medium y la salida del agente no está del todo bien. En vez de descartar la sesión y empezar de nuevo con más pensamiento, simplemente subes a xhigh y le dices al agente que lo intente otra vez. Ya tiene todo el contexto del intento fallido.
+
+![Model selection in Duet](/blog/claude-opus-4-7-gpt-5-4-extended-thinking-duet/model-selection.gif)
+
+### La profundidad de pensamiento funciona igual
+
+Ajusta el nivel de pensamiento entre tareas, a mitad de sesión, sin reiniciar. Empieza en medium para el andamiaje, sube a xhigh para las partes difíciles, baja a low para la limpieza.
+
+![Thinking level selection in Duet](/blog/claude-opus-4-7-gpt-5-4-extended-thinking-duet/thinking-level-selection.gif)
+
+### Un ejemplo práctico
+
+Digamos que estás corriendo tres agentes en tu workspace:
+
+1. **Monitor diario de la competencia.** Hace scraping de páginas de precios y envía un resumen a Slack. Corre en GPT-5.4 con pensamiento low. Rápido, barato, corre cada mañana. (Mira [cómo configurar un agente de AI 24/7](/blog/how-to-set-up-a-24-7-ai-agent) para el patrón de cron.)
+2. **Constructor de herramientas internas.** Tu equipo pide dashboards y herramientas a medida vía un comando de Slack. Corre en Claude Opus 4.7 con pensamiento high. Necesita precisión y buena generación de código.
+3. **Reportero analítico semanal.** Extrae datos de PostHog, Stripe y tu base de datos, y genera un resumen listo para el directorio. Corre en Claude Opus 4.7 con pensamiento xhigh. La tarea es compleja, la salida necesita estar pulida y solo corre una vez por semana, así que el costo no es una preocupación.
+
+Cada agente obtiene el modelo y el nivel de pensamiento que coincide con su trabajo. Sin concesiones.
+
+## Qué significa esto para el workflow de tu agente
+
+La selección de modelo y la profundidad de pensamiento no son características que configuras una vez y olvidas. Son controles operativos que afectan directamente qué tan confiables, rápidos y rentables son tus agentes.
+
+El patrón práctico:
+
+1. **Empieza con los valores por defecto.** Opus 4.7 en pensamiento medium maneja bien la mayoría de las tareas.
+2. **Sube el pensamiento para trabajo complejo.** Si la salida de un agente no es lo suficientemente confiable, aumenta la profundidad de pensamiento antes de probar cualquier otra cosa. Es el cambio de mayor apalancamiento que puedes hacer.
+3. **Cambia a GPT-5.4 para tareas simples y de alto volumen.** No pagues por razonamiento profundo en tareas que no lo necesitan.
+4. **Ajusta el modelo al trabajo, no al workspace.** Distintos agentes pueden y deben correr distintos modelos.
+
+---
+
+Estas actualizaciones están en vivo ahora. **¿Ya estás en Duet?** Abre la configuración de cualquier agente para elegir un modelo y un nivel de pensamiento. **¿Nuevo aquí?** [Prueba Duet gratis](/) y tu primer agente corre en Claude Opus 4.7 por defecto, con los controles de modelo y pensamiento a un clic de distancia.
+
+## Preguntas frecuentes
+
+### ¿Necesito actualizar algo para usar Claude Opus 4.7?
+
+No. Opus 4.7 es el modelo por defecto para todos los agentes de Duet. Los agentes existentes se actualizaron automáticamente. No necesitas cambiar ninguna configuración a menos que quieras cambiar a un modelo distinto.
+
+### ¿Cuándo debería usar pensamiento xhigh en vez de high?
+
+El pensamiento high funciona para la mayoría de las tareas complejas, incluyendo workflows de varios pasos, herramientas con lógica condicional e integraciones entre dos o tres sistemas. Usa xhigh cuando la tarea falló en niveles de pensamiento más bajos, o cuando sabes de antemano que la tarea implica depuración profunda, más de 10 rutas condicionales o construir sistemas con múltiples componentes interdependientes. xhigh cuesta más en tokens pero ahorra tiempo al lograr la salida correcta en el primer intento.
+
+### ¿Puedo usar GPT-5.4 y Claude en el mismo workspace?
+
+Sí. Cada agente en tu workspace puede correr un modelo distinto. Podrías tener un agente en GPT-5.4 para tareas diarias rápidas y otro en Claude Opus 4.7 para builds complejos. Cambia de modelo en cualquier momento sin volver a crear el agente.
+
+### ¿Cuánto cuesta GPT-5.4 en Duet?
+
+GPT-5.4 está disponible en todos los planes mensuales de Duet. Su trabajo usa primero los créditos mensuales y después la reserva pagada para uso adicional.
+
+### ¿Puedo cambiar de modelo en medio de una sesión?
+
+Sí. Cambia de modelo o de nivel de pensamiento en cualquier punto durante una sesión. La sesión conserva todo su historial de eventos, herramientas, contexto de Train y archivos del workspace. Nada se reinicia y puedes usar distintos modelos sin empezar de cero.
+
+### ¿Cómo afecta la selección de modelo a las herramientas y la memoria de mi agente?
+
+No las afecta. El historial de la sesión, las herramientas, la configuración y los archivos del workspace se mantienen iguales. Solo cambia el motor de razonamiento, así que puedes experimentar sin perder la configuración.
+
+### ¿Hay una forma de fijar un modelo por defecto para todos los agentes nuevos?
+
+Sí. Hay configuraciones de modelo por defecto a nivel de workspace. Fija tu modelo preferido una vez y todos los agentes nuevos en ese workspace lo usarán. Los agentes individuales aún se pueden sobreescribir.
+
+### ¿Cómo se compara Claude Opus 4.7 con GPT-5.4 para agentes de AI?
+
+Están ajustados para distintos trabajos. Claude Opus 4.7 es más fuerte en razonamiento de cadena larga, seguimiento de instrucciones y generación de código, lo que lo hace la mejor opción por defecto para agentes que construyen herramientas o corren workflows de varios pasos. GPT-5.4 es más rápido y más barato por token, lo que lo hace la mejor opción para tareas de alto volumen, sensibles a la latencia o sensibles al costo. Lo más acertado suele ser correr ambos, con cada agente en el modelo que se ajusta a su trabajo.

@@ -1,0 +1,59 @@
+{
+  "status": "prepared-source-only-no-deployment",
+  "rootPath": "/Users/synthetic-user/.codex/worktrees/unified-cli-sync/duet",
+  "sourceRevision": "7b3404fbe0da1627b7a7f82f0b49d15f040a648f",
+  "detached": true,
+  "trackedUntrackedClean": true,
+  "vercelignoreSha256": "164353256c20837e9bf02ba57d7952ef7ea2b5830a81f5d0da44bd9d66a7dab6",
+  "artifactsExcluded": true,
+  "installedCli": "54.21.1",
+  "installedCliDeployOwnerSha256": "390de7a283e40153d14ecb3fe8c8537f2a8e601d267dda102089d0eb4f474ea8",
+  "fileOnlyProof": {
+    "command": "vercel deploy <rootPath> --scope aomni --prod --yes --dry --format=json",
+    "sourceBranch": "Installed deploy owner calls inspectDeploymentFiles in --dry branch and returns before submission",
+    "reportFile": "/tmp/unified-duet-production-additive-upload-files-clean.json",
+    "sha256": "e6a42c8ce81cc8c6d6c468b4feb9b06f49d48ba85f73db22a88c269a20c1b391",
+    "fileCount": 3178,
+    "totalSize": 253919013,
+    "untrackedFilesIncluded": [],
+    "operationalCachesIncluded": []
+  },
+  "localIgnoredCleanup": [
+    "Empty advisor-preview fixture tree",
+    "Obsolete duetfs directory containing only local node_modules and empty scripts",
+    "Two old locally staged Mac Syncthing binaries and now-empty bin directories"
+  ],
+  "target": {
+    "orgId": "team_I18zdvAznXXwqq1PcIampT1t",
+    "projectId": "prj_XNhS93vciHGDEc8dZBHg2q4Kzo5o",
+    "scope": "aomni",
+    "remoteRoot": "apps/api"
+  },
+  "proposedOperatorArgv": [
+    "vercel",
+    "deploy",
+    "/Users/synthetic-user/.codex/worktrees/unified-cli-sync/duet",
+    "--scope",
+    "aomni",
+    "--prod",
+    "--yes",
+    "--build-env",
+    "VERCEL_GIT_COMMIT_SHA=7b3404fbe0da1627b7a7f82f0b49d15f040a648f",
+    "--env",
+    "VERCEL_GIT_COMMIT_SHA=7b3404fbe0da1627b7a7f82f0b49d15f040a648f"
+  ],
+  "proposedOperatorEnvironment": {
+    "VERCEL_ORG_ID": "team_I18zdvAznXXwqq1PcIampT1t",
+    "VERCEL_PROJECT_ID": "prj_XNhS93vciHGDEc8dZBHg2q4Kzo5o"
+  },
+  "gitMetadata": "Actual detached frozen checkout; no fake main ref, custom git metadata or branch alias",
+  "notPerformed": [
+    "live deployment",
+    "remote build",
+    "environment update",
+    "Git push",
+    "primary or root source change",
+    "extra full source checkout"
+  ],
+  "futureAcceptance": "Root must verify actual API revision and baked backend revision equal exact source SHA; actual served runtime identity separately required"
+}

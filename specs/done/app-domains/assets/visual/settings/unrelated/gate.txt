@@ -1,0 +1,406 @@
+$ bash scripts/ui-playground.sh check "spa-shell covers settings authorization, failures, billing, keys, and Spanish\$"
+[0.31ms] ".env.production"
+bun install v1.3.14 (0d9b296a)
+Resolving dependencies
+Resolved, downloaded and extracted [1]
+
++ @dotenvx/dotenvx@2.17.2
++ @typescript/native-preview@7.0.0-dev.20260707.2
++ convex@1.42.3
++ next@16.2.10
++ oxfmt@0.57.0
++ oxlint@1.75.0
++ pixelmatch@7.2.0
++ pngjs@7.0.0
++ rimraf@6.1.3
++ turbo@2.10.6
++ typescript@7.0.1-rc
+
+1010 packages installed [6.17s]
+
+Attention:
+Turborepo now collects completely anonymous telemetry regarding usage.
+This information is used to shape the Turborepo roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://turborepo.dev/docs/telemetry
+
+• turbo 2.10.6
+
+   • Packages in scope: @repo/ui, web
+   • Running check-types, lint in 2 packages
+   • Remote caching disabled
+
+@repo/contract:check-types: cache miss, executing f669bf5e4ea5ba31
+@repo/web-locale:check-types: cache miss, executing 83928058f893f0b0
+@repo/web-locale:check-types: $ tsc --noEmit
+@repo/contract:check-types: $ tsc --noEmit
+@repo/email:check-types: cache miss, executing 4a383e14a330d1a4
+@repo/email:check-types: $ tsc --noEmit
+@repo/email:lint: cache miss, executing d44ca74042183ed4
+@repo/email:lint: $ oxlint
+@repo/email:lint: Found 0 warnings and 0 errors.
+@repo/email:lint: Finished in 48ms on 11 files with 125 rules using 18 threads.
+@repo/web-locale:lint: cache miss, executing e57e7132b330038b
+@repo/web-locale:lint: $ oxlint
+@repo/web-locale:lint: Found 0 warnings and 0 errors.
+@repo/web-locale:lint: Finished in 44ms on 2 files with 125 rules using 18 threads.
+@repo/contract:lint: cache miss, executing 7400dd1d0c2fc108
+@repo/contract:lint: $ oxlint
+@repo/contract:lint: Found 0 warnings and 0 errors.
+@repo/contract:lint: Finished in 118ms on 144 files with 125 rules using 18 threads.
+@repo/ui:check-types: cache miss, executing 357ccac98048afcd
+@repo/ui:check-types: $ tsc --noEmit
+@repo/ui:lint: cache miss, executing aa27a4db0e55d2c0
+@repo/ui:lint: $ oxlint
+@repo/ui:lint: Found 0 warnings and 0 errors.
+@repo/ui:lint: Finished in 87ms on 83 files with 125 rules using 18 threads.
+@repo/sync-tunnel:lint: cache miss, executing 30b197429a06c6ba
+@repo/sync-tunnel:lint: $ oxlint
+@repo/sync-tunnel:lint: Found 0 warnings and 0 errors.
+@repo/sync-tunnel:lint: Finished in 73ms on 2 files with 125 rules using 18 threads.
+@repo/seed-drive:lint: cache miss, executing eaab1539193594b4
+@repo/seed-drive:lint: $ oxlint
+@repo/seed-drive:lint: Found 0 warnings and 0 errors.
+@repo/seed-drive:lint: Finished in 81ms on 12 files with 125 rules using 18 threads.
+@repo/sync-tunnel:check-types: cache miss, executing de7367140e300691
+@repo/sync-tunnel:check-types: $ tsc --noEmit
+@repo/seed-drive:check-types: cache miss, executing 7db0a48d6da4f3f6
+@repo/seed-drive:check-types: $ tsc --noEmit
+@repo/gateway:lint: cache miss, executing 4777a6299a47fc02
+@repo/gateway:lint: $ oxlint
+@repo/gateway:lint: Found 0 warnings and 0 errors.
+@repo/gateway:lint: Finished in 132ms on 282 files with 125 rules using 18 threads.
+web:lint: cache miss, executing 051f7d127c5eb415
+web:lint: $ oxlint
+@repo/gateway:check-types: cache miss, executing 9316d7375b1cdbc8
+@repo/gateway:check-types: $ tsc --noEmit -p tsconfig.check.json
+web:lint:
+web:lint:   ! next(no-html-link-for-pages): Do not use `<a>` elements to navigate between Next.js pages.
+web:lint:      ,-[components/playground/onboarding-journey-playground.tsx:162:13]
+web:lint:  161 |
+web:lint:  162 | ,->             <a
+web:lint:  163 | |                 href="/playground"
+web:lint:  164 | |                 className="mt-1.5 block w-full rounded-lg px-3 py-2 text-center text-xs text-muted-foreground hover:bg-foreground/[0.05] hover:text-foreground"
+web:lint:  165 | |->             >
+web:lint:      : `---- Replace with `<Link>` from `next/link`
+web:lint:  166 |                   ← Back to playground
+web:lint:      `----
+web:lint:   help: Use `<Link />` from `next/link` instead for internal navigation. See https://nextjs.org/docs/messages/no-html-link-for-pages
+web:lint:
+web:lint:   ! next(no-html-link-for-pages): Do not use `<a>` elements to navigate between Next.js pages.
+web:lint:      ,-[components/playground/onboarding-journey-playground.tsx:178:13]
+web:lint:  177 |                 </button>
+web:lint:  178 | ,->             <a
+web:lint:  179 | |                 href="/playground"
+web:lint:  180 | |                 className="rounded-r-lg border border-l-0 border-foreground/20 bg-background px-2.5 py-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground shadow-lg hover:text-foreground [writing-mode:vertical-rl]"
+web:lint:  181 | |->             >
+web:lint:      : `---- Replace with `<Link>` from `next/link`
+web:lint:  182 |                   Exit
+web:lint:      `----
+web:lint:   help: Use `<Link />` from `next/link` instead for internal navigation. See https://nextjs.org/docs/messages/no-html-link-for-pages
+web:lint:
+web:lint:   ! next(no-img-element): Using `<img>` could result in slower LCP and higher bandwidth.
+web:lint:      ,-[spa/drive/drive-file-icon.tsx:104:6]
+web:lint:  103 |   return (
+web:lint:  104 |     <img
+web:lint:      :      ^|^
+web:lint:      :       `-- Use `<Image />` from `next/image` instead.
+web:lint:  105 |       src={src}
+web:lint:      `----
+web:lint:   help: Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images.
+web:lint:   note: See https://nextjs.org/docs/messages/no-img-element
+web:lint:
+web:lint:   ! next(no-img-element): Using `<img>` could result in slower LCP and higher bandwidth.
+web:lint:     ,-[spa/sessions/session-markdown.tsx:78:8]
+web:lint:  77 |     return (
+web:lint:  78 |       <img
+web:lint:     :        ^|^
+web:lint:     :         `-- Use `<Image />` from `next/image` instead.
+web:lint:  79 |         key={resolved.src}
+web:lint:     `----
+web:lint:   help: Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images.
+web:lint:   note: See https://nextjs.org/docs/messages/no-img-element
+web:lint:
+web:lint:   ! next(no-img-element): Using `<img>` could result in slower LCP and higher bandwidth.
+web:lint:      ,-[spa/files/media-preview.tsx:108:10]
+web:lint:  107 |       <div className="relative grid min-h-0 flex-1 place-items-center overflow-auto bg-muted/10 p-4">
+web:lint:  108 |         <img
+web:lint:      :          ^|^
+web:lint:      :           `-- Use `<Image />` from `next/image` instead.
+web:lint:  109 |           key={displayed.sourceKey}
+web:lint:      `----
+web:lint:   help: Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images.
+web:lint:   note: See https://nextjs.org/docs/messages/no-img-element
+web:lint:
+web:lint:   ! react-hooks(exhaustive-deps): React Hook useEffect has a missing dependency: 'state.recommendations'
+web:lint:      ,-[spa/onboarding/onboarding-experience.tsx:269:6]
+web:lint:  232 |     if (state.step !== 'team') return
+web:lint:  233 |     if (!recommendationsRequestNeeded(state.recommendations, composedPurpose)) return
+web:lint:      :                                       ^^|^^
+web:lint:      :                                         `-- useEffect uses `state.recommendations` here
+web:lint:  234 |     const purpose = composedPurpose
+web:lint:  235 |     const tagHints =
+web:lint:  236 |       state.goal.kind === 'preset' ? getOnboardingGoal(state.goal.goalId).tagHints : undefined
+web:lint:  237 |     recommendationsAbort.current?.abort()
+web:lint:  238 |     const controller = new AbortController()
+web:lint:  239 |     recommendationsAbort.current = controller
+web:lint:  240 |     // The timeout settles the state itself: aborting only asks the source to
+web:lint:  241 |     // reject, and a source that ignores the signal would leave the skeleton up
+web:lint:  242 |     // forever. The reducer's purpose guard makes the later settle a no-op.
+web:lint:  243 |     const timeout = setTimeout(() => {
+web:lint:  244 |       controller.abort()
+web:lint:  245 |       dispatch({ type: 'recommendations-settle', purpose, items: [] })
+web:lint:  246 |     }, RECOMMENDATIONS_CLIENT_TIMEOUT_MS)
+web:lint:  247 |     dispatch({ type: 'recommendations-pending', purpose })
+web:lint:  248 |     void recommendationsSource
+web:lint:  249 |       .recommendOnboardingAgents(
+web:lint:  250 |         workspaceSlug,
+web:lint:  251 |         { purpose, ...(tagHints === undefined ? {} : { tagHints: [...tagHints] }) },
+web:lint:  252 |         controller.signal,
+web:lint:  253 |       )
+web:lint:  254 |       .then(({ recommendations }) =>
+web:lint:  255 |         dispatch({ type: 'recommendations-settle', purpose, items: recommendations }),
+web:lint:  256 |       )
+web:lint:  257 |       .catch(() => dispatch({ type: 'recommendations-settle', purpose, items: [] }))
+web:lint:  258 |       .finally(() => clearTimeout(timeout))
+web:lint:  259 |     return () => {
+web:lint:  260 |       controller.abort()
+web:lint:  261 |       clearTimeout(timeout)
+web:lint:  262 |     }
+web:lint:  263 |     /* `state.recommendations` is read above but is deliberately NOT a
+web:lint:  264 |        dependency: the effect itself moves it to `pending`, and listing it
+web:lint:  265 |        re-ran the effect on that very change — whose cleanup aborted the request
+web:lint:  266 |        it had just sent, so the rail always settled empty against a real
+web:lint:  267 |        network. Each run is a fresh closure, so the guard still reads the
+web:lint:  268 |        current state whenever the step or the purpose actually changes. */
+web:lint:  269 |   }, [state.step, state.goal, composedPurpose, recommendationsSource, workspaceSlug])
+web:lint:      :      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+web:lint:  270 |
+web:lint:      `----
+web:lint:   help: Either include it or remove the dependency array.
+web:lint:
+web:lint: Found 6 warnings and 0 errors.
+web:lint: Finished in 308ms on 754 files with 125 rules using 18 threads.
+web:check-types: cache miss, executing 2c41033f0b536a4c
+web:check-types: $ tsc --noEmit
+
+ Tasks:    16 successful, 16 total
+Cached:    0 cached, 16 total
+  Time:    5.044s
+
+$ bun scripts/verify-visual-coverage.ts
+Web visual coverage verified for 708 product rendered symbols.
+$ bun scripts/verify-visual-coverage.ts
+Shared UI visual coverage verified for 204 rendered symbols.
+$ bun scripts/verify-visual-owner-union.ts
+Verified the complete lander/web/docs/ui/official-apps visual owner union and contact-sheet index.
+$ bun scripts/verify-asset-ownership.ts
+Verified 328 public asset paths, exact web reachability, 11 approved cross-app hash groups, and no tracked runtime artifacts.
+• turbo 2.10.6
+
+   • Packages in scope: @repo/ui, web
+   • Running build in 2 packages
+   • Remote caching disabled
+
+@repo/gateway:build: cache miss, executing 9386885c580c687c
+@repo/gateway:build: $ bun run routing:export && bun build src/index.ts --target=bun --outdir=dist --entry-naming=index.js && bun build src/attribution/helper-main.ts --target=bun --outfile=dist/helper.js && bun build src/gateway-bootstrap.ts --target=bun --outfile=dist/gateway-bootstrap.js
+@repo/gateway:build: $ bun scripts/export-routing-table.mjs
+@repo/gateway:build: Bundled 562 modules in 50ms
+@repo/gateway:build:
+@repo/gateway:build:   index.js  3.1 MB  (entry point)
+@repo/gateway:build:
+@repo/gateway:build: Bundled 162 modules in 19ms
+@repo/gateway:build:
+@repo/gateway:build:   helper.js  0.91 MB  (entry point)
+@repo/gateway:build:
+@repo/gateway:build: Bundled 174 modules in 20ms
+@repo/gateway:build:
+@repo/gateway:build:   gateway-bootstrap.js  0.95 MB  (entry point)
+@repo/gateway:build:
+web:build: cache miss, executing 73bec615c44609d7
+web:build: $ next build
+web:build: Attention: Next.js now collects completely anonymous telemetry regarding usage.
+web:build: This information is used to shape Next.js' roadmap and prioritize features.
+web:build: You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+web:build: https://nextjs.org/telemetry
+web:build:
+web:build: ▲ Next.js 16.2.10 (Turbopack)
+web:build:
+web:build:   Creating an optimized production build ...
+web:build: ✓ Compiled successfully in 8.4s
+web:build:   Running TypeScript ...
+web:build:   Detected @typescript/native-preview as TypeScript compiler. Some Next.js TypeScript features (like type checking during build) require the standard typescript package.
+web:build:   Finished TypeScript in 73ms ...
+web:build:   Collecting page data using 17 workers ...
+web:build:   Generating static pages using 17 workers (0/154) ...
+web:build: Error: ENVIRONMENT_FALLBACK
+web:build:     at <unknown> (.next/server/chunks/ssr/_096venu._.js:1:2616)
+web:build:     at <unknown> (.next/server/chunks/ssr/apps_web_spa_files_1uz2s99._.js:1:28765) {
+web:build:   code: 'ENVIRONMENT_FALLBACK'
+web:build: }
+web:build: Error: ENVIRONMENT_FALLBACK
+web:build:     at <unknown> (.next/server/chunks/ssr/_096venu._.js:1:2616)
+web:build:     at J (.next/server/chunks/ssr/apps_web_spa_routes_internal-admin_tsx_0pnw9tl._.js:1:3721) {
+web:build:   code: 'ENVIRONMENT_FALLBACK'
+web:build: }
+web:build:   Generating static pages using 17 workers (38/154)
+web:build:   Generating static pages using 17 workers (76/154)
+web:build:   Generating static pages using 17 workers (115/154)
+web:build: ✓ Generating static pages using 17 workers (154/154) in 867ms
+web:build:   Finalizing page optimization ...
+web:build:
+web:build: Route (app)
+web:build: ┌ ƒ /
+web:build: ├ ○ /_not-found
+web:build: ├ ƒ /api/auth/magic-link
+web:build: ├ ƒ /api/campaigns/handoff
+web:build: ├ ƒ /api/duet/[...path]
+web:build: ├ ƒ /api/duet/pending-share
+web:build: ├ ƒ /api/duet/session
+web:build: ├ ƒ /api/version
+web:build: ├ ƒ /auth/magic-link/callback
+web:build: ├ ƒ /device
+web:build: ├ ƒ /invite/[token]
+web:build: ├ ○ /manifest.json
+web:build: ├ ƒ /oauth/authorize
+web:build: ├ ƒ /onboarding
+web:build: ├ ○ /playground
+web:build: ├ ● /playground/[id]
+web:build: │ ├ /playground/workspace-app-domains
+web:build: │ ├ /playground/app-domains-management
+web:build: │ ├ /playground/workspace-backups-empty
+web:build: │ └ [+140 more paths]
+web:build: ├ ○ /playground/desktop-frame
+web:build: ├ ○ /product-route-manifest.json
+web:build: ├ ƒ /publish/[workspaceSlug]/[publishSlug]/[[...path]]
+web:build: ├ ƒ /share/[token]
+web:build: ├ ƒ /sign-in
+web:build: └ ƒ /sign-out
+web:build:
+web:build:
+web:build: ƒ Proxy (Middleware)
+web:build:
+web:build: ○  (Static)   prerendered as static content
+web:build: ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+web:build: ƒ  (Dynamic)  server-rendered on demand
+web:build:
+
+ Tasks:    2 successful, 2 total
+Cached:    0 cached, 2 total
+  Time:    12.048s
+
+$ bun scripts/verify-build-output.ts
+Verified 5 static playground routes, 4 dynamic identity/product routes, 3 SPA rewrites, and no removed route owners.
+• turbo 2.10.6
+
+   • Packages in scope: web
+   • Running visual in 1 packages
+   • Remote caching disabled
+
+web:visual: cache bypass, force executing b45c354db760fb9b
+web:visual: $ playwright test -g "(playground|docs|auth|lander|official-apps)/(spa-shell covers settings authorization, failures, billing, keys, and Spanish\$)" --pass-with-no-tests
+web:visual: [WebServer] $ next start --port 3000
+web:visual:
+web:visual: Running 2 tests using 2 workers
+web:visual:
+web:visual:   ✘  2 [mobile] › tests/visual/playground.spec.ts:11580:1 › playground/spa-shell covers settings authorization, failures, billing, keys, and Spanish (899ms)
+web:visual:   ✘  1 [desktop] › tests/visual/playground.spec.ts:11580:1 › playground/spa-shell covers settings authorization, failures, billing, keys, and Spanish (1.7s)
+web:visual:
+web:visual:
+web:visual:   1) [desktop] › tests/visual/playground.spec.ts:11580:1 › playground/spa-shell covers settings authorization, failures, billing, keys, and Spanish
+web:visual:
+web:visual:     Error: expect(page).toHaveScreenshot(expected) failed
+web:visual:
+web:visual:       12830 pixels (ratio 0.01 of all image pixels) are different.
+web:visual:
+web:visual:       Snapshot: settings-api-key-secret-once.png
+web:visual:
+web:visual:     Call log:
+web:visual:       - Expect "toHaveScreenshot(settings-api-key-secret-once.png)" with timeout 5000ms
+web:visual:         - verifying given screenshot expectation
+web:visual:       - taking page screenshot
+web:visual:         - disabled all CSS animations
+web:visual:       - waiting for fonts to load...
+web:visual:       - fonts loaded
+web:visual:       - 12899 pixels (ratio 0.01 of all image pixels) are different.
+web:visual:       - waiting 100ms before taking screenshot
+web:visual:       - taking page screenshot
+web:visual:         - disabled all CSS animations
+web:visual:       - waiting for fonts to load...
+web:visual:       - fonts loaded
+web:visual:       - captured a stable screenshot
+web:visual:       - 12830 pixels (ratio 0.01 of all image pixels) are different.
+web:visual:
+web:visual:
+web:visual:       11627 |   await expect(page.getByText('Copy your new API key', { exact: true })).toBeVisible()
+web:visual:       11628 |   await expect(page.getByText('duet_sk_29a8cdef0123456789fixture', { exact: true })).toBeVisible()
+web:visual:     > 11629 |   await expect(page).toHaveScreenshot('settings-api-key-secret-once.png', { fullPage: true })
+web:visual:             |                      ^
+web:visual:       11630 |   await page
+web:visual:       11631 |     .getByRole('button', { name: 'Browser route: /settings/profile', exact: true })
+web:visual:       11632 |     .evaluate((button: HTMLButtonElement) => button.click())
+web:visual:         at /work/apps/web/tests/visual/playground.spec.ts:11629:22
+web:visual:
+web:visual:     attachment #1: settings-api-key-secret-once (image/png) ────────────────────────────────────────
+web:visual:     Expected: tests/visual/__screenshots__/desktop/playground.spec.ts/settings-api-key-secret-once.png
+web:visual:     Received: test-results/playground-playground-spa--f40f9-es-billing-keys-and-Spanish-desktop/settings-api-key-secret-once-actual.png
+web:visual:     Diff:     test-results/playground-playground-spa--f40f9-es-billing-keys-and-Spanish-desktop/settings-api-key-secret-once-diff.png
+web:visual:     ────────────────────────────────────────────────────────────────────────────────────────────────
+web:visual:
+web:visual:     Error Context: test-results/playground-playground-spa--f40f9-es-billing-keys-and-Spanish-desktop/error-context.md
+web:visual:
+web:visual:   2) [mobile] › tests/visual/playground.spec.ts:11580:1 › playground/spa-shell covers settings authorization, failures, billing, keys, and Spanish
+web:visual:
+web:visual:     Error: expect(page).toHaveScreenshot(expected) failed
+web:visual:
+web:visual:       6025 pixels (ratio 0.02 of all image pixels) are different.
+web:visual:
+web:visual:       Snapshot: settings-not-payer.png
+web:visual:
+web:visual:     Call log:
+web:visual:       - Expect "toHaveScreenshot(settings-not-payer.png)" with timeout 5000ms
+web:visual:         - verifying given screenshot expectation
+web:visual:       - taking page screenshot
+web:visual:         - disabled all CSS animations
+web:visual:       - waiting for fonts to load...
+web:visual:       - fonts loaded
+web:visual:       - 6025 pixels (ratio 0.02 of all image pixels) are different.
+web:visual:       - waiting 100ms before taking screenshot
+web:visual:       - taking page screenshot
+web:visual:         - disabled all CSS animations
+web:visual:       - waiting for fonts to load...
+web:visual:       - fonts loaded
+web:visual:       - captured a stable screenshot
+web:visual:       - 6025 pixels (ratio 0.02 of all image pixels) are different.
+web:visual:
+web:visual:
+web:visual:       11592 |   await scenario('settings-not-payer')
+web:visual:       11593 |   await expect(page.getByText('You are not a designated payer', { exact: true })).toBeVisible()
+web:visual:     > 11594 |   await expect(page).toHaveScreenshot('settings-not-payer.png', { fullPage: true })
+web:visual:             |                      ^
+web:visual:       11595 |
+web:visual:       11596 |   await scenario('settings-error')
+web:visual:       11597 |   await expect(page.getByText('Settings could not load', { exact: true })).toBeVisible()
+web:visual:         at /work/apps/web/tests/visual/playground.spec.ts:11594:22
+web:visual:
+web:visual:     attachment #1: settings-not-payer (image/png) ──────────────────────────────────────────────────
+web:visual:     Expected: tests/visual/__screenshots__/mobile/playground.spec.ts/settings-not-payer.png
+web:visual:     Received: test-results/playground-playground-spa--f40f9-es-billing-keys-and-Spanish-mobile/settings-not-payer-actual.png
+web:visual:     Diff:     test-results/playground-playground-spa--f40f9-es-billing-keys-and-Spanish-mobile/settings-not-payer-diff.png
+web:visual:     ────────────────────────────────────────────────────────────────────────────────────────────────
+web:visual:
+web:visual:     Error Context: test-results/playground-playground-spa--f40f9-es-billing-keys-and-Spanish-mobile/error-context.md
+web:visual:
+web:visual:   2 failed
+web:visual:     [desktop] › tests/visual/playground.spec.ts:11580:1 › playground/spa-shell covers settings authorization, failures, billing, keys, and Spanish
+web:visual:     [mobile] › tests/visual/playground.spec.ts:11580:1 › playground/spa-shell covers settings authorization, failures, billing, keys, and Spanish
+web:visual: error: script "visual" exited with code 1
+web#visual:  ERROR  command (/work/apps/web) /usr/bin/bun run visual -g (playground|docs|auth|lander|official-apps)/(spa-shell covers settings authorization, failures, billing, keys, and Spanish$) --pass-with-no-tests exited (1)
+
+ Tasks:    0 successful, 1 total
+Cached:    0 cached, 1 total
+  Time:    4.838s
+Failed:    web#visual
+
+ ERROR  run failed: command  exited (1)
+error: script "ui:check" exited with code 1

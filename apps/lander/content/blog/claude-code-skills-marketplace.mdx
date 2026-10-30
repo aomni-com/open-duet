@@ -1,0 +1,108 @@
+---
+title: 'Claude Code Skills Marketplace 101'
+metaTitle: 'Claude Code Skills Marketplace: Where to Find & Share Skills (2026 Guide)'
+description: 'Learn where to find Claude Code skills, how to review them safely, and how to keep reusable instructions in a Duet workspace without depending on a proprietary catalog.'
+date: '2026-06-16'
+updatedAt: '2026-07-12'
+readTime: '6 min read'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/1.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'ai'
+tags: ['claude-code', 'skills', 'marketplace', 'ai-agents', 'extensions']
+image: '/blog/claude-code-skills-marketplace/cover.png'
+imageDark: '/blog/claude-code-skills-marketplace/cover-dark.png'
+type: 'article'
+relatedPosts:
+  - 'how-to-set-up-a-24-7-ai-agent'
+  - 'claude-code-web-ui'
+cta:
+  title: 'Give reusable instructions a durable home.'
+  subtitle: 'Keep instruction files, supporting code, and business context together in a persistent Duet workspace.'
+  buttonText: 'Try Duet free'
+  href: '/sign-in?from=blog-claude-code-skills-marketplace'
+---
+
+Claude Code skills are reusable instruction packages. A good skill gives an agent a focused procedure, the context it needs, and clear boundaries around tools and output.
+
+Finding a skill is the easy part. The harder questions are whether you trust its instructions, whether it still matches the tools you use, and how your team will review updates. This guide covers a practical, vendor-neutral workflow.
+
+## Where to Find Claude Code Skills
+
+Start with official documentation and source repositories maintained by the tool vendor. Community collections and GitHub search are useful for discovery, but treat every result as third-party code: read the files before you run them, inspect install scripts, and check recent maintenance activity.
+
+Useful sources usually fall into three groups:
+
+- **Official examples.** Best for learning the supported shape and conventions.
+- **Curated community lists.** Good for breadth, but curation is not a security review.
+- **Project-specific skills.** Often the most valuable because they encode your own review process, naming, deployment steps, and acceptance checks.
+
+There is no reason to adopt an entire collection. Copy the smallest useful unit and keep its history visible in version control.
+
+## How to Review a Skill Before Using It
+
+Review a skill as you would a small dependency.
+
+1. **Read every instruction and script.** Look for shell commands, network calls, filesystem access, and credential handling.
+2. **Check the scope.** A narrowly described skill should not request broad access or unrelated tools.
+3. **Inspect its failure behavior.** It should stop safely when required input is missing and should not hide partial changes.
+4. **Pin the source.** Record the repository and revision you reviewed instead of repeatedly pulling an unbounded latest version.
+5. **Test with disposable data.** Prove the workflow before allowing access to production systems or customer information.
+
+A polished README does not replace this review. Skills influence an agent's actions, so their instructions are executable policy even when they contain no traditional code.
+
+## What Good Skills Look Like
+
+The most reliable skills share four qualities.
+
+**Fit.** They solve one recognizable job. A skill for preparing a release can own the checklist, evidence, and handoff without also trying to manage every engineering workflow.
+
+**Boundaries.** They say what they may read or change, which tools they require, and when they must stop for a human decision.
+
+**Verification.** They define observable evidence. “Deploy the app” is vague; “deploy staging, open the canonical URL, and retain the test result” is testable.
+
+**Maintenance.** Their assumptions live close to the instructions and can be reviewed like any other project asset. When the underlying workflow changes, the skill changes with it.
+
+## Using Skill Files in Duet
+
+The current Duet web app does not have a dedicated skills marketplace or one-click skills manager. Duet can still work with reusable instruction files because each workspace has persistent Files and durable Sessions.
+
+A simple workflow is:
+
+1. Review a skill outside the workspace or in a disposable branch.
+2. Add the approved instruction file and supporting scripts through Files or your normal repository workflow.
+3. Start a Session and point the agent at those files.
+4. Keep stable business facts and sources in Train rather than duplicating them inside every instruction file.
+5. Connect external services through Integrations and grant only the permissions the workflow needs.
+
+This keeps the source visible and portable. It also separates three concerns cleanly: Files own instructions and code, Train owns durable business context, and Integrations own external authorization.
+
+## How to Share Your Own Skill
+
+Version control is the simplest distribution mechanism. Put the skill in a focused repository or a clearly named project directory, include a license, document required tools and permissions, and tag reviewed releases. Consumers can then inspect exactly what changed between versions.
+
+If you maintain a public collection, publish review criteria and make provenance obvious. If you maintain an internal collection, require the same code-review process used for other automation that can access company systems.
+
+## Frequently Asked Questions
+
+### Is there a Claude Code skills marketplace?
+
+The ecosystem includes official examples, public repositories, and community indexes. Their guarantees differ, so verify the source and review the actual files rather than treating “listed in a marketplace” as proof of safety.
+
+### Where can I find Claude Code skills to install?
+
+Start with the vendor's official documentation and repositories, then use curated community lists or GitHub search for broader discovery. Prefer projects with clear provenance, recent maintenance, and readable install steps.
+
+### How do I publish a skill?
+
+Publish the instruction file and any supporting code in a versioned repository. Document its purpose, required tools, permissions, expected output, failure behavior, and a small verification example.
+
+### Does Duet have a skills catalog?
+
+Not in this release. Store approved reusable instructions in workspace Files, keep stable sources in Train, and authorize external tools through Integrations. Sessions provide the durable record of how those instructions were used.
+
+### Do I need to be a developer to use a skill?
+
+Not always, but someone should review what the skill asks the agent to do. If it runs scripts, changes systems, or handles credentials, involve a person who can evaluate those risks before using it with real data.

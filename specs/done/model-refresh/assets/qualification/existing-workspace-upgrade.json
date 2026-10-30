@@ -1,0 +1,170 @@
+{
+  "before": {
+    "workspaceId": "ns7fxm0zpta7413wjw5gmqjnt18f961k",
+    "slug": "refresh-upgrade-staging-e2e-synthetic",
+    "health": {
+      "agentVersion": "0.3.26",
+      "gatewayVersion": "0.0.0+77c2a65ddfe9"
+    },
+    "sessionId": "j972rbvv55rr3qez3vfnd3p54h8f96zs",
+    "savedTier": "openai-max",
+    "history": {
+      "count": 5,
+      "rows": [
+        {
+          "sha256": "843f072c76e961cb25bfa5162ab5117eef7a23605daabddf1575e4fda30dda89"
+        },
+        {
+          "sha256": "e3af9ad1da851fa10949180ce1dc80501ab9d6dea5b63d84aba476fa176bf656"
+        },
+        {
+          "sha256": "e431e5d137b7871dcf3187aee7a3143c8607490b96b460a3964e6c0d38cdc3f0"
+        },
+        {
+          "sha256": "16bc55c29427fd185536e97989877eb9a0b9df2cef2067602ea8e249dab43993"
+        },
+        {
+          "sha256": "3b7d8096b40fb6f7598ae7e1f0cf5f380e8b3ef300a93c3f84431b956fea384c"
+        }
+      ]
+    },
+    "generations": [
+      {
+        "id": "md7c2tf7w5q1bd5gs32v2xyf758f9jy8",
+        "model": "openai/gpt-5.6-sol",
+        "tier": "openai-max",
+        "status": "reconciling"
+      },
+      {
+        "id": "md73ztpnwnj1072w9g853gqnws8f8kpz",
+        "model": "openai/gpt-5.6-luna",
+        "tier": "openai-max",
+        "status": "reconciling"
+      },
+      {
+        "id": "md76v9fyq670rxtzd0hm38fc0d8f9jny",
+        "model": "google/gemini-embedding-2",
+        "tier": "openai-max",
+        "status": "reconciling"
+      }
+    ],
+    "subscriptions": [
+      {
+        "id": "v57cvj62q72d1b23r21rhpasen8f8w45",
+        "agentId": "r57dwak8hty495x92vc8g4w79s8f9vtg",
+        "path": "agents/writer",
+        "filePath": "agents/writer/apps/setup-voice/duet.ts",
+        "sha256": "12e7238d7f21ad79cf6e6472ae6c3892df5e69bd34fd275ae8d3b4dd3ba958c4"
+      },
+      {
+        "id": "v57513ey7fs5rtd4c8yq4mt1a98f9cwm",
+        "agentId": "r57e59dfez13my0trf0mqbtz9s8f9eey",
+        "path": "agents/brand-designer",
+        "filePath": "agents/brand-designer/apps/setup-brand/duet.ts",
+        "sha256": "fc59f74e59a28562eef38fbcbb44f751d50f29bda2f66b9679c97e7ff72e5e1e"
+      }
+    ]
+  },
+  "after": {
+    "manifest": {
+      "version": "0.0.0+16af104fd3bc",
+      "agentVersion": "0.3.27"
+    },
+    "health": {
+      "agentVersion": "0.3.27",
+      "gatewayVersion": "0.0.0+16af104fd3bc"
+    },
+    "subscriptions": [
+      {
+        "id": "v57cvj62q72d1b23r21rhpasen8f8w45",
+        "agentId": "r57dwak8hty495x92vc8g4w79s8f9vtg",
+        "path": "agents/writer",
+        "filePath": "agents/writer/apps/setup-voice/duet.ts",
+        "sha256": "41d0100bae4ffc35097ee716fcf43b70df278cb39c2e0f51d48f68a1852108ab"
+      },
+      {
+        "id": "v57513ey7fs5rtd4c8yq4mt1a98f9cwm",
+        "agentId": "r57e59dfez13my0trf0mqbtz9s8f9eey",
+        "path": "agents/brand-designer",
+        "filePath": "agents/brand-designer/apps/setup-brand/duet.ts",
+        "sha256": "cc453e1593507a949398b8cbf9f621804ea3cf35e884c0e86105fb0b9ee09af6"
+      }
+    ],
+    "resume": {
+      "savedTier": "openai-max",
+      "preservedHistoryRows": 5,
+      "historyRows": 9,
+      "cursor": 9,
+      "billing": {
+        "execution": [
+          {
+            "id": "md7bzegjy7chaktp85qpj2cmh58f90rn",
+            "upstreamGenerationId": "gen_01M3JR9MA5M9GWGEBSVX6D54T4",
+            "model": "openai/gpt-6-sol",
+            "tier": "openai-max",
+            "usage": {
+              "uncachedInputTokens": 21917,
+              "cachedInputTokens": 0,
+              "outputTokens": 9
+            },
+            "billedCostMicroUsd": 219440,
+            "debitMicroUsd": -219440
+          }
+        ],
+        "support": [
+          {
+            "id": "md7ahr7qj7pdtdvq4g5n98y2w98f91px",
+            "model": "google/gemini-embedding-2",
+            "tier": "openai-max",
+            "status": "settled"
+          },
+          {
+            "id": "md79hs2wvfpcfa5t4aymte10zx8f904g",
+            "model": "openai/gpt-6-luna",
+            "tier": "openai-max",
+            "status": "reconciling"
+          },
+          {
+            "id": "md70pnxexb9j1pxtaeybjk9nw18f9rea",
+            "model": "google/gemini-embedding-2",
+            "tier": "openai-max",
+            "status": "reconciling"
+          }
+        ]
+      }
+    },
+    "apps": [
+      {
+        "agentName": "writer",
+        "appId": "jn7bh63yt6715f6xn1rwkw4bp58f83dc",
+        "modelOutputPresent": true,
+        "generations": [
+          {
+            "id": "md7a5fngqt8c5nnp3f7pvxp0j98f901b",
+            "model": "openai/gpt-6-luna",
+            "tier": "services",
+            "status": "settled",
+            "upstreamCostMicroUsd": 249,
+            "billedCostMicroUsd": 249
+          }
+        ]
+      },
+      {
+        "agentName": "brand-designer",
+        "appId": "jn70d89h21fwsrtvc9cf54n6ws8f8ggt",
+        "modelOutputPresent": true,
+        "generations": [
+          {
+            "id": "md7a6zxb9qexj9c9xfvmrnc8zx8f9fdn",
+            "model": "openai/gpt-6-luna",
+            "tier": "services",
+            "status": "settled",
+            "upstreamCostMicroUsd": 246,
+            "billedCostMicroUsd": 246
+          }
+        ]
+      }
+    ]
+  },
+  "scope": "Staging ephemeral fixture; agent0.3.26 to0.3.27. Retained for corrected release convergence; cleanup still required."
+}

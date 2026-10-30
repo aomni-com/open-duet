@@ -1,0 +1,213 @@
+{
+  "status": "read-only production R5 observation verified",
+  "observedAt": "2026-10-05T03:54:53.781928+00:00",
+  "mainRevision": "da3779eb8e153a57c6f7e7f4d28ff7c75afd336a",
+  "runtimeVersion": "0.0.0+1f6cae5ff4257948977b076170e652555fd019511c47fb327685f1c6335094ed",
+  "previousVersion": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+  "attachments": 14,
+  "unattached": 0,
+  "backendTotalVmLessRows": 812,
+  "actualBootCertified": 14,
+  "finalHealthCertifiedNoUpdateInFlight": 14,
+  "physicalCurrentArtifactsVerified": 112,
+  "physicalPreviousArtifactsVerified": 112,
+  "changedArtifacts": [
+    "duet"
+  ],
+  "osBootsPreservedFromR2": 14,
+  "independentProcessesPreserved": 31,
+  "independentProcessHosts": 5,
+  "managedAppConfigsUnchangedFromR2": 78,
+  "managedAppTCPAccepting": 78,
+  "freshRequiredReadyReconcileInvoked": false,
+  "boundaries": [
+    "GET/query/SSH metadata and TCP observations only; no customer service control, signals, provisioning or forced update",
+    "Existing managed-app sanity script ran before/read-only phase; its after phase would push reconcile and was intentionally not invoked",
+    "No application response or business-flow assertion from TCP acceptance",
+    "Original process identity checks pin PID, parent, start ticks and cgroups with non-stopped live state; independent desktop and syncthing service identities also match R2",
+    "R5 previous R4 has actual historical boot certification on the same preserved OS boots",
+    "Initial anonymous served-manifest request returned expected401; manifest subsequently read on one VM with existing token held only within remote Python process"
+  ],
+  "physicalRows": [
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    }
+  ],
+  "evidenceSha256": {
+    "apps.json": "85b2164145861b1e73955cd087f2b8d571630e4b53c1f5e64b688eaee6e63904",
+    "apps.log": "af0c0b498a6820b2e925ed8426220a599c3a6dc29f8a31e9900c9633e2584b0f",
+    "background/workspace-redacted.json": "4929f0964b7587f76d9745c41ab64131ddd9b20b809a82a45190f7f46648d411",
+    "background/workspace-redacted.json": "204258081535439d95956e6ecd4dc50a9a159437db8022c650ae4f45f20de7b9",
+    "background/workspace-redacted.json": "b0d6d22092fc2a00f1f0253f7635ce39551897c7a8a47c185f9f5fc1650533bc",
+    "background/workspace-redacted.json": "5c64c552ea5c10857956e9aef0bff05e04e4918dcd77022c7feeedb56be065b1",
+    "background/workspace-redacted.json": "e6bd49aba14e6dd49f3f1c92b47c97c3b265411ef4f3bb0bd64309b457d9503d",
+    "background/summary.json": "bf7e8153dee1b8d2c009f8837e3460bb967eaad798016e4f249992f439bcba56",
+    "background.log": "e874b8206708d9c0c6791301c2328817edcb43c668ca25597e94eec604e122de",
+    "background.py": "445aa33502842483b10df2062e48633dfa97134aaab756b9a418f2b9cec86cc1",
+    "census.json": "e03a072e961c4d193eb47a2e6565559610bf46eb4ad2861efdcaf0eb626b97b3",
+    "deployment.json": "fc853b36510a23e4e071e4e873afcc6e7bc82a4b45565300778aa20467aeadda",
+    "producers/unified-duet-background-preservation-audit.py": "e80099179657f5120bd20a4251952696398d3b440da3dcdf6a332b32ed01a701",
+    "producers/unified-duet-final-fleet-census.ts": "6716442e55e291cad7f6c2bb5f8ce118c84dacc746fb3bb996682f876834b014",
+    "producers/unified-duet-main-managed-app-sanity.ts": "054b63686666be1282fe6ae9c86286003c0cf9e9ca1fac25c2aa6892664b04e8",
+    "producers/unified-duet-observe-main-fleet.py": "3083e75ec103e7e472720a3ef567df16645bf44f57ff7f34beee9a9e1f10fdb2",
+    "producers/unified-duet-read-main-runtime.py": "898189cfa5144a79509b74bbc29e7af5686cad1f2e893aaa81f8a74567ce250c",
+    "readiness.json": "88cd4812e8c000e72844f83706fa129b7b2acecdd7859a865da4dd2e0e64e48c",
+    "readiness.log": "1e9eb3f07937c2064596c197d107d41d93860e3c2f8ab92277c08744805fab70",
+    "readiness.py": "06f7880e2b9de54d66f4ae60e17d474401e61f3b7fcfc3a192467078de016627",
+    "runtime/workspace-redacted.json": "927fc50600e52e1b7bb3ecafdff72ef56f1326e324ff3aa1585ac044a67baf3b",
+    "runtime/workspace-redacted.json": "49ba765d010982b93bcf4e22f0ebeba6d5dc61dc15c56635eae4a1383e1515e9",
+    "runtime/workspace-redacted.json": "0fc3e9efeaaad8bf7e051ba78f18c4e3539b9c91e170d357e069cb51c0b90335",
+    "runtime/workspace-redacted.json": "29e1d263a95d79d7b2d9074b82f46131f648455c4cc9004f504c287977c79c3f",
+    "runtime/workspace-redacted.json": "9f1c892f77af42d7ec80c0009abe2f6a06e874f720cd12548b5d05d36170cdc4",
+    "runtime/workspace-redacted.json": "0c1623178bec74282e9ace7b04c39633f387a1df006338335472f494729f8f58",
+    "runtime/workspace-redacted.json": "c281b4cec39210719baa274827d40a01195b70ef4b7276172a079e35f0c615b0",
+    "runtime/workspace-redacted.json": "7a2a16064bb7d356896d45ecda2ad3828fd4fdae1f514bb728f094d2faaea3ee",
+    "runtime/workspace-redacted.json": "84d02ae5433c98faa617e50d0cdf3163632ed2cb537f86b566d4b72c861315b3",
+    "runtime/workspace-redacted.json": "1462e0ceaf56266a878df8e25bb179db306730d2fc7ae22a92c2c0ff033e1993",
+    "runtime/workspace-redacted.json": "e9fd1e6b7b306d4815a7e3998c3c1ad8c3375883cb15e2a0c88bd61291f0d46c",
+    "runtime/workspace-redacted.json": "2cd10d99055a5ac2b9d7a5bbb667f26b057a07cb050cc86922d266be89132dbd",
+    "runtime/workspace-redacted.json": "433d6d0418327b11d3ea21c7f9e6d5461d9d284dc4a7da625642af7bf056a122",
+    "runtime/workspace-redacted.json": "9811cfeaa7001965d2b3e6c2bdc60a6257e2889e7b75f932bae5878beee800ce",
+    "runtime/summary.json": "b019043325e455723d0e20199acd5b0e8b768a5d2524f7116dfbbf66412aa626",
+    "runtime.log": "680328d77090b4bd7e919dc9fb9718fabbe645ed777054f84eeb4f7e18e46702",
+    "served-runtime.json": "03f2f51d6952e0a6c018dbed3bc19b5dac980ad6baa438596b06a7ec51c9a806",
+    "verify.py": "cdcca03033741a4775e5fdfd54beed487306adfefd94093df2cb9f2225978579"
+  }
+}

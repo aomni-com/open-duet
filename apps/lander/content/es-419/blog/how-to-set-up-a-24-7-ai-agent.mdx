@@ -1,0 +1,476 @@
+---
+title: 'Cómo configurar un agente de AI 24/7 que trabaja mientras duermes'
+description: 'Configura un agente de AI siempre activo con tareas programadas, webhooks y memoria persistente que maneja el trabajo a toda hora.'
+date: '2026-03-01'
+updatedAt: '2026-05-08'
+readTime: '12 min read'
+author:
+  name: 'David'
+  role: 'Founder'
+  link: '/'
+category: 'ai'
+tags: ['ai-agents', 'automation', 'cron', 'webhooks', 'always-on']
+type: 'article'
+image: '/blog/how-to-set-up-a-24-7-ai-agent/cover.png'
+relatedPosts:
+  [
+    'how-to-host-openclaw-in-the-cloud',
+    'mcp-alternatives-code-execution-agents',
+    'openclaw-vs-managed-ai-agent-platforms',
+  ]
+cta:
+  title: 'Tu agente, en servicio 24/7.'
+  subtitle: 'Duet ejecuta trabajos programados, escucha webhooks y mantiene la memoria entre sesiones. Sin sintaxis de cron, sin tener que cuidarlo.'
+  buttonText: 'Levanta el agente'
+  href: '/sign-in?from=blog-24-7-agent'
+locale: es-419
+translationKey: 'how-to-set-up-a-24-7-ai-agent'
+---
+
+# Cómo configurar un agente de AI 24/7 que trabaja mientras duermes
+
+<Callout emoji="💡">
+Resumen rápido
+
+Esta guía recorre la configuración de un agente de AI 24/7 que trabaja mientras duermes. Manejar el monitoreo del inbox, automatizaciones programadas, reportes y disparadores de eventos en un servidor en la nube persistente sin que necesites estar en línea.
+
+</Callout>
+
+<Callout emoji="❓">
+Preguntas que responde esta página
+
+- Cómo configurar un agente de AI que trabaja 24/7
+- Mejores herramientas para agentes de AI siempre activos
+- Cómo ejecutar un agente de AI mientras duermes
+- Cómo automatizar tareas con un agente de AI persistente
+- ¿Qué es un agente de AI 24/7 y cómo funciona?
+
+</Callout>
+
+Un agente de AI 24/7 es software que corre de forma continua en un servidor, ejecutando tareas programadas, respondiendo a webhooks y manteniendo memoria persistente entre sesiones. A diferencia de la AI basada en chat que olvida el contexto después de cada conversación, los agentes siempre activos manejan workflows recurrentes como monitorear los precios de los competidores a las 6 AM todos los días, responder tickets de soporte en minutos o generar reportes de desempeño semanales sin intervención manual.
+
+---
+
+## ¿Qué significa realmente "agente de AI siempre activo"?
+
+La AI siempre activa corre en un servidor persistente en lugar de en tu máquina local. Opera de tres maneras:
+
+Ejecución programada: el agente ejecuta tareas en horarios específicos usando sintaxis de cron. Ejemplo: 0 9 1 corre cada lunes a las 9 AM.
+
+Disparadores de webhook: los eventos externos activan el agente al instante. El envío de un formulario, un mensaje de Slack o un commit de GitHub pueden disparar un workflow de AI en segundos.
+
+Memoria persistente: el agente almacena el contexto entre sesiones. Recuerda conversaciones pasadas, decisiones y datos sin que tengas que volver a explicar el contexto de tu negocio cada vez.
+
+Los chatbots de AI tradicionales se reinician después de cada conversación. Un agente 24/7 acumula conocimiento, mantiene el estado y ejecuta de forma autónoma. Es la diferencia entre contratar a un consultor para cada tarea y emplear a alguien que aprende tus sistemas.
+
+## ¿Cuándo necesita realmente tu negocio un agente de AI 24/7?
+
+Cinco escenarios requieren agentes siempre activos en lugar de prompts manuales de AI:
+
+| Caso de uso              | Por qué lo manual no funciona                                                       | Enfoque del agente                                                                                             |
+| ------------------------ | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Monitoreo de leads       | No puedes revisar el email/formularios cada 15 minutos                              | El webhook se dispara al enviar un formulario; el agente califica el lead y notifica a ventas en 2 minutos     |
+| Inteligencia competitiva | Revisar manualmente los sitios de competidores cada semana pierde cambios de precio | Un cron diario hace scraping de los competidores; el agente te alerta en menos de 24 horas de cualquier cambio |
+| Soporte al cliente       | El horario de chat deja más de 16 horas sin monitorear                              | El webhook procesa los tickets de soporte 24/7; el agente redacta respuestas o escala los problemas urgentes   |
+| Publicación de contenido | La programación social manual requiere logins diarios                               | Un cron semanal genera y publica contenido; el agente mantiene la voz de marca desde la memoria                |
+| Sincronización de datos  | Las exportaciones manuales crean huecos y errores                                   | Un cron por hora obtiene datos de las APIs; el agente reconcilia las discrepancias y actualiza los dashboards  |
+
+El patrón: si una tarea corre más de dos veces por semana o requiere un tiempo de respuesta menor a 1 hora, automatízala con un agente 24/7.
+
+## Cómo configurar tu primera tarea programada de agente de AI
+
+Empieza con un resumen diario de email. Esto prueba que el sistema funciona antes de construir workflows complejos.
+
+Paso 1: Define el calendario
+
+Elige la sintaxis de cron para tu horario:
+
+- 0 8 \* = 8 AM diario
+- 0 9 1 = 9 AM cada lunes
+- /15 \* = Cada 15 minutos
+  Prueba el horario en crontab.guru antes de desplegar.
+
+Paso 2: Escribe la lógica de la tarea
+
+Crea un archivo de texto plano que describa qué debe hacer el agente:
+
+```plaintext
+Daily Email Summary Agent
+
+Every weekday at 8 AM:
+1. Check Gmail for emails from the last 24 hours
+2. Categorize: urgent, actionable, FYI
+3. Draft 3-sentence summaries for each urgent email
+4. Send one consolidated report to my work email
+5. If any email mentions "invoice" or "payment," flag it separately
+```
+
+Sé específico sobre las fuentes de datos, las reglas de categorización y el formato de salida. Las instrucciones vagas producen resultados inconsistentes.
+
+Paso 3: Conecta tus fuentes de datos
+
+El agente necesita acceso a la API:
+
+- Email: API de Gmail o credenciales IMAP
+- Calendario: API de Google Calendar
+- CRM: API keys de HubSpot, Salesforce o Airtable
+- Slack: URL de webhook entrante
+  Almacena las credenciales como variables de entorno. Nunca pongas las API keys directamente en los archivos de tareas.
+
+Paso 4: Prueba manualmente primero
+
+Ejecuta la tarea una vez en modo interactivo. Verifica:
+
+- ¿Accede a los datos correctos?
+- ¿Los resúmenes son precisos y concisos?
+- ¿Funciona el formato de salida (email, Slack, dashboard)?
+  Corrige los errores antes de programar. Depurar cron jobs después del despliegue desperdicia tiempo.
+
+Paso 5: Despliega el calendario
+
+Agrega la tarea a tu sistema de cron. La mayoría de las plataformas usan:
+
+```bash
+crontab -e
+```
+
+Luego agrega tu línea:
+
+```plaintext
+0 8 * * 1-5 /path/to/agent run daily-email-summary
+```
+
+Guarda y sal. El agente ahora corre los días de semana a las 8 AM sin intervención.
+
+Paso 6: Monitorea durante una semana
+
+Revisa a diario:
+
+- ¿La tarea corrió a tiempo?
+- ¿La calidad de la salida es consistente?
+- ¿Hay errores de límite de tasa de API?
+  Después de siete ejecuciones exitosas, el agente está listo para producción. Agrega tareas más complejas a partir de aquí.
+
+## Cómo usar webhooks para disparar acciones instantáneas del agente de AI
+
+Los webhooks convierten los eventos externos en respuestas inmediatas de la AI. A diferencia de cron (basado en tiempo), los webhooks se disparan cuando algo ocurre.
+
+Paso 1: Identifica el evento disparador
+
+Fuentes comunes de webhook:
+
+- Envíos de formularios: Typeform, Google Forms, Tally
+- Mensajería: Slack, Discord, Teams
+- Código: commits de GitHub, pull requests
+- Pagos: Stripe, PayPal
+- CRM: nuevo lead en HubSpot/Salesforce
+  Cada plataforma ofrece un campo de URL de webhook en la configuración.
+
+Paso 2: Crea un endpoint de webhook
+
+Tu agente necesita una URL pública para recibir los datos del webhook. Formato:
+
+```plaintext
+https://your-agent-server.com/webhooks/lead-qualifier
+```
+
+La mayoría de las plataformas de agentes de AI las autogeneran. Copia la URL.
+
+Paso 3: Configura el servicio externo
+
+Ve a la configuración de webhook de tu herramienta de formularios/CRM/mensajería. Pega la URL de webhook de tu agente.
+
+Ejemplo (Typeform):
+
+1. Abre las integraciones del formulario, Webhooks
+1. Pega https://your-agent-server.com/webhooks/lead-qualifier
+1. Selecciona "Submit form" como el evento disparador
+1. Prueba la conexión
+   Paso 4: Escribe la lógica de respuesta del agente
+
+Define qué ocurre cuando se dispara el webhook:
+
+```plaintext
+Lead Qualifier Webhook
+
+When a new form submission arrives:
+1. Extract company name, employee count, industry
+2. Check if employee count > 50 and industry matches our ICP
+3. If yes: send Slack message to #sales with lead details
+4. If no: add to "nurture" list in CRM
+5. Either way: send auto-reply email within 5 minutes
+```
+
+Sé explícito sobre la lógica de ramificación y las restricciones de tiempo.
+
+Paso 5: Prueba con datos reales
+
+Envía un formulario de prueba o dispara el webhook manualmente. Verifica:
+
+- ¿El agente recibió el payload del webhook?
+- ¿Parseó los campos correctamente?
+- ¿Ejecutó las acciones correctas?
+  La mayoría de las plataformas muestran logs de entrega de webhooks. Úsalos para depurar las entregas fallidas.
+
+Paso 6: Maneja los casos límite
+
+Agrega manejo de errores:
+
+- ¿Qué pasa si falta un campo requerido?
+- ¿Qué pasa si la API de Slack está caída?
+- ¿Qué pasa si dos webhooks se disparan simultáneamente?
+  Registra las fallas en un canal aparte para que puedas revisarlas semanalmente.
+
+## Por qué la memoria persistente es crítica para los agentes de AI 24/7
+
+La AI sin estado olvida todo entre conversaciones. La memoria persistente convierte a un agente en un compañero de equipo informado.
+
+Lo que permite la memoria:
+
+| Sin memoria                                                         | Con memoria                                                       |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| "Recuérdame nuestros niveles de precio" en cada conversación        | El agente conoce tu precio y lo aplica automáticamente            |
+| Volver a explicar los criterios de ICP en cada calificación de lead | El agente recuerda el ICP y puntúa los leads de forma consistente |
+| Formatear manualmente cada reporte de la misma manera               | El agente recuerda tu formato preferido y lo reutiliza            |
+| Perder el contexto al cambiar de Slack a email                      | El agente conecta las conversaciones entre canales                |
+
+La memoria acumula tres tipos de conocimiento:
+
+1. Hechos explícitos: precios, especificaciones de producto, estructura del equipo, nombres de clientes. Se lo dices al agente una vez; lo recuerda para siempre.
+
+2. Patrones implícitos: después de puntuar 50 leads, el agente aprende qué industrias convierten. Después de redactar 100 emails, imita tu tono.
+
+3. Historial de sesión: el agente conecta la tarea de hoy con la conversación de la semana pasada. "Continúa el análisis de competidores del martes" funciona sin volver a explicar.
+
+Cómo funciona el almacenamiento de la memoria:
+
+Los agentes almacenan la memoria en formatos estructurados:
+
+```json
+{
+  "pricing": {
+    "starter": 29,
+    "professional": 99,
+    "enterprise": "custom"
+  },
+  "icp": {
+    "employee_count_min": 50,
+    "industries": ["SaaS", "fintech", "healthcare"],
+    "deal_breakers": ["consumer apps", "marketplaces"]
+  },
+  "recent_conversations": [
+    {
+      "date": "2026-02-24",
+      "topic": "competitor_pricing",
+      "outcome": "Updated pricing spreadsheet"
+    }
+  ]
+}
+```
+
+Esta estructura permite que el agente consulte decisiones pasadas: "¿Qué precio usamos para el último cliente SaaS?" devuelve respuestas precisas al instante.
+
+Memoria vs. recuperación:
+
+Algunos sistemas usan la recuperación (buscar en logs pasados) en lugar de la memoria real. La diferencia:
+
+- Recuperación: el agente busca en conversaciones pasadas fragmentos relevantes. Lenta y dependiente del contexto.
+- Memoria: el agente almacena hechos estructurados y los actualiza. Rápida y confiable.
+  Para los agentes 24/7, la memoria le gana a la recuperación. Necesitas respuestas instantáneas y deterministas, no resultados de búsqueda probabilísticos.
+
+## Cómo construir un sistema de agente de AI 24/7 del mundo real
+
+Construyamos un agente de monitoreo de competidores que corre a diario y te alerta sobre cambios de precio.
+
+Arquitectura:
+
+```plaintext
++------------------+  6 AM: Scrape competitor sites
+| Daily Cron       |
+| (6 AM)           |
++------------------+
+         |
+         v
++------------------+  Parse pricing, compare to memory
+| AI Agent         |
+| (Processor)      |
++------------------+
+         |
+         v
++------------------+  If change detected, POST to Slack
+| Webhook Out      |
+| (Alert)          |
++------------------+
+```
+
+Paso 1: Configura el cron job
+
+Crea competitor-monitor.txt:
+
+```plaintext
+Competitor Pricing Monitor
+
+Every day at 6 AM:
+1. Visit competitor A at example.com/pricing
+2. Visit competitor B at competitorb.com/plans
+3. Extract pricing for "Professional" and "Enterprise" tiers
+4. Compare to yesterday's stored prices in memory
+5. If any price changed >5%, send Slack alert to #marketing
+6. Update memory with today's prices
+```
+
+Prográmalo:
+
+```plaintext
+0 6 * * * /agent run competitor-monitor
+```
+
+Paso 2: Configura el almacenamiento de la memoria
+
+Inicializa la memoria del agente:
+
+```json
+{
+  "competitor_a": {
+    "professional": 99,
+    "enterprise": 499,
+    "last_checked": "2026-02-28"
+  },
+  "competitor_b": {
+    "professional": 89,
+    "enterprise": 399,
+    "last_checked": "2026-02-28"
+  }
+}
+```
+
+El agente actualiza esto a diario. Después de 30 días, tienes un historial completo de precios sin hojas de cálculo manuales.
+
+Paso 3: Conecta el webhook de Slack
+
+Obtén tu URL de webhook entrante de Slack:
+
+1. Ve a api.slack.com/apps
+1. Crea una app, Incoming Webhooks, Activate
+1. Agrégala al canal #marketing
+1. Copia la URL del webhook: https://hooks.slack.com/services/T00/B00/XXX
+   Agrégala a la configuración del agente:
+
+```plaintext
+Alert Settings:
+- Slack webhook: https://hooks.slack.com/services/T00/B00/XXX
+- Message format: "Competitor {name} changed {tier} pricing from ${old} to ${new}"
+```
+
+Paso 4: Prueba el ciclo completo
+
+Dispara el agente manualmente:
+
+```bash
+/agent run competitor-monitor --test
+```
+
+Salida esperada:
+
+1. El agente visita ambos sitios de competidores
+1. Hace scraping del precio actual
+1. Compara con la memoria (sin cambios en la primera ejecución)
+1. Actualiza la memoria con la marca de tiempo "last_checked"
+   Cambia un precio en la memoria manualmente y luego vuelve a ejecutar. Deberías recibir una alerta de Slack.
+
+Paso 5: Despliega y monitorea
+
+Después de las pruebas exitosas, déjalo correr. Revisa semanalmente:
+
+- Revisa las alertas de Slack para verificar precisión
+- Verifica que el cron job se haya ejecutado (revisa los logs)
+- Confirma que la memoria se actualiza correctamente
+  Después de 30 días, exporta el historial de precios y visualiza las tendencias. Ahora tienes inteligencia competitiva que se actualiza automáticamente.
+
+## Cómo Duet hace que los agentes de AI 24/7 sean simples para equipos no técnicos
+
+La mayoría de las herramientas de AI requieren que las ejecutes localmente o que pagues por infraestructura en la nube compleja. Duet está construido específicamente para la operación de agentes 24/7.
+
+Lo que hace diferente a Duet:
+
+Servidor persistente: tus agentes corren en la infraestructura de Duet, no en tu laptop. Cierra tu computadora; los agentes siguen trabajando.
+
+Cron integrado: programa tareas con una sintaxis simple. Sin gestión de servidores ni configuración de cronjob.
+
+Manejo de webhooks: Duet autogenera los endpoints de webhook. Pégalos en los servicios externos y empieza a recibir eventos al instante.
+
+Memoria unificada: todos tus agentes comparten una base de conocimiento. El agente de ventas sabe lo que el agente de soporte aprendió ayer.
+
+Hosting de apps: construye dashboards, formularios o herramientas personalizadas. Aloja en el dominio de Duet sin desplegar infraestructura aparte.
+
+Esta es la propuesta de valor central: AI que corre de forma autónoma en un servidor que no gestionas. Configura una tarea una vez, y se ejecuta a diario durante meses sin intervención.
+
+Ejemplo: una startup de 3 personas usa Duet para dirigir las operaciones. Un agente maneja los tickets de soporte al cliente 24/7. Otro monitorea los precios de los competidores a diario. Un tercero genera reportes de desempeño semanales. Los fundadores dedican cero tiempo al mantenimiento del servidor.
+
+Para los equipos que necesitan AI siempre activa pero no quieren gestionar infraestructura, Duet ofrece el camino más simple de la idea al agente desplegado. Obtén más información en duet.so.
+
+## 7 errores comunes al configurar agentes de AI 24/7
+
+1. Sin manejo de errores
+
+Tu agente fallará. Las APIs se caen, se alcanzan los límites de tasa, los formatos de datos cambian. Incluye siempre:
+
+- Lógica de reintentos (intentar 3 veces antes de alertar)
+- Acciones de respaldo (si Slack falla, enviar email)
+- Logging de errores (capturar las fallas para la revisión semanal)
+
+2. Primeras tareas demasiado complejas
+
+Empieza con un workflow simple. Comprueba que funciona durante 30 días antes de agregar complejidad. Los usuarios nuevos suelen intentar automatizar 10 procesos simultáneamente y depurarlos todos a la vez.
+
+3. Ignorar los límites de tasa
+
+La mayoría de las APIs limitan las peticiones:
+
+- Gmail: 250 emails/día para cuentas gratuitas
+- Slack: 1 mensaje/segundo
+- Twitter: 300 peticiones/15 minutos
+  Diseña las tareas para mantenerte por debajo de los límites. Usa operaciones por lotes y caché.
+
+4. Saltarse las pruebas manuales
+
+Nunca despliegues un cron job sin ejecutarlo manualmente primero. Prueba los casos límite:
+
+- Conjuntos de datos vacíos (¿qué pasa si no llegaron emails?)
+- Datos mal formados (¿qué pasa si falta un campo de formulario?)
+- Errores de API (¿qué pasa si Stripe está caído?)
+
+5. Sin monitoreo
+
+Configura alertas para cuando las tareas fallen. Opciones:
+
+- Email de resumen diario: "5/5 tareas exitosas"
+- Alertas de Slack en caso de falla
+- Dashboard de health check semanal
+  No notarás una falla silenciosa hasta que cause problemas reales.
+
+## Preguntas frecuentes
+
+### ¿Qué significa que un agente de AI corra 24/7?
+
+Un agente de AI 24/7 corre de forma continua en un servidor, ejecutando tareas según un calendario o en respuesta a disparadores, sin requerir que estés presente ni que tu laptop esté abierta. Puede monitorear datos, enviar alertas, generar reportes o tomar acciones de forma autónoma a toda hora, igual que un proceso de servidor en segundo plano.
+
+### ¿Qué infraestructura necesitas para ejecutar un agente de AI 24/7?
+
+Necesitas un servidor que se mantenga en línea: un VPS, una VM en la nube o una plataforma gestionada como Duet. El proceso del agente debe estar configurado para reiniciarse automáticamente si se cae. También necesitas una API key de un proveedor de AI y una forma de manejar los disparadores programados, como cron jobs o webhooks de eventos.
+
+### ¿Cuál es la forma más fácil de configurar un agente de AI siempre activo sin conocimientos de DevOps?
+
+Las plataformas gestionadas como Duet son la ruta más fácil: se encargan del servidor, la gestión de procesos y la programación por ti. La alternativa es rentar un VPS barato y seguir una guía de configuración, pero requiere comodidad con la línea de comandos y administración básica de servidores.
+
+### ¿Cuánto cuesta ejecutar un agente de AI 24/7?
+
+Los costos del servidor empiezan en alrededor de 5-10 USD/mes por un VPS básico. El costo mayor es el uso de la API de AI: un agente que corre de forma continua y hace llamadas frecuentes a la API puede acumular costos significativos de tokens. Diseña tu agente para que llame a la AI solo cuando sea necesario en lugar de en un bucle de polling apretado.
+
+### ¿Qué tareas son las más adecuadas para un agente de AI 24/7?
+
+Las tareas de monitoreo (rastreo de precios, actualizaciones de competidores, alertas de noticias), la generación de contenido programada (reportes semanales, newsletters), los pipelines de procesamiento de datos, el enrutamiento de consultas de clientes y las tareas de investigación recurrentes encajan bien. Las tareas que se benefician de la persistencia (donde de otra forma te olvidarías de revisar) son ideales para los agentes siempre activos.
+
+### ¿Cómo te aseguras de que un agente de AI 24/7 no cometa errores?
+
+Incorpora puntos de control humanos para las acciones de consecuencia. Usa logging de salida para que puedas revisar lo que hizo. Empieza con tareas de solo lectura antes de darle al agente permisos de escritura o de envío. Establece límites de gasto en tu cuenta de API de AI y usa el nivel de modelo más económico que maneje la tarea de forma adecuada.

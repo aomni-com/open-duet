@@ -1,0 +1,28 @@
+[
+  {
+    "viewport": "desktop",
+    "before": [
+      1440,
+      836
+    ],
+    "after": [
+      1440,
+      836
+    ],
+    "byteIdentical": false,
+    "changedPixels": 450
+  },
+  {
+    "viewport": "mobile",
+    "before": [
+      390,
+      1249
+    ],
+    "after": [
+      390,
+      1249
+    ],
+    "byteIdentical": false,
+    "changedPixels": 450
+  }
+]

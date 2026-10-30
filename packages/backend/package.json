@@ -1,0 +1,54 @@
+{
+  "name": "@repo/backend",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "setup": "convex dev --configure=existing --team david-2dce6 --project duet-v2",
+    "select-dev": "convex deployment select dev",
+    "select-staging": "convex deployment select staging",
+    "dev": "convex dev",
+    "codegen": "convex codegen",
+    "deploy": "convex deploy",
+    "deploy:ci": "convex deploy",
+    "deploy:staging": "convex deployment select staging && convex dev --once",
+    "file-activity-cutover:staging": "DUET_CUTOVER_ENV=staging bunx dotenvx run --strict --redact -f ../../.env.staging -fk ../../.env.keys -- bun scripts/file-activity-cutover.ts",
+    "file-activity-cutover:production": "DUET_CUTOVER_ENV=production bunx dotenvx run --strict --redact -f ../../.env.production -fk ../../.env.keys -- bun scripts/file-activity-cutover.ts",
+    "workspace-capacity-census": "bun scripts/workspace-capacity-census.ts",
+    "reprovision-fleet:staging": "DUET_FLEET_ENV=staging bunx dotenvx run --strict --redact -f ../../.env.staging -fk ../../.env.keys -- bun scripts/reprovision-fleet.ts",
+    "reprovision-fleet:production": "DUET_FLEET_ENV=production bunx dotenvx run --strict --redact -f ../../.env.production -fk ../../.env.keys -- bun scripts/reprovision-fleet.ts",
+    "stripe:provision-subscriptions": "bun scripts/provision-stripe-subscriptions.ts",
+    "stripe:capture-subscription-fixtures": "bun scripts/capture-stripe-subscription-fixtures.ts",
+    "check-types": "tsc --noEmit && tsc --noEmit -p convex/tsconfig.json",
+    "lint": "oxlint",
+    "test": "bun test --parallel=1 --timeout 60000"
+  },
+  "dependencies": {
+    "@auth/core": "^0.41.1",
+    "@convex-dev/action-retrier": "^0.3.0",
+    "@convex-dev/auth": "0.0.94",
+    "@convex-dev/batch-worker": "0.2.2",
+    "@convex-dev/migrations": "^0.3.5",
+    "@repo/contract": "*",
+    "@repo/email": "*",
+    "@repo/exe": "*",
+    "@repo/official-agents-seed": "*",
+    "@repo/seed-drive": "*",
+    "ai": "^7",
+    "convex": "^1.42.1",
+    "convex-helpers": "0.1.120",
+    "stripe": "20.4.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@repo/test-harness": "*",
+    "@repo/typescript-config": "*",
+    "@types/bun": "catalog:",
+    "@types/node": "catalog:",
+    "convex-test": "^0.0.54",
+    "typescript": "catalog:"
+  }
+}

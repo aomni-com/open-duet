@@ -1,0 +1,10 @@
+{
+  "triggers": [],
+  "tags": [
+    "sales"
+  ],
+  "onboarding": {
+    "kind": "chat"
+  },
+  "suggestedFirstMessage": "Hi — I’m your Sales Development Rep. I find the right contacts and write outbound sequences where every personal detail traces to a real source — and nothing sends without you. Who are you trying to reach?"
+}

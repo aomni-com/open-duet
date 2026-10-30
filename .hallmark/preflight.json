@@ -1,0 +1,9 @@
+{
+  "scannedAt": "2026-08-29",
+  "framework": "Next.js with React and Tailwind",
+  "fontStack": "Existing Duet sans and serif tokens",
+  "palette": "Existing semantic HSL/OKLCH design tokens",
+  "motion": "framer-motion, with reduced-motion parity",
+  "spacing": "Existing four-point Tailwind rhythm",
+  "preserve": ["font stack", "palette", "spacing scale", "component ownership"]
+}

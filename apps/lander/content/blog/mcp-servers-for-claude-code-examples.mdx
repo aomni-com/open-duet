@@ -1,0 +1,305 @@
+---
+title: '8 MCP Servers for Claude Code You Can Actually Defend (2026)'
+metaTitle: 'MCP Server Examples for Claude Code: 8 Vetted Picks (2026)'
+description: 'MCP server examples for Claude Code, vetted for safety and maintenance. 8 servers across code, databases, and web grounding, with live-verified install commands.'
+date: '2026-07-07'
+updatedAt: '2026-07-10'
+author:
+  name: 'Duet Team'
+  link: '/'
+category: 'ai'
+tags: ['mcp-server-examples', 'claude-code', 'mcp-servers', 'duet-ai', 'agent-tooling']
+type: 'article'
+image: '/blog/mcp-servers-for-claude-code-examples/cover.png'
+relatedPosts:
+  [
+    'claude-code-mcp-servers-setup',
+    'agent-skills-101-tools-vs-mcp-vs-skills',
+    'claude-code-for-teams',
+  ]
+cta:
+  title: 'Skip the MCP audit. Ship with servers you can trust.'
+  subtitle: 'Duet ships with vetted MCP servers pre-configured and scoped for your team, so you connect tools without auditing every package yourself.'
+  buttonText: 'Try Duet free'
+  href: '/sign-in?from=blog-mcp-servers-examples'
+---
+
+Every "best MCP servers" list hands you the same two dozen npm commands and moves on. None of them tell you which packages are abandoned, which ones ship with write access you did not ask for, or which official reference servers got archived last quarter and now point to dead installs.
+
+**Most guides hand you a list. This one hands you a list you can defend.**
+
+Every server below is grouped by the job it does, tagged with its transport and auth model, and paired with an install command we verified live before publishing. Where the official package is archived or renamed, we say so and point to the maintained replacement. Start with the vetting checklist, then take the servers you need.
+
+<AnswerBox
+  summary="The MCP servers worth adding to Claude Code cover three jobs: reading and writing code (Filesystem, Git, GitHub), querying data (Postgres MCP Pro, SQLite), and grounding answers in current sources (Context7, Brave Search, Fetch). That is eight servers that handle most day-to-day coding work. Before you add any of them, vet it: confirm it is maintained, read what it can touch, and scope its token to the minimum. A server you cannot audit is a server you should not connect."
+  queries={[
+    'mcp server examples',
+    'best mcp servers for claude code',
+    'claude code mcp server list',
+    'which mcp servers should i use',
+    'are mcp servers safe',
+    'mcp server github',
+    'postgres mcp server claude code',
+    'context7 mcp server',
+  ]}
+/>
+
+<GuideTOC
+  items={[
+    {
+      number: 1,
+      title: 'How to Vet an MCP Server Before You Add It',
+      href: '#how-to-vet-an-mcp-server',
+    },
+    { number: 2, title: 'Adding a Server: The One Command', href: '#adding-a-server' },
+    { number: 3, title: 'Code and Repo Servers', href: '#code-and-repo-servers' },
+    { number: 4, title: 'Database Servers', href: '#database-servers' },
+    { number: 5, title: 'Web Grounding Servers', href: '#web-grounding-servers' },
+    { number: 6, title: 'FAQ', href: '#frequently-asked-questions' },
+  ]}
+/>
+
+---
+
+## How to Vet an MCP Server Before You Add It
+
+An MCP server runs code on your machine or holds a token to your accounts. Treat adding one like adding a dependency, because that is exactly what it is. Four checks, every time.
+
+**1. Official or community, and does it matter here?** Anthropic and vendors like GitHub, Sentry, and Notion publish first-party servers. Community servers fill the gaps. Neither is automatically safe. Know which one you are installing so you know who to trust and where to file bugs.
+
+**2. Read what it can touch.** Open the source or the README and find the tool list. A Filesystem server scoped to one directory is low risk. A shell-execution server is not. If the tool list is longer than the job you need, that is surface area you are taking on for no reason.
+
+**3. Scope the token to the minimum.** Most servers that reach a cloud service want an API token. Give it a read-only token when you only need reads. Restrict OAuth scopes to the one or two you actually use. A database server with a read-only connection string cannot drop a table, no matter what the model asks it to do.
+
+**4. Check that it is still alive.** Official reference servers get archived. Community packages get abandoned. Before you trust an install command, confirm the package published recently and the repo is not read-only. Every command in this post was verified live on the publish date for exactly this reason.
+
+![Four-step checklist for vetting an MCP server: know who you're installing, read what it can touch, scope the token to the minimum, and check that it's still alive](/blog/mcp-servers-for-claude-code-examples/checklist.png)
+
+---
+
+## Adding a Server: The One Command
+
+You add every server below with `claude mcp add`. The shape changes with the transport.
+
+```bash
+# Remote HTTP server (cloud services)
+claude mcp add --transport http <name> <url> --header "Authorization: Bearer YOUR_TOKEN"
+
+# Local stdio server (runs as a subprocess on your machine)
+claude mcp add --transport stdio <name> -- <command> [args...]
+```
+
+All flags (`--transport`, `--env`, `--scope`, `--header`) come before the server name. The `--` separates the name from the command Claude Code runs. Check any server with `/mcp` inside a session, or `claude mcp list` from your shell.
+
+A note on runtimes: Node servers run through `npx -y`, which fetches and runs the package on demand. Python servers run through `uvx`, the [uv](https://docs.astral.sh/uv/) runner, which does the same for PyPI. If a command below uses `uvx`, install uv first.
+
+---
+
+## Code and Repo Servers
+
+The core of any coding workflow. These let Claude Code read your files, work your git history, and manage your GitHub.
+
+### Filesystem
+
+Scoped read and write access to directories you name. The safest way to give the agent file access without handing it your whole disk.
+
+- **Maintainer:** official Anthropic reference server
+- **Transport:** stdio &middot; **Auth:** none (access is the directory you pass)
+
+```bash
+claude mcp add --transport stdio filesystem \
+  -- npx -y @modelcontextprotocol/server-filesystem /path/to/project
+```
+
+Pass only the directories the task needs. Everything outside them is invisible to the server, which is the point.
+
+### Git
+
+Local git operations as tools: status, diff, log, blame, commit. Lets the agent reason about your history without you narrating it.
+
+- **Maintainer:** official Anthropic reference server (PyPI)
+- **Transport:** stdio &middot; **Auth:** none
+
+```bash
+claude mcp add --transport stdio git \
+  -- uvx mcp-server-git --repository /path/to/repo
+```
+
+This is separate from GitHub. Git handles your local repository. GitHub handles the remote, the PRs, and the issues.
+
+### GitHub
+
+Pull requests, issues, code search, and reviews against github.com.
+
+- **Maintainer:** official GitHub server. Note: this moved from an npm package to a remote HTTP endpoint. The old `npx` install is dead. Use the URL below.
+- **Transport:** HTTP &middot; **Auth:** GitHub personal access token
+
+```bash
+claude mcp add --transport http github https://api.githubcopilot.com/mcp/ \
+  --header "Authorization: Bearer YOUR_GITHUB_PAT"
+```
+
+Scope the PAT to the repos you work in. A token with org-wide write access is a liability the moment it leaks into a log.
+
+![Filesystem, Git, and GitHub MCP servers side by side with transport and auth badges: STDIO with no auth for Filesystem and Git, HTTP with a personal access token for GitHub](/blog/mcp-servers-for-claude-code-examples/code-servers.png)
+
+---
+
+## Database Servers
+
+Let the agent query your data directly instead of you pasting rows into chat. Read-only by default, always.
+
+### Postgres MCP Pro
+
+Query, inspect schemas, and analyze performance against a Postgres instance. The official reference Postgres server was archived, so this maintained community server by crystaldba is the one to use.
+
+- **Maintainer:** community (crystaldba), replaces the archived official server &middot; PyPI package `postgres-mcp`
+- **Transport:** stdio &middot; **Auth:** connection string, plus an access mode
+
+```bash
+claude mcp add --transport stdio postgres \
+  --env DATABASE_URI="postgresql://readonly:pass@host:5432/app" \
+  -- uvx postgres-mcp --access-mode=restricted
+```
+
+`--access-mode=restricted` blocks writes and destructive statements. Use it unless you have a specific reason not to, and pair it with a read-only database role so the restriction holds at two layers.
+
+### SQLite
+
+Query a local SQLite database file. The official reference SQLite server was also archived. This npm package is the maintained drop-in.
+
+- **Maintainer:** community, replaces the archived official server &middot; npm package `mcp-server-sqlite-npx`
+- **Transport:** stdio &middot; **Auth:** none (path to the database file)
+
+```bash
+claude mcp add --transport stdio sqlite \
+  -- npx -y mcp-server-sqlite-npx /path/to/database.db
+```
+
+Good for local development databases, analytics exports, and anything you would otherwise open in a SQLite browser.
+
+---
+
+## Web Grounding Servers
+
+Keep the agent's answers tied to current, real sources instead of stale training data. This is the group that most reduces hallucination in day-to-day coding.
+
+### Context7
+
+Pulls up-to-date, version-specific documentation for thousands of libraries straight into context. Stops the agent from writing against an API that changed two releases ago.
+
+- **Maintainer:** community (Upstash) &middot; npm package `@upstash/context7-mcp`. Note: this is not `@context7/mcp-server`, a name some older guides still print.
+- **Transport:** stdio &middot; **Auth:** none for basic use, optional API key for higher rate limits
+
+```bash
+claude mcp add --transport stdio context7 \
+  -- npx -y @upstash/context7-mcp
+```
+
+### Brave Search
+
+Web and local search with an independent index. Brave now ships its own official server, which supersedes the archived reference one.
+
+- **Maintainer:** official Brave server &middot; npm package `@brave/brave-search-mcp-server`
+- **Transport:** stdio &middot; **Auth:** Brave Search API key
+
+```bash
+claude mcp add --transport stdio brave-search \
+  --env BRAVE_API_KEY=YOUR_KEY \
+  -- npx -y @brave/brave-search-mcp-server
+```
+
+### Fetch
+
+Retrieves a URL and converts the page to clean markdown for the model to read. The simplest way to let the agent read a doc, a changelog, or an RFC you link it to.
+
+- **Maintainer:** official Anthropic reference server (PyPI)
+- **Transport:** stdio &middot; **Auth:** none
+
+```bash
+claude mcp add --transport stdio fetch \
+  -- uvx mcp-server-fetch
+```
+
+Fetch pulls external content into your session, which is exactly where prompt injection lives. Only point it at sources you trust, and keep the vetting checklist in mind.
+
+---
+
+## Eight Servers, Not Fifty
+
+You do not need a wall of servers. These eight cover the jobs that come up every day: touching code, querying data, and grounding answers in current sources. Each one is maintained, each install command was verified live, and each is scoped to give the agent what the task needs and nothing more.
+
+When you do reach for a comms or notification server later, Slack, Sentry, Notion, run it through the same four checks first. The list you can defend is short on purpose.
+
+![Diagram of Claude Code connected to eight MCP servers grouped into code and repo, database, and web and context servers, each labeled with its transport and auth](/blog/mcp-servers-for-claude-code-examples/recap.png)
+
+---
+
+## Frequently Asked Questions
+
+<Accordion type="single" collapsible className="w-full">
+
+<AccordionItem value="are-mcp-servers-safe">
+  <AccordionTrigger>Are MCP servers safe to use?</AccordionTrigger>
+  <AccordionContent>
+    They are as safe as the vetting you do before adding them. An MCP server runs code or holds a
+    token, so treat it like any dependency: confirm it is maintained, read what it can touch, and
+    scope its credentials to the minimum. See the vetting checklist at the top of this post.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="how-many-servers">
+  <AccordionTrigger>How many MCP servers should I run at once?</AccordionTrigger>
+  <AccordionContent>
+    Only the ones a task needs. Claude Code defers tool loading, so idle servers cost little
+    context, but every connected server is auth surface and one more thing that can break. Add per
+    project via `--scope project`, not globally.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="git-vs-github">
+  <AccordionTrigger>What's the difference between the Git and GitHub servers?</AccordionTrigger>
+  <AccordionContent>
+    Git handles your local repository: status, diff, log, blame, and commits, with no network
+    access. GitHub handles the remote side: pull requests, issues, code search, and reviews against
+    github.com, which is why it needs a personal access token. Most coding workflows use both.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="why-not-official-postgres">
+  <AccordionTrigger>Why not use the official Postgres and SQLite servers?</AccordionTrigger>
+  <AccordionContent>
+    Because they were archived. Anthropic's original reference servers for Postgres and SQLite are
+    now read-only repos with no maintenance. The install commands in older guides still point at
+    them. This post uses maintained replacements instead: `postgres-mcp` from crystaldba and
+    `mcp-server-sqlite-npx`, both verified live on the publish date.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="reinstall-per-project">
+  <AccordionTrigger>Do I have to reinstall a server for every project?</AccordionTrigger>
+  <AccordionContent>
+    No. Use `--scope` to control where a server is available. `--scope project` writes config to the
+    project so a server like Postgres only loads where you need it. `--scope user` makes a server
+    available everywhere, which suits general tools like Fetch or Context7. Scope database and repo
+    servers to the project, not globally.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="mcp-vs-skills">
+  <AccordionTrigger>Is an MCP server the same as a Claude Code skill?</AccordionTrigger>
+  <AccordionContent>
+    No. An MCP server connects Claude Code to an external system through a running process or
+    endpoint. A skill is a packaged set of instructions and files the agent loads on demand. They
+    solve different problems and often work together. See [Skills vs
+    MCP](/guides/agent-skills-101-tools-vs-mcp-vs-skills) for where each fits.
+  </AccordionContent>
+</AccordionItem>
+
+</Accordion>
+
+## Keep reading
+
+- [Claude Code MCP Servers: Complete Setup Guide](/guides/claude-code-mcp-servers-setup). The full setup, scopes, and troubleshooting reference this post builds on.
+- [Skills vs MCP: What's the Difference](/guides/agent-skills-101-tools-vs-mcp-vs-skills). Where MCP fits alongside Tools and Skills.
+- [Claude Code for Teams](/guides/claude-code-for-teams). Sharing MCP config across a team with project scope.

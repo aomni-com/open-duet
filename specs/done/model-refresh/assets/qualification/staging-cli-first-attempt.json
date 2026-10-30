@@ -1,0 +1,42 @@
+{
+  "status": "failed",
+  "generations": [
+    {
+      "role": "image:google",
+      "model": "google/gemini-3.1-flash-image",
+      "exitCode": 0,
+      "bytes": 983426,
+      "validMedia": true,
+      "sha256": "63ce60a681062b124d867b769f19bb295f6f5ca68edbe6d147db955eeece1e5b"
+    },
+    {
+      "role": "video:google",
+      "model": "google/veo-3.1-generate-001",
+      "exitCode": 0,
+      "bytes": 308066,
+      "validMedia": true,
+      "sha256": "bd7184744c5f0803245ef1d1a6cf6d37373967e05f748ddb6b7c6e9359c7f7d7"
+    },
+    {
+      "role": "video:grok",
+      "model": "spacexai/grok-imagine-video-1.5",
+      "exitCode": 0,
+      "bytes": 371857,
+      "validMedia": true,
+      "sha256": "b7597dc60d25920f4189e768a72000fc487d96429814acea16bb2c0db9cdb6e8"
+    }
+  ],
+  "nondefault": [],
+  "agentVersion": "0.3.27",
+  "memoryModel": "openai/gpt-6-luna",
+  "roles": {
+    "image:google": "google/gemini-3.1-flash-image",
+    "video:google": "google/veo-3.1-generate-001",
+    "video:grok": "spacexai/grok-imagine-video-1.5",
+    "video:pro": "bytedance/seedance-2.5",
+    "video:seedance": "bytedance/seedance-2.5",
+    "video": "bytedance/seedance-2.0-fast"
+  },
+  "skillHash": "49f48248d9553552b6266581d0d120fc527a814524373051d30b03024e52c867",
+  "error": "duet model failed (143); inspect VM logs\n\n143 !== 0\n"
+}

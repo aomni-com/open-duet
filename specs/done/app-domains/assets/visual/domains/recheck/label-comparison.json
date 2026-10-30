@@ -1,0 +1,38 @@
+[
+  {
+    "viewport": "desktop",
+    "beforeSize": [
+      576,
+      282
+    ],
+    "afterSize": [
+      576,
+      306
+    ],
+    "bytesDiffer": true,
+    "candidateFile": "desktop-failed.png",
+    "baselineFile": "../../../../../../../apps/web/tests/visual/__screenshots__/desktop/app-domains.spec.ts/app-domains-queued-recheck-failed.png",
+    "candidateFileSha256": "d04a01d0564c5f419af970923c2e9f305f76e80275249eb4800394f2530a9139",
+    "baselineFileSha256": "ec3642266c44297dfdc2ca3c41b1e2436aaf1750ca934a47a8c2b0799d6d5a73",
+    "rgbaPixelsEqual": true,
+    "rgbaSha256": "9fe3f360619b52151d1438487776f7051a729661da2401135923455f5599e59b"
+  },
+  {
+    "viewport": "mobile",
+    "beforeSize": [
+      390,
+      322
+    ],
+    "afterSize": [
+      390,
+      346
+    ],
+    "bytesDiffer": true,
+    "candidateFile": "mobile-failed.png",
+    "baselineFile": "../../../../../../../apps/web/tests/visual/__screenshots__/mobile/app-domains.spec.ts/app-domains-queued-recheck-failed.png",
+    "candidateFileSha256": "ed4bcc4d397bc09521c1ffdf37b3dd874e5443b059f19f15d26c8fa9d7434b4a",
+    "baselineFileSha256": "482298cdafe387a652edc0f611142da3052ba2d99c39ed48590b9c329f40aaff",
+    "rgbaPixelsEqual": true,
+    "rgbaSha256": "c553037c8e83dbb701e1c25586587b516d0489876bc3ed578b1c1499039c31cb"
+  }
+]

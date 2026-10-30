@@ -1,0 +1,173 @@
+import { EndpointReference } from '../../components/endpoint-reference'
+import { DesktopExampleSource } from '../../components/desktop-example-source'
+
+export const metadata = {
+  title: 'Desktop',
+  description: 'Embed and focus the shared workspace desktop.',
+  alternates: { canonical: '/desktop/' },
+}
+
+<p className="eyebrow">Resource guide</p>
+
+# Embed the shared workspace desktop
+
+The Desktop API exposes the same live framebuffer that a person sees in Duet. Your backend mints
+an origin-bound viewer URL, your browser embeds it, and either side can read status or ask Duet to
+bring an agent's existing Chrome window to the front. The API does not create a second desktop or
+an isolated browser.
+
+Desktop routes require the workspace's `sessions` capability. Human keys derive it from current
+membership and role; OAuth and app credentials use their explicit grants. They and Duet's browser
+session all use the same public operations. Keep a long-lived
+credential on your backend; send only the short-lived viewer response to browser code.
+
+## Put the credential behind your own session
+
+Mount the checked-in Web-standard handler at `/api/desktop/*` in your backend framework. Its
+`authorize` callback represents your application's own login and workspace authorization—do not
+publish an unauthenticated mint proxy. The workspace slug and Duet API key come from server
+configuration rather than browser input.
+
+<details>
+  <summary>Shared example types</summary>
+  <DesktopExampleSource file="contract" />
+</details>
+
+<details>
+  <summary>Backend handler</summary>
+  <DesktopExampleSource file="backend" />
+</details>
+
+The handler forwards the Duet status and error body plus `Retry-After`, but never returns the API
+key. It also marks responses `no-store`, because `entryUrl` is a bearer capability: anyone who has
+that URL can attempt admission until it expires. Redact the complete URL from logs, analytics,
+traces, exception reports, browser history, and support transcripts.
+
+## Mint once, then fit the real screen
+
+The browser sends its exact `window.location.origin` to the backend. Duet accepts one canonical
+HTTPS origin, or HTTP only for `localhost`, `127.0.0.0/8`, and `[::1]`. A path, trailing slash,
+query, fragment, credentials, wildcard, non-default spelling of a default port, or a list of
+origins is invalid. Duet binds the resulting grant to that exact origin with Content Security
+Policy; loading the URL from another origin is refused by the browser's frame policy, not by a
+separate REST `403`.
+
+{/* schema: DesktopSessionRequestSchema */}
+
+```json
+{
+  "embedOrigin": "https://customer.example"
+}
+```
+
+{/* schema: DesktopSessionResponseSchema */}
+
+```json
+{
+  "entryUrl": "https://vm.example/d/g.cap/",
+  "expiresAt": 1786723200000,
+  "phase": "ready",
+  "screen": { "width": 1440, "height": 900 }
+}
+```
+
+Use the response's `screen`, which is the VM's actual framebuffer resolution, as the iframe's
+intrinsic size. Uniformly scale it down to fit the container, never enlarge it beyond 1×, and
+center the unused space. This preserves pointer coordinates and aspect ratio instead of asking the
+desktop to reflow like a web page.
+
+The iframe policy is exact: `sandbox` is
+`allow-same-origin allow-scripts allow-forms allow-modals allow-pointer-lock allow-downloads`,
+`allow` is `clipboard-read; clipboard-write`, fullscreen is enabled, and
+`referrerpolicy="no-referrer"` prevents the capability URL from becoming another site's referrer.
+
+<details>
+  <summary>Browser mount, scaling, status, and focus</summary>
+  <DesktopExampleSource file="browser" />
+</details>
+
+The example mints on mount and after the browser reports that the network is back online. It does
+not replace the iframe on a timer. `expiresAt` is the last moment a new HTTP or WebSocket admission
+may begin, not a lease on an admitted connection: a viewer WebSocket admitted before expiry stays
+connected until it disconnects. If the page remounts, the iframe reloads, or the viewer actually
+disconnects, mint a fresh URL. Do not cache and reuse an expired URL.
+
+Status polling is independent from viewer admission. Polling status may update lifecycle or owner
+UI, but it must not tear down a healthy iframe.
+
+## Status describes one shared machine
+
+{/* schema: DesktopStatusResponseSchema */}
+
+```json
+{
+  "phase": "ready",
+  "viewers": 1,
+  "owners": []
+}
+```
+
+`phase` is `stopped`, `starting`, or `ready`; `viewers` counts admitted viewers. Each owner entry
+describes root or one named agent, whether its browser window is focused, its activity phase, and
+current or discarded batch-tab counts.
+
+Every viewer and agent shares one framebuffer, input stream, clipboard, Chrome profile, and global
+native focus. A person's click can race an agent's input, and the last focus or interaction wins.
+Owner labels organize presentation and resources; they are not security boundaries. Anyone trusted
+inside one workspace VM may see other tabs and windows.
+
+## Focus is idempotent presentation intent
+
+Focus brings an existing browser window for `root` or a named agent to the top. It does not create
+a window, select a particular tab, or isolate what other viewers can see. If an agent needs a
+particular tab shown, it first selects that tab through its browser-control connection, then calls
+focus for the owning window.
+
+Generate one `requestId` per logical focus attempt and reuse it if that request must be retried.
+Changing the ID means a new attempt.
+
+{/* schema: DesktopFocusRequestSchema */}
+
+```json
+{
+  "requestId": "login-019ffcd5"
+}
+```
+
+{/* schema: FocusBrowserOwnerResultSchema */}
+
+```json
+{
+  "focused": true
+}
+```
+
+`focused: false` means no existing window for that owner was brought forward; minting a viewer does
+not implicitly create or focus one.
+
+## Handle refusals without leaking the capability
+
+All desktop errors use JSON. Preserve the status, body, and `Retry-After` header while keeping
+`entryUrl` out of diagnostics.
+
+- **`400` — invalid mint or focus body.** Correct the request; do not retry unchanged.
+- **`401` — missing, invalid, expired, or revoked credential.** Reauthenticate the backend.
+- **`403` — missing `sessions` capability.** Check the human's membership and role, or the delegated grant.
+- **`404` — workspace or focus target is unavailable to the caller.** Reconcile the slug or agent.
+- **`402`, `409`, `410`, or lifecycle `503`.** Surface the workspace lifecycle action and honor
+  `Retry-After` when present.
+- **`429` — the authenticated principal exceeded an API limit.** Wait for `Retry-After`, then retry
+  safely.
+- **`503` with `desktop_unavailable`.** The live viewer-grant registry is full; wait at least one
+  second and retry minting.
+- **`502` with `desktop_gateway_failed`.** Use bounded backoff and recheck status.
+
+The general authenticated ceiling is 600 requests in a fixed 60-second window. Human API, OAuth
+and app credentials each have their own credential bucket; browser sessions and
+impersonation share a user bucket. Existing stricter endpoint limits still apply. See
+[idempotency and rate limits](/reliability) for retry behavior and [errors](/errors) for the common
+wire shape.
+
+## Endpoint schemas
+
+<EndpointReference category="desktop" />

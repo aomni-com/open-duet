@@ -1,0 +1,187 @@
+---
+title: 'Cómo Duet construye memoria de agente con grafos de contexto'
+metaTitle: 'Memoria de agente y grafos de contexto: cómo Duet los construye y evalúa (2026)'
+description: 'La ingeniería de contexto es más que una ventana más grande. Un grafo de contexto captura el porqué detrás de cada decisión del agente: qué se sopesó, rechazó y anuló. Cómo Duet lo registra y evalúa.'
+date: '2026-05-18'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/2.png'
+category: 'ai'
+tags:
+  [
+    'agent-memory',
+    'context-graphs',
+    'context-engineering',
+    'evals',
+    'long-term-memory',
+    'duet-agent',
+    'ai-agents',
+  ]
+type: 'article'
+image: '/blog/context-graphs/cover.png'
+locale: es-419
+translationKey: 'how-duet-builds-and-evals-context-graphs'
+relatedPosts:
+  - slug: 'how-to-run-claude-code-in-the-cloud'
+    context: 'How persistent cloud agents stay useful across sessions.'
+  - slug: 'how-to-set-up-a-24-7-ai-agent'
+    context: 'Configure always-on agents that survive your laptop closing.'
+cta:
+  title: 'Contrata un compañero de AI que de verdad recuerda.'
+  subtitle: 'Duet registra el porqué detrás de cada decisión para que tu agente no olvide tus convenciones, tus anulaciones ni lo que probaste la semana pasada.'
+  buttonText: 'Probar Duet'
+  href: '/sign-in?from=blog-context-graphs'
+---
+
+<Callout emoji="💡">
+**Resumen rápido**
+
+La mayoría de los sistemas de memoria de agentes almacenan resultados. La ingeniería de contexto bien hecha almacena el _precedente_ detrás de cada decisión: qué se consideró, rechazó, aplicó y anuló. La memoria de agente de Duet está construida como un grafo de contexto en tres capas de observación, cada una controlada por su propia eval. Este artículo recorre cómo se captura el grafo y cómo mantenemos honestas a las capas.
+
+</Callout>
+
+<Callout emoji="❓">
+**Preguntas que responde esta página**
+
+<ul>
+  <li>¿Qué es un grafo de contexto?</li>
+  <li>¿Qué es la ingeniería de contexto y en qué se diferencia de una ventana de contexto más grande?</li>
+  <li>¿Qué es la memoria de agente y qué significa realmente la memoria a largo plazo para los agentes de AI?</li>
+  <li>¿Por qué no alcanza con una transcripción de chat o un resumen para la memoria de un agente de AI?</li>
+  <li>¿Cómo registra Duet los rastros de decisión de conversaciones reales?</li>
+  <li>¿Cómo evalúas la capa de memoria de un agente sin calificarla a mano?</li>
+  <li>¿Cómo se compara esto con mem0, Letta, la memoria de LangChain y la memoria de Claude?</li>
+</ul>
+</Callout>
+
+## ¿Qué es la ingeniería de contexto y qué es un grafo de contexto?
+
+La **ingeniería de contexto** es la disciplina de moldear lo que un agente de AI realmente ve en cada turno: no solo el prompt, sino la memoria recuperada, el precedente, las reglas del proyecto y las orientaciones del usuario que deberían anular los valores por defecto. Una ventana de contexto más grande no lo resuelve. Un índice de búsqueda sobre transcripciones viejas tampoco. La parte difícil es decidir _qué vale la pena llevar adelante_ y _con qué forma_.
+
+Un **grafo de contexto** es una respuesta a esa pregunta. El encuadre viene del artículo de Foundation Capital [Context Graphs: AI's Trillion-Dollar Opportunity](https://foundationcapital.com/ideas/context-graphs-ais-trillion-dollar-opportunity). Su argumento, destilado: el valor duradero del día a día de un trabajador del conocimiento no son los artefactos que entrega. Es el **grafo de precedentes alrededor de cada decisión**: qué alternativas se sopesaron, quién aprobó la excepción, en qué política se apoyó, sobre qué decisión previa se construyó esta.
+
+Los resultados quedan escritos. El CRM tiene el trato cerrado-ganado. Git tiene el PR fusionado. El documento tiene el texto final.
+
+El grafo casi nunca queda. El descuento se aprobó en una llamada de Zoom. El giro de arquitectura ocurrió en un hilo de Slack. La regla de "no los tratamos como legacy" salió de una sola frase en una revisión de código. Nada de eso aterriza en un sistema de registro, así que el siguiente agente —humano o AI— lo vuelve a derivar desde cero y suele elegir distinto.
+
+Para un [compañero de AI](/use-cases/small-businesses), esa brecha es fatal. Un agente que solo ve resultados sugerirá alegremente la opción que rechazaste hace tres semanas, volverá a litigar una convención que ya zanjaste, o descartará silenciosamente la excepción que tallaste de forma explícita. Se siente olvidadizo incluso cuando su recuerdo en bruto es perfecto, porque **recordar resultados sin recordar el precedente no es memoria del trabajo: es memoria del artefacto**.
+
+Un grafo de contexto es lo que cierra esa brecha. En concreto, por cada decisión que el agente toma o te ve tomar, intenta capturar seis dimensiones:
+
+- **Insumos reunidos.** Qué archivos, errores, resultados de herramientas o mensajes previos realmente moldearon la decisión.
+- **Alternativas consideradas y rechazadas.** Qué se probó primero y se dejó de lado, qué se propuso y se vetó.
+- **Orientaciones, aprobaciones y anulaciones del usuario.** Tu redacción casi textual cuando empujas hacia atrás, rediriges o das el visto bueno.
+- **Convención o política aplicada.** Qué regla de `AGENTS.md`, lineamiento del proyecto o decisión previa se usó como apoyo.
+- **Precedente previo.** Sobre qué fila de memoria anterior, PR o sesión se construyó esta decisión.
+- **Bandera de excepción / anulación.** Si el camino tomado se desvía del valor por defecto, y por qué.
+
+Una fila de decisión que registra solo el resultado —`"refactorizó auth en middleware"`— ha perdido todo el grafo. Una fila que registra `"El usuario vetó el enfoque de guard por ruta por considerarlo sobreingeniería; extrajimos un solo middleware según la regla de 'una sola superficie de auth' del proyecto, establecida en el refactor de auth previo — excepción: dejar la ruta legacy `/health` sin guard"` es un borde de grafo que un futuro agente sí puede reutilizar.
+
+## Por qué los resultados pelados no alcanzan para la memoria de agente
+
+La mayoría de los sistemas de memoria de agentes hoy —ya se llamen a sí mismos memoria a largo plazo, memoria agéntica o simplemente "contexto"— caen en algún punto de un espectro entre dos modos de falla.
+
+**Memoria de transcripción.** Guardar todo el chat. Buscarlo por embedding. Esto es técnicamente sin pérdida, pero inútil en la práctica: la relación señal-ruido es brutal, el precedente relevante queda enterrado dentro del output de herramientas y la charla trivial, y el agente termina releyendo la misma conversación en cada turno. Peor aún, el **grafo es implícito**: el agente tiene que volver a derivar "preferiste el enfoque de middleware" del intercambio en bruto cada vez que lo necesita.
+
+**Memoria de resumen.** Comprimir conversaciones en viñetas. Barato de recuperar, pero el compresor optimiza para resultados (`"se entregó auth middleware el 14 de mayo"`) y descarta el grafo (`"se eligió middleware sobre guards por ruta tras el empuje del usuario"`). El agente termina con un prolijo registro de resultados y ninguna idea de por qué las cosas son como son. Dos semanas después vuelve a proponer el enfoque rechazado, y te preguntas por qué no parece aprender.
+
+Un grafo de contexto es la tercera opción: estructurado deliberadamente en torno a las dimensiones del grafo, con los prompts y las evals escritos para mantener el grafo intacto de punta a punta.
+
+## Cómo Duet registra la memoria de agente en tres capas
+
+Duet construye el grafo de contexto en tres capas. Cada una puede destruir el grafo por su cuenta si no tiene cuidado, así que cada una está diseñada en torno a un solo trabajo y controlada por su propio test.
+
+### Capa 1: el observador
+
+Después de cada turno, un modelo observador lee el intercambio y escribe un pequeño conjunto de filas de observación en un almacén de memoria que vive dentro del workspace del usuario. Aquí es donde las dimensiones del grafo entran al sistema.
+
+Al observador no se le instruye "resume este intercambio": ese es el modo de falla que colapsa el precedente en resultados. Se le instruye capturar rastros de decisión, con cada dimensión nombrada y ejemplificada. La instrucción más importante que recibe es preservar **las orientaciones, aprobaciones y anulaciones del usuario** de forma casi textual:
+
+> Cuando el usuario empuja hacia atrás, redirige, veta o aprueba explícitamente un camino, preserva su redacción de forma casi textual y trátala como una señal de autoridad. Citas como _"creo que esto es sobreingeniería"_, _"no deberíamos tratarlos como legacy"_, _"haz X en su lugar"_, _"adelante"_ son el equivalente a un VP aprobando un descuento en una llamada de Zoom: no están en ningún sistema de registro hasta que las escribes. Estas son las observaciones de mayor señal, porque son el precedente que anula los valores por defecto.
+
+El observador también recibe dos antipatrones detallados, porque ambos son trampas fáciles:
+
+1. **La verdad reconstruible no es memoria.** Si lo único que produjo el intercambio fue "el agente listó un directorio y encontró estos archivos", la fila se descarta: el agente puede volver a listar el directorio en el próximo turno. La memoria se reserva para cosas que el agente no puede redescubrir trivialmente.
+2. **Los resultados pelados son inválidos.** "X fue arreglado" no es un rastro de decisión. Una fila tiene que atribuir la decisión a al menos una de las seis dimensiones de arriba, o no vale la pena conservarla.
+
+### Capa 2: el reflector dentro de la sesión
+
+Dentro de una sola sesión, las observaciones se acumulan rápido. El reflector dentro de la sesión las compacta periódicamente en una vista consolidada que el agente recarga al inicio de cada turno. Esta es la capa que mantiene visible el grafo de contexto sin inflar el prompt.
+
+El paso de compactación es el segundo lugar donde el grafo puede morir. Si el reflector trata las orientaciones del usuario como "relleno narrativo" y las descarta —dejando solo el resultado—, cada capa posterior queda hambrienta. Al reflector se le dice explícitamente que no lo haga: una fila que sobrevive a la compactación tiene que mantener su atribución intacta (orientación del usuario, convención, precedente previo, síntoma observado, o "sin precedente: decisión de criterio nueva").
+
+### Capa 3: el reflector global
+
+A través de las sesiones, el pool entre sesiones se atomiza periódicamente en filas duraderas de largo plazo. Esta es la capa que convierte una semana de trabajo en la memoria institucional que el agente carga en sesiones futuras.
+
+La restricción aquí es más dura: una fila que aterriza en esta capa tiene que poder leerse en frío, por un futuro agente que nunca vio la conversación original. Eso significa mini-narrativas completas —disparador → recorrido → decisión → fundamento— con identificadores concretos (rutas de archivo, números de PR, fechas, etiquetas de versión) que el futuro agente pueda buscar con grep.
+
+Una fila que sobrevive hasta esta capa es lo más parecido que tiene el sistema a un borde de grafo permanente. La tratamos en consecuencia.
+
+## Cómo evaluamos la capa de memoria de agente
+
+Los prompts son la parte fácil. Mantener los prompts honestos a medida que el sistema evoluciona es la parte difícil. Un cambio de prompt que descarta silenciosamente "las orientaciones del usuario" de las instrucciones de extracción no rompe ningún test normal, pero amputa silenciosamente el grafo desde ese día en adelante.
+
+Por eso la capa de memoria tiene su propia suite de evals. El patrón es el mismo en cada una: correr la capa real de punta a punta contra un modelo en vivo con un escenario hecho a mano, y luego calificar el resultado con un juez LLM específico del dominio.
+
+### Controlar al observador
+
+La eval del observador le da un intercambio corto que contiene una orientación de usuario clara y textual; por ejemplo, el usuario empujando hacia atrás sobre un layout de archivos y declarando _"trata eso como la convención del proyecto de aquí en adelante."_ Luego verifica que la observación escrita en la memoria preserva la orientación: fraseo, intención y bandera de precedente intactos. Si un futuro cambio de prompt hace que el observador colapse el intercambio en un resultado pelado, la eval falla en el paso del juez. El grafo amputado se atrapa en la capa donde, de lo contrario, entraría al sistema.
+
+### Controlar a los reflectores
+
+El reflector dentro de la sesión y el reflector global comparten un prompt, así que una eval cubre ambos. Corre el reflector contra un pool de observaciones que incluyen orientaciones de usuario, convenciones y banderas de excepción, y califica el resultado consolidado contra tres jueces independientes:
+
+1. **Forma narrativa.** ¿Cada fila se lee como una mini-historia de disparador → recorrido → decisión → fundamento, o ha colapsado de nuevo a un titular pelado?
+2. **Identificadores concretos.** ¿Cada fila contiene al menos un ancla buscable con grep (ruta de archivo, número de PR, fecha, etiqueta de versión) que un futuro agente realmente podría consultar?
+3. **Preservación de la orientación del usuario.** ¿La fila todavía lleva la redacción casi textual del usuario, o ha sido lavada hasta convertirse en fraseo genérico?
+
+Un reflector que descarta cualquiera de esas cosas se atrapa antes de que su resultado llegue a un usuario real.
+
+### Controlar a los jueces
+
+Esta es la parte que es fácil pasar por alto. **Un prompt de juez es solo otro prompt.** Si el juez deriva —demasiado estricto, demasiado laxo, engañado por un fraseo particular—, cada eval que depende de él sale silenciosamente mal.
+
+Por eso cada juez tiene su propia eval con fixtures de respuesta conocida: casos positivos hechos a mano que deben pasar, y casos negativos hechos a mano que deben fallar. Un cambio de prompt de juez tiene que mantener ambos conjuntos correctos antes de que corran las evals a nivel de capa. A los calificadores se los califica.
+
+## Por qué esto importa para un compañero de AI con memoria a largo plazo
+
+Constrúyelo sin el grafo y entregas un chatbot con buen recuerdo: recuerda lo que dijiste, repite tu última conversación, encuentra el archivo que mencionaste. Agradable. Olvidable. (La memoria solo empieza a importar cuando el agente también está [siempre activo a través de las sesiones](/blog/how-to-set-up-a-24-7-ai-agent); de lo contrario, no hay nada que acumular.)
+
+Constrúyelo con el grafo y entregas algo distinto en su esencia. El agente llega a la siguiente sesión sabiendo no solo qué se hizo la semana pasada, sino **por qué**: qué opción rechazaste, qué convención fijaste, qué excepción tallaste. Deja de volver a litigar decisiones zanjadas. Empieza a detectar su propia deriva antes que tú. A lo largo de los meses, acumula el tipo de memoria institucional que normalmente queda encerrada dentro de quien lleva más tiempo en la empresa: la diferencia entre un asistente de programación que reinicias cada semana y [un agente de programación que corre en la nube y se queda contigo](/blog/how-to-run-claude-code-in-the-cloud).
+
+Esa es la apuesta. La oportunidad de un billón de dólares en el encuadre de Foundation Capital no es un modelo con más contexto, es un compañero con mejor precedente. Estamos [construyendo hacia lo segundo](/use-cases).
+
+## Preguntas frecuentes
+
+### ¿Qué es la ingeniería de contexto?
+
+La ingeniería de contexto es la práctica de diseñar _lo que ve un agente de AI_ en cada turno: la memoria recuperada, las convenciones del proyecto, las orientaciones del usuario, el precedente. Es la capa que decide qué información pasada vale la pena llevar adelante y con qué forma. Una ventana de contexto más grande es plomería; la ingeniería de contexto es el paso editorial que decide qué fluye a través de ella. Un grafo de contexto es un enfoque dentro de esa disciplina: precedente estructurado, no transcripciones en bruto.
+
+### ¿Qué es la memoria de agente y qué significa realmente la memoria a largo plazo para los agentes de AI?
+
+La memoria de agente es todo lo que un agente de AI persiste a través de turnos o sesiones para no tener que volver a derivar el mismo contexto cada vez. La memoria de corto plazo es la ventana de la conversación actual. La memoria a largo plazo para los agentes de AI es la capa duradera —las convenciones del usuario, las decisiones previas, las excepciones y las anulaciones— que sobrevive a través de las sesiones. La memoria de agente de Duet está estructurada como un grafo de contexto, de modo que lo que sobrevive no es solo el resultado sino el precedente detrás de él.
+
+### ¿Cuál es la diferencia entre un grafo de contexto y un almacén de memoria vectorial?
+
+Un almacén vectorial indexa texto en bruto por similitud semántica. Puede recuperar "cosas relacionadas con auth middleware" pero no puede decirte _por qué_ se eligió el enfoque de middleware sobre los guards por ruta, ni que vetaste explícitamente el enfoque por ruta por sobreingeniería. Un grafo de contexto coloca un rastro de decisión estructurado —alternativas, orientaciones del usuario, convenciones aplicadas, excepciones— encima del (o en lugar del) texto en bruto. El recuerdo vectorial es necesario pero no suficiente.
+
+### ¿Cómo se compara esto con mem0, Letta, la memoria de LangChain o la memoria de Claude?
+
+La mayoría de las bibliotecas dedicadas de memoria de agentes (mem0, Letta, la memoria de LangChain) y las funciones de memoria a nivel de producto (la memoria de Claude, la memoria de ChatGPT) se enfocan en extraer _hechos_ de una conversación y recordarlos después: cosas como "el usuario prefiere TypeScript", "el proyecto despliega a Vercel". Útil, pero sigue siendo principalmente un almacén de hechos. El grafo de contexto de Duet está construido en torno a _decisiones y precedente_: no solo "el usuario prefiere X", sino "el usuario vetó Y en favor de X en esta fecha, por Z, y la excepción es W". Ese grafo es lo que le permite a un compañero de AI dejar de volver a litigar decisiones zanjadas. Los dos enfoques son complementarios: los hechos son necesarios; el precedente es lo que hace que el agente se sienta como si de verdad hubiera estado en la sala contigo.
+
+### ¿Puedo ver las observaciones que Duet está almacenando sobre mi trabajo?
+
+Sí. Viven en un almacén de memoria local dentro de tu propio workspace de Duet, y Duet expone comandos para inspeccionarlas, buscarlas y reflexionar sobre ellas. Nada sale de tu sandbox a menos que lo compartas explícitamente. Los modelos observador y reflector corren a través de tu AI gateway configurado, igual que los turnos de tu agente.
+
+### ¿En qué se diferencia esto de las reglas de proyecto de CLAUDE.md o AGENTS.md?
+
+Los archivos de reglas de proyecto (`CLAUDE.md`, `AGENTS.md`, similares) son las _políticas_ en las que se apoya un agente. Un grafo de contexto es la _jurisprudencia_: las decisiones, excepciones y anulaciones reales que se han acumulado encima de esas políticas. Las dimensiones del grafo incluyen explícitamente "convención o política aplicada", de modo que la jurisprudencia cite la regla, pero la regla sola no alcanza: el valor vive en el precedente.
+
+### ¿Capturar todo esto no hará que el prompt del agente sea enorme?
+
+Ese es exactamente el problema que resuelven las tres capas. El observador escribe todo. El reflector dentro de la sesión compacta dentro de una sesión. El reflector global atomiza a través de las sesiones en filas duraderas que se cargan según la relevancia. El prompt real del agente solo ve la porción del grafo que el turno actual probablemente necesita: ajustada por uso, decaída por frescura y ordenada por ranking.
+
+### ¿Dónde puedo leer el código fuente?
+
+La capa de memoria vive en [`duet-agent`](https://github.com/dzhng/duet-agent) bajo `src/memory/`, y las evals están bajo `evals/`. Los prompts en `src/memory/observational-prompts.ts` son el artefacto que carga el peso: vale la pena leerlos de principio a fin si estás diseñando tu propio sistema de memoria.

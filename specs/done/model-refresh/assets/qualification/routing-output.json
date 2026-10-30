@@ -1,0 +1,68 @@
+{
+  "agentVersion": "0.3.26",
+  "rows": [
+    {
+      "name": "gpt-6-sol",
+      "issues": [
+        {
+          "code": "dangling_reference",
+          "path": "tiers.fixture-provider.routes.general.target.modelName",
+          "message": "Target \"gpt-6-sol\" is neither a virtual model nor a catalog name."
+        },
+        {
+          "code": "dangling_reference",
+          "path": "tiers.fixture-provider.advisor.target.modelName",
+          "message": "Target \"gpt-6-sol\" is neither a virtual model nor a catalog name."
+        }
+      ],
+      "resolved": "gpt-6-sol"
+    },
+    {
+      "name": "sol",
+      "issues": [],
+      "resolved": "openai/gpt-5.6-sol"
+    },
+    {
+      "name": "gpt-6-luna",
+      "issues": [
+        {
+          "code": "dangling_reference",
+          "path": "tiers.fixture-provider.routes.general.target.modelName",
+          "message": "Target \"gpt-6-luna\" is neither a virtual model nor a catalog name."
+        },
+        {
+          "code": "dangling_reference",
+          "path": "tiers.fixture-provider.advisor.target.modelName",
+          "message": "Target \"gpt-6-luna\" is neither a virtual model nor a catalog name."
+        }
+      ],
+      "resolved": "gpt-6-luna"
+    },
+    {
+      "name": "luna",
+      "issues": [],
+      "resolved": "openai/gpt-5.6-luna"
+    },
+    {
+      "name": "opus-5.5",
+      "issues": [
+        {
+          "code": "dangling_reference",
+          "path": "tiers.fixture-provider.routes.general.target.modelName",
+          "message": "Target \"opus-5.5\" is neither a virtual model nor a catalog name."
+        },
+        {
+          "code": "dangling_reference",
+          "path": "tiers.fixture-provider.advisor.target.modelName",
+          "message": "Target \"opus-5.5\" is neither a virtual model nor a catalog name."
+        }
+      ],
+      "resolved": "opus-5.5"
+    },
+    {
+      "name": "opus",
+      "issues": [],
+      "resolved": "anthropic/claude-opus-5"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "status": "verified-registry-distribution",
+  "package": "@duetso/agent@1.0.0",
+  "sourceRevision": "da3779eb8e153a57c6f7e7f4d28ff7c75afd336a",
+  "artifact": {
+    "sha256": "2c41eff13547087d8d9e4ccec4f56442112213ef00bb1c91cc1cba541fed4630",
+    "integrity": "sha512-hvOvJeiEYVvjoUZd7L9yry1ihPkd1ue5KGamytbksNXWGOeInJi4tsj1gj2kmhTXjZ3QUMKrRza8F/NsXlDnuA==",
+    "sha1": "ea094c2c4cd8b78a819b525487ea8305f8f8b0fc",
+    "bytes": 2525030,
+    "entrySha256": "9828385eec4527f97eb01e7db67a9cdaf57041a62412c2dff1d746a46019d8a4",
+    "entryBytes": 13076321
+  },
+  "originalWorkflow": {
+    "runId": 37259953781,
+    "url": "https://github.com/aomni-com/duet/actions/runs/37259953781",
+    "attempt": 1,
+    "conclusion": "failure",
+    "createdAt": "2026-10-05T03:34:12Z",
+    "completedAt": "2026-10-05T03:36:25Z",
+    "receiptAvailable": false,
+    "artifactsCount": 0,
+    "failure": "immediate post-publish npm view @duetso/agent@1.0.0 --json --fetch-retries=0 returned E404 No match found for version 1.0.0",
+    "productionReadinessLog": {
+      "observedAt": "2026-10-05T03:36:19.4186203Z",
+      "apiRevision": "da3779eb8e153a57c6f7e7f4d28ff7c75afd336a",
+      "backendRevision": "da3779eb8e153a57c6f7e7f4d28ff7c75afd336a"
+    }
+  },
+  "publicationEvidence": "exact rebuilt original source equals registry tarball; recovered verification, not an original successful workflow receipt",
+  "platforms": [
+    {
+      "label": "linux",
+      "closure": "/tmp/unified-duet-registry-final-261004/linux/evidence/installed-closure.json",
+      "closureSha256": "c9f65e7a9f5d6b1754168552216240ce1c29bdd76c34818ff83e97fcf69b3695",
+      "native": "/tmp/unified-duet-registry-final-261004/linux/evidence/linux/runtime.json",
+      "journey": "/tmp/unified-duet-registry-final-261004/linux/evidence/linux/journey.json",
+      "smokeExitCode": 0,
+      "x64Execution": "native"
+    },
+    {
+      "label": "arm64",
+      "closure": "/tmp/unified-duet-registry-final-261004/arm64/evidence/installed-closure.json",
+      "closureSha256": "46680b3f2591dbc7b83ac20c2456c012c698067065d86da771a4140e7f291256",
+      "native": "/tmp/unified-duet-registry-final-261004/arm64/evidence/runtime.json",
+      "journey": "/tmp/unified-duet-registry-final-261004/arm64/evidence/journey.json",
+      "smokeExitCode": 0,
+      "x64Execution": "native"
+    },
+    {
+      "label": "x64",
+      "closure": "/tmp/unified-duet-registry-final-261004/x64/evidence/installed-closure.json",
+      "closureSha256": "2d6ed8752216aac20ae6b408613ac517c1385e966d0937e90676d36682448aa7",
+      "native": "/tmp/unified-duet-registry-final-261004/x64/evidence/runtime.json",
+      "journey": "/tmp/unified-duet-registry-final-261004/x64/evidence/journey.json",
+      "smokeExitCode": 0,
+      "x64Execution": "Rosetta on ARM"
+    }
+  ],
+  "productionDeploymentProof": "/tmp/unified-duet-main-apps-final.json",
+  "limitations": [
+    "The original workflow remains failed and has no published receipt. This receipt records verification recovered later, not an original success.",
+    "Registry time for 1.0.0 (03:37:59.520Z) is later than the original workflow end (03:36:25Z); the timestamp discrepancy is unresolved.",
+    "The registry version has no gitHead and publication used --provenance=false; exact reproducibility proves artifact/source equality, not a registry-signed source attestation."
+  ]
+}

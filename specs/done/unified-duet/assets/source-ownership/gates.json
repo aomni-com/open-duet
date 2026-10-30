@@ -1,0 +1,85 @@
+{
+  "scope": "slice01 source ownership plus integrated02\u201304 wire seams",
+  "source": {
+    "cliRpcMemory": {
+      "tests": 124,
+      "assertions": 331
+    },
+    "memoryStoreBuild": {
+      "tests": 1,
+      "assertions": 4
+    },
+    "resume": {
+      "tests": 2,
+      "assertions": 20
+    },
+    "rpcDeadlineCleanup": {
+      "tests": 1,
+      "assertions": 3
+    },
+    "memoryAndRouting": {
+      "tests": 40,
+      "assertions": 60
+    },
+    "benchmarkPackagingAndE2B": {
+      "tests": 20,
+      "assertions": 45
+    }
+  },
+  "consumers": {
+    "gatewayMemory": {
+      "tests": 8,
+      "assertions": 37
+    },
+    "gatewayRouting": {
+      "tests": 8,
+      "assertions": 103
+    },
+    "gatewaySyncAndTunnels": {
+      "tests": 18,
+      "assertions": 58
+    },
+    "workflowFixture": {
+      "tests": 12,
+      "assertions": 31
+    },
+    "modelGateway": {
+      "tests": 64,
+      "assertions": 496
+    },
+    "contractVmScopes": {
+      "tests": 74,
+      "assertions": 174
+    },
+    "contractGateway": {
+      "tests": 5,
+      "assertions": 18
+    },
+    "cleanApiBuild": {
+      "tests": 1,
+      "assertions": 7
+    }
+  },
+  "typesPassed": [
+    "agent (source TypeScript5.9.3)",
+    "duet (source TypeScript5.9.3)",
+    "contract (Pi0.79.10 retained)",
+    "gateway",
+    "api",
+    "model-gateway"
+  ],
+  "workflowArchiveSha256": "b77b40a888f6fd5e581124d2f1bf6fa4e9c0e5b3a3d7cb37b10db183b93011a5",
+  "redControls": [
+    "Moved CLI helper paths failed resume and subprocess cleanup before repair.",
+    "Monorepo constructor failed against standalone source layout before repair.",
+    "Capacity parser accepted omitted Photon before required-asset inventory was shared.",
+    "Clean API build failed with core dist absent before dependency build was added."
+  ],
+  "notRun": [
+    "root closeout suite",
+    "paid evaluation",
+    "live staging journey",
+    "external package install/publication",
+    "fleet migration"
+  ]
+}

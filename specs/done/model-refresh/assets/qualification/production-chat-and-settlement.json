@@ -1,0 +1,54 @@
+{
+  "scope": "user-selected active production workspace",
+  "models": [
+    {
+      "requestedModel": "openai/gpt-6-luna",
+      "tier": null,
+      "status": 200,
+      "model": "openai/gpt-6-luna",
+      "id": "gen_01M3JPE42MPDRGSS8JSH5RQ23K",
+      "generationId": "gen_01M3JPE42MPDRGSS8JSH5RQ23K",
+      "usage": {
+        "input_tokens": 19,
+        "output_tokens": 5,
+        "total_tokens": 24,
+        "input_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "answer": "42"
+    },
+    {
+      "requestedModel": "openai/gpt-6-sol",
+      "tier": "balanced",
+      "status": 200,
+      "model": "openai/gpt-6-sol",
+      "id": "gen_01M3JPE5GC5TBP21FJ566X516R",
+      "generationId": "gen_01M3JPE5GC5TBP21FJ566X516R",
+      "usage": {
+        "input_tokens": 19,
+        "output_tokens": 5,
+        "total_tokens": 24,
+        "input_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "answer": "42"
+    }
+  ],
+  "exitCode": 0,
+  "settlement": {
+    "expectedMicroUsd": 123,
+    "amountMicroUsd": -123,
+    "reference": "ai_generation:gen_01M3JPE5GC5TBP21FJ566X516R"
+  },
+  "ok": true
+}

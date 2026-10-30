@@ -1,0 +1,13 @@
+bun test v1.3.14 (0d9b296a)
+
+specs/unified-duet/assets/live-drill-preparation/adoption-progress.test.ts:
+(pass) settled pre-cut deferral reports its real receipt and saves owned metadata [1.98ms]
+(pass) prepared journal remains observable before the platform has settled [2.39ms]
+(pass) settled recovery crash is retained even when no journal or normal receipt exists [1.86ms]
+(pass) durable journal receipt survives missing platform receipt without claiming settlement [0.39ms]
+(pass) a missing private executable does not erase readable job identity or the other hash [0.64ms]
+
+ 5 pass
+ 0 fail
+ 17 expect() calls
+Ran 5 tests across 1 file. [41.00ms]

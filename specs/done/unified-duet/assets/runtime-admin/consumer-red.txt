@@ -1,0 +1,19 @@
+bun test v1.3.14 (0d9b296a)
+
+spa/routes/internal-admin.test.tsx:
+8387 |         destroy: function (error) {
+8388 |           didFatal = !0;
+8389 |           fatalError = error;
+8390 |         }
+8391 |       });
+8392 |       if (didFatal && fatalError !== abortReason) throw fatalError;
+                                                               ^
+TypeError: undefined is not an object (evaluating 'entries.length')
+      at renderToStringImpl (/Users/synthetic-user/.codex/worktrees/unified-runtime-admin/duet/node_modules/react-dom/cjs/react-dom-server-legacy.browser.development.js:8392:57)
+      at <anonymous> (/Users/synthetic-user/.codex/worktrees/unified-runtime-admin/duet/apps/web/spa/routes/internal-admin.test.tsx:63:18)
+(fail) fleet renders one runtime convergence and the reported releases for each VM [18.75ms]
+
+ 0 pass
+ 2 filtered out
+ 1 fail
+Ran 1 test across 1 file. [209.00ms]

@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Attachment Look — three directions</title>
+    <style>
+      :root {
+        --ink: #1c2333;
+        --sub: #6b7280;
+        --line: #e5e7eb;
+        --bg: #f6f8fb;
+        --card: #ffffff;
+        --accent: #3b5bdb;
+        --danger: #b91c1c;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      body {
+        font:
+          15px/1.55 -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+        padding: 32px 20px 80px;
+      }
+      main {
+        max-width: 880px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 22px;
+        margin-bottom: 4px;
+      }
+      .sub {
+        color: var(--sub);
+        margin-bottom: 28px;
+      }
+      h2 {
+        font-size: 16px;
+        margin: 36px 0 4px;
+      }
+      .why {
+        color: var(--sub);
+        font-size: 13px;
+        margin-bottom: 12px;
+      }
+      .stage {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 22px;
+      }
+      .bubble {
+        max-width: 560px;
+        margin-left: auto;
+        background: #eef2ff;
+        border-radius: 14px;
+        padding: 12px 16px;
+      }
+      .bubble p {
+        margin-bottom: 10px;
+      }
+      .meta {
+        color: var(--sub);
+        font-size: 12px;
+      }
+      .imgthumb {
+        width: 120px;
+        height: 84px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #c7d2fe, #818cf8);
+        position: relative;
+      }
+      .imgthumb span {
+        position: absolute;
+        left: 6px;
+        bottom: 4px;
+        color: #fff;
+        font-size: 11px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+      }
+      /* A: preview cards */
+      .cards {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 6px;
+      }
+      .card {
+        width: 176px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .card .pane {
+        height: 96px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        color: #475569;
+        background: #f8fafc;
+      }
+      .card .pane.pdf {
+        background: #fef2f2;
+        color: #b91c1c;
+        font-weight: 600;
+      }
+      .card .pane.mono {
+        font-family: ui-monospace, monospace;
+        font-size: 9px;
+        padding: 8px;
+        color: #64748b;
+        align-items: flex-start;
+        overflow: hidden;
+      }
+      .card .strip {
+        border-top: 1px solid var(--line);
+        padding: 7px 10px;
+      }
+      .card .strip .n {
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      /* B: compact chips */
+      .chips {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 6px;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 999px;
+        padding: 6px 12px 6px 8px;
+        font-size: 13px;
+      }
+      .glyph {
+        width: 26px;
+        height: 26px;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 9px;
+        font-weight: 700;
+        color: #fff;
+      }
+      .g-pdf {
+        background: #dc2626;
+      }
+      .g-svg {
+        background: #7c3aed;
+      }
+      .g-img {
+        background: #0891b2;
+      }
+      .g-csv {
+        background: #059669;
+      }
+      /* C: list rows */
+      .rows {
+        margin-top: 6px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+        overflow: hidden;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+      }
+      .row + .row {
+        border-top: 1px solid var(--line);
+      }
+      .row .n {
+        font-size: 13px;
+        font-weight: 500;
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      /* composer */
+      .composer {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        padding: 12px 14px;
+        margin-top: 14px;
+      }
+      .composer .ph {
+        color: #9ca3af;
+      }
+      .pending {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+      }
+      .status {
+        font-size: 11px;
+        color: var(--sub);
+      }
+      .status.err {
+        color: var(--danger);
+        font-weight: 600;
+      }
+      .retry {
+        font-size: 11px;
+        color: var(--accent);
+        cursor: pointer;
+        text-decoration: underline;
+      }
+      .pick {
+        display: flex;
+        gap: 8px;
+        margin-top: 14px;
+      }
+      .pick button {
+        font-size: 12px;
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 999px;
+        padding: 4px 12px;
+        cursor: pointer;
+      }
+      .pick button.on {
+        background: var(--ink);
+        color: #fff;
+        border-color: var(--ink);
+      }
+      .folder {
+        font-family: ui-monospace, monospace;
+        font-size: 12.5px;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 10px 12px;
+        margin-top: 8px;
+      }
+      .reply {
+        background: #0f172a;
+        color: #e2e8f0;
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin-top: 40px;
+        font-family: ui-monospace, monospace;
+        font-size: 13px;
+        white-space: pre-wrap;
+      }
+      .reply b {
+        color: #7dd3fc;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>What does an attachment look like in Duet?</h1>
+      <p class="sub">
+        Same fake message every time — "Here are the brand files" + 1 image + logo-primary.svg (48
+        KB) + brand-guidelines.pdf (2.4 MB). Only the design varies. Composer pending-states shown
+        once under direction A (they follow whichever direction wins).
+      </p>
+
+      <h2>A — Preview cards (v1 chat-app parity)</h2>
+      <p class="why">
+        Type-aware thumbnail pane over a meta strip. Rich, heavy, instantly scannable; ~176px per
+        file, wraps into a grid on many files.
+      </p>
+      <div class="stage">
+        <div class="bubble">
+          <p>Here are the brand files</p>
+          <div class="cards">
+            <div class="card">
+              <div class="pane" style="padding: 0">
+                <div class="imgthumb" style="width: 100%; height: 100%; border-radius: 0">
+                  <span>hero-shot.png</span>
+                </div>
+              </div>
+              <div class="strip">
+                <div class="n">hero-shot.png</div>
+                <div class="meta">PNG · 1.8 MB</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="pane mono">&lt;svg viewBox="0 0 120 40"&gt;&lt;path d="M12 8c…"&gt;</div>
+              <div class="strip">
+                <div class="n">logo-primary.svg</div>
+                <div class="meta">SVG · 48 KB</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="pane pdf">PDF</div>
+              <div class="strip">
+                <div class="n">brand-guidelines.pdf</div>
+                <div class="meta">PDF · 2.4 MB</div>
+              </div>
+            </div>
+          </div>
+          <div class="meta" style="text-align: right; margin-top: 8px">11:42 AM</div>
+        </div>
+        <div class="composer">
+          <div class="pending">
+            <div class="card">
+              <div class="pane pdf">PDF</div>
+              <div class="strip">
+                <div class="n">brand-guidelines.pdf</div>
+                <div class="status">Uploading · 42%</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="pane mono">font-license.txt…</div>
+              <div class="strip">
+                <div class="n">font-license.txt</div>
+                <div class="status err">Upload failed · <span class="retry">Retry</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="ph">Continue this session…</div>
+        </div>
+      </div>
+
+      <h2>B — Compact chips</h2>
+      <p class="why">
+        Pill per file: glyph + name + size. Light, quiet, matches Duet's calm density; no content
+        preview. Images could stay as today's thumbnails with only non-images as chips.
+      </p>
+      <div class="stage">
+        <div class="bubble">
+          <p>Here are the brand files</p>
+          <div style="margin-top: 6px">
+            <div class="imgthumb"><span>hero-shot.png</span></div>
+          </div>
+          <div class="chips">
+            <span class="chip"
+              ><span class="glyph g-svg">SVG</span>logo-primary.svg
+              <span class="meta">48 KB</span></span
+            >
+            <span class="chip"
+              ><span class="glyph g-pdf">PDF</span>brand-guidelines.pdf
+              <span class="meta">2.4 MB</span></span
+            >
+          </div>
+          <div class="meta" style="text-align: right; margin-top: 8px">11:42 AM</div>
+        </div>
+      </div>
+
+      <h2>C — Attachment list rows</h2>
+      <p class="why">
+        Email-style: slim full-width rows under the text. Densest for many files, weakest "object"
+        feel, no wrap logic needed.
+      </p>
+      <div class="stage">
+        <div class="bubble">
+          <p>Here are the brand files</p>
+          <div style="margin-top: 6px">
+            <div class="imgthumb"><span>hero-shot.png</span></div>
+          </div>
+          <div class="rows">
+            <div class="row">
+              <span class="glyph g-svg">SVG</span><span class="n">logo-primary.svg</span
+              ><span class="meta">48 KB</span>
+            </div>
+            <div class="row">
+              <span class="glyph g-pdf">PDF</span><span class="n">brand-guidelines.pdf</span
+              ><span class="meta">2.4 MB</span>
+            </div>
+          </div>
+          <div class="meta" style="text-align: right; margin-top: 8px">11:42 AM</div>
+        </div>
+      </div>
+
+      <h2>Folder shape in your Files tab</h2>
+      <p class="why">
+        Where a 3-file message lands inside the agent's folder — this string is what you and the
+        agent will see forever.
+      </p>
+      <div class="folder">
+        1&nbsp;&nbsp;agents/brand-designer/<b>uploads/incoming/2026-08-12-a1b2c3d4/</b>logo-primary.svg
+      </div>
+      <div class="folder">
+        2&nbsp;&nbsp;agents/brand-designer/<b>uploads/2026-08-12/</b>logo-primary.svg
+        <span class="meta">(flat per-day, collisions get "(2)")</span>
+      </div>
+      <div class="folder">
+        3&nbsp;&nbsp;agents/brand-designer/<b>inbox/</b>logo-primary.svg
+        <span class="meta">(flattest; the agent files things out of one inbox)</span>
+      </div>
+
+      <div class="reply">
+        <b>Copy/edit this as your reply:</b>
+
+        bubble look: A / B / C (B = chips; images keep thumbnails) folder shape: 1 / 2 / 3 (1 =
+        per-message batch dir, current spec) context probes — correct anything wrong: - consumers
+        are non-technical end users; folder paths WILL be seen in the Files tab, so names must read
+        human - "done" = brand-designer onboarding accepts logo+font files in chat end-to-end on
+        staging - files people actually send: logos/fonts/PDFs/CSVs, usually &lt; 20MB, rarely &gt;
+        100MB - anything you forgot to mention that a builder would only discover too late?
+      </div>
+    </main>
+  </body>
+</html>

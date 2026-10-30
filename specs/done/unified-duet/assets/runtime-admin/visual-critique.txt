@@ -1,0 +1,11 @@
+Final fresh no-history critique, as delivered by the root release owner
+
+Inspected 16 current images: four full fleet/VM captures, four tight crops, six upper-page context strips, and the actual native mobile runtime-ending full capture/crop.
+
+No high-confidence unintended overlap or clipping in the detailed fleet/VM captures. Workspace/runtime association remains visible at the runtime ending. Complete VM identities wrap across two desktop and three mobile lines.
+
+Medium-confidence concerns retained: mobile initial/end horizontal clipping is abrupt and can resemble a complete identifier, although the scroll instruction helps. The desktop Runtime heading sits at the far right of a long column spanning roughly half the table, weakening quick scan association.
+
+High-confidence evidence limitations, not UI defects: named mobile states extend below the contact-strip frame; desktop montages provide overview context only. No mobile capture shows heartbeat, CPU or memory columns. Static screenshots do not verify scrolling, selection or copy interactions. Separate native-browser measurements prove scroll completion/reset, visible end-state workspace/header geometry and exact 70-byte copy.
+
+Root direct inspection covered the current desktop fleet, mobile runtime ending and mobile VM crop. Root accepts the deliberate complete-identity table, visible scroll instruction and measured native copy/scroll behavior, with these limits. No further UI redesign requested.

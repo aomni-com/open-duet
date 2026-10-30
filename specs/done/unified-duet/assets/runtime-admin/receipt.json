@@ -1,0 +1,170 @@
+{
+  "base": "dbeb2f0e2c998f0e875ceb935bca184ce3b68baf",
+  "borrowedContractOwner": "birth_fence 5826d261b; excluded from UI commit",
+  "borrowedContractSha256": "3fdc1a1bd886b49cd655e2e1636b5e6ebdf002ebff9206ef8062fad913bff621",
+  "runtime": {
+    "bun": "1.3.14",
+    "playwright": "1.61.0",
+    "container": "mcr.microsoft.com/playwright:v1.61.0-jammy"
+  },
+  "sourceSha256": {
+    "apps/web/README.md": "c639133186209351e7801040cdb6b8c77d92a1d53da05e1a8635a553f2fe86a0",
+    "apps/web/components/playground/internal-admin-playground.tsx": "947518c01fb9559dc79ec479607a6dc7ef07dd93048f9cf61d280717051e8e9c",
+    "apps/web/components/playground/spa-fixture.ts": "d0ed5daa5a7f3e6accb7e42986b7df8a63d0a4a76f93ece55e9d0cc1fe5385c7",
+    "apps/web/messages/en/app.json": "55d73c5463ca6fbb65117d8bc13a2f4b10ff0cfdf0bfbef71037b2b1b68d32f2",
+    "apps/web/messages/es-419/app.json": "c58361021cf8b74c7ae850cc59d712e152bb5c3d1673279e4f2c2265963e74f9",
+    "apps/web/spa/api/client.ts": "69f45bce7551b6151720033864b6756fbf4aa638beca10107d3c08387d3ea2fa",
+    "apps/web/spa/routes/internal-admin.test.tsx": "f77a60527aef5ecca54297af13fe9217fd27fdb47e821820d15b004446fe9dfb",
+    "apps/web/spa/routes/internal-admin.tsx": "a61a02050317d44a457271472e9f4672fd158c7e0fe62456ec71c54f548d6494",
+    "apps/web/tests/visual/coverage-ledger.generated.json": "eec3d026d8452f87c66709df9e891dbde7738846f2496561f028cdca495f1a6e",
+    "apps/web/tests/visual/coverage.ts": "acb634e5a2962168bed523d2c94546f032cd95e49d0bc1de35d51cc134244d98",
+    "apps/web/tests/visual/playground.spec.ts": "925b278c75782ad938f5ba7a8d6d673f4ca7b54ca310371057c6605b6a18ce1a",
+    "visual-coverage/index.generated.html": "b113bd24ca9a8446931e107350df22b3d2e27802200c32d2e97c5d9d177e5154",
+    "apps/web/components/playground/runtime-fixture.ts": "44a0f20318328af2308b200e56ad998bf711e55fd4790536f2876fe8fb2ad898"
+  },
+  "baselineSha256": {
+    "apps/web/tests/visual/__screenshots__/desktop/playground.spec.ts/internal-admin-backup-failed.png": "51c4c339c2b5ead44b9cc424176838c5be577fff45171bc7cac2de9dc96a482f",
+    "apps/web/tests/visual/__screenshots__/desktop/playground.spec.ts/internal-admin-backup-pending.png": "42db8ff2c27733a5f798d5f6fbba76043dcd09f41a609e16b51c69195fb61481",
+    "apps/web/tests/visual/__screenshots__/desktop/playground.spec.ts/internal-admin-command.png": "352db48fdb2049214cb58bde09ba71f8371855e128df6edd1d71a80bce9eac86",
+    "apps/web/tests/visual/__screenshots__/desktop/playground.spec.ts/internal-admin-create-user.png": "eca138d6d9b12864cb7928e00f0c4c0bac0e269165e3f039714c72fd07033bd6",
+    "apps/web/tests/visual/__screenshots__/desktop/playground.spec.ts/internal-admin-error.png": "c9151197eade5e0165773f5b47dec9727a7aea4a67321130d20d4417ec95d549",
+    "apps/web/tests/visual/__screenshots__/desktop/playground.spec.ts/internal-admin-file.png": "e7138b6b87cc9aae775f292889cea591271a3a8e6d26bb91a8d7621929cb9c1a",
+    "apps/web/tests/visual/__screenshots__/desktop/playground.spec.ts/internal-admin-fleet.png": "62be4e10f8ceb7ac6e1dca343599baee290666cd0e29ee0edd27dfab72f12cc8",
+    "apps/web/tests/visual/__screenshots__/desktop/playground.spec.ts/internal-admin-loading.png": "c48b6b665e67585be683def90e0c8be452444b435237f88e6944d5caa1918d41",
+    "apps/web/tests/visual/__screenshots__/desktop/playground.spec.ts/internal-admin-logs.png": "7d94faed4c60ee142942f999fc4d1dbb3a27d798fe614aa3c936e5bb20fc32fe",
+    "apps/web/tests/visual/__screenshots__/desktop/playground.spec.ts/internal-admin-search.png": "953132977e214743f9be9c7bcd6fb2e58d3d03d4d3bc4b57464bd08d6db70a03",
+    "apps/web/tests/visual/__screenshots__/desktop/playground.spec.ts/internal-admin-vm.png": "1ac149aad5ea246a8ba9937f6dab0afa5f5296589b35c3079f4698129a00442b",
+    "apps/web/tests/visual/__screenshots__/desktop/playground.spec.ts/internal-admin.png": "953132977e214743f9be9c7bcd6fb2e58d3d03d4d3bc4b57464bd08d6db70a03",
+    "apps/web/tests/visual/__screenshots__/desktop/playground.spec.ts/spa-shell-account-menu.png": "8b4f7af1104a86b5850031dcaa410205cf03b9e4befc92115e931e49b712d79f",
+    "apps/web/tests/visual/__screenshots__/desktop/playground.spec.ts/spa-shell-internal-admin.png": "3ba2ed9bf1ecd23456e611f9474e75160c8aaad1409ede3dc608278848ee665b",
+    "apps/web/tests/visual/__screenshots__/desktop/playground.spec.ts/spa-shell-workspace-switcher.png": "cb9fa335df3642271e2f54d85373119bd3f2919b49b7ae5d328bcc4d02d0c042",
+    "apps/web/tests/visual/__screenshots__/mobile/playground.spec.ts/internal-admin-backup-failed.png": "5894b2abf7097239f01028fe4e14d9e34d40ee4c7e155f302366c30084c30a4e",
+    "apps/web/tests/visual/__screenshots__/mobile/playground.spec.ts/internal-admin-backup-pending.png": "6af3ee23b1941c6b77142cf857c264ea914b9aaacb406eadcb7cd87fc764cc55",
+    "apps/web/tests/visual/__screenshots__/mobile/playground.spec.ts/internal-admin-command.png": "a55ddeaba60be4f0698fd28d9c173b4cad4746c919af9bca1620e40d932798bc",
+    "apps/web/tests/visual/__screenshots__/mobile/playground.spec.ts/internal-admin-create-user.png": "6fd5ed5007102f76c67d95a61e83da7c7039f851f897d0315270c34eeb7e266f",
+    "apps/web/tests/visual/__screenshots__/mobile/playground.spec.ts/internal-admin-error.png": "cfa2119d6a65daa34ed5572caa7239d4763001b391109d4f52a044bf8b5f200b",
+    "apps/web/tests/visual/__screenshots__/mobile/playground.spec.ts/internal-admin-file.png": "f3abbec0b21ce8e25f98c71aeb575b81dc7987ede07e471e4ccb01f8b0645c92",
+    "apps/web/tests/visual/__screenshots__/mobile/playground.spec.ts/internal-admin-fleet.png": "d1393191097f87714b6b698cce20d6ab6a9a7da78c5d4e754868763a496fe666",
+    "apps/web/tests/visual/__screenshots__/mobile/playground.spec.ts/internal-admin-loading.png": "7b7b18688d32ba4667851e1a5d008943015242c3e62b090aacbf28c641b6b0d7",
+    "apps/web/tests/visual/__screenshots__/mobile/playground.spec.ts/internal-admin-logs.png": "f77fc468f6a6e616085cdc02cfd102f09084ffa2144f4648116642528b752bec",
+    "apps/web/tests/visual/__screenshots__/mobile/playground.spec.ts/internal-admin-search.png": "19c2a140e88c0c689b590fe76fa73dbf9057737456c91c8621b04e202a0ac2ad",
+    "apps/web/tests/visual/__screenshots__/mobile/playground.spec.ts/internal-admin-vm.png": "f9e9582357c3247933855655b6b648c3931cd84bb785422aef0572709bdbde2b",
+    "apps/web/tests/visual/__screenshots__/mobile/playground.spec.ts/internal-admin.png": "19c2a140e88c0c689b590fe76fa73dbf9057737456c91c8621b04e202a0ac2ad",
+    "apps/web/tests/visual/__screenshots__/mobile/playground.spec.ts/spa-shell-account-menu.png": "4133f3554f1a0729363482839c05870ecb82fa64552ff9c5d79ea430cb3c385c",
+    "apps/web/tests/visual/__screenshots__/mobile/playground.spec.ts/spa-shell-internal-admin.png": "a4ee10300bb807ded95113b9eed9db4317ae6e612e87c0e839e7d5e76e66fbad"
+  },
+  "evidencePngSha256": {
+    "context-desktop-0.png": "455eb62aa66390e2f22894f0ddaf8cdd893bf2c91e62fbf4a830dad70c46fcf1",
+    "context-desktop-1.png": "b4cdce5d4d7cdbac5e10d19d95984f891604896e20af16df75c28599cee37bc1",
+    "context-desktop-2.png": "45b88ac019ccf03d23ccdd0e45f1d2d97d6a808f2763765f4013b177f121150b",
+    "context-mobile-0.png": "f98359bdb05d501742dd10372096d32ef20347e14bcc2eae3a2feadcb4c5412e",
+    "context-mobile-1.png": "e4362852534376f7718c09869e4cf6b3859074f107b53f51a43d5a4aae14e932",
+    "context-mobile-2.png": "a8970b4ee9c1cdf75e9fed4208a18ab0b575cecca65c0486274978b5da3168ba",
+    "fleet-mobile-runtime-end-before.png": "c5f6624fb907b70503d920daa5746741b46d3a6d567c1b8def376d49ab66a4a5",
+    "fleet-mobile-runtime-end-tight-2x.png": "10781f4146ed493c8918e7784d8732d981edace8cd28d3cf31030e56b9c9a9c6",
+    "fleet-mobile-runtime-end.png": "8f7d2969010e0608ce4fc55b28aca09eca3ce5db5a2346bc55cbbf8a42ed2cc2",
+    "internal-admin-fleet-desktop-tight-2x.png": "132fad57d249f73d811f07a92b792a88a174186553b32917802f179592aada61",
+    "internal-admin-fleet-desktop.png": "62be4e10f8ceb7ac6e1dca343599baee290666cd0e29ee0edd27dfab72f12cc8",
+    "internal-admin-fleet-mobile-tight-2x.png": "da8699f5097a18b8d96ef6d439b081e302b435a4b3d88f147bb26f8585cb57cd",
+    "internal-admin-fleet-mobile.png": "d1393191097f87714b6b698cce20d6ab6a9a7da78c5d4e754868763a496fe666",
+    "internal-admin-vm-desktop-tight-2x.png": "610d5a5ad9e1efffd484ffb18710d60bb4178204dfa9837f20ed7329ea0afa49",
+    "internal-admin-vm-desktop.png": "1ac149aad5ea246a8ba9937f6dab0afa5f5296589b35c3079f4698129a00442b",
+    "internal-admin-vm-mobile-tight-2x.png": "0e086b272fe4df34ccaf65a8034cfb1d36d5df020593f5fad8286df3306d0c8f",
+    "internal-admin-vm-mobile.png": "f9e9582357c3247933855655b6b648c3931cd84bb785422aef0572709bdbde2b",
+    "runtime-header-end-before.png": "8ce4d9215719655c896264d5702e2645a3e4f7a6aa4b2df67a2b361b82a27666"
+  },
+  "gates": {
+    "unchangedVisual": 18,
+    "finalNormalVisual": 18,
+    "focusedTests": 54,
+    "focusedAssertions": 149,
+    "priorOwningWebTests": 1932,
+    "priorOwningWebAssertions": 6365,
+    "priorSuiteTiming": "before final presentation changes",
+    "types": true,
+    "lint": true,
+    "boundaries": true,
+    "visualCoverage": 716,
+    "ownerUnion": true,
+    "buildOutput": true
+  },
+  "review": "No actionable interaction, overlap, or tracer-reliability defects found in the scoped two-file delta. Source hashes match the receipts, and inspected captures support workspace association and Runtime heading visibility. The 18 passing checks and exact70 copy remain receipt evidence; no independent browser rerun or fresh unprimed critique was performed.",
+  "visualAcceptance": "Root accepted after final fresh no-history 16-image critique and direct desktop fleet/mobile ending/mobile VM inspection",
+  "liveWrites": false,
+  "rolloutHold": "Parent release owner controls integration and deployment; no live writes in this lane.",
+  "producerTallyFollowup": "birth_fence 1ccc4f1f5; excludes unreported build identities, preserves unknown rows",
+  "interaction": {
+    "atEnd": 40,
+    "finalLeft": 0,
+    "atRuntimeEnd": {
+      "left": 360,
+      "width": 314,
+      "scrollWidth": 921
+    },
+    "namesAtEnd": [
+      {
+        "name": "dan-test",
+        "visible": true
+      },
+      {
+        "name": "jamar",
+        "visible": true
+      },
+      {
+        "name": "acme",
+        "visible": true
+      },
+      {
+        "name": "newco",
+        "visible": true
+      }
+    ],
+    "headerAtRuntimeEnd": true,
+    "nativeCopyExact": true,
+    "copiedBytes": 70
+  },
+  "reviewLogSha256": "1bc1e81278589ad61808139e44ce6d40170a74d36a245cf9e4c6aeb066ab4eb3",
+  "evidenceTextSha256": {
+    "configured-review.txt": "4825db47b8906fe7a2ed8dda04de2e6b3b032b26bc30c78a9dc3b4986930b573",
+    "consumer-red.txt": "30062546858278d3173211f7c1980933be35cdab2556268ef3ab5e479095fe32",
+    "count-green.txt": "0302c33d27faa4903b159b6b9c4e258b5016b6ec4ec93d130ad2d8111f0128ce",
+    "cpu-red.txt": "cb4439abbd61e6d9413821fee5aec77ff676e998b2d7ce9e5c54c2e297d5aa36",
+    "final-scoped-review.txt": "1d811ad5553d82c2b3bb71495709aa462a1e4109eba2e38cdde12dcdd56656bd",
+    "focused-gate.txt": "0db638e19202a7c8620ad9e09382ba04fe26cda57d0f793db5ad4d85f3a85efb",
+    "identity-truncation-red.txt": "f77580f6a7a27e2f6750056e5fd1a387ce62fbcdf53a739129461a881819354f",
+    "identity-width-red.txt": "3643f0e224547b530f194fd9b75c427678514eba9f095c5f4f9233358d5feba3",
+    "prior-web-gate.txt": "58e15995f7d339dbef2aebf8a97a549304ecd2e04dfe31844f0e7e7bf377f326",
+    "runtime-header-red.txt": "df1d2398b28671994bd4b7578a6b3a677f47ad9aede4e3136c59eb4ac18e7b06",
+    "scroll-red.txt": "92ba82b05f59bc974a2cc7b8d12447a645e475f6b90ef4f0ac45cbb0d4e9a89d",
+    "visual-critique.txt": "f9920470ddc95fef9f6a6a1da6d86cd36bcc3ea45943facb4b6eaeca79fc8feb",
+    "visual-gate.txt": "7c5c5d55d6683ce73307a8b74f1c764b37f51fa3ab3742504837eaf88286ffcf",
+    "workspace-association-red.txt": "57d410c26f5b824bd70f79309d0f6b856c3701c0ba3f848bc02ac5af708ff085"
+  },
+  "finalScopedReviewLogSha256": "660b0f8219e71ba6c1f2d7d8b7f876ae5d47f405c6ab379310d8a4c94a000287",
+  "visualLimits": [
+    "Mobile heartbeat/CPU/memory columns have not been visually captured",
+    "Context strips show upper-page overview only, not full named states or page endings",
+    "Static screenshots do not prove interactions; separate native probe owns scroll/copy claims"
+  ],
+  "visualMediumConcerns": [
+    "Abrupt mobile horizontal clipping can resemble a complete identifier despite the scroll cue",
+    "Desktop right-edge Runtime heading and long column reduce quick scan association"
+  ],
+  "rawEvidenceTextSha256": {
+    "configured-review.txt": "4825db47b8906fe7a2ed8dda04de2e6b3b032b26bc30c78a9dc3b4986930b573",
+    "consumer-red.txt": "30062546858278d3173211f7c1980933be35cdab2556268ef3ab5e479095fe32",
+    "count-green.txt": "0302c33d27faa4903b159b6b9c4e258b5016b6ec4ec93d130ad2d8111f0128ce",
+    "cpu-red.txt": "d7e3289b0c72efde762c70b0ff8a135637d7caa532688638d52d26ebdbb915a3",
+    "final-scoped-review.txt": "1d811ad5553d82c2b3bb71495709aa462a1e4109eba2e38cdde12dcdd56656bd",
+    "focused-gate.txt": "0db638e19202a7c8620ad9e09382ba04fe26cda57d0f793db5ad4d85f3a85efb",
+    "identity-truncation-red.txt": "c134c9a0a0b300d0d97ccca67618a059d28889023f002c43a34adae20a4e85de",
+    "identity-width-red.txt": "c6d95719d152c68d01f3fcba8d8a447c5eff644a727253b2d484d804b3715371",
+    "prior-web-gate.txt": "58e15995f7d339dbef2aebf8a97a549304ecd2e04dfe31844f0e7e7bf377f326",
+    "runtime-header-red.txt": "56b0f2a16aab0f6e80c285b0c932f7b3db96f80a3db1cb97c8b95b6c9f54bea7",
+    "scroll-red.txt": "274d9b01b63295db5d0acbf6cefe90282ac94fc3c6a638a63dc1512edb4a7d35",
+    "visual-critique.txt": "f9920470ddc95fef9f6a6a1da6d86cd36bcc3ea45943facb4b6eaeca79fc8feb",
+    "visual-gate.txt": "60976825c97a83121daa8f7dc83c000e5acc04100344c59a1a963430fb87dcc7",
+    "workspace-association-red.txt": "dd61e41a01ef8d2a54acd1874629a30936768d9a47eb870953741c68600603df"
+  },
+  "evidenceTextNormalization": "Archived text logs omit trailing whitespace; scratch run logs retain original bytes."
+}

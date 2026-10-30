@@ -1,0 +1,58 @@
+{/* DOCS-FIRST DRAFT (slice 20), revision 2 — edited after the unprimed
+    review (findings + resolutions recorded in
+    specs/file-attribution/slices/20-sync-credential.md). Full revised text
+    of apps/docs/app/device-flow/page.mdx adding the sync-device grant
+    path. Lands with the slice-20 implementation in the same diff; the
+    grant request's wire shape (including the device-name field) stays
+    owned by the endpoint reference panel below. */}
+
+import { EndpointReference } from '../../components/endpoint-reference'
+
+export const metadata = {
+  title: 'Device flow',
+  description: 'Authorize a terminal or device without embedding a reusable Duet credential.',
+  alternates: { canonical: '/device-flow/' },
+}
+
+<p className="eyebrow">Authorization</p>
+
+# Approval happens where the user is signed in
+
+Device flow lets a command-line tool request workspace scopes, show the user a short verification
+code, and poll for the result while the user approves or denies the request in a trusted browser.
+The tool never receives the user's web credentials.
+
+## Keep the request narrow
+
+Choose one workspace and only the capabilities the tool needs. Display the requested scopes next to
+the verification code so the user can compare the terminal request with the approval screen. The
+one grant that is deliberately not workspace-narrow is a sync device, below — narrow there means
+files-only, not one workspace.
+
+## Sync devices use the same flow
+
+`duetfs login --sync` requests a [sync-device grant](/api-keys) through the same code-and-poll
+sequence. The scopes are the user-wide pair `user:files:read` and `user:files:write` instead of a
+workspace pick, and the request carries a device name — asserted by the requesting tool, not
+verified — so the approval screen and the web device list can say which machine is asking. The
+browser approval is the sole gate on issuing a user-wide grant, which is why the screen names the
+breadth plainly: file read and write on all your workspaces from that named device, never agent
+execution or administration. Read it the same way you read a workspace request: a tool asking for
+a sync grant that is not a sync tool deserves a denial.
+
+The issued credential is the device identity from then on — a new approval mints a new device.
+Approve the flow once per machine rather than copying a key between machines, so that per-device
+revocation and per-device activity attribution stay meaningful.
+
+## Poll politely
+
+Treat pending, approved, denied, and expired as distinct states. Honor the declared polling interval
+and rate-limit response, stop on denial or expiry, and store an issued key using the operating
+system's credential storage.
+
+## Codes are temporary
+
+Verification codes are short-lived correlation values, not credentials. Do not log the resulting
+API key, echo it back to a browser, or reuse a code after it reaches a terminal state.
+
+<EndpointReference category="device" />

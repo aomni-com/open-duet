@@ -1,0 +1,56 @@
+{
+  "environment": "staging",
+  "identity": {
+    "revision": "7b3404fbe0da1627b7a7f82f0b49d15f040a648f",
+    "schema": 1
+  },
+  "observedAt": "2026-10-04T17:53:40.724Z",
+  "keysByKind": {
+    "system_vm": 1072,
+    "impersonation": 628,
+    "browser_session": 680,
+    "app": 2112,
+    "user": 52
+  },
+  "humanCount": 52,
+  "peerFieldsByKind": {},
+  "humanManagedOnlyFieldCount": 0,
+  "humanLegacyGrantCount": 0,
+  "userIdentitySha256": "d218cf0582b19185a9d744c48811df2ce7df02e9d84bc146850eb24eb1c4ca47",
+  "legacyDeviceCodeCount": 0,
+  "deviceCodeCount": 14,
+  "workspaceCount": 602,
+  "workspaceLegacyRuntimeCount": 0,
+  "originalHumanIdentitiesPreserved": 52,
+  "originalUserIdentitySha256": "d218cf0582b19185a9d744c48811df2ce7df02e9d84bc146850eb24eb1c4ca47",
+  "completePaginatedCensus": true,
+  "migrations": [
+    {
+      "cursor": null,
+      "isDone": true,
+      "latestEnd": 1791136320769,
+      "latestStart": 1791136317929,
+      "name": "migrations:migrateWorkspaceRuntimeIdentity041026",
+      "processed": 602,
+      "state": "success"
+    },
+    {
+      "cursor": null,
+      "isDone": true,
+      "latestEnd": 1791136317670,
+      "latestStart": 1791136317670,
+      "name": "migrations:expireLegacyDeviceCodes031026",
+      "processed": 14,
+      "state": "success"
+    },
+    {
+      "cursor": null,
+      "isDone": true,
+      "latestEnd": 1791136317422,
+      "latestStart": 1791136305089,
+      "name": "migrations:migrateHumanIdentityKeys031026",
+      "processed": 4544,
+      "state": "success"
+    }
+  ]
+}

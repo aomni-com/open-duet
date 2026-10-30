@@ -1,0 +1,80 @@
+{
+  "status": "prepared-awaiting-final-registry-receipt",
+  "observationsOnly": true,
+  "reusableProofOwner": "../final-candidate/README.md",
+  "earlierProofBounds": {
+    "sourceBase": "0964a6cf1",
+    "tarballSha256": "806121b3a22f827678d6ab237860c86950ddb646b35c04e6abed1e65b502264f",
+    "finalSourceRegistryAcceptance": false
+  },
+  "resources": {
+    "linuxImage": {
+      "id": "sha256:9074d8e019c4b0a8e9ab64647a1b826067dbcb2d8351a8aa879d80e7c946711b",
+      "available": true,
+      "arch": "amd64"
+    },
+    "macArm": {
+      "bun": "1.3.14",
+      "arch": "arm64",
+      "platform": "darwin",
+      "node": "24.14.0",
+      "npm": "11.11.1"
+    },
+    "macX64": {
+      "bunFile": "/tmp/unified-public-pack/bun-darwin-x64/bun-darwin-x64-baseline/bun",
+      "bunSha256": "ea2f223e94bb2f4bf3050895113c3cf346438f6fa0501c8532284e063f72f7a0",
+      "version": "1.3.14",
+      "observedArch": "x64",
+      "platform": "darwin",
+      "limit": "Rosetta on ARM; known AVX warning; no physical Intel Mac claim"
+    },
+    "npmNativeSelection": "Installed npm11 definitions support --cpu and --os native-module override"
+  },
+  "blockingInputs": [
+    "Final public source SHA and repo publisher receipt binding registry @duetso/agent@1.0.0 dist.integrity to validated packed artifact",
+    "Matching final production API/backend SHA readiness for publisher",
+    "Fresh cold registry installation and existing native/composed probes on Linux amd64, Mac ARM and Rosetta x64",
+    "Registry-confirmed duetfs deprecation after replacement publication"
+  ],
+  "publisherOwner": {
+    "workflow": ".github/workflows/public-cli-release.yml",
+    "script": "packages/duet/scripts/release-public-cli.ts",
+    "receipt": "packages/duet/dist/public-release/receipt.json",
+    "existingCheck": "Validates registry integrity then fresh install/version; richer platform acceptance remains separate"
+  },
+  "coldInstallTemplate": {
+    "environment": "env -i PATH=<appropriate Node/npm path> HOME=<new scratch home> NPM_CONFIG_CACHE=<new scratch cache> NPM_CONFIG_USERCONFIG=<new empty scratch npmrc>",
+    "argv": [
+      "npm",
+      "install",
+      "--prefix",
+      "<new scratch install>",
+      "--registry=https://registry.npmjs.org",
+      "--no-audit",
+      "--no-fund",
+      "--ignore-scripts",
+      "--include=optional",
+      "--os=<linux|darwin>",
+      "--cpu=<x64|arm64>",
+      "@duetso/agent@1.0.0"
+    ],
+    "identityChecks": [
+      "npm view exact version dist.integrity/shasum; compare publisher receipt",
+      "Installed package name/version/bin, entry SHA and dependency platform selection",
+      "Reject duetfs alias/private workspace imports; hash evidence before probes"
+    ],
+    "linuxProbe": "bash specs/unified-duet/assets/public-distribution/final-candidate/verify-linux.sh <checkout> <evidence-dir> sha256:9074d8e019c4b0a8e9ab64647a1b826067dbcb2d8351a8aa879d80e7c946711b <cold-install-root>",
+    "macProbeOwners": [
+      "final-candidate/probe.ts installed-entry evidence-dir (scratch HTTP+launchctl, real Syncthing)",
+      "assets/packaging/probe.ts with PROBE_COMMAND=[/usr/bin/env,DUET_NO_AUTO_UPGRADE=1,exactBun,installedEntry] and PROBE_EVIDENCE=scratch evidence",
+      "public-oauth-preload.ts with scratch HOME and DUET_NO_AUTO_UPGRADE=1, --no-install",
+      "probe-mac-tui.py exactBun installedEntry scratch evidence; creates private HOME/PTY internally"
+    ]
+  },
+  "limits": [
+    "No registry reads/writes performed by this preflight",
+    "No package installation performed",
+    "No real HOME config/service changes",
+    "No final publication/native acceptance claimed"
+  ]
+}

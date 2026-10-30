@@ -1,0 +1,7 @@
+{
+  "before": "fleet-mobile-runtime-end-before.png",
+  "after": "fleet-mobile-runtime-end.png",
+  "sameSize": true,
+  "diffRatio32": 0.003978146592291624,
+  "mae": 0.45212450933131326
+}

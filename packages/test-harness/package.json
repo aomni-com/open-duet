@@ -1,0 +1,39 @@
+{
+  "name": "@repo/test-harness",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./official-agent-workspace": "./src/official-agent-workspace.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "demo:60s": "bun scripts/demo-60s.ts",
+    "e2e:onboarding:local": "bun scripts/local-onboarding-e2e.ts",
+    "live:staging": "bun scripts/staging-live.ts",
+    "live:service-catalog": "bun scripts/service-catalog-staging.ts",
+    "verify:release": "bun scripts/verify-release-deployment.ts",
+    "lint": "oxlint",
+    "test": "bun test --parallel=1 --timeout 60000 src"
+  },
+  "dependencies": {
+    "@composio/core": "0.18.1",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@repo/contract": "*",
+    "@repo/exe": "*",
+    "@repo/fake-oauth-issuer": "*",
+    "@repo/official-agents-seed": "*",
+    "agentmail": "^0.0.57",
+    "convex": "^1.42.1",
+    "jszip": "^3.10.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.0",
+    "@repo/typescript-config": "*",
+    "@types/bun": "catalog:",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "@repo/agent": "workspace:*"
+  }
+}

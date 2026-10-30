@@ -1,0 +1,44 @@
+[
+  {
+    "name": "desktop-collapsed",
+    "width": 1440,
+    "height": 900,
+    "pixelsChanged": 894,
+    "ratio": 0.0006898148148148148
+  },
+  {
+    "name": "desktop-expanded",
+    "width": 1440,
+    "height": 1338,
+    "pixelsChanged": 677,
+    "ratio": 0.0003513743564191995
+  },
+  {
+    "name": "desktop-image",
+    "width": 1440,
+    "height": 1548,
+    "pixelsChanged": 677,
+    "ratio": 0.0003037072925638817
+  },
+  {
+    "name": "mobile-collapsed",
+    "width": 390,
+    "height": 896,
+    "pixelsChanged": 402,
+    "ratio": 0.001150412087912088
+  },
+  {
+    "name": "mobile-expanded",
+    "width": 390,
+    "height": 1476,
+    "pixelsChanged": 345,
+    "ratio": 0.0005993329164060871
+  },
+  {
+    "name": "mobile-image",
+    "width": 390,
+    "height": 1652,
+    "pixelsChanged": 345,
+    "ratio": 0.0005354814676848575
+  }
+]

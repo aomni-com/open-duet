@@ -1,0 +1,7 @@
+# First ordinary production release
+
+The [receipt](receipt.json) binds the actual API/backend revision and both immutable and canonical artifact streams to the installed fleet. Each original VM certified the complete ordinary runtime and retained the verified transition release as previous; OS boots and independent background processes stayed intact. Fresh AppSupervisor readiness and TCP sanity passed across the managed apps after gateway restarts.
+
+Normal control-plane polling can be quiet for five minutes. Existing roster refresh requests fetched real sync responses promptly while retaining the updater's idle-admission gate and normal boot requirements. No live agent process was signaled to advance the release.
+
+The existing migration component completed all three row migrations. A full settled census verifies zero legacy human/device/workspace fields and preserves every original human credential identity. An earlier census while the final batch was still running observed one remaining legacy human row; it is retained as an intermediate observation, not final acceptance. The complete cutoff census contains no accepted births or billing changes. The final strict release remains pending. Keep recovery copies until both environments retain two actually certified ordinary releases. The obsolete-bootstrap census records each VM's actual bytes: different historical bootstrap hashes are deliberate observations, not a single inferred fleet hash.

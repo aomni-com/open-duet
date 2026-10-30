@@ -1,0 +1,28 @@
+{
+  "marker": "SUBS-IMPL-04",
+  "capturedAt": "2026-07-17",
+  "apiVersion": "2026-02-25.clover",
+  "mode": "test",
+  "requestContract": {
+    "products": "one Duet product with Starter, Pro, and Max monthly prices",
+    "allowedUpdates": ["price"],
+    "prorationBehavior": "always_invoice",
+    "scheduleAtPeriodEnd": ["decreasing_item_amount"],
+    "cancelMode": "at_period_end",
+    "termsOfServiceUrl": "https://service.example.invalid/terms",
+    "privacyPolicyUrl": "https://service.example.invalid/privacy-policy"
+  },
+  "result": {
+    "status": 400,
+    "type": "invalid_request_error",
+    "param": "features[subscription_update][products]",
+    "message": "For each product, its price must have unique billing intervals.",
+    "objectsCreatedBeforeRejection": ["product", "starterPrice", "proPrice", "maxPrice"],
+    "portalConfigurationCreated": false
+  },
+  "verdict": {
+    "d1Expressible": false,
+    "reason": "The binding one-product, three-monthly-price catalog is rejected by Stripe Billing Portal.",
+    "fallback": "Use the first-party plan-change seam from draft-c-seam-quality.md; keep period-end cancellation in Portal."
+  }
+}

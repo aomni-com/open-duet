@@ -1,0 +1,31 @@
+{
+  "profile": "existing-full",
+  "passed": true,
+  "checks": {
+    "discoveredInventory": true,
+    "identityPreserved": true,
+    "servicesDeclared": true,
+    "exportedThroughWorkspaceAuthority": true,
+    "configuredBeforeDeploy": true,
+    "intendedHostEnvironment": true,
+    "deployedSourceExecuted": true,
+    "staticTrackingPage": true,
+    "noTranscriptDisclosure": true,
+    "noPersistedCredentials": true,
+    "boundedIssuance": true,
+    "fullCapacityHandled": true,
+    "activeCredentialPreserved": true
+  },
+  "receiptCount": 24,
+  "safeDeployment": {
+    "at": 1791239410235,
+    "operation": "host.deploy",
+    "projectId": "project-eval",
+    "environment": "production",
+    "credentialId": "export-1",
+    "origin": "http://192.0.2.1:54275",
+    "entry": "api/index.js",
+    "configurationComplete": true
+  },
+  "leakedFiles": []
+}

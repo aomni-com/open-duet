@@ -1,0 +1,114 @@
+{
+  "startedAt": 1790565191735,
+  "ephemeralExpiresAt": 1790577989760,
+  "balanceBeforeMicroUsd": 25351430,
+  "manifest": {
+    "version": "0.0.0+ec2b3d8e8e09",
+    "agentVersion": "0.3.29"
+  },
+  "healthBefore": {
+    "agentVersion": "0.3.28",
+    "gatewayVersion": "0.0.0+ec2b3d8e8e09"
+  },
+  "savedTier": "openai-max",
+  "historyBefore": [
+    {
+      "seq": 1,
+      "sha256": "843f072c76e961cb25bfa5162ab5117eef7a23605daabddf1575e4fda30dda89"
+    },
+    {
+      "seq": 2,
+      "sha256": "e3af9ad1da851fa10949180ce1dc80501ab9d6dea5b63d84aba476fa176bf656"
+    },
+    {
+      "seq": 3,
+      "sha256": "e431e5d137b7871dcf3187aee7a3143c8607490b96b460a3964e6c0d38cdc3f0"
+    },
+    {
+      "seq": 4,
+      "sha256": "16bc55c29427fd185536e97989877eb9a0b9df2cef2067602ea8e249dab43993"
+    },
+    {
+      "seq": 5,
+      "sha256": "3b7d8096b40fb6f7598ae7e1f0cf5f380e8b3ef300a93c3f84431b956fea384c"
+    },
+    {
+      "seq": 6,
+      "sha256": "9bdc0ae99311e3a3e6ad41692e0b1dd5a97d6c89faef6b944ef422cbeb60ccf2"
+    },
+    {
+      "seq": 7,
+      "sha256": "af30659bd898b1a6e7de35b01b7bb9612df5e15a7e44f5a8634795e4cf800441"
+    },
+    {
+      "seq": 8,
+      "sha256": "910a5ac84314241fc6b3598101dcd141e00ab1bc4b96ea2b55e08f6a563e2317"
+    },
+    {
+      "seq": 9,
+      "sha256": "2d0140114c9ca9f173e27f4696fd87dab74bcf3ee68cb0d27a870884b770722d"
+    },
+    {
+      "seq": 10,
+      "sha256": "002c93fca3ac6b8debb748b092dcb12b1599dcf6e493065cc00ea238d3bbf3e2"
+    },
+    {
+      "seq": 11,
+      "sha256": "7515fbb4735bdaac0a09f409608b9a34cdb96f2e2c0b411faa2ff74cd0cba27b"
+    },
+    {
+      "seq": 12,
+      "sha256": "9f410accc9b73f979fd0dc36b68cd3b15fd1f5824a7dc7943be71273745b7d3a"
+    },
+    {
+      "seq": 13,
+      "sha256": "ef512dfada9f0a98c8dc092730cb61b9cdf98bda13b0f31f085da08d0f01c44e"
+    }
+  ],
+  "healthAfter": {
+    "agentVersion": "0.3.29",
+    "gatewayVersion": "0.0.0+ec2b3d8e8e09"
+  },
+  "preservedHistoryRows": 13,
+  "historyRows": 17,
+  "cursor": 17,
+  "billing": {
+    "execution": [
+      {
+        "id": "md70xb7hj7zwk1n7jh2kg10fmd8f8bbn",
+        "upstreamGenerationId": "gen_01M3K019XS8DXV02RA7BET42KW",
+        "model": "openai/gpt-6-sol",
+        "tier": "openai-max",
+        "usage": {
+          "uncachedInputTokens": 22210,
+          "cachedInputTokens": 0,
+          "outputTokens": 7
+        },
+        "billedCostMicroUsd": 222310,
+        "debitMicroUsd": -222310
+      }
+    ],
+    "support": [
+      {
+        "id": "md73gr424rrkkz7ptdeqszg9z58f8zdf",
+        "model": "google/gemini-embedding-2",
+        "tier": "openai-max",
+        "status": "settled"
+      },
+      {
+        "id": "md742yaymke8d8n540pfscfv758f9hsj",
+        "model": "openai/gpt-6-luna",
+        "tier": "openai-max",
+        "status": "reconciling"
+      },
+      {
+        "id": "md7ayaebgzqrwt9kbber0k1axn8f94kx",
+        "model": "google/gemini-embedding-2",
+        "tier": "openai-max",
+        "status": "reconciling"
+      }
+    ]
+  },
+  "balanceAfterMicroUsd": 25129087,
+  "status": "pass"
+}

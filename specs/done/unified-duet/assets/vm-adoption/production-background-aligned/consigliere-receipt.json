@@ -1,0 +1,37 @@
+{
+  "status": "partial; Consigliere canary complete and independently verified",
+  "sourceRevision": "c48be2bced0ba117ed676c1772dd5c8ec06072ae",
+  "helperSha256": "ecccf4f4768f648d012565db8bb01df5ade08dc057f0993e92b3c772320596e8",
+  "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+  "vmName": "workspace-redacted",
+  "workspaceId": "qs75nfw09e6etnqze2tt2cx7wx8cmqsf",
+  "originalOSBootUnchanged": true,
+  "backgroundProcessIdentitiesPreserved": 2,
+  "syncthingDesktopIdentitiesPreserved": true,
+  "currentAndPreviousEightArtifactsVerified": true,
+  "gatewayCertified": true,
+  "ordinaryWorkspaceBunUnchanged": "1.3.14",
+  "gatewayBun": "1.4.2",
+  "managedAppSanity": {
+    "freshRequiredReadyHTTP": 200,
+    "appCount": 1,
+    "sameAuthoritativeConfigs": true,
+    "allTCPPortsAccepting": true
+  },
+  "hostExitCode": 1,
+  "exitExplanation": "Targeted CLI retains13 canary-holdback outcomes; selected VM completed",
+  "totalProductionVerified": 10,
+  "requiredInventory": 14,
+  "privateRecoveryRetained": true,
+  "fullFleetPassClaimed": false,
+  "observations": {
+    "consigliere-host.json.gz": "67e2fae190eda4ca6ff71cbafe2bf9823b2915a91d6f19ee4597a2c9ddc0e9da",
+    "consigliere-background-after.json.gz": "6944a1acf5a11b2a1b43362dc13dd647070f6bdd0a60a92db5f8ac3b72a8053b",
+    "managed-apps-baseline.json.gz": "7cd56446db6087e31374de203259225a44427f540fbb7b2b366d4f29b3e369a9",
+    "consigliere-apps-ready.json.gz": "b6cc7016ad797a3c8c8cbc65002197c5ad3650b52d46c0d8c8384df90eefa774",
+    "consigliere-runtime.json.gz": "7956e44f164263705a343b385a0aace69d6c5a6e7f334708693d2816d17ce53b",
+    "consigliere-retirement.json.gz": "aac2561b08e167144cb8070677db92e218ab17ef800a1807ba9c6b66410be24f",
+    "consigliere-wiring.json.gz": "75d4339cce6a493b774eaa443b55da7896944c6e786cec84bdf5bbdb8a0057ae",
+    "consigliere-validation.json.gz": "17be05596490a844c1704ec72da9c6101ec66547bbce1ffbeae4bd0e2e3abab3"
+  }
+}

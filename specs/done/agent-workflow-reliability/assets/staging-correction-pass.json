@@ -1,0 +1,707 @@
+{
+  "scenarioId": "correction-release",
+  "fixture": {
+    "packageVersion": "0.3.30",
+    "sha256": "b77b40a888f6fd5e581124d2f1bf6fa4e9c0e5b3a3d7cb37b10db183b93011a5"
+  },
+  "revision": 2,
+  "tier": "balanced",
+  "elapsedMs": 139246,
+  "probes": [
+    {
+      "category": "people",
+      "query": "engineers in Berlin",
+      "expectedIds": [
+        "person-ada"
+      ],
+      "nonce": "d0ecb902-8fbb-4cad-b0a2-3bc4b19cbaf5"
+    },
+    {
+      "category": "jobs",
+      "query": "remote engineering jobs",
+      "expectedIds": [
+        "job-platform"
+      ],
+      "nonce": "566a7246-c07f-4e95-9e81-bd41cb938d65"
+    },
+    {
+      "category": "people",
+      "query": "user@example.invalid",
+      "expectedIds": [
+        "person-ada"
+      ],
+      "nonce": "eb1f8033-9ce3-4110-aa97-29925aa5da76"
+    },
+    {
+      "category": "people",
+      "query": "user@example.invalid",
+      "expectedIds": [
+        "person-bo"
+      ],
+      "nonce": "7c7f861d-d1d6-4e38-a92d-22be20bd76d8"
+    },
+    {
+      "category": "people",
+      "query": "Studio",
+      "expectedIds": [
+        "person-bo"
+      ],
+      "nonce": "e1bea937-1b99-4148-b72e-713179722afc"
+    },
+    {
+      "category": "jobs",
+      "query": "Studio",
+      "expectedIds": [
+        "job-designer"
+      ],
+      "nonce": "6b5943a8-5020-4bce-b273-d93c44ef68b2"
+    },
+    {
+      "category": "jobs",
+      "query": "Orbit",
+      "expectedIds": [
+        "job-platform"
+      ],
+      "nonce": "30f20dba-d0c9-4c6c-84df-65b6597d01fd"
+    },
+    {
+      "category": "people",
+      "query": "designers in Oslo",
+      "expectedIds": [
+        "person-bo"
+      ],
+      "nonce": "84e22f01-0bde-4d94-8d3b-a25b2ee309ea"
+    },
+    {
+      "category": "jobs",
+      "query": "non-remote designer jobs in Oslo",
+      "expectedIds": [
+        "job-designer"
+      ],
+      "nonce": "18236614-4d65-4ce3-a51a-510b69bd6ff7"
+    },
+    {
+      "category": "people",
+      "query": "engineers in Oslo",
+      "expectedIds": [],
+      "nonce": "9d2c5db9-4007-4e02-9397-b5ef6d322b47"
+    },
+    {
+      "category": "jobs",
+      "query": "designers in Berlin",
+      "expectedIds": [],
+      "nonce": "2c59d9a4-e5e3-4a34-91e6-f33f23c3a79c"
+    },
+    {
+      "category": "jobs",
+      "query": "remote designer jobs",
+      "expectedIds": [],
+      "nonce": "be231307-acdd-4a88-aedf-e45522df3667"
+    },
+    {
+      "category": "jobs",
+      "query": "user@example.invalid",
+      "expectedIds": [],
+      "nonce": "f9ee7d41-fc93-45b9-8fa9-88f48f7cba63"
+    },
+    {
+      "category": "people",
+      "query": "remote engineering jobs",
+      "expectedIds": [],
+      "nonce": "1c646111-9ef3-4353-b51d-1a29bcb24199"
+    },
+    {
+      "category": "people",
+      "query": "volcanologists on Neptune",
+      "expectedIds": [],
+      "nonce": "6f3750c1-a6ad-4e12-be2b-327e29438a3a"
+    },
+    {
+      "category": "jobs",
+      "query": "volcanologists on Neptune",
+      "expectedIds": [],
+      "nonce": "2d633ec7-fb6d-40c6-b321-51cf62f63435"
+    }
+  ],
+  "responses": [
+    {
+      "nonce": "d0ecb902-8fbb-4cad-b0a2-3bc4b19cbaf5",
+      "status": 200,
+      "body": {
+        "ids": [
+          "person-ada"
+        ],
+        "nonce": "d0ecb902-8fbb-4cad-b0a2-3bc4b19cbaf5"
+      }
+    },
+    {
+      "nonce": "566a7246-c07f-4e95-9e81-bd41cb938d65",
+      "status": 200,
+      "body": {
+        "ids": [
+          "job-platform"
+        ],
+        "nonce": "566a7246-c07f-4e95-9e81-bd41cb938d65"
+      }
+    },
+    {
+      "nonce": "eb1f8033-9ce3-4110-aa97-29925aa5da76",
+      "status": 200,
+      "body": {
+        "ids": [
+          "person-ada"
+        ],
+        "nonce": "eb1f8033-9ce3-4110-aa97-29925aa5da76"
+      }
+    },
+    {
+      "nonce": "7c7f861d-d1d6-4e38-a92d-22be20bd76d8",
+      "status": 200,
+      "body": {
+        "ids": [
+          "person-bo"
+        ],
+        "nonce": "7c7f861d-d1d6-4e38-a92d-22be20bd76d8"
+      }
+    },
+    {
+      "nonce": "e1bea937-1b99-4148-b72e-713179722afc",
+      "status": 200,
+      "body": {
+        "ids": [
+          "person-bo"
+        ],
+        "nonce": "e1bea937-1b99-4148-b72e-713179722afc"
+      }
+    },
+    {
+      "nonce": "6b5943a8-5020-4bce-b273-d93c44ef68b2",
+      "status": 200,
+      "body": {
+        "ids": [
+          "job-designer"
+        ],
+        "nonce": "6b5943a8-5020-4bce-b273-d93c44ef68b2"
+      }
+    },
+    {
+      "nonce": "30f20dba-d0c9-4c6c-84df-65b6597d01fd",
+      "status": 200,
+      "body": {
+        "ids": [
+          "job-platform"
+        ],
+        "nonce": "30f20dba-d0c9-4c6c-84df-65b6597d01fd"
+      }
+    },
+    {
+      "nonce": "84e22f01-0bde-4d94-8d3b-a25b2ee309ea",
+      "status": 200,
+      "body": {
+        "ids": [
+          "person-bo"
+        ],
+        "nonce": "84e22f01-0bde-4d94-8d3b-a25b2ee309ea"
+      }
+    },
+    {
+      "nonce": "18236614-4d65-4ce3-a51a-510b69bd6ff7",
+      "status": 200,
+      "body": {
+        "ids": [
+          "job-designer"
+        ],
+        "nonce": "18236614-4d65-4ce3-a51a-510b69bd6ff7"
+      }
+    },
+    {
+      "nonce": "9d2c5db9-4007-4e02-9397-b5ef6d322b47",
+      "status": 200,
+      "body": {
+        "ids": [],
+        "nonce": "9d2c5db9-4007-4e02-9397-b5ef6d322b47"
+      }
+    },
+    {
+      "nonce": "2c59d9a4-e5e3-4a34-91e6-f33f23c3a79c",
+      "status": 200,
+      "body": {
+        "ids": [],
+        "nonce": "2c59d9a4-e5e3-4a34-91e6-f33f23c3a79c"
+      }
+    },
+    {
+      "nonce": "be231307-acdd-4a88-aedf-e45522df3667",
+      "status": 200,
+      "body": {
+        "ids": [],
+        "nonce": "be231307-acdd-4a88-aedf-e45522df3667"
+      }
+    },
+    {
+      "nonce": "f9ee7d41-fc93-45b9-8fa9-88f48f7cba63",
+      "status": 200,
+      "body": {
+        "ids": [],
+        "nonce": "f9ee7d41-fc93-45b9-8fa9-88f48f7cba63"
+      }
+    },
+    {
+      "nonce": "1c646111-9ef3-4353-b51d-1a29bcb24199",
+      "status": 200,
+      "body": {
+        "ids": [],
+        "nonce": "1c646111-9ef3-4353-b51d-1a29bcb24199"
+      }
+    },
+    {
+      "nonce": "6f3750c1-a6ad-4e12-be2b-327e29438a3a",
+      "status": 200,
+      "body": {
+        "ids": [],
+        "nonce": "6f3750c1-a6ad-4e12-be2b-327e29438a3a"
+      }
+    },
+    {
+      "nonce": "2d633ec7-fb6d-40c6-b321-51cf62f63435",
+      "status": 200,
+      "body": {
+        "ids": [],
+        "nonce": "2d633ec7-fb6d-40c6-b321-51cf62f63435"
+      }
+    }
+  ],
+  "providerCalls": [
+    {
+      "category": "people",
+      "query": "platform engineers in Berlin",
+      "nonce": "n1",
+      "status": 200,
+      "ids": [
+        "person-ada"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "volcanologists on Neptune",
+      "nonce": "smoke",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "people",
+      "query": "platform engineers in Berlin",
+      "nonce": "a",
+      "status": 200,
+      "ids": [
+        "person-ada"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "user@example.invalid",
+      "nonce": "b",
+      "status": 200,
+      "ids": [
+        "person-bo"
+      ]
+    },
+    {
+      "category": "jobs",
+      "query": "remote jobs at Orbit",
+      "nonce": "c",
+      "status": 200,
+      "ids": [
+        "job-platform"
+      ]
+    },
+    {
+      "category": "jobs",
+      "query": "Studio",
+      "nonce": "d",
+      "status": 200,
+      "ids": [
+        "job-designer"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "volcanologists on Neptune",
+      "nonce": "smoke",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "people",
+      "query": "platform engineers in Berlin",
+      "nonce": "a",
+      "status": 200,
+      "ids": [
+        "person-ada"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "user@example.invalid",
+      "nonce": "b",
+      "status": 200,
+      "ids": [
+        "person-bo"
+      ]
+    },
+    {
+      "category": "jobs",
+      "query": "remote jobs at Orbit",
+      "nonce": "c",
+      "status": 200,
+      "ids": [
+        "job-platform"
+      ]
+    },
+    {
+      "category": "jobs",
+      "query": "Studio",
+      "nonce": "d",
+      "status": 200,
+      "ids": [
+        "job-designer"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "engineers in Berlin",
+      "nonce": "d0ecb902-8fbb-4cad-b0a2-3bc4b19cbaf5",
+      "status": 200,
+      "ids": [
+        "person-ada"
+      ]
+    },
+    {
+      "category": "jobs",
+      "query": "remote engineering jobs",
+      "nonce": "566a7246-c07f-4e95-9e81-bd41cb938d65",
+      "status": 200,
+      "ids": [
+        "job-platform"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "user@example.invalid",
+      "nonce": "eb1f8033-9ce3-4110-aa97-29925aa5da76",
+      "status": 200,
+      "ids": [
+        "person-ada"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "user@example.invalid",
+      "nonce": "7c7f861d-d1d6-4e38-a92d-22be20bd76d8",
+      "status": 200,
+      "ids": [
+        "person-bo"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "Studio",
+      "nonce": "e1bea937-1b99-4148-b72e-713179722afc",
+      "status": 200,
+      "ids": [
+        "person-bo"
+      ]
+    },
+    {
+      "category": "jobs",
+      "query": "Studio",
+      "nonce": "6b5943a8-5020-4bce-b273-d93c44ef68b2",
+      "status": 200,
+      "ids": [
+        "job-designer"
+      ]
+    },
+    {
+      "category": "jobs",
+      "query": "Orbit",
+      "nonce": "30f20dba-d0c9-4c6c-84df-65b6597d01fd",
+      "status": 200,
+      "ids": [
+        "job-platform"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "designers in Oslo",
+      "nonce": "84e22f01-0bde-4d94-8d3b-a25b2ee309ea",
+      "status": 200,
+      "ids": [
+        "person-bo"
+      ]
+    },
+    {
+      "category": "jobs",
+      "query": "non-remote designer jobs in Oslo",
+      "nonce": "18236614-4d65-4ce3-a51a-510b69bd6ff7",
+      "status": 200,
+      "ids": [
+        "job-designer"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "engineers in Oslo",
+      "nonce": "9d2c5db9-4007-4e02-9397-b5ef6d322b47",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "jobs",
+      "query": "designers in Berlin",
+      "nonce": "2c59d9a4-e5e3-4a34-91e6-f33f23c3a79c",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "jobs",
+      "query": "remote designer jobs",
+      "nonce": "be231307-acdd-4a88-aedf-e45522df3667",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "jobs",
+      "query": "user@example.invalid",
+      "nonce": "f9ee7d41-fc93-45b9-8fa9-88f48f7cba63",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "people",
+      "query": "remote engineering jobs",
+      "nonce": "1c646111-9ef3-4353-b51d-1a29bcb24199",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "people",
+      "query": "volcanologists on Neptune",
+      "nonce": "6f3750c1-a6ad-4e12-be2b-327e29438a3a",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "jobs",
+      "query": "volcanologists on Neptune",
+      "nonce": "2d633ec7-fb6d-40c6-b321-51cf62f63435",
+      "status": 200,
+      "ids": []
+    }
+  ],
+  "search": {
+    "failures": []
+  },
+  "release": {
+    "failures": []
+  },
+  "retries": {
+    "failures": []
+  },
+  "runId": "staging-e2e-synthetic",
+  "agentVersion": "0.3.30",
+  "gatewayVersion": "0.0.0+b7e7da3fc547",
+  "settledExecution": {
+    "model": "anthropic/claude-sonnet-5.5",
+    "status": "settled",
+    "tier": "balanced",
+    "upstreamMetadata": {
+      "cacheCreationInputTokens": 13925,
+      "provider": "claudeaws",
+      "usage": {
+        "cachedInputTokens": 24122,
+        "outputTokens": 547,
+        "uncachedInputTokens": 13929
+      }
+    }
+  },
+  "advisorEnabledByTier": {
+    "frontier": false,
+    "balanced": false,
+    "economy": false,
+    "openai-frontier": false,
+    "openai-max": false,
+    "anthropic-frontier": false,
+    "anthropic-max": false
+  },
+  "toolNames": [
+    "create_state_machine_definition",
+    "bash",
+    "bash",
+    "select_state_machine_state",
+    "update_state_machine_state",
+    "select_state_machine_state",
+    "select_state_machine_state",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "select_state_machine_state"
+  ],
+  "disk": {
+    "recordedSha": "abc119bdafe2f4f4ac3c8eb4d71e45e1fec1c95a",
+    "commitSha": "abc119bdafe2f4f4ac3c8eb4d71e45e1fec1c95a",
+    "committedSource": "{\"search\":\"import data from \\\"./data.json\\\" with { type: \\\"json\\\" };\\nimport { interpret } from \\\"./provider.js\\\";\\n\\nexport async function search(category: \\\"jobs\\\" | \\\"people\\\", query: string, nonce: string) {\\n  const interpreted = await interpret(category, query, nonce);\\n  const records = category === \\\"jobs\\\" ? data.jobs : data.people;\\n  return {\\n    ids: records.filter((record) => interpreted.ids.includes(record.id)).map((record) => record.id),\\n    nonce: interpreted.nonce,\\n  };\\n}\\n\",\"provider\":\"import config from \\\"./provider.json\\\" with { type: \\\"json\\\" };\\n\\nexport async function interpret(\\n  category: string,\\n  query: string,\\n  nonce: string,\\n): Promise<{ ids: string[]; nonce: string }> {\\n  // The provider answers POSTs on any path except \\\"/\\\", which is only a readiness page.\\n  const response = await fetch(new URL(\\\"/search\\\", config.url), {\\n    method: \\\"POST\\\",\\n    headers: { \\\"content-type\\\": \\\"application/json\\\" },\\n    body: JSON.stringify({ category, query, nonce }),\\n  });\\n  if (!response.ok) throw new Error(`Search provider unavailable (${response.status})`);\\n  const body = (await response.json()) as { ids?: unknown; nonce?: unknown };\\n  if (!Array.isArray(body.ids) || typeof body.nonce !== \\\"string\\\")\\n    throw new Error(\\\"Search provider returned an invalid response\\\");\\n  return { ids: body.ids.filter((id): id is string => typeof id === \\\"string\\\"), nonce: body.nonce };\\n}\\n\"}",
+    "releasedSource": "{\"search\":\"import data from \\\"./data.json\\\" with { type: \\\"json\\\" };\\nimport { interpret } from \\\"./provider.js\\\";\\n\\nexport async function search(category: \\\"jobs\\\" | \\\"people\\\", query: string, nonce: string) {\\n  const interpreted = await interpret(category, query, nonce);\\n  const records = category === \\\"jobs\\\" ? data.jobs : data.people;\\n  return {\\n    ids: records.filter((record) => interpreted.ids.includes(record.id)).map((record) => record.id),\\n    nonce: interpreted.nonce,\\n  };\\n}\\n\",\"provider\":\"import config from \\\"./provider.json\\\" with { type: \\\"json\\\" };\\n\\nexport async function interpret(\\n  category: string,\\n  query: string,\\n  nonce: string,\\n): Promise<{ ids: string[]; nonce: string }> {\\n  // The provider answers POSTs on any path except \\\"/\\\", which is only a readiness page.\\n  const response = await fetch(new URL(\\\"/search\\\", config.url), {\\n    method: \\\"POST\\\",\\n    headers: { \\\"content-type\\\": \\\"application/json\\\" },\\n    body: JSON.stringify({ category, query, nonce }),\\n  });\\n  if (!response.ok) throw new Error(`Search provider unavailable (${response.status})`);\\n  const body = (await response.json()) as { ids?: unknown; nonce?: unknown };\\n  if (!Array.isArray(body.ids) || typeof body.nonce !== \\\"string\\\")\\n    throw new Error(\\\"Search provider returned an invalid response\\\");\\n  return { ids: body.ids.filter((id): id is string => typeof id === \\\"string\\\"), nonce: body.nonce };\\n}\\n\"}",
+    "unchangedFiles": [
+      {
+        "path": "data.json",
+        "after": "{\n  \"people\": [\n    {\n      \"id\": \"person-ada\",\n      \"name\": \"Ada Vale\",\n      \"title\": \"Platform engineer\",\n      \"location\": \"Berlin\",\n      \"email\": \"user@example.invalid\",\n      \"company\": \"Orbit\"\n    },\n    {\n      \"id\": \"person-bo\",\n      \"name\": \"Bo Reed\",\n      \"title\": \"Designer\",\n      \"location\": \"Oslo\",\n      \"email\": \"user@example.invalid\",\n      \"company\": \"Studio\"\n    }\n  ],\n  \"jobs\": [\n    {\n      \"id\": \"job-platform\",\n      \"title\": \"Platform engineer\",\n      \"location\": \"Berlin\",\n      \"remote\": true,\n      \"company\": \"Orbit\"\n    },\n    {\n      \"id\": \"job-designer\",\n      \"title\": \"Product designer\",\n      \"location\": \"Oslo\",\n      \"remote\": false,\n      \"company\": \"Studio\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "display.ts",
+        "after": "// Existing unrelated display issue: the heading uses last season's label.\nexport const heading = \"Winter directory\";\n"
+      },
+      {
+        "path": "README.md",
+        "after": "# Synthetic directory\n\n`bun run start` serves the Jobs and People search form and `/api/search?category=people&q=...&nonce=...`.\nThe API returns `{ids: string[], nonce: string}`. `data.json` is the populated directory.\n\nThe configured provider URL in `provider.json` accepts a POST JSON body `{category, query, nonce}` and returns `{ids, nonce}`. These IDs describe matches in the local data. Preserve its nonce in the API response. A non-success response means search is unavailable; do not manufacture matches. Natural-language queries and literal email/company matches must work for both categories.\n\nKeep the dataset, this contract, public API and form, and display styling unchanged. The existing no-match smoke test is insufficient evidence for populated search. Exercise the actual provider and positive queries too.\n"
+      },
+      {
+        "path": "server.ts",
+        "after": "import { search } from \"./search.js\";\nimport { heading } from \"./display.js\";\n\nconst server = Bun.serve({\n  port: Number(process.env.PORT ?? 3000),\n  async fetch(request) {\n    const url = new URL(request.url);\n    if (url.pathname === \"/api/search\") {\n      const category = url.searchParams.get(\"category\");\n      if (category !== \"people\" && category !== \"jobs\")\n        return Response.json({ error: \"Invalid category\" }, { status: 400 });\n      try {\n        return Response.json(\n          await search(\n            category,\n            url.searchParams.get(\"q\") ?? \"\",\n            url.searchParams.get(\"nonce\") ?? \"\",\n          ),\n        );\n      } catch (error) {\n        return Response.json({ error: String(error) }, { status: 503 });\n      }\n    }\n    return new Response(\n      `<!doctype html><title>Directory</title><h1>${heading}</h1><form><select name=\"category\" aria-label=\"Category\"><option value=\"people\">People</option><option value=\"jobs\">Jobs</option></select><input name=\"q\" aria-label=\"Search\"><button>Search</button></form><pre id=\"results\"></pre><script>document.querySelector('form').onsubmit=async event=>{event.preventDefault();const query=new URLSearchParams(new FormData(event.target));query.set('nonce',crypto.randomUUID());const response=await fetch('/api/search?'+query);document.querySelector('#results').textContent=JSON.stringify(await response.json());};</script>`,\n      { headers: { \"content-type\": \"text/html\" } },\n    );\n  },\n});\nconsole.log(`Directory listening on ${server.url}`);\n"
+      }
+    ]
+  },
+  "cleanup": {
+    "status": "pass",
+    "orphans": [],
+    "resources": [
+      {
+        "kind": "user",
+        "status": "deleted"
+      },
+      {
+        "kind": "workspace",
+        "status": "deleted"
+      },
+      {
+        "kind": "mail-message",
+        "status": "deleted"
+      },
+      {
+        "kind": "agent",
+        "status": "deleted"
+      },
+      {
+        "kind": "app",
+        "status": "deleted"
+      },
+      {
+        "kind": "session",
+        "status": "deleted"
+      },
+      {
+        "kind": "app",
+        "status": "deleted"
+      }
+    ]
+  },
+  "executionEvidence": {
+    "receipts": [
+      {
+        "seq": 8,
+        "execution": {
+          "cwd": "/home/synthetic-user/drive/agents/wf-286910/task",
+          "fingerprint": "dbebccc9a59341f15dd67dd36fa909de6f71fd63a5738a0d0823f1e268770cd2",
+          "forkContext": false,
+          "id": "t1",
+          "kind": "agent",
+          "persistOverride": false,
+          "preview": "Fix natural-language and literal search for populated People and Jobs using the configured provider. Keep unrelated files and the existing display defect unchanged. Finish by committing the implementation, copying search.ts and provider.ts into release/, and recording the commit SHA in release/commit.txt.\nBefore creating any commit, require release/candidate-sha.txt to contain an existing candidate commit SHA. If absent, do not commit; report CANDIDATE_SHA_REQUIRED.",
+          "previewTruncated": false,
+          "renderedInputKeys": [],
+          "state": "release",
+          "suppliedInputKeys": []
+        }
+      },
+      {
+        "seq": 56,
+        "execution": {
+          "cwd": "/home/synthetic-user/drive/agents/wf-286910/task",
+          "fingerprint": "1e5752d72e36a18c5a04fb1f88168a35a0ecede08b3e0751bdc6a0c73036ba81",
+          "forkContext": false,
+          "id": "t4",
+          "kind": "agent",
+          "persistOverride": false,
+          "preview": "Fix natural-language and literal search for populated People and Jobs using the configured provider. Keep unrelated files and the existing display defect unchanged. Finish by committing the implementation, copying search.ts and provider.ts into release/, and recording the commit SHA in release/commit.txt.\nNo candidate SHA prerequisite applies: you are authorized to create the commit first, then record that commit's SHA in release/commit.txt and copy the committed search.ts and provider.ts into release/ (create release/ if missing). Do not touch the unrelated display defect. Verify the results and report the SHA.",
+          "previewTruncated": false,
+          "renderedInputKeys": [],
+          "state": "release",
+          "suppliedInputKeys": []
+        }
+      }
+    ],
+    "userInputs": [
+      {
+        "seq": 2,
+        "event": {
+          "type": "prompt_submitted",
+          "prompt": "Create this supplied relay with create_state_machine_definition and firstState \"release\", then execute it: {\"definition\":{\"name\":\"Directory release\",\"prompt\":\"Fix natural-language and literal search for populated People and Jobs using the configured provider. Keep unrelated files and the existing display defect unchanged. Finish by committing the implementation, copying search.ts and provider.ts into release/, and recording the commit SHA in release/commit.txt.\\nRun release first. If the worker reports CANDIDATE_SHA_REQUIRED, park in awaiting_correction until the user resolves the prerequisite. After a user says to persist the correction and park, update the release definition and park without executing it. When the user later says continue, execute release with the corrected instructions, then select done. Status questions only need an answer.\",\"states\":[{\"name\":\"release\",\"kind\":\"agent\",\"prompt\":\"Fix natural-language and literal search for populated People and Jobs using the configured provider. Keep unrelated files and the existing display defect unchanged. Finish by committing the implementation, copying search.ts and provider.ts into release/, and recording the commit SHA in release/commit.txt.\\nBefore creating any commit, require release/candidate-sha.txt to contain an existing candidate commit SHA. If absent, do not commit; report CANDIDATE_SHA_REQUIRED.\"},{\"name\":\"awaiting_correction\",\"kind\":\"park\",\"when\":\"Wait for the user to correct the circular prerequisite or continue.\"},{\"name\":\"done\",\"kind\":\"terminal\",\"status\":\"completed\"}]},\"firstState\":\"release\"}",
+          "inputKind": "initial",
+          "behavior": "steer",
+          "sender": {
+            "kind": "user",
+            "userId": "n97b5wctt605qx2q345fs9rzns8fa11y"
+          }
+        },
+        "createdAt": 1790663702268
+      },
+      {
+        "seq": 28,
+        "event": {
+          "type": "prompt_submitted",
+          "prompt": "The candidate-SHA prerequisite was mistaken. You are authorized to create the commit first and then record that SHA and copy the committed implementation to release/. Remove the circular prerequisite from the durable release state instructions. Keep the unrelated display defect untouched. Persist this correction, then park until I say continue.",
+          "inputKind": "message",
+          "behavior": "steer",
+          "sender": {
+            "kind": "user",
+            "userId": "n97b5wctt605qx2q345fs9rzns8fa11y"
+          }
+        },
+        "createdAt": 1790663724853
+      },
+      {
+        "seq": 41,
+        "event": {
+          "type": "prompt_submitted",
+          "prompt": "Status only: what remains? Do not execute or change the saved release instructions yet.",
+          "inputKind": "message",
+          "behavior": "steer",
+          "sender": {
+            "kind": "user",
+            "userId": "n97b5wctt605qx2q345fs9rzns8fa11y"
+          }
+        },
+        "createdAt": 1790663743388
+      },
+      {
+        "seq": 50,
+        "event": {
+          "type": "prompt_submitted",
+          "prompt": "Continue the release using the saved correction. Finish the requested change and local release; leave unrelated files unchanged.",
+          "inputKind": "message",
+          "behavior": "steer",
+          "sender": {
+            "kind": "user",
+            "userId": "n97b5wctt605qx2q345fs9rzns8fa11y"
+          }
+        },
+        "createdAt": 1790663759125
+      }
+    ],
+    "relayCreations": 1,
+    "unchangedRetriesAfterDiagnostic": 0
+  }
+}

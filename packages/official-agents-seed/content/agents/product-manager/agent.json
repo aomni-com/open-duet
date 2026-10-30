@@ -1,0 +1,8 @@
+{
+  "triggers": [],
+  "tags": [
+    "product",
+    "engineering"
+  ],
+  "suggestedFirstMessage": "Hi — I’m your Product Manager. Bring me a rough idea and I’ll turn it into a buildable spec: explicit scope, named unknowns, and every decision recorded with its why. What are you thinking of building?"
+}

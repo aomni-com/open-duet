@@ -1,0 +1,49 @@
+export const metadata = {
+  title: 'SSE and resume',
+  description: 'Consume Duet event streams and reconnect without losing order.',
+  alternates: { canonical: '/events/' },
+}
+
+<p className="eyebrow">Streaming</p>
+
+# A stream is a moving read model
+
+Server-sent events deliver ordered progress while long-running work continues. Parse event frames,
+commit the last fully handled position, and project events into your own UI without treating a TCP
+connection as durable state.
+
+## Reconnect from committed progress
+
+Each durable frame carries an SSE `id` — a numeric sequence on session streams, a cursor string on
+the file-activity stream. Preserve it only after the event's effects are committed; reconnecting
+from a merely received position can skip work after a crash. Send the last committed value in
+`Last-Event-ID`. Session streams accept no query fallback; clients that need to set an initial
+cursor use a streaming fetch. The file-activity endpoint separately documents its own cursor query.
+
+When reconnecting needs a canonical replay rather than a live stream, read session history in
+ascending order with `afterSeq` set to the last committed numeric sequence. Follow every
+`nextCursor` until it is `null`, then open the stream with that same committed position in
+`Last-Event-ID`. History catches up durable state; the stream carries new events.
+
+```ts
+for await (const frame of streamEvents({ lastEventId: committedId })) {
+  await apply(frame.event)
+  if (frame.id !== undefined) {
+    committedId = frame.id
+    await save(committedId)
+  }
+}
+```
+
+## Expect every ending
+
+A clean terminal event, an idle connection, a network failure, and an explicit interruption are
+different outcomes. Back off reconnects, stop after a declared terminal state, and fetch canonical
+state when an event gap cannot be reconciled. A stream that declares no terminal state — the
+[file-activity feed](/file-activity) — instead ends every segment with a clean close; resume it
+from committed progress rather than stopping.
+
+## Keep the protocol streamable
+
+Do not buffer the entire response or run it through a JSON-only helper. Preserve content type,
+status, cancellation, and event boundaries from the HTTP response.

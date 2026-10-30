@@ -1,0 +1,35 @@
+{
+  "runId": "staging-e2e-synthetic",
+  "status": "pass",
+  "resources": [
+    {
+      "kind": "user",
+      "status": "deleted"
+    },
+    {
+      "kind": "workspace",
+      "status": "deleted"
+    },
+    {
+      "kind": "mail-message",
+      "status": "deleted"
+    },
+    {
+      "kind": "agent",
+      "status": "deleted"
+    },
+    {
+      "kind": "session",
+      "status": "deleted"
+    },
+    {
+      "kind": "agent",
+      "status": "deleted"
+    },
+    {
+      "kind": "session",
+      "status": "deleted"
+    }
+  ],
+  "orphans": []
+}

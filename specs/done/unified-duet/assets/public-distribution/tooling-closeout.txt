@@ -1,0 +1,22 @@
+bun install v1.3.14 (0d9b296a)
+Resolving dependencies
+Resolved, downloaded and extracted [2]
+
+285 packages installed [3.91s]
+$ tsc -p tsconfig.build.json && bun build src/memory/store/index.ts --target=node --format=esm --outfile dist/src/memory-store.js && bun scripts/build-workflow-fixtures.ts
+Bundled 7 modules in 123ms
+
+  memory-store.js  21.63 KB  (entry point)
+
+bun test v1.3.14 (0d9b296a)
+
+packages/agent/test/connected-provider-bundled-oauth.test.ts:
+(pass) the registered Codex OAuth flow refreshes with the patched scope and rotated credential [21.93ms]
+
+packages/duet/test/public-pack.test.ts:
+(pass) the public tarball installs away from the checkout and retains native agent behavior [27763.39ms]
+
+ 2 pass
+ 0 fail
+ 26 expect() calls
+Ran 2 tests across 2 files. [28.41s]

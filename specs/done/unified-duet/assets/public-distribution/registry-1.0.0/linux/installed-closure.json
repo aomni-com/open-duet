@@ -1,0 +1,170 @@
+{
+  "status": "registry bytes and installed closure verified; smoke results recorded separately",
+  "publicationRunUrl": "https://github.com/aomni-com/duet/actions/runs/37259953781",
+  "publicationRevision": "da3779eb8e153a57c6f7e7f4d28ff7c75afd336a",
+  "publicationEvidenceStatus": "recovered-verification",
+  "publicationRunConclusion": "failure",
+  "publicationEvidenceReceipt": "/private/tmp/unified-duet-registry-final-261004/original-recovery/recovered-verification.json",
+  "publicationEvidenceLimitations": [
+    "The original workflow remains failed and has no published receipt. This receipt records verification recovered later, not an original success.",
+    "Registry time for 1.0.0 (03:37:59.520Z) is later than the original workflow end (03:36:25Z); the timestamp discrepancy is unresolved.",
+    "The registry version has no gitHead and publication used --provenance=false; exact reproducibility proves artifact/source equality, not a registry-signed source attestation.",
+    "Three cold registry installs and legacy deprecations are downstream work and not verified by this receipt."
+  ],
+  "registryPublishedAt": "2026-10-05T03:37:59.520Z",
+  "registryIntegrity": "sha512-hvOvJeiEYVvjoUZd7L9yry1ihPkd1ue5KGamytbksNXWGOeInJi4tsj1gj2kmhTXjZ3QUMKrRza8F/NsXlDnuA==",
+  "packageTarSha256": "2c41eff13547087d8d9e4ccec4f56442112213ef00bb1c91cc1cba541fed4630",
+  "entrySha256": "9828385eec4527f97eb01e7db67a9cdaf57041a62412c2dff1d746a46019d8a4",
+  "registryLockKey": "../../../../private/tmp/unified-duet-registry-final-261004/linux/install/node_modules/@duetso/agent",
+  "platform": "linux",
+  "arch": "x64",
+  "dependencies": [
+    {
+      "name": "@opentui/core-linux-x64",
+      "version": "0.2.5",
+      "os": [
+        "linux"
+      ],
+      "cpu": [
+        "x64"
+      ],
+      "files": [
+        {
+          "path": "@opentui/core-linux-x64/libopentui.so",
+          "bytes": 4675288,
+          "sha256": "c053cf31f8618ce331d3fb35aa9a8e73a0954b928a7d0f9d27d9af92a8228a0f",
+          "mode": "0o644",
+          "fileDescription": "ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), static-pie linked, with debug_info, not stripped"
+        }
+      ]
+    },
+    {
+      "name": "@vscode/ripgrep-linux-x64",
+      "version": "1.18.0",
+      "os": [
+        "linux"
+      ],
+      "cpu": [
+        "x64"
+      ],
+      "files": [
+        {
+          "path": "@vscode/ripgrep-linux-x64/bin/rg",
+          "bytes": 5728032,
+          "sha256": "193906679498de4d939345b937fa24e0e69a03c244bd70c859f5e41232713f21",
+          "mode": "0o755",
+          "fileDescription": "ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), static-pie linked, BuildID[sha1]=2b383d9415825d822afb5443dc15d67ade812bac, stripped"
+        }
+      ]
+    },
+    {
+      "name": "@opentui/core",
+      "version": "0.2.5",
+      "os": null,
+      "cpu": null,
+      "files": [
+        {
+          "path": "@opentui/core/assets/javascript/tree-sitter-javascript.wasm",
+          "bytes": 411770,
+          "sha256": "5fb488d0cabb4775a594bab85682de5ad6ce83c0d6ac997a9f82dd084d571240",
+          "mode": "0o644",
+          "fileDescription": "WebAssembly (wasm) binary module version 0x1 (MVP)"
+        },
+        {
+          "path": "@opentui/core/assets/markdown/tree-sitter-markdown.wasm",
+          "bytes": 421534,
+          "sha256": "3e13182f21373634c40653f170e6f2d2790914eb2c243927086d79023c534f7a",
+          "mode": "0o644",
+          "fileDescription": "WebAssembly (wasm) binary module version 0x1 (MVP)"
+        },
+        {
+          "path": "@opentui/core/assets/markdown_inline/tree-sitter-markdown_inline.wasm",
+          "bytes": 426020,
+          "sha256": "9bbd71a70a23f6d0193bb162a72eecf2a2bd9ce76910d7ad3da9c5f80f122671",
+          "mode": "0o644",
+          "fileDescription": "WebAssembly (wasm) binary module version 0x1 (MVP)"
+        },
+        {
+          "path": "@opentui/core/assets/typescript/tree-sitter-typescript.wasm",
+          "bytes": 1413849,
+          "sha256": "778025db5a8be0e70f8ccc3671e486dfeddd048c25d9e8a70c26de2e1bf6f97d",
+          "mode": "0o644",
+          "fileDescription": "WebAssembly (wasm) binary module version 0x1 (MVP)"
+        },
+        {
+          "path": "@opentui/core/assets/zig/tree-sitter-zig.wasm",
+          "bytes": 691726,
+          "sha256": "54b3b83dd9c62da5815f06132bc3fc914d9dcc780370b32416446a0b7969e8c6",
+          "mode": "0o644",
+          "fileDescription": "WebAssembly (wasm) binary module version 0x1 (MVP)"
+        }
+      ]
+    },
+    {
+      "name": "@vscode/ripgrep",
+      "version": "1.18.0",
+      "os": null,
+      "cpu": null,
+      "files": []
+    },
+    {
+      "name": "@electric-sql/pglite",
+      "version": "0.4.5",
+      "os": null,
+      "cpu": null,
+      "files": [
+        {
+          "path": "@electric-sql/pglite/dist/initdb.wasm",
+          "bytes": 169969,
+          "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+          "mode": "0o644",
+          "fileDescription": "WebAssembly (wasm) binary module version 0x1 (MVP)"
+        },
+        {
+          "path": "@electric-sql/pglite/dist/pglite.data",
+          "bytes": 5289109,
+          "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+          "mode": "0o644",
+          "fileDescription": "data"
+        },
+        {
+          "path": "@electric-sql/pglite/dist/pglite.wasm",
+          "bytes": 8739902,
+          "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+          "mode": "0o644",
+          "fileDescription": "WebAssembly (wasm) binary module version 0x1 (MVP)"
+        },
+        {
+          "path": "@electric-sql/pglite/dist/vector.tar.gz",
+          "bytes": 46108,
+          "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+          "mode": "0o644",
+          "fileDescription": "gzip compressed data, from Unix, original size modulo 2^32 204800"
+        }
+      ]
+    },
+    {
+      "name": "@silvia-odwyer/photon-node",
+      "version": "0.3.4",
+      "os": null,
+      "cpu": null,
+      "files": [
+        {
+          "path": "@silvia-odwyer/photon-node/photon_rs_bg.wasm",
+          "bytes": 1881634,
+          "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+          "mode": "0o644",
+          "fileDescription": "WebAssembly (wasm) binary module version 0x1 (MVP)"
+        }
+      ]
+    },
+    {
+      "name": "@mariozechner/clipboard",
+      "version": "0.3.9",
+      "os": null,
+      "cpu": null,
+      "files": []
+    }
+  ],
+  "install": "/private/tmp/unified-duet-registry-final-261004/linux/install"
+}

@@ -1,0 +1,76 @@
+{
+  "status": "cause-established-read-only",
+  "frozenHelperSha256": "e8603337408bad602fbff58f82d928a96982bf2e1b709c82aa48814b1558f5ed",
+  "frozenBootstrapSha256": "b33587a373136cdac66b78cf74f2e05eb2ee7341207d7adafef49045f0b4e1ab",
+  "actualFailedVms": [
+    "workspace-redacted",
+    "workspace-redacted"
+  ],
+  "cause": {
+    "legacyOverride": "/etc/systemd/system/duet-gateway.service.d/40-bun-runtime.conf",
+    "overrideSha256": "14551d3dcee64fe8d54e1174e0d2525584836bb61a6a272531cfc2536414992f",
+    "effectiveExecStartPre": [
+      "/opt/duet/gateway-runtime/bin/bun",
+      "/opt/duet/bin/gateway-bootstrap.js"
+    ],
+    "legacyBootstrapBypassesFrozenRuntimeBootstrap": true,
+    "actualDuringAdoptionEvents": [
+      "gateway_release_bootstrap adopted0.0.0+4955b7a09dde at1791152313354794 on Example User",
+      "gateway_release_bootstrap adopted0.0.0+4955b7a09dde at1791152421158228 on phydr-old"
+    ],
+    "result": "Old bootstrap switches current to its two-artifact oldAPI4955 release; current/duet is absent, so frozen helper native probe spawn throws ENOENT."
+  },
+  "cheapestCounterexample": {
+    "kind": "Local pure old-owner release inspection against immutable held runtime; no writes",
+    "result": {
+      "ok": false,
+      "failures": [
+        {
+          "artifact": "manifest.json",
+          "reason": "invalid gateway release manifest sha256"
+        }
+      ]
+    },
+    "owner": "/tmp/unified-duet-compatible-production-backend/packages/gateway/src/gateway-release.ts",
+    "noVmOrRegistryEffects": true
+  },
+  "preservation": {
+    "bothOperationReceipts": "failed/restored",
+    "bothPlatformUnits": "inactive/dead with MainPID0 and ControlPID0",
+    "originalBootIdsUnchanged": true,
+    "gatewayNowRestoredToOld4955": true
+  },
+  "minimalFixProposalNotImplemented": [
+    "Keep0aac release and b335 bootstrap unchanged; fix only the bounded one-shot boot-wiring adoption owner.",
+    "Snapshot the actual known legacy40-bun-runtime.conf with existing exact-path metadata/restore mechanism, then retire it while gateway is stopped before target start; restore it byte-for-byte on any uncommitted failure.",
+    "Check effective ExecStartPre/ExecStart after daemon-reload before target start; base-file hash alone cannot prove actual systemd command. Unknown command overrides remain a clear deferred/failed preflight, not blanket deletion.",
+    "Real disposable old-layout systemd red fixture must contain this reset+legacy ExecStartPre override and preexisting isolated Bun; green must certify0aac, preserve OS boot/workspace state/Bun, and prove crash restoration of exact override.",
+    "Do not pre-delete the live override outside the helper and create a second restoration owner. Do not retry unchanged helper or reprovision/reboot."
+  ],
+  "additionalBoundary": "The intended0aac admission hold was bypassed when old gateway started. No actual accepted-work loss is inferred from this read-only metadata; root should distinguish proof of correct held target from base-unit installation before further adoption.",
+  "liveMutationByThisLane": false,
+  "signalsSentByThisLane": false,
+  "credentialOrRawEnvOrPrivateOriginalRead": false,
+  "evidenceFiles": {
+    "Example User-metadata.json": {
+      "sha256": "04883baa76dffe4b38ed40c2825234430c2ab981e55b5ad953a5b0ec45b60f1e",
+      "bytes": 3399
+    },
+    "phydr-old-metadata.json": {
+      "sha256": "655e8e8f6e019467d29cc09f7b055c34140a0b2bf3d380627459bfbf6c1b2ff7",
+      "bytes": 3401
+    },
+    "Example User-override.json": {
+      "sha256": "fc1a8158cadd4f8a3fb795b79f3b7b7a5fc0f8065c555c44fb3c3aaaff82765c",
+      "bytes": 1050
+    },
+    "phydr-old-override.json": {
+      "sha256": "a0a9555b13ef23ae5664a59c5c17459fbb96c32659b68b63bdd40da39260bb66",
+      "bytes": 1050
+    },
+    "old-parser-held-counterexample.json": {
+      "sha256": "fb48e5f1e4cf97d772d019851c2ad8e54c25ab92c833c7c7ea08f2ada6186b85",
+      "bytes": 106
+    }
+  }
+}

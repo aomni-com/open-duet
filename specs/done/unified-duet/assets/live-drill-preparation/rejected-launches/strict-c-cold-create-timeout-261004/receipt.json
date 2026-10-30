@@ -1,0 +1,11 @@
+{
+  "status": "failed-provider-create-no-drill-pass",
+  "createStartedAt": "2026-10-04T19:30:07Z",
+  "resultWrittenAt": "2026-10-04T19:31:11Z",
+  "sdkCommandDeadlineMs": 60000,
+  "providerVmObservedAndRemovedDuringCleanup": true,
+  "verifiedAbsent": true,
+  "nativeOrStrictDrillClaim": false,
+  "nextAction": "create-only finite five-minute SDK budget; deploy that ordinary owner before final staging acceptance",
+  "attribution": "Observed creation call failure after roughly the SDK deadline; SSH exit255/empty stderr does not independently establish server phase or killed/signal cause."
+}

@@ -1,0 +1,105 @@
+{
+  "backendRevision": "db2f70ae73399e186ada89ba82fc76ffcb80fd74",
+  "observedAt": "2026-10-04T14:00:46.206Z",
+  "metadata": [
+    {
+      "appId": "jn714jrqe6dbrcwpmh4zv6sntn8dh7mv",
+      "keySha256": "0bd2774e123277cb42bde15149543ade0c3959235bafde062a711aee9b734bb5",
+      "createdAt": 1791121549070.5837,
+      "expiresAt": 1791726348663,
+      "active": true
+    },
+    {
+      "appId": "jn71p22m882pj0zf82563y74k98dhhe0",
+      "keySha256": "8eaf2fd7f347f2559856b7988c54526a58ffe75cd3eef38b89bb4aa22c74be89",
+      "createdAt": 1791121549070.5842,
+      "expiresAt": 1791726348663,
+      "active": true
+    },
+    {
+      "appId": "jn72f65dh6cck5jyync0ecdfrx8dgm0g",
+      "keySha256": "6be0136cdf33ab51fb382dac265522aa990b1ef17b450279d5e3de7ca120341d",
+      "createdAt": 1791121549070.5847,
+      "expiresAt": 1791726348663,
+      "active": true
+    },
+    {
+      "appId": "jn72z9y65ayshz9f2tcgmed0xs8dhmhy",
+      "keySha256": "51b37d640036c3ba45d24d15f11cdc2239e3ea804f63b4f1fa2603ad70e5d2fd",
+      "createdAt": 1791121549070.5852,
+      "expiresAt": 1791726348663,
+      "active": true
+    },
+    {
+      "appId": "jn73wfjsa6wbxbafsdp7tdydz58dgn2w",
+      "keySha256": "395796e1fd7f13e4b6a1c131e4939089f995a1bcd6944f23c654b3d4f7d5d5fc",
+      "createdAt": 1791121549070.5857,
+      "expiresAt": 1791726348663,
+      "active": true
+    },
+    {
+      "appId": "jn76gmss16zr7kn3k9r0dehk4d8dhpt7",
+      "keySha256": "353959140960e5d13dca251a9982dc6e795ded61509c1d52f0568761df9650f4",
+      "createdAt": 1791121549070.5862,
+      "expiresAt": 1791726348663,
+      "active": true
+    },
+    {
+      "appId": "jn7ag33dctr6t46k2r9nwv3ee98dgs85",
+      "keySha256": "ca9abc4a22148115ecac180a0bc0c7bfd1495c73ad9daea0f0a0982207812270",
+      "createdAt": 1791121549070.5867,
+      "expiresAt": 1791726348663,
+      "active": true
+    },
+    {
+      "appId": "jn7bf9a5yxxw3zeadgj2enzpv18dh0qg",
+      "keySha256": "ca76b90f2e770cd877f60ab1e0f25aeec98671ae5f2ca8fd241566d39cea4369",
+      "createdAt": 1791121549070.5872,
+      "expiresAt": 1791726348663,
+      "active": true
+    }
+  ],
+  "retired": [
+    {
+      "appId": "jn714jrqe6dbrcwpmh4zv6sntn8dh7mv",
+      "createdAt": 1791121183189.846,
+      "revokedAt": 1791121548663
+    },
+    {
+      "appId": "jn71p22m882pj0zf82563y74k98dhhe0",
+      "createdAt": 1791121183189.8464,
+      "revokedAt": 1791121548663
+    },
+    {
+      "appId": "jn72f65dh6cck5jyync0ecdfrx8dgm0g",
+      "createdAt": 1791121183189.847,
+      "revokedAt": 1791121548663
+    },
+    {
+      "appId": "jn72z9y65ayshz9f2tcgmed0xs8dhmhy",
+      "createdAt": 1791121183189.8474,
+      "revokedAt": 1791121548663
+    },
+    {
+      "appId": "jn73wfjsa6wbxbafsdp7tdydz58dgn2w",
+      "createdAt": 1791121183189.848,
+      "revokedAt": 1791121548663
+    },
+    {
+      "appId": "jn76gmss16zr7kn3k9r0dehk4d8dhpt7",
+      "createdAt": 1791121183189.8484,
+      "revokedAt": 1791121548663
+    },
+    {
+      "appId": "jn7ag33dctr6t46k2r9nwv3ee98dgs85",
+      "createdAt": 1791121183189.8489,
+      "revokedAt": 1791121548663
+    },
+    {
+      "appId": "jn7bf9a5yxxw3zeadgj2enzpv18dh0qg",
+      "createdAt": 1791121183189.8494,
+      "revokedAt": 1791121548663
+    }
+  ],
+  "scope": "Read-only current hub App-key hashes match live active backend rows; no plaintext is captured."
+}

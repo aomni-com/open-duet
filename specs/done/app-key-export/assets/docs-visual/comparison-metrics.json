@@ -1,0 +1,77 @@
+{
+  "note": "Historical baseline and candidate padded at bottom with white to max height for diagnostics; native screenshots unchanged. Distance locates changed prose and displaced endpoint catalog, not acceptance.",
+  "results": [
+    {
+      "id": "mobile-docs-apps",
+      "dimensions": {
+        "width": 390,
+        "height": 16384
+      },
+      "distance": 0.16856,
+      "grayscale": {
+        "mae": 15.22299,
+        "rmse": 47.10578,
+        "diffRatio16": 0.13461,
+        "diffRatio32": 0.11176,
+        "diffRatio64": 0.08424,
+        "pixelmatchRatio": 0.13037
+      },
+      "edgeEnergyRatio": 1.18595,
+      "edgeDiffRatio32": 0.23978
+    },
+    {
+      "id": "mobile-docs-api-keys",
+      "dimensions": {
+        "width": 390,
+        "height": 4597
+      },
+      "distance": 0.14248,
+      "grayscale": {
+        "mae": 13.40267,
+        "rmse": 46.4014,
+        "diffRatio16": 0.10617,
+        "diffRatio32": 0.09441,
+        "diffRatio64": 0.07649,
+        "pixelmatchRatio": 0.1028
+      },
+      "edgeEnergyRatio": 1.1847,
+      "edgeDiffRatio32": 0.18822
+    },
+    {
+      "id": "desktop-docs-apps",
+      "dimensions": {
+        "width": 1440,
+        "height": 10804
+      },
+      "distance": 0.10679,
+      "grayscale": {
+        "mae": 7.02023,
+        "rmse": 30.80531,
+        "diffRatio16": 0.06855,
+        "diffRatio32": 0.05407,
+        "diffRatio64": 0.03538,
+        "pixelmatchRatio": 0.06683
+      },
+      "edgeEnergyRatio": 1.19834,
+      "edgeDiffRatio32": 0.128
+    },
+    {
+      "id": "desktop-docs-api-keys",
+      "dimensions": {
+        "width": 1440,
+        "height": 2879
+      },
+      "distance": 0.08034,
+      "grayscale": {
+        "mae": 5.76102,
+        "rmse": 30.3954,
+        "diffRatio16": 0.04581,
+        "diffRatio32": 0.04048,
+        "diffRatio64": 0.03285,
+        "pixelmatchRatio": 0.04433
+      },
+      "edgeEnergyRatio": 1.17277,
+      "edgeDiffRatio32": 0.08243
+    }
+  ]
+}

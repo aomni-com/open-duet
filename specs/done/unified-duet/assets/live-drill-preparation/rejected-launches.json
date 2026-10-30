@@ -1,0 +1,91 @@
+{
+  "archiveSha256": "050c2ebcf16d736a88ae9e44b87a68cca845814b532b9246527eb1144bd3a189",
+  "driverUnchanged": true,
+  "attempts": [
+    {
+      "fixtureId": "staging-e2e-synthetic",
+      "vmName": "duet-test-staging-e2e-synthetic",
+      "status": "failed",
+      "error": "exe.dev command failed: new --name duet-test-staging-e2e-synthetic --image ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187 --pool pool-duet --cpu 2 --memory 4GB --comment duet-test --tag duet-test --tag duet-ephemeral --tag duet-fixture-staging --tag duet-run-staging-e2e-synthetic --env [REDACTED] --env [REDACTED] --env [REDACTED] --env [REDACTED] --no-email (exit 1)\n{\"error\":\"invalid VM name, must be 5-52 characters: start with a lowercase letter, then lowercase letters or digits, with optional single hyphen separators (e.g., a-vm-name)\"}\n",
+      "automaticCleanup": {
+        "verifiedAbsent": false,
+        "error": "Creation remained unobserved; exact-run reconciliation is still required"
+      },
+      "rootReconciliation": {
+        "providerValidationRejected": true,
+        "exactName": "duet-test-staging-e2e-synthetic",
+        "verifiedAbsent": true,
+        "observedAt": "2026-10-04T15:46:13.349Z"
+      },
+      "recoveryProof": false
+    },
+    {
+      "fixtureId": "staging-e2e-synthetic",
+      "vmName": "duet-test-staging-e2e-synthetic",
+      "status": "failed",
+      "error": "exe.dev command failed: tag duet-test-staging-e2e-synthetic duet-test (exit 1)\n{\"error\":\"tag \\\"duet-test\\\" already exists on duet-test-staging-e2e-synthetic\"}\n",
+      "automaticCleanup": {
+        "verifiedAbsent": false,
+        "error": "Creation remained unobserved; exact-run reconciliation is still required"
+      },
+      "rootReconciliation": {
+        "exactName": "duet-test-staging-e2e-synthetic",
+        "verifiedAbsent": true,
+        "observedAt": "2026-10-04T15:57:21.090Z",
+        "failure": "Pool attempted duplicate ownership tag after creation; its existing catch removed the VM",
+        "recoveryProof": false
+      },
+      "recoveryProof": false
+    },
+    {
+      "fixtureId": "staging-e2e-synthetic",
+      "vmName": "duet-test-staging-e2e-synthetic",
+      "status": "failed",
+      "error": "Fixture timeout: held target has completed explicit sync refresh before cut",
+      "automaticCleanup": {
+        "verifiedAbsent": true
+      },
+      "recoveryProof": false,
+      "observedLegacyGateway": "0.0.0+01212abf6ba1",
+      "legacyCliVersion": "0.3.11",
+      "metadataRetrieved": true,
+      "journalBeforeCleanup": "not captured; next diagnostic producer must preserve it"
+    },
+    {
+      "fixtureId": "staging-e2e-synthetic",
+      "vmName": "duet-test-staging-e2e-synthetic",
+      "archiveSha256": "6f3e97804f30fe329ab3089b5d582880d98793dad085ea859d5ab3d799e4ff3b",
+      "status": "failed",
+      "error": "Adoption ended before the requested cut: deferred / restored: A gateway child is still active",
+      "automaticCleanup": {
+        "verifiedAbsent": true
+      },
+      "recoveryProof": false,
+      "actualOutcome": "safe startup-work deferral before the requested interruption",
+      "helperReceipt": {
+        "status": "deferred",
+        "phase": "restored",
+        "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+        "previousGatewayVersion": "0.0.0+01212abf6ba1",
+        "restored": true,
+        "reason": "A gateway child is still active",
+        "bootIdBefore": "d0f08210-0046-46db-bd67-f264e4f47ea3",
+        "bootIdAfter": "d0f08210-0046-46db-bd67-f264e4f47ea3"
+      },
+      "platformSettlement": {
+        "unit": "duet-runtime-adoption.service",
+        "runId": "b2e5ecd2-4d2a-49c2-bcb1-6fb1a40177e1",
+        "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+        "settled": true
+      },
+      "platformProperties": "MainPID=0\nControlPID=0\nResult=success\nExecMainCode=0\nExecMainStatus=0\nLoadState=not-found\nActiveState=inactive\nSubState=dead",
+      "unchangedGatewayPid": 506,
+      "gatewayUptimeSeconds": 9
+    }
+  ],
+  "joinedChecks": {
+    "tests": 9,
+    "skippedLivePoolTest": 1,
+    "assertions": 41
+  }
+}

@@ -1,0 +1,28 @@
+$ bun test scripts && bun run verify:boundaries && bun run verify:content && bun run verify:endpoints && bun run verify:visual-coverage
+bun test v1.3.14 (0d9b296a)
+
+scripts/verify-content-core.test.ts:
+(pass) docs content address helpers > maps file-routed MDX to public paths [0.31ms]
+(pass) docs content address helpers > matches the heading anchors emitted for plain developer headings [0.06ms]
+
+scripts/unified-cli-copy.test.ts:
+(pass) public docs use the unified CLI and one human login [1.93ms]
+
+scripts/endpoint-reference.test.tsx:
+(pass) renders collection and endpoint-specific errors from the composed contract schema [42.60ms]
+
+scripts/serve-static-export.test.ts:
+(pass) docs static export server > serves clean routes, static files, and the exported 404 page [6.39ms]
+
+ 5 pass
+ 0 fail
+ 24 expect() calls
+Ran 5 tests across 4 files. [127.00ms]
+$ bun scripts/check-boundaries.ts
+Docs boundaries verified across 35 source files.
+$ bun scripts/verify-content.ts
+Verified 22 MDX routes, links, anchors, and schema-bound examples.
+$ bun scripts/verify-endpoints.ts
+Verified 196 contract-owned public endpoints.
+$ bun scripts/verify-visual-coverage.ts
+Verified 32 code-derived docs page and component owners across 23 routes.

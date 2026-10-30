@@ -1,0 +1,20 @@
+{
+  "workspace-redacted.json.gz": {
+    "originalSha256": "3db8b4ea047c2530503fb8410070d4ff8f4b79d205c766dc0634a9222e940e20",
+    "storedSha256": "78e52aa1ee3d3910198bc0a06464267662b74f3f151ef12c8200303f793cdf37",
+    "originalBytes": 8491,
+    "compressed": true
+  },
+  "workspace-redacted.json.gz": {
+    "originalSha256": "b100dd3cf4f986b793d51781f35a0564c927a1ab80636d29085ef9e4eec7446a",
+    "storedSha256": "e24c0d5e2483e8dc8dfb7ffa659f829f759eefcd9560bfd362192e81c288cc7d",
+    "originalBytes": 8495,
+    "compressed": true
+  },
+  "summary.json.gz": {
+    "originalSha256": "2971ebfb5bfdb4fc960bef86260191177ad06a70e582326fc6644fe038e949cb",
+    "storedSha256": "abad3d52d3833677f56f7a5cb2b6044fed1c9fd3797b8f7041ad5e2709da1743",
+    "originalBytes": 19159,
+    "compressed": true
+  }
+}

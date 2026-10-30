@@ -1,0 +1,11 @@
+{
+  "cloud_probe_ready": false,
+  "required_environment_names": [
+    "LIVEKIT_URL",
+    "LIVEKIT_API_KEY",
+    "LIVEKIT_API_SECRET",
+    "LIVEKIT_FISH_STOCK_VOICE_ID_3"
+  ],
+  "required_stock_voice_count": 3,
+  "third_stock_voice_ready": false
+}

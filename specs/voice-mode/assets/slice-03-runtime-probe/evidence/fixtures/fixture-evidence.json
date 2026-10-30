@@ -1,0 +1,10 @@
+{
+  "container_mime": "audio/ogg;codecs=opus",
+  "full_bytes": 15124,
+  "full_duration_ms": 4000,
+  "full_sha256": "57aa18d6f3b8ad94132da88f9a3b3ec58ee4d3f1b19f0017938073d28bd86e3c",
+  "prefix_bytes": 4453,
+  "prefix_duration_ms": 1200,
+  "prefix_sha256": "ff2a58c441d3a7efc1e50c776839ecb66c17adc27376c2b0e59a79a7e105b545",
+  "retained_transcript": "One two"
+}

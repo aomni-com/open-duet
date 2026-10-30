@@ -1,0 +1,50 @@
+{
+  "sourceSession": "jn7c6hrjkkkpwg3r4efcr2kdkn8f93dj",
+  "sourceEventSeq": [
+    6572,
+    6573
+  ],
+  "sanitization": "Task text, paths, commit IDs and project identity replaced with synthetic values; structural placement preserved.",
+  "historicalRequest": {
+    "decision": {
+      "state": "publish-candidate"
+    },
+    "input": {
+      "gateVerifiedSha": "synthetic-commit",
+      "gateResult": "local fixture checks passed"
+    },
+    "override": {
+      "kind": "agent",
+      "state": {
+        "cwd": "/fixture/release",
+        "forkContext": true,
+        "prompt": "Publish the exact verified fixture candidate; do not repeat the waived check."
+      }
+    }
+  },
+  "historicalAcceptedDecision": {
+    "state": "publish-candidate"
+  },
+  "expectedAfterCutover": {
+    "admitted": false,
+    "workerStarts": 0,
+    "invalidPath": "/override"
+  },
+  "validReplacement": {
+    "decision": {
+      "state": "publish-candidate",
+      "input": {
+        "gateVerifiedSha": "synthetic-commit",
+        "gateResult": "local fixture checks passed"
+      },
+      "override": {
+        "kind": "agent",
+        "state": {
+          "cwd": "/fixture/release",
+          "forkContext": true,
+          "prompt": "Publish the exact verified fixture candidate; do not repeat the waived check."
+        }
+      }
+    }
+  }
+}

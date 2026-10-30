@@ -1,0 +1,17 @@
+{
+  "runId": "staging-e2e-synthetic",
+  "downstreamHeaderObservation": {
+    "journey": "app-domains",
+    "stage": "app-domains:document-headers {\"mode\":\"cors\",\"destination\":\"document\"}"
+  },
+  "privateRefusal": {
+    "host": "domain-probe--app-domains-staging-e2e-synthetic",
+    "status": 403,
+    "contentType": "application/json",
+    "robots": "noindex, nofollow",
+    "error": "forbidden",
+    "denied": true,
+    "guestPrivate": true
+  },
+  "operatorIntent": "The diagnostic document probe used handwritten Accept text/html, Sec-Fetch-Dest document and Sec-Fetch-Mode navigate. This records operator intent, not a capture of headers arriving at edge."
+}

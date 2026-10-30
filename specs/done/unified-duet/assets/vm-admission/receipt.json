@@ -1,0 +1,67 @@
+{
+  "observedAt": "2026-10-04",
+  "frozenSourceRevision": "0f997d60df1a3abd86eaf75ab11926b06e46f15c",
+  "gatewayVersionObservedReadOnly": "0.0.0+4955b7a09dde",
+  "sourceTrees": {
+    "0f997d60": {
+      "packages/gateway": "0f35ea72fac8726b6faf5c0df1b722149b960284",
+      "packages/vm-image/systemd": "5df32ecd0e7ef523b9afd7694433e2c478bfe3c4"
+    },
+    "1d0ee5edefd1e55c49a857c74b5e87171ed1f078": {
+      "packages/gateway": "0f35ea72fac8726b6faf5c0df1b722149b960284",
+      "packages/vm-image/systemd": "5df32ecd0e7ef523b9afd7694433e2c478bfe3c4"
+    },
+    "dbb28fe14a026c143f2134b88586a13f2e0ebdef": {
+      "packages/gateway": "0f35ea72fac8726b6faf5c0df1b722149b960284",
+      "packages/vm-image/systemd": "5df32ecd0e7ef523b9afd7694433e2c478bfe3c4"
+    }
+  },
+  "runtimeProbe": {
+    "tests": 2,
+    "assertions": 20,
+    "gatewayBun": "1.3.14",
+    "linuxArch": "amd64",
+    "actualProductionComponents": [
+      "agent coordinator and ledger",
+      "Train route and job ledger",
+      "backup routes and worker"
+    ],
+    "controlledExternalWork": [
+      "mock agent runner",
+      "held Train callback",
+      "held backup HTTP claim"
+    ]
+  },
+  "systemdProbe": {
+    "linuxArch": "arm64",
+    "base": "ubuntu:24.04",
+    "unitSource": "0f997d60df1a3abd86eaf75ab11926b06e46f15c:packages/vm-image/systemd/duet-gateway.service",
+    "fixtureChanges": [
+      "User/Group root",
+      "WorkingDirectory and ExecStart fixture shell",
+      "ExecStartPre omitted"
+    ],
+    "watchdogUSec": 0,
+    "killFirstSignal": 9,
+    "restoredSignal": 15,
+    "scriptSha256": {
+      "systemd-probe": "4e42fc8be1ee95c5915752c283d4230d6c5db3a39816ff3c544e40bce99c7f97",
+      "guardian-probe": "2aa6ed3d5ddd2d1d55fdb4d3de10a675d2c8f63fa9e5381f0fa2b8ef90cdddd2",
+      "sigkill-stop-probe": "1c1c0b0721cf66c176f1b7c87d121f74d1a2cdb360007cf36de9f926147c8cfa"
+    }
+  },
+  "liveVmReadOnlyObservation": {
+    "environment": "staging",
+    "vmName": "workspace-redacted",
+    "watchdogUSec": 0,
+    "killMode": "control-group",
+    "killSignal": 15,
+    "serviceProcessCount": 13,
+    "rpcOwnerMarkedProcessesAcrossProc": 0
+  },
+  "notProven": [
+    "full old-layout migration or bootstrap/health certification",
+    "guardian versus controller final-cut race",
+    "live production or staging mutation"
+  ]
+}

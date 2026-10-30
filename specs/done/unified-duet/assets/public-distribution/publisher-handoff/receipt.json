@@ -1,0 +1,47 @@
+{
+  "observedAt": "2026-10-04T11:23:45Z",
+  "sourceRepository": "Example User/duet-agent",
+  "destinationRepository": "aomni-com/duet",
+  "sourceRevision": "b1fcfbc21df293d173c6703fbf765667b1fe36ed",
+  "workflowRun": {
+    "id": 37198536907,
+    "url": "https://github.com/Example User/duet-agent/actions/runs/37198536907",
+    "conclusion": "success"
+  },
+  "secret": {
+    "name": "NPM_TOKEN",
+    "destinationKeyId": "3380204578043523366",
+    "createdAt": "2026-10-04T11:23:45Z",
+    "updatedAt": "2026-10-04T11:23:45Z",
+    "verifiedBy": "destination GitHub secret name and timestamps"
+  },
+  "cleanup": {
+    "temporaryWorkflowState": "disabled_manually",
+    "temporaryBranchDeleted": true,
+    "encryptedArtifactDeleted": true,
+    "localCiphertextDeleted": true
+  },
+  "oldPublisher": {
+    "workflowId": 271933189,
+    "state": "active",
+    "credentialRetained": true,
+    "retirementCondition": "replacement registry publication and clean registry install verified"
+  },
+  "verification": {
+    "disposableCredentialTests": 2,
+    "testsPassed": true,
+    "liveWorkflowTestsPassed": true,
+    "independentReview": "No actionable defects; root separately verified destination public key ownership and successful workflow execution."
+  },
+  "claims": {
+    "credentialTransferred": true,
+    "npmCredentialPublicationPermissionVerified": false,
+    "registryPublished": false,
+    "vmMutations": false
+  },
+  "sourceSha256": {
+    "transfer-npm-publisher.yml": "aa4e88ee10de3bf1f70e715e0aead4c784881256490f8e960757bda7e2ea85a7",
+    "seal-publisher-secret.py": "6c2bffd7202df6247d373e62b1007aaafcbfb20b330999528a3343f514afcb1d",
+    "seal-publisher-secret.test.py": "7da84dbb4660ed9df17b7d5b7b77140c5c2a5286518dc0d7c36af3bc1ce8332d"
+  }
+}

@@ -1,0 +1,835 @@
+<title>Map — device auth: pick-at-approval + MCP OAuth</title>
+<style>
+  :root {
+    --brand: hsl(214 65% 56%);
+    --ground: hsl(216 28% 96%);
+    --card: #fff;
+    --border: hsl(216 18% 87%);
+    --ink: hsl(218 22% 14%);
+    --ink-soft: hsl(218 12% 42%);
+    --muted: hsl(216 25% 96%);
+    --good: hsl(152 45% 36%);
+    --warn: hsl(28 80% 42%);
+    --bad: hsl(4 65% 48%);
+    --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: hsl(220 18% 10%);
+      --card: hsl(219 16% 14%);
+      --border: hsl(218 12% 24%);
+      --ink: hsl(216 20% 92%);
+      --ink-soft: hsl(216 10% 62%);
+      --muted: hsl(219 14% 18%);
+      --good: hsl(152 40% 52%);
+      --warn: hsl(28 85% 60%);
+      --bad: hsl(4 75% 64%);
+    }
+  }
+  :root[data-theme='light'] {
+    --ground: hsl(216 28% 96%);
+    --card: #fff;
+    --border: hsl(216 18% 87%);
+    --ink: hsl(218 22% 14%);
+    --ink-soft: hsl(218 12% 42%);
+    --muted: hsl(216 25% 96%);
+    --good: hsl(152 45% 36%);
+    --warn: hsl(28 80% 42%);
+    --bad: hsl(4 65% 48%);
+  }
+  :root[data-theme='dark'] {
+    --ground: hsl(220 18% 10%);
+    --card: hsl(219 16% 14%);
+    --border: hsl(218 12% 24%);
+    --ink: hsl(216 20% 92%);
+    --ink-soft: hsl(216 10% 62%);
+    --muted: hsl(219 14% 18%);
+    --good: hsl(152 40% 52%);
+    --warn: hsl(28 85% 60%);
+    --bad: hsl(4 75% 64%);
+  }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    margin: 0;
+    font:
+      15px/1.6 system-ui,
+      -apple-system,
+      'Segoe UI',
+      sans-serif;
+    padding: 2.5rem 1.25rem 4rem;
+  }
+  main {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 1.6rem;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.3rem;
+    text-wrap: balance;
+  }
+  .meta {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    margin: 0 0 2.2rem;
+  }
+  h2 {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brand);
+    margin: 2.6rem 0 0.9rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  h2 .quad {
+    color: var(--ink-soft);
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+    font-size: 0.8rem;
+  }
+  h3.phase {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin: 1.4rem 0 0.5rem;
+  }
+  section > p {
+    max-width: 70ch;
+  }
+  code,
+  .file {
+    font-family: var(--mono);
+    font-size: 0.78em;
+    background: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 0.35rem;
+    padding: 0.08rem 0.35rem;
+    white-space: nowrap;
+  }
+  ul.facts {
+    padding-left: 1.1rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  ul.facts li {
+    max-width: 75ch;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.86rem;
+  }
+  th,
+  td {
+    text-align: left;
+    border-top: 1px solid var(--border);
+    padding: 0.55rem 0.7rem 0.55rem 0;
+    vertical-align: top;
+  }
+  th {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--ink-soft);
+    border-top: none;
+  }
+  td.who {
+    white-space: nowrap;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 650;
+    border-radius: 999px;
+    padding: 0.12rem 0.55rem;
+    border: 1px solid currentcolor;
+  }
+  .tag.user {
+    color: var(--brand);
+  }
+  .tag.inform {
+    color: var(--ink-soft);
+  }
+  .tag.open {
+    color: var(--warn);
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1.1rem 1.3rem;
+    margin-bottom: 0.9rem;
+  }
+  .card h3 {
+    margin: 0 0 0.35rem;
+    font-size: 0.95rem;
+    display: flex;
+    gap: 0.6rem;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .card p {
+    margin: 0.3rem 0;
+    font-size: 0.86rem;
+    max-width: 72ch;
+  }
+  .card .why {
+    color: var(--ink-soft);
+  }
+  .sev {
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    border-radius: 0.35rem;
+    padding: 0.14rem 0.45rem;
+  }
+  .sev.hi {
+    background: var(--bad);
+    color: #fff;
+  }
+  .sev.md {
+    background: var(--warn);
+    color: #fff;
+  }
+  .sev.lo {
+    background: var(--muted);
+    color: var(--ink-soft);
+    border: 1px solid var(--border);
+  }
+  .status {
+    margin-left: auto;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+  }
+  details {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 0.9rem 1.3rem;
+    margin-bottom: 0.9rem;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 650;
+    font-size: 0.92rem;
+  }
+  details[open] summary {
+    margin-bottom: 0.6rem;
+  }
+  ol.plan {
+    padding-left: 1.2rem;
+    margin: 0.4rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+  }
+  .prompt-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1.1rem 1.3rem;
+  }
+  .prompt-box header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.7rem;
+  }
+  .prompt-box header strong {
+    font-size: 0.92rem;
+  }
+  pre#prompt {
+    font: 0.78rem/1.65 var(--mono);
+    white-space: pre-wrap;
+    margin: 0;
+    background: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 0.6rem;
+    padding: 0.9rem 1rem;
+    overflow-x: auto;
+  }
+  button.copy {
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--ink);
+    border-radius: 0.55rem;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button.copy:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+  .overflow {
+    overflow-x: auto;
+  }
+</style>
+
+<main>
+  <h1>Device auth — pick-at-approval + MCP OAuth: the map</h1>
+  <p class="meta">
+    Quadrant walk closed 2026-07-23, extended same day with MCP OAuth · duet + duet-agent · one
+    consent surface, two front doors · billing untouched (per-user, orthogonal)
+  </p>
+  <p class="meta">
+    <strong>SUPERSEDED FOR IMPLEMENTATION by <code>specs/device-auth/</code></strong> (14-slice
+    ladder, written 2026-07-23). This map remains the product-decision record; the build plan and
+    kickoff prompt below are stale — start from the spec's README instead. Late decisions not in the
+    ledger below: MCP domains are mcp[-staging].service.example.invalid; the /mcp path is deleted (MCP serves at
+    root). Drafting correction: the 'first expiring credential' claim in the phase-2 cards is wrong
+    — apiKeys.expiresAt already exists and is checked generically; the oauth kind reuses it.
+  </p>
+
+  <section>
+    <h2>Known knowns <span class="quad">— settled ground</span></h2>
+
+    <h3 class="phase">Phase 1 — device flow</h3>
+    <ul class="facts">
+      <li>
+        <strong>Current flow:</strong> the CLI front-loads <code>ws:&lt;slug&gt;:ai</code> into
+        <span class="file">duet-agent/src/lib/login.ts:68</span>; the server asserts
+        single-workspace pre-auth (<span class="file">apps/api/src/routes/device.ts:64</span>);
+        approval authorizes via <code>grantableWorkspaceIds</code> (<span class="file"
+          >domains/apiKeys/deviceApproval.ts</span
+        >); mint copies stored scopes (<span class="file">domains/apiKeys/api.ts:269</span>).
+        Workspace binding happens at step 1 — this change moves it to approval.
+      </li>
+      <li>
+        <strong>Landmine origin:</strong> vocabulary cutover <code>f5725d30</code> renamed
+        <code>ai→services</code>, <code>agent→sessions</code>;
+        <code>parseScope('ws:acme:ai')</code> is pinned null (<span class="file"
+          >contract/src/scopes/index.test.ts:87</span
+        >). Only duet-agent still sends <code>:ai</code>.
+      </li>
+      <li>
+        <strong>Key purpose:</strong> model gateway demands
+        <code>ws:&lt;slug&gt;:services</code> (<span class="file"
+          >domains/modelGateway/preflight.ts:56</span
+        >); <code>services</code> is editor/owner-grantable (<span class="file"
+          >domains/apiKeys/model.ts:675</span
+        >).
+      </li>
+      <li>
+        <strong>Second mint path:</strong> web settings form with workspace select + capability
+        chips (<span class="file">apps/web/spa/routes/user-settings.tsx:595</span>) — the approval
+        page reuses this picker pattern, not a sibling.
+      </li>
+      <li>
+        <strong>Flag-removal blast radius:</strong> only
+        <span class="file">duet-agent/src/cli/login.ts</span>, <span class="file">help.ts</span>,
+        and login tests. VM rail uses <code>DUET_WORKSPACE_HINT</code>; duetfs untouched; nothing
+        invokes <code>duet login --workspace</code>.
+      </li>
+      <li>
+        <strong>Sync-device grants</strong> (<code>user:</code> pair) are a separate branch and stay
+        byte-for-byte unchanged.
+      </li>
+    </ul>
+
+    <h3 class="phase">Phase 2 — MCP OAuth (spec revision 2025-11-25, fetched fresh)</h3>
+    <ul class="facts">
+      <li>
+        <strong>MCP auth today:</strong> no flow of its own — bearer [REDACTED] via
+        <code>/v1/whoami</code> (<span class="file">apps/mcp/src/http.ts:32-44</span>); bare 401
+        JSON, no <code>WWW-Authenticate</code>; stateless per-request transport; forwards the
+        caller's bearer to <code>service.example.invalid</code> + <code>service.example.invalid</code>. Tools demand
+        files:read/write, memory, sessions, integrations, services (<span class="file"
+          >apps/mcp/src/tools/*</span
+        >).
+      </li>
+      <li>
+        <strong>Spec requires (RS):</strong> RFC 9728 Protected Resource Metadata naming the AS; 401
+        + <code>WWW-Authenticate: Bearer [REDACTED]"…" scope="…"</code>; audience validation
+        (RFC 8707 <code>resource</code> param).
+      </li>
+      <li>
+        <strong>Spec requires (AS):</strong> OAuth 2.1 authorization-code + PKCE S256 (<code
+          >code_challenge_methods_supported</code
+        >
+        mandatory in metadata); RFC 8414 metadata; refresh rotation for public clients; short-lived
+        access tokens.
+        <strong>Client ID Metadata Documents are now the primary registration path</strong> for
+        unknown clients; DCR (RFC 7591) is the backwards-compat fallback.
+      </li>
+      <li>
+        <strong>Reused wholesale:</strong> the phase-1 consent panel (picker + chips + eligibility
+        via <code>roleCanGrant</code>), <code>ws:</code> scope materialization at grant, the
+        <code>apiKeys</code> table + whoami validation stack, the browser-session pattern from
+        <code>/device</code>, the device-endpoint rate-limit rail.
+      </li>
+      <li>
+        <strong>Not this:</strong> connected-providers 11b fake issuer is Duet-as-OAuth-<em
+          >client</em
+        >
+        test scaffolding (outbound); MCP OAuth is Duet-as-<em>server</em> (inbound). Opposite arrows
+        — 11b stays its own call.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Known unknowns <span class="quad">— decision ledger</span></h2>
+    <div class="overflow">
+      <table>
+        <tr>
+          <th>#</th>
+          <th>Question</th>
+          <th>Decision</th>
+          <th>Closed by</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Workspace-less request shape</td>
+          <td>
+            New <code>capabilities</code> field on <code>/v1/device/code</code>;
+            <code>scopes</code> keeps its <code>ws:</code>/<code>user:</code> grammar; mixing
+            rejected
+          </td>
+          <td class="who"><span class="tag user">user</span></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Back-compat for ≤0.3.2 CLIs</td>
+          <td>Hard break — no <code>ai→services</code> alias</td>
+          <td class="who"><span class="tag user">user</span></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Capability set login requests</td>
+          <td>
+            Broad: files:read, files:write, memory, sessions, services, integrations — one key
+            powers CLI + MCP paste-style
+          </td>
+          <td class="who"><span class="tag user">user</span></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><code>--workspace</code> / <code>DUET_WORKSPACE</code></td>
+          <td>Deleted entirely; workspace-specific minting lives in the web settings form</td>
+          <td class="who"><span class="tag user">user</span></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Picker data path</td>
+          <td>Inspect response gains grantable <code>workspaces</code> — no new endpoint</td>
+          <td class="who"><span class="tag inform">informed</span></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Where binding happens</td>
+          <td>
+            Approve carries <code>workspaceSlug</code>, materializes <code>ws:</code> scopes onto
+            the row — mint path untouched
+          </td>
+          <td class="who"><span class="tag inform">informed</span></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>CLI learns the pick</td>
+          <td>Token response gains <code>workspace: {slug, name}</code>; CLI hard-requires it</td>
+          <td class="who"><span class="tag inform">informed</span></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Old <code>ws:</code>-scoped request form</td>
+          <td>Stays valid — sync-device + staging harness use it</td>
+          <td class="who"><span class="tag inform">informed</span></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Server-side capability validation</td>
+          <td>Enum minus <code>admin</code>; role-gating at approval decides the rest</td>
+          <td class="who"><span class="tag inform">informed</span></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Auto-select rule</td>
+          <td>Exactly one grantable workspace → no picker; workspace still named</td>
+          <td class="who"><span class="tag user">user</span></td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>AS placement / issuer</td>
+          <td>
+            Token/register/metadata on <code>apps/api</code> (issuer
+            <code>https://service.example.invalid</code>); <code>/oauth/authorize</code> consent UI on the web
+            app via browser session, like <code>/device</code>
+          </td>
+          <td class="who"><span class="tag user">user</span></td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>Access token shape</td>
+          <td>
+            New <code>apiKeys</code> kind <code>oauth</code>: duet_sk_ validation stack +
+            <code>ws:</code> scopes, ~1h <code>expiresAt</code>, rotating refresh tokens
+          </td>
+          <td class="who"><span class="tag user">user</span></td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td>Audience posture</td>
+          <td>
+            First-party platform audience — mcp/api/gateway all accept; SECURITY.md documents why
+            same-trust-domain forwarding isn't token passthrough
+          </td>
+          <td class="who"><span class="tag user">user</span></td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td>Client registration</td>
+          <td>
+            DCR (today's real clients) + Client ID Metadata Documents (spec's primary path),
+            SSRF-guarded
+          </td>
+          <td class="who"><span class="tag user">user</span></td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td>OAuth scope grammar</td>
+          <td>
+            Bare capability names; <code>scopes_supported</code> = the six; workspace bound at
+            consent like a device approval
+          </td>
+          <td class="who"><span class="tag inform">informed</span></td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td>Sequencing</td>
+          <td>
+            Phase 1 ships first and factors the consent panel into a shared component; phase 2
+            consumes it
+          </td>
+          <td class="who"><span class="tag inform">informed</span></td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td>Refresh semantics</td>
+          <td>
+            Rotation with reuse-detection (reuse revokes grant family); retry-of-same-token grace to
+            avoid self-nuke
+          </td>
+          <td class="who"><span class="tag inform">informed</span></td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td>Grant management</td>
+          <td>OAuth grants listed + revocable in web settings alongside keys and sync devices</td>
+          <td class="who"><span class="tag inform">informed</span></td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Unknown knowns <span class="quad">— extracted taste</span></h2>
+    <ul class="facts">
+      <li>
+        Ineligible (viewer-role) workspaces <strong>hidden entirely</strong>; capabilities as
+        <strong>mono chips</strong>; auto-selection <strong>visible, never silent</strong>;
+        no-eligible state = <strong>explain + Deny only</strong>.
+      </li>
+      <li>
+        Copy: <strong>“Connect a device to Duet”</strong> replaces the hardcoded “Connect duetfs”;
+        approve button carries the pick (“Approve for Acme Inc”).
+      </li>
+      <li>
+        <strong>OAuth consent inherits all of the above</strong>, plus spec-forced additions: client
+        identity (<code>client_name</code>) on the card, and the redirect URI hostname displayed —
+        with warning treatment for <code>localhost</code> redirects (the spec's named impersonation
+        vector).
+      </li>
+      <li>
+        Consolidation instinct, resolved twice: MCP needed no OAuth
+        <em>for the CLI key path</em> (shared credential was already the consolidation) — but MCP
+        clients get a real first-class OAuth door; both doors share one consent surface. And 11b is
+        <em>not</em> this building.
+      </li>
+      <li>Simplification instinct: fewer flags beats compat shims — drove decisions 2 and 4.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Unknown unknowns <span class="quad">— landmine cards, worst first</span></h2>
+
+    <h3 class="phase">Phase 1 — device flow</h3>
+
+    <div class="card">
+      <h3>
+        <span class="sev hi">HI</span> Approval responses 500 on pending capability rows
+        <span class="status">sharp edge</span>
+      </h3>
+      <p>
+        <strong>Evidence:</strong>
+        <span class="file">apps/api/src/routes/device.ts:163</span> re-parses responses through
+        <code>DeviceApprovalResponseSchema</code>;
+        <span class="file">contract/src/api-keys/index.ts:39</span> requires
+        <code>scopes: min(1)</code>.
+      </p>
+      <p class="why">
+        A capability-pending row has no <code>ws:</code> scopes until approve → server-side parse
+        failure → 500. Schema gains <code>capabilities</code> + <code>workspaces</code>,
+        <code>scopes</code> optional — in the same slice that introduces pending rows.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>
+        <span class="sev hi">HI</span> Inspect/deny are role-gated; state C impossible without
+        opening them <span class="status">decided</span>
+      </h3>
+      <p class="why">
+        <span class="file">deviceApproval.ts:29</span> role-gates inspect (and deny) → 403 today.
+        For capability-pending codes: inspect + deny open to any authenticated user; approve keeps
+        the gate; <code>ws:</code>-scoped codes unchanged.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>
+        <span class="sev hi">HI</span> Ship order is one-way: servers first, agent last
+        <span class="status">sharp edge</span>
+      </h3>
+      <p class="why">
+        New CLI → old API = 400 on the unknown <code>capabilities</code> field. Deploy duet (api +
+        backend + web) to staging <em>and prod</em> (prod deploy already flagged stale), then
+        publish agent 0.3.3. CLI hard-requires <code>workspace</code> in the token response so skew
+        fails loudly.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>
+        <span class="sev md">MD</span> SECURITY.md describes two request shapes; this adds a third
+        <span class="status">sharp edge</span>
+      </h3>
+      <p class="why">
+        The invariant section (echoed at <span class="file">domains/apiKeys/mutations.ts:209</span>)
+        must gain the capability-pending shape: binding moves to approval, mint assertion unchanged.
+        Rides the same commit.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>
+        <span class="sev md">MD</span> Test pins that will trip
+        <span class="status">mechanical</span>
+      </h3>
+      <p class="why">
+        Visual: <code>'Approve device'</code> button string (<span class="file"
+          >auth-routes.spec.ts:134</span
+        >) + playground fixture (<span class="file">coverage.ts:106</span>) →
+        <code>ui-playground</code> red/green. SPA client pin (<span class="file"
+          >client.test.ts:437</span
+        >). Agent pins <code>{scopes: ["ws:acme:ai"]}</code> (<span class="file"
+          >login-device-flow.test.ts:77,153,174</span
+        >) → <code>write-tests</code>.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3><span class="sev lo">LO</span> Residuals <span class="status">noted</span></h3>
+      <p class="why">
+        Old pending rows keep working (additive optional field). Staging e2e device journey needs a
+        capability-form variant (done bar). Agent's capability list duplicated agent-side — named
+        constant pointing at the contract.
+      </p>
+    </div>
+
+    <h3 class="phase">Phase 2 — MCP OAuth</h3>
+
+    <div class="card">
+      <h3>
+        <span class="sev hi">HI</span> Expiry enters the hot auth path
+        <span class="status">sharp edge</span>
+      </h3>
+      <p class="why">
+        No credential in <code>apiKeys</code> expires today — whoami/key authorization has no
+        <code>expiresAt</code> check. The <code>oauth</code> kind adds one to the path every product
+        request flows through; must be cheap and must not regress
+        <code>user</code>/<code>sync_device</code>/<code>app</code> kinds.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>
+        <span class="sev hi">HI</span> Refresh rotation self-nuke on client retries
+        <span class="status">decided (ledger #17)</span>
+      </h3>
+      <p class="why">
+        A network-flake retry of the <em>same</em> refresh token must not trip reuse-detection and
+        revoke the grant family. Idempotent same-token handling within a short window; genuinely old
+        tokens still kill the family per OAuth 2.1.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>
+        <span class="sev md">MD</span> CIMD is SSRF by design <span class="status">sharp edge</span>
+      </h3>
+      <p class="why">
+        The AS fetches an attacker-supplied <code>client_id</code> URL. Application-level guard
+        (private-IP/redirect blocking) — network-level controls don't exist inside Vercel functions.
+        Spec's security section is the checklist.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>
+        <span class="sev md">MD</span> The MCP app doesn't know its own name
+        <span class="status">small fact OPEN</span>
+      </h3>
+      <p class="why">
+        PRM + audience validation need a canonical self-URL;
+        <span class="file">apps/mcp/src/config.ts</span> only knows api + gateway. New
+        <code>DUET_MCP_PUBLIC_URL</code> via the secret-topology rail, both envs.
+        <strong>OPEN: confirm the MCP deploy domain with Example User at build time.</strong>
+      </p>
+    </div>
+
+    <div class="card">
+      <h3><span class="sev lo">LO</span> Residuals <span class="status">noted</span></h3>
+      <p class="why">
+        401 shape change (adding <code>WWW-Authenticate</code>) is additive-safe. New tables: oauth
+        clients (DCR) + CIMD cache + grants/refresh tokens. Rate-limit rail extends to
+        token/register endpoints. Consent-component factoring from phase 1 is a
+        <code>refactor-clean</code> checkpoint, not a copy-paste.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Build plan <span class="quad">— sorted by likelihood of tweaking</span></h2>
+    <details open>
+      <summary>Judgment calls (tweakable)</summary>
+      <ol class="plan">
+        <li>
+          <strong>Approval/consent card layout details</strong> — picker order, role display,
+          client-identity header placement (phase 2). Tweak freely.
+        </li>
+        <li>
+          <strong>Login capability constant</strong> — lives in duet-agent as a named constant;
+          server validates independently. Alternative (contract export) rejected: cross-repo import
+          for six strings.
+        </li>
+        <li>
+          <strong>Token lifetimes</strong> — ~1h access / refresh TTL and rotation grace window;
+          defaults proposed at build, easy to tune.
+        </li>
+        <li>
+          <strong>Eligibility semantics</strong> — role grants <em>every</em> requested capability
+          (all-or-nothing); partial grants rejected as scope creep.
+        </li>
+      </ol>
+    </details>
+    <details>
+      <summary>Phase 1 — device flow (mechanical, trusted)</summary>
+      <ol class="plan">
+        <li>
+          Contract: <code>capabilities</code> on device-code request, approval request/response,
+          token response <code>workspace</code>.
+        </li>
+        <li>
+          Backend: store capabilities; inspect returns eligible workspaces; approve binds +
+          materializes; poll returns workspace.
+        </li>
+        <li>API route three-way branch (sync / ws-scoped / capabilities); reject mixed.</li>
+        <li>
+          Web: card states A/B/C per mock (consent panel factored as a shared component),
+          playground, baselines.
+        </li>
+        <li>
+          Agent: delete flags, send capabilities, hard-require workspace, tests, release 0.3.3.
+        </li>
+        <li>
+          SECURITY.md + docs. Deploy servers (staging + prod), then publish agent. Staging e2e
+          (needs approval).
+        </li>
+      </ol>
+    </details>
+    <details>
+      <summary>Phase 2 — MCP OAuth (mechanical, trusted)</summary>
+      <ol class="plan">
+        <li>
+          Auth stack: <code>oauth</code> kind with <code>expiresAt</code> + audience; expiry check
+          in key authorization.
+        </li>
+        <li>
+          AS on apps/api: RFC 8414 metadata, authorize/token endpoints, PKCE S256, DCR + CIMD
+          (SSRF-guarded), refresh rotation, rate limits.
+        </li>
+        <li>
+          Consent UI on web at <code>/oauth/authorize</code>: shared consent panel + client identity
+          + redirect-host display (localhost warning).
+        </li>
+        <li>
+          RS on apps/mcp: PRM well-known, <code>WWW-Authenticate</code> 401s, audience validation,
+          <code>DUET_MCP_PUBLIC_URL</code>.
+        </li>
+        <li>
+          Web settings: OAuth grants list + revoke. SECURITY.md: first-party audience rationale.
+        </li>
+        <li>Verify with a real MCP client (Claude) against staging; staging e2e extension.</li>
+      </ol>
+    </details>
+  </section>
+
+  <section>
+    <h2>Kickoff <span class="quad">— superseded</span></h2>
+    <p style="max-width: 70ch">
+      <strong>Do not use this prompt.</strong> The spec at
+      <code>specs/device-auth/</code> supersedes it — open its README's "Next Agent Prompt" and
+      start at slice 00. The text below is retained only as the planning record.
+    </p>
+    <div class="prompt-box">
+      <header>
+        <strong>Implementation prompt (stale — see specs/device-auth/)</strong
+        ><button class="copy" id="copy">Copy</button>
+      </header>
+      <pre id="prompt">
+Build the device-auth program per the map (artifact: device auth map). Two phases, phase 1
+first; write-spec the ladder before implementing.
+
+Phase 1 — device flow pick-at-approval (duet + ../duet-agent): contract adds `capabilities`
+(no ws slug) to /v1/device/code; approval page picks the workspace (auto-select when exactly
+one eligible; hidden ineligible; mono chips; "Connect a device to Duet"; explain+deny when
+none); approve carries workspaceSlug and materializes ws: scopes onto the row (mint path
+untouched); token response gains workspace {slug,name}, CLI hard-requires it; duet login
+drops --workspace/DUET_WORKSPACE and requests files:read, files:write, memory, sessions,
+services, integrations; hard break ≤0.3.2. Factor the consent panel as a shared component.
+Sharp edges: response schema (scopes optional + capabilities) lands with pending rows;
+inspect/deny open to authed users for capability codes; SECURITY.md rides; servers deploy
+(staging + prod) before agent 0.3.3 publishes; ui-playground + write-tests for pinned tests.
+
+Phase 2 — MCP OAuth: AS on apps/api (issuer https://service.example.invalid) — OAuth 2.1 auth-code +
+PKCE S256, RFC 8414 metadata, DCR + Client ID Metadata Documents (SSRF-guarded), rotating
+refresh tokens (same-token retry grace); consent UI at /oauth/authorize on web reusing the
+shared panel + client_name + redirect-host display (localhost warning); RS on apps/mcp —
+RFC 9728 PRM, WWW-Authenticate 401s, audience validation, new DUET_MCP_PUBLIC_URL (confirm
+domain with Example User); access token = apiKeys kind 'oauth' (~1h expiry — first expiring kind:
+add the expiresAt check to key auth without regressing other kinds); first-party platform
+audience documented in SECURITY.md; grants revocable in web settings; scopes = bare
+capability names bound to a workspace at consent. Verify with a real MCP client on staging.
+
+TDD per write-tests throughout.</pre
+      >
+    </div>
+  </section>
+</main>
+
+<script>
+  document.getElementById('copy').addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(document.getElementById('prompt').textContent)
+    } catch {}
+  })
+</script>

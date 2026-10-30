@@ -1,0 +1,704 @@
+---
+title: 'Skills vs MCP: cuál es la diferencia y cuándo usar cada uno'
+metaTitle: 'Skills vs MCP explicado: guía de herramientas para agentes de AI (2026)'
+description: 'Las skills enseñan a los agentes de AI cómo trabajar. MCP los conecta a datos externos. Aquí ves cuándo usar Tools, MCP o Skills en tus workflows de agentes.'
+date: '2026-02-02'
+updatedAt: '2026-05-08'
+author:
+  name: 'Sawyer Middeleer'
+category: 'guides'
+tags: ['claude-code', 'mcp', 'skills', 'tools', 'agents']
+type: 'guide'
+image: '/guides/agent-skills-101-tools-vs-mcp-vs-skills/cover.png'
+howTo:
+  name: 'Cómo elegir entre Tools, MCP y Agent Skills para tu agente de AI'
+  description: 'Una guía paso a paso para entender y elegir el tipo de capacidad correcto para el workflow de tu agente de AI.'
+  steps:
+    - name: 'Entiende qué son las AI Tools'
+      text: 'Las Tools son funciones que defines y que un modelo de AI puede invocar, como una búsqueda web, una consulta a base de datos o una llamada a una API. Son los bloques de construcción de cualquier agente de AI.'
+    - name: 'Aprende qué hace MCP (Model Context Protocol)'
+      text: 'MCP es un protocolo abierto de Anthropic que estandariza cómo los modelos de AI se conectan a herramientas y fuentes de datos. En lugar de construir integraciones únicas, MCP te da un conector universal para bases de datos, APIs y servicios.'
+    - name: 'Identifica cuándo usar Agent Skills'
+      text: "Las Agent Skills son paquetes prearmados y reutilizables de comportamiento del agente, como un workflow de 'investigar y resumir'. Usa Skills cuando quieras desplegar la misma capacidad del agente en varios proyectos sin reconstruirla."
+    - name: 'Empareja el enfoque correcto con tu caso de uso'
+      text: 'Usa Tools para integraciones únicas a la medida, MCP para conexiones estandarizadas entre varios servicios, y Agent Skills para workflows repetibles que quieras reutilizar entre proyectos.'
+cta:
+  title: 'Construye skills que tus agentes reutilizan.'
+  subtitle: 'Guarda instrucciones reutilizables en Archivos, contexto duradero en Train y acceso externo en Integraciones.'
+  buttonText: 'Prueba Duet'
+  href: '/sign-in?from=guide-agent-skills-101'
+locale: es-419
+translationKey: 'agent-skills-101-tools-vs-mcp-vs-skills'
+---
+
+¿Confundido con la terminología de los agentes de AI? Esta guía desglosa la diferencia exacta entre **Tools**, **MCP (Model Context Protocol)** y **Agent Skills**, para que puedas construir workflows de AI más inteligentes hoy. Al final sabrás exactamente cuándo usar cada uno y cómo encajan entre sí.
+
+<AnswerBox
+  title="Resumen rápido"
+  summary="En los agentes de AI, las Tools son funciones individuales que se pueden invocar (búsqueda, calculadora), MCP (Model Context Protocol) es el estándar abierto de Anthropic para conectar agentes a servicios externos, y las Agent Skills son workflows reutilizables y prearmados que combinan varias tools. Usa Tools para tareas a la medida, MCP para integraciones estandarizadas, Skills para workflows repetibles."
+  queries={[
+    'Skills vs MCP cuál es la diferencia',
+    'MCP vs Skills cuál debería usar',
+    'Tools vs MCP vs Skills explicado',
+    'Cuándo usar skills vs MCP en agentes de AI',
+  ]}
+/>
+
+Si eres totalmente nuevo en Claude Code, empieza con [la guía para principiantes](/guides/claude-code-for-founders) y luego vuelve aquí para conocer a fondo la arquitectura de tools/MCP/skills.
+
+## Tools vs MCP vs Agent Skills: comparación rápida
+
+| Característica  | Tools                                                         | MCP (Model Context Protocol)                                                | Agent Skills                                                                  |
+| --------------- | ------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Qué es          | Funciones que una AI puede llamar (ej. búsqueda, calculadora) | Un protocolo para conectar la AI a fuentes de datos y herramientas externas | Capacidades de agente prearmadas y reutilizables, empaquetadas para desplegar |
+| Quién lo define | El desarrollador                                              | Anthropic (estándar abierto)                                                | Plataforma / marketplace                                                      |
+| Mejor para      | Integraciones únicas a la medida                              | Conexiones estandarizadas entre varias herramientas                         | Workflows repetibles entre proyectos                                          |
+| Complejidad     | Baja                                                          | Media                                                                       | Baja (plug-and-play)                                                          |
+| Ejemplo         | Búsqueda web, ejecución de código                             | GitHub MCP, Slack MCP                                                       | Skill de "investigar y resumir"                                               |
+
+<GuideTOC
+  items={[
+    { number: 1, title: 'TL;DR: las tres primitivas', href: '#tldr-the-three-primitives' },
+    { number: 2, title: '¿Qué son las Tools?', href: '#what-are-tools' },
+    { number: 3, title: '¿Qué es MCP?', href: '#what-is-mcp-model-context-protocol' },
+    { number: 4, title: '¿Qué son las Skills?', href: '#what-are-skills' },
+    { number: 5, title: 'Skills en Claude Code', href: '#skills-in-claude-code' },
+    { number: 6, title: 'Casos de uso reales', href: '#real-world-use-cases' },
+    { number: 7, title: 'Cómo trabajan juntos', href: '#how-tools-mcp-and-skills-work-together' },
+    { number: 8, title: 'Cuándo usar qué', href: '#when-to-use-what' },
+    { number: 9, title: 'Errores comunes', href: '#common-mistakes' },
+    { number: 10, title: 'Preguntas frecuentes', href: '#frequently-asked-questions' },
+  ]}
+/>
+
+---
+
+## TL;DR: las tres primitivas
+
+| Primitiva  | Qué hace                                                                        | Cuándo usarla                                                    |
+| ---------- | ------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| **Tools**  | Ejecutan acciones únicas (traer un archivo, crear un ticket, correr un comando) | Necesitas una operación discreta                                 |
+| **MCP**    | Protocolo estandarizado que conecta la AI a sistemas externos                   | Necesitas acceso confiable a Slack, GitHub, bases de datos, etc. |
+| **Skills** | Workflows empaquetados con instrucciones + recursos + verificaciones            | Necesitas resultados repetibles y consistentes en cada corrida   |
+
+**La idea clave:** las Tools hacen acciones. MCP da acceso. Las Skills codifican _cómo hacer bien el trabajo_; y como son archivos que el agente puede leer y escribir, se mejoran a sí mismas.
+
+---
+
+## ¿Qué son las Tools?
+
+Las tools de los agentes de AI son funciones individuales que un modelo de AI puede llamar, como búsqueda web, lectura de archivos, consultas a bases de datos o llamadas a APIs. Cada tool hace una acción discreta con una entrada y una salida. Las tools son los bloques de construcción de cualquier agente, pero por sí solas no codifican workflows de varios pasos ni estándares de calidad.
+
+Una tool es una operación única que el agente puede ejecutar. Piensa en "un paso", no en "un workflow".
+
+### Ejemplos de Tools
+
+- `read_file` — trae el contenido de un archivo
+- `create_jira_ticket` — crea un ticket con parámetros dados
+- `run_bash_command` — ejecuta un comando de shell
+- `search_codebase` — encuentra archivos que coinciden con un patrón
+- `send_slack_message` — publica en un canal
+
+### En qué son buenas las Tools
+
+**Precisión**: una entrada → una salida. Fáciles de probar y depurar.
+
+**Control**: sabes exactamente qué pasó. Sin ambigüedad.
+
+**Componibilidad**: las tools se pueden encadenar. Pero _tú_ todavía tienes que definir la cadena.
+
+### Dónde fallan las Tools
+
+![Diagrama que muestra dónde fallan las tools comparadas con las skills](/guides/agent-skills-101-tools-vs-mcp-vs-skills/tools-break-down-skills.png)
+
+Las tools no codifican _cómo hacer el trabajo de principio a fin_. Si dependes solo de tools + prompts:
+
+- La secuencia varía ("a veces resume primero, a veces escribe primero")
+- No hay definición de "terminado" ("¿esto realmente está completo?")
+- Las instrucciones se repiten ("usa nuestro formato, no ese formato", cada vez)
+
+**Las Tools responden:** "¿Qué puedo hacer?"
+
+**No responden:** "¿Qué debería hacer, en qué orden, con qué nivel de calidad?"
+
+---
+
+## ¿Qué es MCP (Model Context Protocol)?
+
+MCP (Model Context Protocol) es un estándar abierto de Anthropic que define cómo los modelos de AI se conectan a herramientas, bases de datos y APIs externas. En lugar de construir integraciones a la medida para cada servicio, MCP ofrece un conector universal usando JSON-RPC 2.0. Soporta transportes locales (stdio) y remotos (HTTP).
+
+MCP es un protocolo abierto que Anthropic presentó en noviembre de 2024. Estandariza cómo las aplicaciones de AI se conectan a sistemas externos.
+
+**El problema que resuelve:** sin MCP, cada integración es única. ¿Conectar Claude a Slack? Código a la medida. ¿Conectar a GitHub? Otro código a la medida distinto. ¿Conectar a tu base de datos? Otra integración más.
+
+MCP define un protocolo cliente/servidor consistente, así que construyes la integración una vez y cualquier AI compatible con MCP puede usarla.
+
+### Cómo funciona MCP (técnico)
+
+MCP usa **JSON-RPC 2.0** para codificar mensajes. Toda la comunicación pasa por tres tipos de mensaje:
+
+```
+Request:      { "jsonrpc": "2.0", "id": 1, "method": "tools/list", "params": {} }
+Response:     { "jsonrpc": "2.0", "id": 1, "result": { "tools": [...] } }
+Notification: { "jsonrpc": "2.0", "method": "progress", "params": { "percent": 50 } }
+```
+
+### Arquitectura de MCP
+
+![Diagrama de la arquitectura de MCP que muestra host, clientes y servidores](/guides/agent-skills-101-tools-vs-mcp-vs-skills/mcp-architecture.png)
+
+- **Host**: la aplicación de AI (Claude Desktop, tu app)
+- **Cliente**: el conector dentro del host que habla con un servidor
+- **Servidor**: el servicio que expone tools, recursos o prompts
+
+### Opciones de transporte
+
+**1. stdio (Local)**
+
+El cliente lanza el servidor como subproceso. Los mensajes fluyen por stdin/stdout.
+
+```bash
+# Server reads from stdin, writes to stdout
+[Client] → stdin → [Server Process] → stdout → [Client]
+```
+
+Mejor para: integraciones locales, escenarios de un solo cliente, herramientas de CLI.
+
+**2. Streamable HTTP (Remoto)**
+
+El servidor corre de forma independiente. Los clientes se conectan vía HTTP POST.
+
+```bash
+curl -X POST https://mcp-server.example.com/mcp \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -H "Mcp-Session-Id: abc123" \
+  -d '{"jsonrpc": "2.0", "id": 1, "method": "tools/call", ...}'
+```
+
+Mejor para: servidores remotos, escenarios multicliente, despliegues de equipo.
+
+### Qué exponen los servidores MCP
+
+- **Recursos**: datos que la AI puede leer (archivos, registros de base de datos, respuestas de API)
+- **Tools**: acciones que la AI puede ejecutar (crear ticket, enviar mensaje, correr consulta)
+- **Prompts**: plantillas prearmadas para workflows comunes
+
+### Dónde se detiene MCP
+
+MCP te da **acceso**, no **método**.
+
+Te dice: "Así te conectas a Slack y esto es lo que puedes hacer ahí".
+
+No te dice: "Cuando escribas una actualización de estado, toma de estos tres canales, resume en este formato y consigue aprobación antes de publicar".
+
+Para eso son las Skills.
+
+Para un recorrido paso a paso del uso de tools MCP dentro de Claude Code, mira la [Sección 6: Tools MCP en la guía para principiantes de Claude Code](/guides/claude-code-for-founders#6-mcp-tools).
+
+---
+
+## ¿Qué son las Skills?
+
+Las Agent Skills son paquetes prearmados y reutilizables de comportamiento del agente que combinan instrucciones, plantillas y verificaciones de calidad en una sola capacidad. A diferencia de las tools individuales, una skill codifica todo el "cómo": workflow paso a paso, formato de salida y definición de "terminado". Las skills usan revelación progresiva para cargar solo lo necesario, evitando inflar el contexto.
+
+Las skills son workflows reutilizables que agrupan conocimiento de procedimiento y recursos. Le dicen al agente _cómo_ hacer un trabajo de forma consistente.
+
+La analogía de Anthropic: construir una skill es como armar una guía de onboarding para un nuevo integrante. Estás capturando conocimiento de procedimiento para que el agente no reinvente el proceso cada vez.
+
+### Skill = Método + Recursos + Verificaciones
+
+Un modelo mental útil:
+
+![Diagrama que muestra cómo una skill se descompone en método, recursos y verificaciones](/guides/agent-skills-101-tools-vs-mcp-vs-skills/skill-break-down.png)
+
+| Componente         | Qué contiene                          | Ejemplo                                                                           |
+| ------------------ | ------------------------------------- | --------------------------------------------------------------------------------- |
+| **Metadata**       | Nombre, descripción, cuándo usarla    | "Usar al crear PRDs a partir de notas de reunión"                                 |
+| **Método**         | Workflow paso a paso                  | "1. Extraer decisiones 2. Identificar responsables 3. Dar formato como plantilla" |
+| **Recursos**       | Plantillas, ejemplos, schemas         | `prd-template.md`, `example-prd.md`                                               |
+| **Verificaciones** | Definición de "terminado", guardrails | "Cada action item debe tener un responsable"                                      |
+
+### Por qué las Skills no inflan el contexto
+
+**Revelación progresiva**: las skills usan un modelo de carga de tres niveles.
+
+| Nivel                  | Cuándo se carga    | Costo en tokens | Contenido                     |
+| ---------------------- | ------------------ | --------------- | ----------------------------- |
+| Nivel 1: Metadata      | Siempre            | ~100 tokens     | Nombre + descripción          |
+| Nivel 2: Instrucciones | Al activarse       | &lt;5k tokens   | Cuerpo completo del SKILL.md  |
+| Nivel 3: Recursos      | Cuando se necesita | Ilimitado       | Plantillas, scripts, ejemplos |
+
+El agente empieza solo con la descripción. Las instrucciones completas se cargan únicamente cuando la skill se activa. Los archivos de recursos se cargan solo cuando se referencian.
+
+Esto significa que puedes empaquetar conocimiento institucional extenso (plantillas, ejemplos, playbooks) sin pagar el costo de contexto hasta que realmente se necesite.
+
+### Skills prearmadas de Anthropic
+
+Anthropic incluye Agent Skills prearmadas para workflows comunes de documentos:
+
+| Skill    | Qué hace                                  |
+| -------- | ----------------------------------------- |
+| **pptx** | Crea y edita presentaciones de PowerPoint |
+| **xlsx** | Crea y analiza hojas de cálculo de Excel  |
+| **docx** | Crea y edita documentos de Word           |
+| **pdf**  | Genera documentos PDF                     |
+
+Estas corren en un entorno de ejecución de código con acceso al sistema de archivos. Son la diferencia entre que el LLM devuelva "esto es lo que deberían decir tus diapositivas" y que de verdad produzca un archivo `.pptx` que puedes abrir.
+
+<DuetCTA />
+
+---
+
+## Skills en Claude Code
+
+Claude Code tiene su propio sistema de skills basado en el sistema de archivos y local al proyecto.
+
+Si quieres un recorrido de más alto nivel de las skills dentro del producto antes de meterte en la estructura de directorios, revisa la [Sección 7: Skills en la guía para principiantes de Claude Code](/guides/claude-code-for-founders#7-skills).
+
+### Estructura de directorios de una skill
+
+![Diagrama que muestra la estructura de carpetas de una skill de Claude Code](/guides/agent-skills-101-tools-vs-mcp-vs-skills/skill-directory-structure.png)
+
+### Formato de SKILL.md
+
+```yaml
+---
+name: code-review
+description: Reviews code for security issues and best practices. Use when reviewing PRs or commits.
+allowed-tools: Read, Grep, Glob
+---
+
+# Code Review
+
+When reviewing code:
+
+1. **Security scan**: Check for injection vulnerabilities, exposed secrets, unsafe deserialization
+2. **Style check**: Verify naming conventions, file organization, comment quality
+3. **Logic review**: Trace data flow, identify edge cases, check error handling
+4. **Output format**: Use the template in review-template.md
+
+## Common issues to flag
+- SQL queries built with string concatenation
+- User input passed directly to shell commands
+- Missing input validation on API endpoints
+- Hardcoded credentials or API keys
+```
+
+### Opciones de frontmatter
+
+| Campo                      | Propósito                                         | Predeterminado        |
+| -------------------------- | ------------------------------------------------- | --------------------- |
+| `name`                     | Nombre para mostrar (minúsculas, guiones)         | Nombre del directorio |
+| `description`              | Cuándo usarla (Claude la usa para autoinvocación) | Primer párrafo        |
+| `allowed-tools`            | Restringe las tools disponibles                   | Todas las tools       |
+| `disable-model-invocation` | Evita el uso automático (solo `/name` manual)     | false                 |
+| `user-invocable`           | Oculta del menú `/` si es false                   | true                  |
+| `context`                  | `inline` o `fork` (subagente aislado)             | inline                |
+
+### Modos de invocación
+
+**Predeterminado**: el usuario la invoca con `/skill-name`, Claude la autoinvoca cuando es relevante.
+
+**Solo manual** (`disable-model-invocation: true`): el usuario debe escribir `/skill-name`. Claude no la activará automáticamente.
+
+**Solo Claude** (`user-invocable: false`): Claude la autoinvoca cuando es relevante. No se muestra en el menú.
+
+### Contenido dinámico
+
+Las skills soportan sustitución de variables:
+
+```yaml
+---
+name: session-logger
+---
+Log activity to: logs/${CLAUDE_SESSION_ID}.log
+
+User request: $ARGUMENTS
+```
+
+Y la inyección de comandos de shell (la salida reemplaza el marcador):
+
+```yaml
+---
+name: pr-summary
+---
+
+## PR Context
+Diff: !`gh pr diff`
+Comments: !`gh pr view --comments`
+
+Summarize this PR...
+```
+
+---
+
+## Casos de uso reales
+
+Estos ejemplos combinan bien con los chat modes y el workflow de scope-plan-execute descritos en [Trabajar con Claude Code](/guides/claude-code-for-founders#3-working-with-claude-code) y la [sección de Chat Modes](/guides/claude-code-for-founders#chat-modes). Para más ejemplos enfocados en el negocio, mira [Cómo operar todo tu negocio con Claude Code](/guides/claude-code-for-founders).
+
+### Caso de uso 1: revisión de código automatizada
+
+**Sin skills**: cada revisión de código es distinta. A veces el agente revisa seguridad, a veces estilo, a veces ninguno. El formato de salida varía.
+
+**Con skills**:
+
+```yaml
+---
+name: security-review
+description: Security-focused code review. Use when reviewing PRs touching auth, payments, or user data.
+allowed-tools: Read, Grep, Glob
+---
+
+# Security Review
+
+## Checklist
+1. [ ] No SQL injection (parameterized queries only)
+2. [ ] No command injection (no shell calls with user input)
+3. [ ] No exposed secrets (check for hardcoded keys)
+4. [ ] Input validation on all external data
+5. [ ] Proper authentication checks
+
+## Output format
+Use severity levels: CRITICAL, HIGH, MEDIUM, LOW
+
+For each finding:
+- File and line number
+- Description of issue
+- Suggested fix
+```
+
+**Resultado**: cada revisión de seguridad sigue el mismo checklist. La salida es consistente. No se pasa nada por alto.
+
+### Caso de uso 2: notas de reunión → action items
+
+**El problema**: convertir transcripciones de reuniones en action items es tedioso e inconsistente.
+
+**La skill**:
+
+```yaml
+---
+name: meeting-processor
+description: Convert meeting notes to decisions and action items. Use after meetings.
+---
+
+# Meeting Processor
+
+## Steps
+1. Extract all decisions made (statements of agreement or conclusion)
+2. Extract all action items (tasks assigned to people)
+3. Identify open questions (unresolved discussions)
+4. Format using action-template.md
+
+## Action item format
+Each action item MUST have:
+- Clear description (what, not how)
+- Owner (single person responsible)
+- Due date (if mentioned)
+
+## Quality check
+- Every action item has an owner
+- No vague items ("follow up on X" → "John to send X proposal to team by Friday")
+```
+
+### Caso de uso 3: documentación a partir del código
+
+**La skill**:
+
+```yaml
+---
+name: api-docs
+description: Generate API documentation from code. Use when documenting endpoints.
+allowed-tools: Read, Grep, Glob
+---
+
+# API Documentation Generator
+
+## Process
+1. Find all route definitions (Grep for route patterns)
+2. For each endpoint, extract:
+   - HTTP method and path
+   - Request parameters and body schema
+   - Response format
+   - Authentication requirements
+3. Generate markdown using api-doc-template.md
+
+## Include for each endpoint
+- Description (what it does, not how)
+- Request example (curl command)
+- Response example (actual JSON)
+- Error cases (4xx/5xx responses)
+```
+
+<DuetCTA />
+
+---
+
+## Cómo trabajan juntos Tools, MCP y Skills
+
+Tools, MCP y Skills forman una arquitectura por capas: las Skills definen el workflow y el nivel de calidad, MCP da acceso estandarizado a servicios externos, y las Tools ejecutan acciones individuales. Un flujo típico: se activa una Skill, carga sus instrucciones, se conecta vía MCP a datos externos, ejecuta Tools en cada paso y luego valida la salida.
+
+![Diagrama de cómo se apilan tools, MCP y skills](/guides/agent-skills-101-tools-vs-mcp-vs-skills/mcp-skills-tools.png)
+
+**Flujo de ejemplo**:
+
+1. **Se activa la Skill**: el usuario pide "crear una actualización de estado semanal"
+2. **La Skill carga**: las instrucciones dicen "toma de #engineering, #product, resume los bloqueos"
+3. **MCP se conecta**: el servidor MCP de Slack da acceso a los canales
+4. **Las Tools se ejecutan**: `read_channel`, `search_messages`, `post_message`
+5. **La Skill valida**: verifica que la salida coincida con la plantilla y tenga todas las secciones requeridas
+
+---
+
+## Mirando hacia adelante
+
+A medida que las skills maduran, la frontera entre skills y tools se irá difuminando. Las skills viven en el sistema de archivos y pueden contener código ejecutable, lo que significa que pueden realizar las mismas acciones que las tools, con dos ventajas clave: **los agentes pueden leer las skills para entenderlas** y **escribir en ellas para mejorarse a sí mismas**.
+
+La trayectoria probable: las tools y MCP se vuelven primitivas delgadas (leer/escribir, traer, buscar), mientras que las skills absorben la lógica específica del dominio.
+
+---
+
+## Cuándo usar qué
+
+### Usa Tools cuando:
+
+- Necesitas una operación única y discreta
+- La acción es autocontenida (sin workflow)
+- Estás construyendo bloques para automatización de más alto nivel
+
+### Usa MCP cuando:
+
+- Necesitas conectarte a sistemas externos (Slack, GitHub, bases de datos)
+- Quieres integraciones que funcionen entre plataformas de AI
+- Estás construyendo infraestructura basada en servidores
+
+### Usa Skills cuando:
+
+- Necesitas resultados consistentes y repetibles
+- La tarea requiere varios pasos en un orden específico
+- Quieres capturar conocimiento institucional
+- La calidad de la salida importa (plantillas, verificaciones, ejemplos)
+
+### Árbol de decisión
+
+![Árbol de decisión para elegir entre tools, MCP y skills](/guides/agent-skills-101-tools-vs-mcp-vs-skills/decision-tree.png)
+
+---
+
+## Errores comunes
+
+### Error 1: usar prompts en lugar de skills
+
+**Problema**: pegar las mismas instrucciones en cada conversación.
+
+**Solución**: empaquétalo como una skill. Escríbelo una vez, úsalo de forma consistente. Mira [El Playbook de Claude Code](/guides/claude-code-playbook-building-a-skill-first-workflow-that-actually-sticks#skills-giving-claude-deep-expertise) para un recorrido práctico.
+
+### Error 2: meter todo dentro de MCP
+
+**Problema**: construir workflows complejos dentro de los servidores MCP.
+
+**Solución**: MCP maneja el acceso. Las Skills manejan el workflow. Mantenlos separados.
+
+### Error 3: sin definición de "terminado"
+
+**Problema**: el agente produce una salida, pero no sabes si está completa.
+
+**Solución**: agrega verificaciones a tu skill. "Cada action item debe tener un responsable".
+
+### Error 4: ignorar la revelación progresiva
+
+**Problema**: cargar todo el contexto de entrada, reventando la ventana de contexto.
+
+**Solución**: usa el modelo de tres niveles. Metadata siempre. Instrucciones al activarse. Recursos por demanda.
+
+---
+
+## Consideraciones de seguridad
+
+### Seguridad de MCP
+
+- Valida el header `Origin` en los transportes HTTP (previene DNS rebinding)
+- Vincula solo a localhost para servidores locales (no 0.0.0.0)
+- Requiere consentimiento explícito del usuario para invocar tools
+- Implementa autenticación adecuada para servidores remotos
+
+### Seguridad de las Skills
+
+- Usa `allowed-tools` para restringir lo que una skill puede hacer
+- Pon `disable-model-invocation: true` para operaciones sensibles
+- Audita las skills de fuentes externas antes de usarlas
+- Las skills pueden incluir código ejecutable; trátalas como dependencias
+
+---
+
+## Referencia rápida
+
+### Formato de mensaje de MCP
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "search_code",
+    "arguments": { "query": "authentication" }
+  }
+}
+```
+
+### Estructura de archivos de una Skill
+
+```
+.claude/skills/my-skill/
+├── SKILL.md          # Instructions (required)
+├── template.md       # Output template
+├── examples/         # Example outputs
+└── scripts/          # Validation scripts
+```
+
+### Frontmatter de la Skill
+
+```yaml
+---
+name: skill-name
+description: When to use this skill
+allowed-tools: Read, Grep, Glob
+disable-model-invocation: false
+user-invocable: true
+---
+```
+
+---
+
+## Lecturas adicionales
+
+- [Más allá de Claude Code: cómo construir una biblioteca de skills compartida](/guides/beyond-claude-code-building-a-shared-skill-library) — Cómo construir, compartir y mantener skills entre Claude.ai, la API y el Agent SDK
+- [Especificación de MCP](https://modelcontextprotocol.io/specification/2025-11-25) — Documentación completa del protocolo
+- [Docs de Claude Code Skills](https://docs.anthropic.com/en/docs/claude-code/skills) — Documentación oficial de skills
+- [Repositorio de Skills de Anthropic](https://github.com/anthropics/skills) — Skills prearmadas y ejemplos
+- [MCP GitHub](https://github.com/modelcontextprotocol) — Implementación del protocolo y servidores
+
+---
+
+## Preguntas frecuentes
+
+<Accordion type="single" collapsible className="w-full">
+
+<AccordionItem value="tools-vs-skills-difference">
+  <AccordionTrigger>¿Cuál es la diferencia entre las AI Tools y las Agent Skills?</AccordionTrigger>
+  <AccordionContent>
+    Las AI Tools son funciones individuales que un agente puede llamar (como búsqueda web o una
+    calculadora). Las Agent Skills son workflows prearmados y reutilizables que combinan varias
+    tools en una sola capacidad, como una skill de "investigar y resumir" que usa tools de búsqueda,
+    lectura y escritura en conjunto.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="what-is-mcp-why">
+  <AccordionTrigger>¿Qué es MCP (Model Context Protocol) y por qué importa?</AccordionTrigger>
+  <AccordionContent>
+    MCP (Model Context Protocol) es un estándar abierto creado por Anthropic que define cómo los
+    modelos de AI se conectan a herramientas, bases de datos y APIs externas. Importa porque elimina
+    la necesidad de construir integraciones a la medida para cada servicio; en su lugar, usas un
+    protocolo estandarizado para conectar tu agente de AI a cualquier servicio compatible con MCP.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="what-are-skills">
+<AccordionTrigger>¿Qué son las Agent Skills?</AccordionTrigger>
+<AccordionContent>
+Las Agent Skills son **habilidades reutilizables** que le das a un agente de AI para que haga un trabajo de la misma forma cada vez. En lugar de escribir un prompt nuevo para cada tarea, una skill empaqueta el "cómo" una vez (pasos + plantillas + reglas) y Claude puede usarla cuando se necesite.
+
+Los docs de Anthropic describen skills prearmadas y señalan que Claude puede usarlas automáticamente cuando son relevantes.
+
+</AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="skills-vs-prompts">
+  <AccordionTrigger>¿Las skills son solo prompts?</AccordionTrigger>
+  <AccordionContent>
+    No. Un prompt suele ser una instrucción de una sola vez. Una skill es más como un mini playbook
+    (y a veces incluye scripts + archivos) que el agente puede reutilizar. Anthropic describe las
+    skills como carpetas que pueden incluir instrucciones, scripts y recursos que Claude carga
+    cuando los necesita.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="tool-vs-skill">
+  <AccordionTrigger>¿Cuál es la diferencia entre una tool y una skill?</AccordionTrigger>
+  <AccordionContent>
+    - Una tool hace una acción (ejemplo: "crear un ticket de Jira", "buscar en docs", "correr un
+    comando"). - Una skill es un workflow completo (ejemplo: "convertir una reunión en decisiones +
+    action items + seguimientos") y puede usar varias tools en el camino.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="what-is-mcp">
+  <AccordionTrigger>¿Qué es MCP en términos simples?</AccordionTrigger>
+  <AccordionContent>
+    MCP (Model Context Protocol) es una forma estándar de que un agente de AI se conecte a tus
+    herramientas y datos (como Slack, Drive, GitHub, Jira, etc.). Usa un formato de mensaje conocido
+    (JSON-RPC) y tiene formas estándar de conectarse (como stdio o HTTP).
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="mcp-required">
+  <AccordionTrigger>¿Necesito MCP para usar skills?</AccordionTrigger>
+  <AccordionContent>
+    No siempre. Necesitas **MCP** cuando el workflow debe tomar datos de sistemas externos o actuar
+    dentro de ellos (como leer un doc de Drive o publicar en Slack). Si la skill se trata sobre todo
+    de producir una salida limpia (como un doc/deck/hoja de cálculo) a partir de lo que ya
+    proporcionas, puedes usar skills sin MCP.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="progressive-disclosure">
+  <AccordionTrigger>¿Qué significa "revelación progresiva"?</AccordionTrigger>
+  <AccordionContent>
+    Significa que el agente no carga todo de entrada. Empieza con una pequeña descripción de la
+    skill y solo carga las instrucciones/plantillas detalladas cuando de verdad las necesita. Esto
+    mantiene la conversación más ligera y evita volcados enormes de contexto.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="prebuilt-skills">
+<AccordionTrigger>¿Qué skills prearmadas existen hoy (en Claude)?</AccordionTrigger>
+<AccordionContent>
+Los docs de Anthropic listan skills prearmadas para resultados de trabajo comunes:
+
+- **pptx** (PowerPoint)
+- **xlsx** (Excel)
+- **docx** (Word)
+- **pdf**
+
+</AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="subagents-mcp">
+  <AccordionTrigger>¿Los subagentes de Claude Code pueden usar tools MCP?</AccordionTrigger>
+  <AccordionContent>
+    Sí. Los docs de Claude Code dicen que los subagentes heredan las mismas tools que la sesión
+    principal, incluidas las tools MCP por defecto (y puedes restringirlas si lo necesitas).
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="future">
+  <AccordionTrigger>¿Las skills reemplazarán a las tools y a MCP?</AccordionTrigger>
+  <AccordionContent>
+    Parcialmente. Las skills pueden contener código ejecutable, así que pueden hacer lo que hacen
+    las tools, con la ventaja de que los agentes pueden leer las skills para entenderlas y
+    modificarlas para mejorarlas. El futuro probable: tools/MCP se vuelven primitivas (sistema de
+    archivos, web, shell), mientras que las skills absorben todo lo específico del dominio.
+  </AccordionContent>
+</AccordionItem>
+
+</Accordion>
+
+## Sigue leyendo
+
+- [Duet AI para fundadores: el modo fundador como sistema operativo](/guides/duet-ai-for-founders). Combina playbooks reutilizables, contexto en Train y sesiones duraderas para equipos liderados por fundadores.
+- [Claude Code para empresas](/guides/claude-code-for-founders) — automatiza GTM, producto y operaciones con Claude Code.
+- [Cómo construir una biblioteca de skills compartida](/guides/beyond-claude-code-building-a-shared-skill-library) — profundiza en crear y compartir skills reutilizables.
+- [Alternativas a MCP para agentes que ejecutan código](/blog/mcp-alternatives-code-execution-agents) — explora alternativas más allá de MCP para el tooling de agentes.
+- [Cómo construir y desplegar una app web usando solo AI](/blog/how-to-build-and-deploy-a-web-app-using-only-ai) — ve las skills y tools en acción.

@@ -1,0 +1,86 @@
+{
+  "source": "d8b257e3f",
+  "incomingStaging": "1d0ee5edefd1e55c49a857c74b5e87171ed1f078",
+  "mergeCommit": "ca47a3d85",
+  "liveWrites": false,
+  "checks": {
+    "contract": {
+      "tests": 407,
+      "assertions": 2551
+    },
+    "mcp": {
+      "tests": 35,
+      "assertions": 281
+    },
+    "composeBar": {
+      "tests": 2,
+      "assertions": 9
+    },
+    "sessions": {
+      "tests": 51,
+      "assertions": 145
+    },
+    "mergedTypes": [
+      "api",
+      "web"
+    ],
+    "joinedHostHelper": {
+      "tests": 38,
+      "assertions": 97
+    },
+    "joinedCanonicalBackend": {
+      "tests": 4,
+      "assertions": 17
+    },
+    "joinedGateway": {
+      "tests": 192,
+      "assertions": 958
+    },
+    "joinedJourneyEvidence": {
+      "tests": 5,
+      "assertions": 10
+    },
+    "joinedTypes": [
+      "contract",
+      "gateway",
+      "api",
+      "web",
+      "backend"
+    ],
+    "joinedWeb": {
+      "tests": 54,
+      "assertions": 149
+    },
+    "joinedApiArtifactAuthAndPausedSync": {
+      "tests": 3,
+      "assertions": 17
+    },
+    "joinedHumanMigration": {
+      "tests": 1,
+      "assertions": 5
+    },
+    "joinedVisualOwnership": "coverage716 + complete owner union"
+  },
+  "review": {
+    "independentMerge": "completed",
+    "findings": [
+      {
+        "priority": 1,
+        "issue": "Double lost chat responses can lose original request identity on later merged-draft resend"
+      },
+      {
+        "priority": 2,
+        "issue": "Failed chat sends can merge drafts across changed message/note modes"
+      },
+      {
+        "priority": 2,
+        "issue": "Option answer can race a pending context note"
+      }
+    ],
+    "disposition": "All three are inherited unchanged from the existing live staging chat/composer. Exact file comparison against 1d0ee5e is empty; no unified-runtime integration caused them. Preserved upstream behavior and recorded findings outside this release scope."
+  },
+  "limits": [
+    "No root full suite or live journey run in this integration pass",
+    "No strict deployment, image publication or npm publication"
+  ]
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://service.example.invalid/api/auth/magic-link: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://service.example.invalid/api/duet/session: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/pending-share: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/unified-duet-staging-e2e-synthetic/apps/hello/launch: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/unified-duet-staging-e2e-synthetic/files/.agents/skills: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/unified-duet-staging-e2e-synthetic/files/AGENTS.md: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://service.example.invalid/api/auth/magic-link: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://service.example.invalid/api/duet/session: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/pending-share: net::ERR_ABORTED"
+  }
+]

@@ -1,0 +1,54 @@
+{
+  "environment": "production",
+  "status": "local-preparation-only",
+  "baseline": "dbb28fe14a026c143f2134b88586a13f2e0ebdef",
+  "compatibleSourceRevision": "f728ae9c07f710e2be5fb02b92dbb8d57d653350",
+  "cleanSourcePath": "/tmp/unified-duet-compatible-production-backend",
+  "deployReadyPath": "/tmp/unified-duet-compatible-production-deploy",
+  "patchSha256": "a420d97feeed10c5b5017c5f00ca6a13e57e851fe284fb18634cf0508951e36d",
+  "patchedSourceSha256": {
+    "packages/backend/convex/config.ts": "d055d8b2b8d79ca087b09da842c8eded7c1d8d7c280e6a2724ed794a2d6236ef",
+    "packages/backend/convex/domains/workspaces/lifecycle.ts": "c194c096e917233ccb6320836e9b0180a52e390f6c83f8103a2bf46bc581c6b1",
+    "packages/backend/convex/domains/workspaces/provisioningCore.ts": "502e27d9dc7861883ad719f36a1dceb30c93fd74c0ee8d259d9c206c7bde5342",
+    "packages/backend/convex/domains/workspaces/vmConvergence.ts": "b0653b80fbd4b4d7c0feedef986eec0956bcb2548e4abda60ac8fb595b879d00",
+    "packages/backend/convex/domains/workspaces/vmSchedule.ts": "25b3e78a162171361f839c3726bfabc22af1d9706676d9368f549caa6f3bc3b5",
+    "packages/backend/convex/domains/workspaces/vmDiskSchedule.ts": "38ea68545f405a08c4d948395ab0e181d486132283be494380b9a9d527c00405",
+    "packages/backend/convex/domains/workspaces/vmSizeModel.ts": "8adaf702c2de8c00994fda5baf4c8f3a5b396ce9d8951cfec7c53f5d799c1233",
+    "packages/backend/convex/domains/workspaces/vmDiskPolicy.ts": "07a330767404154c4087dde901119f8cffe03d640f55aa5b77d8f8562a485add"
+  },
+  "unchangedBaselineAbiSha256": {
+    "packages/backend/convex/schema.ts": "9db671bb9d011302a4f5dc8763ef0cf41199f1044e89ef7eedfa74f7e2d93bc6",
+    "packages/backend/convex/_generated/api.d.ts": "7d8662e81a50a837447d9574784e4e47ef2cb7a9ef468fbb5c5f0a451701df83",
+    "packages/backend/convex/_generated/dataModel.d.ts": "db177073d16a4393c7a96bcdc3a2a904e88c2432d54d138ca7715cc431982c17",
+    "packages/contract/src/deployment/index.ts": "8d3e3347eb14cd82193b95ec7a002dc20e7e679958ca089365c0bb25336df1e4",
+    "bun.lock": "04a3b38ace3909b76088eaa6e20ae26a58628b7fc6b4d65f197c97dbab77f759",
+    "packages/backend/package.json": "207ac4eb97f4f365aa4fc867168d8bfa0220f29701dcc81990e93cf337ed3ff0"
+  },
+  "generatedIdentity": {
+    "revision": "f728ae9c07f710e2be5fb02b92dbb8d57d653350",
+    "schema": 1
+  },
+  "generatedRevisionOwner": "scripts/vercel-deploy-rail.mjs:backendReleaseRevisionSource",
+  "deployGeneratedFileSha256": "2204fcb38e84acc140532bc2ad61786afd648e39fe3f40611b04e9e10a72dbf0",
+  "compilerPlacement": "ignored packages/backend/node_modules/typescript -> ../../../node_modules/typescript; frozen compiler7.0.1-rc",
+  "gates": {
+    "owningLifecycleCases": 84,
+    "owningAssertions": 310,
+    "sourceBackendTypes": 0,
+    "sourceBackendLint": 0,
+    "deployBackendTypes": 0
+  },
+  "operatorCommandNotExecuted": "/Users/synthetic-user/dev/duet/node_modules/.bin/dotenvx run --strict --redact --env-keys-file /Users/synthetic-user/dev/duet/.env.keys -f /Users/synthetic-user/.codex/worktrees/232f/duet/.env.production -- bun run --cwd /tmp/unified-duet-compatible-production-deploy/packages/backend deploy:ci -- --typecheck enable",
+  "liveDeployment": false,
+  "liveDryRun": false,
+  "environmentFlagsChanged": false,
+  "vmOperationsPerformed": false,
+  "strictSourceAdopted": false,
+  "newTables": [],
+  "newColumns": [],
+  "limits": [
+    "Operator deployment, schema/index diff confirmation and live identity verification remain root-owned after full staging acceptance.",
+    "Deploy checkout differs from clean source commit only by the existing owner-generated revision file."
+  ],
+  "credentialOwner": "REDACTED"
+}

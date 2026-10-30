@@ -1,0 +1,501 @@
+<title>Live apps — the actual words</title>
+<style>
+  :root {
+    --bg: #fbfbfa;
+    --fg: #16181d;
+    --muted: #61656e;
+    --line: #e3e3e0;
+    --card: #ffffff;
+    --code-bg: #f4f4f2;
+    --accent: #0f766e;
+    --accent-soft: #0f766e14;
+    --add: #0f766e;
+    --add-bg: #0f766e0f;
+    --warn: #a16207;
+    --warn-bg: #a162070f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16181d;
+      --fg: #e8e9ec;
+      --muted: #9aa0aa;
+      --line: #2b2f37;
+      --card: #1c1f26;
+      --code-bg: #12141a;
+      --accent: #4dd4c0;
+      --accent-soft: #4dd4c018;
+      --add: #4dd4c0;
+      --add-bg: #4dd4c014;
+      --warn: #e0b25c;
+      --warn-bg: #e0b25c14;
+    }
+  }
+  :root[data-theme='light'] {
+    --bg: #fbfbfa;
+    --fg: #16181d;
+    --muted: #61656e;
+    --line: #e3e3e0;
+    --card: #ffffff;
+    --code-bg: #f4f4f2;
+    --accent: #0f766e;
+    --accent-soft: #0f766e14;
+    --add: #0f766e;
+    --add-bg: #0f766e0f;
+    --warn: #a16207;
+    --warn-bg: #a162070f;
+  }
+  :root[data-theme='dark'] {
+    --bg: #16181d;
+    --fg: #e8e9ec;
+    --muted: #9aa0aa;
+    --line: #2b2f37;
+    --card: #1c1f26;
+    --code-bg: #12141a;
+    --accent: #4dd4c0;
+    --accent-soft: #4dd4c018;
+    --add: #4dd4c0;
+    --add-bg: #4dd4c014;
+    --warn: #e0b25c;
+    --warn-bg: #e0b25c14;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    margin: 0;
+    font:
+      16px/1.6 ui-sans-serif,
+      -apple-system,
+      'Segoe UI',
+      system-ui,
+      sans-serif;
+    padding: 3rem 1.25rem 5rem;
+  }
+  main {
+    max-width: 60rem;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 1.9rem;
+    line-height: 1.15;
+    margin: 0 0 0.4rem;
+    letter-spacing: -0.02em;
+  }
+  .sub {
+    color: var(--muted);
+    margin: 0 0 2.5rem;
+    max-width: 46rem;
+  }
+  h2 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--muted);
+    margin: 3rem 0 0.9rem;
+    font-weight: 600;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 1.25rem 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .card h3 {
+    margin: 0 0 0.15rem;
+    font-size: 1.02rem;
+  }
+  .where {
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    margin-bottom: 0.9rem;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    overflow-x: auto;
+    margin: 0 0 0.9rem;
+    font:
+      13px/1.65 ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      monospace;
+  }
+  pre .new {
+    display: block;
+    background: var(--add-bg);
+    box-shadow: inset 3px 0 var(--add);
+    padding-left: 0.55rem;
+    margin-left: -0.55rem;
+  }
+  pre .dim {
+    color: var(--muted);
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .chip {
+    font-size: 0.78rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.28rem 0.7rem;
+    color: var(--muted);
+    background: transparent;
+    cursor: default;
+  }
+  .chip.keep {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .note {
+    border-left: 3px solid var(--warn);
+    background: var(--warn-bg);
+    padding: 0.7rem 0.95rem;
+    border-radius: 0 8px 8px 0;
+    margin: 0.9rem 0 0;
+    font-size: 0.9rem;
+    color: var(--fg);
+  }
+  ol.q {
+    list-style: none;
+    counter-reset: q;
+    padding: 0;
+    margin: 0;
+  }
+  ol.q > li {
+    counter-increment: q;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 1.1rem 1.3rem;
+    margin-bottom: 0.8rem;
+  }
+  ol.q > li::before {
+    content: 'Q' counter(q);
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 0.74rem;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+  ol.q h3 {
+    margin: 0.3rem 0 0.5rem;
+    font-size: 1rem;
+  }
+  ol.q p {
+    margin: 0 0 0.7rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  td,
+  th {
+    text-align: left;
+    padding: 0.5rem 0.7rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  td code,
+  p code,
+  li code {
+    background: var(--code-bg);
+    border-radius: 5px;
+    padding: 0.08em 0.35em;
+    font-size: 0.88em;
+  }
+  .reply {
+    border: 1px dashed var(--line);
+    border-radius: 14px;
+    padding: 1.1rem 1.3rem;
+    background: transparent;
+  }
+  .reply pre {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--muted);
+  }
+  footer {
+    color: var(--muted);
+    font-size: 0.84rem;
+    margin-top: 2.5rem;
+  }
+</style>
+
+<main>
+  <h1>Live apps — the actual words</h1>
+  <p class="sub">
+    Nearly all of this change is prose: two skill files and one prompt renderer. So react to the
+    prose. Every block below is proposed text at its real destination — keep it, cut it, or tell me
+    what's wrong with it.
+  </p>
+
+  <h2>1 · The generated prompt layer</h2>
+  <div class="card">
+    <h3>Your apps</h3>
+    <div class="where">
+      packages/gateway/src/agents/your-apps-prompt.ts → your-apps.md, every session
+    </div>
+    <pre># Your apps
+
+This is a snapshot of the apps available to this session when the session started.
+
+<span class="new">- **Tasks** (`tasks`) — `projects/tasks` — private — API `http://192.0.2.1:41207`</span>
+<span class="new">- **Hello** (`hello`) — `welcome/hello-app` — private — API `http://192.0.2.1:41003`</span>
+
+<span class="new">## Call an app</span>
+<span class="new"></span>
+<span class="new">These apps are running services on this VM. Call one at its API address above —</span>
+<span class="new">nothing else is needed to reach it.</span>
+<span class="new"></span>
+<span class="new">Read an app's `README.md` before calling its API or changing its code — it says</span>
+<span class="new">what the app is for and what its API accepts. If you change an app, update its</span>
+<span class="new">README in the same turn.</span>
+<span class="new"></span>
+<span class="new">After changing an app's data, tell the user what changed and point them to the</span>
+<span class="new">app open beside the conversation.</span>
+
+<span class="dim">## Move this session into an app</span>
+<span class="dim">(unchanged)</span></pre>
+    <div class="chips">
+      <span class="chip keep">keep</span><span class="chip">cut the "in the same turn"</span>
+      <span class="chip">README should be a path, not a flag</span><span class="chip">reword</span>
+    </div>
+  </div>
+
+  <h2>2 · The build-apps skill</h2>
+  <div class="card">
+    <h3>Your app is an interface for agents too</h3>
+    <div class="where">packages/skills-registry/skills/build-apps/SKILL.md — new section</div>
+    <pre>
+You are not the last agent to touch this app. Long after you finish building it,
+the user will sit in a session with the app open beside the conversation and ask
+for changes to what is *in* it — "add a task", "mark that one done", "clear the
+list" — not to the app's code. A different agent, in a different session, will
+serve those asks by calling your app.
+
+Build for that agent now. Everything the UI can do, the API must also be able to
+do; an app whose data is reachable only through its own forms leaves that future
+session with nothing to call, and the user is told to go click it themselves.
+
+Any app holding state a user might ask an agent to change is a service, not a
+static app. Static serving is for content that does not change.
+
+Document the API in a `README.md` in the app folder, together with what the app
+is for and why it exists. That file is how the next agent — who has never seen
+your code — knows what it may call. Keep it current: a stale README is worse
+than none.
+
+Other agents reach the app from inside the VM at `http://192.0.2.1:$PORT`.</pre
+    >
+    <div class="chips">
+      <span class="chip keep">keep</span><span class="chip">too preachy</span>
+      <span class="chip">drop the static-app paragraph</span><span class="chip">reword</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Keep the open page live</h3>
+    <div class="where">packages/skills-registry/skills/build-apps/SKILL.md — new section</div>
+    <pre>
+Someone is watching the page while an agent writes to it. They must see the
+change without reloading.
+
+Push from the server to the page over SSE, and refresh from the event. What
+your frames carry is your design — a bare "something changed" nudge is enough
+for most apps, a busier one may want per-resource events.
+
+The connection crosses a proxy, so the browser will reopen it on its own from
+time to time. That is normal, not an error: make reconnecting cheap and make
+sure the page is correct once it happens.
+
+The copy-paste pattern is in reference/live-updates.md.</pre
+    >
+    <div class="chips">
+      <span class="chip keep">keep</span><span class="chip">merge into the section above</span
+      ><span class="chip">reword</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>The copy-paste pattern</h3>
+    <div class="where">
+      packages/skills-registry/skills/build-apps/reference/live-updates.md — new file (sits beside
+      app-icons.md, theme-and-mobile.md)
+    </div>
+    <pre><span class="dim">// server.ts — one process, UI + API + events</span>
+<span class="new">Bun.serve({ port, idleTimeout: 255, fetch: app.fetch })</span>
+<span class="dim">// ^ REQUIRED. Bun's default is a 10s idle timeout, which is shorter</span>
+<span class="dim">//   than the heartbeat below — the server would kill its own stream.</span>
+<span class="dim">//   The gateway hit exactly this (runtime/http.ts:1188).</span>
+
+const watchers = new Set&lt;(frame: string) =&gt; void&gt;()
+const announce = () =&gt; { for (const send of watchers) send('data: {}\n\n') }
+
+app.post('/api/tasks', async c =&gt; {
+  const task = createTask(await c.req.json())
+  announce()
+  return c.json(task, 201)
+})
+
+app.get('/events', c =&gt; {
+  const stream = new ReadableStream({
+    start(controller) {
+      const send = (frame: string) =&gt; controller.enqueue(encoder.encode(frame))
+      watchers.add(send)
+      const ping = setInterval(() =&gt; send(': ping\n\n'), 15_000)
+      c.req.raw.signal.addEventListener('abort', () =&gt; {
+        clearInterval(ping); watchers.delete(send); controller.close()
+      })
+    },
+  })
+  return new Response(stream, {
+    headers: { 'content-type': 'text/event-stream', 'cache-control': 'no-cache' },
+  })
+})</pre>
+    <pre><span class="dim">&lt;!-- the page --&gt;</span>
+new EventSource('/events').onmessage = () =&gt; refresh()
+<span class="dim">// EventSource reconnects by itself; do not write retry logic.</span></pre>
+    <div class="note">
+      The <code>abort</code> listener is the load-bearing line. Every reconnect through the edge
+      leaves a dead writer behind without it, and a pane open all afternoon slowly fills the app's
+      memory with them.
+    </div>
+    <div class="chips">
+      <span class="chip keep">keep</span><span class="chip">too much code for a skill</span
+      ><span class="chip">show the client side fuller</span>
+    </div>
+  </div>
+
+  <div class="note">
+    Answered: Hello becomes live · under 5s · the agent narrates · README when there is an API or
+    decisions worth recording. Preserved in <code>specs/done/live-apps/README.md</code>.
+  </div>
+
+  <h2>3 · Taste I can't read off the code</h2>
+  <ol class="q">
+    <li>
+      <h3>Does <strong>Hello</strong> become the live demo?</h3>
+      <p>
+        <code>welcome/hello-app</code> ships in every new workspace and is already a Bun service —
+        it just serves one static greeting. It could instead be the smallest real example of all of
+        this: a list, an API, an SSE stream, a README. First thing every new user sees, and the
+        first thing every agent reads when asked to build something similar.
+      </p>
+      <div class="chips">
+        <span class="chip">yes — make Hello live</span>
+        <span class="chip">no — keep the greeting, ship an example elsewhere</span>
+        <span class="chip">no example at all, the skill text is enough</span>
+      </div>
+    </li>
+    <li>
+      <h3>How live is live?</h3>
+      <p>
+        This sets the assertion in the <code>build-app</code> staging leg, and it sets the ceiling
+        on what the skill can promise an author.
+      </p>
+      <div class="chips">
+        <span class="chip">under 1s — it should feel like the agent typed it</span>
+        <span class="chip">under 5s — no reload is the point, not speed</span>
+        <span class="chip">don't assert timing, just assert it arrives</span>
+      </div>
+    </li>
+    <li>
+      <h3>Does the agent say anything?</h3>
+      <p>
+        After it POSTs the task, does the prompt layer tell it to point at the pane ("added — it's
+        in the list now"), or does the app just update while the agent answers normally?
+      </p>
+      <div class="chips">
+        <span class="chip">silent — the update speaks for itself</span>
+        <span class="chip">one line, first time only</span>
+        <span class="chip">tell it to narrate</span>
+      </div>
+    </li>
+    <li>
+      <h3>Is a README expected of every app, or only apps with an API?</h3>
+      <p>
+        Universal is one sentence in the skill and one habit for agents. Conditional keeps one-page
+        throwaway apps free of ceremony — but then the <code>your-apps.md</code>
+        marker's absence means two different things.
+      </p>
+      <div class="chips">
+        <span class="chip">every app</span>
+        <span class="chip">only apps with an API</span>
+      </div>
+    </li>
+  </ol>
+
+  <h2>4 · Where this leaves the map</h2>
+  <table>
+    <tr>
+      <th>Decision</th>
+      <th>Settled as</th>
+    </tr>
+    <tr>
+      <td>D1 App classes</td>
+      <td>Two-class rule — state ⇒ service</td>
+    </tr>
+    <tr>
+      <td>D2 Notify transport</td>
+      <td>SSE, from the app's own server</td>
+    </tr>
+    <tr>
+      <td>D3 Discovery</td>
+      <td><code>README.md</code> in the app folder</td>
+    </tr>
+    <tr>
+      <td>D4 Frame shape</td>
+      <td>Out of scope — app by app</td>
+    </tr>
+    <tr>
+      <td>D5 Data access rules</td>
+      <td>Out of scope — an app is just an app</td>
+    </tr>
+    <tr>
+      <td>D6 README hint surface</td>
+      <td>Agent-facing only; no REST or wire field</td>
+    </tr>
+    <tr>
+      <td>D7 README direction</td>
+      <td>Read before call or edit; update on change</td>
+    </tr>
+    <tr>
+      <td>D8 Proof</td>
+      <td>Extend the <code>build-app</code> staging leg</td>
+    </tr>
+  </table>
+
+  <h2>5 · Your reply, pre-drafted</h2>
+  <div class="reply">
+    <pre>
+1 prompt layer: keep / ...
+2 skill sections: keep / ...
+3 reference sample: keep / ...
+Q1 Hello:   live / keep the greeting / no example
+Q2 latency: 1s / 5s / no timing
+Q3 narrate: silent / once / narrate
+Q4 README:  every app / only with an API</pre
+    >
+  </div>
+
+  <footer>Quadrant 3 of 4 · unknown knowns. Landmines (Q4) and the finished map come next.</footer>
+</main>

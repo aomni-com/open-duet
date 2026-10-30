@@ -1,0 +1,334 @@
+{
+  "targetVersion": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+  "transitionVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+  "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:2e97be2b9c4937800689895d2743a43f4a2adfcfeccd846f873d438eb723d72f",
+  "release": {
+    "backendSchema": 1,
+    "cacheSchema": 16,
+    "runtimeVersion": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec"
+  },
+  "migrated": {
+    "workspaceId": "ns7bkd20x918mfvwjftzgp1zm98bxrek",
+    "vmName": "workspace-redacted",
+    "sshDest": "service.example.invalid",
+    "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+    "bootId": "855c30d4-5d04-4a2f-b028-2f77ce617e4b",
+    "runtimeVersion": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+    "duetArtifact": {
+      "name": "duet",
+      "sha256": "a0defe4e706387c251d55a4b4dc18994ec2fdcebbbe27142024b99028dfd1551",
+      "byteLength": 117078144,
+      "mode": 493
+    },
+    "manifest": {
+      "formatVersion": 1,
+      "version": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+      "artifacts": [
+        {
+          "name": "duet",
+          "sha256": "a0defe4e706387c251d55a4b4dc18994ec2fdcebbbe27142024b99028dfd1551",
+          "byteLength": 117078144,
+          "mode": 493
+        },
+        {
+          "name": "helper.js",
+          "sha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+          "byteLength": 908569,
+          "mode": 420
+        },
+        {
+          "name": "index.js",
+          "sha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+          "byteLength": 2226400,
+          "mode": 420
+        },
+        {
+          "name": "initdb.wasm",
+          "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+          "byteLength": 169969,
+          "mode": 420
+        },
+        {
+          "name": "pglite.data",
+          "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+          "byteLength": 5289109,
+          "mode": 420
+        },
+        {
+          "name": "pglite.wasm",
+          "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+          "byteLength": 8739902,
+          "mode": 420
+        },
+        {
+          "name": "photon_rs_bg.wasm",
+          "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+          "byteLength": 1881634,
+          "mode": 420
+        },
+        {
+          "name": "vector.tar.gz",
+          "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+          "byteLength": 46108,
+          "mode": 420
+        }
+      ]
+    }
+  },
+  "fresh": {
+    "workspaceId": "ns767c0dc98kzh6mzdg0rvj8zh8fm2eb",
+    "vmName": "workspace-redacted",
+    "sshDest": "service.example.invalid",
+    "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:2e97be2b9c4937800689895d2743a43f4a2adfcfeccd846f873d438eb723d72f",
+    "bootId": "46c25850-8386-4074-b43b-ec64aeaa6ead",
+    "runtimeVersion": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+    "duetArtifact": {
+      "name": "duet",
+      "sha256": "a0defe4e706387c251d55a4b4dc18994ec2fdcebbbe27142024b99028dfd1551",
+      "byteLength": 117078144,
+      "mode": 493
+    },
+    "manifest": {
+      "formatVersion": 1,
+      "version": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+      "artifacts": [
+        {
+          "name": "duet",
+          "sha256": "a0defe4e706387c251d55a4b4dc18994ec2fdcebbbe27142024b99028dfd1551",
+          "byteLength": 117078144,
+          "mode": 493
+        },
+        {
+          "name": "helper.js",
+          "sha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+          "byteLength": 908569,
+          "mode": 420
+        },
+        {
+          "name": "index.js",
+          "sha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+          "byteLength": 2226400,
+          "mode": 420
+        },
+        {
+          "name": "initdb.wasm",
+          "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+          "byteLength": 169969,
+          "mode": 420
+        },
+        {
+          "name": "pglite.data",
+          "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+          "byteLength": 5289109,
+          "mode": 420
+        },
+        {
+          "name": "pglite.wasm",
+          "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+          "byteLength": 8739902,
+          "mode": 420
+        },
+        {
+          "name": "photon_rs_bg.wasm",
+          "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+          "byteLength": 1881634,
+          "mode": 420
+        },
+        {
+          "name": "vector.tar.gz",
+          "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+          "byteLength": 46108,
+          "mode": 420
+        }
+      ]
+    }
+  },
+  "device": {
+    "userId": "n97dkak53bqv3ft58znwtby7ch8fmgbj",
+    "currentMembershipChecked": true,
+    "roleChangeChecked": true,
+    "membershipRemoved": "ns767c0dc98kzh6mzdg0rvj8zh8fm2eb",
+    "revokedPrefix": "[REDACTED_DUET_KEY]",
+    "noMembershipAccessChecked": true
+  },
+  "models": [
+    {
+      "workspaceId": "ns767c0dc98kzh6mzdg0rvj8zh8fm2eb",
+      "slug": "unified-duet-staging-e2e-synthetic",
+      "generationId": "md7a2rn3r0sxsakyr640wq88558fnf90",
+      "upstreamGenerationId": "gen_01M44FAWKCMMEYA40SGKTK32S1",
+      "billedCostMicroUsd": 4,
+      "debitMicroUsd": -4
+    },
+    {
+      "workspaceId": "ns7dvcy8ygp1v1t6khngpjs4q58fnrqh",
+      "slug": "unified-4038b6",
+      "generationId": "md70b4fnd7y6a4jsvhcta1exe58fma6h",
+      "upstreamGenerationId": "gen_01M44FBGQH96PTPK91KXAQ5WAQ",
+      "billedCostMicroUsd": 4,
+      "debitMicroUsd": -4
+    }
+  ],
+  "sync": {
+    "machines": [
+      {
+        "machineId": "ph7ejhkff11rndpp2ehy2azwc18fnp9j",
+        "syncthingDeviceId": "AAMRLJJ-2ZTJQKC-GF23HXZ-THCI4ZE-OZZMDDC-UNAWUMC-FE7TAEM-WOZ4PQB"
+      },
+      {
+        "machineId": "ph70vf4ttfm1jf4abme7nf4q8s8fnnfe",
+        "syncthingDeviceId": "KOND6IW-RV2JWNT-XTNS4T4-U2TT6ET-GEOGCN2-SAJQ3BD-JK2PSPT-LTHTKAK"
+      }
+    ],
+    "bytesSha256": "2f00fe6cd6a2fb946fc1e3bb97f8e08b2c25b797a4f5101da43914804f342378",
+    "removedMachineId": "ph7ejhkff11rndpp2ehy2azwc18fnp9j",
+    "survivingMachineId": "ph70vf4ttfm1jf4abme7nf4q8s8fnnfe"
+  },
+  "native": {
+    "localMemoryContent": "LOCAL-staging-e2e-synthetic",
+    "remoteCompleted": true,
+    "status": "pass",
+    "commands": [
+      {
+        "command": "skills",
+        "exitCode": 0
+      },
+      {
+        "command": "memory",
+        "exitCode": 0
+      },
+      {
+        "command": "memory",
+        "exitCode": 0
+      },
+      {
+        "command": "--rpc",
+        "exitCode": 0
+      }
+    ],
+    "executable": "/opt/duet/releases/0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec/duet",
+    "duetArtifact": {
+      "name": "duet",
+      "sha256": "a0defe4e706387c251d55a4b4dc18994ec2fdcebbbe27142024b99028dfd1551",
+      "byteLength": 117078144,
+      "mode": 493
+    },
+    "runtimeVersion": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+    "memoryContent": "staging-e2e-synthetic",
+    "rpcCompleted": true
+  },
+  "externalDrills": [
+    {
+      "environment": "staging",
+      "disposable": true,
+      "fixtureId": "staging-e2e-synthetic",
+      "vmName": "duet-test-staging-e2e-synthetic",
+      "execution": "provider-vm",
+      "controlPlane": "controlled-loopback",
+      "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "status": "pass",
+      "kind": "interrupted-adoption",
+      "observations": {
+        "interruptedPhase": "started",
+        "recoveredVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+        "stateBeforeSha256": "1440bb37a9ca583b3cc978dc33f85ac5139dcd8bfb05572cf3b4e94d5d98fead",
+        "stateAfterSha256": "1440bb37a9ca583b3cc978dc33f85ac5139dcd8bfb05572cf3b4e94d5d98fead",
+        "credentialBeforeSha256": "1eebad1dc3b2d21ad489e621e86610d813f9fdef778564526dcfe379b4bb8c30",
+        "credentialAfterSha256": "1eebad1dc3b2d21ad489e621e86610d813f9fdef778564526dcfe379b4bb8c30"
+      }
+    },
+    {
+      "environment": "staging",
+      "disposable": true,
+      "fixtureId": "staging-e2e-synthetic",
+      "vmName": "duet-test-staging-e2e-synthetic",
+      "execution": "provider-vm",
+      "controlPlane": "controlled-loopback",
+      "targetVersion": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+      "status": "pass",
+      "kind": "live-work-deferral",
+      "observations": {
+        "adoptionStatus": "deferred",
+        "workContinued": true,
+        "sessionId": "fixture-staging-e2e-synthetic",
+        "runnerExecutable": {
+          "executablePath": "/opt/duet/releases/0.0.0+373f0d4dcb530705e3ad400e4f7be5fb55ddc0edb75cedfae3753522a8a36788/duet",
+          "executableSha256": "62e5980fc3c6741624ebdf597213220521a32cb6d79f341d2eea30a92dc7100b"
+        }
+      }
+    },
+    {
+      "environment": "staging",
+      "disposable": true,
+      "fixtureId": "staging-e2e-synthetic",
+      "vmName": "duet-test-staging-e2e-synthetic",
+      "execution": "provider-vm",
+      "controlPlane": "controlled-loopback",
+      "targetVersion": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+      "status": "pass",
+      "kind": "agent-only-update",
+      "observations": {
+        "changedArtifacts": [
+          "duet"
+        ],
+        "fromVersion": "0.0.0+373f0d4dcb530705e3ad400e4f7be5fb55ddc0edb75cedfae3753522a8a36788",
+        "installedVersion": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+        "gatewayBeforeSha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+        "gatewayAfterSha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+        "native": {
+          "version": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+          "executablePath": "/opt/duet/releases/0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec/duet",
+          "executableSha256": "a0defe4e706387c251d55a4b4dc18994ec2fdcebbbe27142024b99028dfd1551",
+          "nativeMemoryVerified": true
+        }
+      }
+    },
+    {
+      "environment": "staging",
+      "disposable": true,
+      "fixtureId": "staging-e2e-synthetic",
+      "vmName": "duet-test-staging-e2e-synthetic",
+      "execution": "provider-vm",
+      "controlPlane": "controlled-loopback",
+      "targetVersion": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+      "status": "pass",
+      "kind": "missing-asset-repair",
+      "observations": {
+        "artifactName": "initdb.wasm",
+        "missingBefore": true,
+        "expectedSha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+        "repairedSha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+        "installedVersion": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+        "native": {
+          "version": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+          "executablePath": "/opt/duet/releases/0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec/duet",
+          "executableSha256": "a0defe4e706387c251d55a4b4dc18994ec2fdcebbbe27142024b99028dfd1551",
+          "nativeMemoryVerified": true
+        }
+      }
+    },
+    {
+      "environment": "staging",
+      "disposable": true,
+      "fixtureId": "staging-e2e-synthetic",
+      "vmName": "duet-test-staging-e2e-synthetic",
+      "execution": "provider-vm",
+      "controlPlane": "controlled-loopback",
+      "targetVersion": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+      "status": "pass",
+      "kind": "matched-rollback",
+      "observations": {
+        "rollbackVersion": "0.0.0+373f0d4dcb530705e3ad400e4f7be5fb55ddc0edb75cedfae3753522a8a36788",
+        "installedVersion": "0.0.0+373f0d4dcb530705e3ad400e4f7be5fb55ddc0edb75cedfae3753522a8a36788",
+        "rollbackInventorySha256": "049381a1b8a1b9d0480c00a9ee69344fbad0c6c81b402acceafb7312cabdf886",
+        "installedInventorySha256": "049381a1b8a1b9d0480c00a9ee69344fbad0c6c81b402acceafb7312cabdf886",
+        "native": {
+          "version": "0.0.0+373f0d4dcb530705e3ad400e4f7be5fb55ddc0edb75cedfae3753522a8a36788",
+          "executablePath": "/opt/duet/releases/0.0.0+373f0d4dcb530705e3ad400e4f7be5fb55ddc0edb75cedfae3753522a8a36788/duet",
+          "executableSha256": "62e5980fc3c6741624ebdf597213220521a32cb6d79f341d2eea30a92dc7100b",
+          "nativeMemoryVerified": true
+        }
+      }
+    }
+  ]
+}

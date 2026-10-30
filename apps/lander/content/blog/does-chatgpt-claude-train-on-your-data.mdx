@@ -1,0 +1,209 @@
+---
+title: 'Does ChatGPT or Claude Train on Your Data? The Answer Depends on Your Account'
+metaTitle: 'Does ChatGPT or Claude Train on Your Data? (2026)'
+description: "ChatGPT trains on consumer chats unless you opt out; Claude depends on a setting. See exactly what's safe by account type, plus a 5-minute audit."
+date: '2026-07-18'
+updatedAt: '2026-07-18'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/10.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'ai'
+tags:
+  [
+    'does chatgpt train on your data',
+    'does claude train on your data',
+    'chatgpt data privacy',
+    'claude data privacy',
+    'ai data training',
+  ]
+type: 'article'
+image: '/blog/does-chatgpt-claude-train-on-your-data/cover.png'
+relatedPosts:
+  - 'how-to-run-claude-code-in-the-cloud'
+  - 'who-runs-your-ai-agent-after-you-build-it'
+cta:
+  title: 'One governed workspace for your AI work.'
+  subtitle: 'Duet keeps team sessions, files, and workspace history in one place — data access, retention, and connectors defined once, not renegotiated per tool.'
+  buttonText: 'Hire Duet'
+  href: '/sign-in?from=blog-does-chatgpt-claude-train-on-your-data'
+---
+
+<Callout emoji="💡">
+**Quick answer**
+
+ChatGPT trains on consumer content unless you opt out; ChatGPT Business, Enterprise, and API do not train on business data by default. Claude may use consumer chats for training when the model-improvement setting is on; Claude for Work, API, and other commercial services do not train on customer content by default. Feedback and safety-flagged content can still be used under both vendors' policies.
+
+</Callout>
+
+<Callout emoji="❓">
+**Questions this page answers**
+
+<ul>
+  <li>Does ChatGPT train on your data by default?</li>
+  <li>Does Claude train on your data by default?</li>
+  <li>Does ChatGPT Enterprise or Business train on your data?</li>
+  <li>Does Claude for Work or the Anthropic API train on your data?</li>
+  <li>If training is off, is my data completely private?</li>
+  <li>Can my company's admin see what I type at work?</li>
+  <li>How do I turn off model training on ChatGPT or Claude?</li>
+</ul>
+</Callout>
+
+Checked live against OpenAI and Anthropic's own policy pages on July 17, 2026 — settings and terms change, so verify your own account before you rely on this.
+
+![Does ChatGPT or Claude train on your data? Matrix by account type: consumer chat tiers may train unless you opt out or unless a model-improvement setting is off, while Business, Enterprise, and API accounts do not train on your content by default.](/blog/does-chatgpt-claude-train-on-your-data/diagram-training-matrix.png)
+
+The account you're logged into matters more than which product you picked. Here's the four-row version before the detail:
+
+| Account type                                        | Trains on your content?                                   | Opt-out / control path                                                 | Default retention                           |
+| --------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------------------------------- |
+| ChatGPT Free, Plus, or Pro (personal)               | May train — unless you opt out                            | Settings → Data Controls → "Improve the model for everyone"            | Until deleted; 30-day purge after           |
+| Claude Free, Pro, or Max (personal)                 | May train — only when the model-improvement setting is on | Settings → Privacy → "Help improve Claude"                             | 30 days if off; up to 5 years if on         |
+| ChatGPT Business, Enterprise, or Edu                | No training by default                                    | Workspace admin controls retention and access                          | Deleted conversations purged within 30 days |
+| Claude for Work, Enterprise, or either vendor's API | No training by default                                    | Zero data retention for qualifying organizations on eligible endpoints | ~30-day default deletion                    |
+
+A "no training" row doesn't mean nothing is retained, reviewed, or admin-visible. That's the whole subject of the four-questions section below.
+
+## Does ChatGPT train on your data on a free or paid personal account?
+
+Yes, unless you turn it off. [OpenAI states](https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance) that content from ChatGPT Free, Plus, and Pro personal accounts may train its models whenever "Improve the model for everyone" is on. That's true across every consumer tier, paid or not.
+
+Paying for Plus or Pro buys you higher usage limits and better models. It doesn't buy you a business data contract. That's a separate product, covered in the next section.
+
+Two carve-outs matter more than the toggle itself. Give a chat a thumbs up or thumbs down, and the entire associated conversation can be used for training, even with the toggle off. Temporary Chat is the one mode never used for training, though OpenAI keeps a safety copy of it for up to 30 days.
+
+| ChatGPT consumer feature | What happens                                                              |
+| ------------------------ | ------------------------------------------------------------------------- |
+| Default chat             | May train unless "Improve the model for everyone" is off                  |
+| Thumbs up/down feedback  | Trains regardless of the toggle — pulls in the whole conversation         |
+| Temporary Chat           | Never used for training; kept up to 30 days for safety review only        |
+| Deleted chat             | Removed from your history immediately; purged from systems within 30 days |
+
+## Does Claude train on your data on a free or paid personal account?
+
+It depends on a setting you control, not on which plan you pay for. [Anthropic states](https://privacy.claude.com/en/articles/10023580-is-my-data-used-for-model-training) it may use Claude.ai chats and coding sessions — including Claude Code run from a Free, Pro, or Max account — to train its models "only when this setting is on."
+
+Anthropic doesn't publish whether that setting defaults on or off for new or existing consumer accounts. Check it yourself under Settings → Privacy → "Help improve Claude" rather than assume either answer.
+
+If the setting is on, your data can be retained for model training for up to five years. If it's off, standard 30-day back-end deletion applies instead. Either way, explicit feedback and safety-flagged content are still fair game for Anthropic's own trust-and-safety systems.
+
+If you [run Claude Code in the cloud](/blog/how-to-run-claude-code-in-the-cloud) from a personal Claude account, the same consumer training setting follows the coding sessions. It isn't a separate, safer channel.
+
+| Claude consumer feature    | What happens                                            |
+| -------------------------- | ------------------------------------------------------- |
+| Chat, training setting on  | May train; can be retained up to 5 years                |
+| Chat, training setting off | Not used for training; 30-day back-end deletion         |
+| Thumbs up/down feedback    | Stored and usable for training regardless of the toggle |
+| Incognito chat             | Never used to improve Claude, even with the setting on  |
+
+## Does ChatGPT Business, Enterprise, or the API train on your data?
+
+No. By default, OpenAI does not use inputs or outputs from ChatGPT Business, Enterprise, Edu, or the API to train or improve its models.
+
+That's the training answer. The surrounding controls are what make the tier actually usable for company data:
+
+- **Retention:** workspace admins set the retention window; deleted conversations are removed from systems within 30 days.
+- **Security posture:** AES-256 encryption at rest, TLS 1.2+ in transit, SOC 2 Type 2, ISO 27001/17/18/27701, GDPR and CCPA support, and a DPA on request.
+- **Admin visibility:** Business workspace admins can view, access, export, and delete end-user conversations; Enterprise adds an audit log via the Compliance API.
+- **API retention:** 30-day default retention for inputs and outputs, deleted after that unless legally required.
+- **Zero data retention:** available on request, for qualifying organizations, on eligible API endpoints only. Not a universal opt-in.
+
+## Does Claude for Work, the API, or Enterprise train on your data?
+
+No. Anthropic does not use Customer Content from its commercial services — Claude for Work, the API, Bedrock, Vertex, Gov, or Education — to train models by default, per both its Privacy Center and its Commercial Terms of Service.
+
+The rest of the picture, at a glance:
+
+- **Carve-outs:** the same feedback and trust-and-safety exceptions that apply to consumer accounts also apply here: explicit feedback and content flagged for safety review remain usable.
+- **Retention:** API and commercial data defaults to 30-day auto-deletion.
+- **Zero data retention:** a per-organization arrangement on eligible surfaces only, not something any account can self-serve.
+
+## Training, retention, review, and connectors: why "no training" doesn't mean "nothing leaves your business"?
+
+Because "does it train on my data" is really four separate questions bundled into one, and a clean "no" on training doesn't settle the other three.
+
+![Four separate questions behind "does AI train on your data": model training, retention windows up to 7 years, human safety review regardless of settings, and connector or workspace-admin access — each with its own rules.](/blog/does-chatgpt-claude-train-on-your-data/diagram-four-questions.png)
+
+1. **Training.** Does your content update future model weights? This is the only question a settings toggle actually answers.
+2. **Retention.** How long is content stored? Both vendors keep flagged content for up to 2 years, feedback for up to 5 years, and safety-classifier scores for up to 7 years, regardless of your training setting.
+3. **Human review.** Can a person read it? Both vendors keep human-review and safety-flag carve-outs that apply "regardless of whether your model training setting is on or off."
+4. **Connectors and admins.** Who else can reach it? On a business account, workspace administrators can access and control the account and its content under both vendors' privacy policies. Connected apps and integrations operate under their own separate terms.
+
+A no-training guarantee on your business tier never meant no human, no admin, and no connector would ever touch the data. It meant your content wouldn't retrain the model. Those are different promises.
+
+## What happened when businesses got this wrong?
+
+Two real incidents show what "ungoverned" actually costs — one internal ban, one nine-figure regulatory fine.
+
+Samsung banned staff from using generative AI tools in 2023 after employees pasted sensitive source code and internal data into ChatGPT from personal accounts. The failure wasn't training in the abstract — it was disclosure through a consumer tool with no workspace controls attached.
+
+Italy's data authority took the regulatory route instead. In December 2024, the Garante [fined OpenAI €15 million](https://www.reuters.com/technology/italy-fines-openai-15-million-euros-over-privacy-rules-breach-2024-12-20/) (about $15.58 million) over how it handled personal data and verified users' ages, on top of briefly banning ChatGPT outright the year before.
+
+OpenAI called the fine "disproportionate" and appealed. GDPR fines can reach €20 million or 4% of global turnover, whichever is higher.
+
+Neither case turned on a single training toggle. Both trace back to consumer-tool use with no account-level governance behind it.
+
+## How do you check and fix your settings in five minutes?
+
+Run this five-check audit on your own account before you paste anything you'd regret pasting.
+
+![Five-minute AI data audit checklist: confirm your account type, find the model-training toggle in ChatGPT data controls or Claude privacy settings, review connectors, know your admin can see workspace chats, and define what data is never pasted.](/blog/does-chatgpt-claude-train-on-your-data/diagram-five-minute-audit.png)
+
+1. **Which account are you actually in?** Personal or company-administered, check the workspace name, not the logo.
+2. **Is model improvement on?** ChatGPT: profile icon → Settings → Data Controls → "Improve the model for everyone" (works on web, mobile, and even signed-out sessions, and syncs across devices). Claude: your name → Settings → Privacy → "Help improve Claude."
+3. **What's connected?** Review connected apps and connectors, and what each one can actually read.
+4. **Who can see your chats?** On a business workspace, your admin can view, export, and delete them.
+5. **What's off-limits to paste?** Secrets, credentials, and full customer records, regardless of any toggle's position.
+
+One catch worth remembering: turning a toggle off only stops future use. Anything already pulled into a training run that has already started, or a model that's already been trained, stays as it is.
+
+## What's the safest way to handle business data in ChatGPT or Claude going forward?
+
+Use the approved business or commercial tier for company data, and stop treating a settings toggle as the whole answer.
+
+The operating rules that hold up in practice:
+
+- Do company work in the business/commercial tier, not a personal login. That's the only tier with a no-training default and an admin behind it.
+- Never paste secrets, credentials, or full customer records into a personal account, no matter which toggle is set.
+- Review connector and connected-app scopes; a no-training vendor promise doesn't extend to whatever a connector can read.
+- Keep one governed workspace instead of scattering the same work across personal chat logins. See [who actually runs your AI agent after you build it](/blog/who-runs-your-ai-agent-after-you-build-it) for what happens when nobody owns that upkeep.
+
+That last point is the structural fix, not another checklist. Teams that [build a real AI command center](/guides/how-to-build-your-ai-command-center) stop relitigating "which account was this in?" every single week.
+
+Here's the pattern underneath every version of this question: the risk was never really ChatGPT versus Claude. It's how many personal logins, browser tabs, and unmanaged chat histories your business's actual work is scattered across. A fully compliant, no-training business tier still can't help if an employee pastes a customer list into the personal account they're used to.
+
+The fix isn't a settings checklist to re-run every quarter. It's giving your team one approved, governed AI workspace where data access, retention, and connectors get defined once instead of relitigated per chat.
+
+That's the operating model behind how Duet's own team runs its content work, a persistent workspace instead of ad hoc chat sessions.
+
+## Frequently Asked Questions
+
+### Does ChatGPT train on my data by default?
+
+ChatGPT's consumer plans (Free, Plus, and Pro) train on your content whenever "Improve the model for everyone" is on. OpenAI's help pages walk through how to turn that setting off, but no page states outright that it starts in the on position, so the accurate phrasing is that ChatGPT trains on consumer content unless you opt out.
+
+### Does Claude train on my data by default?
+
+Anthropic doesn't publicly document whether the "Help improve Claude" toggle defaults on or off for consumer accounts. Check Settings → Privacy in your own account to see its current state. What's confirmed: on means chats and coding sessions may train models and can be retained up to five years; off means standard 30-day deletion.
+
+### Does ChatGPT Enterprise or Business train on my data?
+
+No. By default, OpenAI does not use data from ChatGPT Business, Enterprise, Edu, or the API — including inputs and outputs — to train or improve its models.
+
+### Does Claude for Work or the Anthropic API train on my data?
+
+No. Anthropic does not use Customer Content from Claude for Work, the API, Bedrock, Vertex, Gov, or Education services to train models by default, per both the Privacy Center and the Commercial Terms of Service.
+
+### If training is off, is my data completely private?
+
+No. Both vendors keep carve-outs: explicit feedback can still be used, and content flagged for safety or trust review can be retained separately: up to 2 years for the flag and up to 7 years for classifier scores, regardless of your training setting.
+
+### Can my company's admin see what I type into ChatGPT or Claude at work?
+
+Yes, on a business or workspace account. Administrators can access and control the account, including its content, under both OpenAI's and Anthropic's privacy policies. ChatGPT Business specifically lets workspace admins view, export, and delete end-user conversations.
+
+### How do I turn off model training on ChatGPT or Claude?
+
+On ChatGPT: profile icon → Settings → Data Controls → toggle off "Improve the model for everyone." It works on web, mobile, and even signed-out sessions. On Claude: your name → Settings → Privacy → toggle off "Help improve Claude." Turning it off stops future training use; it doesn't undo training runs that already started.

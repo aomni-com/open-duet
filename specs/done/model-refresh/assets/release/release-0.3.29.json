@@ -1,0 +1,138 @@
+{
+  "version": "0.3.29",
+  "gitHead": "a8676bc7f10fece825b4e82bd2d65d6dcdd0e072",
+  "tag": "v0.3.29",
+  "tagObject": "2eb4283007a6b6ded8385c6c897a22fe9cfbbda7",
+  "metadataDelta": "package.json version only",
+  "pushedRefs": [
+    "main",
+    "v0.3.29"
+  ],
+  "releaseWorkflow": {
+    "id": 36371978019,
+    "url": "https://github.com/Example User/duet-agent/actions/runs/36371978019",
+    "status": "success",
+    "fullDocker": {
+      "passed": 1384,
+      "failed": 0,
+      "files": 148,
+      "seconds": 265.48
+    },
+    "log": "/tmp/agent-refresh-029-release-workflow.log"
+  },
+  "sourceVerificationReceipt": "/tmp/agent-selections-final-review-receipt.json",
+  "publishedArtifact": {
+    "status": "verified",
+    "provenance": {
+      "version": "0.3.29",
+      "gitHead": "a8676bc7f10fece825b4e82bd2d65d6dcdd0e072",
+      "integrity": "sha512-FSgTO2mBVc7rB/4Aa9sB0I8M4e1QQgcWF050R8L5hm7S8hJHQ2zqDYJaXgJT+1EDPUUmrkC9jBZN7v/Py1oHgw==",
+      "shasum": "dd1f7e1b1ef028f79b7a82f2d96c2d1b1bd36acd",
+      "tarball": "https://registry.npmjs.org/@duetso/agent/-/agent-0.3.29.tgz",
+      "bytes": 868157,
+      "integrityVerified": true,
+      "installedFilesVerified": 669,
+      "installedBytesMatchRegistryTarball": true
+    },
+    "cliVersion": "0.3.29",
+    "behavior": {
+      "packageVersion": "0.3.29",
+      "results": [
+        {
+          "alias": "opus",
+          "id": "anthropic/claude-opus-5.5",
+          "api": "anthropic-messages",
+          "controlledRequestSerialized": true
+        },
+        {
+          "alias": "sol",
+          "id": "openai/gpt-6-sol",
+          "api": "openai-responses",
+          "controlledRequestSerialized": true
+        },
+        {
+          "alias": "terra",
+          "id": "openai/gpt-6-sol",
+          "api": "openai-responses",
+          "controlledRequestSerialized": true
+        },
+        {
+          "alias": "luna",
+          "id": "openai/gpt-6-luna",
+          "api": "openai-responses",
+          "controlledRequestSerialized": true
+        },
+        {
+          "alias": "grok",
+          "id": "spacexai/grok-4.7",
+          "api": "openai-completions",
+          "controlledRequestSerialized": true
+        },
+        {
+          "alias": "glm",
+          "id": "zai/glm-5.3",
+          "api": "anthropic-messages",
+          "controlledRequestSerialized": true
+        }
+      ],
+      "savedAliasesUpgrade": true,
+      "configExportValid": true,
+      "configTopLevelKeys": [
+        "defaultTier",
+        "tiers",
+        "classifier"
+      ],
+      "overlap": {
+        "gatewayCommit": "9b2dee1eef0ef1d5a35a1d7e988846db30f3db6a",
+        "loadAccepted": true,
+        "fullPolicyPreserved": true,
+        "inputFileUnmodified": true,
+        "dispatch": [
+          {
+            "tier": "openai-max",
+            "target": "openai/gpt-6-sol",
+            "effort": "medium",
+            "controlledRequestSerialized": true
+          },
+          {
+            "tier": "anthropic-max",
+            "target": "anthropic/claude-opus-5.5",
+            "effort": "medium",
+            "controlledRequestSerialized": true
+          }
+        ]
+      }
+    },
+    "changedSeams": {
+      "passed": 14,
+      "failed": 0,
+      "assertions": 337,
+      "files": 4,
+      "seconds": 3.88,
+      "log": "/tmp/agent-refresh-published-029-verify/changed-seams.log",
+      "runtime": "installed npm dist/src via symlink; no checkout source runtime",
+      "coverage": [
+        "new explicit different provider pin ordinary non-slash dispatch on fresh and resumed sessions",
+        "all baseline retired spellings plus provider-preserving recovery",
+        "clear and subsequent picker after resume including explicit recovered preferences",
+        "inline override matching fresh default",
+        "custom virtual chat routing/advisor versus concrete-only memory",
+        "uninstantiated and active saved workflows actual child dispatch with original transcript/history retained",
+        "old managed table load, policy and disk bytes unchanged"
+      ]
+    },
+    "dockerExitCode": 0,
+    "dockerLog": "/tmp/agent-refresh-published-029-verify/docker.log",
+    "liveProviderCalls": false
+  },
+  "runtimeHarness": "Owned source regressions import installed npm dist/src via symlink; only CLI entry suffix adaptation. Docker HOME isolated. No source runtime copied.",
+  "unrelatedLocalCommitsExcluded": true,
+  "liveProviderCalls": false,
+  "sourceOnlyCoverage": [
+    "Full1384-test Docker source suite including connected-provider refresh",
+    "Benchmark generator/report regressions; benchmarks/evals/examples are not npm artifact files",
+    "Live availability, production tariffs and staging journeys remain parent-owned integration gates"
+  ],
+  "temporaryVerificationCI": "Prepared locally but never pushed or run; local Docker succeeded",
+  "originalSiblingHead": "3bc0ea503c2fc1b945de3e0c79c4c967d42a38b4"
+}

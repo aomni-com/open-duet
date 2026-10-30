@@ -1,0 +1,354 @@
+'use node'
+
+import { v } from 'convex/values'
+
+import { internal } from '@repo/backend/convex/_generated/api'
+import { type Id } from '@repo/backend/convex/_generated/dataModel'
+import { action, internalAction, type ActionCtx } from '@repo/backend/convex/_generated/server'
+import * as Auth from '@repo/backend/convex/model/auth'
+
+import {
+  addDomainToProject,
+  getDomainStatus,
+  removeDomainFromProject,
+  verifyDomain,
+} from '../../services/vercel'
+
+const DOMAIN_REGEX =
+  /^(?=.{1,253}$)([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)(\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+$/i
+
+function normalizeDomain(input: string): string {
+  const trimmed = input.trim().toLowerCase()
+  const withoutProtocol = trimmed.replace(/^https?:\/\//, '').replace(/\/+$/, '')
+  if (!DOMAIN_REGEX.test(withoutProtocol)) {
+    throw new Error(`Invalid domain: ${input}`)
+  }
+  if (withoutProtocol.endsWith('.service.example.invalid') || withoutProtocol.endsWith('.duet.chat')) {
+    throw new Error('Cannot register a service.example.invalid / duet.chat domain')
+  }
+  return withoutProtocol
+}
+
+async function ensureOrgMember(
+  ctx: ActionCtx,
+  organizationId: Id<'organizations'>,
+  userId: Id<'users'>,
+): Promise<void> {
+  const isMember = await ctx.runQuery(
+    internal.domains.organizations.internal.isUserInOrganization,
+    { userId, organizationId },
+  )
+  if (!isMember) {
+    throw new Error('Not a member of this organization')
+  }
+}
+
+export const addDomain = action({
+  args: {
+    organizationId: v.id('organizations'),
+    domain: v.string(),
+    appSlug: v.string(),
+  },
+  handler: async (ctx, args): Promise<{ domainId: Id<'customDomains'> }> => {
+    const { user } = await Auth.ensureAuthAndUserAction(ctx)
+    await ensureOrgMember(ctx, args.organizationId, user._id)
+
+    const domain = normalizeDomain(args.domain)
+
+    const domainId: Id<'customDomains'> = await ctx.runMutation(
+      internal.domains.customDomains.internal.createDomain,
+      {
+        organizationId: args.organizationId,
+        appSlug: args.appSlug,
+        domain,
+        createdBy: user._id,
+      },
+    )
+
+    try {
+      const info = await addDomainToProject(domain)
+      await ctx.runMutation(internal.domains.customDomains.internal.updateDomain, {
+        domainId,
+        vercelDomainId: info.id,
+        verification: info.verification,
+        conflicts: info.conflicts,
+        clearConflicts: info.conflicts === undefined,
+        status: info.verified ? 'active' : 'verifying',
+        verifiedAt: info.verified ? Date.now() : undefined,
+        lastCheckedAt: Date.now(),
+        clearError: true,
+      })
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error)
+      await ctx.runMutation(internal.domains.customDomains.internal.updateDomain, {
+        domainId,
+        status: 'failed',
+        lastError: message,
+        lastCheckedAt: Date.now(),
+      })
+      throw error
+    }
+
+    return { domainId }
+  },
+})
+
+export const removeDomain = action({
+  args: { domainId: v.id('customDomains') },
+  handler: async (ctx, args): Promise<{ removed: boolean }> => {
+    const { user } = await Auth.ensureAuthAndUserAction(ctx)
+
+    const record = await ctx.runQuery(internal.domains.customDomains.internal.getById, {
+      domainId: args.domainId,
+    })
+    if (!record) {
+      return { removed: false }
+    }
+
+    await ensureOrgMember(ctx, record.organizationId, user._id)
+
+    try {
+      await removeDomainFromProject(record.domain)
+    } catch (error) {
+      console.error('Vercel removeDomain failed (continuing to delete row):', error)
+    }
+
+    await ctx.runMutation(internal.domains.customDomains.internal.deleteDomain, {
+      domainId: args.domainId,
+    })
+
+    return { removed: true }
+  },
+})
+
+export const refreshDomain = action({
+  args: { domainId: v.id('customDomains') },
+  handler: async (ctx, args): Promise<{ status: string }> => {
+    const { user } = await Auth.ensureAuthAndUserAction(ctx)
+    const record = await ctx.runQuery(internal.domains.customDomains.internal.getById, {
+      domainId: args.domainId,
+    })
+    if (!record) throw new Error('Domain not found')
+    await ensureOrgMember(ctx, record.organizationId, user._id)
+
+    try {
+      const info = await verifyDomain(record.domain)
+      const nextStatus = info.verified ? 'active' : 'verifying'
+      await ctx.runMutation(internal.domains.customDomains.internal.updateDomain, {
+        domainId: args.domainId,
+        verification: info.verification,
+        conflicts: info.conflicts,
+        clearConflicts: info.conflicts === undefined,
+        status: nextStatus,
+        verifiedAt: info.verified ? Date.now() : undefined,
+        lastCheckedAt: Date.now(),
+        clearError: true,
+      })
+      return { status: nextStatus }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error)
+      await ctx.runMutation(internal.domains.customDomains.internal.updateDomain, {
+        domainId: args.domainId,
+        status: 'failed',
+        lastError: message,
+        lastCheckedAt: Date.now(),
+      })
+      throw error
+    }
+  },
+})
+
+async function resolveSandboxOrg(
+  ctx: ActionCtx,
+  gatewayToken: string,
+): Promise<{ organizationId: Id<'organizations'> }> {
+  const sandbox = await ctx.runQuery(internal.domains.sandboxes.internal.getSandboxByGatewayToken, {
+    gatewayToken,
+  })
+  if (!sandbox) throw new Error('Invalid gateway token')
+  return { organizationId: sandbox.organizationId }
+}
+
+/**
+ * Sandbox-authenticated: add a custom domain from inside the agent-gateway.
+ * The gatewayToken identifies which org the call belongs to.
+ */
+export const sandboxAddDomain = action({
+  args: {
+    gatewayToken: v.string(),
+    domain: v.string(),
+    appSlug: v.string(),
+  },
+  handler: async (ctx, args): Promise<{ domainId: Id<'customDomains'>; status: string }> => {
+    const { organizationId } = await resolveSandboxOrg(ctx, args.gatewayToken)
+    const domain = normalizeDomain(args.domain)
+
+    const domainId: Id<'customDomains'> = await ctx.runMutation(
+      internal.domains.customDomains.internal.createDomain,
+      { organizationId, appSlug: args.appSlug, domain },
+    )
+
+    try {
+      const info = await addDomainToProject(domain)
+      const status = info.verified ? 'active' : 'verifying'
+      await ctx.runMutation(internal.domains.customDomains.internal.updateDomain, {
+        domainId,
+        vercelDomainId: info.id,
+        verification: info.verification,
+        conflicts: info.conflicts,
+        clearConflicts: info.conflicts === undefined,
+        status,
+        verifiedAt: info.verified ? Date.now() : undefined,
+        lastCheckedAt: Date.now(),
+        clearError: true,
+      })
+      return { domainId, status }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error)
+      await ctx.runMutation(internal.domains.customDomains.internal.updateDomain, {
+        domainId,
+        status: 'failed',
+        lastError: message,
+        lastCheckedAt: Date.now(),
+      })
+      throw error
+    }
+  },
+})
+
+export const sandboxListDomains = action({
+  args: { gatewayToken: v.string() },
+  handler: async (
+    ctx,
+    args,
+  ): Promise<
+    Array<{
+      domain: string
+      appSlug: string
+      status: string
+      verification?: Array<{ type: string; domain: string; value: string; reason?: string }>
+      conflicts?: Array<{ name: string; type: string; value: string }>
+      lastError?: string
+    }>
+  > => {
+    const { organizationId } = await resolveSandboxOrg(ctx, args.gatewayToken)
+    const rows = await ctx.runQuery(internal.domains.customDomains.internal.listForOrganization, {
+      organizationId,
+    })
+    return rows.map(r => ({
+      domain: r.domain,
+      appSlug: r.appSlug,
+      status: r.status,
+      verification: r.verification,
+      conflicts: r.conflicts,
+      lastError: r.lastError,
+    }))
+  },
+})
+
+export const sandboxRemoveDomain = action({
+  args: {
+    gatewayToken: v.string(),
+    domain: v.string(),
+  },
+  handler: async (ctx, args): Promise<{ removed: boolean }> => {
+    const { organizationId } = await resolveSandboxOrg(ctx, args.gatewayToken)
+    const domain = normalizeDomain(args.domain)
+
+    const row = await ctx.runQuery(internal.domains.customDomains.internal.getDomainByName, {
+      domain,
+    })
+    if (!row || row.organizationId !== organizationId) {
+      return { removed: false }
+    }
+
+    try {
+      await removeDomainFromProject(domain)
+    } catch (error) {
+      console.error('Vercel removeDomain failed (continuing to delete row):', error)
+    }
+
+    await ctx.runMutation(internal.domains.customDomains.internal.deleteDomain, {
+      domainId: row._id,
+    })
+    return { removed: true }
+  },
+})
+
+/**
+ * Cascade delete: remove all custom domains for a given (org, appSlug).
+ * Scheduled by the sandbox app sync when an app is removed — keeps Vercel
+ * and the DB in sync so orphan domains don't linger.
+ */
+export const cascadeDeleteForApp = internalAction({
+  args: {
+    organizationId: v.id('organizations'),
+    appSlug: v.string(),
+  },
+  handler: async (ctx, args): Promise<{ removed: number }> => {
+    const rows = await ctx.runQuery(internal.domains.customDomains.internal.listForApp, {
+      organizationId: args.organizationId,
+      appSlug: args.appSlug,
+    })
+    for (const row of rows) {
+      try {
+        await removeDomainFromProject(row.domain)
+      } catch (error) {
+        console.error('Vercel removeDomain failed during cascade (continuing):', error)
+      }
+      await ctx.runMutation(internal.domains.customDomains.internal.deleteDomain, {
+        domainId: row._id,
+      })
+    }
+    return { removed: rows.length }
+  },
+})
+
+/**
+ * Cron-invoked: poll unverified domains and flip to active once Vercel confirms.
+ */
+export const pollVerifications = internalAction({
+  args: { limit: v.optional(v.number()) },
+  handler: async (ctx, args): Promise<{ checked: number; activated: number }> => {
+    const limit = args.limit ?? 50
+    const pending = await ctx.runQuery(internal.domains.customDomains.internal.listByStatus, {
+      status: 'verifying',
+      limit,
+    })
+    let activated = 0
+    for (const row of pending) {
+      try {
+        const info = await getDomainStatus(row.domain)
+        if (!info) {
+          await ctx.runMutation(internal.domains.customDomains.internal.updateDomain, {
+            domainId: row._id,
+            status: 'failed',
+            lastError: 'Domain no longer exists on Vercel project',
+            lastCheckedAt: Date.now(),
+          })
+          continue
+        }
+        const nextStatus = info.verified ? 'active' : 'verifying'
+        if (info.verified) activated++
+        await ctx.runMutation(internal.domains.customDomains.internal.updateDomain, {
+          domainId: row._id,
+          verification: info.verification,
+          conflicts: info.conflicts,
+          clearConflicts: info.conflicts === undefined,
+          status: nextStatus,
+          verifiedAt: info.verified ? Date.now() : undefined,
+          lastCheckedAt: Date.now(),
+          clearError: true,
+        })
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error)
+        await ctx.runMutation(internal.domains.customDomains.internal.updateDomain, {
+          domainId: row._id,
+          lastError: message,
+          lastCheckedAt: Date.now(),
+        })
+      }
+    }
+    return { checked: pending.length, activated }
+  },
+})

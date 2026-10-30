@@ -1,0 +1,19 @@
+{
+  "scope": "Provider fault-drill provenance only; no allocation/live writes",
+  "sourceBaseline": "cda8f8a501099afac9c807e0b256c8150e6f2c8a",
+  "red": "Honest provider fixture without workspaceId rejected by original validator",
+  "green": "fixtureId + provider-vm + controlled-loopback accepted; wrong provenance and migrated real VM still refused",
+  "focusedGate": {
+    "tests": 5,
+    "assertions": 10,
+    "failures": 0
+  },
+  "lint": "pass",
+  "typecheck": "pass after matching existing owning-package @types dependency placement in isolated checkout; no source workaround",
+  "review": "Independent Codex found no concrete defects and explicitly did not certify live behavior",
+  "files": {
+    "green.txt.gz": "aeb49708673d261546b636c8c62ce3d1c9f868d23a2f167345a9483af12dc5d5",
+    "red.txt.gz": "6c3877d3765fca03da2fb5cf197e8cf652921c513529ba812761c857c02b1052",
+    "review.txt.gz": "6f4e4d4f82909cd2cd129b013e7672097efc46f66355c36d98811a7af32e04bb"
+  }
+}

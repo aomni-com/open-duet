@@ -1,0 +1,8 @@
+{
+  "name": "@repo/test-harness-convex-local-fixture",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "convex": "^1.42.1"
+  }
+}

@@ -1,0 +1,4 @@
+.convex/
+.env.local
+convex/_generated/
+convex/tsconfig.json

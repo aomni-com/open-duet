@@ -1,0 +1,173 @@
+{
+  "kind": "screenshot-parity-diff",
+  "generatedAt": "2026-07-16T17:21:20.929Z",
+  "note": "Lower parityDistance means the candidate is closer to the reference for this fixed pair. This is a distance metric, not an acceptance gate.",
+  "pairCount": 2,
+  "worstPair": "desktop",
+  "results": [
+    {
+      "id": "desktop",
+      "current": "specs/done/share-sync-orchestration/assets/slice-12/reference/desktop.png",
+      "candidate": "specs/done/share-sync-orchestration/assets/slice-12/candidate/desktop.png",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "parityDistance": 0.16747,
+      "grayscale": {
+        "mae": 4.02282,
+        "rmse": 16.01329,
+        "diffRatio16": 0.03062,
+        "diffRatio32": 0.01844,
+        "diffRatio64": 0.01415,
+        "pixelmatchRatio": 0.02938
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.99785,
+        "terrainLikeRatioCandidate": 0.99616,
+        "avgLuminanceCurrent": 242.66863,
+        "avgLuminanceCandidate": 242.98088,
+        "avgLuminanceDelta": 0.31225,
+        "edgeEnergyCurrent": 0.02828,
+        "edgeEnergyCandidate": 0.05345,
+        "edgeEnergyRatio": 1.89037,
+        "edgeDiffRatio32": 0.06347
+      },
+      "artifacts": {
+        "sideBySide": "compare/desktop-side-by-side.png",
+        "currentGray": "compare/desktop-current-gray.png",
+        "candidateGray": "compare/desktop-candidate-gray.png",
+        "absDiff": "compare/desktop-absdiff.png",
+        "pixelmatch": "compare/desktop-pixelmatch.png",
+        "currentEdges": "compare/desktop-current-edges.png",
+        "candidateEdges": "compare/desktop-candidate-edges.png",
+        "edgeDiff": "compare/desktop-edge-diff.png"
+      },
+      "worldCrop": {
+        "label": "settings content, lifecycle rows, and actions",
+        "bounds": {
+          "x": 504,
+          "y": 63,
+          "width": 907,
+          "height": 774
+        },
+        "parityDistance": 0.20202,
+        "grayscale": {
+          "mae": 6.78594,
+          "rmse": 20.96879,
+          "diffRatio16": 0.0539,
+          "diffRatio32": 0.03219,
+          "diffRatio64": 0.02465,
+          "pixelmatchRatio": 0.05174
+        },
+        "contentProxies": {
+          "blackRatioCurrent": 0,
+          "blackRatioCandidate": 0,
+          "terrainLikeRatioCurrent": 0.99794,
+          "terrainLikeRatioCandidate": 0.99524,
+          "avgLuminanceCurrent": 242.99745,
+          "avgLuminanceCandidate": 243.413,
+          "avgLuminanceDelta": 0.41555,
+          "edgeEnergyCurrent": 0.02714,
+          "edgeEnergyCandidate": 0.06937,
+          "edgeEnergyRatio": 2.55551,
+          "edgeDiffRatio32": 0.11127
+        },
+        "artifacts": {
+          "sideBySide": "compare/desktop-world-crop-side-by-side.png",
+          "currentGray": "compare/desktop-world-crop-current-gray.png",
+          "candidateGray": "compare/desktop-world-crop-candidate-gray.png",
+          "absDiff": "compare/desktop-world-crop-absdiff.png",
+          "pixelmatch": "compare/desktop-world-crop-pixelmatch.png",
+          "currentEdges": "compare/desktop-world-crop-current-edges.png",
+          "candidateEdges": "compare/desktop-world-crop-candidate-edges.png",
+          "edgeDiff": "compare/desktop-world-crop-edge-diff.png"
+        }
+      }
+    },
+    {
+      "id": "mobile",
+      "current": "specs/done/share-sync-orchestration/assets/slice-12/reference/mobile.png",
+      "candidate": "specs/done/share-sync-orchestration/assets/slice-12/candidate/mobile.png",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "parityDistance": 0.11235,
+      "grayscale": {
+        "mae": 6.04039,
+        "rmse": 25.45612,
+        "diffRatio16": 0.0698,
+        "diffRatio32": 0.05121,
+        "diffRatio64": 0.03888,
+        "pixelmatchRatio": 0.06674
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.99581,
+        "terrainLikeRatioCandidate": 0.99387,
+        "avgLuminanceCurrent": 241.56478,
+        "avgLuminanceCandidate": 240.81764,
+        "avgLuminanceDelta": -0.74714,
+        "edgeEnergyCurrent": 0.07771,
+        "edgeEnergyCandidate": 0.09502,
+        "edgeEnergyRatio": 1.2227,
+        "edgeDiffRatio32": 0.13692
+      },
+      "artifacts": {
+        "sideBySide": "compare/mobile-side-by-side.png",
+        "currentGray": "compare/mobile-current-gray.png",
+        "candidateGray": "compare/mobile-candidate-gray.png",
+        "absDiff": "compare/mobile-absdiff.png",
+        "pixelmatch": "compare/mobile-pixelmatch.png",
+        "currentEdges": "compare/mobile-current-edges.png",
+        "candidateEdges": "compare/mobile-candidate-edges.png",
+        "edgeDiff": "compare/mobile-edge-diff.png"
+      },
+      "worldCrop": {
+        "label": "settings content, first lifecycle row, and fixed navigation",
+        "bounds": {
+          "x": 0,
+          "y": 228,
+          "width": 390,
+          "height": 616
+        },
+        "parityDistance": 0.14975,
+        "grayscale": {
+          "mae": 8.27612,
+          "rmse": 29.79703,
+          "diffRatio16": 0.09562,
+          "diffRatio32": 0.07016,
+          "diffRatio64": 0.05327,
+          "pixelmatchRatio": 0.09145
+        },
+        "contentProxies": {
+          "blackRatioCurrent": 0,
+          "blackRatioCandidate": 0,
+          "terrainLikeRatioCurrent": 0.99475,
+          "terrainLikeRatioCandidate": 0.99208,
+          "avgLuminanceCurrent": 241.48673,
+          "avgLuminanceCandidate": 240.46305,
+          "avgLuminanceDelta": -1.02368,
+          "edgeEnergyCurrent": 0.08122,
+          "edgeEnergyCandidate": 0.10493,
+          "edgeEnergyRatio": 1.29196,
+          "edgeDiffRatio32": 0.18759
+        },
+        "artifacts": {
+          "sideBySide": "compare/mobile-world-crop-side-by-side.png",
+          "currentGray": "compare/mobile-world-crop-current-gray.png",
+          "candidateGray": "compare/mobile-world-crop-candidate-gray.png",
+          "absDiff": "compare/mobile-world-crop-absdiff.png",
+          "pixelmatch": "compare/mobile-world-crop-pixelmatch.png",
+          "currentEdges": "compare/mobile-world-crop-current-edges.png",
+          "candidateEdges": "compare/mobile-world-crop-candidate-edges.png",
+          "edgeDiff": "compare/mobile-world-crop-edge-diff.png"
+        }
+      }
+    }
+  ]
+}

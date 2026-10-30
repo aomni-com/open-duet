@@ -1,0 +1,88 @@
+[
+  {
+    "variant": "missingPhoton",
+    "exitCode": 1,
+    "assertion": "Actual image read must include original4096x4/displayed2000x2 result",
+    "observedToolResults": [
+      {
+        "type": "tool_result",
+        "tool_use_id": "tool_fixture_1",
+        "content": "Read image file [image/png]\n[Image omitted: could not be resized below the inline image size limit.]",
+        "is_error": false,
+        "cache_control": {
+          "type": "ephemeral"
+        }
+      },
+      {
+        "type": "tool_result",
+        "tool_use_id": "tool_fixture_1",
+        "content": "Read image file [image/png]\n[Image omitted: could not be resized below the inline image size limit.]",
+        "is_error": false
+      },
+      {
+        "type": "tool_result",
+        "tool_use_id": "tool_fixture_2",
+        "content": "needle.txt:The harbor lighthouse is violet.\n",
+        "is_error": false,
+        "cache_control": {
+          "type": "ephemeral"
+        }
+      },
+      {
+        "type": "tool_result",
+        "tool_use_id": "tool_fixture_1",
+        "content": "Read image file [image/png]\n[Image omitted: could not be resized below the inline image size limit.]",
+        "is_error": false
+      },
+      {
+        "type": "tool_result",
+        "tool_use_id": "tool_fixture_2",
+        "content": "needle.txt:The harbor lighthouse is violet.\n",
+        "is_error": false
+      }
+    ]
+  },
+  {
+    "variant": "corruptPhoton",
+    "exitCode": 1,
+    "assertion": "Actual image read must include original4096x4/displayed2000x2 result",
+    "observedToolResults": [
+      {
+        "type": "tool_result",
+        "tool_use_id": "tool_fixture_1",
+        "content": "Read image file [image/png]\n[Image omitted: could not be resized below the inline image size limit.]",
+        "is_error": false,
+        "cache_control": {
+          "type": "ephemeral"
+        }
+      },
+      {
+        "type": "tool_result",
+        "tool_use_id": "tool_fixture_1",
+        "content": "Read image file [image/png]\n[Image omitted: could not be resized below the inline image size limit.]",
+        "is_error": false
+      },
+      {
+        "type": "tool_result",
+        "tool_use_id": "tool_fixture_2",
+        "content": "needle.txt:The harbor lighthouse is violet.\n",
+        "is_error": false,
+        "cache_control": {
+          "type": "ephemeral"
+        }
+      },
+      {
+        "type": "tool_result",
+        "tool_use_id": "tool_fixture_1",
+        "content": "Read image file [image/png]\n[Image omitted: could not be resized below the inline image size limit.]",
+        "is_error": false
+      },
+      {
+        "type": "tool_result",
+        "tool_use_id": "tool_fixture_2",
+        "content": "needle.txt:The harbor lighthouse is violet.\n",
+        "is_error": false
+      }
+    ]
+  }
+]

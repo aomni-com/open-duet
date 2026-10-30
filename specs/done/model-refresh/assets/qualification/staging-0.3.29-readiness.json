@@ -1,0 +1,23 @@
+{
+  "at": "2026-09-28T03:12:50.681Z",
+  "ready": true,
+  "httpStatus": 200,
+  "deployment": {
+    "revision": "0cbb71854fc90c86c0e70395fdbf5ee12fa76ab2",
+    "backend": {
+      "revision": "0cbb71854fc90c86c0e70395fdbf5ee12fa76ab2",
+      "schema": 1
+    },
+    "gateway": {
+      "version": "0.0.0+ec2b3d8e8e09"
+    }
+  },
+  "manifest": {
+    "version": "0.0.0+ec2b3d8e8e09",
+    "agentVersion": "0.3.29"
+  },
+  "health": {
+    "gatewayVersion": "0.0.0+ec2b3d8e8e09",
+    "agentVersion": "0.3.28"
+  }
+}

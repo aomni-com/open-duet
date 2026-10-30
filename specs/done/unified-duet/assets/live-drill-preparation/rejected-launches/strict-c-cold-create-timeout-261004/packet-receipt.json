@@ -1,0 +1,13 @@
+{
+  "phase": "strict",
+  "targetVersion": "0.0.0+9bf3ec593e72f4c041bbfb5f7449adfeb44b9628cb7d33083063ae99ef9a5177",
+  "archive": "/tmp/unified-duet-provider-strict-packet-261004-c.tar",
+  "archiveSha256": "62c4143fd66fe4c8592990992ba9a2557deca75e4b265c65c20be2b503f9c0bc",
+  "outputDir": "/tmp/unified-duet-provider-strict-packet-261004-c",
+  "files": {
+    "runtime-bootstrap.js": "e857f023ab6801ace9d898e61132c51c56a3d94d72d35b83822b5594f080c6d0",
+    "duet-gateway.service": "84677a224fe0385b335a36dc8cb4e9609424a75f49ed138ab671a4f9c8e3b867",
+    "gateway-bun": "a83d263767d839e4d2649ca8e35d07159c7afc99afdc96d731ced29e056dda0c",
+    "fixture-driver.js": "99934a0d595307ccb4025c550403afaf2ae057e18297966921078cde09d4e75b"
+  }
+}

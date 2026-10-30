@@ -1,0 +1,4 @@
+[
+  {"route":"/company/enrich","request":{"method":"POST","json":{"company":"example.com"}},"response":{"status":200,"json":{}}},
+  {"route":"/person/enrich","request":{"method":"POST","json":{"email":"person@example.com"}},"response":{"status":200,"json":{}}}
+]

@@ -1,0 +1,49 @@
+{
+  "original": "/opt/duet/releases/0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+  "recovery": "/home/synthetic-user/.duet/runtime-adoption/0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2/recovery-releases/0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+  "repaired": "/home/synthetic-user/.duet/runtime-adoption/0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2/recovery-releases/0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+  "health": {
+    "instanceId": "1afb5cfd-c1c5-45e2-a6d1-61bc621f02bc",
+    "imageVersion": "0.0.0+fixture_old_image",
+    "runtimeVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "uptimeSeconds": 0,
+    "diagnostics": {
+      "runtimeUpdateInFlight": false,
+      "attribution": {
+        "rawEventsObserved": 0,
+        "droppedReads": 0,
+        "overflow": 0,
+        "mirrorReadsSkipped": 0,
+        "cgroupMisses": 0,
+        "helperRestarts": 0
+      },
+      "scanNudge": {
+        "scans": 0,
+        "failures": 0,
+        "loopGuardSkips": 0,
+        "rawPathsObserved": 0,
+        "latestPaths": []
+      },
+      "anchorReconcile": null,
+      "restoreInFlight": false,
+      "backup": null,
+      "bootHealthCertified": false
+    }
+  },
+  "memory": [
+    {
+      "id": "mem_cZMOrwGOYpV5",
+      "content": "fixture memory must survive runtime adoption",
+      "kind": "note",
+      "source": "user",
+      "priority": "medium",
+      "createdAt": "2026-10-04T11:19:18.939Z",
+      "lastUsedAt": "2026-10-04T11:19:18.939Z",
+      "observedDate": "2026-10-04",
+      "tags": [],
+      "packScore": 2.9972584638514737
+    }
+  ],
+  "manifestApiReturned404": true,
+  "bootIdUnchanged": true
+}

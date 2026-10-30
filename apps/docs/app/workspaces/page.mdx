@@ -1,0 +1,150 @@
+import { EndpointReference } from '../../components/endpoint-reference'
+
+export const metadata = {
+  title: 'Workspace selection',
+  description: 'Choose the operation workspace independently of your human login.',
+  alternates: { canonical: '/workspaces/' },
+}
+
+<p className="eyebrow">Identity</p>
+
+# Select the workspace for the operation
+
+A Duet client resolves its target workspace before starting work. A human key identifies the
+person, and current membership and role determine access to the workspace named by the operation.
+Changing that target does not change the login. App and OAuth credentials retain their explicit
+workspace boundaries; see [API keys and access](/api-keys).
+
+## Keep human choice visible
+
+When a user belongs to several workspaces, display the selected workspace and persist its stable
+identity with the integration configuration. Do not guess from the most recently visited browser
+page or fall back to the first membership.
+
+## Slugs are addresses
+
+Slugs make workspace routes and scopes readable, but they are still protocol identifiers. Validate
+them with the shared contract grammar, encode dynamic path segments, and plan for a rename to break
+old public URLs rather than hiding the break behind an ambiguous redirect.
+
+## Choose local or remote CLI work explicitly
+
+`duet workspace use <slug>` saves a default for remote commands and Duet model billing.
+An explicit workspace address or `--workspace <slug>` selects an operation target. If a file address
+and a workspace flag name different workspaces, the command fails before sending a request.
+
+Prompts run locally. `memory` and `train` run locally unless `--workspace` selects the remote
+operation. A saved default never turns local work into a remote command:
+
+```bash
+duet memory recall "notes" \
+  --workspace acme
+duet train --workspace acme \
+  --file ./sessions.jsonl
+```
+
+Human model requests send `x-duet-workspace` to select the workspace that pays. The gateway checks
+live access and payer policy; an omitted target never silently chooses the first membership.
+
+## Invite workspace members
+
+Use a workspace owner's key with the `members` capability to create, list, or revoke invitations.
+Creating an invitation sends the recipient a Duet email; your integration does not need to send
+another message. Invitations are bound to one canonical email, expire after seven days, and grant
+either editor or viewer access.
+
+The recipient follows the email link and signs in with the invited email address. Duet accepts the
+invitation and opens that workspace, without requiring personal workspace setup. A new account
+created through this link joins the invited workspace without creating a personal one. An existing
+account keeps its other workspaces.
+
+If the recipient signs up normally instead, they get the normal personal workspace setup and can
+accept the pending invitation from the bar in the Duet app. Acceptance belongs to the recipient's
+account: the recipient's human login can list and accept their invitations; an app or OAuth grant
+cannot act as that person's account.
+Your integration manages outgoing invitations through the workspace endpoints below; the recipient
+completes the handoff in Duet.
+
+Workspace owners may change member roles, but the durable workspace domain preserves two
+invariants: every workspace retains an owner, and the designated payer remains an owner until
+billing is reassigned. Consumers should surface the conflict rather than trying to sequence a
+client-side workaround.
+
+Audit events are returned newest-first with opaque cursors. Treat a cursor as a continuation token,
+not as a timestamp or stable event identifier.
+
+## Set the agent tier fallback
+
+Owners can set a workspace's default tier through the single-purpose default-model endpoint using
+a `tier` selection. For example, `{ "tier": "openai-frontier" }` chooses a stable provider alias.
+The accepted [session selections](/sessions) apply here too.
+This is a fallback for sessions without a sticky choice, not a rewrite of queued prompts or existing
+session preferences. Every selection is available to every workspace. Explicit provider aliases
+survive subscription-plan changes.
+
+## Lifecycle and path repair
+
+Workspace creation returns while provisioning continues. Reprovisioning is an owner-only recovery
+operation, not a retry strategy for ordinary request failures. Renaming requires an explicit
+acknowledgement because workspace-scoped URLs change.
+
+Apps, publishes, and share roots retain path anchors. List anchors to diagnose a moved path; repair
+only an anchor in the `broken` state, using the capability that owns its kind.
+
+## Read VM telemetry history
+
+Workspace members can read the VM's recent CPU, memory, and disk history. The optional `sinceAt`
+query value is a Unix timestamp in milliseconds; without it, the service returns the retained
+30-day window. Long windows are downsampled to a bounded chart response, so treat points as trend
+buckets rather than exact latest readings. Memory and disk expose used and total values separately,
+and an absent metric means that sample could not observe it.
+
+## Export a workspace backup
+
+Use the workspace `admin` capability to capture a private ZIP in the background. The workspace
+agent's normal credential includes this capability. A files-only key cannot export the workspace.
+
+Send a unique request ID when starting an export; reuse that ID if the response is lost. The
+response is `202` with a durable backup record. Only one capture runs per workspace. A distinct
+request while capture is active returns `409 backup_in_progress` and the active backup ID.
+
+{/* schema: BackupCreateRequestSchema */}
+```json
+{
+  "requestId": "backup-2026-09-29-release"
+}
+```
+
+```bash
+curl -X POST "https://ctl.duet.so/v1/ws/$WORKSPACE/backups" \
+  -H "Authorization: Bearer $DUET_API_KEY" \
+  -H "Content-Type: application/json" \
+  --data '{"requestId":"backup-2026-09-29-release"}'
+```
+
+Poll the returned backup ID until it is ready or failed. Progress shows observed files, records,
+and bytes rather than a percentage. A failed capture has no download; retry with a new request ID
+to create a fresh attempt. Closing the client does not cancel capture.
+
+The ZIP contains the complete Drive, including hidden files, `.env` secrets, dependencies, and
+symlinks, plus portable workspace configuration and session history with image bytes. It excludes
+workspace membership and Duet platform credentials. Capture runs alongside live writers; it is
+not a transaction snapshot and cannot detect every change. A ready backup marked `partial` is
+still downloadable: read its warnings before relying on it. The archive's root `README.md`
+explains recovery through current APIs. Historical chats remain files; there is no chat-history
+import or running-process continuation promise.
+
+Mint a download URL only when needed. It expires, but the stored backup remains until explicitly
+deleted, including when its source VM is unavailable. Request a new URL after expiry; do not
+persist the URL alongside the backup record. The response includes archive bytes and SHA-256 so
+an agent can verify the downloaded ZIP.
+
+Deletion immediately removes download access and cancels active capture. A `202` means storage
+cleanup is still pending; an absent backup is an idempotent success. A backup needed by an accepted
+workspace operation cannot be deleted yet. If `emptyDriveOnNextStart` is true, deletion removed an
+archived workspace's recovery backup: its next start uses an empty Drive while keeping its
+workspace records. This does not remove a running workspace's files or another retained backup.
+
+<EndpointReference category="backups" />
+
+<EndpointReference category="identity" />

@@ -1,0 +1,18 @@
+bun test v1.3.14 (0d9b296a)
+
+specs/unified-duet/assets/live-drill-preparation/fixture-api.test.ts:
+(pass) historical fixture sync stays idle300 and exposes no runtime-release endpoint [3.40ms]
+(pass) native event relays receive sequence acknowledgements through the controlled API edge [2.63ms]
+(pass) the native model edge waits for release and answers one complete Anthropic stream [104.34ms]
+
+specs/unified-duet/assets/live-drill-preparation/provider-run.test.ts:
+(pass) lost create response removes only the resource recorded before provider creation [1009.60ms]
+(pass) remote failure metadata is retrieved before exact fixture deletion [1014.03ms]
+(pass) a passing driver cannot complete when owned raw metadata preparation fails [1011.77ms]
+(pass) lost creation visibility is reconciled before claiming exact cleanup [3014.87ms]
+(pass) an unobserved creation remains unresolved instead of claiming absence [10031.04ms]
+
+ 8 pass
+ 0 fail
+ 34 expect() calls
+Ran 8 tests across 2 files. [16.27s]

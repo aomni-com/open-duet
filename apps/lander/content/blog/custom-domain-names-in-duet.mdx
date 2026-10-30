@@ -1,0 +1,206 @@
+---
+title: 'Custom Domains for AI-Built Apps: Setup Guide for Duet'
+metaTitle: 'Custom Domain Names in Duet | Deploy AI-Built Apps on Your Own Domain'
+description: 'AI-built tools on generic subdomains look like demos. Custom domains in Duet let you ship internal tools and client-facing apps on your own URL, with automatic HTTPS, in minutes.'
+date: '2026-04-25'
+updatedAt: '2026-05-08'
+readTime: '6 min read'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/7.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'updates'
+tags: ['custom-domains', 'deployment', 'internal-tools', 'ai-apps']
+type: 'article'
+image: '/blog/custom-domain-names-in-duet/cover.png'
+relatedPosts:
+  - 'how-to-build-internal-tool-in-a-day-with-ai'
+  - 'how-to-build-and-deploy-a-web-app-using-only-ai'
+  - 'how-to-build-client-analytics-dashboard-without-developer'
+  - 'claude-opus-4-7-gpt-5-4-extended-thinking-duet'
+cta:
+  title: 'Ship the app, not the demo URL.'
+  subtitle: 'Build an internal tool or client app in Duet, point your domain at it, and TLS is live in minutes. No deploy script, no DNS gymnastics.'
+  buttonText: 'Try Duet free'
+  href: '/sign-in?from=blog-custom-domains'
+---
+
+Duet apps can now run on your own domain. Add a CNAME record, and Duet handles verification, TLS provisioning, and routing automatically. Setup takes a few minutes per app, with no additional cost.
+
+You built a client dashboard with AI in 20 minutes. It works. The data is live. The client could use it today.
+
+Then you look at the URL: `app-7f3x2.duet.so`.
+
+You're not sending that to a client. You're not sharing that with your team and calling it an internal tool. It looks like a prototype on someone else's platform, because that's exactly what the URL says.
+
+This is the gap between "I built something useful" and "I shipped something my team actually uses." And it's a gap that kills adoption. People don't bookmark tools on random subdomains. They don't trust dashboards that look temporary. They don't integrate apps into their workflow when the URL screams "this might disappear."
+
+Duet apps can now run on your own domain: `tools.yourcompany.com`, `reports.youragency.com`, `tracker.yourstartup.io`. Your URL, your brand, automatic HTTPS, active in minutes. (Once your tool is live on your domain, the next question is usually "how do I keep it running 24/7?" See [how to run Claude Code in the cloud](/blog/how-to-run-claude-code-in-the-cloud) and [how to set up a 24/7 AI agent](/blog/how-to-set-up-a-24-7-ai-agent).)
+
+<AnswerBox
+  title="Custom Domains in Duet"
+  summary="Apps built in Duet can run on your own domain. Add a domain in Settings > Apps, point a CNAME to Duet, and Duet handles verification, TLS certificates, and routing automatically. Each app gets its own custom domain, with no additional cost. Setup takes minutes."
+  bullets={[
+    'Map any Duet app to your own root domain or subdomain.',
+    'Automatic HTTPS through managed TLS certificate provisioning and renewal.',
+    'No DevOps work, no nginx configs, no SSL renewal scripts.',
+    'One domain per app. Unlimited apps per workspace.',
+    'Included for all Duet users at no extra cost.',
+  ]}
+  queries={[
+    'Can I use my own domain for Duet apps?',
+    'How do I set up a custom domain for an AI-built tool?',
+    'Does Duet handle SSL automatically?',
+    'How long does custom domain setup take?',
+    'Can I host AI apps on my own domain?',
+    'Custom domain for Claude Duet',
+    'Deploy AI app on own domain',
+  ]}
+  faq={[
+    {
+      question: 'Is there an extra cost for custom domains?',
+      answer:
+        'No. Custom domains are included for all Duet users at no additional charge. You just need to own the domain and have access to its DNS settings.',
+    },
+    {
+      question: 'How long does it take for a custom domain to go live?',
+      answer:
+        'Once you add the CNAME record, Duet handles verification and TLS provisioning automatically. Most domains are active within a few minutes, depending on DNS propagation. Some DNS providers take up to 24 hours, but that is rare.',
+    },
+    {
+      question: 'Can I change or remove a custom domain later?',
+      answer:
+        'Yes. Update or remove custom domain mappings at any time from Settings > Apps. If you remove a domain, traffic reverts to the default Duet subdomain. Your app keeps working either way.',
+    },
+    {
+      question: 'Do I need to configure anything for HTTPS?',
+      answer:
+        'No. Duet provisions and renews TLS certificates automatically. Your custom domain serves over HTTPS from the moment it goes live. There is no manual certificate setup, no renewal process, and no downtime.',
+    },
+    {
+      question: 'Can I use a subdomain like tools.mycompany.com?',
+      answer:
+        'Yes. Subdomains are the most common setup. Point a CNAME for your subdomain to Duet and the rest is handled automatically. Most teams use patterns like tools.company.com, reports.company.com, or app.company.com.',
+    },
+    {
+      question: 'Can I use custom domains for client-facing apps?',
+      answer:
+        'Yes. If you are building tools for clients, you can either use a subdomain under your own domain (like clientname.youragency.com) or have the client point their own domain to the app. Both approaches work with the same CNAME setup.',
+    },
+  ]}
+/>
+
+## The Problem With Default Subdomains
+
+Every AI builder gives you a generated URL when you deploy something. It's fine for testing. It's a dead end for everything else.
+
+Here's what actually happens when your tools live on generic subdomains:
+
+**Internal tools don't get adopted.** You build a competitive intelligence dashboard for your sales team. You share the link in Slack. Half the team doesn't click it because the URL looks sketchy. The other half bookmarks it, but when they see `app-7f3x2.duet.so` in their bookmarks three weeks later, they've forgotten what it is. The tool quietly dies.
+
+**Client-facing work looks amateur.** If you're an agency or freelancer building tools for clients, the URL is part of the deliverable. Sending a client to a generic subdomain undermines the value of what you built. It signals "quick hack" instead of "professional solution."
+
+**IT and compliance get nervous.** In larger teams, tools on unknown domains trigger questions. "What is this?" "Is it approved?" "Who controls this?" Your own domain answers all of those questions before they're asked.
+
+**No SEO or brand value.** If you're building public-facing tools like calculators, dashboards, or interactive content, a generic subdomain means zero brand association. Traffic goes to someone else's domain authority.
+
+Custom domains solve all of this. Same tool, completely different perception.
+
+## How Custom Domains Work in Duet
+
+Three steps. No engineering, no DevOps tickets, no infrastructure to manage.
+
+### Step 1: Add your domain
+
+Go to **Settings > Apps** in [Duet](/guides/duet-ai-for-founders). Select the app you want to map. Enter the domain you want to use.
+
+This works with root domains (`yourcompany.com`) or subdomains (`tools.yourcompany.com`, `reports.youragency.com`). Subdomains are the most common pattern for internal tools.
+
+### Step 2: Point your DNS
+
+Add a CNAME record in your DNS provider pointing your domain to Duet. This is the only step that happens outside of Duet. If you've ever set up a custom domain for anything (a blog, a landing page, an email service), this is the same process.
+
+### Step 3: Duet handles the rest
+
+Once DNS propagates (usually a few minutes), Duet automatically:
+
+- Verifies domain ownership
+- Provisions a TLS certificate (HTTPS from day one)
+- Routes traffic to your app
+- Tracks status in your settings panel
+
+No manual certificate management. No nginx configs. No SSL renewal reminders.
+
+## One Domain Per App. Unlimited Apps.
+
+Each Duet app gets its own custom domain. This means you can build a coherent namespace for your tooling:
+
+- `intel.yourcompany.com`: competitive intelligence tracker
+- `metrics.yourcompany.com`: weekly KPI dashboard
+- `onboard.yourcompany.com`: new hire onboarding checklist
+- `pricing.yourcompany.com`: dynamic pricing calculator
+
+Or if you're an agency building for clients:
+
+- `reports.clientname.com`: automated reporting dashboard
+- `analytics.clientname.com`: traffic and conversion analytics
+- `pipeline.clientname.com`: sales pipeline tracker
+
+All managed from the same settings screen in Duet. No separate hosting accounts, no server management, no deployment pipelines.
+
+## What You Get
+
+| Feature          | Details                                                |
+| ---------------- | ------------------------------------------------------ |
+| TLS certificates | Automatic provisioning and renewal, zero configuration |
+| DNS verification | Guided setup with real-time status tracking            |
+| Routing          | Automatic, no server configuration needed              |
+| Multiple domains | One per app, unlimited apps                            |
+| Setup time       | Minutes from DNS change to live app                    |
+| Cost             | Included for all Duet users, no additional charge      |
+| Subdomains       | Full support, same setup process                       |
+
+## When Custom Domains Change the Outcome
+
+Custom domains aren't a cosmetic feature. They change whether the tool you built actually gets used.
+
+**Internal tools that stick.** A dashboard on `metrics.yourcompany.com` gets bookmarked, shared in Slack, and becomes part of the team's daily routine. The same dashboard on a generated subdomain gets used twice and forgotten. (For more on shipping internal tools fast with AI, see [how to build an internal tool in a day with AI](/blog/how-to-build-internal-tool-in-a-day-with-ai).)
+
+**Client deliverables that justify the fee.** When you hand a client a tool running on their own domain, it feels like a custom build, because it is. The perceived value jumps. The client shares it internally. It becomes a reference point, not a one-off.
+
+**Public tools that build brand.** If you're using Duet to build free tools, calculators, or interactive content for lead generation, those tools on your domain drive SEO value and brand recognition back to you.
+
+---
+
+Custom domains are live now under **Settings > Apps**. **New to Duet?** [Start a free workspace](/) and ship your first app on your own domain in minutes.
+
+## Frequently Asked Questions
+
+### Is there an extra cost for custom domains?
+
+No. Custom domains are included for all Duet users at no additional charge. You just need to own the domain and have access to its DNS settings.
+
+### How long does it take for a custom domain to go live?
+
+Once you add the CNAME record, Duet handles verification and TLS provisioning automatically. Most domains are active within a few minutes, depending on DNS propagation. Some DNS providers take up to 24 hours, but that's rare.
+
+### Can I change or remove a custom domain later?
+
+Yes. Update or remove custom domain mappings at any time from Settings > Apps. If you remove a domain, traffic reverts to the default Duet subdomain. Your app keeps working either way.
+
+### Do I need to configure anything for HTTPS?
+
+No. Duet provisions and renews TLS certificates automatically. Your custom domain serves over HTTPS from the moment it goes live. There's no manual certificate setup, no renewal process, and no downtime.
+
+### Can I use a subdomain like tools.mycompany.com?
+
+Yes. Subdomains are the most common setup. Point a CNAME for your subdomain to Duet and the rest is handled automatically. Most teams use patterns like `tools.company.com`, `reports.company.com`, or `app.company.com`.
+
+### Can I use custom domains for client-facing apps?
+
+Yes. If you're building tools for clients, you can either use a subdomain under your own domain (like `clientname.youragency.com`) or have the client point their own domain to the app. Both approaches work with the same CNAME setup.
+
+### Do custom domains work with apps that use Claude or GPT-5.4 under the hood?
+
+Yes. Custom domains apply to any Duet app, whether it's powered by Claude Opus 4.7, GPT-5.4, or another supported model. For more on choosing the right model for each app, see our guide to [picking your AI agent model](/blog/claude-opus-4-7-gpt-5-4-extended-thinking-duet).

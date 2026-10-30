@@ -1,0 +1,42 @@
+{
+  "status": "failed",
+  "message": "Actual gateway managed native session refused",
+  "gatewayMainPid": 706,
+  "health": {
+    "instanceId": "de7f08a1-8bb4-4bc2-bdc5-ae162d8810cc",
+    "bootId": "625f5be6-d8d1-42c2-afea-3b1465671d92",
+    "imageVersion": "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+    "runtimeVersion": "0.0.0+373f0d4dcb530705e3ad400e4f7be5fb55ddc0edb75cedfae3753522a8a36788",
+    "uptimeSeconds": 61,
+    "diagnostics": {
+      "runtimeUpdateInFlight": false,
+      "attribution": {
+        "rawEventsObserved": 0,
+        "droppedReads": 0,
+        "overflow": 0,
+        "mirrorReadsSkipped": 0,
+        "cgroupMisses": 2,
+        "helperRestarts": 0
+      },
+      "scanNudge": {
+        "scans": 0,
+        "failures": 0,
+        "loopGuardSkips": 0,
+        "rawPathsObserved": 0,
+        "latestPaths": []
+      },
+      "anchorReconcile": {
+        "path": "fast",
+        "anchorCount": 0,
+        "anchorProbes": 0,
+        "walkEntries": 0,
+        "markerResolutionOperations": 0,
+        "excludedSubtrees": 0,
+        "durationMs": 0.01694800000404939
+      },
+      "restoreInFlight": false,
+      "backup": null,
+      "bootHealthCertified": true
+    }
+  }
+}

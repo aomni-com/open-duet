@@ -1,0 +1,34 @@
+{
+  "name": "@repo/official-agents-seed",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./manifest": "./manifest.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "inspect": "bun src/inspect.ts",
+    "lint": "oxlint",
+    "test": "bun test",
+    "codegen": "bun src/generate-content.ts",
+    "visual": "bun tests/visual/run-visual.ts check",
+    "visual:approve": "bun tests/visual/run-visual.ts approve",
+    "visual:approve:force": "bun tests/visual/run-visual.ts approve-force",
+    "verify:visual-coverage": "bun tests/visual/generate-coverage-ledger.ts && bun tests/visual/verify-screenshots.ts",
+    "verify:visual-ledger": "bun tests/visual/generate-coverage-ledger.ts",
+    "visual:coverage:write": "bun tests/visual/generate-coverage-ledger.ts --write"
+  },
+  "dependencies": {
+    "@repo/contract": "*",
+    "@repo/seed-drive": "*"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.0",
+    "@repo/typescript-config": "*",
+    "@types/bun": "catalog:",
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
+  }
+}

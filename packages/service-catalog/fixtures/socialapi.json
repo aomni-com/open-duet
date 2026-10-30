@@ -1,0 +1,3 @@
+[
+  {"route":"/twitter/search","request":{"method":"GET","query":{"query":"example"}},"response":{"status":200,"json":{"tweets":[]}}}
+]

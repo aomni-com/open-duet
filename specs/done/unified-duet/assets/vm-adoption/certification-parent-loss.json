@@ -1,0 +1,43 @@
+{
+  "launch": {
+    "unit": "duet-runtime-adoption.service",
+    "runId": "3441c3b2-aa1a-42ca-8ef3-8f3b9eff287e",
+    "resultFile": "/tmp/transfer/loss-started-1791113318382.json",
+    "settledFile": "/tmp/transfer/loss-started-1791113318382.json.settled.json"
+  },
+  "interrupted": {
+    "phase": "started",
+    "oldPid": 11950,
+    "main": {
+      "pid": 11950,
+      "started": "676182"
+    },
+    "worker": {
+      "pid": 14855,
+      "started": "762774"
+    },
+    "parent": 14828
+  },
+  "receipt": {
+    "status": "failed",
+    "phase": "restored",
+    "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "restored": true,
+    "reason": "The bounded adoption job ended before commitment; original runtime restored",
+    "previousGatewayVersion": "0.0.0+01212abf6ba1",
+    "bootIdBefore": "5a3f2a10-7bc3-4ae9-98db-56282788ca59",
+    "bootIdAfter": "5a3f2a10-7bc3-4ae9-98db-56282788ca59"
+  },
+  "settled": {
+    "unit": "duet-runtime-adoption.service",
+    "runId": "3441c3b2-aa1a-42ca-8ef3-8f3b9eff287e",
+    "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "settled": true
+  },
+  "mainAfter": 15038,
+  "workerState": "absent",
+  "bootIdUnchanged": true,
+  "workspaceBun": "1.3.14",
+  "current": "/opt/duet/releases/0.0.0+01212abf6ba1",
+  "unit": "Restart=always\nKillSignal=15"
+}

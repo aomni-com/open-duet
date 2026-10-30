@@ -1,0 +1,58 @@
+{
+  "status": "prepared-not-executed",
+  "liveAllocationOccurred": false,
+  "runtimeRebuilt": false,
+  "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+  "sourceSha256": {
+    "fixture-api.test.ts": "28c32e2a4afacca28c3768f23334c9505c90fdf5e6ed86a6e7757683e4713ec3",
+    "fixture-api.ts": "44ab1fb7674226ab323ff183168bcfe1a355294090d584baf76bcb1e480d9522",
+    "fixture-driver.ts": "983a5928c32379a90cfefc0ac61c27ba4746553ce511d186f2af6dde70dee39f",
+    "prepare-packet.ts": "8bb0f9eb3c5c552206d4988ba475bba45e0d7416e0bd27f45e89f7f52619fbfe",
+    "provider-run.test.ts": "f916d10b3617f5bf8a21efdb95918bb896dbf33565f937070bfaf42afb1a42c0",
+    "provider-run.ts": "48360aa1ea8d17821dd9164ec3b391e0734f145d1493dfd435c482e1278496b2"
+  },
+  "packetArchiveSha256": "050c2ebcf16d736a88ae9e44b87a68cca845814b532b9246527eb1144bd3a189",
+  "narrowChecks": {
+    "tests": 8,
+    "assertions": 34,
+    "typecheck": "passed",
+    "lint": "passed"
+  },
+  "independentReview": {
+    "log": "/tmp/unified-duet-provider-packet-review.txt",
+    "findings": [
+      {
+        "finding": "late-visible lost creation",
+        "resolution": "reconcile exact name and creation tags throughout bounded cleanup; unknown creation stays unresolved"
+      },
+      {
+        "finding": "nonzero evidence preparation",
+        "resolution": "record retrieval failure and fail result while exact cleanup continues"
+      },
+      {
+        "finding": "restored HTTP not ready",
+        "resolution": "bounded original-version readiness wait before retry"
+      },
+      {
+        "finding": "settlement before unit collection",
+        "resolution": "match settlement then await transient unit LoadState not-found"
+      },
+      {
+        "finding": "initializer server leak",
+        "resolution": "all post-server initializer work belongs to API server try/finally"
+      }
+    ]
+  },
+  "proofLimits": [
+    "Local tests prove fixture edges and ownership only.",
+    "Actual provider interruption, preservation and cleanup receipts are pending root-reviewed execution.",
+    "Strict four-drill paths remain held pending verified strict image and source-built predecessor.",
+    "Cold legacy CLI is source-identified at runtime; missing CLI fails the initializer."
+  ],
+  "manualCrashBackstop": {
+    "intent": "<outputDir>/intent.json",
+    "command": "bun provider-run.ts --cleanup <intent.json>",
+    "scope": "exact name plus all original creation tags only; no TTL or other-session sweep"
+  },
+  "systemdShowSemanticsSource": "https://raw.githubusercontent.com/systemd/systemd/v249/src/systemctl/systemctl-show.c"
+}

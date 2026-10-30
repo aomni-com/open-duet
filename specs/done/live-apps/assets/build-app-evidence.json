@@ -1,0 +1,20 @@
+{
+  "journey": "build-app",
+  "status": "pass",
+  "harnessRevision": "82344a6a",
+  "registeredMs": 449735,
+  "agentTerminalMs": 650505,
+  "contentAttempts": 1,
+  "readmePresent": true,
+  "apiWriteStatus": 201,
+  "apiReadStatus": 200,
+  "eventsStatus": 200,
+  "eventsContentType": "text/event-stream",
+  "firstFrameMs": 1,
+  "segmentLifetimeMs": 240843,
+  "reconnectGapMs": 1229,
+  "cleanup": {
+    "status": "pass",
+    "orphans": []
+  }
+}

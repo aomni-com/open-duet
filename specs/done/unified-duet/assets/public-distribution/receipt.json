@@ -1,0 +1,91 @@
+{
+  "status": "tooling pass; unified CLI integration and publication remain pending",
+  "sourceRevision": "667840376ee9fd4a646e20eb879f9e09cf35e68b",
+  "sourceLockSha256": "0a9741ee09e13d737a4e513d1a5a518970071e03cd30a7b12c6391a28e558a75",
+  "artifact": {
+    "path": "/tmp/unified-public-pack/duetso-agent-1.0.0.tgz",
+    "name": "@duetso/agent",
+    "version": "1.0.0",
+    "sha256": "b94bb1184bcbe9def3f5e9d9ba3a0305d775099fa381ef576ef145afe1139c37",
+    "bytes": 2375204,
+    "unpackedBytes": 12358618
+  },
+  "nativeOwners": {
+    "@opentui/core": "0.2.5",
+    "@electric-sql/pglite": "0.4.5",
+    "@silvia-odwyer/photon-node": "0.3.4",
+    "@vscode/ripgrep": "1.18.0"
+  },
+  "platformSelection": {
+    "linux-x64": {
+      "@opentui/core-linux-x64/libopentui.so": {
+        "sha256": "c053cf31f8618ce331d3fb35aa9a8e73a0954b928a7d0f9d27d9af92a8228a0f",
+        "bytes": 4675288,
+        "format": "ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), static-pie linked, with debug_info, not stripped"
+      },
+      "@vscode/ripgrep-linux-x64/bin/rg": {
+        "sha256": "193906679498de4d939345b937fa24e0e69a03c244bd70c859f5e41232713f21",
+        "bytes": 5728032,
+        "format": "ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), static-pie linked, BuildID[sha1]=2b383d9415825d822afb5443dc15d67ade812bac, stripped"
+      }
+    },
+    "darwin-arm64": {
+      "@opentui/core-darwin-arm64/libopentui.dylib": {
+        "sha256": "d9f6a3aa5c23550542bc90abe7786d3e483cd2af9cd6971d12670a1e9272bea1",
+        "bytes": 896496,
+        "format": "Mach-O 64-bit dynamically linked shared library arm64"
+      },
+      "@vscode/ripgrep-darwin-arm64/bin/rg": {
+        "sha256": "6ef40346bf31fcce79d9614c7745c198542925a0c7d4911e1ffe794c53392ac1",
+        "bytes": 4528512,
+        "format": "Mach-O 64-bit executable arm64"
+      }
+    },
+    "darwin-x64": {
+      "@opentui/core-darwin-x64/libopentui.dylib": {
+        "sha256": "0799da4947acc9f33330d572481f8bbcdac56065da9f41b68290b2fab0db5e44",
+        "bytes": 906383,
+        "format": "Mach-O 64-bit dynamically linked shared library x86_64"
+      },
+      "@vscode/ripgrep-darwin-x64/bin/rg": {
+        "sha256": "f999495980a5e6f1e7d26461ef5768b4013a62df610ed7d77a8b2de247a5b228",
+        "bytes": 4742676,
+        "format": "Mach-O 64-bit executable x86_64"
+      }
+    }
+  },
+  "verified": [
+    "clean npm11.19.0/Node24.21.0 Linux install",
+    "clean Bun1.3.14 Linux install and actual memory/reopen/pgvector/image/rg",
+    "Macarm64 Bun clean install and memory/reopen/pgvector/image/rg",
+    "Linux and Macarm64 native TUI transcript initialization",
+    "installed JS and compiled production entry Codex device login + overridden originator header",
+    "registered SDK OAuth.refresh sends patched scope and rotated credential; removal control red"
+  ],
+  "limits": [
+    "No source05 unified login/remote file/import/sync command claim: this baseline predates composition.",
+    "Syncthing optional owners and notice are inherited when present in source manifest; absent in this frozen baseline.",
+    "Darwinx64 package selection and Mach-O architecture verified; actualx64 execution unverified.",
+    "No npm publication, registry release, deprecation, VM transport or deployment claim."
+  ],
+  "negativeControls": {
+    "originalTarballInstall": "EUNSUPPORTEDPROTOCOL workspace:*",
+    "originalBundledOAuth": "login_failed before HTTP request",
+    "removedSdkScope": "request body missing scope assertion red"
+  },
+  "compiledFixture": "Bun --compile-exec-argv=--preload /preload.ts; actual product entry, only HTTP edge replaced. Compiled evidence does not certify full VM payload closure.",
+  "npmNativeTranscriptProcessExit": 124,
+  "npmNativeTranscriptGate": "Passed readable labels + no initialization errors via Bun UTF8 decoding; last incomplete UTF8 byte at process timeout is decoded as replacement, matching maintained test reader.",
+  "reproducer": {
+    "exitCode": 0,
+    "tarballSha256": "b94bb1184bcbe9def3f5e9d9ba3a0305d775099fa381ef576ef145afe1139c37",
+    "bytes": 2375204,
+    "results": "independent clean npm install + controlled runtime/OAuth/nativeTUI all passed"
+  },
+  "review": {
+    "shape": "One staged public builder, native package owners retained, no installer/SDK copying framework.",
+    "diff": "Production registry4-line fix; publish-only dependency manifest and license collection; process bounds use Bun/GNU built-ins.",
+    "docs": "Receipt and choices delimit tooling proof from composition, Macx64 runtime, Syncthing and publication gates.",
+    "externalReview": "Root independent review requested; configured Codex CLI review unavailable on account, no model override attempted."
+  }
+}

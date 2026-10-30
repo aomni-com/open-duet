@@ -1,0 +1,21 @@
+{
+  "revision": "9ad05c3ec8b54f72295a946a69ec0040e48e1e29",
+  "deploymentId": "dpl_7aPM1JdLHxWkxvVpVgFuGtGr4ikj",
+  "apiBackendRevisionMatch": true,
+  "announcedRuntime": null,
+  "observedFailures": [
+    "runtime release verification failed {\n  releaseDir: '/var/task/runtime-release',\n  artifact: 'helper.js',\n  reason: 'artifact_metadata',\n  isFile: true,\n  expectedByteLength: 908586,\n  observedByteLength: 908586,\n  expectedMode: 420,\n  observedMode: 493\n}",
+    "runtime release verification failed {\n  releaseDir: '/var/task/runtime-release',\n  artifact: 'index.js',\n  reason: 'artifact_metadata',\n  isFile: true,\n  expectedByteLength: 2226419,\n  observedByteLength: 2226419,\n  expectedMode: 420,\n  observedMode: 493\n}",
+    "runtime release verification failed {\n  releaseDir: '/var/task/runtime-release',\n  artifact: 'initdb.wasm',\n  reason: 'artifact_metadata',\n  isFile: true,\n  expectedByteLength: 169969,\n  observedByteLength: 169969,\n  expectedMode: 420,\n  observedMode: 493\n}",
+    "runtime release verification failed {\n  releaseDir: '/var/task/runtime-release',\n  artifact: 'pglite.data',\n  reason: 'artifact_metadata',\n  isFile: true,\n  expectedByteLength: 5289109,\n  observedByteLength: 5289109,\n  expectedMode: 420,\n  observedMode: 493\n}",
+    "runtime release verification failed {\n  releaseDir: '/var/task/runtime-release',\n  artifact: 'pglite.wasm',\n  reason: 'artifact_metadata',\n  isFile: true,\n  expectedByteLength: 8739902,\n  observedByteLength: 8739902,\n  expectedMode: 420,\n  observedMode: 493\n}",
+    "runtime release verification failed {\n  releaseDir: '/var/task/runtime-release',\n  artifact: 'photon_rs_bg.wasm',\n  reason: 'artifact_metadata',\n  isFile: true,\n  expectedByteLength: 1881634,\n  observedByteLength: 1881634,\n  expectedMode: 420,\n  observedMode: 493\n}",
+    "runtime release verification failed {\n  releaseDir: '/var/task/runtime-release',\n  artifact: 'vector.tar.gz',\n  reason: 'artifact_metadata',\n  isFile: true,\n  expectedByteLength: 46108,\n  observedByteLength: 46108,\n  expectedMode: 420,\n  observedMode: 493\n}"
+  ],
+  "interpretation": "Seven data artifacts retain exact declared length but platform mount mode is 0755, whereas intended VM installation mode is 0644. Hosted API content verification must be independent of target installation permissions. Digest acceptance remains unproven until actual streamed inventory verification.",
+  "vmControls": {
+    "runtimeUpdates": "paused",
+    "birthAdmission": "closed"
+  },
+  "productionChanged": false
+}

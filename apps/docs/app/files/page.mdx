@@ -1,0 +1,159 @@
+import { EndpointReference } from '../../components/endpoint-reference'
+
+export const metadata = {
+  title: 'Files',
+  description: 'Read and write Duet workspace files without losing HTTP semantics.',
+  alternates: { canonical: '/files/' },
+}
+
+<p className="eyebrow">Resource guide</p>
+
+# Files are byte streams
+
+Treat file reads and writes as HTTP byte transfers, not JSON wrappers. Preserve content length,
+ETag, byte-range responses, cancellation, and error status through your client. Read content types
+are inferred from known file extensions and otherwise remain `application/octet-stream`; the bytes
+are always authoritative.
+
+## Address paths deliberately
+
+Normalize workspace-relative paths with the contract path grammar. Encode dynamic URL segments,
+reject traversal, and do not infer whether a path is a file or folder from its extension.
+
+```ts
+const encodedPath = segments.map(encodeURIComponent).join('/')
+const rangeHeaders = { range: 'bytes=0-65535' }
+```
+
+The snippet illustrates safe path encoding and a bounded byte range; use the endpoint reference for
+the final public route template before shipping a client.
+
+## Page directory entries
+
+Add `?list=1` to a directory path and walk the universal collection envelope. Listings are ordered
+by name and path, `limit` defaults to 50 and caps at 100, and `nextCursor: null` ends the walk.
+The cursor is opaque and bound to both the workspace and directory; pass it back unchanged with the
+same path. Directory mutations can change later pages, so key consumers by `path` and make repeated
+processing harmless. A malformed or rebound listing cursor returns
+`400 {"error":"invalid_cursor"}`; other invalid listing query fields return `invalid_request`.
+
+Listings have no entry ceiling: a directory of any size pages out completely. The 1,000-entry
+bound applies to operations that reproduce a folder — archive downloads, recursive copies, and
+publishes — not to reading its listing.
+
+{/* schema: FileListResponseSchema */}
+
+```json
+{
+  "items": [
+    {
+      "name": "notes.md",
+      "path": "notes.md",
+      "type": "file",
+      "size": 128,
+      "mtime": "2026-08-26T12:00:00.000Z"
+    }
+  ],
+  "nextCursor": null
+}
+```
+
+## Ask for a path that may not exist
+
+A missing path answers `404` — the drive's ordinary way of saying a folder is gone rather than
+empty. When your client is asking after a file that is allowed not to exist (an agent's
+`agent.json`, a skills folder that was never created), add `?optional=1` to the read, stat, or
+listing and a missing path answers an empty `204` instead. Everything else — a present file, a
+symlink conflict, a workspace that is missing, provisioning, or paused — answers exactly as it
+would without the flag.
+
+## Separate read and write grants
+
+Tools that index or preview content need `files:read`. Editors and uploaders need `files:write`.
+Request both only when the workflow genuinely performs both roles.
+
+## Mint a grant for direct uploads
+
+Writing a file through this API carries its bytes across it, which is right for a document and
+impossible for something multi-gigabyte. For anything a person picked off disk, mint a short-lived
+grant with a credential that has `files:write` and send the bytes to the workspace VM instead.
+`pathPrefix` is the drive-relative folder the grant covers; an empty string is the drive root.
+
+{/* schema: FileUploadRequestSchema */}
+
+```json
+{
+  "pathPrefix": "agents/research/uploads"
+}
+```
+
+The response's `vmBaseUrl` and `uploadPath` identify the VM's direct files endpoint, while
+`uploadToken` is the bearer for that upload. Append one URL-encoded filename to `uploadPath` and
+send the bytes with `PUT` directly to `vmBaseUrl`; do not send the workspace API key to the VM.
+`expiresAt` is the latest time a new upload may begin, not a deadline for finishing one — a transfer
+already under way is not cut off when it passes.
+
+The grant covers that one folder tree and is write-only. Clients choose a visible filename before
+uploading and handle same-name collisions themselves.
+
+A single file has a published size limit, and it is enforced on the `Content-Length` the request
+declares — so an upload that cannot be accepted is refused before its bytes are sent, with a `413`
+naming the limit in `limitBytes`. A request that declares no length is not measured against it and
+is bounded only by the workspace's free space.
+
+## Symlinks are entries, not their targets
+
+Listings and stat report a symbolic link as its own entry: `type: "symlink"` with a `target`
+string holding the link text verbatim. A link is listed whether or not its target exists — a
+dangling link is a legal, visible entry, because workspaces mirror real development trees where
+links routinely point at paths that come and go. Listings can therefore now contain a third
+`type` value; clients that switch on entry types should treat unrecognized values as opaque
+entries rather than failing the listing. For a link entry, `size` is the byte length of the
+target text and `mtime` is the link's own modification time.
+
+Addressing a link never silently follows it — only a content read does. A GET on a link path
+serves the target's bytes when the target resolves inside the workspace, and a successful read
+through a link is byte-for-byte a read of the target: same ETag, length, range, and conditional
+behavior. When the target dangles or escapes the workspace, the read fails with `409
+symlink_unresolvable` carrying the link's `target` — never a silent fallback. Writes are stricter:
+a PUT, mkdir, or directory listing addressed at a link path fails with `409 path_is_symlink`
+rather than acting through the link. Directory links in *intermediate* path segments resolve
+normally while they stay inside the workspace; link discipline applies to the path's final
+component.
+
+## Make structural changes explicit
+
+Use the JSON action endpoint for directories, moves, copies, recursive deletion, and link
+creation. Collision overwrites and recursion are opt-in. Recursive work is bounded by the gateway
+before mutation, so clients should surface a limit error instead of retrying an unsafe operation
+with broader local semantics.
+
+Create or retarget a link:
+
+{/* schema: FileOperationRequestSchema */}
+```json
+{
+  "operation": "symlink",
+  "path": "current",
+  "target": "releases/v2"
+}
+```
+
+`target` is stored verbatim — relative targets are the portable choice, and targets outside the
+workspace are legal to store but never readable through the link. `symlink` replaces an existing
+symlink at `path` (that is how you retarget) and conflicts with any other existing entry type;
+replacing a file with a link — or a link with a file — is always an explicit delete followed by a
+create. This mirrors how PUT overwrites files in place: same-type replacement is direct,
+cross-type replacement is deliberate.
+
+Links participate in structural operations as ordinary entries. A copy reproduces a link as a link
+with the same verbatim target — it never follows one — so a relative target is reinterpreted at
+the destination and may dangle there; the same applies to moves. Deleting a link removes the link
+itself: a recursive delete of a directory containing a link-to-directory removes the link entry,
+never the target's tree.
+
+Editors should retain the ETag returned by a read and send it in `If-Match` when saving. A `412`
+means the file changed after it was opened; reload it or require the user to deliberately replace
+the newer version.
+
+<EndpointReference category="files" />

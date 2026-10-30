@@ -1,0 +1,191 @@
+{
+  "status": "prepared-not-executed",
+  "scope": "Five disposable staging drill receipts; root operator owns all live writes and allocations",
+  "environment": "staging",
+  "sourceInspected": "cda8f8a501099afac9c807e0b256c8150e6f2c8a",
+  "transitionVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+  "transitionInput": {
+    "runtimeDir": "/tmp/unified-duet-adoption-held-built/runtime-release",
+    "helperFile": "/tmp/unified-duet-vm-runtime-adoption-cert-refresh-final.js",
+    "helperSha256": "e8603337408bad602fbff58f82d928a96982bf2e1b709c82aa48814b1558f5ed",
+    "bootstrapFile": "/tmp/unified-duet-adoption-held-built/runtime-bootstrap.js",
+    "gatewayBunFile": "/tmp/unified-duet-adoption-held-built/gateway-bun",
+    "gatewayBunSha256": "a83d263767d839e4d2649ca8e35d07159c7afc99afdc96d731ced29e056dda0c"
+  },
+  "unresolvedInputs": [
+    "Root-authorized provider-only disposable physical fixture; no backend workspace or birth-fence bypass",
+    "Exact final strict source, complete release version and inventory, bootstrap and immutable image reference",
+    "Real source-built strict-compatible predecessor with only duet bytes changed",
+    "Controlled loopback API desired-state pause points; real staging rollout controls remain root-owned and unchanged by fault fixtures",
+    "Actual provider-only legacy image initial unit/CLI state must be verified before applying controlled fixture configuration; no Docker initializer or stubbed OS units"
+  ],
+  "fixtureBudget": {
+    "maxConcurrentDrillVms": 1,
+    "totalSequentialDrillVms": 2,
+    "modelWork": "One bounded gateway-managed session; no delegation or model retries to manufacture a verdict",
+    "identities": "Unique run fixture ID and tags AT provider create; durable pre-create intent; exact-run verified teardown; existing MANUAL tag-sweep crash backstop (no TTL claim)"
+  },
+  "receiptRootTemplate": "specs/unified-duet/assets/live-drills/<runId>",
+  "rawObservationRootTemplate": "<existing staging artifact root>/<runId>/drills",
+  "phases": [
+    {
+      "phase": "old-api",
+      "fixture": "Provider-only physical legacy-image VM with controlled loopback API/model; no backend attachment",
+      "drills": [
+        {
+          "kind": "interrupted-adoption",
+          "owner": "scripts/vm-runtime-adoption-job.ts and scripts/vm-runtime-adoption.ts",
+          "receiptFile": "interrupted-adoption.json",
+          "rawFiles": [
+            "intent.json",
+            "legacy-layout.json",
+            "preservation-before.json",
+            "interruption-journal.json",
+            "first-job-settlement.json",
+            "restoration.json",
+            "rerun-receipt.json",
+            "rerun-settlement.json",
+            "health.json",
+            "preservation-after.json",
+            "cleanup.json"
+          ],
+          "targetBinding": "transitionVersion",
+          "fault": "SIGKILL only the identity-checked adoption supervisor after journal started and actual held target verification",
+          "completion": "Existing systemd recovery settles, then same owner completes and certifies exact transition; selected state and credentials unchanged"
+        }
+      ]
+    },
+    {
+      "phase": "strict-api-and-image",
+      "fixture": "Provider-only physical strict-image VM with controlled loopback API/model; no backend attachment",
+      "constructionPrerequisite": "One CLI-only source-built predecessor through existing native packaging/shared constructor; exactly duet differs from final strict inventory",
+      "drills": [
+        {
+          "kind": "live-work-deferral",
+          "owner": "Existing managed session API, gateway runtime updater and authenticated roster refresh",
+          "receiptFile": "live-work-deferral.json",
+          "rawFiles": [
+            "session-accepted.json",
+            "runner-before.json",
+            "deferred-update-log.json",
+            "runner-after.json",
+            "continued-sentinel.json",
+            "session-complete.json"
+          ],
+          "targetBinding": "strict targetVersion",
+          "completion": "Actual ordinary updater deferred decision joins same gateway-managed native session/PID, controlled model response held briefly, continued durable progress and normal completion"
+        },
+        {
+          "kind": "agent-only-update",
+          "owner": "packages/gateway/src/runtime-update.ts and runtime-release.ts",
+          "receiptFile": "agent-only-update.json",
+          "rawFiles": [
+            "predecessor-source.patch",
+            "constructor.json",
+            "inventory-before.json",
+            "inventory-after.json",
+            "update-log.json",
+            "certified-health.json"
+          ],
+          "targetBinding": "strict targetVersion",
+          "completion": "After controlled turn finishes, ordinary updater installs strict release; exactly duet differs and gateway hash is unchanged"
+        },
+        {
+          "kind": "missing-asset-repair",
+          "owner": "Ordinary gateway ExecStartPre and packages/gateway/src/runtime-bootstrap.ts",
+          "receiptFile": "missing-asset-repair.json",
+          "rawFiles": [
+            "idle-census.json",
+            "missing-asset.json",
+            "bootstrap-log.json",
+            "repaired-asset.json",
+            "certified-health.json"
+          ],
+          "targetBinding": "strict targetVersion",
+          "completion": "Real staging artifact route repairs one missing declared sidecar to exact announced metadata under ordinary bootstrap"
+        },
+        {
+          "kind": "matched-rollback",
+          "owner": "Existing stable bootstrap and complete runtime manager",
+          "receiptFile": "matched-rollback.json",
+          "rawFiles": [
+            "idle-census.json",
+            "verified-previous-inventory.json",
+            "missing-current-asset.json",
+            "transport-outage.json",
+            "bootstrap-log.json",
+            "installed-inventory.json",
+            "rollback-health.json",
+            "strict-restoration.json"
+          ],
+          "targetBinding": "strict targetVersion",
+          "completion": "Bootstrap repair transport unavailable only during invocation; complete strict-compatible previous selected and observed, then strict restored while idle"
+        }
+      ],
+      "finalFiles": [
+        "provider-and-boot-preservation.json",
+        "cleanup.json",
+        "ephemeral-sweep.json",
+        "manual-sweep-recovery-command.json"
+      ]
+    }
+  ],
+  "assembly": {
+    "outputFile": "evidence.json",
+    "owner": "packages/test-harness/src/staging-e2e-synthetic",
+    "requirements": "Five actual provider-VM fault-drill passes explicitly labeled controlled-loopback, plus REAL migrated canary preservation. Final journey independently proves REAL staging registration/API/sync/model/fresh birth.",
+    "notEvidence": [
+      "This plan",
+      "Docker fixture receipts",
+      "Synthetic parser examples",
+      "A strict-bootstrap repair substituted for first adoption",
+      "Paused updater not_needed substituted for live-work deferral",
+      "An arbitrary RPC process substituted for a managed session",
+      "Hand-edited manifest versions or artifact mixing"
+    ]
+  },
+  "provenance": {
+    "fixtureIdentity": "fixtureId, not a fabricated backend workspaceId",
+    "execution": "provider-vm",
+    "controlPlane": "controlled-loopback",
+    "realControlPlaneEvidence": "Root two-VM adoption and dedicated final unified-duet journey"
+  },
+  "existingReproducer": {
+    "provenance": "Exact retained helper platform drivers used by earlier disposable full-systemd frozen-old fixtures; not executed as live here",
+    "interruption": [
+      "sudo",
+      "-n",
+      "/tmp/transfer/gateway-bun",
+      "/tmp/transfer/platform-refresh-loss.js",
+      "started"
+    ],
+    "completion": [
+      "sudo",
+      "-n",
+      "/tmp/transfer/gateway-bun",
+      "/tmp/transfer/platform-success.js"
+    ],
+    "fixedRemoteInputFile": "/tmp/transfer/input.json",
+    "fixedRemoteHelperFile": "/tmp/transfer/platform-helper.js",
+    "requiredControlledApiJournal": "/tmp/fixture-api-syncs",
+    "requiredExistingMemoryContent": "fixture memory must survive runtime adoption",
+    "preflight": "Root prepares ONLY a provider-VM fixture from legacy image; actual old service/CLI/Bun must be source-identified and helper input must bind immutable transition. Real Syncthing/desktop units are retained; full-setup.sh from Docker is NOT a provider fixture initializer.",
+    "output": "Raw driver stdout plus existing preservation-before/after and provider/OS/process audits; only then project interrupted-adoption receipt",
+    "limitations": "Driver is intentionally phase-specific: started phase and absent isolated Bun are legacy-layout assumptions. It expects /tmp/transfer paths. Root must review/setup controlled fixture and exact-name deletion before allocation. It does not allocate, install, select credentials, or create its own backend workspace.",
+    "controlledOldApiFile": "controlled-old-api.js",
+    "controlledOldApiLimit": "Idle300 sync and old release-route 404 only, fixture token preseeded; not a controlled model server or real staging control plane"
+  },
+  "providerCleanup": {
+    "beforeCreate": "Atomic durable intent with expected duet-test name, image digest, run ID and tags before pool.checkout effect",
+    "createTags": [
+      "duet-test",
+      "duet-ephemeral",
+      "<unique run tag>",
+      "<explicit staging fixture tag>"
+    ],
+    "providerPool": "Existing approved reserved pool if required; no new reserved-capacity pool is created",
+    "finally": "Reconcile list by exact intended name + run tags even when create response is lost; return exact owned resource and verify absence through bounded list polling",
+    "crashBackstop": "MANUAL recovery uses existing provider list/remove after matching this durable intent and unique run tags; no broad pool/ephemeral sweep that touches other sessions, no TTL/automatic lease claim",
+    "terminal": "Any uncertain creation, unsettled job or unverified deletion prevents a passing fixture status"
+  }
+}

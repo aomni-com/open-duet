@@ -1,0 +1,22 @@
+{
+  "status": "local-additive-device-expiry-proof",
+  "parentCommit": "a0ecf6a0c",
+  "liveActions": false,
+  "redEvidence": "Invoking the actual registered migration in oneBatchOnly mode left a workspaceIds-only legacy row approved with its old field present. The narrowed original predicate was restored temporarily to prove the final test still fails for this defect.",
+  "correction": "The existing migration selects any presence of scopes, capabilities, workspaceIds or deviceName, then expires that row and clears all four fields. Identity-only rows remain byte-for-byte unchanged.",
+  "choices": [
+    "Use the existing registered migration and its batch owner; no additional row helper, UDF, table or scan framework",
+    "Empty legacy arrays and an empty machine name still need removal before strict schema",
+    "Keep source tightening separate from additive migration deployment and refreshed live census"
+  ],
+  "gates": {
+    "deviceAndExistingMigrationTests": { "tests": 7, "assertions": 29 },
+    "types": "backend TypeScript 7.0.1-rc",
+    "formatAndLint": "focused changed source and diff checks passed"
+  },
+  "independentReview": "The new registered-migration regression passed; no actionable defects found.",
+  "limits": [
+    "No deployment, live migration, actual credential read or VM operation performed",
+    "Strict human schema/contract removal is proposed and held, not implemented in this commit"
+  ]
+}

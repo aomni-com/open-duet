@@ -1,0 +1,171 @@
+{
+  "revision": "db4ecc84c6616d7d684ab0e4848ea3cdb9327b21",
+  "runId": "staging-e2e-synthetic",
+  "defaultTier": {
+    "effective": "balanced"
+  },
+  "generationAttempts": 4,
+  "totalUpstreamCostMicroUsd": 61099,
+  "attempts": [
+    {
+      "operation": "default-text-cli",
+      "model": "openai/gpt-6.1-sol",
+      "modality": "text",
+      "billingMode": "post_response",
+      "status": "settled",
+      "elapsedMs": 20867,
+      "output": {
+        "mimeType": "text/plain",
+        "size": 14,
+        "sha256": "753b845a219504dc472410041de71eb095217800f8f98ef4a22c62741a510ee5"
+      },
+      "settlement": {
+        "generationId": "md78b3w2f479ezsp0ypqy2r24n8fr2ye",
+        "upstreamGenerationId": "gen_01M47B7B2F1QPEHXB05V9BAGCX",
+        "workspaceId": "ns79vbmc78ktfzpvz4s0sna6218frrh1",
+        "model": "openai/gpt-6.1-sol",
+        "modality": "text",
+        "billingMode": "post_response",
+        "status": "settled",
+        "upstreamCostMicroUsd": 96,
+        "billedCostMicroUsd": 96,
+        "tier": "services",
+        "reservationId": null,
+        "ledger": {
+          "type": "usage",
+          "reference": "ai_generation:gen_01M47B7B2F1QPEHXB05V9BAGCX",
+          "amountMicroUsd": -96,
+          "status": null,
+          "estimateMicroUsd": null,
+          "actualCostMicroUsd": null
+        }
+      }
+    },
+    {
+      "operation": "native-image-cli",
+      "model": "recraft/recraft-v4.1-flash",
+      "modality": "image",
+      "billingMode": "reservation",
+      "status": "settled",
+      "elapsedMs": 23814,
+      "output": {
+        "mimeType": "image/webp",
+        "size": 377350,
+        "sha256": "9d369215f812ec1269906d96f2bb26868f776f9949abd9bd84916d812f3c6acc"
+      },
+      "settlement": {
+        "generationId": "md7fn10qgkqcbs8f2b15wdjnyn8fsbzx",
+        "upstreamGenerationId": "gen_01M47B80N0VAKS807PEWTGFWCX",
+        "workspaceId": "ns79vbmc78ktfzpvz4s0sna6218frrh1",
+        "model": "recraft/recraft-v4.1-flash",
+        "modality": "image",
+        "billingMode": "reservation",
+        "status": "settled",
+        "upstreamCostMicroUsd": 7000,
+        "billedCostMicroUsd": 7000,
+        "tier": null,
+        "reservationId": "ai_generation:49186134-4e74-4037-894a-53c9311662b3",
+        "ledger": {
+          "type": "reservation",
+          "reference": "ai_generation:49186134-4e74-4037-894a-53c9311662b3",
+          "amountMicroUsd": -7000,
+          "status": "settled",
+          "estimateMicroUsd": 2000000,
+          "actualCostMicroUsd": 7000
+        }
+      }
+    },
+    {
+      "operation": "native-video-mcp",
+      "model": "spacexai/grok-imagine-video-1.5-lite",
+      "modality": "video",
+      "billingMode": "reservation",
+      "status": "settled",
+      "elapsedMs": 35567,
+      "output": {
+        "mimeType": "video/mp4",
+        "size": 66566,
+        "sha256": "506aee7f5d43ece87f5ff5eed7197441b03c5c02df9d3b8a4c2a821607a986b0"
+      },
+      "settlement": {
+        "generationId": "md73hetceg0x6yket1ec5spqx18frfx2",
+        "upstreamGenerationId": "gen_01M47B8PP9G61M13GB6T6R631K",
+        "workspaceId": "ns79vbmc78ktfzpvz4s0sna6218frrh1",
+        "model": "spacexai/grok-imagine-video-1.5-lite",
+        "modality": "video",
+        "billingMode": "reservation",
+        "status": "settled",
+        "upstreamCostMicroUsd": 20000,
+        "billedCostMicroUsd": 20000,
+        "tier": null,
+        "reservationId": "ai_generation:5efdafbc-8fc4-4535-b2a8-93bd00a20fea",
+        "ledger": {
+          "type": "reservation",
+          "reference": "ai_generation:5efdafbc-8fc4-4535-b2a8-93bd00a20fea",
+          "amountMicroUsd": -20000,
+          "status": "settled",
+          "estimateMicroUsd": 2000000,
+          "actualCostMicroUsd": 20000
+        }
+      }
+    },
+    {
+      "operation": "language-image-mcp",
+      "model": "google/gemini-3.1-flash-lite-image",
+      "modality": "text",
+      "billingMode": "post_response",
+      "status": "settled",
+      "elapsedMs": 28807,
+      "output": {
+        "mimeType": "image/jpeg",
+        "size": 26392,
+        "sha256": "2c8d77eec17a65663ece93b8e5ac8687397de69c3556ec90c426825938efce87"
+      },
+      "settlement": {
+        "generationId": "md7asb77339s5hyw33yw04g9c98fsvk9",
+        "upstreamGenerationId": "gen_01M47B9SX94SR5FYM67G8H7JCQ",
+        "workspaceId": "ns79vbmc78ktfzpvz4s0sna6218frrh1",
+        "model": "google/gemini-3.1-flash-lite-image",
+        "modality": "text",
+        "billingMode": "post_response",
+        "status": "settled",
+        "upstreamCostMicroUsd": 34003,
+        "billedCostMicroUsd": 34003,
+        "tier": "services",
+        "reservationId": null,
+        "ledger": {
+          "type": "usage",
+          "reference": "ai_generation:gen_01M47B9SX94SR5FYM67G8H7JCQ",
+          "amountMicroUsd": -34003,
+          "status": null,
+          "estimateMicroUsd": null,
+          "actualCostMicroUsd": null
+        }
+      }
+    }
+  ],
+  "cleanup": {
+    "status": "pass",
+    "vmNames": [
+      "workspace-redacted"
+    ],
+    "resources": [
+      {
+        "kind": "user",
+        "status": "deleted"
+      },
+      {
+        "kind": "workspace",
+        "status": "deleted"
+      },
+      {
+        "kind": "mail-message",
+        "status": "deleted"
+      }
+    ],
+    "orphans": []
+  },
+  "postRunSweep": {
+    "ephemeralVms": 0
+  }
+}

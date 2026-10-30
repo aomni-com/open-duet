@@ -1,0 +1,3 @@
+[
+  {"route":"/api/v2/contact/enrich/bulk","request":{"method":"POST","json":{"name":"fixture","data":[{"first_name":"John","last_name":"Snow","company_name":"Example Inc","enrich_fields":["contact.work_emails"]}]}},"response":{"status":200,"json":{"enrichment_id":"fixture-enrichment"}}}
+]

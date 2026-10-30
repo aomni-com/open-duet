@@ -1,0 +1,38 @@
+bun test v1.3.14 (0d9b296a)
+
+specs/unified-duet/assets/live-drill-preparation/provider-run.test.ts:
+(pass) lost create response removes only the resource recorded before provider creation [6.17ms]
+(pass) remote failure metadata is retrieved before exact fixture deletion [3.13ms]
+150 |     },
+151 |     async remove() { vm = undefined },
+152 |   }
+153 |   try {
+154 |     const result = await runProviderFixture(spec, {client: client as never, copy: async () => {}})
+155 |     expect(result.status).toBe('failed')
+                                ^
+error: expect(received).toBe(expected)
+
+Expected: "failed"
+Received: "complete"
+
+      at <anonymous> (/Users/synthetic-user/.codex/worktrees/unified-cli-sync/duet/specs/unified-duet/assets/live-drill-preparation/provider-run.test.ts:155:27)
+(fail) a passing driver cannot complete when owned raw metadata preparation fails [2.17ms]
+194 |     },
+195 |   }
+196 |   try {
+197 |     const result = await runProviderFixture(spec, {client: client as never})
+198 |     expect(result.status).toBe('failed')
+199 |     expect(removed).toBe(true)
+                          ^
+error: expect(received).toBe(expected)
+
+Expected: true
+Received: false
+
+      at <anonymous> (/Users/synthetic-user/.codex/worktrees/unified-cli-sync/duet/specs/unified-duet/assets/live-drill-preparation/provider-run.test.ts:199:21)
+(fail) lost creation visibility is reconciled before claiming exact cleanup [1.42ms]
+
+ 2 pass
+ 2 fail
+ 18 expect() calls
+Ran 4 tests across 1 file. [84.00ms]

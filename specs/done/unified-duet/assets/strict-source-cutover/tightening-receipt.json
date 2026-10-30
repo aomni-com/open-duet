@@ -1,0 +1,56 @@
+{
+  "parentCommit": "5826d261b",
+  "phase": "post-migration-strict-schema",
+  "liveActions": false,
+  "requiredBeforeDeployment": [
+    "complete held-runtime adoption census in that environment",
+    "canonical additive phase deployed",
+    "new API owns domain",
+    "migrations:migrateWorkspaceRuntimeIdentity041026 completed",
+    "complete workspace census contains no gatewayVersion/agentVersion/duetfsVersion"
+  ],
+  "gates": {
+    "migrationAndStrictRows": {
+      "tests": 10,
+      "assertions": 49
+    },
+    "ordinaryLifecycleFenceRecovery": {
+      "tests": 49,
+      "assertions": 171
+    },
+    "backendObservationPlanningIntegration": {
+      "tests": 5,
+      "assertions": 14
+    },
+    "provisioningDecommissionRegression": {
+      "tests": 2,
+      "assertions": 4
+    },
+    "retiredMarketplaceObservation": {
+      "tests": 1,
+      "assertions": 3
+    }
+  },
+  "types": [
+    "backend",
+    "api",
+    "test-harness"
+  ],
+  "lint": "focused changed source passed",
+  "independentReview": {
+    "productionVerdict": "correct under stated deployment prerequisites",
+    "finding": "two provisioning fixtures retained obsolete activityGeneration",
+    "resolution": "removed helper parameter and callers; both affected local integration cases passed; retired marketplace fixture also changed to assert refusal"
+  },
+  "retained": [
+    "historical audit labels",
+    "complete current/previous repair and boot probation",
+    "temporary lifecycle fence/replay",
+    "one-shot host/helper and source-independent held artifacts"
+  ],
+  "limits": [
+    "Root full gate not run",
+    "No deployment, migration, image verification/publication or live resources executed",
+    "Root owns temporary dual-generation host census projection and web consumer integration"
+  ]
+}

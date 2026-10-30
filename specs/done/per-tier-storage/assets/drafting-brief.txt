@@ -1,0 +1,22 @@
+<task>
+Draft a complete implementation plan (slice ladder) for the "per-tier-storage" feature of this repo (Duet). The binding requirements document is specs/per-tier-storage/MAP.md — read it fully first; every decision D1-D14 there is a GIVEN, not open for debate. Supporting evidence: specs/per-tier-storage/research/*.md and specs/per-tier-storage/assets/storage-ui-directions.html (locked UI direction).
+
+Recon the real code before proposing slices. Key territory (verify yourself, do not trust this list blindly):
+- packages/contract/src/plans/index.ts, resources/index.ts, vm/index.ts, drive/index.ts
+- packages/backend/convex/domains/workspaces/{vmAttach,vmExe,provisioningCore,provisioningActions,vmSync}.ts
+- packages/backend/convex/domains/credits/{subscriptions,billingActions,creditsShared}.ts
+- packages/backend/convex/schema.ts, crons.ts, testing/workspaces.ts
+- packages/exe/src/exe.ts (ExeClient.resize()/restart() already exist)
+- packages/gateway/src/vm/telemetry-sampler.ts, routes/files.ts, runner/process-runner.ts, runtime/http.ts
+- apps/web billing settings UI + subscribe wall + low-credit toast pattern (find them)
+- Tests: packages/backend/src/{provisioning,billing,vm-attach,vm-teardown}.test.ts (note SUBS-IMPL-07), packages/test-harness staging e2e legs
+- The invariants in specs/done/monthly-subscriptions/README.md (single grant door, wallet single-writer, reconcileServicingStatus ownership, block codes) MUST stay intact.
+
+Propose: the slice graph (per slice: contract unlocked; API seam with module/types/ownership; runnable or reviewable artifact; verification incl. named tests; delegated freedoms; dependencies), package boundaries, firewalls (what must NOT change), risks, and which slice proves the scariest assumption first. Note which staging e2e legs are affected.
+</task>
+<output_contract>
+Markdown, inline as your final message. Sections: 1) Recon facts (measured, file:line), 2) Slice ladder (NN-name subsections, full contract each), 3) Seams and ownership map, 4) Firewalls, 5) Risks and open questions. This is a READ-ONLY planning run - change no files.
+</output_contract>
+<grounding>Every code claim cites a real path:line you actually read. Label inferences as inferences.</grounding>
+
+BIAS: fewest-slices. Produce the smallest ladder that still ships the MAP end-to-end. Merge slices aggressively; for every rung state why it cannot be merged into a neighbor. MARKER: draft-a-tier-storage

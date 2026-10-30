@@ -1,0 +1,171 @@
+import { EndpointReference } from '../../components/endpoint-reference'
+
+export const metadata = {
+  title: 'Apps',
+  description: 'Register and manage applications served from a Duet workspace.',
+  alternates: { canonical: '/apps/' },
+}
+
+<p className="eyebrow">Resource guide</p>
+
+# An app binds a folder to a process
+
+App registration connects a workspace path, start command, port, and stable slug. An optional `name`
+is the human-facing label; when it is unset, clients display the registered folder name. An optional
+`icon` is a safe path relative to that app folder, such as `icon.png` or `assets/icon.png`—it is not
+an image URL or embedded bytes. Keep the command reproducible from the registered folder and choose
+visibility separately from process configuration. The API returns the generated
+standalone `canonicalUrl`; clients should use that address rather than construct or persist a
+second app identity. An active custom hostname becomes this standalone address. The generated
+`https://<app>--<workspace>.edge.duet.so/` address keeps working.
+
+{/* schema: RegisterAppRequestSchema */}
+
+```json
+{
+  "path": "apps/status",
+  "command": "bun run start",
+  "apiScopes": ["services"],
+  "port": 4173,
+  "slug": "status",
+  "name": "Status Board",
+  "icon": "assets/icon.png"
+}
+```
+
+`apiScopes` is the app server's least-privilege declaration, not a list of features the UI happens
+to show. Declare only the capabilities required by Duet API routes the server actually calls, and
+send `[]` when it calls none. The capability grammar and credential boundaries live in
+[API keys and scopes](/api-keys); `admin` is deliberately unavailable to apps.
+
+Duet does not add an install-time consent step. Declared scopes are visible before and after an app
+is installed, with elevated access called out; a workspace removes that authority by disabling or
+uninstalling the app, not by maintaining a second approval record.
+
+## Runtime authority stays outside the drive
+
+A service running inside Duet receives its separately managed `DUET_APP_API_KEY` and
+`DUET_API_URL` through its process environment; install commands do not receive the key. Duet
+owns that credential's refresh and recovery. Keep it in memory, never source, `.env*`, SQLite,
+logs or Drive files: Drive contents sync to devices and can be shared or published.
+
+An externally hosted server uses a fresh exported instance of the app credential instead.
+[API keys and scopes](/api-keys#app-declarations-bind-runtime-authority) owns the shared identity,
+capability, lifetime and revocation rules.
+
+## Externally hosted apps
+
+Keep an ordinary visible app registration for a server hosted on Vercel or another provider.
+Its small static page explains what the app does, says it is externally hosted, and links to the
+actual deployment URL when known. Keep that folder and app row when redeploying; no external app
+subtype or Duet hosting proxy is required.
+
+After declaring the server's capabilities, export an app credential and install it through the
+host's server-side secret manager before deployment. Use returned `key`, `apiUrl` and
+`gatewayBaseUrl` as `DUET_APP_API_KEY`, `DUET_API_URL` and `DUET_GATEWAY_BASE_URL`. Those origins
+identify the same deployment as the key, including staging. Keep the key out of browser/public
+environment variables, command arguments, files and tool transcripts: capture the response in
+memory and pass it to the host through stdin.
+
+A workspace agent can complete registration, export, host configuration and deployment using its
+normal app-management authority. It does not require a human to create or copy a Duet key.
+Use the actual `duet app credentials export` command when available, or the public export API
+with an explicit expiration choice. Production automation normally chooses `never`; honor a
+requested finite lifetime. The response reveals new plaintext once, so do not automatically retry
+an issuing POST after an uncertain network result. Inspect inventory and clean up unwanted
+issuance before an explicit retry.
+
+To rotate, export another key, configure and deploy the host, confirm the deployed server uses it,
+then revoke the selected old credential ID. A full live inventory needs deliberate cleanup, not
+a retry loop or wholesale revocation. Declarations remain visible in normal app inspection.
+
+## Reconcile, do not duplicate
+
+List existing apps before creating one from automation. Update command, install command, or port on
+the existing slug; use deletion only when the public identity should disappear. Name and icon
+updates are metadata-only: they do not reinstall or restart the app, and sending the same icon path
+again deliberately advances `updatedAt` so clients can refresh bytes replaced at that path. Public
+visibility is a deliberate exposure boundary, not a health-check mechanism.
+
+Runtime writes are complete only after Duet's computer accepts the workspace configuration. Apps
+report whether that reconciliation is pending, complete, or needs attention. A reconciliation
+failure is a structured API error: preserve the returned app, show the reason, and refresh the list
+instead of assuming the optimistic change became durable. Failed runtime edits retain the last
+accepted command, install command, and port while retaining name and icon changes from the request;
+failed deletes retain the app registration.
+
+## Shared apps arrive as replicas
+
+Accepting a share whose folder registers apps materializes real app rows in the recipient
+workspace, tagged with their origin (`sourceShareId`, `sourceAppId`) and with the access that share
+grants (`sourceShareMode`). Its `apiScopes` declaration travels with the registration, but no key
+does: the recipient workspace mints its own runtime credential. A replica is a real app on the
+recipient's own computer at the recipient's own URL, so sharing an app is sharing files: a
+write-mode recipient may change its runtime and publish their copy, and doing so never changes the
+origin app's visibility. A read-mode
+recipient may do neither. The recipient's own control is the disabled flag: disabling a replica is
+durable — origin updates never resurrect it — and re-enabling is the same idempotent endpoint. A
+replica records who disabled it and when, so the state is auditable. A replica is removed by
+dropping the share, never by deleting the app.
+
+## Keep policy on the server
+
+The `apps` scope permits access to this resource but does not replace workspace roles. Viewers can
+list and inspect apps. Editors can register apps, change runtime configuration, make a public app
+workspace-only, and delete it. Only owners can expose an app publicly.
+
+Role alone cannot answer what a caller may do to a given app, because a replica lives in a
+workspace the recipient owns while its permissions come from the share. Every app therefore carries
+its own resolved `controls` (`updateRuntime`, `makePublic`, `makePrivate`, `delete`, `manageDomain`); the list-level
+`capabilities` answers only the workspace-wide question of whether this caller may register an app.
+Present controls from those values, and still handle authorization failures because roles and
+shares can change after a client loads.
+
+## A custom domain changes the address, not admission
+
+Each app can attach one hostname. Editors and owners can manage it, including for a disabled,
+broken, shared, or installed app; viewers can inspect its status and DNS instructions. A binding
+belongs to this local app and does not travel with shared files or marketplace content.
+
+Attach returns the durable reservation while provider work proceeds. Repeating the same hostname
+returns the same binding; another hostname on that app or a hostname already reserved elsewhere
+returns a conflict. Follow the returned DNS instructions and conflicts. Duet checks automatically
+while setup is pending; Recheck also requests a new check after DNS changes or retries an exhausted
+removal. Only `active` bindings serve content or become standalone addresses. Provider failures
+retain diagnostics so the user can repair setup and retry.
+
+Full domain responses include `checking: true` while an `active` or `failed` binding has a queued
+or running recheck. An active hostname keeps serving during the check. Observe the domain detail
+or workspace collection until `checking` is absent and `lastCheckedAt` advances, then use the
+returned status and diagnostics as the result. Initial setup still uses `pending` and `verifying`.
+
+Removal stops custom-host serving immediately and cleans up the provider assignment in the
+background. A `removing` binding keeps its reservation until cleanup finishes. When cleanup needs
+attention, `retryRequired` identifies the manual retry; the existing Duet address continues to work.
+The workspace collection uses the usual opaque continuation cursor and may return fewer rows than
+the requested limit.
+
+A provider write with an uncertain outcome requires operator repair. `operatorRepairRequired`
+identifies this state; ordinary Recheck cannot clear it. The hostname stays reserved until support
+confirms the remote work has settled and resumes cleanup. This prevents a delayed provider add or
+delete from changing a later attachment.
+
+Public custom-host content retains the app's indexing directives. Standard Duet addresses, private
+content, and platform authentication or error responses remain excluded from indexing.
+
+## A private app is reachable without being public
+
+Visibility governs standalone access, not whether members can use the app. An anonymous browser
+opening a private app document can sign in through Duet and return to its original host and deep
+path. This works on its standard address and an active custom domain. API calls, iframe requests,
+and denied signed-in visitors receive the ordinary refusal instead of a sign-in redirect.
+
+`GET /v1/ws/{workspace}/apps/{slug}/launch` mints the short-lived access grant after checking current
+app access. Its optional `host` and `path` query parameters must be supplied together; the host must
+be that app's standard address or current active custom domain. The path stays relative to that
+host, and any old `duet_access` parameter is replaced. The default launch always uses the standard
+Duet address. Embedded views use this host for both public and private apps, so customer DNS cannot
+interrupt an embedded view. Standalone Open and Copy link actions use the active custom address
+where offered; attaching never publishes the app.
+
+<EndpointReference category="apps" />

@@ -1,0 +1,646 @@
+[
+  {
+    "image": "docs-api-keys-desktop.png",
+    "beforeSize": [
+      1440,
+      2548
+    ],
+    "afterSize": [
+      1440,
+      2587
+    ],
+    "comparedTop": [
+      0,
+      0,
+      1440,
+      900
+    ],
+    "mae": 4.919706790123457,
+    "rmse": 32.64030968538786,
+    "diffRatio32": 0.022867283950617285,
+    "byteIdentical": false,
+    "beforeSha256": "9dff7559eb1b43205189cbb59021a33e1f62b25a79252652101eef02768441d9",
+    "afterSha256": "c71ee696678da3ab664a98e2fb92bb373dcd1d1bee7a0315b017dab443138d4f"
+  },
+  {
+    "image": "docs-api-keys-mobile.png",
+    "beforeSize": [
+      390,
+      3994
+    ],
+    "afterSize": [
+      390,
+      4031
+    ],
+    "comparedTop": [
+      0,
+      0,
+      390,
+      1688
+    ],
+    "mae": 13.1329626929153,
+    "rmse": 48.21455452155242,
+    "diffRatio32": 0.08155608214849921,
+    "byteIdentical": false,
+    "beforeSha256": "24a0981847a250cc480a838742272a370b8ab3443fce5c6a825c2d3e8becde43",
+    "afterSha256": "0ef1383c5ff40ca936bb28deb6b8e6eea9828cda6384bacbf851b5fe6b748155"
+  },
+  {
+    "image": "docs-billing-desktop.png",
+    "beforeSize": [
+      1440,
+      5933
+    ],
+    "afterSize": [
+      1440,
+      5973
+    ],
+    "comparedTop": [
+      0,
+      0,
+      1440,
+      900
+    ],
+    "mae": 9.090835648148149,
+    "rmse": 42.338391840162174,
+    "diffRatio32": 0.04553472222222222,
+    "byteIdentical": false,
+    "beforeSha256": "9be4c38106c8c1bd54e756195ff3477b4f5f3d08a67b05715cec34a59192aebf",
+    "afterSha256": "cda146dcabe8118fce6a0b771c0e81089b285bc6d4e6e41e0c45dcc1f7c1a1c2"
+  },
+  {
+    "image": "docs-billing-mobile.png",
+    "beforeSize": [
+      390,
+      8803
+    ],
+    "afterSize": [
+      390,
+      8840
+    ],
+    "comparedTop": [
+      0,
+      0,
+      390,
+      1688
+    ],
+    "mae": 16.3713027099283,
+    "rmse": 53.41538982782149,
+    "diffRatio32": 0.10441882367237817,
+    "byteIdentical": false,
+    "beforeSha256": "02513b9d3ae1b2c829c9ccb72d97c20b795798bc04443c4c4fe72eace24ae731",
+    "afterSha256": "5962c1cc97971a1b6ae1d65bd8957f3e341f384da3debcf073fdd4105c16e072"
+  },
+  {
+    "image": "docs-desktop-desktop.png",
+    "beforeSize": [
+      1440,
+      5305
+    ],
+    "afterSize": [
+      1440,
+      5503
+    ],
+    "comparedTop": [
+      0,
+      0,
+      1440,
+      900
+    ],
+    "mae": 0.0,
+    "rmse": 0.0,
+    "diffRatio32": 0.0,
+    "byteIdentical": false,
+    "beforeSha256": "8ea257246793c9a095ad0451104032d1b950bfe8812b2c49c92dd7bb551ca571",
+    "afterSha256": "0d405dddbcb4435a9f8e29dddb7373f283e0ebdaa88566d5fc020152817aaa25"
+  },
+  {
+    "image": "docs-desktop-mobile.png",
+    "beforeSize": [
+      390,
+      7657
+    ],
+    "afterSize": [
+      390,
+      7843
+    ],
+    "comparedTop": [
+      0,
+      0,
+      390,
+      1688
+    ],
+    "mae": 0.0,
+    "rmse": 0.0,
+    "diffRatio32": 0.0,
+    "byteIdentical": false,
+    "beforeSha256": "4a3cedf6a996fc4a113e995c742e7f60a65a95179474d2f3f821566dad245bdb",
+    "afterSha256": "bdf26d7dda8c23f2c65ddef7eeb4de415fcef3a29e4e8d521116bced1142b808"
+  },
+  {
+    "image": "docs-device-flow-desktop.png",
+    "beforeSize": [
+      1440,
+      5381
+    ],
+    "afterSize": [
+      1440,
+      5421
+    ],
+    "comparedTop": [
+      0,
+      0,
+      1440,
+      900
+    ],
+    "mae": 8.017847222222223,
+    "rmse": 39.89747390979429,
+    "diffRatio32": 0.039517746913580246,
+    "byteIdentical": false,
+    "beforeSha256": "e27ae13d21fd9d454302478e201ca96666250a8a2cc173ce13a1567542acc4dd",
+    "afterSha256": "37fa1aaf82df0c2020fd962a368e0461738e27f1e350cb64d8be2c6afe5fa56f"
+  },
+  {
+    "image": "docs-device-flow-mobile.png",
+    "beforeSize": [
+      390,
+      7652
+    ],
+    "afterSize": [
+      390,
+      7689
+    ],
+    "comparedTop": [
+      0,
+      0,
+      390,
+      1688
+    ],
+    "mae": 17.686369850528617,
+    "rmse": 55.29701569715625,
+    "diffRatio32": 0.11284026005589987,
+    "byteIdentical": false,
+    "beforeSha256": "0dcf5dbe7d652abb1f41359350a71dde2614989620c506801f636ad35e59a5c8",
+    "afterSha256": "ea03fcba7b56c5ff024acefbc52445254ba3b98b129344e82df0af5a6c7baf21"
+  },
+  {
+    "image": "docs-file-activity-desktop.png",
+    "beforeSize": [
+      1440,
+      8054
+    ],
+    "afterSize": [
+      1440,
+      8370
+    ],
+    "comparedTop": [
+      0,
+      0,
+      1440,
+      900
+    ],
+    "mae": 7.548317901234568,
+    "rmse": 39.72957995182114,
+    "diffRatio32": 0.03610725308641975,
+    "byteIdentical": false,
+    "beforeSha256": "c4555998b409483da26ac4de43cc2a05e40095b630da240f7fce5240c7c94019",
+    "afterSha256": "3d4c5a91eb927383497fde070999a8d838332bc4899c3c9034308d174c77088d"
+  },
+  {
+    "image": "docs-file-activity-mobile.png",
+    "beforeSize": [
+      390,
+      11589
+    ],
+    "afterSize": [
+      390,
+      11832
+    ],
+    "comparedTop": [
+      0,
+      0,
+      390,
+      1688
+    ],
+    "mae": 10.197622736663021,
+    "rmse": 43.63217019905168,
+    "diffRatio32": 0.06021539676752947,
+    "byteIdentical": false,
+    "beforeSha256": "e6dc8a48f3f4d3616fdc3911c09857b9d8673605250725e7588202654e3866d9",
+    "afterSha256": "fa61ae208dea665249374123f6d9d249bd2f8dd801c85274ac8c422a3a2cb858"
+  },
+  {
+    "image": "docs-getting-started-desktop.png",
+    "beforeSize": [
+      1440,
+      1727
+    ],
+    "afterSize": [
+      1440,
+      1846
+    ],
+    "comparedTop": [
+      0,
+      0,
+      1440,
+      900
+    ],
+    "mae": 7.944116512345679,
+    "rmse": 39.94023746390148,
+    "diffRatio32": 0.04094598765432099,
+    "byteIdentical": false,
+    "beforeSha256": "ff6c4aef25fbc1ed4bcc5a7623fd0605800179f9f53002cbaebff8e7b15f8fc6",
+    "afterSha256": "e72f4ece7df0502542f8958a7a33aaf4483376930d25a3b531c8eb31cbd0e084"
+  },
+  {
+    "image": "docs-getting-started-mobile.png",
+    "beforeSize": [
+      390,
+      2633
+    ],
+    "afterSize": [
+      390,
+      2732
+    ],
+    "comparedTop": [
+      0,
+      0,
+      390,
+      1688
+    ],
+    "mae": 6.537884311580994,
+    "rmse": 34.504889262763996,
+    "diffRatio32": 0.03998967067687447,
+    "byteIdentical": false,
+    "beforeSha256": "a0534c53200c1dc499b0f095ad6ac11483fcb8ec9530e9629b24e4f5491e9659",
+    "afterSha256": "a4f61ff0c822c60dcf5cd3623e388590acc631040ee20c2bd02253213cedbcae"
+  },
+  {
+    "image": "docs-home-desktop.png",
+    "beforeSize": [
+      1440,
+      1450
+    ],
+    "afterSize": [
+      1440,
+      1450
+    ],
+    "comparedTop": [
+      0,
+      0,
+      1440,
+      900
+    ],
+    "mae": 0.0,
+    "rmse": 0.0,
+    "diffRatio32": 0.0,
+    "byteIdentical": true,
+    "beforeSha256": "08c4969b1877249de6afdc8e7ddfa9f4cdb52673b6cf5b492d49e281ae26d1ab",
+    "afterSha256": "08c4969b1877249de6afdc8e7ddfa9f4cdb52673b6cf5b492d49e281ae26d1ab"
+  },
+  {
+    "image": "docs-home-mobile.png",
+    "beforeSize": [
+      390,
+      2175
+    ],
+    "afterSize": [
+      390,
+      2175
+    ],
+    "comparedTop": [
+      0,
+      0,
+      390,
+      1688
+    ],
+    "mae": 0.0,
+    "rmse": 0.0,
+    "diffRatio32": 0.0,
+    "byteIdentical": true,
+    "beforeSha256": "5d72668e0debcabcb64bef5813a59e8966b7b0779b5d949e5182a72a201d053b",
+    "afterSha256": "5d72668e0debcabcb64bef5813a59e8966b7b0779b5d949e5182a72a201d053b"
+  },
+  {
+    "image": "docs-mirror-devices-desktop.png",
+    "beforeSize": [
+      1440,
+      4901
+    ],
+    "afterSize": [
+      1440,
+      5177
+    ],
+    "comparedTop": [
+      0,
+      0,
+      1440,
+      900
+    ],
+    "mae": 0.8286882716049383,
+    "rmse": 10.888349051244106,
+    "diffRatio32": 0.006377314814814815,
+    "byteIdentical": false,
+    "beforeSha256": "4780c96d422e33efe621162b45c0697a90aa3cde98870a837f5da06a0bb10ae1",
+    "afterSha256": "7873e7cb9ead27d1f12f336cb107400df3a0266fb9785d7cd1052c5e9930454f"
+  },
+  {
+    "image": "docs-mirror-devices-mobile.png",
+    "beforeSize": [
+      390,
+      6842
+    ],
+    "afterSize": [
+      390,
+      7069
+    ],
+    "comparedTop": [
+      0,
+      0,
+      390,
+      1688
+    ],
+    "mae": 10.94954885162231,
+    "rmse": 44.523405242093546,
+    "diffRatio32": 0.06684742982136348,
+    "byteIdentical": false,
+    "beforeSha256": "67ef7100ede2309482a9e73a91ce41bf1db763a51639c97c7a3878662257f51f",
+    "afterSha256": "94efc6e6064e26c7589b939d8c5983143d1df6e1d0361461c3137e275cf80f8e"
+  },
+  {
+    "image": "docs-reference-desktop.png",
+    "beforeSize": [
+      1440,
+      16384
+    ],
+    "afterSize": [
+      1440,
+      16384
+    ],
+    "comparedTop": [
+      0,
+      0,
+      1440,
+      900
+    ],
+    "mae": 0.0,
+    "rmse": 0.0,
+    "diffRatio32": 0.0,
+    "byteIdentical": true,
+    "beforeSha256": "8a1e98bf9969053c99cc035293d5ee501e37eea662d4b60b9117ae6e206912fe",
+    "afterSha256": "8a1e98bf9969053c99cc035293d5ee501e37eea662d4b60b9117ae6e206912fe"
+  },
+  {
+    "image": "docs-reference-mobile.png",
+    "beforeSize": [
+      390,
+      16384
+    ],
+    "afterSize": [
+      390,
+      16384
+    ],
+    "comparedTop": [
+      0,
+      0,
+      390,
+      1688
+    ],
+    "mae": 0.0,
+    "rmse": 0.0,
+    "diffRatio32": 0.0,
+    "byteIdentical": true,
+    "beforeSha256": "784b4a7147aa0348ebbff8e7f38d01c2e4c3c7473dd99903b46c22e18350e0c3",
+    "afterSha256": "784b4a7147aa0348ebbff8e7f38d01c2e4c3c7473dd99903b46c22e18350e0c3"
+  },
+  {
+    "image": "docs-reliability-desktop.png",
+    "beforeSize": [
+      1440,
+      1227
+    ],
+    "afterSize": [
+      1440,
+      1267
+    ],
+    "comparedTop": [
+      0,
+      0,
+      1440,
+      900
+    ],
+    "mae": 9.061762345679012,
+    "rmse": 42.224288783490536,
+    "diffRatio32": 0.04574382716049383,
+    "byteIdentical": false,
+    "beforeSha256": "49ebcf221c77b586a301fb3309959b5517589cefbc265329620850379743f0d2",
+    "afterSha256": "941e19f943e0c4f118c82bf567d6be4c529c1503058ca789a6b9c63986ec79e7"
+  },
+  {
+    "image": "docs-reliability-mobile.png",
+    "beforeSize": [
+      390,
+      1680
+    ],
+    "afterSize": [
+      390,
+      1717
+    ],
+    "comparedTop": [
+      0,
+      0,
+      390,
+      1680
+    ],
+    "mae": 15.854488705738706,
+    "rmse": 51.89960074694513,
+    "diffRatio32": 0.10264041514041514,
+    "byteIdentical": false,
+    "beforeSha256": "78d6e713fc12fa280c826aed0a5b01a1890a6679e765451104529c8f04456fef",
+    "afterSha256": "d5332f6c0018fff5fbaa8063f7f5f20a5b23b26ae7c18faae832733717280085"
+  },
+  {
+    "image": "docs-sync-desktop.png",
+    "beforeSize": [
+      1440,
+      5679
+    ],
+    "afterSize": [
+      1440,
+      6039
+    ],
+    "comparedTop": [
+      0,
+      0,
+      1440,
+      900
+    ],
+    "mae": 5.468895061728395,
+    "rmse": 34.52608031940814,
+    "diffRatio32": 0.02529398148148148,
+    "byteIdentical": false,
+    "beforeSha256": "8ec94a44da49ff47d5e8ee67356085c4d857defe9d7de7bbd75b042d62fed5eb",
+    "afterSha256": "89df29224461b21fe128f8b9c7fa3ba04cd587e4150cc544f2658490c8724ef7"
+  },
+  {
+    "image": "docs-sync-mobile.png",
+    "beforeSize": [
+      390,
+      8361
+    ],
+    "afterSize": [
+      390,
+      8701
+    ],
+    "comparedTop": [
+      0,
+      0,
+      390,
+      1688
+    ],
+    "mae": 21.037604812249363,
+    "rmse": 64.62372805221493,
+    "diffRatio32": 0.1112635192611496,
+    "byteIdentical": false,
+    "beforeSha256": "8cef332f903ee0ecba6bdec3a8af7a0f8129490de8250ce6fa1e9db93360f4e6",
+    "afterSha256": "1416c7c7a8ce774b72873c7c58ee91d8141a9f06da9c9131ae4b437b2ca0714c"
+  },
+  {
+    "image": "docs-workspaces-desktop.png",
+    "beforeSize": [
+      1440,
+      16384
+    ],
+    "afterSize": [
+      1440,
+      16384
+    ],
+    "comparedTop": [
+      0,
+      0,
+      1440,
+      900
+    ],
+    "mae": 0.0,
+    "rmse": 0.0,
+    "diffRatio32": 0.0,
+    "byteIdentical": false,
+    "beforeSha256": "a11453a86f327f490c709b6feaf997536ea83c21f538423e5fe8413a29dbbc26",
+    "afterSha256": "d0ce5996db37a7c7dfd381b42790e21c998371724873873c6a1eb5a817411fd4"
+  },
+  {
+    "image": "docs-workspaces-mobile.png",
+    "beforeSize": [
+      390,
+      16384
+    ],
+    "afterSize": [
+      390,
+      16384
+    ],
+    "comparedTop": [
+      0,
+      0,
+      390,
+      1688
+    ],
+    "mae": 5.575911410864017,
+    "rmse": 32.14360148108025,
+    "diffRatio32": 0.03136620488516223,
+    "byteIdentical": false,
+    "beforeSha256": "1552f26fc1488394f6d9e67df4dcb82f7adfe2fc0fba0feacf5ff06b2b1f4074",
+    "afterSha256": "5b85c5adec8e732812b40d6bef65f41387f81ef950e7137e144248b16e0643b8"
+  },
+  {
+    "image": "lander-install-desktop.png",
+    "beforeSize": [
+      1440,
+      900
+    ],
+    "afterSize": [
+      1440,
+      900
+    ],
+    "comparedTop": [
+      0,
+      0,
+      1440,
+      900
+    ],
+    "mae": 0.07900848765432099,
+    "rmse": 1.9910476722904786,
+    "diffRatio32": 0.001154320987654321,
+    "byteIdentical": false,
+    "beforeSha256": "ce237e4d589cc2da5b347498fe0e5d514a1d0a1da7e72f414d000ae144080db5",
+    "afterSha256": "fa65c55c8fa3a0d8eda410845a70beffda36571f9b624962dab67277eecf1561"
+  },
+  {
+    "image": "lander-install-full-desktop.png",
+    "beforeSize": [
+      1440,
+      3084
+    ],
+    "afterSize": [
+      1440,
+      3996
+    ],
+    "comparedTop": [
+      0,
+      0,
+      1440,
+      900
+    ],
+    "mae": 0.08695756172839506,
+    "rmse": 2.0499538913814925,
+    "diffRatio32": 0.0013209876543209876,
+    "byteIdentical": false,
+    "beforeSha256": "8b074ccdb21f13888fea277aef3f23fe5bc2456b5a67400601aa186d6a75f996",
+    "afterSha256": "2b2a97bedaf74c7e08bdb2996326316e28b3c4c824f04d7e35e6903c81881df9"
+  },
+  {
+    "image": "lander-install-full-mobile.png",
+    "beforeSize": [
+      780,
+      6704
+    ],
+    "afterSize": [
+      780,
+      9504
+    ],
+    "comparedTop": [
+      0,
+      0,
+      780,
+      1688
+    ],
+    "mae": 1.888308117632762,
+    "rmse": 17.396350342109756,
+    "diffRatio32": 0.013333181431522664,
+    "byteIdentical": false,
+    "beforeSha256": "d7244a42534bc7232d7e826a4c35eeb44634700296cc55d9d64be6c81d7fa5ee",
+    "afterSha256": "6438dbb5c1ec3d38b27e7736b36068374b8e1aa22a26d3fe17d6925a8f3dfe0f"
+  },
+  {
+    "image": "lander-install-mobile.png",
+    "beforeSize": [
+      390,
+      844
+    ],
+    "afterSize": [
+      390,
+      844
+    ],
+    "comparedTop": [
+      0,
+      0,
+      390,
+      844
+    ],
+    "mae": 1.7044659132336857,
+    "rmse": 15.187763141040184,
+    "diffRatio32": 0.013926358002187385,
+    "byteIdentical": false,
+    "beforeSha256": "d9eefff59b420601af00b1d426ffb9ab315f5b66c1379dcc93f983e4a7d29771",
+    "afterSha256": "504c38a16385299e6957dd14a05f12e6f073fec382642fb7e6819deb6998ef6b"
+  }
+]

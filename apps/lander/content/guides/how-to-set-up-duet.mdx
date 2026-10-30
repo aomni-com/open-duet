@@ -1,0 +1,508 @@
+---
+title: 'How to Set Up Duet: A Founder Walkthrough for Your AI Workforce'
+metaTitle: 'How to Set Up Duet: AI Workforce Setup Guide for Founders'
+description: 'How to set up Duet for a real first job: start a durable session, organize files, train reusable context, connect integrations, and ship apps.'
+date: '2026-05-19'
+updatedAt: '2026-05-19'
+author:
+  name: 'David Zhang'
+  link: '/'
+category: 'guides'
+tags:
+  [
+    'duet',
+    'getting-started',
+    'sessions',
+    'memory',
+    'training',
+    'integrations',
+    'ai-coworker',
+    'ai-workforce',
+    'ai-for-small-business',
+    'ai-for-founders',
+    'ai-workspace',
+  ]
+type: 'guide'
+image: '/guides/how-to-set-up-duet/cover.webp'
+relatedPosts:
+  [
+    'how-to-build-your-ai-command-center',
+    'duet-ai-for-founders',
+    'agent-skills-101-tools-vs-mcp-vs-skills',
+  ]
+cta:
+  title: 'Set up your AI workforce in an afternoon.'
+  subtitle: 'Skip the trial-and-error. Start one real session, load the context it needs, and keep the result in your workspace.'
+  buttonText: 'Start your workspace'
+  href: '/sign-in?from=guide-how-to-set-up-duet'
+howTo:
+  name: 'How to Set Up Duet'
+  description: 'A founder-led walkthrough of how to set up a new Duet workspace, organize files, train reusable context, run durable sessions, and connect tools.'
+  steps:
+    - name: 'Start one durable session'
+      text: 'Give Duet a real outcome, the relevant context, and a concrete acceptance check.'
+    - name: 'Garden your memory'
+      text: 'Treat the file system like your Drive. Better organization makes a smarter coworker.'
+    - name: 'Train reusable context'
+      text: 'Add stable facts and sources to Train so later sessions can retrieve them.'
+    - name: 'Schedule recurring work'
+      text: 'Keep scheduled results in durable session history and workspace files.'
+    - name: 'Connect anything with an API'
+      text: 'Use the 500+ preconfigured integrations or just ask Duet to wire up a new API. It writes the code.'
+    - name: 'Ship internal and external apps'
+      text: 'Have Duet build apps for your team or customers. Free hosting, custom domains, white-label-ready.'
+---
+
+<AnswerBox
+  title="Quick Summary"
+  summary="Duet gives every workspace a private cloud VM and a persistent AI coworker. To set it up: (1) start one durable session with a real outcome, (2) organize workspace files like you would brief a new hire, (3) add stable facts and sources to Train, (4) keep scheduled results in session history and files, (5) connect tools through Integrations, and (6) ship internal or external apps from the same workspace. Specific context matters more than novelty."
+  queries={[
+    'What is Duet?',
+    'How do I set up Duet?',
+    'What is an AI workforce?',
+    'How do I onboard an AI coworker?',
+    'What is the difference between Duet and ChatGPT?',
+    'How do I build an AI workforce for a small business?',
+  ]}
+/>
+
+This guide is the exact walkthrough David, Duet's founder, gives to new customers on their first call. It is not a feature tour. It is the order of operations that turns a new workspace into a working AI coworker — what to do first, what to skip, and the mindset shifts that separate the people who get 10x value from the people who treat Duet like a fancier ChatGPT.
+
+If you just signed up, read this once before you do anything else. If you're an implementation partner setting up Duet for a client, this is the playbook.
+
+![Chatbot versus a persistent, always-on AI coworker with memory and tools](/guides/how-to-set-up-duet/server-vs-chatbot.webp)
+
+<GuideTOC
+  items={[
+    {
+      number: 1,
+      title: 'Start with one real session',
+      href: '#1-start-with-one-real-session',
+    },
+    { number: 2, title: 'Garden your knowledge base', href: '#2-garden-your-knowledge-base' },
+    {
+      number: 3,
+      title: 'Train reusable context',
+      href: '#3-train-reusable-context',
+    },
+    {
+      number: 4,
+      title: 'Schedule recurring work',
+      href: '#4-schedule-recurring-work',
+    },
+    { number: 5, title: 'Connect any tool with an API', href: '#5-connect-any-tool-with-an-api' },
+    {
+      number: 6,
+      title: 'Ship internal and external apps',
+      href: '#6-ship-internal-and-external-apps',
+    },
+    { number: 7, title: 'Security and your own server', href: '#7-security-and-your-own-server' },
+    { number: 8, title: 'Billing without surprises', href: '#8-billing-without-surprises' },
+    { number: 9, title: 'Pick the right model', href: '#9-pick-the-right-model' },
+    {
+      number: 10,
+      title: 'Connect external services',
+      href: '#10-connect-external-services',
+    },
+    {
+      number: 11,
+      title: 'Workspace identity and app domains',
+      href: '#11-workspace-identity-and-app-domains',
+    },
+    { number: 12, title: 'The mindset shift', href: '#12-the-mindset-shift' },
+    { number: 13, title: 'FAQ', href: '#13-faq' },
+  ]}
+/>
+
+## 1. Start with one real session
+
+Duet opens on Sessions: a list of durable pieces of work. Start with one real outcome instead of trying to configure the entire workspace at once.
+
+The biggest predictor of a useful first result is the quality of the brief: the desired outcome, the source material, the constraints, and the test that tells the agent it is done.
+
+Think of it like this. If you transplanted every memory you have into another person's brain, that person would behave a lot like you — same opinions, same instincts, same shortcuts. The model is the brain. Your memory is what makes Duet act like _your_ coworker instead of a generic assistant.
+
+<Callout type="tip" title="What to do on day one">
+  Start a session with one real job. Upload the sales deck, strategy document, ICP notes, style
+  guide, or other files the job depends on, then state what a finished result must contain.
+</Callout>
+
+When the session asks a question, answer it directly. The answer becomes part of that durable work history instead of disappearing after a one-off prompt.
+
+If you came from Aomni, this is the same idea as "model training" — except Duet does it implicitly through conversation and explicitly through the memory file, and the word "memory" is more accurate than "training." You're not retraining the model. You're giving it context.
+
+## 2. Garden your knowledge base
+
+The Files tab in your workspace is a real file system on a real cloud server. You can upload PDFs, drag in folders, paste URLs (Duet will scrape them into markdown automatically), and Duet can read everything in there.
+
+The way to think about it: **set it up the way you would organize a Google Drive for a brand new employee.**
+
+```
+/files
+  /company
+    one-pager.pdf
+    pitch-deck.pdf
+    style-guide.md
+  /customers
+    target-icp.md
+    case-studies/
+  /products
+    pricing.md
+    roadmap.md
+  /sales
+    discovery-questions.md
+    objection-handling.md
+```
+
+This is what David calls "gardening." You don't have to do it constantly. A quick sanity check every couple of weeks is enough — move anything that obviously belongs somewhere else, prune anything stale.
+
+A well-organized memory file links to sub-memories, which link to other files. The agent navigates your file system the same way you do. Better structure = smarter coworker.
+
+<Callout type="info" title="Power-user tip">
+  The Files API exposes the same workspace file tree as the web app, so automated workflows can
+  create, read, move, and publish artifacts without a second storage model.
+</Callout>
+
+## 3. Train reusable context
+
+Train is where a workspace keeps stable facts and sources that should be reusable across sessions. Add a short record directly, upload source material, or provide a URL for the workspace to process.
+
+After a strong session — for example, an SEO audit with the right internal-link, cannibalization, AEO, and ranking checks — extract the durable facts and standards that future work should reuse.
+
+> "Save the stable SEO criteria and our company-specific priorities so later sessions can reuse them."
+
+Keep those standards in Train and the supporting files in the workspace. Future sessions can retrieve the same business context without inventing it again.
+
+This is the part that does not exist in a disposable prompt window. Duet keeps the session history, trained context, and files together so useful work compounds.
+
+<Callout type="tip" title="What to add to Train">
+  Anything that has the shape: "domain expert + repeatable workflow + tedious to do every time."
+  Examples: weekly competitor monitoring, SEO audit per page, customer onboarding email drafting,
+  inbound lead enrichment, monthly board update prep. If a fact or standard should survive this
+  session, add it to Train.
+</Callout>
+
+Reusable context should be specific to your company: its keywords, priorities, terminology, customers, and trusted data sources. That specificity is the point.
+
+<DuetCTA />
+
+## 4. Schedule recurring work
+
+Duet's workspace VM stays available when your laptop is closed, so the agent can run scheduled jobs and keep their results in durable sessions and files.
+
+Here is what it looks like in practice. Start a session and give the AI an instruction:
+
+> "Every hour, check our connected support inbox. Every day at 9am, update the growth report. Every Monday, run the weekly SEO check."
+
+Duet sets up the scheduled work on the workspace VM. Its session events and output files leave an inspectable record of what ran and what changed.
+
+The big win over hidden cron jobs:
+
+- **You can see what it's doing.** Not "hopefully it ran."
+- **You can refine it in the same session.** "Also check Reddit while you're at it."
+- **You can inspect the files it produced.** Reports remain in the workspace instead of disappearing into a scheduler log.
+- **You keep one durable history.** The assignment, questions, progress, and results stay together.
+
+<Callout type="info" title="Moving existing cron jobs">
+  Start a session and ask Duet to inventory the cron jobs on the workspace VM, explain what each one
+  does, and migrate only the jobs you approve. Keep the resulting runbook in workspace files.
+</Callout>
+
+## 5. Connect any tool with an API
+
+Duet ships with around 500 preconfigured integrations — Google Calendar, Slack, Notion, Linear, Stripe, Gmail, Telegram, you name it. Browse them in the Integrations tab and connect with one click.
+
+![SaaS integrations flowing into your Duet server: Slack, Linear, Stripe, and Notion connect to your private server, which produces customer and team results](/guides/how-to-set-up-duet/saas-integration.webp)
+
+What most people miss: **Duet can connect to anything with an API, not just the 500 preconfigured ones.**
+
+The way it works: Duet is, at its core, a coding agent. Every AI agent is. Even when you ask it to do "research" or "sales prospecting," it's actually writing and running code under the hood. So if you want to connect a random fifteen-year-old billing system that nobody else integrates with, you just ask:
+
+> "Does Sentry have an API? Connect to it. Here's our API key."
+
+Duet looks up the docs, writes the integration, and calls the API through the credential boundary you authorize. For catalog integrations, credentials remain with the server-side provider connection rather than being returned to browser JavaScript.
+
+<Callout type="tip" title="Secret handling">
+  Prefer the Integrations screen for supported services. Duet keeps provider credentials on a
+  server-side connection boundary, scopes workspace credentials, and does not expose raw keys to
+  browser JavaScript or session events.
+</Callout>
+
+## 6. Ship internal and external apps
+
+Because Duet has its own server and runs a coding agent, it can build apps. Real ones.
+
+![Build versus Build plus Run: traditional tools assemble static pieces, while Duet builds and continuously runs your apps in a feedback loop](/guides/how-to-set-up-duet/build-vs-build-run.webp)
+
+There are two flavors and you'll probably use both:
+
+**Internal apps.** A dashboard, an admin tool, an "internal use cases" page that links to your best workflows. Duet builds them, hosts them on your server, and you can share the URL with your team. We use this constantly — every cool tab in our own Duet workspace ends up linked from one internal app we maintain.
+
+**External apps.** A landing page, a marketing site, a customer portal. Same flow. You ask, Duet ships, the app gets a `.duet.so` URL by default, and you can wire your own custom domain (like `consigliere.com`) by setting up the DNS record. We currently host customer-facing marketing sites for several companies entirely inside their Duet workspace.
+
+Hosting, custom domains, SSL — all included. No "deploy" button to find. The app is just there once Duet writes it.
+
+<Callout type="success" title="Real example">
+  A bartender in Texas who runs a seven-year-old bar was paying a dev agency $3,000/month for his
+  website. He moved his entire site into Duet and now spends about $200/month in tokens for a better
+  one that he can iterate on himself, in plain English.
+</Callout>
+
+<DuetCTA
+  title="Hire your AI workforce"
+  subtitle="One workspace. Sessions. Files. Train. Integrations. Apps. Your private cloud server."
+  buttonText="Start free"
+/>
+
+## 7. Security and your own server
+
+The single most important thing to understand about Duet's security model: **every workspace is its own server.**
+
+Not a shared agent process. Each workspace receives a dedicated single-tenant virtual machine. Its files and processes are isolated from other customer workspaces.
+
+This isn't just a marketing label; it is an architectural boundary. A dedicated computer lets Duet write code, install tools, retain files, and continue work across sessions without sharing a workspace runtime with another customer.
+
+![Shared SaaS with many tenants crammed into one server versus your private Duet server with a single user and a lock icon](/guides/how-to-set-up-duet/private-vs-shared.webp)
+
+Practically:
+
+- Integration credentials stay behind server-side provider connections.
+- Browser sessions use secure HTTP-only cookies; raw product API keys are not exposed to browser JavaScript.
+- You can browse, edit, and download workspace files through the product and API.
+- VM and workspace credentials are scoped, time-bounded, and rotated by the control plane.
+
+If you're at a company with compliance requirements, this single-tenant model is usually easier to defend than a typical multi-tenant agent platform, not harder.
+
+## 8. Billing without surprises
+
+Duet has three monthly plans: Starter, Pro, and Max. Two things to know.
+
+**Monthly credits reset.** Each plan includes a monthly credit bucket. It resets at renewal and unused monthly credits do not roll over, so choose the plan around the work you expect Duet to own in a normal month.
+
+**Overage uses your paid reserve.** When monthly credits run out, Duet draws from the paid reserve. The designated payer can refill it manually or enable auto topups; every subscription charge and topup produces an invoice.
+
+**How to avoid sticker shock.** Three settings, all in your billing page:
+
+| Setting               | What it does                                       | Recommended                                                                                                                                  |
+| --------------------- | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Spend cap             | Hard ceiling per month. Duet stops at this number. | Set it to your real budget.                                                                                                                  |
+| Auto top-up amount    | How much credit gets added when you run low.       | $20 minimum for casual use; higher if you use Duet hard.                                                                                     |
+| Auto top-up threshold | The balance at which auto top-up kicks in.         | Don't set this too low — usage comes in bursts of $5–$50 at a time, and your credit card processor will start blocking too-frequent charges. |
+
+The dashboard breaks usage down per member, per day, with per-message tags. You can always see what cost what.
+
+## 9. Pick the right model
+
+Duet can run work through multiple model families while preserving one durable session history.
+
+**Default to a stronger reasoning model when you're getting started.** Especially in the setup phase. It is better at instruction following and deciding whether a workflow is worth saving as a reusable playbook. The extra reasoning cost can be worthwhile while the workspace is taking shape.
+
+Once Train context and reusable playbook files are tuned, smaller models can handle workloads that do not need the most expensive reasoning tier — Q&A over your knowledge base, drafting a quick reply, or summarizing a report.
+
+<Callout type="tip" title="Prompt rewriting trick">
+  Want to use a cheaper model on a workflow but the output isn't as good? Run the workflow on Opus
+  first. Then run the same prompt on Sonnet (or Gemini) and ask the cheaper model: "Keep improving
+  your output until it matches what Opus produced." The cheaper model will iterate, and along the
+  way it'll write a longer, more explicit version of the prompt that you can reuse. Cheap models
+  often just need more guidance — let AI write the better prompt for you.
+</Callout>
+
+We've tested automatic model routing in the past. It didn't work well. The models have very different personalities, and an auto-router produces a "schizophrenic" experience — sometimes great, sometimes bafflingly off, no way to know why. For now, choose the model explicitly.
+
+## 10. Connect external services
+
+Duet connects external systems through the Integrations screen. The agent can then use authorized actions inside a session without exposing provider credentials to the browser.
+
+**Email.** Connect a supported email provider and give the agent a bounded task. Common patterns:
+
+- "Summarize the email and recommend a next action. Don't reply automatically."
+- "Reply to all customer support emails using our brand voice. Escalate anything refund-related to me."
+- "Add the email to the right contact record and save a one-line summary to memory."
+
+The resulting tool calls and outputs remain attached to the session that initiated them. Disconnecting the integration revokes future Duet access.
+
+## 11. Workspace identity and app domains
+
+Duet keeps workspace identity and published apps separate. You can:
+
+- Rename your workspace from workspace settings, with explicit acknowledgement that public URLs may change.
+- Use a custom domain for any app Duet builds.
+- Set up DNS so your customers see your brand, not ours.
+
+The only thing we don't currently support fully white-labeling is the root Duet app URL. The pragmatic workaround: build your customer-facing experience as an app inside Duet, point your own domain at it, and the customer never sees the word "Duet."
+
+<Callout type="info" title="Implementation partners">
+  If you're an agency or partner setting up Duet for clients: the cleanest pattern is to create a
+  workspace on behalf of the client, configure it, then invite them as an admin and leave the
+  workspace yourself when you're done. The workspace is no longer tied to your account once you
+  leave. Make sure the client is an admin first — otherwise the workspace becomes ownerless.
+</Callout>
+
+## 12. The mindset shift
+
+![A team org chart with four human teammates and an AI coworker with a green status ring](/guides/how-to-set-up-duet/ai-coworker.webp)
+
+If you take one thing away from this guide, take this:
+
+**Using AI well is a little like gambling.**
+
+You're betting some tokens — call it $1, or $10, or $100 — that the AI will produce something that returns multiples of that value. Sometimes it doesn't. Sometimes the run goes sideways and you've spent $20 on nothing. But over a month, if you know roughly what you want, the expected value is heavily positive. Our top users spend hundreds of dollars in tokens a month and get tens of thousands of dollars of work back.
+
+This mindset only works if **you know what you want.** Vague prompts on expensive models with no context in place will burn money fast. Specific outcomes, backed by Train sources and reusable instructions, are easier to evaluate and repeat.
+
+The corollary: **don't try to learn AI by exploring randomly.** Pick one boring, valuable, repeatable workflow in your business — answering customer support emails, doing weekly SEO audits, updating your website, drafting outbound sequences, building an internal dashboard — and make Duet good at that one thing. Then add the next. People who try to "use AI for everything" on day one usually use it for nothing by week four.
+
+<DuetCTA />
+
+## 13. FAQ
+
+<Accordion type="single" collapsible className="w-full">
+
+<AccordionItem value="what-is-duet">
+  <AccordionTrigger>What is Duet?</AccordionTrigger>
+  <AccordionContent>
+    Duet is an AI workforce platform that gives every team a private cloud server with an always-on
+    AI coworker. Each workspace runs on its own single-tenant virtual machine with durable sessions,
+    a real file system, trained memory, integrations, and the ability to build and host apps. Think
+    of it as hiring an AI employee, not signing up for another SaaS tool.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="is-duet-an-ai-workforce-platform">
+  <AccordionTrigger>
+    Is Duet an AI workforce platform for small businesses and founders?
+  </AccordionTrigger>
+  <AccordionContent>
+    Yes. Duet is designed for founders, solo operators, and small teams who want AI coworkers that
+    do real work, not chatbots that answer questions. Each workspace runs on its own private server,
+    remembers trained context and integrates with business tools through server-side connections.
+    Monthly plans include shared credits, so a one-person business and a fifty-person team can
+    choose around the work they want Duet to own rather than buying seats.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="what-is-the-first-thing-i-should-do-in-duet">
+  <AccordionTrigger>What is the first thing I should do in a new Duet workspace?</AccordionTrigger>
+  <AccordionContent>
+    Start one real session and load the context it needs. Upload the files you would brief a new
+    hire with — sales deck, ICP, style guide, pricing notes — and describe a concrete finished
+    result. Add stable facts and sources to Train so they can compound across later sessions.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="what-is-a-duet-skill">
+  <AccordionTrigger>What is a Duet skill?</AccordionTrigger>
+  <AccordionContent>
+    The agent can use reusable instructions and code stored in workspace files. The current web app
+    exposes Sessions, Apps, Files, Train, and Integrations; a dedicated skills-management surface is
+    not part of this release.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="how-does-duet-handle-recurring-work">
+  <AccordionTrigger>How does Duet handle recurring work?</AccordionTrigger>
+  <AccordionContent>
+    Recurring work runs as scheduled jobs on the workspace VM. The AI can wake up, perform the job,
+    and keep its results in the durable session history or workspace files so the team can inspect
+    and refine the next run.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="can-duet-integrate-with-tools-not-on-the-official-list">
+  <AccordionTrigger>
+    Can Duet integrate with tools that aren't on the official integrations list?
+  </AccordionTrigger>
+  <AccordionContent>
+    Yes. If the tool has an API, Duet can connect to it — even something obscure or fifteen years
+    old. Duet is a coding agent at its core. You give it the API docs and a token, it writes the
+    integration on its own server, and you query the tool from inside Duet. No MCP server required.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="how-does-duet-store-my-api-keys">
+  <AccordionTrigger>How does Duet store my API keys and tokens?</AccordionTrigger>
+  <AccordionContent>
+    Supported integration credentials stay behind server-side provider connections and can be
+    revoked by disconnecting the integration. Browser credentials use secure HTTP-only cookies, and
+    raw API keys are not exposed to browser JavaScript or session events.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="is-duet-multi-tenant-or-single-tenant">
+  <AccordionTrigger>Is Duet multi-tenant or single-tenant?</AccordionTrigger>
+  <AccordionContent>
+    Every workspace receives a dedicated isolated virtual machine for its files and agent processes.
+    The control plane scopes credentials and authorization to that workspace instead of running
+    every customer's agent inside one shared workspace runtime.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="how-does-duet-bill">
+  <AccordionTrigger>How does Duet bill?</AccordionTrigger>
+  <AccordionContent>
+    Starter, Pro, and Max are monthly subscriptions with included credits that reset without
+    rollover. The designated payer manages payment methods, reserve topups, limits, and billing
+    history from user settings. Overage draws from that paid reserve.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="which-model-should-i-use-in-duet">
+  <AccordionTrigger>Which model should I use in Duet?</AccordionTrigger>
+  <AccordionContent>
+    Use the model available for the session and judge it against the job's acceptance criteria.
+    Expensive reasoning models fit ambiguous, long-horizon work; smaller models fit bounded
+    drafting, extraction, and summarization. Durable sessions and trained context should remain
+    useful when the underlying model changes.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="can-i-white-label-duet">
+  <AccordionTrigger>Can I white-label Duet for my clients?</AccordionTrigger>
+  <AccordionContent>
+    Customer-facing apps can use their own design and custom domain. Workspace settings and the Duet
+    product shell remain Duet-branded in this release; logo replacement and AI renaming are not part
+    of the current settings surface.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="how-do-i-set-up-duet-for-a-client-as-an-agency">
+  <AccordionTrigger>
+    How do I set up Duet for a client as an agency or implementation partner?
+  </AccordionTrigger>
+  <AccordionContent>
+    Create a new workspace on behalf of the client. Configure their Train sources, playbook files,
+    and integrations with whatever questionnaire output and onboarding context you've gathered.
+    Invite the client as an admin. When you're done, leave the workspace — it no longer ties back to
+    your account once you leave, so make sure the client is an admin first.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="what-do-non-technical-users-need-help-with-most">
+  <AccordionTrigger>What do non-technical Duet users need the most help with?</AccordionTrigger>
+  <AccordionContent>
+    Coming up with the first use case. Everyone knows AI is a big deal, almost nobody knows what to
+    apply it to first. The fastest wins are usually low-risk and concrete: rebuild your website with
+    a coding agent (a few dollars in tokens vs. a $3,000/month agency), let Duet draft customer
+    support replies for you to review, or run a weekly competitor monitor that stores a report in
+    the workspace.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="whats-the-difference-between-duet-and-perplexity-comet">
+  <AccordionTrigger>
+    What's the difference between Duet and a consumer AI computer like Perplexity Comet?
+  </AccordionTrigger>
+  <AccordionContent>
+    Comet is a consumer browser-based computer. Duet gives each workspace a dedicated cloud VM,
+    durable sessions, workspace files, trained context, hosted apps, and server-side integration
+    connections intended for ongoing business work.
+  </AccordionContent>
+</AccordionItem>
+
+</Accordion>
+
+<DuetCTA
+  title="Set up your workspace"
+  subtitle="One private server. Sessions, files, trained memory, integrations, and apps."
+  buttonText="Start free"
+/>

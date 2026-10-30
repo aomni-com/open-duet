@@ -1,0 +1,26 @@
+{
+  "target": "Preserve the existing Files hierarchy and row rhythm while making app identity and status legible, disabled rows visibly dim but readable, broken phantoms destructive and inert, and touch chevrons visible without clipping.",
+  "captureDate": "2026-07-16",
+  "captureCommit": "370a5a8e4e37ed9379a182e173fa50603a481342",
+  "fixture": "/playground/files",
+  "reference": "../reference/{desktop,mobile}.png (browse fixture, left side)",
+  "candidate": "../candidate/{desktop,mobile}.png (apps state-matrix fixture, right side)",
+  "verdict": "candidate-less-wrong",
+  "desktop": {
+    "dimensions": "1440x900",
+    "fullFrameDistance": 0.04851,
+    "rowCropDistance": 0.13238,
+    "averageLuminanceDelta": 0.00212
+  },
+  "mobile": {
+    "dimensions": "390x844",
+    "fullFrameDistance": 0.02911,
+    "rowCropDistance": 0.05955,
+    "averageLuminanceDelta": -0.38862
+  },
+  "notes": [
+    "Distance metrics locate intended row-list movement; they are not an acceptance score.",
+    "The default Files browse screenshots remain byte-identical to their prior baselines.",
+    "The final candidate uses fixed size/action slots, 75% whole-row disabled opacity, and a compact localized missing-folder badge that preserves the full phantom name on mobile."
+  ]
+}

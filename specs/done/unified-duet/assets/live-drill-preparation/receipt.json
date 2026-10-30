@@ -1,0 +1,15 @@
+{
+  "status": "prepared-not-executed",
+  "sourceInspected": "cda8f8a501099afac9c807e0b256c8150e6f2c8a",
+  "approvedSchemaCommit": "99d94f9db",
+  "files": {
+    "README.md": "df64ae8f8a703aa763e3ab396142698ee1c687d068e2ca0f0fdd990cd31a14d4",
+    "controlled-old-api.js": "2610a235e09401aee391a9f11ad858cf0790cf18941beca34c0a742aee273d95",
+    "plan.json": "665adb5255e8bc9d95805b5415ebe0c68db90c91dedecb0d74d11d5c9aa7a1a4",
+    "platform-refresh-loss.js": "1fdae5d4dfdfa340f75f5a6a90dc10975d33f32214a928f3cb157efd28319c5f",
+    "platform-success.js": "05b9dc57ffcdde16bd37ca0f0e9b6fba29eb2fc0fdfefc3e4e0090e559491965"
+  },
+  "verification": "Plan JSON parsed; retained loss/completion driver source hashes match earlier tested scripts; both Bun build syntax gates pass. No live allocation, VM mutation or drill pass occurred.",
+  "notPrepared": "No strict candidate/image or predecessor has been supplied. Native controlled-model managed-session driver remains bound to these future exact inputs.",
+  "cleanupReviewRequired": "Root operator reviews actual provider initialization, persisted intent/run tags and exact-run removal before allocation."
+}

@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Publish viewer — slice graph</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        font:
+          15px/1.5 -apple-system,
+          system-ui,
+          sans-serif;
+        margin: 0;
+        padding: 24px;
+        background: #0d1117;
+        color: #e6edf3;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0 0 4px;
+      }
+      p.sub {
+        margin: 0 0 20px;
+        color: #8b949e;
+      }
+      .wave {
+        margin-bottom: 20px;
+      }
+      .wave h2 {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #8b949e;
+        margin: 0 0 8px;
+        border-bottom: 1px solid #21262d;
+        padding-bottom: 4px;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .card {
+        border: 1px solid #30363d;
+        border-radius: 8px;
+        padding: 10px 12px;
+        min-width: 210px;
+        max-width: 300px;
+        background: #161b22;
+      }
+      .card .id {
+        font-weight: 700;
+        font-size: 12px;
+        color: #58a6ff;
+      }
+      .card .t {
+        font-weight: 600;
+        margin: 2px 0 4px;
+      }
+      .card .d {
+        font-size: 12px;
+        color: #8b949e;
+      }
+      .card.kill {
+        border-color: #f85149;
+      }
+      .card.kill .id {
+        color: #f85149;
+      }
+      .card.parallel {
+        border-style: dashed;
+      }
+      .dep {
+        font-size: 11px;
+        color: #6e7681;
+        margin-top: 6px;
+      }
+      .legend {
+        font-size: 12px;
+        color: #8b949e;
+        margin-top: 16px;
+      }
+      .legend span {
+        display: inline-block;
+        margin-right: 16px;
+      }
+      .sw {
+        display: inline-block;
+        width: 22px;
+        border-top: 2px solid;
+        vertical-align: middle;
+        margin-right: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Publish viewer — slice graph</h1>
+    <p class="sub">
+      Publish becomes a read-only public file/folder viewer reusing the drive components. Build the
+      wavefront, not the ladder.
+    </p>
+
+    <div class="wave">
+      <h2>Wave 0 — opening wavefront (no unmet deps, build concurrently)</h2>
+      <div class="row">
+        <div class="card kill">
+          <div class="id">00 · KILL GATE</div>
+          <div class="t">Transport spike</div>
+          <div class="d">
+            Anonymous Next page + <code>/_next/*</code> relay behind the edge. Proves R1 or the plan
+            is re-cut.
+          </div>
+        </div>
+        <div class="card parallel">
+          <div class="id">02</div>
+          <div class="t">Gateway data contract</div>
+          <div class="d">
+            <code>?list</code>/<code>?raw</code>, text→text/plain, hidden filter, containment.
+          </div>
+        </div>
+        <div class="card parallel">
+          <div class="id">04</div>
+          <div class="t">Anchor coexistence</div>
+          <div class="d">
+            Compat matrix: publish ↔ app/agent/share-root. Caller allow-lists only.
+          </div>
+        </div>
+        <div class="card parallel">
+          <div class="id">05</div>
+          <div class="t">Viewer metadata wire</div>
+          <div class="d">workspace name + owner label into the edge resolve (R5).</div>
+        </div>
+        <div class="card parallel">
+          <div class="id">07</div>
+          <div class="t">Read-only components</div>
+          <div class="d">DriveBrowser + PreviewPane source mode; SVG as text. vs MockProvider.</div>
+        </div>
+        <div class="card parallel">
+          <div class="id">10</div>
+          <div class="t">Publish skill</div>
+          <div class="d">New skill + build-apps boundary. In skills-registry.</div>
+        </div>
+        <div class="card parallel">
+          <div class="id">03 (helper)</div>
+          <div class="t">Hidden-entry policy</div>
+          <div class="d">
+            Shared predicate + authed Drive toggle (default off). Amends drive-shell-port.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wave">
+      <h2>Wave 1 — after their deps land</h2>
+      <div class="row">
+        <div class="card">
+          <div class="id">01</div>
+          <div class="t">Edge classifier + firewall</div>
+          <div class="d">viewer / raw / list dispatch; credential firewall.</div>
+          <div class="dep">needs 00 + 02</div>
+        </div>
+        <div class="card">
+          <div class="id">06</div>
+          <div class="t">PublicFileSystemProvider</div>
+          <div class="d">
+            read-only, same-origin, credentials omit; stat via listing/range (R3).
+          </div>
+          <div class="dep">needs 02 + 05</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wave">
+      <h2>Wave 2 — composition</h2>
+      <div class="row">
+        <div class="card">
+          <div class="id">08</div>
+          <div class="t">Public route + controller</div>
+          <div class="d">app/publish/[…]; URL↔path; single-file; back/forward.</div>
+          <div class="dep">needs 06 + 07 (00 proven)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wave">
+      <h2>Wave 3 — chrome + closeout</h2>
+      <div class="row">
+        <div class="card">
+          <div class="id">09</div>
+          <div class="t">Viewer chrome + visual</div>
+          <div class="d">banner, breadcrumbs, visual gates.</div>
+          <div class="dep">needs 05 + 08</div>
+        </div>
+        <div class="card">
+          <div class="id">11</div>
+          <div class="t">Hard cutover + staging e2e</div>
+          <div class="d">remove raw-render; refactor-clean; live e2e (Example User-gated).</div>
+          <div class="dep">needs all</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span><span class="sw" style="border-color: #f85149"></span>kill gate</span>
+      <span
+        ><span class="sw" style="border-color: #30363d; border-top-style: dashed"></span>parallel
+        (no unmet dep)</span
+      >
+      <span><span class="sw" style="border-color: #30363d"></span>serialized</span>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "image": "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+  "releaseDir": "/tmp/unified-duet-strict-predecessor-built-cef66f48401f/runtime-release",
+  "predecessorVersion": "0.0.0+373f0d4dcb530705e3ad400e4f7be5fb55ddc0edb75cedfae3753522a8a36788",
+  "probe": "/Users/synthetic-user/.codex/worktrees/232f/duet/specs/unified-duet/assets/packaging/probe.ts",
+  "probeSha256": "ffde098160ad6d1f6c1bc29ad50f4c53acf74593d92d7ce558839c0a4075a061",
+  "tuiOwner": "/Users/synthetic-user/.codex/worktrees/232f/duet/specs/unified-duet/assets/public-distribution/final-candidate/verify-linux.sh",
+  "tuiOwnerSha256": "4af13c4404ec35e80d9ccd1f91f1b75ac2ea28b2bda7b0cee17a5482da6344c7",
+  "releaseManifestSha256": "3c71db38b9a0ad7e7bb85e91196dc8fa293e9befd25625e215096d3ba6f670b7",
+  "noExternalNetwork": true,
+  "releaseReadOnly": true,
+  "hardTimeoutSeconds": {
+    "host": 600,
+    "container": 540,
+    "nativeProbe": 90,
+    "tui": 4
+  },
+  "fixtureName": "duet-strict-predecessor-cef66-physical-official",
+  "imageDecision": "Actual final target OS, including image-owned ripgrep; supersedes minimal9074 fixture for compiled CLI proof"
+}

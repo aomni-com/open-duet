@@ -1,0 +1,32 @@
+{
+  "environment": "production",
+  "revision": "41b75a05ccfec4f7040132ecff7ff58f2b5a7112",
+  "owners": {
+    "api": "41b75a05ccfec4f7040132ecff7ff58f2b5a7112",
+    "backend": "41b75a05ccfec4f7040132ecff7ff58f2b5a7112",
+    "web": "41b75a05ccfec4f7040132ecff7ff58f2b5a7112",
+    "docs": "41b75a05ccfec4f7040132ecff7ff58f2b5a7112",
+    "edge": "41b75a05ccfec4f7040132ecff7ff58f2b5a7112"
+  },
+  "edge": {
+    "alias": "service.example.invalid",
+    "projectId": "prj_mPNx8yJ4JRlThnK3NMZOIpeenJjM",
+    "deploymentId": "dpl_7igmGJtC8PZT69L1VY3Z6DyFgMET",
+    "branch": "main"
+  },
+  "backendSchema": 1,
+  "cacheSchema": 15,
+  "gatewayVersion": "0.0.0+6a5618fea06f",
+  "protectedReturn": {
+    "status": 307,
+    "signInPath": "/sign-in",
+    "preservedHostAndPath": true
+  },
+  "appsDocsContract": true,
+  "gatewayProbeWorkspace": "official-agents-hub",
+  "productionDomainCredential": {
+    "key": "DUET_VERCEL_DOMAINS_TOKEN",
+    "restrictedProjectId": "prj_mPNx8yJ4JRlThnK3NMZOIpeenJjM",
+    "sourceMatchesRuntime": true
+  }
+}

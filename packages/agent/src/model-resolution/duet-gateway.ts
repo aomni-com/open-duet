@@ -1,0 +1,574 @@
+import {
+  createProvider,
+  envApiKeyAuth,
+  type Api,
+  type Model,
+  type Provider,
+  type ProviderAuth,
+} from "@earendil-works/pi-ai";
+import { anthropicMessagesApi } from "@earendil-works/pi-ai/api/anthropic-messages.lazy";
+import { openAICompletionsApi } from "@earendil-works/pi-ai/api/openai-completions.lazy";
+import { openAIResponsesApi } from "@earendil-works/pi-ai/api/openai-responses.lazy";
+import { getEnvApiKey } from "@earendil-works/pi-ai/compat";
+import {
+  builtinProviders,
+  getBuiltinModel,
+  getBuiltinModels,
+} from "@earendil-works/pi-ai/providers/all";
+
+import { isConnectedProviderId } from "../connected-providers/store.js";
+import {
+  connectedProviderApiKey,
+  refreshConnectedTokenInBackground,
+} from "../connected-providers/tokens.js";
+import { duetGatewayHeaders } from "./gateway-headers.js";
+
+const DEFAULT_DUET_GATEWAY_BASE_URL = "https://gateway.duet.so";
+const OPENAI_MODEL_PREFIX = "openai/";
+const ANTHROPIC_MODEL_PREFIX = "anthropic/";
+const DUET_GATEWAY_PROVIDER_ID = "duet-gateway";
+const VERCEL_GATEWAY_BASE_URL = "https://ai-gateway.vercel.sh";
+const VERCEL_GATEWAY_PROVIDER_ID = "vercel-ai-gateway";
+/**
+ * The Duet gateway proxies Vercel's AI Gateway path layout and authenticates
+ * with `DUET_API_KEY`. Human keys select a billing workspace through
+ * `DUET_WORKSPACE`; bound VM keys can omit that selection. `DUET_GATEWAY_BASE_URL`
+ * points model traffic at a different origin; unset, it goes to
+ * `https://gateway.duet.so`.
+ */
+export const DUET_GATEWAY_API_KEY_ENV = "DUET_API_KEY";
+export const DUET_GATEWAY_BASE_URL_ENV = "DUET_GATEWAY_BASE_URL";
+
+export function getDuetGatewayBaseUrl(): string {
+  const override = process.env[DUET_GATEWAY_BASE_URL_ENV]?.trim();
+  if (override) return stripTrailingSlash(override);
+  return DEFAULT_DUET_GATEWAY_BASE_URL;
+}
+
+/**
+ * A gateway route: where a request goes, and which credential it carries.
+ *
+ * The Duet gateway is a proxy in front of Vercel's — same catalog, same model
+ * ids, same protocols — so the origin and the credential are the entire
+ * difference between them. Every rule below is therefore written once against
+ * a route rather than twice per gateway, and a third gateway of this shape
+ * costs one entry rather than another parallel set of functions.
+ */
+export interface GatewayRoute {
+  id: string;
+  name: string;
+  /** Read per call: the Duet origin is configurable, Vercel's is fixed. */
+  origin(): string;
+  auth(): ProviderAuth;
+  /** Request headers the route needs on every model it serves. */
+  headers(): Record<string, string> | undefined;
+}
+
+const DUET_GATEWAY: GatewayRoute = {
+  id: "duet-gateway",
+  name: "Duet Gateway",
+  origin: getDuetGatewayBaseUrl,
+  auth: () => ({ apiKey: envApiKeyAuth("Duet", [DUET_GATEWAY_API_KEY_ENV]) }),
+  // Every duet-gateway model resolves through this route — parent step,
+  // classifier, vision fallback, subagents and memory alike — so billing
+  // selection is claimed here rather than at each call site.
+  headers: duetGatewayHeaders,
+};
+
+const VERCEL_GATEWAY: GatewayRoute = {
+  id: VERCEL_GATEWAY_PROVIDER_ID,
+  name: "Vercel AI Gateway",
+  origin: () => VERCEL_GATEWAY_BASE_URL,
+  // The transports and the model list are ours to decide; how Vercel
+  // authenticates stays the catalog's to declare.
+  auth: () => builtinGatewayAuth(),
+  // Workspace and tier selection belong to Duet's billing boundary.
+  headers: () => undefined,
+};
+
+export const GATEWAY_ROUTES: readonly GatewayRoute[] = [DUET_GATEWAY, VERCEL_GATEWAY];
+
+/** The route serving `providerId`, or undefined when it is not a gateway. */
+export function gatewayRoute(providerId: string): GatewayRoute | undefined {
+  return GATEWAY_ROUTES.find((route) => route.id === providerId);
+}
+
+function builtinGatewayAuth(): ProviderAuth {
+  const builtin = builtinProviders().find(({ id }) => id === VERCEL_GATEWAY_PROVIDER_ID);
+  if (!builtin) throw new Error(`Model catalog has no ${VERCEL_GATEWAY_PROVIDER_ID} provider`);
+  return builtin.auth;
+}
+
+/**
+ * The catalog rebased onto one gateway route, built once per route.
+ *
+ * The catalog is the only source of a model's capabilities; nothing here
+ * declares a model. That is what lets a newly served gateway model work with
+ * no code change, and it is why a capability we send on the wire must either
+ * come from the catalog or be named in `gatewayCapabilityGaps` below.
+ *
+ * `resolveGatewayModel` runs on every model resolution — parent step,
+ * classifier, each subagent — so rebasing two hundred catalog entries per call
+ * is pure waste. Route id and origin are the rebase's only inputs, so together
+ * they are the key; tests move the origin between cases, which is why this is
+ * not a plain once-flag.
+ */
+const gatewayModelsByRoute = new Map<string, Model<Api>[]>();
+
+function gatewayModels(route: GatewayRoute): Model<Api>[] {
+  const origin = route.origin();
+  const key = `${route.id}@${origin}`;
+  const cached = gatewayModelsByRoute.get(key);
+  if (cached) return cached;
+  const models = [
+    ...getBuiltinModels(VERCEL_GATEWAY_PROVIDER_ID),
+    ...missingCatalogModels(VERCEL_GATEWAY_PROVIDER_ID),
+  ].map((model) => rebaseOntoGateway(model, route, origin));
+  gatewayModelsByRoute.set(key, models);
+  return models;
+}
+
+/**
+ * The transport a gateway model runs over.
+ *
+ * Both gateways serve the whole catalog over the same protocol surface — pi-ai
+ * declares every `vercel-ai-gateway` model as `anthropic-messages` — so the
+ * choice is per model, not per gateway, and `duet-gateway` and
+ * `vercel-ai-gateway` make it identically.
+ *
+ * Anthropic's own models keep the Anthropic transport, which is native for
+ * them. Everything else that accepts images moves to OpenAI completions,
+ * because the two transports disagree about where a tool result's image goes:
+ * the Anthropic serializer leaves it inside the `tool_result` block, and
+ * Vercel's translation to an OpenAI-shaped provider has nowhere to put it, so
+ * it arrives as text. Measured against `moonshotai/kimi-k3`, one 512x512 PNG
+ * costs 147,554 tokens that way and 650 when the OpenAI serializer hoists it
+ * into the following user message — which it already does, unprompted.
+ *
+ * OpenAI's own models stay on the Responses transport: routing them through
+ * either compatible path drops reasoning stream semantics and silently ignores
+ * `reasoningEffort`.
+ */
+function gatewayApi(model: Model<Api>): Api {
+  if (model.id.startsWith(OPENAI_MODEL_PREFIX)) return "openai-responses";
+  if (model.id.startsWith(ANTHROPIC_MODEL_PREFIX)) return model.api;
+  return model.input.includes("image") ? "openai-completions" : model.api;
+}
+
+/**
+ * Point a catalog model at a gateway: its own transport, that gateway's origin,
+ * and the capabilities the catalog is missing.
+ *
+ * `provider` is deliberately rewritten for the Duet gateway so cost and usage
+ * telemetry attribute the call to the Duet proxy rather than to Vercel.
+ */
+function rebaseOntoGateway(model: Model<Api>, route: GatewayRoute, origin: string): Model<Api> {
+  const api = gatewayApi(model);
+  const gaps = gatewayCapabilityGaps(model.id);
+  return {
+    ...model,
+    // A gap fills in what the catalog omits; it must not take the two nested
+    // records with it, or the day the catalog ships one field here silently
+    // drops the others.
+    thinkingLevelMap: { ...model.thinkingLevelMap, ...gaps?.thinkingLevelMap },
+    compat: { ...model.compat, ...gaps?.compat },
+    api,
+    // Rewritten so cost and usage telemetry attribute the call to the route
+    // that served it rather than to the catalog it was declared in.
+    provider: route.id,
+    baseUrl: gatewayBaseUrlForApi(origin, api),
+  };
+}
+
+/**
+ * Capabilities both gateways serve that pi-ai's catalog does not yet describe.
+ *
+ * An entry here is a bug report against the catalog, not a place to declare a
+ * model: it exists only while a capability we send on the wire has no catalog
+ * field behind it, and it is deleted the moment one ships. Anything beyond
+ * that — a price, a context window, a transport — belongs to the catalog, and
+ * a second copy of it here would silently go stale.
+ */
+function gatewayCapabilityGaps(modelId: string): Partial<Model<Api>> | undefined {
+  if (
+    modelId === "openai/gpt-6.1-sol" ||
+    modelId === "openai/gpt-6-sol" ||
+    modelId === "openai/gpt-6-luna"
+  ) {
+    return { thinkingLevelMap: { minimal: "low", xhigh: "xhigh", max: "max" } };
+  }
+  // GLM accepts max rather than xhigh on the gateway reasoning-effort surface.
+  if (modelId === "zai/glm-5.3") {
+    return { thinkingLevelMap: { xhigh: "max" }, compat: { forceAdaptiveThinking: true } };
+  }
+  return undefined;
+}
+
+/** The published fields a missing model's contract can differ from its sibling's on. */
+type PublishedContract = Partial<Pick<Model<Api>, "input" | "contextWindow" | "maxTokens">> & {
+  cost?: Partial<Model<Api>["cost"]>;
+};
+
+interface MissingModelClone {
+  /** A shipped sibling whose transport, compat and reasoning shape the clone keeps. */
+  from: string;
+  to: string;
+  name: string;
+  /**
+   * The contract each router publishes, keyed by catalog provider. Routers
+   * price and limit the same model differently, and a provider left out gets
+   * no clone rather than another router's numbers.
+   */
+  byProvider: Partial<Record<string, PublishedContract>>;
+}
+
+// The two metered catalogs publish the same contract for these models.
+// Connected transports reuse their costs while retaining conservative donor limits.
+const OPUS_5_5_CONTRACT: PublishedContract = {
+  input: ["text", "image"],
+  contextWindow: 1_000_000,
+  maxTokens: 128_000,
+  cost: { input: 4, output: 20, cacheRead: 0.2, cacheWrite: 5 },
+};
+const SOL_6_CONTRACT: PublishedContract = {
+  input: ["text", "image"],
+  contextWindow: 1_050_000,
+  maxTokens: 128_000,
+  cost: {
+    input: 2,
+    output: 10,
+    cacheRead: 0.2,
+    cacheWrite: 2.5,
+    tiers: [{ inputTokensAbove: 272000, input: 4, output: 15, cacheRead: 0.4, cacheWrite: 5 }],
+  },
+};
+const SOL_6_1_CONTRACT: PublishedContract = {
+  ...SOL_6_CONTRACT,
+  cost: {
+    input: 2,
+    output: 10,
+    cacheRead: 0.1,
+    cacheWrite: 2.5,
+    tiers: [{ inputTokensAbove: 272000, input: 4, output: 15, cacheRead: 0.2, cacheWrite: 5 }],
+  },
+};
+const LUNA_6_CONTRACT: PublishedContract = {
+  input: ["text", "image"],
+  contextWindow: 1_050_000,
+  maxTokens: 128_000,
+  cost: {
+    input: 0.1,
+    output: 0.5,
+    cacheRead: 0.01,
+    cacheWrite: 0.125,
+    tiers: [
+      { inputTokensAbove: 272000, input: 0.2, output: 0.75, cacheRead: 0.02, cacheWrite: 0.25 },
+    ],
+  },
+};
+
+/**
+ * Models the routers serve that pi-ai's catalog has not shipped, each cloned
+ * from a shipped sibling with only the fields whose published contract differs.
+ *
+ * Like `gatewayCapabilityGaps`, an entry is a bug report against the catalog,
+ * deleted the moment it ships the id. Without it the gateways would fall back
+ * to `synthesizePassthroughModel` — free and text-only — and every other
+ * provider would not resolve the id at all.
+ */
+const MISSING_MODEL_CLONES: readonly MissingModelClone[] = [
+  {
+    from: "anthropic/claude-opus-5",
+    to: "anthropic/claude-haiku-5.5",
+    name: "Claude Haiku 5.5",
+    byProvider: {
+      "vercel-ai-gateway": {
+        input: ["text", "image"],
+        contextWindow: 1_000_000,
+        maxTokens: 128_000,
+        cost: {
+          input: 0.1,
+          output: 0.5,
+          cacheRead: 0.01,
+          cacheWrite: 0.125,
+          tiers: [
+            {
+              inputTokensAbove: 100000,
+              input: 0.5,
+              output: 2.5,
+              cacheRead: 0.05,
+              cacheWrite: 0.625,
+            },
+          ],
+        },
+      },
+    },
+  },
+  {
+    from: "openai/gpt-5.6-sol",
+    to: "openai/gpt-6.1-sol",
+    name: "GPT-6.1 Sol",
+    byProvider: { "vercel-ai-gateway": SOL_6_1_CONTRACT, openrouter: SOL_6_1_CONTRACT },
+  },
+  {
+    from: "gpt-5.6-sol",
+    to: "gpt-6.1-sol",
+    name: "GPT-6.1 Sol",
+    byProvider: { "openai-codex": { cost: SOL_6_1_CONTRACT.cost } },
+  },
+  {
+    from: "anthropic/claude-sonnet-5",
+    to: "anthropic/claude-sonnet-5.5",
+    name: "Claude Sonnet 5.5",
+    byProvider: {
+      "vercel-ai-gateway": {
+        input: ["text", "image"],
+        contextWindow: 1_000_000,
+        maxTokens: 128_000,
+        cost: { input: 2, output: 10, cacheRead: 0.2, cacheWrite: 2.5 },
+      },
+    },
+  },
+  {
+    from: "claude-opus-5",
+    to: "claude-opus-5.5",
+    name: "Claude Opus 5.5",
+    byProvider: { "github-copilot": { cost: OPUS_5_5_CONTRACT.cost } },
+  },
+  {
+    from: "gpt-5.6-sol",
+    to: "gpt-6-sol",
+    name: "GPT-6 Sol",
+    byProvider: { "openai-codex": { cost: SOL_6_CONTRACT.cost } },
+  },
+  {
+    from: "gpt-5.6-luna",
+    to: "gpt-6-luna",
+    name: "GPT-6 Luna",
+    byProvider: { "openai-codex": { cost: LUNA_6_CONTRACT.cost } },
+  },
+
+  {
+    from: "anthropic/claude-opus-5",
+    to: "anthropic/claude-opus-5.5",
+    name: "Claude Opus 5.5",
+    byProvider: { "vercel-ai-gateway": OPUS_5_5_CONTRACT, openrouter: OPUS_5_5_CONTRACT },
+  },
+  {
+    from: "openai/gpt-5.6-sol",
+    to: "openai/gpt-6-sol",
+    name: "GPT-6 Sol",
+    byProvider: { "vercel-ai-gateway": SOL_6_CONTRACT, openrouter: SOL_6_CONTRACT },
+  },
+  {
+    from: "openai/gpt-5.6-luna",
+    to: "openai/gpt-6-luna",
+    name: "GPT-6 Luna",
+    byProvider: { "vercel-ai-gateway": LUNA_6_CONTRACT, openrouter: LUNA_6_CONTRACT },
+  },
+  {
+    from: "x-ai/grok-4.3",
+    to: "x-ai/grok-4.7",
+    name: "Grok 4.7",
+    byProvider: {
+      openrouter: {
+        input: ["text", "image"],
+        contextWindow: 500000,
+        maxTokens: 450000,
+        cost: {
+          input: 1.6,
+          output: 4.8,
+          cacheRead: 0.4,
+          cacheWrite: 0,
+        },
+      },
+    },
+  },
+  {
+    from: "spacexai/grok-4.6",
+    to: "spacexai/grok-4.7",
+    name: "Grok 4.7",
+    byProvider: {
+      "vercel-ai-gateway": {
+        input: ["text", "image"],
+        contextWindow: 500000,
+        maxTokens: 500000,
+        cost: {
+          input: 1.2,
+          output: 3.6,
+          cacheRead: 0.3,
+          cacheWrite: 0,
+        },
+      },
+    },
+  },
+  {
+    from: "deepseek/deepseek-v4-flash",
+    to: "deepseek/deepseek-v4.1-flash",
+    name: "DeepSeek V4.1 Flash",
+    byProvider: {
+      [VERCEL_GATEWAY_PROVIDER_ID]: {
+        input: ["text", "image"],
+        cost: { input: 0.3, output: 1.2, cacheRead: 0.03, cacheWrite: 0 },
+        contextWindow: 1_048_576,
+        maxTokens: 32_768,
+      },
+      openrouter: {
+        input: ["text", "image"],
+        cost: { input: 0.15, output: 0.6, cacheRead: 0.003, cacheWrite: 0 },
+        contextWindow: 1_048_576,
+        maxTokens: 384_000,
+      },
+    },
+  },
+];
+
+/** The catalog's spec for `provider:modelId`, or the clone standing in for one it lacks. */
+export function catalogModel(provider: string, modelId: string): Model<Api> | undefined {
+  return (
+    shippedModel(provider, modelId) ??
+    missingCatalogModels(provider).find((model) => model.id === modelId)
+  );
+}
+
+function shippedModel(provider: string, modelId: string): Model<Api> | undefined {
+  return getBuiltinModel(
+    provider as Parameters<typeof getBuiltinModel>[0],
+    modelId as Parameters<typeof getBuiltinModel>[1],
+  ) as Model<Api> | undefined;
+}
+
+/**
+ * Clones `provider` publishes a contract for and whose source it ships; any
+ * other is dropped rather than guessed at.
+ */
+export function missingCatalogModels(
+  provider: string,
+  models?: readonly Model<Api>[],
+): Model<Api>[] {
+  return MISSING_MODEL_CLONES.flatMap((clone) => {
+    const lookup = (id: string) =>
+      models ? models.find((model) => model.id === id) : shippedModel(provider, id);
+    if (lookup(clone.to)) return [];
+    const contract = clone.byProvider[provider];
+    const source = contract && lookup(clone.from);
+    if (!source) return [];
+    return [
+      {
+        ...source,
+        ...contract,
+        id: clone.to,
+        name: clone.name,
+        cost: { ...source.cost, ...contract.cost },
+      },
+    ];
+  });
+}
+
+/**
+ * A gateway as a first-class pi-ai provider.
+ *
+ * `auth` is why this is a provider rather than a bag of rewritten models: a
+ * credential is resolved per provider, and `duet-gateway` is not an id pi-ai's
+ * env-key map knows. Declaring it on the provider is what lets any call
+ * resolve the token without being handed one.
+ *
+ * All three transports are declared because serialization belongs to the
+ * provider: rewriting a model's `api` to one the provider does not implement
+ * yields a model that claims Responses and is sent as Anthropic, silently
+ * dropping reasoning effort and mangling tool-result images.
+ */
+export function gatewayProvider(route: GatewayRoute): Provider {
+  return createProvider({
+    id: route.id,
+    name: route.name,
+    baseUrl: route.origin(),
+    auth: route.auth(),
+    models: gatewayModels(route),
+    api: {
+      "anthropic-messages": anthropicMessagesApi(),
+      "openai-completions": openAICompletionsApi(),
+      "openai-responses": openAIResponsesApi(),
+    },
+  });
+}
+
+/**
+ * Resolve a `<gateway>:<modelId>` string to a Model.
+ *
+ * An id the catalog has not shipped still resolves: a gateway serves a model
+ * the moment its vendor lists it, and waiting for a catalog release to use it
+ * is the coupling this module exists to avoid. The synthesized entry is
+ * deliberately conservative so an unknown model never 400s on an
+ * over-advertised window.
+ */
+export function resolveGatewayModel(route: GatewayRoute, modelId: string): Model<Api> {
+  const declared = gatewayModels(route).find((model) => model.id === modelId);
+  const model =
+    declared ?? rebaseOntoGateway(synthesizePassthroughModel(modelId), route, route.origin());
+  // Applied here rather than in the rebase: the rebased list is memoized per
+  // route, but the routing tier changes within a session — a mid-turn `/model`
+  // switch retargets attribution — so a header baked in at build time would
+  // report whichever tier happened to be active when the list was first built.
+  const headers = route.headers();
+  return headers ? { ...model, headers: { ...model.headers, ...headers } } : model;
+}
+
+/**
+ * Build a minimal spec for a gateway model the catalog has not shipped yet.
+ * OpenAI ids keep the Responses transport and its native vision support; every
+ * other unknown id is assumed text-only until the catalog says otherwise.
+ */
+function synthesizePassthroughModel(modelId: string): Model<Api> {
+  return {
+    id: modelId,
+    name: modelId,
+    // `provider`, `baseUrl` and `api` are required fields the rebase then
+    // decides for real; only `input` survives, and it is what tells the rebase
+    // which transport can carry this model.
+    provider: VERCEL_GATEWAY_PROVIDER_ID,
+    baseUrl: VERCEL_GATEWAY_BASE_URL,
+    api: "anthropic-messages",
+    reasoning: true,
+    input: modelId.startsWith(OPENAI_MODEL_PREFIX) ? ["text", "image"] : ["text"],
+    cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
+    contextWindow: 256_000,
+    maxTokens: 64_000,
+  };
+}
+
+/** OpenAI-compatible transports live under the gateway's `/v1` route. */
+function gatewayBaseUrlForApi(origin: string, api: Api): string {
+  const openAiCompatible = api === "openai-completions" || api === "openai-responses";
+  return openAiCompatible ? `${origin}/v1` : origin;
+}
+
+function stripTrailingSlash(url: string): string {
+  return url.endsWith("/") ? url.slice(0, -1) : url;
+}
+
+/**
+ * The API key to send for a provider, resolved the way Duet stores keys.
+ *
+ * Two kinds of caller need this. Connected providers (ChatGPT, Copilot) keep
+ * their token in Duet's own store, which pi-ai cannot see at all. And the
+ * api-dispatch `complete()` used for structured output does no provider auth
+ * resolution whatsoever, so it needs the key handed to it — including for
+ * `duet-gateway`, an id pi-ai's env-key map does not know.
+ *
+ * A gateway rebase deliberately rewrites `model.provider` to
+ * `"duet-gateway"` so cost and usage telemetry attribute the call to the Duet
+ * proxy rather than to Vercel; that rename is what puts the id outside pi-ai's
+ * map in the first place.
+ */
+export function resolveProviderApiKey(provider: string): string | undefined {
+  if (provider === DUET_GATEWAY_PROVIDER_ID) {
+    return process.env[DUET_GATEWAY_API_KEY_ENV];
+  }
+  if (isConnectedProviderId(provider)) {
+    const token = connectedProviderApiKey(provider);
+    if (!token) refreshConnectedTokenInBackground(provider);
+    return token;
+  }
+  return getEnvApiKey(provider as Parameters<typeof getEnvApiKey>[0]);
+}

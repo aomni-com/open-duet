@@ -1,0 +1,29 @@
+{
+  "status": "single-existing-production-VM-adoption-complete",
+  "vmName": "workspace-redacted",
+  "workspaceId": "qs71vgxq0f3ms7rgb6xh7qze7n8c9bek",
+  "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+  "sourceRevision": "ad6dd7152e17c95fdcbd12d582f76b7ad8ef4cba",
+  "helperSha256": "af16bf408c572f7d8fc8466be578ec9072187e2b78aa4557c35aa0e8bce733d8",
+  "frozenApplicationInputsUnchanged": true,
+  "bootIdBefore": "7f362cf0-3ec6-46be-a6e5-1e8488688455",
+  "bootIdAfter": "7f362cf0-3ec6-46be-a6e5-1e8488688455",
+  "currentAndPreviousAll8ArtifactsVerified": true,
+  "legacyOverrideAbsent": true,
+  "effectiveSystemdCommandsVerified": true,
+  "platformJobInactiveZeroPid": true,
+  "transferCleanupPending": false,
+  "hostExitCode": 1,
+  "hostExitReason": "expected canary holdbacks for13 other required attachments, no target failure",
+  "privateRollbackRetained": true,
+  "fullFleetRetry": "running; unchanged same frozen target with corrected helper, concurrency2",
+  "metadataSha256": {
+    "fleet-receipt.json": "1400be578fe629c4f8240b8ecdf854f6d842f0ad957a4982d7ffc5b581b43a8b",
+    "runtime-audit.json": "b47624a194d24486d12902726855c542f3e2711171bff765af1adc63b64e40e6",
+    "settled-wiring.txt": "ca5fe4c551f95de941d28a12d158f653482ae4e1b54aad73492592b569a03f3c",
+    "deployment.json": "86fdf9587bb2f30198ebf98d90a0df8d61ed603e18bc61d18436875c1009760e",
+    "job-metadata.json": "594a1c94e5e89ea8478e11d084d527fe7e87fdfce26002ca7cd2229ac3bcf0bb"
+  },
+  "recordedJobs": 3,
+  "allRecordedTransferDirectoriesAbsent": true
+}

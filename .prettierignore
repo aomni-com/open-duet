@@ -1,0 +1,18 @@
+# oxfmt's Markdown parser currently corrupts literal identifiers and MDX
+# comments in this repository. Keep prose byte-stable until that parser is safe.
+**/*.md
+**/*.mdx
+
+# Agent skills are vendored from the canonical library (dzhng/skills); keep the
+# whole tree byte-identical to source (incl. scripts/assets) — don't reformat.
+.agents/skills/
+
+# Official-agent seed content is authored, hashed, and replicated verbatim to
+# the hub — the formatter reformatting a prompt or an app template rewrites what
+# every installer receives, and breaks the manifest hashes.
+packages/official-agents-seed/content/
+
+# Generated code is owned by its codegen, not the formatter — never reformat it.
+**/_generated/
+**/*.generated.*
+**/skills-registry/src/generated.ts

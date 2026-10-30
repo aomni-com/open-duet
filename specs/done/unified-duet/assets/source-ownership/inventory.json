@@ -1,0 +1,476 @@
+{
+  "sourceRevision": "cad4c4ee7ab6ad822e11e9f64bf296cc2acd05b4",
+  "trackedFiles": 742,
+  "unmodifiedFiles": 625,
+  "adaptedFiles": [
+    {
+      "source": "benchmarks/swebench/README.md",
+      "destination": "packages/agent/benchmarks/swebench/README.md"
+    },
+    {
+      "source": "benchmarks/swebench/cli.ts",
+      "destination": "packages/agent/benchmarks/swebench/cli.ts"
+    },
+    {
+      "source": "benchmarks/swebench/e2b/run.ts",
+      "destination": "packages/agent/benchmarks/swebench/e2b/run.ts"
+    },
+    {
+      "source": "benchmarks/swebench/e2b/score.ts",
+      "destination": "packages/agent/benchmarks/swebench/e2b/score.ts"
+    },
+    {
+      "source": "benchmarks/swebench/e2b/support.ts",
+      "destination": "packages/agent/benchmarks/swebench/e2b/support.ts"
+    },
+    {
+      "source": "benchmarks/swebench/e2b/template.ts",
+      "destination": "packages/agent/benchmarks/swebench/e2b/template.ts"
+    },
+    {
+      "source": "benchmarks/swebench/src/duet-client.ts",
+      "destination": "packages/agent/benchmarks/swebench/src/duet-client.ts"
+    },
+    {
+      "source": "benchmarks/swebench/src/packaging.ts",
+      "destination": "packages/agent/benchmarks/swebench/src/packaging.ts"
+    },
+    {
+      "source": "benchmarks/swebench/test.sh",
+      "destination": "packages/agent/benchmarks/swebench/test.sh"
+    },
+    {
+      "source": "benchmarks/swebench/test/swebench-e2b.test.ts",
+      "destination": "packages/agent/benchmarks/swebench/test/swebench-e2b.test.ts"
+    },
+    {
+      "source": "benchmarks/swebench/test/swebench-packaging.test.ts",
+      "destination": "packages/agent/benchmarks/swebench/test/swebench-packaging.test.ts"
+    },
+    {
+      "source": "evals/cli-paths.eval.ts",
+      "destination": "packages/agent/evals/cli-paths.eval.ts"
+    },
+    {
+      "source": "evals/compact.eval.ts",
+      "destination": "packages/agent/evals/compact.eval.ts"
+    },
+    {
+      "source": "evals/helpers/rpc-session.ts",
+      "destination": "packages/agent/evals/helpers/rpc-session.ts"
+    },
+    {
+      "source": "evals/helpers/train.ts",
+      "destination": "packages/agent/evals/helpers/train.ts"
+    },
+    {
+      "source": "evals/inline-slash-commands.eval.ts",
+      "destination": "packages/agent/evals/inline-slash-commands.eval.ts"
+    },
+    {
+      "source": "evals/memory-multi-cli-lock.eval.ts",
+      "destination": "packages/agent/evals/memory-multi-cli-lock.eval.ts"
+    },
+    {
+      "source": "evals/model-direct.eval.ts",
+      "destination": "packages/agent/evals/model-direct.eval.ts"
+    },
+    {
+      "source": "evals/rpc.eval.ts",
+      "destination": "packages/agent/evals/rpc.eval.ts"
+    },
+    {
+      "source": "evals/state-machine-supersede-rpc-event.eval.ts",
+      "destination": "packages/agent/evals/state-machine-supersede-rpc-event.eval.ts"
+    },
+    {
+      "source": "evals/state-machine-workdir-cwd-rpc.eval.ts",
+      "destination": "packages/agent/evals/state-machine-workdir-cwd-rpc.eval.ts"
+    },
+    {
+      "source": "evals/task-lost-resume-rpc.eval.ts",
+      "destination": "packages/agent/evals/task-lost-resume-rpc.eval.ts"
+    },
+    {
+      "source": "evals/task-rpc-heartbeat.eval.ts",
+      "destination": "packages/agent/evals/task-rpc-heartbeat.eval.ts"
+    },
+    {
+      "source": "evals/train-store.eval.ts",
+      "destination": "packages/agent/evals/train-store.eval.ts"
+    },
+    {
+      "source": "examples/tui-playground.ts",
+      "destination": "packages/duet/examples/tui-playground.ts"
+    },
+    {
+      "source": "scripts/verify-paste.ts",
+      "destination": "packages/agent/scripts/verify-paste.ts"
+    },
+    {
+      "source": "src/cli.ts",
+      "destination": "packages/duet/src/cli.ts"
+    },
+    {
+      "source": "src/cli/auto-upgrade.ts",
+      "destination": "packages/duet/src/cli/auto-upgrade.ts"
+    },
+    {
+      "source": "src/cli/config.ts",
+      "destination": "packages/duet/src/cli/config.ts"
+    },
+    {
+      "source": "src/cli/connect.ts",
+      "destination": "packages/duet/src/cli/connect.ts"
+    },
+    {
+      "source": "src/cli/inline-slash.ts",
+      "destination": "packages/duet/src/cli/inline-slash.ts"
+    },
+    {
+      "source": "src/cli/login.ts",
+      "destination": "packages/duet/src/cli/login.ts"
+    },
+    {
+      "source": "src/cli/memory-add.ts",
+      "destination": "packages/duet/src/cli/memory-add.ts"
+    },
+    {
+      "source": "src/cli/memory-db.ts",
+      "destination": "packages/duet/src/cli/memory-db.ts"
+    },
+    {
+      "source": "src/cli/memory-json.ts",
+      "destination": "packages/duet/src/cli/memory-json.ts"
+    },
+    {
+      "source": "src/cli/memory-query.ts",
+      "destination": "packages/duet/src/cli/memory-query.ts"
+    },
+    {
+      "source": "src/cli/memory-recall.ts",
+      "destination": "packages/duet/src/cli/memory-recall.ts"
+    },
+    {
+      "source": "src/cli/memory-reflect.ts",
+      "destination": "packages/duet/src/cli/memory-reflect.ts"
+    },
+    {
+      "source": "src/cli/memory-sources.ts",
+      "destination": "packages/duet/src/cli/memory-sources.ts"
+    },
+    {
+      "source": "src/cli/memory-tui.ts",
+      "destination": "packages/duet/src/cli/memory-tui.ts"
+    },
+    {
+      "source": "src/cli/memory.ts",
+      "destination": "packages/duet/src/cli/memory.ts"
+    },
+    {
+      "source": "src/cli/model.ts",
+      "destination": "packages/duet/src/cli/model.ts"
+    },
+    {
+      "source": "src/cli/route.ts",
+      "destination": "packages/duet/src/cli/route.ts"
+    },
+    {
+      "source": "src/cli/rpc.ts",
+      "destination": "packages/duet/src/cli/rpc.ts"
+    },
+    {
+      "source": "src/cli/run.ts",
+      "destination": "packages/duet/src/cli/run.ts"
+    },
+    {
+      "source": "src/cli/send-feedback.ts",
+      "destination": "packages/duet/src/cli/send-feedback.ts"
+    },
+    {
+      "source": "src/cli/shared.ts",
+      "destination": "packages/duet/src/cli/shared.ts"
+    },
+    {
+      "source": "src/cli/skills.ts",
+      "destination": "packages/duet/src/cli/skills.ts"
+    },
+    {
+      "source": "src/cli/train.ts",
+      "destination": "packages/duet/src/cli/train.ts"
+    },
+    {
+      "source": "src/cli/upgrade.ts",
+      "destination": "packages/duet/src/cli/upgrade.ts"
+    },
+    {
+      "source": "src/model-resolution/resolver.ts",
+      "destination": "packages/agent/src/model-resolution/resolver.ts"
+    },
+    {
+      "source": "src/tui/app.ts",
+      "destination": "packages/duet/src/tui/app.ts"
+    },
+    {
+      "source": "src/tui/autocomplete.ts",
+      "destination": "packages/duet/src/tui/autocomplete.ts"
+    },
+    {
+      "source": "src/tui/boot-screen.ts",
+      "destination": "packages/duet/src/tui/boot-screen.ts"
+    },
+    {
+      "source": "src/tui/controllers.ts",
+      "destination": "packages/duet/src/tui/controllers.ts"
+    },
+    {
+      "source": "src/tui/initial-prompt.ts",
+      "destination": "packages/duet/src/tui/initial-prompt.ts"
+    },
+    {
+      "source": "src/tui/paste-controller.ts",
+      "destination": "packages/duet/src/tui/paste-controller.ts"
+    },
+    {
+      "source": "src/tui/paste.ts",
+      "destination": "packages/duet/src/tui/paste.ts"
+    },
+    {
+      "source": "src/tui/question-picker.ts",
+      "destination": "packages/duet/src/tui/question-picker.ts"
+    },
+    {
+      "source": "src/tui/session-subscription.ts",
+      "destination": "packages/duet/src/tui/session-subscription.ts"
+    },
+    {
+      "source": "src/tui/sidebar.ts",
+      "destination": "packages/duet/src/tui/sidebar.ts"
+    },
+    {
+      "source": "src/tui/slash-commands.ts",
+      "destination": "packages/duet/src/tui/slash-commands.ts"
+    },
+    {
+      "source": "src/tui/status-controller.ts",
+      "destination": "packages/duet/src/tui/status-controller.ts"
+    },
+    {
+      "source": "src/tui/step-renderer.ts",
+      "destination": "packages/duet/src/tui/step-renderer.ts"
+    },
+    {
+      "source": "src/tui/task-lane-renderer.ts",
+      "destination": "packages/duet/src/tui/task-lane-renderer.ts"
+    },
+    {
+      "source": "src/tui/task-tree.ts",
+      "destination": "packages/duet/src/tui/task-tree.ts"
+    },
+    {
+      "source": "src/tui/tool-formatters.ts",
+      "destination": "packages/duet/src/tui/tool-formatters.ts"
+    },
+    {
+      "source": "src/turn-runner/turn-runner.ts",
+      "destination": "packages/agent/src/turn-runner/turn-runner.ts"
+    },
+    {
+      "source": "test/auto-upgrade.test.ts",
+      "destination": "packages/duet/test/auto-upgrade.test.ts"
+    },
+    {
+      "source": "test/cli-connect-login.test.ts",
+      "destination": "packages/duet/test/cli-connect-login.test.ts"
+    },
+    {
+      "source": "test/cli-connect.test.ts",
+      "destination": "packages/duet/test/cli-connect.test.ts"
+    },
+    {
+      "source": "test/cli-exit-codes.test.ts",
+      "destination": "packages/duet/test/cli-exit-codes.test.ts"
+    },
+    {
+      "source": "test/cli-inline-slash.test.ts",
+      "destination": "packages/duet/test/cli-inline-slash.test.ts"
+    },
+    {
+      "source": "test/cli-memory-add-store.test.ts",
+      "destination": "packages/duet/test/cli-memory-add-store.test.ts"
+    },
+    {
+      "source": "test/cli-memory-add.test.ts",
+      "destination": "packages/duet/test/cli-memory-add.test.ts"
+    },
+    {
+      "source": "test/cli-memory-query.test.ts",
+      "destination": "packages/duet/test/cli-memory-query.test.ts"
+    },
+    {
+      "source": "test/cli-memory-recall.test.ts",
+      "destination": "packages/duet/test/cli-memory-recall.test.ts"
+    },
+    {
+      "source": "test/cli-model-media.test.ts",
+      "destination": "packages/duet/test/cli-model-media.test.ts"
+    },
+    {
+      "source": "test/cli-resume-clear.test.ts",
+      "destination": "packages/duet/test/cli-resume-clear.test.ts"
+    },
+    {
+      "source": "test/cli-route.test.ts",
+      "destination": "packages/duet/test/cli-route.test.ts"
+    },
+    {
+      "source": "test/cli-rpc.test.ts",
+      "destination": "packages/duet/test/cli-rpc.test.ts"
+    },
+    {
+      "source": "test/cli-shutdown.test.ts",
+      "destination": "packages/duet/test/cli-shutdown.test.ts"
+    },
+    {
+      "source": "test/cli-skills.test.ts",
+      "destination": "packages/duet/test/cli-skills.test.ts"
+    },
+    {
+      "source": "test/cli-train-manage.test.ts",
+      "destination": "packages/duet/test/cli-train-manage.test.ts"
+    },
+    {
+      "source": "test/cli-train-store.test.ts",
+      "destination": "packages/duet/test/cli-train-store.test.ts"
+    },
+    {
+      "source": "test/cli-train.test.ts",
+      "destination": "packages/duet/test/cli-train.test.ts"
+    },
+    {
+      "source": "test/cli.test.ts",
+      "destination": "packages/duet/test/cli.test.ts"
+    },
+    {
+      "source": "test/connected-providers-fallback.test.ts",
+      "destination": "packages/duet/test/connected-providers-fallback.test.ts"
+    },
+    {
+      "source": "test/executed-state-cli-fixture.test.ts",
+      "destination": "packages/duet/test/executed-state-cli-fixture.test.ts"
+    },
+    {
+      "source": "test/helpers/tui-harness.ts",
+      "destination": "packages/duet/test/helpers/tui-harness.ts"
+    },
+    {
+      "source": "test/login-device-flow.test.ts",
+      "destination": "packages/duet/test/login-device-flow.test.ts"
+    },
+    {
+      "source": "test/memory-db.test.ts",
+      "destination": "packages/duet/test/memory-db.test.ts"
+    },
+    {
+      "source": "test/model-refresh.test.ts",
+      "destination": "packages/duet/test/model-refresh.test.ts"
+    },
+    {
+      "source": "test/session-model-switch.test.ts",
+      "destination": "packages/duet/test/session-model-switch.test.ts"
+    },
+    {
+      "source": "test/skill-context-system-prompt-files.test.ts",
+      "destination": "packages/duet/test/skill-context-system-prompt-files.test.ts"
+    },
+    {
+      "source": "test/starters.test.ts",
+      "destination": "packages/duet/test/starters.test.ts"
+    },
+    {
+      "source": "test/train-archive.test.ts",
+      "destination": "packages/duet/test/train-archive.test.ts"
+    },
+    {
+      "source": "test/tui-autocomplete.test.ts",
+      "destination": "packages/agent/test/tui-autocomplete.test.ts"
+    },
+    {
+      "source": "test/tui-context-bar.test.ts",
+      "destination": "packages/agent/test/tui-context-bar.test.ts"
+    },
+    {
+      "source": "test/tui-ctrl-c-exit.test.ts",
+      "destination": "packages/duet/test/tui-ctrl-c-exit.test.ts"
+    },
+    {
+      "source": "test/tui-ctrl-c-pop.test.ts",
+      "destination": "packages/agent/test/tui-ctrl-c-pop.test.ts"
+    },
+    {
+      "source": "test/tui-ctrl-enter-steer.test.ts",
+      "destination": "packages/agent/test/tui-ctrl-enter-steer.test.ts"
+    },
+    {
+      "source": "test/tui-keymap.test.ts",
+      "destination": "packages/agent/test/tui-keymap.test.ts"
+    },
+    {
+      "source": "test/tui-paste-flow.test.ts",
+      "destination": "packages/agent/test/tui-paste-flow.test.ts"
+    },
+    {
+      "source": "test/tui-rendering.test.ts",
+      "destination": "packages/agent/test/tui-rendering.test.ts"
+    },
+    {
+      "source": "test/tui-resume.test.ts",
+      "destination": "packages/duet/test/tui-resume.test.ts"
+    },
+    {
+      "source": "test/tui-sidebar-empty-hints.test.ts",
+      "destination": "packages/agent/test/tui-sidebar-empty-hints.test.ts"
+    },
+    {
+      "source": "test/tui-slash-commands.test.ts",
+      "destination": "packages/agent/test/tui-slash-commands.test.ts"
+    },
+    {
+      "source": "test/tui-streaming.test.ts",
+      "destination": "packages/agent/test/tui-streaming.test.ts"
+    },
+    {
+      "source": "test/tui-submit.test.ts",
+      "destination": "packages/agent/test/tui-submit.test.ts"
+    },
+    {
+      "source": "test/tui-task-frame.test.ts",
+      "destination": "packages/agent/test/tui-task-frame.test.ts"
+    },
+    {
+      "source": "test/tui-task-subscription.test.ts",
+      "destination": "packages/duet/test/tui-task-subscription.test.ts"
+    },
+    {
+      "source": "test/tui-task-tree.test.ts",
+      "destination": "packages/duet/test/tui-task-tree.test.ts"
+    },
+    {
+      "source": "test/tui-transcript-cap.test.ts",
+      "destination": "packages/duet/test/tui-transcript-cap.test.ts"
+    },
+    {
+      "source": "test/upgrade-command.test.ts",
+      "destination": "packages/duet/test/upgrade-command.test.ts"
+    },
+    {
+      "source": "tsconfig.build.json",
+      "destination": "packages/agent/tsconfig.build.json"
+    },
+    {
+      "source": "tsconfig.json",
+      "destination": "packages/agent/tsconfig.json"
+    }
+  ],
+  "missing": []
+}

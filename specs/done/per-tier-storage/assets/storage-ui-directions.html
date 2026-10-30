@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Storage UI — reaction mock</title>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      body {
+        font:
+          14px/1.5 -apple-system,
+          'SF Pro Text',
+          Helvetica,
+          sans-serif;
+        background: #0d0e11;
+        color: #e8e9ec;
+        padding: 40px 24px 80px;
+      }
+      h1 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .sub {
+        color: #8a8f98;
+        margin-bottom: 36px;
+      }
+      .panel {
+        max-width: 560px;
+        margin: 0 auto 44px;
+      }
+      .panel h2 {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #6f7480;
+        margin-bottom: 12px;
+      }
+      .card {
+        background: #16181d;
+        border: 1px solid #262931;
+        border-radius: 12px;
+        padding: 20px;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 6px;
+      }
+      .plan-name {
+        font-weight: 600;
+        font-size: 15px;
+      }
+      .plan-price {
+        color: #8a8f98;
+      }
+      .meter-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: #a9adb6;
+        margin: 14px 0 6px;
+      }
+      .meter {
+        height: 6px;
+        border-radius: 3px;
+        background: #262931;
+        overflow: hidden;
+      }
+      .meter > i {
+        display: block;
+        height: 100%;
+        border-radius: 3px;
+        background: #5b8def;
+      }
+      .meter.warn > i {
+        background: #e0a83e;
+      }
+      .meter.full > i {
+        background: #e05e5e;
+      }
+      .toast {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        background: #16181d;
+        border: 1px solid #3a3323;
+        border-left: 3px solid #e0a83e;
+        border-radius: 10px;
+        padding: 14px 16px;
+      }
+      .toast.err {
+        border-color: #3d2626;
+        border-left-color: #e05e5e;
+      }
+      .toast b {
+        display: block;
+        margin-bottom: 2px;
+        font-size: 13.5px;
+      }
+      .toast span {
+        color: #a9adb6;
+        font-size: 13px;
+      }
+      .toast .cta {
+        margin-left: auto;
+        flex-shrink: 0;
+        background: #2b3g4a;
+        background: #24344f;
+        color: #9db8e8;
+        border: 0;
+        border-radius: 7px;
+        padding: 6px 12px;
+        font-size: 13px;
+        cursor: default;
+        white-space: nowrap;
+      }
+      .note {
+        font-size: 12px;
+        color: #6f7480;
+        margin-top: 8px;
+      }
+      .qs {
+        max-width: 560px;
+        margin: 0 auto;
+        border-top: 1px solid #262931;
+        padding-top: 28px;
+      }
+      .q {
+        margin-bottom: 18px;
+      }
+      .q b {
+        display: block;
+        margin-bottom: 4px;
+      }
+      .q span {
+        color: #a9adb6;
+        font-size: 13px;
+      }
+      code {
+        background: #1d2026;
+        border-radius: 4px;
+        padding: 1px 5px;
+        font-size: 12.5px;
+      }
+      .reply {
+        background: #131a13;
+        border: 1px solid #24402a;
+        border-radius: 10px;
+        padding: 16px;
+        margin-top: 28px;
+        font-size: 13px;
+        color: #a9d3ae;
+      }
+      .reply b {
+        color: #cde8d1;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Storage surfaces — react, don't build</h1>
+    <p class="sub" style="text-align: left; max-width: 560px; margin: 0 auto 36px">
+      Fake data throughout. Three surfaces implied by "meter + upgrade nudge" and "gateway guards a
+      reserve."
+    </p>
+
+    <div class="panel">
+      <h2>A — Billing settings · plan card gains a storage meter</h2>
+      <div class="card">
+        <div class="row">
+          <span class="plan-name">Starter</span><span class="plan-price">$20/month</span>
+        </div>
+        <div class="meter-label"><span>Monthly credits</span><span>41% used</span></div>
+        <div class="meter"><i style="width: 41%"></i></div>
+        <div class="meter-label"><span>Storage</span><span>12.4 GB of 20 GB</span></div>
+        <div class="meter"><i style="width: 62%"></i></div>
+      </div>
+      <p class="note">
+        Storage shows real GB (credits stay %-only per your D12). Empty workspace reads
+        <b>0 GB</b> — the 7.2GB OS image is invisible to the user.
+      </p>
+    </div>
+
+    <div class="panel">
+      <h2>B — Upgrade nudge · fires at 90% of quota</h2>
+      <div class="toast">
+        <div><b>Storage almost full</b><span>18.1 GB of this workspace's 20 GB is used.</span></div>
+        <button class="cta">Upgrade → 50 GB</button>
+      </div>
+      <p class="note">
+        Mirrors the low-credit toast pattern; shown in-workspace, dismissable, re-arms after upgrade
+        or cleanup.
+      </p>
+    </div>
+
+    <div class="panel">
+      <h2>C — Hard stop · gateway reserve refuses the write</h2>
+      <div class="toast err">
+        <div>
+          <b>Storage full</b
+          ><span>This workspace's 20 GB is used up. Delete files or upgrade to keep working.</span>
+        </div>
+        <button class="cta">Upgrade → 50 GB</button>
+      </div>
+      <p class="note">
+        Agent sessions get this as a clean tool-error (writes refused at the reserve line), so the
+        VM itself never wedges.
+      </p>
+    </div>
+
+    <div class="qs">
+      <h2>Three decisions this mock forces</h2>
+      <div class="q">
+        <b>Q-A · What counts as "used"?</b>
+        <span
+          >The meter must count <code>/home/synthetic-user/drive</code> bytes only — the existing telemetry
+          reports whole-filesystem <code>diskUsedMb</code>, which would show ~7.2 GB used on an
+          empty workspace. Gateway measures the drive dir instead.</span
+        >
+      </div>
+      <div class="q">
+        <b>Q-B · Per-workspace or pooled?</b>
+        <span
+          >As mocked, the quota is per workspace: a Starter with 3 workspaces holds 3 × 20 GB. The
+          alternative — one pooled 20 GB across all workspaces — is stricter and needs cross-VM
+          accounting.</span
+        >
+      </div>
+      <div class="q">
+        <b>Q-C · Nudge threshold 90%?</b>
+        <span
+          >Credits warn at 90% used (<code>LOW_CREDIT_WARNING_RATIO</code>). Same ratio for storage
+          as mocked.</span
+        >
+      </div>
+    </div>
+
+    <div class="reply">
+      <b>Reply by pasting, edited to taste:</b><br /><br />
+      A: steal / change: …<br />
+      B: steal / change: …<br />
+      C: steal / change: …<br />
+      Q-A drive-bytes-only: yes / no<br />
+      Q-B per-workspace: yes / pooled<br />
+      Q-C 90%: yes / other: …
+    </div>
+  </body>
+</html>

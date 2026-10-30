@@ -1,0 +1,22 @@
+bun test v1.3.14 (0d9b296a)
+
+convex/strict-runtime-observation.test.ts:
+78 |     expect(row).not.toHaveProperty('gatewayVersion')
+79 |     expect(row).not.toHaveProperty('agentVersion')
+80 |     expect(row).not.toHaveProperty('duetfsVersion')
+81 |     for (const field of ['gatewayVersion', 'agentVersion', 'duetfsVersion']) {
+82 |       const retired = { imageVersion: 'original-image', [field]: 'retired-component' }
+83 |       await expect(t.run(ctx => ctx.db.patch(workspaceId, retired))).rejects.toThrow()
+                                                                                  ^
+error: 
+
+Expected promise that rejects
+Received promise that resolved: Promise { <resolved> }
+
+      at <anonymous> (/Users/synthetic-user/.codex/worktrees/unified-birth-fence/duet/packages/backend/convex/strict-runtime-observation.test.ts:83:78)
+(fail) strict observations reject retired arguments without changing the workspace and write one runtime identity [16.21ms]
+
+ 0 pass
+ 1 fail
+ 7 expect() calls
+Ran 1 test across 1 file. [85.00ms]

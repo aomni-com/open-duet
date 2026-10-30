@@ -1,0 +1,58 @@
+export const metadata = {
+  title: 'Errors',
+  description: 'Handle Duet API failures by stable category and status.',
+  alternates: { canonical: '/errors/' },
+}
+
+<p className="eyebrow">Protocol</p>
+
+# Failures should change behavior
+
+Treat HTTP status and the stable error category as control flow. Human-readable messages are for
+diagnostics and can improve without becoming part of an integration contract.
+
+## Authentication and authority
+
+- `401` means the credential is missing, malformed, expired, or revoked. Stop and obtain a valid key.
+- `403` means the credential is valid but the operation or required scope is unavailable. Do not
+  retry unchanged.
+- `402` is an account or workspace billing boundary. Surface the billing action to the responsible
+  payer rather than rotating credentials.
+
+The stable `402` code identifies which boundary stopped the request. `subscription_required` means
+the account lacks a current entitlement. `workspace_paused` means an authorized data-plane request
+reached a paused workspace and can proceed after the workspace is resumed by paying. Model requests
+use `subscription_inactive` when that same workspace-servicing state blocks the model gateway; it is
+not an account-entitlement code.
+
+## Collection cursors
+
+`400 {"error":"invalid_cursor"}` means an opaque collection cursor is malformed or belongs to a
+different workspace, filter set, ordering, or collection. Restart the walk without that cursor;
+retrying the same value cannot make progress. Other malformed query inputs remain
+`400 {"error":"invalid_request"}`.
+
+## Backpressure
+
+The general authenticated API ceiling returns `429` with both a `Retry-After` header and the stable
+body below. Wait for that interval, add bounded jitter, and preserve the original operation's retry
+safety. A faster retry loop only consumes more refused requests in the same fixed window.
+
+{/* schema: ApiRateLimitErrorSchema */}
+
+```json
+{
+  "error": "rate_limited",
+  "retryAfterSeconds": 42
+}
+```
+
+An operation may also declare a stricter, purpose-built limit with its own error body or headers.
+Follow that endpoint's reference in addition to the general ceiling; do not assume every `429` has
+the general shape.
+
+## Unknown failures
+
+For `5xx` and network failures, retain the request correlation information your client has, use
+bounded exponential backoff, and check whether the operation declares idempotent behavior before
+replaying a write. Never parse a proxy-generated HTML error as the API's JSON schema.

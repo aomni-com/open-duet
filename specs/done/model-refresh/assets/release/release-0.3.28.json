@@ -1,0 +1,93 @@
+{
+  "verifiedAt": "2026-09-28T01:28:30.948738+00:00",
+  "releaseWorkflow": "https://github.com/Example User/duet-agent/actions/runs/36365498239",
+  "provenance": {
+    "name": "@duetso/agent",
+    "version": "0.3.28",
+    "gitHead": "b21b6f74308375c8b920c1394d093450bcad114d",
+    "tarball": "https://registry.npmjs.org/@duetso/agent/-/agent-0.3.28.tgz",
+    "integrity": "sha512-vntMgsSw6hEOP/RlwxqcC0W16+SLKwHOHcZtXHZJkKjqN+bh8T5O6xrWn7jxdnuldfA9uSbRXB57ujptDFXHuQ==",
+    "shasum": "f3b4f39c0f980bd27f4f5e278909962456921ef2",
+    "bytes": 867111,
+    "integrityVerified": true
+  },
+  "environment": {
+    "image": "node:22-bookworm-slim",
+    "bun": "1.3.11",
+    "HOME": "/tmp/home",
+    "install": "npm install /receipt/agent-0.3.28.tgz",
+    "exitCode": 0
+  },
+  "versionOutput": "0.3.28",
+  "behavior": {
+    "packageVersion": "0.3.28",
+    "results": [
+      {
+        "alias": "opus",
+        "id": "anthropic/claude-opus-5.5",
+        "api": "anthropic-messages",
+        "controlledRequestSerialized": true
+      },
+      {
+        "alias": "sol",
+        "id": "openai/gpt-6-sol",
+        "api": "openai-responses",
+        "controlledRequestSerialized": true
+      },
+      {
+        "alias": "terra",
+        "id": "openai/gpt-6-sol",
+        "api": "openai-responses",
+        "controlledRequestSerialized": true
+      },
+      {
+        "alias": "luna",
+        "id": "openai/gpt-6-luna",
+        "api": "openai-responses",
+        "controlledRequestSerialized": true
+      },
+      {
+        "alias": "grok",
+        "id": "spacexai/grok-4.7",
+        "api": "openai-completions",
+        "controlledRequestSerialized": true
+      },
+      {
+        "alias": "glm",
+        "id": "zai/glm-5.3",
+        "api": "anthropic-messages",
+        "controlledRequestSerialized": true
+      }
+    ],
+    "savedAliasesUpgrade": true,
+    "configExportValid": true,
+    "configTopLevelKeys": [
+      "defaultTier",
+      "tiers",
+      "classifier"
+    ],
+    "overlap": {
+      "gatewayCommit": "9b2dee1eef0ef1d5a35a1d7e988846db30f3db6a",
+      "loadAccepted": true,
+      "fullPolicyPreserved": true,
+      "inputFileUnmodified": true,
+      "dispatch": [
+        {
+          "tier": "openai-max",
+          "target": "openai/gpt-6-sol",
+          "effort": "medium",
+          "controlledRequestSerialized": true
+        },
+        {
+          "tier": "anthropic-max",
+          "target": "anthropic/claude-opus-5.5",
+          "effort": "medium",
+          "controlledRequestSerialized": true
+        }
+      ]
+    }
+  },
+  "exportedConfigSha256": "5215cd6dc70440d90afebfece192675342d5d8f79443c781270b3de97ab52cc3",
+  "oldManagedInputSha256": "4dede0804a6ec0546d7426f73816f46504d213e97aea2a8e0ab80f73d620146f",
+  "scope": "Published package bytes only; controlled synthetic HTTP edge, no live provider requests. Both CLI commands exited normally. Actual old managed gateway table loaded and dispatched current targets with full policy preserved and disk bytes unchanged."
+}

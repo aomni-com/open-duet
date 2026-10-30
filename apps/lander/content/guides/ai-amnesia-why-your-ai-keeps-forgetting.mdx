@@ -1,0 +1,460 @@
+---
+title: 'AI Amnesia: Why Your AI Keeps Forgetting (and How to Actually Fix It)'
+metaTitle: 'AI Amnesia: 5 Reasons Claude, ChatGPT & Codex Forget Everything (2026 Fix Guide)'
+description: 'The 5 real reasons Claude, ChatGPT, Codex, Claude Code and OpenClaw lose your context — compaction, new chat amnesia, lost-in-the-middle, memory full, and patch wipes — with real fixes.'
+date: '2026-05-15'
+updatedAt: '2026-05-15'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/2.png'
+category: 'guides'
+tags: ['ai-memory', 'claude-code', 'chatgpt', 'codex', 'openclaw', 'context-window', 'compaction']
+type: 'guide'
+image: '/guides/ai-amnesia-why-your-ai-keeps-forgetting/cover.png'
+cta:
+  title: "Give your AI a memory it can't lose."
+  subtitle: 'Duet runs your agent on a private cloud server with persistent Files and durable context in Train — so important knowledge does not live only inside one model session.'
+  buttonText: 'Cure the amnesia'
+  href: '/sign-in?from=guide-ai-amnesia'
+relatedPosts:
+  - slug: 'claude-code-playbook-building-a-skill-first-workflow-that-actually-sticks'
+    context: 'How to structure a skill-first workflow so your AI never starts from zero.'
+  - slug: 'how-to-build-your-ai-command-center'
+    context: 'Build a persistent home base for your AI so memory survives every session.'
+---
+
+Every serious AI user hits the same wall. You spend an hour explaining context, building rapport, fine-tuning instructions. The model is finally useful. Then it forgets. You open a new chat tomorrow and it has the **"first day at work"** energy all over again. People on Reddit have a word for this: **AI amnesia.**
+
+It is not your imagination, and it is not one bug. It is five different failure modes wearing the same costume. This guide walks through each one — using the exact language real users are typing into r/ClaudeAI, r/ChatGPT, r/codex, and r/openclaw — and shows what actually fixes it.
+
+<AnswerBox
+  title="Why does my AI keep forgetting things?"
+  summary="AI tools forget for five distinct reasons: context compaction discarding decisions, new-session amnesia between chats, mid-thread degradation ('lost in the middle'), silent memory deletion when the memory store fills up, and patch wipes that erase chat history on update."
+  bullets={[
+    'Compaction summarizes old turns and drops the details that matter',
+    'A new chat starts with zero context unless you have a persistent layer',
+    'Long threads degrade in the middle even before they hit the limit',
+    'Saved memories silently fall off when the store fills up',
+    'Updates and patches can reset session storage without warning',
+  ]}
+  queries={[
+    'why does claude code forget everything',
+    'chatgpt amnesia fix',
+    'codex session reset',
+    'claude compaction problem',
+    'ai goldfish memory',
+  ]}
+/>
+
+<GuideTOC
+  items={[
+    {
+      number: 1,
+      title: 'What "AI amnesia" actually means',
+      href: '#1-what-ai-amnesia-actually-means',
+    },
+    {
+      number: 2,
+      title: 'Reason 1: Compaction destroys decisions',
+      href: '#2-reason-1-compaction-destroys-decisions',
+    },
+    {
+      number: 3,
+      title: 'Reason 2: New chat amnesia between sessions',
+      href: '#3-reason-2-new-chat-amnesia-between-sessions',
+    },
+    {
+      number: 4,
+      title: 'Reason 3: Lost in the middle of long threads',
+      href: '#4-reason-3-lost-in-the-middle-of-long-threads',
+    },
+    {
+      number: 5,
+      title: 'Reason 4: Memory Full and silent deletion',
+      href: '#5-reason-4-memory-full-and-silent-deletion',
+    },
+    {
+      number: 6,
+      title: 'Reason 5: Patch wipes and the 5-hour reset',
+      href: '#6-reason-5-patch-wipes-and-the-5-hour-reset',
+    },
+    {
+      number: 7,
+      title: 'The real fix: persistent memory outside the model',
+      href: '#7-the-real-fix-persistent-memory-outside-the-model',
+    },
+    {
+      number: 8,
+      title: 'A practical setup that survives every reset',
+      href: '#8-a-practical-setup-that-survives-every-reset',
+    },
+    { number: 9, title: 'FAQ', href: '#9-faq' },
+  ]}
+/>
+
+---
+
+## 1. What "AI amnesia" actually means
+
+Strictly speaking, large language models do not have memory. They have a **context window** — a fixed amount of recent text the model can read at once — and whatever scaffolding the product wraps around it. Everything that feels like "memory" is one of three things:
+
+- The current context window (resets on close)
+- A summary or compacted version of past turns
+- A separate memory store (system instructions, profile facts, saved chats) injected back into context on each turn
+
+When users say their AI has amnesia, they usually mean one of those three things broke. The five reasons below map to specific failure modes in real products.
+
+A quick taste of the vocabulary users have invented for it:
+
+| Term                   | Meaning                                                                  |
+| ---------------------- | ------------------------------------------------------------------------ |
+| **Amnesia**            | The umbrella complaint. Used as a noun: "Claude amnesia," "GPT amnesia." |
+| **Goldfish memory**    | Mocking, general. "AI with the memory of a goldfish."                    |
+| **Compaction**         | Anthropic's actual feature name; now slang for any forced summarization. |
+| **New chat amnesia**   | Opening a new conversation and watching it forget you exist.             |
+| **Lost in the middle** | Models ignoring info buried in the middle of a long context.             |
+| **Memory Full**        | ChatGPT's notification when the memory store is at capacity.             |
+| **Context anxiety**    | The dread of approaching the window limit on a long task.                |
+
+<Callout type="info" title="Why this matters">
+  Memory is the highest-leverage feature in any AI tool. Without it, every productive session is
+  throwaway work. The fix is rarely "switch models" — it is changing where the memory lives.
+</Callout>
+
+---
+
+## 2. Reason 1: Compaction destroys decisions
+
+The single loudest complaint in r/ClaudeCode is **compaction**. When a session gets long, Claude Code automatically summarizes older turns to free up tokens. The summary is shorter, and almost always drops the things you most needed it to keep: the small decisions you made, the file paths you tried and abandoned, the bugfix you already shipped.
+
+You will see the exact phrases over and over in the wild:
+
+> "Compaction killed my productivity."
+> "Auto-compact destroyed my plan."
+> "Post-compaction amnesia is real."
+> "Why is compacting instant now? Did they swap in a cheaper summarizer?"
+
+Codex users have the same pain with **auto-compact**, and OpenClaw users with what their community calls **wobbly memory** after a summarization pass.
+
+### What is actually happening
+
+A summarizer model reads the older turns and writes a shorter version that gets prepended to the new context. The summarizer has its own priorities: it preserves the _topic_, but it does not know which exact decisions or constraints were load-bearing in your task. Three common losses:
+
+1. **Constraints disappear.** "Do not refactor file X" gets summarized as "the user is working on the codebase."
+2. **Negative results vanish.** "We tried approach A and it failed because of B" becomes "the user explored approach A."
+3. **Specific identifiers get rounded off.** A precise commit hash, ticket ID, or file path becomes a vague description.
+
+### What actually helps
+
+- **Write decisions to disk, not chat.** Keep an `AGENTS.md`, `CLAUDE.md`, or `DECISIONS.md` file in the repo with constraints, rejected approaches, and current plan. The agent re-reads it every session.
+- **Pre-compact on purpose.** When you sense a long session coming, run `/compact` with your own summary instead of waiting for auto-compact to summarize for you.
+- **Smaller scopes.** End the session at logical boundaries and start a fresh one. A summarizer cannot lose context it never had to compact.
+- **`claude --continue` and friends.** Folklore fix in r/ClaudeCode for picking up the previous session is genuinely useful, but only delays the inevitable compact.
+
+<Callout type="tip" title="The Reddit one-liner that captures it">
+  "Compaction is when your AI dictates the highlights of a movie to a teenager and then asks the
+  teenager what happened." Treat compaction as inevitable and write important things down before it
+  runs.
+</Callout>
+
+<DuetCTA />
+
+---
+
+## 3. Reason 2: New chat amnesia between sessions
+
+This is the one normal users feel most. You finish a productive thread. You close the tab. You open a new chat tomorrow. The model has never met you.
+
+It is the most-named failure mode in our scan. Sample post titles, copied verbatim:
+
+- _"Claude Code forgets everything between sessions"_
+- _"Got tired of Claude's amnesia"_
+- _"I built a Save Game system for ChatGPT"_
+- _"First day at work! again"_ (a meme that keeps coming back)
+
+Every major tool ships a half-fix for this, and they all fall short:
+
+| Tool        | What it ships                                         | Why it falls short                                                         |
+| ----------- | ----------------------------------------------------- | -------------------------------------------------------------------------- |
+| ChatGPT     | "Memory" + "Reference chat history"                   | Caps out at ~few KB of facts; silently drops older ones; not project-aware |
+| Claude      | "Project knowledge"                                   | Limited to the project; ties to the context window of each chat            |
+| Claude Code | `CLAUDE.md` + skills                                  | Local to a repo; not shared across machines without your own sync          |
+| Codex       | Saved threads                                         | Threads are isolated; no global facts                                      |
+| OpenClaw    | Plugin ecosystem (Atom, Backfill Lane, Lossless Claw) | User-built; fragmented; breaks on update                                   |
+
+### What actually helps
+
+- **Pick one home for "stable facts."** A markdown file in a synced folder beats every in-product memory feature. It survives model changes and product updates.
+- **Make the agent read it.** Either auto-include the file in every system prompt, or give the agent a tool to read it on demand.
+- **Stop putting facts in chat.** If something is true beyond this session — preferences, voice, key contacts, definitions — write it to the file the moment you say it, not later.
+
+<YouTubeEmbed id="A2Z4F0BdjUE" title="Claude memory and context — what actually persists" />
+
+<Callout type="warning" title="Don't trust the product's memory feature alone">
+  Every "memory" feature in a major AI product has shipped a regression at least once: silent
+  deletions, cap reductions, or feature pauses. Treat in-product memory as a cache, not a source of
+  truth.
+</Callout>
+
+---
+
+## 4. Reason 3: Lost in the middle of long threads
+
+Even before you hit the context window limit, long threads degrade. The model technically _has_ the information — it just stops using it. Academic researchers have a name for this: **lost in the middle**. Sophisticated users on Reddit are picking up the term and using it in complaints.
+
+The symptom: the AI confidently does the opposite of something you told it 8,000 tokens ago. It is not lying. It read the constraint, weighted it as background, and treated more recent turns as more important.
+
+You'll see this across:
+
+- **Claude** ("Long chats have gotten progressively worse")
+- **ChatGPT** ("GPT-5 still forgets past context")
+- **Codex** ("It contradicts itself on long debugging sessions")
+
+### Why it happens
+
+Transformer attention has a strong **primacy and recency bias**. Information at the very top of context (system prompt) and the very bottom (latest turns) gets used more than the middle. The middle of a long session is exactly where most of your hard-won decisions live.
+
+### What actually helps
+
+- **Restate constraints near the end.** Before asking the model to make a hard decision, restate the relevant rules in the same message.
+- **Use a "pinned" pattern.** Some agents support pinned messages or system-prompt additions. Drop core rules there.
+- **Shorter threads.** Yes, this is the boring answer. Yes, it works. Five focused 30-message threads beat one rambling 300-message thread.
+- **Sub-agents and sub-tasks.** Spawn a fresh sub-agent for a focused job, hand it only the context it needs, and return the result.
+
+<Callout type="tip" title="The five-message rule">
+  If the model is making mistakes that contradict something you said earlier, repeat the constraint
+  in your next message. Do not assume long context will save you.
+</Callout>
+
+<DuetCTA />
+
+---
+
+## 5. Reason 4: Memory Full and silent deletion
+
+This one is mostly a ChatGPT story, and it is the most emotional. ChatGPT's Memory feature has a hard cap. When you hit it, you get a **"Memory Full"** notification — and the model silently stops adding new memories. Over time, older memories also get summarized or dropped.
+
+Some of the most-upvoted r/ChatGPT post titles from the last six months:
+
+- _"Did all my ChatGPT memories just vanish?"_
+- _"Heartbroken — my memories are gone"_
+- _"I tracked ChatGPT's memory loss for 11 days"_
+
+Users who store **personal** context — coaching notes, journaling threads, business plans, health logs — feel this the hardest. They thought the product was remembering them. It was, until it wasn't.
+
+### What is actually happening
+
+Three forces at once:
+
+1. **Hard caps.** A memory store has a fixed size. New facts evict old ones.
+2. **Summarization.** "Likes coffee, drinks decaf at night, allergic to cinnamon" becomes "has dietary preferences."
+3. **Background updates.** Model and product updates can re-tier or re-classify memories. Some users have reported memories vanishing after a product update with no notification.
+
+### What actually helps
+
+- **Mirror your AI memory to a file you own.** Ask the model once a week to list everything in its memory, and paste the result into a markdown file. Five minutes a week buys real durability.
+- **Be picky about what goes in.** Memory is a precious resource. Save stable, high-leverage facts, not transient ones.
+- **Audit, don't trust.** Open the memory UI monthly. Delete stale entries yourself.
+
+<Callout type="error" title="Heartbreak prevention">
+  If you are using ChatGPT memory for anything you would be upset to lose — therapy-style
+  journaling, business planning, key relationships — export it to a file you control today. Not
+  tomorrow.
+</Callout>
+
+---
+
+## 6. Reason 5: Patch wipes and the 5-hour reset
+
+The last reason is the most insulting. You did not hit a context limit. You did not run a compaction. The product updated overnight and wiped your sessions.
+
+Real quotes from the last few months:
+
+> "Latest patch deleted every thread."
+> "5.4 to 5.5 update lost all my chats."
+> "Catastrophic memory loss after Windows auto-update."
+> "Why does the 5-hour session window reset feel arbitrary?"
+
+This happens in both directions:
+
+- **Major version upgrades.** ChatGPT-5 to 5.5, Codex CLI 5.4 to 5.5, OpenClaw weekly releases — any can ship with new storage formats that orphan old data.
+- **Time-based resets.** Claude Code has a rolling 5-hour session window that resets independent of your chat. Conversations don't disappear, but the in-session state does.
+- **Crashes and reinstalls.** Cache-based memory dies with the cache.
+
+### What actually helps
+
+- **Never let the only copy of important context live in a vendor app.** This is the same lesson as Reason 4, applied harder.
+- **Use a memory layer outside the tool.** A repo, a notes app, a personal server — anything you own. The vendor can wipe its own storage; it cannot wipe yours.
+- **Treat the 5-hour window as a deadline, not a memory.** Plan to checkpoint your work to disk before the window flips.
+
+<DuetCTA />
+
+---
+
+## 7. The real fix: persistent memory outside the model
+
+Notice the pattern. Every "what helps" section above ends with the same instruction: **move the memory out of the model.** A markdown file. A repo. A folder you sync. A server you own.
+
+This is not a coincidence. The root cause of AI amnesia is architectural. Models have context windows; products bolt on memory features; both are owned and operated by someone else. The only memory that actually survives compaction, new chats, lost-in-the-middle, Memory Full, and patch wipes is the memory **you control and the agent reads on every run**.
+
+That is the entire bet behind [persistent agent servers](/guides/how-to-build-your-ai-command-center). The agent runs inside an environment that has:
+
+- A **filesystem** it can read and write
+- **Instruction and playbook files** it can read when a task needs a repeatable process
+- **Memory files** (`MEMORY.md`, `SOUL.md`, daily logs) that survive every model and product change
+- **Cron** and **state machines** so long-running work outlives any single chat
+
+Reddit users are already building this for themselves. The most-upvoted posts of the last six months across r/ClaudeAI, r/ClaudeCode, r/codex, and r/openclaw are people open-sourcing their own memory layers: Locus, Atom, Cortex, Lossless Claw, Backfill Lane, Save Game. Every one of them is a user-built version of the same architectural fix.
+
+<Callout type="success" title="The takeaway">
+  You don't fix AI amnesia by switching models. You fix it by making sure the model isn't the only
+  place your memory lives.
+</Callout>
+
+---
+
+## 8. A practical setup that survives every reset
+
+If you want a memory layer that handles all five failure modes, here is a minimum viable setup. Most readers can have this running in under an hour.
+
+### Step 1: Create a memory home
+
+Pick one folder. It can be local, a Dropbox, a GitHub repo, or a hosted environment. Inside it, create three files:
+
+- `IDENTITY.md` — who you are, what you do, your preferences and constraints
+- `MEMORY.md` — durable facts you want the AI to know, curated over time
+- `daily/YYYY-MM-DD.md` — raw logs from each day's sessions
+
+This is the same shape Duet uses internally for its agent home directory, and it is intentionally boring. Boring formats survive product changes.
+
+### Step 2: Give every tool the same file
+
+- **Claude Code:** Drop the files into a `CLAUDE.md` at the repo root, or symlink them.
+- **Codex CLI:** Use an `AGENTS.md` file the CLI reads automatically.
+- **ChatGPT / Claude.ai:** Paste the contents of `IDENTITY.md` into Custom Instructions. Re-paste after every product update.
+- **OpenClaw:** Configure a plugin to read the file on every turn.
+
+The point: one source of truth, many readers.
+
+### Step 3: Make updating the memory part of the workflow
+
+After each meaningful session, add a one-line note to `daily/YYYY-MM-DD.md`. Once a week, promote anything durable into `MEMORY.md`. This is the same "captains log" pattern engineers have been using for decades — it just took AI getting amnesia for everyone else to need it too.
+
+### Step 4: Audit the in-product memory once a month
+
+Open ChatGPT memory. Open Claude project knowledge. Open Codex saved threads. Diff against your file. Anything important that lives only in the product gets copied out.
+
+### Step 5: For long-running work, use a server
+
+Cron jobs, watchers, follow-ups, "remind me when X happens" — anything that needs to outlive a chat needs a runtime that outlives a chat. That is the part a desktop tool genuinely cannot solve. A cloud agent workspace with persistent files and cron is the practical answer. External agent skills can still be useful; keep the parts you adopt as explicit instruction or playbook files rather than trusting a product-specific catalog.
+
+<Callout type="info" title="Where Duet fits">
+  Duet gives every user a private cloud server with persistent files and a runtime for scheduled
+  work. Files can hold reusable instructions and playbooks; Train holds durable facts and connected
+  sources. Either path works — the important thing is owning the memory.
+</Callout>
+
+---
+
+## 9. FAQ
+
+<Accordion type="single" collapsible className="w-full">
+
+<AccordionItem value="why-amnesia">
+  <AccordionTrigger>Why do people call this "AI amnesia"?</AccordionTrigger>
+  <AccordionContent>
+    The term started as a meme on r/ClaudeAI and r/ChatGPT and stuck because it captures the
+    experience precisely: the AI feels like it has a personality and history, and then loses both.
+    r/openclaw users escalated it to "amnesia syndrome," treating it as a recognized condition.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="compaction-fix">
+  <AccordionTrigger>Can I turn off compaction in Claude Code?</AccordionTrigger>
+  <AccordionContent>
+    Not fully. You can run `/compact` manually before auto-compact triggers, and you can configure
+    the threshold in some setups. The reliable fix is to keep important decisions in a `CLAUDE.md`
+    file the agent reads every session, so compaction can't lose them.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="chatgpt-memory-gone">
+  <AccordionTrigger>My ChatGPT memories disappeared. Can I get them back?</AccordionTrigger>
+  <AccordionContent>
+    Usually no. OpenAI does not expose a memory backup or recovery flow. If you have important
+    memories in ChatGPT, export them now: ask the model to "list everything in your memory" and copy
+    the result into a file you control.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="lost-in-the-middle">
+  <AccordionTrigger>Is "lost in the middle" a real thing or just a meme?</AccordionTrigger>
+  <AccordionContent>
+    It's a documented research finding. Transformer models pay more attention to the start and end
+    of their context than the middle. The practical implication: long threads quietly degrade even
+    when they technically fit. Re-state important constraints near the end of long conversations.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="codex-session-reset">
+  <AccordionTrigger>Why does Codex reset my session after an update?</AccordionTrigger>
+  <AccordionContent>
+    Codex stores session state locally, and major CLI version upgrades have historically changed the
+    storage format. Users have reported losing every thread after upgrading from 5.4 to 5.5. The
+    fix: don't store anything important only in the CLI — keep an `AGENTS.md` and a separate notes
+    file.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="openclaw-memory">
+  <AccordionTrigger>What's the deal with OpenClaw's "amnesia syndrome"?</AccordionTrigger>
+  <AccordionContent>
+    OpenClaw uses a plugin model for memory (Atom, Backfill Lane, Lossless Claw), and the community
+    calls inconsistent retention across plugins "amnesia syndrome." Most fixes are user-built. A
+    more durable answer is to keep memory in plain files the plugins read, so swapping plugins
+    doesn't lose anything.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="5-hour-reset">
+  <AccordionTrigger>What is the Claude Code 5-hour reset?</AccordionTrigger>
+  <AccordionContent>
+    Claude Code enforces a rolling 5-hour usage window. When the window resets, your conversation
+    does not disappear, but the active session context can. Treat it like an end-of-shift deadline:
+    write important state to disk before it flips.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="best-tool-for-memory">
+  <AccordionTrigger>Which AI tool has the best memory?</AccordionTrigger>
+  <AccordionContent>
+    None of them, on their own. The best memory is the one that lives outside the tool. The "best
+    tool" question is really "which tool best plays with an external memory file?" — and that comes
+    down to whether you can drop a markdown file (`CLAUDE.md`, `AGENTS.md`, custom instructions)
+    that the tool reads every session.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="duet-memory">
+  <AccordionTrigger>How does Duet handle AI memory?</AccordionTrigger>
+  <AccordionContent>
+    Duet gives each user a private cloud server with a persistent filesystem and scheduled work.
+    Reusable instructions can live in Files, while Train owns durable facts and connected sources
+    the agent can draw on across sessions. That keeps important context outside any one model's
+    context window without pretending every file is loaded automatically.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="memory-vs-rag">
+  <AccordionTrigger>Is this the same thing as RAG?</AccordionTrigger>
+  <AccordionContent>
+    Related but different. RAG (retrieval-augmented generation) is a technique for pulling relevant
+    chunks of a large corpus into context at query time. Personal memory is a smaller, curated set
+    of stable facts you want the model to always know. Most serious setups use both: memory files
+    for identity and constraints, RAG for big reference corpora.
+  </AccordionContent>
+</AccordionItem>
+
+</Accordion>
+
+<DuetCTA />

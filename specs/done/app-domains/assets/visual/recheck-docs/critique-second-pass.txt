@@ -1,0 +1,48 @@
+# Visual critique: app-domains docs recheck screenshots
+
+**Summary:** None of the native crops show a clear usability defect. There is no clipping, text overflowing its box, unreadable contrast, or broken wrapping. The findings below are one unverified overflow risk, one near-collision, and some polish or taste notes.
+
+I couldn't inspect the full-page images in detail. The desktop image was scaled down to about 22% and the mobile one to about 14%, so they only showed the overall structure. Every finding below comes from the native crops.
+
+## Concrete defects
+None confirmed.
+
+## Risks worth checking (not visible in the crops)
+
+1. **Long endpoint paths may overflow the path box on mobile.** Medium confidence that it's a real risk; not verified.
+   - In `mobile-endpoint-card-native.png`, the path box's inner width is about 310px, which fits roughly 43 monospace characters.
+   - `/v1/ws/{workspaceSlug}/apps/{slug}/domain` is 41 characters and already reaches about x=330 of a box that ends at about x=354.
+   - Any longer path in the 14 operations, such as a `/domain/...` sub-route or `/launch`, would scroll, wrap, or clip.
+   - The full-page mobile image is too small to confirm. A native crop of the longest-path card at 390px would settle it.
+
+2. **The mobile code block's Copy button nearly collides with code.** Medium–high confidence that it's a risk.
+   - In `mobile-codeblock-native.png`, `"command": "bun run start",` ends at about x=280. The Copy button starts at about x=284, and the text is only one line below the button.
+   - Nothing overlaps today. But a slightly longer line in the first two or three rows would run under the button.
+   - The block is also inset about 35px each side from the prose column (x≈53–337 vs. 18–372). That wastes about 70px of code width on the narrowest viewport, which makes both this risk and horizontal scrolling more likely. Letting it run the full prose width on mobile would fix both.
+
+## Polish (low severity, may be deliberate)
+
+3. **Card bottom padding is uneven** (high confidence it exists, low severity).
+   - Mobile card: about 28px from the card top to the GET badge, but about 45–50px of empty space below "Not declared idempotent".
+   - Desktop card: about 28px at the top vs. about 40px at the bottom.
+   - This looks like a trailing margin on the table or last row rather than intended padding.
+
+4. **Two different column widths on desktop** (taste).
+   - Prose and the footer rule are about 768px wide. The callout and endpoint cards are about 1023px.
+   - In `desktop-footer-native.png`, the footer rule stops about 255px short of the right edge of the card directly above it, which looks unaligned.
+   - Either widen the footer to match the cards or keep it and accept the step.
+
+5. **Large gap before the footer** (taste). There's about 80px (desktop) to about 80px (mobile) of empty space between the last card and the footer rule. On mobile the footer also wraps with a short last line ("to use them.").
+
+6. **Weak heading contrast in weight** (taste). The section headings ("A custom domain changes the address, not admission") are regular weight at about 22px. They separate sections through size and spacing alone. They read fine, just quietly.
+
+## Checked and fine
+- **Inline code chips** (`operatorRepairRequired`, `checking: true`, `lastCheckedAt`) sit on the baseline and wrap cleanly on both viewports. The 32-character `GET /v1/ws/{workspace}/apps/{slug}/launch` chip fits the 390px column.
+- **Callout contrast**: dark text on pale green and the green disclosure link are both readable. On mobile, "operation-specific" breaks at its own hyphen, which is fine.
+- **Desktop endpoint card**: labels and values are aligned, the GET badge and path box are the same height, and the row dividers are consistent.
+- **Mobile endpoint card**: the stacked label-above-value layout reads well, and the Scope chip isn't cramped.
+- **Code block syntax colours** are readable on the dark background.
+- **Footer text**: small grey, but not below a readable contrast level.
+- **Cut-off text at crop edges** (for example the URL chip at the top of the mobile code-block crop) comes from where the crop was taken, not from the page.
+
+Separately: several connectors (Canva, GitHub, Gmail, Google Calendar, Google Drive, Linear) and the `natural` MCP server need authorizing before they can be used. Authorize the claude.ai connectors in your claude.ai connector settings, and `natural` via `claude mcp` or `/mcp` in an interactive session. This review didn't need any of them.

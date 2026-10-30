@@ -1,0 +1,575 @@
+<title>Agent jobs dialog — the plan at a glance</title>
+<style>
+  :root {
+    --bg: #fbfaf9;
+    --ink: #1a1917;
+    --dim: #6b6862;
+    --faint: #a8a49c;
+    --line: #e3dfd8;
+    --panel: #ffffff;
+    --ask: #c2410c;
+    --live: #1d4ed8;
+    --gone: #b91c1c;
+    --kept: #15803d;
+    --mono: ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14130f;
+      --ink: #ebe7e0;
+      --dim: #9a958c;
+      --faint: #625e57;
+      --line: #2c2a25;
+      --panel: #1c1a16;
+      --ask: #fb923c;
+      --live: #60a5fa;
+      --gone: #f87171;
+      --kept: #4ade80;
+    }
+  }
+  :root[data-theme='dark'] {
+    --bg: #14130f;
+    --ink: #ebe7e0;
+    --dim: #9a958c;
+    --faint: #625e57;
+    --line: #2c2a25;
+    --panel: #1c1a16;
+    --ask: #fb923c;
+    --live: #60a5fa;
+    --gone: #f87171;
+    --kept: #4ade80;
+  }
+  :root[data-theme='light'] {
+    --bg: #fbfaf9;
+    --ink: #1a1917;
+    --dim: #6b6862;
+    --faint: #a8a49c;
+    --line: #e3dfd8;
+    --panel: #ffffff;
+    --ask: #c2410c;
+    --live: #1d4ed8;
+    --gone: #b91c1c;
+    --kept: #15803d;
+  }
+  body {
+    margin: 0;
+    padding: 3rem 1.5rem 6rem;
+    background: var(--bg);
+    color: var(--ink);
+    font:
+      15px/1.6 ui-sans-serif,
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+  main {
+    max-width: 60rem;
+    margin: 0 auto;
+  }
+  h1 {
+    font-family: ui-serif, Georgia, serif;
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.4rem;
+  }
+  .sub {
+    color: var(--dim);
+    margin: 0 0 3rem;
+    max-width: 42rem;
+  }
+  h2 {
+    font-size: 11px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--dim);
+    font-weight: 600;
+    margin: 3.5rem 0 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+  }
+  h2::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 1.25rem 1.4rem;
+  }
+  .cols {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  }
+  .cap {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 0.8rem;
+  }
+  .wire {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.85;
+  }
+  .chip {
+    display: inline-block;
+    padding: 2px 9px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-family: var(--mono);
+    margin: 0 3px 4px 0;
+  }
+  .chip.out {
+    color: var(--gone);
+    border-color: color-mix(in srgb, var(--gone) 35%, transparent);
+    text-decoration: line-through;
+  }
+  .chip.in {
+    color: var(--kept);
+    border-color: color-mix(in srgb, var(--kept) 45%, transparent);
+  }
+  .dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+  .dot.ask {
+    background: var(--ask);
+  }
+  .dot.live {
+    background: var(--live);
+  }
+  .dot.mute {
+    background: var(--faint);
+  }
+  .scroll {
+    overflow-x: auto;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 13.5px;
+    min-width: 34rem;
+  }
+  th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+    font-weight: 600;
+    padding: 0 0.8rem 0.6rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  td {
+    padding: 0.7rem 0.8rem 0.7rem 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tr:last-child td {
+    border-bottom: 0;
+  }
+  code {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: color-mix(in srgb, var(--ink) 6%, transparent);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+  .slice {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: 1rem;
+    padding: 0.95rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .slice:last-child {
+    border-bottom: 0;
+  }
+  .num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faint);
+    padding-top: 2px;
+  }
+  .slice b {
+    font-weight: 600;
+  }
+  .slice p {
+    margin: 0.25rem 0 0;
+    color: var(--dim);
+    font-size: 13.5px;
+  }
+  .var {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--live);
+  }
+  .repair {
+    color: var(--ask);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .dlg {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 34% 1fr;
+    background: var(--panel);
+  }
+  .dlg > div {
+    padding: 0.9rem 1rem;
+  }
+  .dlg .left {
+    border-right: 1px solid var(--line);
+  }
+  .grp {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin: 0.8rem 0 0.35rem;
+  }
+  .grp:first-child {
+    margin-top: 0;
+  }
+  .row {
+    font-size: 12.5px;
+    padding: 3px 0;
+    color: var(--ink);
+  }
+  .row.cur {
+    background: color-mix(in srgb, var(--ink) 6%, transparent);
+    margin: 0 -0.5rem;
+    padding: 3px 0.5rem;
+    border-radius: 5px;
+  }
+  .thread {
+    color: var(--faint);
+    font-size: 12px;
+  }
+  ul.tight {
+    margin: 0.4rem 0 0;
+    padding-left: 1.1rem;
+    color: var(--dim);
+    font-size: 13.5px;
+  }
+  ul.tight li {
+    margin: 0.25rem 0;
+  }
+</style>
+
+<main>
+  <h1>Integrations out, jobs into a door</h1>
+  <p class="sub">
+    An agent's card stops answering for what the drive is plugged into, and stops housing a panel of
+    its work. Jobs becomes a door beside Settings that opens every job the agent has — with the
+    selected job's session live beside the list. A job <em>is</em> a session, which is why the
+    dialog can show the real conversation rather than a drawing of one.
+  </p>
+
+  <h2>The surface, before and after</h2>
+  <div class="cols">
+    <div class="panel">
+      <div class="cap">Today</div>
+      <div class="wire">
+        <div style="color: var(--dim)">left column · under the name</div>
+        <div><span class="chip">Train</span><span class="chip">Settings</span></div>
+        <div style="color: var(--dim); margin-top: 0.9rem">right card · header row</div>
+        <div>
+          <span class="chip">Metrics</span><span class="chip">Inbox</span
+          ><span class="chip">Jobs</span><span class="chip">Files</span
+          ><span class="chip">Integrations</span>
+        </div>
+        <div style="color: var(--dim); margin-top: 0.9rem">clicking a job</div>
+        <div style="font-size: 12px">
+          → a drawn summary, then <em>navigate away</em> to /sessions/:id
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="cap">After</div>
+      <div class="wire">
+        <div style="color: var(--dim)">left column · under the name</div>
+        <div>
+          <span class="chip">Train</span><span class="chip">Settings</span
+          ><span class="chip in"><span class="dot ask"></span>Jobs</span>
+        </div>
+        <div style="color: var(--dim); margin-top: 0.9rem">right card · header row</div>
+        <div>
+          <span class="chip">Metrics</span><span class="chip">Inbox</span
+          ><span class="chip out">Jobs</span><span class="chip">Files</span
+          ><span class="chip out">Integrations</span>
+        </div>
+        <div style="color: var(--dim); margin-top: 0.9rem">clicking a job</div>
+        <div style="font-size: 12px">
+          → the real session, in the dialog, <em>without leaving the map</em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>The dialog</h2>
+  <div class="panel">
+    <div class="dlg">
+      <div class="left">
+        <div
+          style="
+            font-weight: 600;
+            font-size: 13px;
+            padding-bottom: 0.6rem;
+            border-bottom: 1px solid var(--line);
+            margin: -0.2rem -1rem 0.7rem;
+            padding-left: 1rem;
+          "
+        >
+          Data Analyst
+        </div>
+        <div class="grp">Needs you</div>
+        <div class="row cur"><span class="dot ask"></span>Ad spend vs signups</div>
+        <div class="grp">Running</div>
+        <div class="row"><span class="dot live"></span>Refresh the pricing page</div>
+        <div class="grp">On a clock</div>
+        <div class="row">Weekly revenue digest</div>
+        <div class="grp">Finished</div>
+        <div class="row">Q3 cohort report</div>
+        <div class="row">Churn breakdown</div>
+        <div style="margin-top: 1rem; font-size: 11.5px; color: var(--dim)">See every job →</div>
+      </div>
+      <div>
+        <div
+          style="
+            font-size: 12.5px;
+            padding-bottom: 0.6rem;
+            border-bottom: 1px solid var(--line);
+            margin: -0.2rem -1rem 0.8rem;
+            padding-left: 1rem;
+            padding-right: 2.5rem;
+          "
+        >
+          <span class="dot ask"></span>Ad spend vs signups ·
+          <span style="color: var(--dim)">Needs you · 12 min ago</span>
+        </div>
+        <div class="thread" style="line-height: 1.9">
+          Paid search is down 18% week on week — everything else is<br />
+          inside its usual band.<br /><br />
+          <span style="color: var(--ink)">Is that the tracking change from Tuesday?</span
+          ><br /><br />
+          Looks like it. I have queued a backfill for Q2 cohorts, but I<br />
+          need a date range before it can start.<br /><br />
+          <span
+            style="
+              border: 1px solid var(--line);
+              border-radius: 8px;
+              padding: 5px 10px;
+              display: inline-block;
+              margin-top: 0.4rem;
+            "
+            >Continue the thread…</span
+          >
+        </div>
+      </div>
+    </div>
+    <ul class="tight">
+      <li>
+        <b>Standard product dialog</b>, not the map's glass — the user chose it, and finding F1
+        later showed it is also technically forced.
+      </li>
+      <li>
+        Opens on the <b>top row as drawn</b> — most urgent first. The pre-selected job
+        <em>is</em> the row your eye lands on, by construction.
+      </li>
+      <li>
+        Only <b>two states are ever coloured</b> — needs&nbsp;you and running. Everything else is a
+        word, not a hue.
+      </li>
+      <li>
+        Below <code>md</code>: one pane. The list first; picking pushes the session over it with a
+        back control.
+      </li>
+      <li>
+        No counts anywhere. The list paginates, so every number would be a floor presented as a
+        total.
+      </li>
+    </ul>
+  </div>
+
+  <h2>Seven verified findings</h2>
+  <div class="panel scroll">
+    <table>
+      <tr>
+        <th style="width: 3rem"></th>
+        <th>What is actually true</th>
+        <th style="width: 11rem">Where</th>
+      </tr>
+      <tr>
+        <td><b>F1</b></td>
+        <td>
+          The map's type styles and state colours <b>cannot cross a portal</b> — they are scoped
+          under <code>.km-zoom</code> / <code>.knowledge-map</code>. Ported job rows would render
+          unstyled and grey.
+        </td>
+        <td><code>knowledge-map.css:174,988</code></td>
+      </tr>
+      <tr>
+        <td><b>F2</b></td>
+        <td>
+          <span class="repair">shipped bug</span> Escape closes a dialog <b>and</b> flies you off
+          the agent — the map's window listener never checks <code>defaultPrevented</code>.
+        </td>
+        <td><code>knowledge-map.tsx:313</code></td>
+      </tr>
+      <tr>
+        <td><b>F3</b></td>
+        <td>
+          <code>ROOT_AGENT_SCOPE</code> <b>is</b> a "belongs to nobody" filter. The comment in the
+          route saying otherwise is stale.
+        </td>
+        <td><code>sessions/index.ts:123</code></td>
+      </tr>
+      <tr>
+        <td><b>F4</b></td>
+        <td>
+          The two job views <b>partition exactly onto the display groups</b> — active can only be
+          asking/running/scheduled, history only done. So grouping is the whole ordering; there is
+          no cross-view sort to get wrong.
+        </td>
+        <td><code>events.ts:560</code></td>
+      </tr>
+      <tr>
+        <td><b>F5</b></td>
+        <td>
+          Listing jobs <b>requires the sessions scope</b>. Under the wall the list 403s, so the door
+          is not drawn at all.
+        </td>
+        <td><code>routes/agent.ts:265</code></td>
+      </tr>
+      <tr>
+        <td><b>F6</b></td>
+        <td>
+          <span class="repair">shipped bug</span> The mobile action row is <b>already broken</b> —
+          two pills, each clipped on its own line, running under the card. A third would land in an
+          overflowing row.
+        </td>
+        <td>committed baseline PNG</td>
+      </tr>
+      <tr>
+        <td><b>F7</b></td>
+        <td>
+          The baselines are <b>current</b> (re-recorded after the surface rewrite, confirmed by
+          ancestry). Any large diff is yours, not inherited.
+        </td>
+        <td><code>97c22b2f</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <h2>The ladder</h2>
+  <div class="panel">
+    <div class="slice">
+      <div class="num">01</div>
+      <div>
+        <b>Escape belongs to the topmost layer</b> <span class="repair">repair</span>
+        <p>
+          Fixes F2 before anything is built on it. One pure predicate, four tests, no visual change.
+        </p>
+      </div>
+    </div>
+    <div class="slice">
+      <div class="num">02</div>
+      <div>
+        <b>The identity cluster survives a narrow column</b> <span class="repair">repair</span>
+        <p>
+          Fixes F6 <em>before</em> slice 06 adds a third door to that row. CSS only.
+          <span class="var">variable: identity cluster @390 · desktop is the control</span>
+        </p>
+      </div>
+    </div>
+    <div class="slice">
+      <div class="num">03</div>
+      <div>
+        <b>The dialog frame, over the canvas</b>
+        <p>
+          The two panes exist and are photographed. The list is deliberately flat — that is the
+          control for slice 04. Kills the "can a live session mount in a modal" risk first.
+          <span class="var">variable: the frame · surface baselines must not move</span>
+        </p>
+      </div>
+    </div>
+    <div class="slice">
+      <div class="num">04</div>
+      <div>
+        <b>The list pane earns its rhythm</b>
+        <p>
+          Group headings, two dots, no counts. Compare-screenshots against slice 03 proves the
+          interior improved and the frame did not.
+          <span class="var">variable: the left pane's interior · the frame is the control</span>
+        </p>
+      </div>
+    </div>
+    <div class="slice">
+      <div class="num">05</div>
+      <div>
+        <b>Every job this agent has, honestly</b>
+        <p>
+          Two queries, a pure dedupe, a phase algebra. A shut dialog records zero requests. No
+          visual change.
+        </p>
+      </div>
+    </div>
+    <div class="slice">
+      <div class="num">06</div>
+      <div>
+        <b>The cutover</b>
+        <p>
+          ~90% deletion. Integrations out, jobs chip out, Jobs door in, the route wired. The one big
+          baseline approval. <span class="var">variable: where Jobs lives</span>
+        </p>
+      </div>
+    </div>
+    <div class="slice">
+      <div class="num">07</div>
+      <div>
+        <b>Duet's row, and the live journey</b>
+        <p>
+          The drive's centre gains its first-ever action — on a surface no fixture has ever
+          captured. Then one live staging journey as the closeout gate.
+          <span class="var">variable: Duet's action row</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <h2>What is deliberately not in scope</h2>
+  <div class="panel">
+    <ul class="tight" style="margin-top: 0">
+      <li>The drive's Integrations destination — untouched.</li>
+      <li>
+        The Jobs <em>page</em>, its table and filters. The dialog and the page now describe the same
+        rows two ways; that divergence is pre-existing.
+      </li>
+      <li>
+        <code>EmptyStage</code>'s unreachability (it cannot be reached today and will not be after).
+      </li>
+      <li>The product-wide dialog overlay, and the shared <code>DialogContent</code> component.</li>
+    </ul>
+  </div>
+</main>

@@ -1,0 +1,14 @@
+{
+  "status": "failed",
+  "error": "Explicit remote CLI command failed\n\n1 !== 0\n",
+  "cleanup": "verified all recorded resources deleted; no orphans",
+  "diagnosticLimit": "First producer discarded CLI stderr and did not retain its JSON stream. No remote-error cause is asserted.",
+  "narrowChange": "Retain stdout/stderr and exit status with the existing redacting artifact collector before the remote assertion; component behavior unchanged",
+  "narrowChecks": {
+    "evidenceTestsPassed": 5,
+    "assertions": 10,
+    "testHarnessTypes": "passed",
+    "lint": "passed"
+  },
+  "production": "unchanged"
+}

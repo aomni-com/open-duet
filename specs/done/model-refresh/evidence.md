@@ -1,0 +1,583 @@
+# Qualification and release evidence
+
+The [final release report](assets/release/final-rollout.json) and
+[production delivery record](#production-delivery-and-deferred-broad-regression-check)
+describe the shipped state and the separately scheduled regression follow-up.
+The entries below preserve historical checkpoints in chronological order.
+Their pending statuses describe those checkpoints, not outstanding build instructions.
+
+Planning baseline, 2026-09-27:
+
+- Duet commit: `d4c0b52e18d043c8ba61f63ef88e5c573dd2045c`.
+- Agent commit: `6cb40aa5062f24aa2bde1971f9ea521440996175`.
+- Installed and npm-latest agent observed at the planning baseline: `0.3.26`.
+- [Catalog receipt](assets/catalog-receipt.json) records retrieval time, source
+  SHA-256, and selected metadata. It proves catalog listing, not account access
+  or successful execution. [Billing baseline](assets/billing-baseline.json) was
+  exported from Duet's pure shared selection contract at the baseline commit.
+- No accepted live-generation spike existed at the planning baseline. Later
+  checkpoints record its commands, inputs, dependency/commit identities,
+  controlled responses and outputs before claiming parity or live compatibility.
+
+## Primary research
+
+- [OpenAI models](https://developers.openai.com/api/docs/models) and
+  [deployment compatibility](https://developers.openai.com/api/docs/guides/deployment-checklist):
+  GPT-6 Astra/Sol/Luna; Responses for reasoning with tools; parameter constraints.
+  The targeted GPT-6 markdown migration URL failed twice during planning; the
+  fetched deployment guide supplied compatibility guidance instead.
+- [Opus 5.5 announcement](https://www.anthropic.com/claude-opus-5-5).
+- [Vercel catalog](https://ai-gateway.vercel.sh/v1/models),
+  [Grok 4.7](https://vercel.com/ai-gateway/models/grok-4.7),
+  [GLM 5.3](https://vercel.com/ai-gateway/models/glm-5.3).
+- [Stable Gemini image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image),
+  [Veo 3.1](https://vercel.com/ai-gateway/models/veo-3.1-generate-001),
+  [Seedance 2.5](https://vercel.com/ai-gateway/models/seedance-2.5),
+  [Grok video namespace](https://vercel.com/ai-gateway/models/grok-imagine-video-1.5/faq).
+
+## Decision ledger
+
+| Decision | Authority / why |
+| --- | --- |
+| All active usage across both repos is in scope | User selected broad scope, then explicitly included agent changes and release |
+| Terra advances to Sol | User chose coding-role continuity over Luna's lower cost |
+| Both video role names remain | User chose same target without removing existing role names |
+| Customer tariffs never track provider price changes | User: outcome value drives prices; cost changes affect margin |
+| Existing users must upgrade automatically | User clarified stable alias behavior is required, not optional compatibility |
+| Hard cutover; no new migration scaffolding | User confirmed; does not waive working existing/resumed sessions |
+| Historical billing coverage stays | Existing shipped contract; needed to preserve delayed settlement |
+| Historical articles/receipts stay | Accepted scope; they describe what happened, not current execution |
+| Existing at-cost paths retain their settlement formula | Scope firewall, not a new user tariff decision; any fixed-media-pricing redesign needs separate product approval |
+
+## Risks and parity gates
+
+| Evidence / fact | Consequence | Owner / gate |
+| --- | --- | --- |
+| Agent `src/model-resolution/resolver.ts` canonicalizes CLI family input; `src/session/session.ts` persists runner state | Alias intent may become a version pin on standalone resume | 01 captures real baseline envelopes; 02 verifies alias identity and next-turn request |
+| Agent gateway resolver already selects Responses for OpenAI | Preserve transport; verify reasoning/tools/structured output rather than switch SDKs speculatively | 01/02 captured request and controlled completion |
+| Duet `tierBillsAtFlatRate` checks concrete membership before fixed pricing | New targets omitted or old IDs removed change customer charges | 04 old/new target settlement with equal usage and varied upstream costs |
+| Gateway `createRunnerBinaryGate` may keep the old binary when reconcile is deferred | New routing bytes can meet an old runtime | 01/07 reproduce normal release overlap; no invented coordinator |
+| `modelByGatewayId` returns first matching role; duplicate policy validation omits pricing | Two Seedance aliases can expose contradictory metadata | 04 identical metadata and role/concrete lookup checks; not a reservation formula change |
+| Proxy uses `DEFAULT_RESERVATION_ESTIMATE_MICRO_USD`, not catalog per-second fields | Catalog prices must not be presented as reservation amounts | 04 preserve existing reservation and settlement behavior |
+| Agent workflow creates GitHub release before npm publish | A visible release can exist without a consumable package | 03 verify npm artifact separately |
+| Official content runtime loads generated bytes and needs hub sync | Source edits alone do not reach subscribers | 05/07 codegen, sync, subscriber evidence |
+
+## Qualification work still required
+
+These are bounded slice-01 measurements, not freedoms to invent policy:
+transport-specific availability, output/reasoning limits, media request defaults
+and estimates, standalone saved selection behavior, and deferred CLI-update
+overlap. Record a pass/fail and evidence for each. A failed invariant must produce
+a focused repair/reslice before dependent implementation or publishing.
+
+Production promotion is a release action after staged evidence exists. This spec
+records the process but is not evidence that publishing, deploying, or syncing
+has happened. Recheck authorization at the concrete release boundary under the
+active task; do not request it repeatedly if the user has already granted it.
+
+## Synthesis and plan review
+
+Three independent draft lenses informed this plan: fewest slices, risk first,
+and seam quality. The fewest-slices draft combined runtime work with publication;
+the canonical plan separates them so the published artifact earns its own
+verdict. The risk-first draft supplied old/new settlement and package-publication
+gates. The seam-quality draft sharpened persisted alias intent and deployed
+gateway serviceability before a standalone package release.
+
+Claude Code was attempted for vendor diversity using Opus/high and read-only
+tools. It emitted no draft in the bounded five-minute run and was terminated;
+the third agent supplied its own independent draft instead. This is not a claim
+of successful Claude review.
+
+The refactor-clean pass retained existing owners and rejected new routing,
+pricing, migration, and rollout abstractions. Two draft descriptions incorrectly
+called media estimate metadata the reservation calculation; inspection of the
+proxy corrected that before materialization. Final independent review caught
+the conditional service-acceptance dependency missing from the README graph;
+the graph and handoff now expose it. The conversation audit carries all user
+decisions, including the later automatic-upgrade clarification, into this spec.
+
+## Implementation evidence — first pass
+
+Gateway qualification receipts and frozen probes live in
+[assets/qualification](assets/qualification). On the baseline catalog, headerless
+GPT-6 Luna returns 403 before preflight; GPT-5.6 Luna succeeds. The real installed
+0.3.26 validator rejects new concrete routing names but accepts the stable families.
+
+The admission regression in `apps/model-gateway/src/model-refresh.test.ts` was red
+with 403 and green after the additive internal catalog entry (12 assertions).
+The settlement regression in `packages/backend/src/model-refresh-settlement.test.ts`
+was red charging upstream cost 1 instead of tariff 471; it now covers old/new
+targets across both changed provider aliases and all router tiers, wallet debits,
+ledger values and replay idempotency (130 assertions). No live provider was called.
+Contract's two focused files pass 32 tests; contract, model-gateway and backend
+type checks pass.
+
+Independent `codex review --uncommitted` identified two pending cross-slice
+requirements: do not ship the new disclosures without the new agent pin, and
+update the web disclosure test. The acceptance-only commit excludes all target
+disclosure changes; the future adoption/visual passes own those findings. No
+admission-specific defect was reported. Agent repo is six unrelated commits
+ahead of origin/main; release composition must be resolved before pushing main.
+
+## Deployed admission prerequisite and live media qualification
+
+On 2026-09-27, the isolated acceptance-only commit `21c23fd9b` was built as
+Vercel deployment `dpl_4eEXmgoBbTr7chN65gtUZ31xmZCd`, then promoted to
+`service.example.invalid`. No agent pin, customer disclosure or consumer update was
+included. The previous deployment was `dpl_5tB3FhGnZ7zRRg5S8JHGrinPjWPj`
+(`service.example.invalid`) for rollback. A bounded
+headerless GPT-6 Luna request with a synthetic invalid credential returned
+403 `tier_not_allowed` before promotion and 401 `invalid_api_key` afterward,
+matching the candidate. This proves model admission reaches authentication,
+not successful authenticated generation; the live journey still owns that gate.
+
+A direct live Vercel AI Gateway Seedance 2.5 generation with a procedural local
+512px PNG supplied as bytes succeeded, returning 3,636,498 video bytes. Request:
+4 seconds, 1280x720, one output, no retries, 180-second abort. The provider warned
+that custom fps is ignored and output is fixed at 24fps. This qualifies the
+existing local-image path despite documentation describing URL-only inputs;
+no upload service is needed. The result was not saved as a product artifact.
+The media role metadata uses representative estimates, explicitly excluding
+claims about undocumented defaults or exact settlement amounts.
+
+Media catalog validation: both retained quality roles now resolve to the same
+concrete record through role lookup, concrete lookup and generated discovery.
+The regression was red on the old divergent targets, then green. Contract
+checks pass (33 tests,113 assertions), types/lint pass, skills codegen is
+idempotent with39 tests passing, and gateway headerless image/video reservation
+tests pass. Independent scoped Codex review reported no media defect; its
+broader gateway tests could not bind a local server in its sandbox. The final
+repository gate remains required.
+
+GPT-6 Luna's production onboarding prompt/schema and sanitization path were
+qualified against the live gateway using a synthetic four-agent catalog. The
+response identified `openai/gpt-6-luna` and returned four valid recommendations
+in 3.324 seconds within the unchanged ten-second budget, with no retries.
+See `assets/qualification/luna-recommendations-live.json`. This is a successful
+bounded compatibility sample, not a latency distribution or deployed-code proof.
+
+## Production backend prerequisite
+
+Standalone CLI tier-attributed requests can reach production before Duet's
+managed package pin advances. Production source `d4c0b52e1` lacked the new
+flat-price coverage and independently denied headerless Luna 6 in backend
+preflight. The gateway-only admission deployment was insufficient for either
+backend contract; its 401 receipt never claimed authenticated serviceability.
+
+The isolated API prerequisite `91d800e6da56f976c785c0dc9b86bcd092c31cf6`
+contains additive admission and billing coverage only, with the old pin, routes,
+labels and tariffs. Settlement regression passes130 assertions and the two
+contract suites pass32 tests; contract types/lint pass. It was deployed through
+the existing API rail, which deploys Convex during the build. Candidate runtime
+revision was initially absent on a local CLI deploy; a corrected candidate
+explicitly supplied the actual SHA to both build and runtime.
+
+Promoted API deployment: `dpl_FY9gN5g4eRiATDBJCYR8Z5H92FG1`
+(`service.example.invalid`). Public `/deployment` now reports API and
+backend revision91d800e6d and gateway `0.0.0+f30190d0005c`. Prior API deployment
+was `dpl_DxdRaMEz8zxKf4mzZZt7rEKzmYfR` (`service.example.invalid`).
+The matching accounting patch is integrated in Duet as `aa7f40ef0`.
+
+## Authenticated production check and restoration
+
+The user approved temporarily resuming the designated workspace, which was
+found to be archived as well as paused. Its normal restore flow was used; a
+first SSH attempt could not find Bun on PATH, and the corrected absolute-path
+attempt reached the gateway but was refused with `subscription_required`. Both
+attempts restored the original archived/paused state and removed the temporary
+servicing exemption; no subscription or credit balance was altered.
+
+The user then selected `Example User-zhang-s-workspace` for the checks. Existing VM
+credentials made two bounded direct API calls: headerless GPT-6 Luna and
+Balanced-attributed GPT-6 Sol. Both returned200, named the requested model and
+answered the checkable arithmetic task correctly. Sol used19 input and5 output
+tokens; its real ledger debit was123 microUSD, exactly the unchanged Balanced
+tariff (rounded once). Receipts are `production-chat-and-settlement.json` and
+`release-workspace-restoration.json`. These verify deployed service prerequisites,
+not the unreleased agent runtime. The selected active workspace was not paused,
+reprovisioned, or otherwise reconfigured.
+
+
+## Successor media admission and agent publication
+
+Additive media admission was deployed before publishing the agent, preserving
+all stable role targets and the old product pin on this prerequisite deployment.
+API/backend now report `9b2dee1eef0ef1d5a35a1d7e988846db30f3db6a` via the public
+`/deployment` endpoint. API deployment `dpl_9eTf3gcXRf8t1iFKF2Hq3zbQrXoB`
+(`service.example.invalid`) and model gateway deployment
+`dpl_4Ewa72MC3keceK7XMQJLS4JGnYYr`
+(`service.example.invalid`) were promoted successfully.
+The media gateway candidate admitted Seedance2.5 far enough to return the expected
+invalid-credential401; this is admission evidence, not live generation evidence.
+The previous paragraph's authenticated chat receipts remain the service proof.
+Final Duet catalog roles select successors and retain prior concrete request
+admission as hidden records; no obsolete execution target is advertised.
+
+Agent main and annotated tag `v0.3.27` were pushed at
+`6cc1caf04a8291455c492d04f31d632d1abd404e` from the clean clone.
+The complete release composition passed1,377 Docker tests, build, types, lint,
+format and independent review. [Publication workflow](https://github.com/Example User/duet-agent/actions/runs/36362894793)
+is pending; a pushed tag alone is not publication evidence.
+
+Whole-spec review found training still passed a newly versioned name during a
+possible deferred binary update. It now passes stable `luna`, which both binaries
+resolve through their existing family mapping. The process-boundary test was red
+on the concrete name and green after the correction (three tests, seven assertions).
+Staging acceptance also checks the API manifest's desired agent version against
+the package pin, separately from the active runtime version, so an environment
+override cannot hide a rollout mismatch.
+
+
+## Published artifact and Duet adoption
+
+Release workflow36362894793 succeeded and npm accepted0.3.27; registry processing
+completed before adoption. `assets/release/release-0.3.27.json` records the exact
+SHA512, tarball SHA1 and source SHA. Isolated Docker installation verified CLI
+version/config export plus six family dispatches and saved alias upgrades from
+the published bytes in the same receipt. The initial local-tarball Bun install
+encountered patch-manifest handling; intended registry dependency installation
+in Duet succeeded, and the isolated npm installation verified the same tarball.
+
+Root catalog and Bun lock now pin0.3.27. The generated routing export contains
+that version and changes retired Terra route intent to Sol. The managed provider
+routes stay stable families. Installed-agent routing and release tests pass6/6,
+including attribution, failure, nested cwd, active-turn completion, offline
+catch-up and resume. The controlled replacement in the release test was updated
+to a current catalog model after the retired fixture correctly failed validation;
+no recovery assertions were relaxed.
+
+Independent whole-spec Codex review found the intentionally pending package
+adoption and two stale train expectations. Both are resolved: installed-agent
+routing is now green and training contract tests11/11 pass. Contract tests46/46
+pass, and all23 root type/lint tasks pass. The root full test gate is in progress.
+The original sibling main integrates the release while retaining its six unrelated
+unpublished commits; nothing else was pushed from that checkout.
+
+
+## Inverse update order blocks production
+
+Staging907a3aa46 was deployed while the local root integration suite continued;
+production requires both gates. API/backend identity matches that commit and the
+gateway release is16af104fd3bc. The official hub sync changed exactly the four
+writer/brand files and verified their generated hashes. The existing subscriber
+fixture retained its identities and upgraded its saved conversation from agent
+0.3.26 to0.3.27 with Sol6 and the unchanged fixed tariff.
+
+A later update-order audit found a missed reverse overlap. The actual old managed
+routing table from prerequisite9b2dee1, loaded by published0.3.27 in Docker, fails
+validation on four old route/advisor references before HTTP. The updater installs
+CLIs before checking gateway restart, so this is a real existing-user window,
+not a hypothetical custom configuration. The prior stable-family overlay protects
+old CLI/new gateway only. Production promotion is blocked while the agent fixes
+the existing load/selection boundary and issues an immutable patch release.
+Receipt: `assets/qualification/inverse-overlap.json`.
+
+
+## Staging execution and incomplete gates
+
+The existing-workspace receipt records the actual0.3.26→0.3.27 update, preserved
+saved alias and five prior history rows, Sol6 settled at the unchanged tariff,
+and unchanged canonical subscriber identities with current file hashes.
+Both installed apps then produced nonempty results using Luna6 with services
+attribution: writer249microUSD and brand246microUSD, each equal to upstream cost.
+App reconciliation completed through the normal content-generation restart path.
+The fixture remains for corrected-release verification and must be cleaned up.
+
+The fresh feature journey verified aliases/runtime/current content and generated
+valid Google image, Veo3.1 and Grok video files. Seedance was killed by its300s
+child deadline, so train/nondefault legs did not run. Read-only upstream evidence
+reports finish_reason=generated, generation_time307718ms and settled932890microUSD;
+this establishes a test deadline failure, not a provider error. One diagnostic
+retry will use a600s Seedance bound with consistent outer budgets. Veo succeeded
+but its row released for missing_generation_id; the SDK supports SSE events with
+inline video before metadata, and the gateway prefix scanner stops at16KB.
+A bounded rolling-window repair is under deterministic regression; the next live
+settlement must confirm the actual path. Do not count the first journey green.
+Its ephemeral workspace/user/session cleanup passed with no orphans.
+
+The first root suite was cancelled after the newly discovered overlap bug required
+a different final agent release. It reached21of23 Turbo tasks and saw Convex1s
+execution timeouts in agent-attachments, vm-usage-candidates and invitations.
+Turbo returned0 on interrupt, but the run is explicitly INCOMPLETE, not passing.
+All owned Convex and test workers stopped. Visual coverage, owner union and asset
+checks ran successfully afterward. The final exact-release root gate remains due;
+run it after the heavy agent gate, not concurrently.
+
+
+## Corrected release and stream ownership
+
+Agent0.3.28 shipped from `b21b6f74308375c8b920c1394d093450bcad114d` through
+[workflow36365498239](https://github.com/Example User/duet-agent/actions/runs/36365498239).
+Its full package Docker gate passed1,380 tests, with59 focused tests and clean
+build/types/lint/format/independent review. Exact npm integrity and installed-byte
+proof are in `assets/release/release-0.3.28.json`. The actual old managed table
+now loads and dispatches current Sol/Opus while retaining policy and disk bytes.
+The original sibling checkout incorporates this release; its unrelated commits
+remain local. Duet's pin/lock/routing snapshot now adopt0.3.28.
+
+The SSE response owner now scans bounded16K overlaps as it forwards client-pulled
+chunks. It does not independently drain a slow client's video into a tee queue.
+On cancellation it retains the existing billing obligation by draining only to
+metadata/EOF; a known ID permits immediate cancellation even with a pending read.
+Two independent-review findings about read-ahead and cancellation were reproduced
+and fixed. The outer HTTP regression forwards inline video byte-for-byte and
+records trailing metadata. Final integration checks pass21 extraction/HTTP tests,
+five probe tests and six installed-agent routing tests. Live Veo settlement still
+requires the final journey, rather than inference from the controlled response.
+
+The three timeout files from the cancelled broad run passed unchanged40/40 in a
+separate55-second run, with no deadline relaxation. This resolves those cases but
+does not substitute for the final exact-release root gate.
+
+
+### Corrected final review
+
+The full-feature independent Codex review against `d4c0b52` found no actionable
+regressions and ran 97 focused tests successfully. Root type checking and lint
+passed on the adopted 0.3.28 tree. The final root gate and staging retry remain
+required; these focused results do not substitute for them.
+
+
+## Combined agent review reopens selection correctness
+
+The user requested confirmation that all agent changes received the review skill.
+Audit found completed per-pass shape/diff/docs and independent reviews, but no
+separately recorded combined pass over the final release. The new whole-range
+review reproduced three defects through production functions: explicitly supplied
+provider pins were normalized a second time during execution; baseline dashed
+alias spellings were missing from the closed recovery map; and clearing a session
+after a bare resume lost the normal fresh-session routing default.
+
+These block production pending a corrected immutable agent release and final
+combined review. The running 0.3.28 staging journey remains useful evidence for
+unchanged media/settlement paths, not proof that the final selection fixes work.
+The retained existing fixture passed its 0.3.28 ordinary resume with all nine old
+history rows and saved alias preserved, exact Sol tariff and one matching debit.
+Source-only active examples now use stable Opus at agent commit
+`33512d7a6ba91c011598f36d81a3e23c6f9cb277`; examples are excluded from npm bytes.
+
+
+## Successful diagnostic staging journey on 0.3.28
+
+The single diagnostic retry completed with exit0 on staging67f1b9e62, gateway
+`d307daaf0c0d`, installed/announced agent0.3.28. All four media paths returned
+valid nonempty outputs and settled: Google image67006, Veo1600000, Grok560000,
+Seedance932890microUSD, each matching upstream under the unchanged media policy.
+Veo settlement now confirms the late-metadata repair through the live path.
+Seedance completed in174943ms within the measured600s ceiling. Stable Luna train
+completed, and Grok4.7/GLM5.3 returned the checkable42 with real settlement.
+Provider selections/history and fixed Sol/Opus tariffs passed; current generated
+subscriber/skill bytes were verified. All seven fixture resources were deleted,
+with no orphans. Sanitized receipts live under `assets/qualification/staging-0.3.28-*`.
+
+This is complete feature-path evidence for0.3.28, not a claim that the pending
+selection fixes are tested. The final patch must earn its own whole-agent review,
+Docker gate, published-byte qualification and updated-runtime verification.
+
+
+## Final-review coverage and test isolation
+
+The first three selection repairs passed188 focused Docker tests, including
+actual CLI clear behavior and all34 baseline alias spellings. The repeated
+whole-range review then found two additional saved-state seams: custom virtual
+tiers must win over matching retired names at session hydration, and agent models
+inside saved workflow definitions must advance too. The fix is being consolidated
+at the typed saved-state boundary; no final release is claimed from these checks.
+
+The running local root gate has repeated Convex one-second deadlines and boot
+timeouts in unchanged domains. Failed test authentication leaves shared test codes
+behind and causes later fixture setup failures before domain assertions. This is
+not a green root gate. A disposable Linux2CPU/4GB diagnostic of the same committed
+source passed all18 marketplace and17 publish tests, including the five local
+failures, plus54 of55 billing tests. The remaining billing report contained six
+of eight concurrent charges after its polling window, while both ledger counters
+were correct. That same case passed locally in4.55s. Delay versus failed scheduled
+work remains unproven, so no deadline or accounting behavior has been changed.
+The diagnostic VM was removed and absence verified; a separately bounded observer
+will capture scheduler evidence rather than repeat assertions blindly.
+
+The second disposable diagnostic also passed54/55 billing cases, but its failed
+case hit a direct mutation timeout before reaching the first run's partial-report
+assertion. A bounded observer recorded21 target scheduled jobs:19 succeeded and
+two rollups failed permanently at the one-second execution limit. No work remained
+pending, and totals did not change over58.6 seconds. This establishes failed
+scheduled work for this run, not the precise cause of the first run's missing
+monthly charges. Original assertions and polling deadlines stayed unchanged;
+the VM was removed and absence verified. Receipts and logs are retained at
+`/tmp/model-refresh-rollup-observation/`.
+
+Further combined agent review found explicit legacy launch preferences restored
+incorrectly after clear, an inline model override equal to the launch default
+discarded during resume, and stale executable benchmark/eval defaults. A separate
+whole-repository consumer scan also found old LongMemEval defaults, Google image
+eval selection and current Fable campaign arms. These are active consumers, unlike
+recorded benchmark outputs and SDK metadata donors. Repairs and repeat review are
+in progress;0.3.29 is neither released nor approved for production yet.
+
+
+The corrected local root run was interrupted after66 minutes with125 recorded
+failures and20/22 Turbo tasks successful. Its process handle terminated and all
+observed test/backend descendants were absent afterward. Turbo returned zero on
+interruption and ran the final static visual/asset checks; this is expressly an
+incomplete, failing root gate, not success. A final isolated unchanged root run
+is still required on the corrected release composition.
+
+## Clean combined agent review; final CI pending
+
+Agent commit3181c05455deb28279811259fffe634307b86f10 contains the consolidated
+saved-state and active-consumer repairs. The repeated whole-feature review from
+the pre-refresh release baseline found no actionable shape, diff or documentation
+defects. It included the previously untracked consumer regressions. Bounded
+offline checks do not replace integration evidence; one sandbox-blocked probe
+was expressly unexecuted. The local receipt is
+`/tmp/agent-selections-final-review-receipt.json`.
+
+Existing CI36371498403 tests the exact final source. CI36371512239 tests the same
+source with only the inline-selection fix reverted, to establish the last CLI
+regression's failing side without restarting the unavailable local Docker daemon.
+Both runs are pending; no0.3.29 tag has been created. The original sibling checkout
+preserves its six unrelated commits after merging the corrected source.
+
+Both CI runs have now completed. Final source passed1384/1384 tests across148
+files, plus build and lint. The falsification run passed1383 tests and failed
+exactly the intended inline-resume test (expected frontier, observed saved Sol).
+The temporary remote branch was deleted. Immutable coordinates, three-lens review
+and test scope are preserved in [the review receipt](assets/release/agent-review.json).
+The source release gates are clear; package publication and installed-byte checks
+remain separate required steps.
+
+
+## Verified agent0.3.29 adoption
+
+The immutable release workflow passed1384/1384 tests and published the exact
+version. Registry gitHead and integrity match the tag; all669 installed files
+matched tarball bytes. Controlled tests importing packaged dist/src passed14
+regressions/337 assertions through actual CLI, session, routing and workflow
+consumers. Six-family request serialization and the old managed routing table
+also passed. This is controlled runtime proof, not connected-account live proof.
+
+Duet's package pin and Bun lock now select that exact integrity. Routing export
+changed only its provenance version, not policy; routing:check and six gateway
+integration tests passed with79 assertions. The final root gate and live29 rollout
+remain required. See [release receipt](assets/release/release-0.3.29.json).
+
+
+## Final staging acceptance and cleanup
+
+All seven Vercel staging deployments succeeded at0cbb71854, with API/backend
+identity matching and gatewayec2b3d8e8e09. The existing fixture upgraded28→29
+through an ordinary resume, retained13 prior history hashes and its saved alias,
+and settled Sol6 at222310microUSD with one debit. Its three support generations
+also settled. The fresh fixture proved installed/announced29, nested routing,
+Sol6/Opus5.5 fixed settlement, saved selection/history and Luna6 internal execution.
+Installed catalog inspection separately proves the memory default; generation
+rows cannot uniquely distinguish memory from title work. Both fixtures were
+deleted and both VM absences verified. Receipts are under `assets/qualification/`
+with0.3.29 names. No media or app call was repeated.
+
+## Final root failure triage
+
+The isolated4CPU run passed frozen installation, all type checks and lint. Its
+first test failure was an existing skills-install test reading the stamp after
+waiting only for the skill file. A controlled filesystem-boundary probe established
+that the active link precedes the atomic stamp. The correction waits for the stamp
+and preserves both exact value assertions. Its unsupported100ms sync check also
+failed under host contention; the test now gives that unrelated filesystem work
+a1s chaos margin while holding the download, with unconditional release on failure.
+Falsification with an awaited installer failed exactly as intended and exited
+cleanly; restored source passed21 focused checks and59 assertions. No production
+code changed. See [test correction](assets/qualification/skills-install-test-correction.json).
+
+A later authentication test received Convex's internal `IsolateNotClean` response,
+without an assertion mismatch; no resource exhaustion was observed in the coarse samples. That cause remains under
+investigation. The original root run is still active and is already known to be
+red; it is not final qualification.
+
+
+The pinned Convex source identifies `IsolateNotClean` as a retryable rejection
+before request execution, not an authentication assertion failure. The underlying
+dirty-isolate reason is absent from the HTTP response. See the
+[request boundary](https://github.com/get-convex/convex-backend/blob/precompiled-2026-09-21-0cf49cb/crates/isolate/src/isolate.rs#L323)
+and [error mapping](https://github.com/get-convex/convex-backend/blob/precompiled-2026-09-21-0cf49cb/crates/isolate/src/metrics.rs#L105).
+The auth code, test and fixture lifecycle are unchanged from the feature baseline.
+
+The same run subsequently failed the unchanged64-call credential-use burst on
+Convex's1s function limit, and an unchanged agent-deletion test retained9 running
+sessions after its convergence window. Neither cause is proven by a five-second
+CPU average. The credential-use owner already uses32 shards and the test
+pre-stamps the credential before its burst. Narrow follow-up diagnostics preserve
+all calls, windows and deadlines, retain actual backend stderr/version, and sample
+resource pressure more frequently. No production behavior has been changed to
+accommodate these failures. The full run remains active and known red.
+
+The fifth failure is in the stale-dispatch/member-cleanup test's final21 parallel
+single-row reads. Its stale-dispatch assertion and cleanup convergence had already
+passed; one read then hit Convex's1s function limit. This is not evidence of a
+stuck cleanup continuation. For the separate deletion failure, all9 sessions
+remaining implies no committed first batch of8, rather than a missed final
+continuation. Follow-up diagnostics must retain the original parallel reads and
+inspect scheduler state before fixture teardown, alongside backend logs and
+resource samples. These owners and assertions are unchanged from the baseline.
+
+## Final transport acceptance audit
+
+The source suite's refreshed-model request captures send text only, despite using
+high reasoning. Vision fallback is tested through an injected stream function,
+and classifier schema handling through an injected generator. These prove their
+internal decisions but not tool/image/schema serialization through the actual SDK.
+Slice01 step4 is therefore reopened for controlled checks against the published
+0.3.29 package, including exact supported effort and checkable tool/structured
+results. No additional live provider call was required for this boundary proof.
+
+That gap is now closed: the [frozen installed-package fixture](assets/qualification/installed-capabilities-0.3.29/README.md)
+passed19 behavior tests plus one receipt writer, with192 assertions. Fifteen
+changed-model/router combinations preserve tool schemas, supported image bytes
+and exact configured effort. Three Luna structured calls force the schema,
+validate arguments and execute returned arithmetic code. An ordinary Sol session
+uses the real write and bash tools, verifies42 and-5, and returns the tool output
+on the next request. Five deliberate payload/result/code faults fail as intended.
+The fixture verifies669 installed files against the frozen npm artifact; its
+owned Docker container is confirmed absent. Controlled responses simulate model
+decisions, so this does not claim live provider acceptance or autonomous coding
+quality. No runtime source changed and no new package release was needed.
+
+## User-directed rollout gate
+
+The user asked to use live staging instead of the broad test bottleneck, noting
+that the development computer was CPU-saturated by multiple projects. The active
+broad run was on a separate4CPU VM, but it was already red and was delaying delivery
+beyond completed feature acceptance. It is being intentionally stopped with
+results retained and owned-VM cleanup verified separately. The prepared follow-up
+runner will not launch. This is a changed rollout gate, not a claim that the broad
+suite passed or that its backend failures have been fixed.
+
+Release acceptance uses the completed full staging journey, existing and fresh
+0.3.29 workspace probes, published package suite and artifact checks, focused model
+and billing regressions, and type/lint results. All production code still matches
+verified staging0cbb71854; later changes only correct a gateway test and retain
+spec evidence. Production deployment identity, content sync and selected-workspace
+verification remain required.
+
+## Production delivery and deferred broad regression check
+
+Normal promotion merged stagingf891c7cd4 into productione5b29f63e. All seven
+production deployments passed. API/backend/web/docs identities match that commit,
+and the normal release verifier passed with gatewayec2b3d8e8e09. Official-hub sync
+updated the four intended writer/brand files, deleted nothing, and verified their
+hashes. The selected production workspace upgraded itself to agent0.3.29 through
+its normal background rail; no restart or forced installation was used.
+
+Its existing routing file retained hash31662d9b…11f while the installed loader
+resolved its saved old Sol target to GPT-6 Sol at the same medium effort. Memory
+resolved to GPT-6 Luna. One incognito verification call returned42 in3.153s with
+no tools, then its exact generation reference settled at132150microUSD, matching
+the unchanged customer tariff. Scratch cleanup ran in finally. See the
+[final release report](assets/release/final-rollout.json) and linked receipts.
+
+The broad root run was intentionally stopped, and its owned VM was deleted with
+absence verified. Its failures remain recorded, not relabeled as passing. At the
+user's request, the scheduled `model-refresh-regression-follow-up` will check for
+spare CPU/memory in about three hours, then run the original full suite once and
+report results. It defers quietly while the computer is busy and pauses after its
+one follow-up run. This later check is not claimed complete in this release.

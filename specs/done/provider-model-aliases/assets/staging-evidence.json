@@ -1,0 +1,436 @@
+{
+  "journey": "provider-model-aliases",
+  "runId": "staging-e2e-synthetic",
+  "evidence": {
+    "upgrade": {
+      "before": {
+        "observedAt": 1790023987490,
+        "workspaceId": "ns7bnzf2yrb8baazs9y98597298ev4tv",
+        "vmName": "workspace-redacted",
+        "lastHeartbeatAt": 1790023966388,
+        "heartbeatGatewayVersion": "0.0.0+5ea2de2a0ed4",
+        "liveGatewayVersion": "0.0.0+5ea2de2a0ed4",
+        "gatewayInstanceId": "2c132323-b4a6-4825-ba12-084a8e422070",
+        "announcedVersion": "0.0.0+5ea2de2a0ed4",
+        "announcedSha256": "5ea2de2a0ed442470b8a771ce5efd595e9bb49f82f0a0ef773035e6fac887c6a",
+        "agentVersion": "0.3.24"
+      },
+      "after": {
+        "observedAt": 1790024272388,
+        "workspaceId": "ns7bnzf2yrb8baazs9y98597298ev4tv",
+        "vmName": "workspace-redacted",
+        "lastHeartbeatAt": 1790024269873,
+        "heartbeatGatewayVersion": "0.0.0+a1c85aa3d11f",
+        "liveGatewayVersion": "0.0.0+a1c85aa3d11f",
+        "gatewayInstanceId": "96cc9226-f530-4e7b-9008-50d1baab924d",
+        "announcedVersion": "0.0.0+a1c85aa3d11f",
+        "announcedSha256": "a1c85aa3d11f689b91e00604fdd3912a1c33f10fab6157f1bdbcc7a280d14afb",
+        "agentVersion": "0.3.24"
+      },
+      "temporaryReadFailures": 0,
+      "evidenceBoundary": "Heartbeat and live health identify the active release; SHA is the announced manifest hash, not a direct audit of /opt bytes."
+    },
+    "sessionId": "j97767pwremh7q4m3d8301hvzh8etmcf",
+    "workspaceDefault": "openai-frontier",
+    "anchorPath": "agents/alias-probe-7e98f2",
+    "runtime": {
+      "gatewayVersion": "0.0.0+a1c85aa3d11f",
+      "announcedSha256": "a1c85aa3d11f689b91e00604fdd3912a1c33f10fab6157f1bdbcc7a280d14afb",
+      "agentVersion": "0.3.24",
+      "cwd": "agents/alias-probe-7e98f2",
+      "configPath": "agents/alias-probe-7e98f2/.duet/models.json",
+      "routing": {
+        "defaultTier": "frontier",
+        "tiers": {
+          "frontier": {
+            "routes": {
+              "visual": {
+                "description": "Frontend, 3D, or anything visual: UI implementation and debugging, styling, graphics, image inspection, and work where visual fidelity matters.",
+                "target": {
+                  "modelName": "kimi",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "plan": {
+                "description": "Architecture, investigation, research, and high-stakes planning where the primary work is reasoning about what to build or do, not implementing it.",
+                "target": {
+                  "modelName": "opus",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "implement": {
+                "description": "Backend, systems, data, CLI, and other implementation or debugging work, including tests and code changes.",
+                "target": {
+                  "modelName": "sol",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "writing": {
+                "description": "Creative writing and prose where voice, narrative, or wording is the primary output rather than analysis or software work.",
+                "target": {
+                  "modelName": "opus",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "general": {
+                "description": "General questions, explanations, summaries, and requests that do not fit a more specific route.",
+                "target": {
+                  "modelName": "sol",
+                  "thinkingLevel": "medium"
+                }
+              }
+            },
+            "advisor": {
+              "enabled": true,
+              "target": {
+                "modelName": "fable",
+                "thinkingLevel": "medium"
+              },
+              "minStepsBetween": 5
+            }
+          },
+          "balanced": {
+            "routes": {
+              "visual": {
+                "description": "Frontend, 3D, or anything visual: UI implementation and debugging, styling, graphics, image inspection, and work where visual fidelity matters.",
+                "target": {
+                  "modelName": "kimi",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "plan": {
+                "description": "Architecture, investigation, research, and high-stakes planning where the primary work is reasoning about what to build or do, not implementing it.",
+                "target": {
+                  "modelName": "sol",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "implement": {
+                "description": "Backend, systems, data, CLI, and other implementation or debugging work, including tests and code changes.",
+                "target": {
+                  "modelName": "terra",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "writing": {
+                "description": "Creative writing and prose where voice, narrative, or wording is the primary output rather than analysis or software work.",
+                "target": {
+                  "modelName": "sonnet",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "general": {
+                "description": "General questions, explanations, summaries, and requests that do not fit a more specific route.",
+                "target": {
+                  "modelName": "terra",
+                  "thinkingLevel": "medium"
+                }
+              }
+            },
+            "advisor": {
+              "enabled": true,
+              "target": {
+                "modelName": "fable",
+                "thinkingLevel": "medium"
+              },
+              "minStepsBetween": 5
+            }
+          },
+          "economy": {
+            "routes": {
+              "implement": {
+                "description": "Backend, systems, data, CLI, and other implementation or debugging work, including tests and code changes.",
+                "target": {
+                  "modelName": "deepseek",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "writing": {
+                "description": "Creative writing and prose where voice, narrative, or wording is the primary output rather than analysis or software work.",
+                "target": {
+                  "modelName": "luna",
+                  "thinkingLevel": "low"
+                }
+              },
+              "general": {
+                "description": "General questions, explanations, summaries, and requests that do not fit a more specific route.",
+                "target": {
+                  "modelName": "deepseek",
+                  "thinkingLevel": "low"
+                }
+              }
+            },
+            "advisor": {
+              "enabled": false,
+              "target": {
+                "modelName": "terra",
+                "thinkingLevel": "medium"
+              },
+              "minStepsBetween": 5
+            }
+          },
+          "openai-frontier": {
+            "routes": {
+              "general": {
+                "description": "All work on OpenAI frontier.",
+                "target": {
+                  "modelName": "gpt-6-astra",
+                  "thinkingLevel": "medium"
+                }
+              }
+            },
+            "advisor": {
+              "enabled": false,
+              "target": {
+                "modelName": "gpt-6-astra",
+                "thinkingLevel": "medium"
+              },
+              "minStepsBetween": 5
+            }
+          },
+          "openai-max": {
+            "routes": {
+              "general": {
+                "description": "All work on OpenAI max.",
+                "target": {
+                  "modelName": "gpt-5.6-sol",
+                  "thinkingLevel": "medium"
+                }
+              }
+            },
+            "advisor": {
+              "enabled": false,
+              "target": {
+                "modelName": "gpt-5.6-sol",
+                "thinkingLevel": "medium"
+              },
+              "minStepsBetween": 5
+            }
+          },
+          "anthropic-frontier": {
+            "routes": {
+              "general": {
+                "description": "All work on Anthropic frontier.",
+                "target": {
+                  "modelName": "fable-5.1",
+                  "thinkingLevel": "medium"
+                }
+              }
+            },
+            "advisor": {
+              "enabled": false,
+              "target": {
+                "modelName": "fable-5.1",
+                "thinkingLevel": "medium"
+              },
+              "minStepsBetween": 5
+            }
+          },
+          "anthropic-max": {
+            "routes": {
+              "general": {
+                "description": "All work on Anthropic max.",
+                "target": {
+                  "modelName": "opus-5",
+                  "thinkingLevel": "medium"
+                }
+              }
+            },
+            "advisor": {
+              "enabled": false,
+              "target": {
+                "modelName": "opus-5",
+                "thinkingLevel": "medium"
+              },
+              "minStepsBetween": 5
+            }
+          }
+        },
+        "classifier": {
+          "target": {
+            "modelName": "typesafe-ai/jev"
+          },
+          "everySteps": 5,
+          "guidance": "Prefer continuity when the task has not materially changed, but switch routes when the work changes domains."
+        }
+      }
+    },
+    "turns": [
+      {
+        "alias": "openai-frontier",
+        "execution": [
+          {
+            "id": "md7extvxt9amcj139b3s222zjd8evy73",
+            "upstreamGenerationId": "gen_01M32W68HDNPFT2AG3G60GFW0C",
+            "model": "openai/gpt-6-astra",
+            "tier": "openai-frontier",
+            "usage": {
+              "uncachedInputTokens": 20660,
+              "cachedInputTokens": 0,
+              "outputTokens": 7
+            },
+            "billedCostMicroUsd": 248340,
+            "debitMicroUsd": -248340
+          }
+        ],
+        "support": [
+          {
+            "id": "md7frvj4gwv7xja64r5rh1bcjh8ets7a",
+            "model": "openai/gpt-5.6-luna",
+            "tier": "openai-frontier",
+            "status": "reconciling"
+          }
+        ]
+      },
+      {
+        "alias": "openai-max",
+        "execution": [
+          {
+            "id": "md70y534an2682c0ts55a2bg598etmwb",
+            "upstreamGenerationId": "gen_01M32W6Z8WG2BRE486HREAP0VV",
+            "model": "openai/gpt-5.6-sol",
+            "tier": "openai-max",
+            "usage": {
+              "uncachedInputTokens": 20783,
+              "cachedInputTokens": 0,
+              "outputTokens": 7
+            },
+            "billedCostMicroUsd": 208040,
+            "debitMicroUsd": -208040
+          }
+        ],
+        "support": [
+          {
+            "id": "md72e5ypazezmey5rzdg9z4j1s8evcgs",
+            "model": "openai/gpt-5.6-luna",
+            "tier": "openai-max",
+            "status": "reconciling"
+          }
+        ]
+      },
+      {
+        "alias": "anthropic-frontier",
+        "execution": [
+          {
+            "id": "md73bk40bm431jsj6rq66pgxyh8etwx4",
+            "upstreamGenerationId": "gen_01M32W7P1111P3EC8S4GFM048D",
+            "model": "anthropic/claude-fable-5.1",
+            "tier": "anthropic-frontier",
+            "usage": {
+              "uncachedInputTokens": 37005,
+              "cachedInputTokens": 0,
+              "outputTokens": 10
+            },
+            "billedCostMicroUsd": 444660,
+            "debitMicroUsd": -444660
+          }
+        ],
+        "support": [
+          {
+            "id": "md76rjn5sp882fn5frkhgkhctd8etn3t",
+            "model": "openai/gpt-5.6-luna",
+            "tier": "anthropic-frontier",
+            "status": "reconciling"
+          }
+        ]
+      },
+      {
+        "alias": "anthropic-max",
+        "execution": [
+          {
+            "id": "md77ks4pdtf03n4aktk9pmtz598ethsh",
+            "upstreamGenerationId": "gen_01M32W8DWX375EESQ8VQFH9CW7",
+            "model": "anthropic/claude-opus-5",
+            "tier": "anthropic-max",
+            "usage": {
+              "uncachedInputTokens": 37171,
+              "cachedInputTokens": 0,
+              "outputTokens": 10
+            },
+            "billedCostMicroUsd": 372010,
+            "debitMicroUsd": -372010
+          }
+        ],
+        "support": [
+          {
+            "id": "md799bvcjfhaet5v6f4sh6rnnx8et3w8",
+            "model": "openai/gpt-5.6-luna",
+            "tier": "anthropic-max",
+            "status": "reconciling"
+          },
+          {
+            "id": "md71r4z03tgp267s3pnyww66518ev0h5",
+            "model": "google/gemini-embedding-2",
+            "tier": "anthropic-max",
+            "status": "reconciling"
+          }
+        ]
+      },
+      {
+        "alias": "anthropic-max",
+        "execution": [
+          {
+            "id": "md7559p0ggbf90p18h9q01wxwh8ethq8",
+            "upstreamGenerationId": "gen_01M32W9429YFW3WBKGF0BJHCTP",
+            "model": "anthropic/claude-opus-5",
+            "tier": "anthropic-max",
+            "usage": {
+              "uncachedInputTokens": 1896,
+              "cachedInputTokens": 36413,
+              "outputTokens": 10
+            },
+            "billedCostMicroUsd": 55673,
+            "debitMicroUsd": -55673
+          }
+        ],
+        "support": [
+          {
+            "id": "md7cpheapywda7dhc8gx5pztz98etfk5",
+            "model": "google/gemini-embedding-2",
+            "tier": "anthropic-max",
+            "status": "settled"
+          },
+          {
+            "id": "md76737a013a1mmzydqhscx2rd8evx7d",
+            "model": "openai/gpt-5.6-luna",
+            "tier": "anthropic-max",
+            "status": "reconciling"
+          }
+        ]
+      }
+    ],
+    "restoredRouter": "economy"
+  },
+  "vmNames": [
+    "workspace-redacted"
+  ],
+  "cleanup": {
+    "runId": "staging-e2e-synthetic",
+    "status": "pass",
+    "resources": [
+      {
+        "kind": "user",
+        "status": "deleted"
+      },
+      {
+        "kind": "workspace",
+        "status": "deleted"
+      },
+      {
+        "kind": "mail-message",
+        "status": "deleted"
+      },
+      {
+        "kind": "agent",
+        "status": "deleted"
+      },
+      {
+        "kind": "session",
+        "status": "deleted"
+      }
+    ],
+    "orphans": []
+  },
+  "deployedRevision": "51d54ba8bac25bf06bd298041e4d9c26ec5ecb59",
+  "invocation": "Existing registered acceptance callback within its normal workspace-browser fixture; temporary bounded pre-deployment wait proves same-VM propagation."
+}

@@ -1,0 +1,559 @@
+---
+title: 'Claude Code MCP Servers: Complete Setup Guide (2026)'
+metaTitle: 'Claude Code MCP Servers: Setup, Config, and Best Servers (2026)'
+description: 'Claude Code MCP servers connect your AI agent to GitHub, Slack, Notion, databases, and more. Step-by-step setup, configuration, and the best MCP servers for coding workflows.'
+date: '2026-05-28'
+author:
+  name: 'Duet Team'
+category: 'guides'
+tags: ['claude-code', 'mcp', 'mcp-servers', 'setup', 'configuration']
+type: 'guide'
+image: '/guides/claude-code-mcp-servers-setup/cover.png'
+relatedPosts:
+  - slug: 'agent-skills-101-tools-vs-mcp-vs-skills'
+    context: 'The conceptual breakdown of Tools vs MCP vs Skills. Start here if you want to understand what MCP is before setting it up.'
+  - slug: 'claude-code-skills-complete-guide'
+    context: 'The complete guide to Claude Code Skills. Skills and MCP are complementary: MCP provides access, Skills encode workflows.'
+  - slug: 'claude-code-for-teams'
+    context: 'How to run Claude Code across a team, including shared MCP configuration and project-level settings.'
+cta:
+  title: 'MCP servers, pre-configured.'
+  subtitle: 'Duet ships Claude Code with MCP integrations ready for your whole team. No manual setup, no config files, no token juggling.'
+  buttonText: 'Try Duet with MCP'
+  href: '/sign-in?from=guide-mcp-setup'
+howTo:
+  name: 'How to Set Up MCP Servers in Claude Code'
+  description: 'A step-by-step guide to adding, configuring, and managing MCP servers in Claude Code for connecting to GitHub, Slack, Notion, databases, and other external tools.'
+  steps:
+    - name: 'Install an MCP server'
+      text: 'Use the claude mcp add command with the appropriate transport type (http for cloud services, stdio for local tools) to connect an MCP server to Claude Code.'
+    - name: 'Configure the scope'
+      text: 'Choose local scope for personal use, project scope to share with your team via .mcp.json, or user scope for cross-project availability.'
+    - name: 'Authenticate the server'
+      text: 'For cloud services, complete OAuth authentication via /mcp or pass API keys via --header or --env flags.'
+    - name: 'Verify the connection'
+      text: 'Run /mcp inside Claude Code to check server status, tool counts, and connection health.'
+---
+
+MCP servers turn Claude Code from a code-completion tool into a connected agent. Instead of pasting data from Slack, Jira, or your database into the chat window, you connect Claude directly to those systems. It reads, writes, and acts on your behalf.
+
+This guide covers everything: how to add MCP servers, which ones matter for coding workflows, how to configure them for your team, and how to debug them when they break. If you are new to MCP as a concept, start with [Skills vs MCP: What's the Difference](/guides/agent-skills-101-tools-vs-mcp-vs-skills) and come back here for the hands-on setup.
+
+<GuideTOC
+  items={[
+    {
+      number: 1,
+      title: 'What Are MCP Servers in Claude Code?',
+      href: '#what-are-mcp-servers-in-claude-code',
+    },
+    {
+      number: 2,
+      title: 'Claude Code MCP vs Claude Cowork',
+      href: '#claude-code-mcp-vs-claude-cowork',
+    },
+    {
+      number: 3,
+      title: 'How to Add an MCP Server',
+      href: '#how-to-add-an-mcp-server-to-claude-code',
+    },
+    {
+      number: 4,
+      title: 'Configuration Scopes',
+      href: '#mcp-configuration-scopes-local-project-and-user',
+    },
+    {
+      number: 5,
+      title: 'Best MCP Servers for Claude Code',
+      href: '#best-mcp-servers-for-claude-code-2026',
+    },
+    {
+      number: 6,
+      title: 'stdio vs Remote HTTP',
+      href: '#stdio-vs-remote-http-which-transport-to-use',
+    },
+    { number: 7, title: 'Authentication and Security', href: '#authentication-and-security' },
+    { number: 8, title: 'How MCP Tools Work at Runtime', href: '#how-mcp-tools-work-at-runtime' },
+    { number: 9, title: 'Troubleshooting', href: '#troubleshooting-common-mcp-issues' },
+    { number: 10, title: 'FAQ', href: '#frequently-asked-questions' },
+  ]}
+/>
+
+---
+
+## What Are MCP Servers in Claude Code?
+
+MCP stands for Model Context Protocol. It is an open standard by Anthropic that defines how AI models connect to external tools, databases, and APIs. An MCP server is a process that exposes tools, resources, and prompts over this standardized protocol. Claude Code acts as an MCP client, connecting to one or more servers and calling their tools during your session.
+
+With MCP servers connected, you can ask Claude Code to:
+
+- Implement a feature from a Jira ticket and open the PR on GitHub, without leaving the terminal
+- Query your production database to find users who hit a specific bug
+- Check Sentry for errors after a deployment
+- Run Playwright browser tests and take screenshots
+- Pull Figma designs and convert them to code
+
+Connect a server when you find yourself copy-pasting data from another tool into chat. Once connected, Claude reads and acts on that system directly.
+
+---
+
+## Claude Code MCP vs Claude Cowork
+
+Anthropic now offers two agentic products: Claude Code for developers and Claude Cowork for knowledge workers. Both use MCP under the hood, but the experience is completely different.
+
+**Claude Code** is a CLI tool. You add MCP servers with `claude mcp add`, configure them in JSON files, and control scope at the project, user, or organization level. You have full control over transport types, auth tokens, and environment variables. MCP in Claude Code is infrastructure you manage.
+
+**Claude Cowork** is a desktop application for non-technical users. It handles tasks autonomously on your computer, working with local files and applications. Cowork has its own connector system with enterprise integrations like Google Drive, Gmail, DocuSign, and FactSet. You don't configure MCP servers manually. Cowork manages that layer for you.
+
+The key differences:
+
+- **Interface:** Claude Code runs in your terminal. Cowork runs as a desktop GUI.
+- **MCP control:** Claude Code gives you full access to add, remove, configure, and debug MCP servers. Cowork abstracts this away behind managed connectors and plugins.
+- **Target user:** Claude Code is for developers and engineers. Cowork is for ops, finance, marketing, and other knowledge workers.
+- **Custom servers:** Claude Code lets you build and connect your own MCP servers. Cowork relies on Anthropic-vetted connectors.
+- **Team sharing:** Claude Code shares MCP configs through `.mcp.json` committed to git. Cowork uses enterprise admin controls.
+
+If you are writing code, shipping features, or building integrations, Claude Code MCP is what you want. If your team needs file organization, document prep, or research synthesis without touching a terminal, Cowork handles that.
+
+For teams that need both, [Duet](/) gives you a shared workspace where developers and non-technical teammates collaborate with agents in the same place, with MCP integrations pre-configured.
+
+---
+
+## How to Add an MCP Server to Claude Code
+
+There are two ways to add an MCP server: the CLI command and manual JSON configuration.
+
+<YouTubeEmbed id="DfWHX7kszQI" title="Claude Code MCP: How to Add MCP Servers (Complete Guide)" />
+
+### Method 1: The claude mcp add command
+
+The fastest way to connect a server. The syntax depends on the transport type.
+
+**For remote HTTP servers (recommended for cloud services):**
+
+```bash
+# Basic syntax
+claude mcp add --transport http <name> <url>
+
+# Example: Connect to Notion
+claude mcp add --transport http notion https://mcp.notion.com/mcp
+
+# With authentication header
+claude mcp add --transport http github https://api.githubcopilot.com/mcp/ \
+  --header "Authorization: Bearer YOUR_GITHUB_PAT"
+```
+
+**For local stdio servers (runs as a subprocess on your machine):**
+
+```bash
+# Basic syntax
+claude mcp add [options] <name> -- <command> [args...]
+
+# Example: Add Playwright for browser testing
+claude mcp add --transport stdio playwright -- npx -y @playwright/mcp@latest
+
+# Example: Add a database server with env vars
+claude mcp add --transport stdio --env AIRTABLE_API_KEY=YOUR_KEY airtable \
+  -- npx -y airtable-mcp-server
+```
+
+> **Important:** All options (`--transport`, `--env`, `--scope`, `--header`) must come before the server name. The `--` (double dash) separates the server name from the command that gets passed to the MCP server.
+
+### Method 2: JSON configuration
+
+For more complex setups or team sharing, add servers via JSON:
+
+```bash
+# Add from JSON directly
+claude mcp add-json weather-api '{"type":"http","url":"https://api.weather.com/mcp","headers":{"Authorization":"Bearer token"}}'
+
+# Add a stdio server from JSON
+claude mcp add-json local-db '{"type":"stdio","command":"/path/to/server","args":["--port","8080"],"env":{"DB_URL":"postgres://..."}}'
+```
+
+### Managing servers
+
+```bash
+# List all configured servers
+claude mcp list
+
+# Get details for a specific server
+claude mcp get github
+
+# Remove a server
+claude mcp remove github
+
+# Inside Claude Code, check server status
+/mcp
+```
+
+If you have MCP servers already configured in Claude Desktop, you can import them:
+
+```bash
+claude mcp add-from-claude-desktop
+```
+
+This works on macOS and WSL. It reads your Claude Desktop config and lets you select which servers to import.
+
+---
+
+## MCP Configuration Scopes: Local, Project, and User
+
+Where you store your MCP config determines who can access it and which projects it loads in. Claude Code supports three scopes.
+
+**Local scope (default)** stores the config in `~/.claude.json` under your current project path. Only you can see it, only in this project. Good for personal dev servers or configs with credentials you do not want in version control.
+
+```bash
+# Local scope (default)
+claude mcp add --transport http stripe https://mcp.stripe.com
+
+# Explicitly specify local
+claude mcp add --transport http stripe --scope local https://mcp.stripe.com
+```
+
+**Project scope** writes to `.mcp.json` at your project root. This file is designed to be committed to git, so every team member gets the same MCP servers automatically.
+
+```bash
+# Add a project-scoped server
+claude mcp add --transport http paypal --scope project https://mcp.paypal.com/mcp
+```
+
+The resulting `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "paypal": {
+      "type": "http",
+      "url": "https://mcp.paypal.com/mcp"
+    }
+  }
+}
+```
+
+**User scope** stores the config in `~/.claude.json` globally. The server loads in every project on your machine. Good for utility servers you use everywhere.
+
+```bash
+claude mcp add --transport http hubspot --scope user https://mcp.hubspot.com/anthropic
+```
+
+Precedence order when the same server exists in multiple scopes: Local > Project > User > Plugins > Claude.ai connectors. The highest-precedence definition wins. Fields are not merged across scopes.
+
+The `.mcp.json` file supports environment variable expansion with `${VAR}` syntax. This lets your team share configs while keeping credentials in each developer's environment:
+
+```json
+{
+  "mcpServers": {
+    "api-server": {
+      "type": "http",
+      "url": "${API_BASE_URL:-https://api.example.com}/mcp",
+      "headers": {
+        "Authorization": "Bearer ${API_KEY}"
+      }
+    }
+  }
+}
+```
+
+<DuetCTA />
+
+---
+
+## Best MCP Servers for Claude Code (2026)
+
+These are the servers that matter most for coding workflows. Each entry includes what it does, how to connect it, and the auth method.
+
+<YouTubeEmbed id="kRxdsv1ZY1E" title="The Best MCP Servers of 2025" />
+
+### GitHub
+
+PRs, issues, code search. Transport: HTTP. Auth: GitHub PAT.
+
+```bash
+claude mcp add --transport http github https://api.githubcopilot.com/mcp/ \
+  --header "Authorization: Bearer YOUR_GITHUB_PAT"
+```
+
+<YouTubeEmbed id="YSGepb9GD28" title="Claude Code + GitHub MCP Setup in 5 Minutes" />
+
+### Playwright
+
+Browser automation, testing, screenshots. Transport: stdio. Auth: None.
+
+```bash
+claude mcp add --transport stdio playwright -- npx -y @playwright/mcp@latest
+```
+
+<YouTubeEmbed id="I9kO6-yPkfM" title="Claude Code + Playwright Browser Automations" />
+
+### Sentry
+
+Error monitoring, stack traces, deployment tracking. Transport: HTTP. Auth: OAuth via `/mcp`.
+
+```bash
+claude mcp add --transport http sentry https://mcp.sentry.dev/mcp
+```
+
+### Notion
+
+Documentation, databases, knowledge bases. Transport: HTTP. Auth: OAuth.
+
+```bash
+claude mcp add --transport http notion https://mcp.notion.com/mcp
+```
+
+### Supabase
+
+Database queries, auth management, edge functions. Transport: stdio. Auth: Service key.
+
+```bash
+claude mcp add --transport stdio --env SUPABASE_KEY=YOUR_KEY supabase \
+  -- npx -y @supabase/mcp-server
+```
+
+### Linear
+
+Issue tracking, project management, sprint planning. Transport: HTTP. Auth: API key.
+
+```bash
+claude mcp add --transport http linear https://mcp.linear.app/mcp
+```
+
+### Slack
+
+Channel reads, message search, posting updates. Transport: HTTP. Auth: OAuth.
+
+```bash
+claude mcp add --transport http slack https://mcp.slack.com/mcp
+```
+
+### Figma
+
+Design-to-code, component inspection, asset export. Transport: HTTP. Auth: OAuth.
+
+```bash
+claude mcp add --transport http figma https://mcp.figma.com/mcp
+```
+
+<YouTubeEmbed
+  id="ZETEqL4yZjk"
+  title="How To Use Claude with Figma MCP: Updated Setup For Designers (2026)"
+/>
+
+### Context7
+
+Up-to-date library documentation. Transport: stdio. Auth: None.
+
+```bash
+claude mcp add --transport stdio context7 -- npx -y @context7/mcp-server
+```
+
+### PostgreSQL (via dbhub)
+
+Direct database queries against your Postgres instance. Transport: stdio. Auth: Connection string.
+
+```bash
+claude mcp add --transport stdio db -- npx -y @bytebase/dbhub \
+  --dsn "postgresql://readonly:pass@host:5432/analytics"
+```
+
+### Jira / Atlassian
+
+Issues, projects, sprint boards. Transport: HTTP. Auth: API token.
+
+```bash
+claude mcp add --transport http atlassian https://mcp.atlassian.com/mcp
+```
+
+Browse the full catalog of reviewed connectors in the [Anthropic Directory](https://claude.ai/directory).
+
+---
+
+## stdio vs Remote HTTP: Which Transport to Use
+
+Claude Code supports two primary transport types for MCP servers.
+
+**stdio (local)** spawns the server as a subprocess on your machine. Messages flow through stdin/stdout. Best for dev tools that need filesystem access, local databases, CLI wrappers, and tools with no remote endpoint. Downside: only works on your machine, not shareable across a team.
+
+**HTTP (remote)** connects to a server running independently over HTTPS. Best for cloud services, team-shared tools, and SaaS integrations. Supports OAuth, automatic reconnection with exponential backoff, and Server-Sent Events for streaming.
+
+> SSE transport is deprecated. Use HTTP where available.
+
+Decision guide:
+
+- Building something for just you? Use stdio.
+- Connecting to a SaaS product? Use HTTP.
+- Sharing with your team? Use HTTP with project-scoped `.mcp.json`.
+- Running a custom script or CLI tool? Use stdio.
+
+---
+
+## Authentication and Security
+
+MCP servers that connect to cloud services need credentials. Claude Code handles this in several ways.
+
+**OAuth 2.0 (recommended for cloud services).** Many remote MCP servers use OAuth. Claude Code handles the flow automatically. Add the server, run `/mcp`, and follow the browser login prompt. Tokens are stored securely and refreshed automatically.
+
+**Bearer tokens and API keys.** Pass static tokens via headers when adding the server:
+
+```bash
+claude mcp add --transport http github https://api.githubcopilot.com/mcp/ \
+  --header "Authorization: Bearer ghp_xxxxxxxxxxxx"
+```
+
+**Environment variables for stdio servers.** Pass sensitive values without hardcoding them:
+
+```bash
+claude mcp add --transport stdio --env DB_PASSWORD=secret db -- ./my-db-server
+```
+
+**Dynamic headers.** For custom auth schemes (Kerberos, internal SSO), use `headersHelper` in `.mcp.json` to run a script that generates auth headers at connection time.
+
+Security best practices:
+
+- Never commit API keys to git. Use env var expansion in `.mcp.json` instead.
+- Use read-only credentials where possible.
+- Restrict OAuth scopes to only what you need.
+- Verify you trust each MCP server before connecting. Servers that fetch external content can expose you to prompt injection.
+
+---
+
+## How MCP Tools Work at Runtime
+
+After you add an MCP server, here is what happens when you start a Claude Code session.
+
+**Tool Search is enabled by default.** Claude Code does not load every MCP tool into context upfront. Instead, it defers them. Only tool names load at session start. When Claude needs a specific tool, it uses an internal ToolSearch function to find and load the relevant tool definition on demand. This keeps your context window lean, even if you have dozens of MCP servers connected.
+
+You can check server status any time with `/mcp`. It shows connected servers, tool counts, and flags any servers that failed to connect.
+
+If a server disconnects mid-session, Claude Code automatically reconnects HTTP servers with exponential backoff (up to 5 attempts). Stdio servers are local processes and are not reconnected automatically.
+
+MCP servers can also push messages into your session via **Channels**. This lets Claude react to external events like CI results, monitoring alerts, or chat messages while you work.
+
+---
+
+## Troubleshooting Common MCP Issues
+
+<YouTubeEmbed
+  id="oM2dXJnD80c"
+  title="Claude Code + MCP Setup: Late Night Tutorial (Troubleshooting Included)"
+/>
+
+**Server not connecting.** Run `claude mcp list` to confirm the server is registered. Then run `/mcp` inside Claude Code to see the status. Check that the command or URL is correct. For stdio servers, verify the binary or npx package exists.
+
+**Authentication failures.** For OAuth servers, clear auth with `/mcp` and re-authenticate. For header-based auth, verify the token has not expired. For env-var auth, make sure the variable is set in your shell before launching Claude Code.
+
+**Timeout errors.** MCP servers have a default startup timeout. Set `MCP_TIMEOUT=10000` before launching Claude Code to increase it to 10 seconds. For per-tool execution timeouts, add a `timeout` field in your `.mcp.json` entry.
+
+**"Could not find tool" errors.** If Tool Search is enabled (default), Claude searches for tools on demand. If you disabled it, all tools load upfront and may exceed context limits. Make sure the server is actually connected before expecting its tools.
+
+**Transport mismatch.** If a server expects HTTP and you configured stdio (or vice versa), the connection silently fails. Check the server's docs for the correct transport type.
+
+**Large output warnings.** MCP tool output that exceeds 10,000 tokens triggers a warning. Set `MAX_MCP_OUTPUT_TOKENS=50000` to raise the limit if you are querying large datasets.
+
+---
+
+## Frequently Asked Questions
+
+<Accordion type="single" collapsible className="w-full">
+
+<AccordionItem value="cowork-vs-code">
+  <AccordionTrigger>
+    What is the difference between MCP in Claude Code and Claude Cowork?
+  </AccordionTrigger>
+  <AccordionContent>
+    Claude Code gives you full CLI control over MCP servers: add, remove, configure, debug. Claude
+    Cowork abstracts MCP behind managed connectors and a desktop GUI. Code is for developers. Cowork
+    is for knowledge workers.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="how-to-add">
+  <AccordionTrigger>How do I add an MCP server to Claude Code?</AccordionTrigger>
+  <AccordionContent>
+    Run `claude mcp add --transport http name url` for remote servers, or `claude mcp add
+    --transport stdio name -- command` for local servers. You can also edit `.mcp.json` directly or
+    use `claude mcp add-json` for complex configurations.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="best-servers">
+  <AccordionTrigger>What are the best MCP servers for Claude Code?</AccordionTrigger>
+  <AccordionContent>
+    For most dev workflows: GitHub, Playwright, Sentry, and your database via dbhub. For
+    design-to-code: Figma. For docs: Notion. For project management: Linear or Jira. Browse the full
+    catalog at claude.ai/directory.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="team-sharing">
+  <AccordionTrigger>How do I share MCP config across my team?</AccordionTrigger>
+  <AccordionContent>
+    Use `--scope project` when adding servers. This writes to `.mcp.json` at your project root.
+    Commit that file to git, and every team member who clones the repo gets the same MCP servers.
+    For credentials, the `${VAR}` syntax lets each developer provide their own tokens via
+    environment variables.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="subagents">
+  <AccordionTrigger>Can MCP servers work with Claude Code subagents?</AccordionTrigger>
+  <AccordionContent>
+    Yes. Subagents inherit MCP tools from the main session by default. You can restrict them with
+    `allowed-tools` in skill definitions if you want to limit which tools a subagent can access.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="debug">
+  <AccordionTrigger>How do I debug MCP connection issues?</AccordionTrigger>
+  <AccordionContent>
+    Run `claude mcp list` to verify registration. Run `/mcp` inside Claude Code to check status. For
+    HTTP servers, check auth tokens. For stdio servers, verify the command exists. Set `MCP_TIMEOUT`
+    for slow startups.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="stdio-vs-http">
+  <AccordionTrigger>What is the difference between stdio and HTTP transport?</AccordionTrigger>
+  <AccordionContent>
+    stdio spawns the server as a local subprocess. Messages flow through stdin/stdout. HTTP connects
+    to a remote server over HTTPS. Use stdio for local tools and scripts. Use HTTP for cloud
+    services and team-shared integrations.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="duet">
+  <AccordionTrigger>Do MCP servers work with Duet AI?</AccordionTrigger>
+  <AccordionContent>
+    Yes. Duet ships with MCP integrations pre-configured for teams. No manual setup required. Your
+    agents connect to Slack, GitHub, Notion, and more out of the box.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="mcp-vs-skills">
+  <AccordionTrigger>Is MCP the same as Skills in Claude Code?</AccordionTrigger>
+  <AccordionContent>
+    No. MCP provides access to external tools and data. Skills encode how to use those tools in
+    multi-step workflows with quality checks and templates. They are complementary. Read our{' '}
+    <a href="/guides/agent-skills-101-tools-vs-mcp-vs-skills">Skills vs MCP guide</a> for the full
+    breakdown.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="custom-server">
+  <AccordionTrigger>Can Claude Code connect to a custom MCP server I built?</AccordionTrigger>
+  <AccordionContent>
+    Yes. Build your server following the MCP specification, then add it with `claude mcp add`. You
+    can also use the `mcp-server-dev` plugin to scaffold a new server from within Claude Code by
+    running `/plugin install mcp-server-dev@claude-plugins-official`.
+  </AccordionContent>
+</AccordionItem>
+
+</Accordion>
+
+## Keep reading
+
+- [Skills vs MCP: What's the Difference and When to Use Each](/guides/agent-skills-101-tools-vs-mcp-vs-skills). The conceptual foundation for understanding MCP's role alongside Tools and Skills.
+- [Claude Code Skills: The Complete Guide](/guides/claude-code-skills-complete-guide). Skills and MCP are complementary. This guide covers how to build and share skills.
+- [Claude Code for Teams](/guides/claude-code-for-teams). Team setup including shared MCP configuration, permissions, and workflows.
+- [MCP Alternatives for Code Execution Agents](/blog/mcp-alternatives-code-execution-agents). When MCP is not the right fit, explore other approaches.
+- [How to Run Claude Code in the Cloud](/blog/how-to-run-claude-code-in-the-cloud). Run Claude Code (and its MCP servers) on remote infrastructure.

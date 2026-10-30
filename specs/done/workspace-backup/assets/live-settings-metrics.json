@@ -1,0 +1,9 @@
+{
+  "reference": "deterministic empty Settings Backups, 1440x900",
+  "candidate": "live staging complete and partial backups, 1280x720",
+  "alignment": "896x350 card regions at (408,186) and (328,186); viewport and data differ, so difference is diagnostic rather than a regression score",
+  "changedPixels": 10393,
+  "totalPixels": 313600,
+  "changedRatio": 0.03314094387755102,
+  "cardWidthPreserved": 896
+}

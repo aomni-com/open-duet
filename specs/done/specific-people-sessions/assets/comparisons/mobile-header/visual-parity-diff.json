@@ -1,0 +1,50 @@
+{
+  "kind": "screenshot-parity-diff",
+  "generatedAt": "2026-08-28T04:28:48.445Z",
+  "note": "Lower parityDistance means the candidate is closer to the reference for this fixed pair. This is a distance metric, not an acceptance gate.",
+  "pairCount": 1,
+  "worstPair": "mobile-header",
+  "results": [
+    {
+      "id": "mobile-header",
+      "current": "git:b30d0dbc5:apps/web/tests/visual/__screenshots__/mobile/playground.spec.ts/agent-jobs-dialog-picked.png",
+      "candidate": "apps/web/tests/visual/__screenshots__/mobile/playground.spec.ts/agent-jobs-dialog-picked.png",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "parityDistance": 0.00582,
+      "grayscale": {
+        "mae": 0.49761,
+        "rmse": 7.22588,
+        "diffRatio16": 0.00767,
+        "diffRatio32": 0.00464,
+        "diffRatio64": 0.0025,
+        "pixelmatchRatio": 0.00731
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0.00478,
+        "blackRatioCandidate": 0.00478,
+        "terrainLikeRatioCurrent": 0.90983,
+        "terrainLikeRatioCandidate": 0.91051,
+        "avgLuminanceCurrent": 234.53917,
+        "avgLuminanceCandidate": 234.528,
+        "avgLuminanceDelta": -0.01117,
+        "edgeEnergyCurrent": 0.10703,
+        "edgeEnergyCandidate": 0.10695,
+        "edgeEnergyRatio": 0.99925,
+        "edgeDiffRatio32": 0.00881
+      },
+      "artifacts": {
+        "sideBySide": "mobile-header/mobile-header-side-by-side.png",
+        "currentGray": "mobile-header/mobile-header-current-gray.png",
+        "candidateGray": "mobile-header/mobile-header-candidate-gray.png",
+        "absDiff": "mobile-header/mobile-header-absdiff.png",
+        "pixelmatch": "mobile-header/mobile-header-pixelmatch.png",
+        "currentEdges": "mobile-header/mobile-header-current-edges.png",
+        "candidateEdges": "mobile-header/mobile-header-candidate-edges.png",
+        "edgeDiff": "mobile-header/mobile-header-edge-diff.png"
+      }
+    }
+  ]
+}

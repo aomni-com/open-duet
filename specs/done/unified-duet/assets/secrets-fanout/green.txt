@@ -1,0 +1,10 @@
+bun test v1.3.14 (0d9b296a)
+
+scripts/secrets-push.test.ts:
+(pass) fanout stores every managed Vercel value byte-exactly through the CLI boundary [1695.81ms]
+(pass) failed upsert preserves the prior value, cleans private input and permits retry [2964.83ms]
+
+ 2 pass
+ 0 fail
+ 227 expect() calls
+Ran 2 tests across 1 file. [4.69s]

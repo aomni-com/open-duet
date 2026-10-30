@@ -1,0 +1,124 @@
+{
+  "bootId": "7f362cf0-3ec6-46be-a6e5-1e8488688455",
+  "gatewayUnit": {
+    "ActiveState": "active",
+    "SubState": "running",
+    "MainPID": "131171",
+    "ControlPID": "0",
+    "Result": "success",
+    "NRestarts": "0",
+    "FragmentPath": "/etc/systemd/system/duet-gateway.service",
+    "DropInPaths": "/etc/systemd/system/duet-gateway.service.d/40-bun-runtime.conf",
+    "ExecStartPrePathArgumentsOnly": [
+      "/opt/duet/bin/gateway-bootstrap.js"
+    ],
+    "ExecStartPathArgumentsOnly": [
+      "/opt/duet/current/index.js"
+    ]
+  },
+  "adoptionUnit": {
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "MainPID": "0",
+    "ControlPID": "0",
+    "Result": "success",
+    "NRestarts": "0"
+  },
+  "linksAndFiles": [
+    {
+      "path": "/opt/duet/current",
+      "lexists": true,
+      "mode": "0o777",
+      "uid": 1000,
+      "gid": 1000,
+      "link": "/opt/duet/releases/0.0.0+4955b7a09dde",
+      "resolved": "/opt/duet/releases/0.0.0+4955b7a09dde",
+      "exists": true
+    },
+    {
+      "path": "/opt/duet/previous",
+      "lexists": true,
+      "mode": "0o777",
+      "uid": 1000,
+      "gid": 1000,
+      "link": "/opt/duet/releases/0.0.0+01212abf6ba1",
+      "resolved": "/opt/duet/releases/0.0.0+01212abf6ba1",
+      "exists": true
+    },
+    {
+      "path": "/opt/duet/current/duet",
+      "lexists": false
+    },
+    {
+      "path": "/opt/duet/current/index.js",
+      "lexists": true,
+      "mode": "0o755",
+      "uid": 1000,
+      "gid": 1000,
+      "resolved": "/opt/duet/releases/0.0.0+4955b7a09dde/index.js",
+      "exists": true,
+      "bytes": 3072004
+    },
+    {
+      "path": "/opt/duet/bin/runtime-bootstrap.js",
+      "lexists": false
+    },
+    {
+      "path": "/opt/duet/bin/gateway-bootstrap.js",
+      "lexists": true,
+      "mode": "0o755",
+      "uid": 1000,
+      "gid": 1000,
+      "resolved": "/opt/duet/bin/gateway-bootstrap.js",
+      "exists": true,
+      "bytes": 862213
+    },
+    {
+      "path": "/opt/duet/gateway-runtime/bin/bun",
+      "lexists": true,
+      "mode": "0o755",
+      "uid": 0,
+      "gid": 0,
+      "resolved": "/opt/duet/gateway-runtime/bin/bun",
+      "exists": true,
+      "bytes": 79500640
+    },
+    {
+      "path": "/usr/local/bin/duet",
+      "lexists": false
+    },
+    {
+      "path": "/home/synthetic-user/.duet/runtime-adoption/0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2/recovery-releases/0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2/duet",
+      "lexists": false
+    }
+  ],
+  "runtime-boot-state.json": {
+    "errorType": "FileNotFoundError"
+  },
+  "runtime-release-adoption.json": {
+    "errorType": "FileNotFoundError"
+  },
+  "operationJournal": {
+    "phase": "restored",
+    "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "previousGatewayVersion": "0.0.0+4955b7a09dde",
+    "bootId": "7f362cf0-3ec6-46be-a6e5-1e8488688455",
+    "main": {
+      "pid": 3979385,
+      "started": "404399216"
+    },
+    "worker": {
+      "pid": 130947,
+      "started": "422595556"
+    }
+  },
+  "operationReceipt": {
+    "status": "failed",
+    "phase": "restored",
+    "restored": true,
+    "reason": "ENOENT: no such file or directory, posix_spawn '/opt/duet/current/duet'",
+    "bootIdBefore": "7f362cf0-3ec6-46be-a6e5-1e8488688455",
+    "bootIdAfter": "7f362cf0-3ec6-46be-a6e5-1e8488688455"
+  },
+  "ownedBootstrapEvents": []
+}

@@ -1,0 +1,31 @@
+{
+  "imageRef": "ttl.sh/duet-share-relocate-20260716124854-3501:1h",
+  "vmAName": "duet-test-relocate-a-20260716t131240-ky1v",
+  "vmBName": "duet-test-relocate-b-20260716t131240-x9ae",
+  "createAMs": 4820,
+  "createBMs": 3976,
+  "readyAMs": 3356,
+  "readyBMs": 3145,
+  "markerExcluded": true,
+  "naiveFolderState": "error",
+  "naiveFolderError": "folder path missing",
+  "stfolderHalts": true,
+  "deletionsPropagated": false,
+  "watcherObservationMs": 14092,
+  "pauseRelocate": {
+    "safe": true,
+    "roundtripMs": 38831
+  },
+  "stopRelocate": {
+    "safe": true,
+    "roundtripMs": 38590
+  },
+  "chosenPrimitive": "stop-repath-start",
+  "relocateRoundtripMs": 38590,
+  "reappearanceDeletesOrigin": true,
+  "deleted": [
+    "duet-test-relocate-b-20260716t131240-x9ae",
+    "duet-test-relocate-a-20260716t131240-ky1v"
+  ],
+  "leakCheck": "none"
+}

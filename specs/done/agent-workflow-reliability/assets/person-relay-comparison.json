@@ -1,0 +1,75 @@
+{
+  "date": "2026-09-29",
+  "task": "Example User NewEra Showcase Boolean/public-profile keyword search",
+  "sourceCommit": "c151c9a0506b33f0467f8aefb574f6b2c721e130",
+  "runtime": "published 0.3.30, qualified runtime 0cd51fb",
+  "model": "Balanced; observed parent anthropic/claude-sonnet-5.5 on both arms; no route switches",
+  "baseline": {
+    "passed": 14,
+    "failed": 22,
+    "legacyPassed": 7,
+    "privacyPassed": 5
+  },
+  "arms": {
+    "auto": {
+      "meaning": "relays available",
+      "elapsedMs": 145704,
+      "bashCalls": 14,
+      "relayCreations": 0,
+      "relaySelections": 0,
+      "reportedModelCostUsd": 0.3548598380000001,
+      "usage": {
+        "input": 3171,
+        "output": 12614,
+        "cacheRead": 521245,
+        "cacheWrite": 50334,
+        "totalTokens": 587364,
+        "cost": {
+          "input": 6.400000000000001e-05,
+          "output": 0.12458000000000002,
+          "cacheRead": 0.10424900000000001,
+          "cacheWrite": 0.125835,
+          "total": 0.3548598380000001
+        }
+      },
+      "passed": 36,
+      "failed": 0,
+      "terminalType": "complete"
+    },
+    "agent": {
+      "meaning": "relays disabled",
+      "elapsedMs": 287354,
+      "bashCalls": 24,
+      "relayCreations": 0,
+      "relaySelections": 0,
+      "reportedModelCostUsd": 0.37727905200000006,
+      "usage": {
+        "input": 5006,
+        "output": 15079,
+        "cacheRead": 649167,
+        "cacheWrite": 39579,
+        "totalTokens": 708831,
+        "cost": {
+          "input": 0.00010000000000000003,
+          "output": 0.14819000000000002,
+          "cacheRead": 0.12983340000000002,
+          "cacheWrite": 0.09894750000000002,
+          "total": 0.37727905200000006
+        }
+      },
+      "passed": 36,
+      "failed": 0,
+      "terminalType": "complete"
+    }
+  },
+  "limits": [
+    "One matched pair, not a reliability estimate.",
+    "Same historical source and user task with Boolean clarification preanswered; not a full historical transcript/model/skills replay.",
+    "Relay-available arm chose no relays. This does not compare executed relay versus direct work or reproduce the historical loop.",
+    "Independent oracle tests existing searchShowcase against real disposable Postgres, not HTTP/authentication/browser/deployment.",
+    "36 representative probes do not exhaust all public fields, syntax, pagination or performance.",
+    "Original ordinary npm test was already failing and its Node TAP reporter crashed. Baseline typecheck and build passed."
+  ],
+  "conclusion": "Both direct executions satisfied the checked search behavior and preserved tested legacy/privacy controls. Neither entered a repeated release loop. No causal speed or reliability advantage from disabling relays is established.",
+  "privateEvidenceRoot": "/tmp/Example User-relay-comparison"
+}

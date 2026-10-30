@@ -1,0 +1,34 @@
+bun test v1.3.14 (0d9b296a)
+
+specs/unified-duet/assets/live-drill-preparation/adoption-progress.test.ts:
+133 |   const journalFile = join(root,'journal.json')
+134 |   await writeFile(journalFile, JSON.stringify({phase:'restored',targetVersion,receipt:{status:'deferred',phase:'restored',targetVersion,restored:true,reason:'A gateway child is still active',privateConfig:'not-for-report'}}))
+135 |   try {
+136 |     let report: unknown
+137 |     const journal = await readAdoptionCutProgress({journalFile,targetVersion,launch,record:async value=>{report=value}})
+138 |     expect(JSON.stringify(journal)).toContain('A gateway child is still active')
+                                          ^
+error: expect(received).toContain(expected)
+
+Expected to contain: "A gateway child is still active"
+Received: "{\"phase\":\"restored\",\"targetVersion\":\"0.0.0+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\"}"
+
+      at <anonymous> (/Users/synthetic-user/.codex/worktrees/unified-cli-sync/duet/specs/unified-duet/assets/live-drill-preparation/adoption-progress.test.ts:138:37)
+(fail) durable journal receipt survives missing platform receipt without claiming settlement [1.62ms]
+ 96 |
+ 97 | export async function readAdoptionPrivateJobMetadata(_input: {
+ 98 |   jobDir: string
+ 99 |   hash: (path: string) => Promise<string>
+100 | }): Promise<Record<string, unknown>> {
+101 |   throw new Error('Private job observation not implemented')
+                  ^
+error: Private job observation not implemented
+      at readAdoptionPrivateJobMetadata (/Users/synthetic-user/.codex/worktrees/unified-cli-sync/duet/specs/unified-duet/assets/live-drill-preparation/adoption-progress.ts:101:13)
+      at <anonymous> (/Users/synthetic-user/.codex/worktrees/unified-cli-sync/duet/specs/unified-duet/assets/live-drill-preparation/adoption-progress.test.ts:150:26)
+(fail) a missing private executable does not erase readable job identity or the other hash [0.56ms]
+
+ 0 pass
+ 3 filtered out
+ 2 fail
+ 1 expect() calls
+Ran 2 tests across 1 file. [36.00ms]

@@ -1,0 +1,241 @@
+'use node'
+
+/**
+ * Vercel Domains API wrapper.
+ *
+ * Registers customer-supplied domains with the sandbox-gateway Vercel project
+ * so that Vercel's edge routing + Let's Encrypt TLS kicks in for them.
+ *
+ * Required env vars:
+ *   - VERCEL_TOKEN           — personal/team token with `domains:write` scope
+ *   - VERCEL_TEAM_ID             — team (account) the sandbox-gateway project lives under
+ *   - VERCEL_SANDBOX_GATEWAY_PROJECT_ID — project id of the sandbox-gateway Vercel project
+ */
+
+interface VercelVerificationRecord {
+  type: string
+  domain: string
+  value: string
+  reason?: string
+}
+
+export interface VercelConflictRecord {
+  name: string
+  type: string
+  value: string
+}
+
+export interface VercelDomainInfo {
+  id: string
+  name: string
+  /** True only when ownership is verified AND DNS resolves to Vercel. */
+  verified: boolean
+  misconfigured: boolean
+  /**
+   * Records the user needs to add to their DNS provider. Vercel returns
+   * ownership TXT challenges on the project-domain response and routing
+   * CNAME / A records on the configs response; we pass both through as-is.
+   */
+  verification?: VercelVerificationRecord[]
+  /** Existing DNS records that will conflict with what Vercel needs. */
+  conflicts?: VercelConflictRecord[]
+}
+
+interface RecommendedCNAME {
+  rank: number
+  value: string
+}
+
+interface RecommendedIPv4 {
+  rank: number
+  value: string[]
+}
+
+interface VercelDomainConfigResponse {
+  misconfigured: boolean
+  configuredBy?: 'A' | 'CNAME' | 'http' | null
+  aValues?: string[]
+  cnames?: string[]
+  conflicts?: VercelConflictRecord[]
+  recommendedCNAME?: RecommendedCNAME[]
+  recommendedIPv4?: RecommendedIPv4[]
+}
+
+interface VercelConfig {
+  token: string
+  teamId: string
+  projectId: string
+}
+
+function getVercelConfig(): VercelConfig {
+  const token = process.env.VERCEL_TOKEN
+  const teamId = process.env.VERCEL_TEAM_ID
+  const projectId = process.env.VERCEL_SANDBOX_GATEWAY_PROJECT_ID
+  if (!token) throw new Error('VERCEL_TOKEN is not set')
+  if (!teamId) throw new Error('VERCEL_TEAM_ID is not set')
+  if (!projectId) throw new Error('VERCEL_SANDBOX_GATEWAY_PROJECT_ID is not set')
+  return { token, teamId, projectId }
+}
+
+function authHeaders(token: string) {
+  return { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+}
+
+async function vercelFetch(cfg: VercelConfig, path: string, init?: RequestInit): Promise<Response> {
+  const url = new URL(`https://api.vercel.com${path}`)
+  url.searchParams.set('teamId', cfg.teamId)
+  return fetch(url.toString(), {
+    ...init,
+    headers: { ...authHeaders(cfg.token), ...init?.headers },
+  })
+}
+
+/**
+ * Fetch DNS routing config. Tells us whether the domain actually points at
+ * Vercel and, if not, which CNAME/A records the user needs to add.
+ */
+async function getDomainConfig(
+  cfg: VercelConfig,
+  domain: string,
+): Promise<VercelDomainConfigResponse> {
+  const res = await vercelFetch(cfg, `/v6/domains/${encodeURIComponent(domain)}/config`)
+  if (!res.ok) {
+    const body = await res.text()
+    throw new Error(`Vercel getDomainConfig failed (${res.status}): ${body}`)
+  }
+  return (await res.json()) as VercelDomainConfigResponse
+}
+
+function isApexDomain(domain: string): boolean {
+  return domain.split('.').length === 2
+}
+
+function stripTrailingDot(value: string): string {
+  return value.endsWith('.') ? value.slice(0, -1) : value
+}
+
+function buildRoutingRecords(
+  domain: string,
+  config: VercelDomainConfigResponse,
+): VercelVerificationRecord[] {
+  if (!config.misconfigured) return []
+
+  if (!isApexDomain(domain)) {
+    const topCname = [...(config.recommendedCNAME ?? [])].sort((a, b) => a.rank - b.rank)[0]
+    if (topCname) {
+      return [{ type: 'CNAME', domain, value: stripTrailingDot(topCname.value) }]
+    }
+  }
+
+  const topIPv4 = [...(config.recommendedIPv4 ?? [])].sort((a, b) => a.rank - b.rank)[0]
+  if (topIPv4) {
+    return topIPv4.value.map(value => ({ type: 'A', domain, value }))
+  }
+
+  return []
+}
+
+async function buildDomainInfo(
+  cfg: VercelConfig,
+  data: { name: string; verified: boolean; verification?: VercelVerificationRecord[] },
+): Promise<VercelDomainInfo> {
+  const config = await getDomainConfig(cfg, data.name)
+  const ownership = data.verification ?? []
+  const routing = buildRoutingRecords(data.name, config)
+  const verification = [...ownership, ...routing]
+  return {
+    id: data.name,
+    name: data.name,
+    verified: data.verified && !config.misconfigured,
+    misconfigured: config.misconfigured,
+    verification: verification.length > 0 ? verification : undefined,
+    conflicts: config.conflicts && config.conflicts.length > 0 ? config.conflicts : undefined,
+  }
+}
+
+/**
+ * Add a domain as an alias on the sandbox-gateway project.
+ * Vercel returns verification records when DNS doesn't yet point at Vercel.
+ */
+export async function addDomainToProject(domain: string): Promise<VercelDomainInfo> {
+  const cfg = getVercelConfig()
+  const res = await vercelFetch(cfg, `/v10/projects/${cfg.projectId}/domains`, {
+    method: 'POST',
+    body: JSON.stringify({ name: domain }),
+  })
+
+  if (!res.ok) {
+    const body = await res.text()
+    throw new Error(`Vercel addDomain failed (${res.status}): ${body}`)
+  }
+
+  const data = (await res.json()) as {
+    name: string
+    verified: boolean
+    verification?: VercelVerificationRecord[]
+  }
+
+  return buildDomainInfo(cfg, data)
+}
+
+/**
+ * Fetch current status for a domain. Returns null if the domain no longer exists on the project.
+ */
+export async function getDomainStatus(domain: string): Promise<VercelDomainInfo | null> {
+  const cfg = getVercelConfig()
+  const res = await vercelFetch(
+    cfg,
+    `/v9/projects/${cfg.projectId}/domains/${encodeURIComponent(domain)}`,
+  )
+
+  if (res.status === 404) return null
+  if (!res.ok) {
+    const body = await res.text()
+    throw new Error(`Vercel getDomain failed (${res.status}): ${body}`)
+  }
+
+  const data = (await res.json()) as {
+    name: string
+    verified: boolean
+    verification?: VercelVerificationRecord[]
+  }
+
+  return buildDomainInfo(cfg, data)
+}
+
+/**
+ * Trigger Vercel's verification check. Safe to call repeatedly.
+ */
+export async function verifyDomain(domain: string): Promise<VercelDomainInfo> {
+  const cfg = getVercelConfig()
+  const res = await vercelFetch(
+    cfg,
+    `/v9/projects/${cfg.projectId}/domains/${encodeURIComponent(domain)}/verify`,
+    { method: 'POST' },
+  )
+
+  if (!res.ok) {
+    const body = await res.text()
+    throw new Error(`Vercel verifyDomain failed (${res.status}): ${body}`)
+  }
+
+  const data = (await res.json()) as {
+    name: string
+    verified: boolean
+    verification?: VercelVerificationRecord[]
+  }
+  return buildDomainInfo(cfg, data)
+}
+
+export async function removeDomainFromProject(domain: string): Promise<void> {
+  const cfg = getVercelConfig()
+  const res = await vercelFetch(
+    cfg,
+    `/v9/projects/${cfg.projectId}/domains/${encodeURIComponent(domain)}`,
+    { method: 'DELETE' },
+  )
+  if (!res.ok && res.status !== 404) {
+    const body = await res.text()
+    throw new Error(`Vercel removeDomain failed (${res.status}): ${body}`)
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "sourceRevision": "cef66f48401f2419a1b8cc71675c250291295090",
+  "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+  "runtimeVersion": "0.0.0+be6c35d22313141c257449a1ed5a526850e07bd46228b4229dbe306f43c1d176",
+  "manifestSha256": "58ca097ae057993f3c3ae24ed562c16488f195460d8afa4514f7436dcdbe127b",
+  "bootstrapSha256": "e857f023ab6801ace9d898e61132c51c56a3d94d72d35b83822b5594f080c6d0",
+  "construction": "Existing build-image:staging consumes supplied exact API-served inventory; no second application build",
+  "localVerification": {
+    "passed": true,
+    "checks": [
+      "complete runtime bootstrap/CLI",
+      "fresh registration/model credential handoff",
+      "controlled native RPC/Photon/grep/durable memory",
+      "native TUI",
+      "required OS/browser/document tools",
+      "desktop framebuffer",
+      "Syncthing pin",
+      "Bun stream garbage collection"
+    ]
+  },
+  "registryInspection": "immutable index contains linux/amd64 manifest f71858e14d0804566aebd56fedd44954c32d4e0cd81a1463a76d90014ad8844e",
+  "registryPush": "passed",
+  "encryptedStagingSourceReference": "recorded by ordinary image owner",
+  "targetReferenceFanout": {
+    "status": "restored and verified",
+    "presentSourceVercelPairs": 53,
+    "defaultPreviewAndStagingBranchValuesMatch": true,
+    "receipt": "staging-vercel-value-verification.json"
+  },
+  "liveProviderFreshImage": {
+    "status": "pass",
+    "scope": "four strict disposable runtime drills; controlled loopback API/model edges",
+    "receipt": "../provider-drills/strict-runtime/receipt.json",
+    "freshManagedWorkspaceAcceptance": "pending staging journey"
+  },
+  "productionPromotion": "not promoted; later CLI timeline fix requires the superseding image",
+  "sourceAndConvexAndVercelImageReference": {
+    "environment": "staging",
+    "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+    "convexValueVerified": true,
+    "vercelPreviewValueVerified": true,
+    "sourceValueVerified": true,
+    "temporaryTargetEnvRemoved": true,
+    "observedAt": "2026-10-04T18:35:14.384Z"
+  },
+  "supersededBy": "timeline-runtime-and-image.json"
+}

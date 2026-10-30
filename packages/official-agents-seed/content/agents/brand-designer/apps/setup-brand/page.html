@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Brand setup</title>
+    <script>
+      const requestedTheme = new URLSearchParams(location.search).get('theme')
+      if (requestedTheme === 'light' || requestedTheme === 'dark') {
+        document.documentElement.dataset.theme = requestedTheme
+      }
+    </script>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --canvas: #f4f1ec;
+        --surface: #fffdf9;
+        --ink: #1c1a24;
+        --muted: #6b6878;
+        --line: rgba(28, 26, 36, 0.14);
+        --accent: #4f46b8;
+        --accent-soft: #e7e5fb;
+        --good: #12805c;
+        --good-soft: #d9f3e7;
+        --warn: #b25e09;
+        --warn-soft: #fdeed8;
+        --shadow: 0 18px 50px rgba(37, 33, 66, 0.09);
+      }
+      :root[data-theme='dark'] {
+        --canvas: #131219;
+        --surface: #1d1c26;
+        --ink: #efedf6;
+        --muted: #a3a0b3;
+        --line: rgba(239, 237, 246, 0.14);
+        --accent: #a5a0f2;
+        --accent-soft: #2c2a4a;
+        --good: #55d6a4;
+        --good-soft: #17382c;
+        --warn: #f0a558;
+        --warn-soft: #40301a;
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) {
+          --canvas: #131219;
+          --surface: #1d1c26;
+          --ink: #efedf6;
+          --muted: #a3a0b3;
+          --line: rgba(239, 237, 246, 0.14);
+          --accent: #a5a0f2;
+          --accent-soft: #2c2a4a;
+          --good: #55d6a4;
+          --good-soft: #17382c;
+          --warn: #f0a558;
+          --warn-soft: #40301a;
+          --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        min-height: 100vh;
+        margin: 0;
+        overflow-x: hidden;
+        background: var(--canvas);
+        color: var(--ink);
+        font: 16px/1.55 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+      button { color: inherit; font: inherit; }
+      .shell { width: min(100% - 2rem, 42rem); margin: 0 auto; padding: 1.6rem 0 4rem; }
+      header { padding: .6rem 0 1.4rem; }
+      h1 { margin: 0 0 .45rem; font: 600 clamp(1.7rem, 5vw, 2.3rem)/1.1 ui-serif, Georgia, serif; letter-spacing: -.03em; }
+      .lede { margin: 0; color: var(--muted); }
+      .banner { display: none; margin: 0 0 1rem; padding: .85rem 1rem; border-radius: .9rem; background: var(--warn-soft); color: var(--warn); font-weight: 600; }
+      .banner.show { display: block; }
+      .done-banner { display: none; align-items: center; gap: .6rem; margin: 0 0 1rem; padding: .95rem 1.1rem; border-radius: .9rem; background: var(--good-soft); color: var(--good); font-weight: 650; }
+      .done-banner.show { display: flex; }
+      .card { margin-bottom: 1rem; border: 1px solid var(--line); border-radius: 1.15rem; background: var(--surface); box-shadow: var(--shadow); }
+      .card-head { padding: 1.05rem 1.15rem .35rem; }
+      .step { color: var(--accent); font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+      h2 { margin: .2rem 0 .2rem; font-size: 1.15rem; }
+      .hint { margin: 0; color: var(--muted); font-size: .88rem; }
+      .card-body { padding: .7rem .7rem 1rem; }
+      .provider, .choice { display: flex; align-items: center; gap: .85rem; min-height: 3.4rem; padding: .55rem .45rem; border-radius: .85rem; }
+      .provider + .provider, .choice + .choice { border-top: 1px solid var(--line); border-radius: 0; }
+      .provider-name { flex: 1; min-width: 0; font-weight: 640; }
+      .provider-note { display: block; color: var(--muted); font-size: .8rem; font-weight: 450; }
+      .pill { flex: 0 0 auto; padding: .28rem .7rem; border-radius: 999px; font-size: .78rem; font-weight: 700; }
+      .pill.on { background: var(--good-soft); color: var(--good); }
+      /* The neutral third state. A bare `.pill` carries padding and radius but
+         no colour, so "not connected" read as naked text beside two siblings
+         that are chips. Neutral rather than warn: nothing is in flight. */
+      .pill.off { background: var(--line); color: var(--muted); }
+      .pill.waiting { background: var(--warn-soft); color: var(--warn); }
+      .choice { cursor: pointer; }
+      .choice input { width: 1.35rem; height: 1.35rem; margin: 0; accent-color: var(--accent); }
+      .choice-label { flex: 1; min-width: 0; font-weight: 600; overflow-wrap: anywhere; }
+      .choice-detail { display: block; color: var(--muted); font-size: .8rem; font-weight: 450; }
+      .empty { padding: 1.1rem .45rem; color: var(--muted); }
+      .save-row { display: flex; align-items: center; gap: .8rem; padding: .35rem 1.15rem 1.15rem; }
+      .save-button { min-height: 2.8rem; padding: .55rem 1.3rem; border: 0; border-radius: .85rem; background: var(--accent); color: #fff; font-weight: 700; cursor: pointer; }
+      :root[data-theme='dark'] .save-button { color: #101711; }
+      @media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .save-button { color: #101711; } }
+      :root .save-button:disabled { cursor: default; opacity: 1; border-color: var(--line); background: color-mix(in srgb, var(--ink) 7%, transparent); color: var(--muted); }
+      .save-note { color: var(--muted); font-size: .85rem; }
+      footer { color: var(--muted); font-size: .85rem; }
+      @media (max-width: 30rem) {
+        .provider { align-items: stretch; flex-direction: column; }
+        .provider .pill { align-self: flex-start; }
+        .save-row { flex-wrap: wrap; }
+        .save-row .save-button { width: 100%; }
+        .save-row .save-note { width: 100%; }
+      }
+      .field-row { display: flex; gap: .7rem; padding: .35rem 1.15rem 1.15rem; }
+      .field { flex: 1; min-width: 0; min-height: 2.8rem; padding: .55rem .9rem; border: 1px solid var(--line); border-radius: .85rem; background: var(--canvas); color: var(--ink); font: inherit; }
+      .field:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+      .found { display: grid; gap: .55rem; padding: .3rem .6rem .2rem; }
+      .found-row { display: flex; align-items: center; gap: .8rem; }
+      .found-label { flex: 0 0 6.6rem; color: var(--muted); font-size: .8rem; font-weight: 650; letter-spacing: .04em; text-transform: uppercase; }
+      .swatches { display: flex; flex-wrap: wrap; gap: .45rem; }
+      .swatch { display: flex; align-items: center; gap: .4rem; padding: .22rem .6rem .22rem .3rem; border: 1px solid var(--line); border-radius: 999px; font-size: .78rem; }
+      .chip { width: 1.05rem; height: 1.05rem; border: 1px solid var(--line); border-radius: 50%; }
+      .found-value { min-width: 0; font-weight: 600; overflow-wrap: anywhere; }
+      .logo-frame { display: flex; align-items: center; justify-content: center; width: 5.5rem; height: 2.6rem; padding: .3rem; border: 1px solid var(--line); border-radius: .6rem; background: #fff; }
+      .logo-frame img { max-width: 100%; max-height: 100%; }
+      .prose { color: var(--muted); font-size: .86rem; font-weight: 450; white-space: pre-wrap; }
+      @media (max-width: 30rem) {
+        .field-row { flex-direction: column; }
+        .field-row .save-button { width: 100%; }
+        /* The row stacks here, and in a column container `flex-basis` sizes the
+           HEIGHT — the label's fixed width became a fixed 6.6rem of empty space
+           above every value. Reset it with the direction. */
+        .found-row { align-items: flex-start; flex-direction: column; gap: .35rem; }
+        .found-row .found-label { flex: 0 0 auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <h1>Your brand, read from your site</h1>
+        <p class="lede">
+          Your brand designer makes every ad, graphic, and slide look like the same company made
+          it. Give it one web address and it takes the colours, type, logo, and voice straight
+          from your site — no questionnaire.
+        </p>
+      </header>
+
+      <div id="problem" class="banner"></div>
+      <div id="done" class="done-banner">All set. Your brand kit is saved and your designer is ready.</div>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="step">Step 1</span>
+          <h2>Where does your brand live?</h2>
+          <p class="hint">Your homepage is enough. Everything below is read from it.</p>
+        </div>
+        <div class="field-row">
+          <input id="site" class="field" type="url" inputmode="url" autocomplete="url"
+                 placeholder="acme.com" aria-label="Your website address" />
+          <button id="scan" class="save-button" type="button">Read my site</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="step">Step 2</span>
+          <h2>What it found</h2>
+          <p class="hint">Check it looks like you. You can change any of it with your designer later.</p>
+        </div>
+        <div id="found" class="card-body"><div class="empty">Read your site and its brand appears here.</div></div>
+        <div class="save-row">
+          <button id="save" class="save-button" type="button" disabled>Use this brand</button>
+          <span id="save-note" class="save-note">Read your site to finish.</span>
+        </div>
+      </section>
+
+      <footer>Your designer reads your site once to learn the system. It never changes anything on it.</footer>
+    </main>
+
+    <script>
+      const problemNode = document.getElementById('problem')
+      const doneNode = document.getElementById('done')
+      const foundNode = document.getElementById('found')
+      const siteInput = document.getElementById('site')
+      const scanButton = document.getElementById('scan')
+      const saveButton = document.getElementById('save')
+      const saveNote = document.getElementById('save-note')
+      let current = { ready: true, kit: null, complete: false }
+
+      function el(tag, className, text) {
+        const node = document.createElement(tag)
+        if (className) node.className = className
+        if (text !== undefined) node.textContent = text
+        return node
+      }
+
+      function foundRow(label, ...children) {
+        const row = el('div', 'found-row')
+        row.append(el('span', 'found-label', label), ...children)
+        return row
+      }
+
+      /* The derived half of the kit comes back as three markdown sections. The
+         page shows them as the same labelled rows as everything else, so one
+         panel reads as one thing rather than a form above a dump of source. */
+      function parseSections(markdown) {
+        if (!markdown) return []
+        return markdown
+          .split(/^##\s+/m)
+          .map(block => block.trim())
+          .filter(Boolean)
+          .map(block => {
+            const newline = block.indexOf('\n')
+            const title = (newline === -1 ? block : block.slice(0, newline)).trim()
+            const body = newline === -1 ? '' : block.slice(newline + 1).trim()
+            return { title, body: body.replace(/^[-*]\s+/gm, '• ') }
+          })
+          .filter(section => section.body !== '')
+      }
+
+      function render() {
+        problemNode.classList.toggle('show', !current.ready)
+        if (!current.ready) problemNode.textContent = current.message || 'This page could not reach your workspace.'
+        doneNode.classList.toggle('show', current.complete)
+
+        const kit = current.kit
+        if (kit === null) {
+          foundNode.replaceChildren(el('div', 'empty', 'Read your site and its brand appears here.'))
+        } else {
+          const rows = []
+          if (kit.logo && kit.logo.source) {
+            const frame = el('div', 'logo-frame')
+            const image = document.createElement('img')
+            image.src = '/api/logo'
+            image.alt = kit.brandName + ' logo'
+            frame.append(image)
+            rows.push(foundRow('Logo', frame))
+          }
+          if (kit.colors.length > 0) {
+            const swatches = el('div', 'swatches')
+            for (const color of kit.colors) {
+              const swatch = el('span', 'swatch')
+              const chip = el('span', 'chip')
+              chip.style.background = color.hex
+              swatch.append(chip, el('span', undefined, color.role + ' ' + color.hex))
+              swatches.append(swatch)
+            }
+            rows.push(foundRow('Colour', swatches))
+          }
+          if (kit.fonts.length > 0) {
+            rows.push(foundRow('Type', el('span', 'found-value',
+              kit.fonts.map(font => font.family).join(' · '))))
+          }
+          const sections = parseSections(kit.judgment)
+          if (sections.length === 0 && kit.tone) {
+            rows.push(foundRow('Voice', el('span', 'found-value', kit.tone)))
+          }
+          for (const section of sections) {
+            rows.push(foundRow(section.title, el('span', 'found-value prose', section.body)))
+          }
+          const grid = el('div', 'found')
+          grid.append(...rows)
+          foundNode.replaceChildren(grid)
+        }
+
+        saveButton.disabled = kit === null || current.complete
+        saveNote.textContent = current.complete
+          ? 'Saved.'
+          : kit === null
+            ? 'Read your site to finish.'
+            : ''
+      }
+
+      async function load() {
+        const response = await fetch('/api/status')
+        if (!response.ok) return
+        current = await response.json()
+        if (current.kit && !siteInput.value) siteInput.value = current.kit.site
+        render()
+      }
+
+      async function post(path, body) {
+        problemNode.classList.remove('show')
+        const response = await fetch(path, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          ...(body === undefined ? {} : { body: JSON.stringify(body) }),
+        })
+        if (!response.ok) {
+          const payload = await response.json().catch(() => ({}))
+          problemNode.textContent = payload.error || 'Something went wrong. Try again in a minute.'
+          problemNode.classList.add('show')
+          return null
+        }
+        return await response.json()
+      }
+
+      scanButton.addEventListener('click', async () => {
+        scanButton.disabled = true
+        const label = scanButton.textContent
+        scanButton.textContent = 'Reading…'
+        const next = await post('/api/scan', { site: siteInput.value })
+        scanButton.disabled = false
+        scanButton.textContent = label
+        if (next !== null) {
+          current = next
+          render()
+        }
+      })
+
+      siteInput.addEventListener('keydown', event => {
+        if (event.key === 'Enter') scanButton.click()
+      })
+
+      saveButton.addEventListener('click', async () => {
+        saveButton.disabled = true
+        saveNote.textContent = 'Saving…'
+        const next = await post('/api/confirm')
+        if (next === null) {
+          saveButton.disabled = false
+          saveNote.textContent = ''
+          return
+        }
+        current = next
+        render()
+      })
+
+      new EventSource('/events').addEventListener('message', () => void load())
+      void load()
+    </script>
+  </body>
+</html>

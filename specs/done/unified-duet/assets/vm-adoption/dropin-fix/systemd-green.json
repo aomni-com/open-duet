@@ -1,0 +1,54 @@
+{
+  "mode": "green",
+  "launch": {
+    "unit": "duet-runtime-adoption.service",
+    "runId": "7e871254-e21a-4543-8887-20214595f4c2",
+    "resultFile": "/tmp/transfer/dropin-green-1791154334962.json",
+    "settledFile": "/tmp/transfer/dropin-green-1791154334962.json.settled.json"
+  },
+  "receipt": {
+    "status": "complete",
+    "phase": "complete",
+    "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "restored": false,
+    "previousGatewayVersion": "0.0.0+01212abf6ba1",
+    "bootIdBefore": "59374403-d3ed-40f9-8ef3-3da51970f6ca",
+    "bootIdAfter": "59374403-d3ed-40f9-8ef3-3da51970f6ca"
+  },
+  "settled": {
+    "unit": "duet-runtime-adoption.service",
+    "runId": "7e871254-e21a-4543-8887-20214595f4c2",
+    "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "settled": true
+  },
+  "job": "MainPID=0\nControlPID=0\nActiveState=inactive",
+  "before": {
+    "bootId": "59374403-d3ed-40f9-8ef3-3da51970f6ca",
+    "current": "/opt/duet/releases/0.0.0+01212abf6ba1",
+    "main": "7155",
+    "syncthingMain": "176",
+    "dropin": {
+      "sha256": "14551d3dcee64fe8d54e1174e0d2525584836bb61a6a272531cfc2536414992f",
+      "mode": 416,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "workspaceBun": "1.3.14",
+    "gatewayBunSha256": "a83d263767d839e4d2649ca8e35d07159c7afc99afdc96d731ced29e056dda0c",
+    "driveSha256": "a313e6c9e1ced45f2d340e9152563c8cb1b8b4b60c90ce5c48aa5ddd0aec23e6",
+    "providerSha256": "b936c070f785bb80c60becf1b3b21148dd997068923fddf9343598a4065696f0"
+  },
+  "after": {
+    "bootId": "59374403-d3ed-40f9-8ef3-3da51970f6ca",
+    "current": "/opt/duet/releases/0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "main": "7972",
+    "syncthingMain": "176",
+    "dropin": null,
+    "workspaceBun": "1.3.14",
+    "gatewayBunSha256": "a83d263767d839e4d2649ca8e35d07159c7afc99afdc96d731ced29e056dda0c",
+    "driveSha256": "a313e6c9e1ced45f2d340e9152563c8cb1b8b4b60c90ce5c48aa5ddd0aec23e6",
+    "providerSha256": "b936c070f785bb80c60becf1b3b21148dd997068923fddf9343598a4065696f0"
+  },
+  "effectiveExecStart": "{ path=/opt/duet/gateway-runtime/bin/bun ; argv[]=/opt/duet/gateway-runtime/bin/bun /opt/duet/current/index.js ; ignore_errors=no ; start_time=[Sun 2026-10-04 22:53:31 UTC] ; stop_time=[n/a] ; pid=7972 ; code=(null) ; status=0/0 }",
+  "effectiveExecStartPre": "{ path=/opt/duet/gateway-runtime/bin/bun ; argv[]=/opt/duet/gateway-runtime/bin/bun /opt/duet/bin/runtime-bootstrap.js ; ignore_errors=no ; start_time=[Sun 2026-10-04 22:53:29 UTC] ; stop_time=[Sun 2026-10-04 22:53:31 UTC] ; pid=7956 ; code=exited ; status=0 }"
+}

@@ -1,0 +1,43 @@
+bun install v1.3.14 (0d9b296a)
+Resolving dependencies
+Resolved, downloaded and extracted [2]
+
+566 packages installed [150.41s]
+{
+  "localPath": "/out/payload/duet-linux-x64",
+  "installPath": "/opt/duet/duet",
+  "sha256": "793fe31345f58ca5b692d821a31d7290aaa5d1cccae96f2be61de6652a207a18",
+  "runtimeAssets": [
+    {
+      "name": "pglite.data",
+      "localPath": "/out/payload/pglite.data",
+      "installPath": "/opt/duet/pglite.data",
+      "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d"
+    },
+    {
+      "name": "pglite.wasm",
+      "localPath": "/out/payload/pglite.wasm",
+      "installPath": "/opt/duet/pglite.wasm",
+      "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9"
+    },
+    {
+      "name": "initdb.wasm",
+      "localPath": "/out/payload/initdb.wasm",
+      "installPath": "/opt/duet/initdb.wasm",
+      "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2"
+    },
+    {
+      "name": "vector.tar.gz",
+      "localPath": "/out/payload/vector.tar.gz",
+      "installPath": "/opt/duet/vector.tar.gz",
+      "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a"
+    },
+    {
+      "name": "photon_rs_bg.wasm",
+      "localPath": "/out/payload/photon_rs_bg.wasm",
+      "installPath": "/opt/duet/photon_rs_bg.wasm",
+      "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c"
+    }
+  ],
+  "packagingMode": "compiled-linux-x64"
+}

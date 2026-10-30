@@ -1,0 +1,8 @@
+npm error code EUNSUPPORTEDPROTOCOL
+npm error Unsupported URL Type "workspace:": workspace:*
+npm notice
+npm notice New minor version of npm available! 11.11.1 -> 11.21.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.0
+npm notice To update run: npm install -g npm@11.21.0
+npm notice
+npm error A complete log of this run can be found in: /tmp/unified-public-pack/original-home/.npm/_logs/2026-10-04T04_11_53_201Z-debug-0.log

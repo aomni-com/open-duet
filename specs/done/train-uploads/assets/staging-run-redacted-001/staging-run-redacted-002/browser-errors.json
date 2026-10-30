@@ -1,0 +1,1530 @@
+[
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2w539uy1l9kz4.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://www.redditstatic.com/ads/pixel.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/es/guides: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2eo8xvc10pqt5.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/es/guides: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/01qr2lssgs8q3.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://connect.facebook.net/en_US/fbevents.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/es/guides: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/es/blog: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://service.example.invalid/api/auth/magic-link: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://service.example.invalid/api/duet/session: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/user/billing: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_vercel/speed-insights/script.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_vercel/insights/script.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/static/surveys.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/blog: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/guides: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/es/pricing: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://bzr.openai.com/v1/sdk/events: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://connect.facebook.net/en_US/fbevents.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://www.redditstatic.com/ads/pixel.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/es/pricing: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/es: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/es: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/es/guides: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://alb.reddit.com/rp.gif: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://bzrcdn.openai.com/sdk/oaiq.min.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/array/phc_rJBr3z9x7eGEaw4vYWWiZhqB2cLCmwYkj4BYfWkW7sfa/config.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/static/exception-autocapture.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_vercel/speed-insights/script.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/static/tracing-headers.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_vercel/insights/script.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://vercel.live/_next-live/feedback/feedback.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://b.stripecdn.com/stripethirdparty-srv/assets/v32.18/ApplePay.html: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://b.stripecdn.com/stripethirdparty-srv/assets/v32.18/AmazonPayButton.html: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://206a9cb93d6a.w.hcaptcha.com/logo.png: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://fb8dcdb0f3e1.w.hcaptcha.com/logo.png: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://service.example.invalid/api/auth/magic-link: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://service.example.invalid/api/auth/magic-link: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://service.example.invalid/api/duet/session: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://service.example.invalid/api/auth/magic-link: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://service.example.invalid/api/duet/session: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://service.example.invalid/api/auth/magic-link: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://service.example.invalid/api/auth/magic-link: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://service.example.invalid/api/auth/magic-link: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/staging-e2e-synthetic/agent/sessions: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/staging-e2e-synthetic/agent/sessions/j978ezbg92krdnk0sffhh2cekn8ajvjn/history: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/staging-e2e-synthetic/agent/sessions/j978ezbg92krdnk0sffhh2cekn8ajvjn/history: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/staging-e2e-synthetic/agent/sessions: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/staging-e2e-synthetic/agent/sessions/j978ezbg92krdnk0sffhh2cekn8ajvjn: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/staging-e2e-synthetic/apps: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/staging-e2e-synthetic/files/reports: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/one_drive: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/elevenlabs: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/apollo: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/sentry: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/calendly: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/google_maps: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/docusign: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/linkedin: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/semrush: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/asana: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/salesforce: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/mem0: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/microsoft_teams: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/shopify: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/snowflake: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/trello: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/discordbot: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/peopledatalabs: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/user/billing/history: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/static/surveys.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://service.example.invalid/flags/: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/user/billing: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/staging-e2e-synthetic/agent/sessions: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/e2e-59b770ca/agent/sessions: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/staging-e2e-synthetic/agent/sessions: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/ui-5cf9664b/agent/sessions: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/e2e-59b770ca/agent/sessions: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/staging-e2e-synthetic/agent/sessions: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/staging-e2e-synthetic/agent/sessions/j978ezbg92krdnk0sffhh2cekn8ajvjn: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/staging-e2e-synthetic/apps: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/microsoft_teams: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/youtube: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/discord: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/asana: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/reddit: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/salesforce: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/exa: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/peopledatalabs: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/one_drive: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/shopify: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/linkedin: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/docusign: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/calendly: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/elevenlabs: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/trello: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/cal: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/apollo: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/slackbot: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/googletasks: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/figma: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/bitbucket: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/wrike: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/canvas: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/sentry: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/mem0: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/snowflake: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/google_maps: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/semrush: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/discordbot: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/semrush: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/google_maps: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/sentry: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/slackbot: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/exa: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/discordbot: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/mem0: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/figma: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/microsoft_teams: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/calendly: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/googletasks: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/reddit: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/canvas: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/docusign: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/snowflake: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/shopify: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/jira: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/one_drive: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/youtube: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/elevenlabs: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/cal: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/asana: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/discord: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/linkedin: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/apollo: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/peopledatalabs: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/bitbucket: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/wrike: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/salesforce: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/firecrawl: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://logos.composio.dev/api/trello: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/staging-e2e-synthetic/invites: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/ws/staging-e2e-synthetic/members: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/api/duet/user/profile: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/0a221qb0fmfut.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/3sh5akrkvhgkw.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/3qphowj-qwicl.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2kxngst6y1vtv.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/0_y7a1fyd2qsu.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/05eixle9sdxw7.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1y0-13d75bcsg.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1dpefdj2hvpf8.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://vercel.live/_next-live/feedback/feedback.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://bzr.openai.com/v1/sdk/events: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "POST https://bzr.openai.com/v1/sdk/events: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2zsmg5v514e14.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/0mf9qxfh75dba.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://ik.imagekit.io/duet/landing/landing-bg-light.mp4: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/42dcv72lk5zox.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/3-t85qagmpqfp.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/136e-elc02ptg.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1cx1ic1wf3lms.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/0p9hl4bc69uqi.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/43sjz51xjdqto.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/427d3t__zdqez.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://bzrcdn.openai.com/sdk/oaiq.min.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/integrations/grok.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1nsm7l_18kr3d.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://vercel.live/_next-live/feedback/feedback.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/357x0l6q0nujn.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/3rhcdk2pacm3_.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2g_lngkzcu0ye.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/34kk26d41ley4.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/stravito.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/mint.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/semperis.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/boots-n-bubbles.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/panzura.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/parallax.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/social-plus.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/furiosa.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://ik.imagekit.io/duet/landing/landing-duet-for-the-launch.png: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/427d3t__zdqez.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/42dcv72lk5zox.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/43sjz51xjdqto.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1-zowhbz5t0yk.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/3rhcdk2pacm3_.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/turbopack-3wubbpll1nnar.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://ik.imagekit.io/duet/landing/landing-duet-mid-week-research.png: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://ik.imagekit.io/duet/landing/landing-bg-light.mp4: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/380vnoh0_ww8k.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1cx1ic1wf3lms.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1canfmp7kd9ek.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/0mf9qxfh75dba.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/0tz89ciqtr0vi.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/0p9hl4bc69uqi.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/357x0l6q0nujn.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1nsm7l_18kr3d.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/34kk26d41ley4.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/3-t85qagmpqfp.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/136e-elc02ptg.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://ik.imagekit.io/duet/landing/landing-duet-hired.png: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2g_lngkzcu0ye.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://ik.imagekit.io/duet/landing/landing-duet-every-morning.png: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2zsmg5v514e14.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/stravito.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/onboarding-mascot/duet-welcoming.png: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/furiosa.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/semperis.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/social-plus.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/parallax.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://ik.imagekit.io/duet/landing/landing-duet-mid-week-research.png: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/mint.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/boots-n-bubbles.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://ik.imagekit.io/duet/landing/landing-duet-on-demand-builds.png: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/panzura.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://ik.imagekit.io/duet/landing/landing-duet-hired.png: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://ik.imagekit.io/duet/landing/landing-duet-every-morning.png: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://ik.imagekit.io/duet/landing/landing-duet-for-the-launch.png: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/357x0l6q0nujn.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/427d3t__zdqez.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://bzrcdn.openai.com/sdk/oaiq.min.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2eo8xvc10pqt5.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/01qr2lssgs8q3.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/0tz89ciqtr0vi.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2g_lngkzcu0ye.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1nsm7l_18kr3d.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2w539uy1l9kz4.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1cx1ic1wf3lms.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/42dcv72lk5zox.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/34kk26d41ley4.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://vercel.live/_next-live/feedback/feedback.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2zsmg5v514e14.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2eo8xvc10pqt5.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2iho8jepmwwua.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1nsm7l_18kr3d.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/357x0l6q0nujn.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/34kk26d41ley4.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2zsmg5v514e14.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/427d3t__zdqez.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/01qr2lssgs8q3.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2w539uy1l9kz4.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/turbopack-3wubbpll1nnar.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2g_lngkzcu0ye.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1-zowhbz5t0yk.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/380vnoh0_ww8k.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/0tz89ciqtr0vi.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/42dcv72lk5zox.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1cx1ic1wf3lms.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1e79onj4iacm6.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1canfmp7kd9ek.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/media/sans_variable-s.p.2c0y96ae70xfx.woff2: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/icons/duet-monogram.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/357x0l6q0nujn.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/0mf9qxfh75dba.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1cx1ic1wf3lms.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/427d3t__zdqez.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/0p9hl4bc69uqi.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2zsmg5v514e14.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/43sjz51xjdqto.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/3-t85qagmpqfp.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://bzrcdn.openai.com/sdk/oaiq.min.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/integrations/grok.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/42dcv72lk5zox.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://vercel.live/_next-live/feedback/feedback.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2g_lngkzcu0ye.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/3rhcdk2pacm3_.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/136e-elc02ptg.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://ik.imagekit.io/duet/landing/landing-bg-light.mp4: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/parallax.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/stravito.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/social-plus.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/semperis.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/mint.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/boots-n-bubbles.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/furiosa.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/panzura.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/0mf9qxfh75dba.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/42dcv72lk5zox.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/34kk26d41ley4.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2zsmg5v514e14.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1nsm7l_18kr3d.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/2g_lngkzcu0ye.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/43sjz51xjdqto.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://vercel.live/_next-live/feedback/feedback.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/integrations/grok.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/0p9hl4bc69uqi.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/427d3t__zdqez.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/136e-elc02ptg.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/357x0l6q0nujn.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/3rhcdk2pacm3_.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://bzrcdn.openai.com/sdk/oaiq.min.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/1cx1ic1wf3lms.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/image: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/_next/static/chunks/3-t85qagmpqfp.js: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://ik.imagekit.io/duet/landing/landing-bg-light.mp4: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/furiosa.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/semperis.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/parallax.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/panzura.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/social-plus.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/mint.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/boots-n-bubbles.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "GET https://service.example.invalid/landing/brands/stravito.svg: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "HEAD https://service.example.invalid/shares-publishes/: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "HEAD https://service.example.invalid/billing/: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "HEAD https://service.example.invalid/mirror-devices/: net::ERR_ABORTED"
+  },
+  {
+    "kind": "navigation-canceled",
+    "message": "HEAD https://service.example.invalid/sync/: net::ERR_ABORTED"
+  }
+]

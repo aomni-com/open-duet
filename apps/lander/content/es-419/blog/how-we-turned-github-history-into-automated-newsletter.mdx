@@ -1,0 +1,133 @@
+---
+title: 'Cómo automatizamos nuestro newsletter semanal de producto con AI'
+description: 'Dos horas para escribir un newsletter. Cada semana. Así lo automatizó Duet, y así puedes hacer lo mismo para cualquier actualización recurrente.'
+date: '2026-03-13'
+updatedAt: '2026-05-08'
+readTime: '6 min read'
+author:
+  name: 'Sawyer Middeleer'
+  role: 'Chief of Staff, Duet'
+  link: '/'
+category: 'productivity'
+tags: ['newsletter', 'automation', 'resend', 'ai-tools', 'workflow']
+type: 'article'
+image: '/blog/how-we-turned-github-history-into-automated-newsletter/cover.png'
+locale: es-419
+translationKey: 'how-we-turned-github-history-into-automated-newsletter'
+cta:
+  title: 'Tu newsletter, en piloto automático.'
+  subtitle: 'Duet lee tu historial de GitHub, redacta la actualización semanal y la envía a Resend. Dos horas de escritura, cada semana, eliminadas.'
+  buttonText: 'Automatizar el newsletter'
+  href: '/sign-in?from=blog-automated-newsletter'
+---
+
+<Callout emoji="💡">
+**Resumen rápido**
+
+Esta guía cubre cómo el equipo de Duet automatizó su newsletter semanal de producto usando AI, incluyendo el workflow, las herramientas, los prompts y el ahorro de tiempo, para que puedas replicar el mismo sistema en tu propio newsletter.
+
+</Callout>
+
+<Callout emoji="❓">
+**Preguntas que responde esta página**
+
+<ul>
+  <li>Cómo automatizar un newsletter de producto con AI</li>
+  <li>Mejores herramientas de AI para automatizar newsletters</li>
+  <li>Cómo usar la AI para escribir un newsletter semanal</li>
+  <li>¿Puede la AI automatizar por completo la creación de newsletters?</li>
+  <li>¿Cómo se ve un sistema de newsletter automatizado?</li>
+</ul>
+</Callout>
+
+Cada semana, nuestro equipo lanza nuevas funciones.
+
+Cada semana, alguien tiene que escribir el newsletter.
+
+Revisar lo que cambió, elegir lo más destacado, escribir el texto, dar formato al correo, subirlo a la plataforma de email, enviar una prueba, ajustarlo y por fin darle a enviar.
+
+Toma un par de horas. Es trabajo importante: mantener a los usuarios al día impulsa la retención y el engagement. Pero es repetitivo, y la información ya está ahí mismo, en nuestro historial de proyecto.
+
+Así que le enseñamos a nuestro agente de AI a hacerlo.
+
+## El problema con los newsletters manuales
+
+Nuestra actualización semanal de producto sigue un patrón simple: mirar lo que el equipo lanzó, elegir las 5 cosas que más le importan a los usuarios, describirlas en lenguaje claro y enviarlo.
+
+Las entradas son predecibles (lo que construimos esta semana), el formato es consistente (un correo con la marca) y la audiencia es la misma (nuestra lista de usuarios). Este es justo el tipo de tarea que la AI debería manejar.
+
+La verdadera fricción no era la escritura, era el cambio de contexto. Alguien tenía que detener lo que estaba haciendo, revisar una semana de cambios, traducir actualizaciones técnicas a un lenguaje que los clientes entiendan, abrir la plataforma de email, dar formato a todo, probar el correo y gestionar el ida y vuelta. Todo para algo que sigue la misma estructura cada vez.
+
+## Cómo lo configuramos
+
+La configuración fue sorprendentemente simple. Usamos Resend para enviar correos y Duet como nuestro workspace de AI. Esto es lo que hicimos:
+
+1. Conectamos la herramienta de email. Instalamos la herramienta de línea de comandos de Resend en nuestro workspace de Duet e iniciamos sesión. Esta es una configuración única; piénsalo como conectar una app nueva a tu teléfono. Una vez vinculada, el agente de AI puede crear borradores, enviar vistas previas y gestionar tu lista de correo sin que toques la plataforma de email.
+
+2. Le enseñamos el workflow al agente. Guardamos un playbook sencillo en Markdown dentro de los Archivos del workspace. Describe en lenguaje claro qué lista usar, cómo se ve la plantilla, dónde encontrar las actualizaciones y reglas como "siempre crea un borrador primero; nunca envíes sin aprobación". No necesitas escribir código: describes el proceso como se lo explicarías a un nuevo miembro del equipo.
+
+3. Lo programamos. Configuramos un temporizador semanal (Duet tiene programación integrada) para que el agente ejecute el workflow cada jueves por la mañana de forma automática.
+
+Eso es todo. Sin programación. Sin integraciones de API que construir. Solo conectar una herramienta, escribir instrucciones y fijar un horario.
+
+## Qué pasa cada jueves
+
+Este es el workflow que se ejecuta de forma automática cada semana:
+
+### El agente revisa lo que se lanzó
+
+Revisa el historial de proyecto del equipo de los últimos 7 días: cada función agregada, bug corregido y mejora hecha. Esta es la materia prima.
+
+### Elige lo destacado y lo reescribe
+
+El agente lee todo y traduce las actualizaciones técnicas a beneficios que de verdad le importan a los usuarios. Por ejemplo, un desarrollador podría registrar un cambio como "add infinite scroll to threads tab". El agente lo convierte en:
+
+> Navegación de hilos más fluida: los hilos ahora cargan de forma continua a medida que haces scroll. No más clics en "cargar más" para encontrar conversaciones antiguas.
+
+Elige los 5 cambios de mayor impacto, enfocándose en cosas que los usuarios notarán de inmediato en lugar de mejoras tras bambalinas.
+
+### Construye un correo con la marca
+
+Usando nuestra plantilla de newsletter (con nuestro logo, colores, estilos de botón y footer ya incorporados), el agente arma un correo completo y con estilo. Si hay capturas de pantalla disponibles, también las incluye.
+
+### Crea un borrador, nunca envía directo
+
+Esta es una regla de seguridad clave que incorporamos. El agente crea un borrador en Resend y envía una vista previa a mi bandeja de entrada. Nunca le dispara a la lista completa sin que un humano diga "adelante".
+
+### Reviso y doy feedback
+
+Una vista previa llega a mi bandeja de entrada. La reviso y puedo pedir cambios en lenguaje claro: "empieza con la función del dashboard", "quita la segunda captura de pantalla", "haz la introducción más directa". El agente hace las ediciones, crea un borrador actualizado y envía una nueva vista previa.
+
+### Digo "envíalo" y sale
+
+Una vez que estoy conforme, respondo "envíalo" y el agente envía el newsletter a nuestra lista completa de usuarios. Todo el ida y vuelta suele tomar unos 5 minutos de mi tiempo, frente a las 2 horas de trabajo manual.
+
+## Por qué funciona tan bien
+
+La información ya existe. Todo equipo registra lo que está haciendo en algún lugar: herramientas de gestión de proyectos, docs compartidos, historial de chat o (en nuestro caso) un repositorio de código. El newsletter no es contenido nuevo. Es un resumen curado de trabajo que ya se hizo. La AI es excelente para resumir.
+
+El formato nunca cambia. Un newsletter semanal tiene la misma estructura cada vez: saludo, principales actualizaciones, tal vez una captura de pantalla o dos, un llamado a la acción, footer. Una vez que defines la plantilla, el agente completa los espacios.
+
+Un humano se mantiene en el bucle. El agente hace el trabajo pesado, pero una persona revisa cada correo antes de que salga. Esto detecta cualquier cosa que la AI haga mal y te permite agregar tu propia voz. Es automatización con una red de seguridad.
+
+## Puedes configurar esto hoy
+
+Este patrón funciona para cualquier comunicación recurrente que siga un formato predecible:
+
+- Actualizaciones semanales de producto desde tu tablero de proyecto o changelog
+- Resúmenes internos de equipo que sintetizan lo que cada uno logró
+- Anuncios a clientes cuando lanzas nuevas funciones
+- Correos de resumen mensual que extraen de tu actividad de los últimos 30 días
+  Los ingredientes clave son:
+
+1. Una fuente de información que la AI pueda leer (historial de proyecto, un tablero de tareas, un doc compartido, notas de reuniones)
+1. Una plantilla que define cómo debe verse el correo
+1. Una plataforma de email para enviar (nosotros usamos Resend, pero funciona cualquier plataforma con una herramienta similar)
+1. Un agente de AI que pueda unir todo según un horario
+   En Duet, esto significa guardar un archivo de instrucciones en los Archivos del workspace, conectar la herramienta de email mediante Integraciones y definir la cadencia. El agente se encarga del resto: leer las actualizaciones, escribir y dar formato al correo, y crear un borrador para revisión.
+
+Toda la configuración toma unos 30 minutos. Después de eso, tu newsletter se escribe solo cada semana. Tú solo revisas y apruebas.
+
+---
+
+Construimos esto con Duet, un workspace en la nube donde tu agente de AI tiene memoria, herramientas, programación y todo lo que necesita para manejar trabajo recurrente como este. Si tu newsletter semanal se está comiendo horas que preferirías dedicar a construir, pruébalo.

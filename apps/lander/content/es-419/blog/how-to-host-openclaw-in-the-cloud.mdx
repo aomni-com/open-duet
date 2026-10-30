@@ -1,0 +1,564 @@
+---
+title: 'Cómo alojar OpenClaw en la nube (siempre activo)'
+description: 'Despliega OpenClaw en un VPS o plataforma gestionada para operar un agente de AI 24/7 con Docker, mejores prácticas de seguridad y análisis de costos.'
+date: '2026-03-01'
+updatedAt: '2026-05-08'
+readTime: '10 min read'
+author:
+  name: 'David'
+  role: 'Founder'
+  link: '/'
+category: 'ai'
+tags: ['openclaw', 'cloud', 'deployment', 'ai-agents']
+type: 'article'
+image: '/blog/how-to-host-openclaw-in-the-cloud/cover.png'
+relatedPosts:
+  [
+    'openclaw-vs-managed-ai-agent-platforms',
+    'how-to-set-up-a-24-7-ai-agent',
+    'mcp-alternatives-code-execution-agents',
+  ]
+cta:
+  title: 'Sáltate la configuración del VPS.'
+  subtitle: 'Duet ejecuta tus agentes de AI en sandboxes gestionados en la nube con memoria persistente y cero DevOps. El poder de OpenClaw sin el impuesto de Docker.'
+  buttonText: 'Ejecuta agentes en Duet'
+  href: '/sign-in?from=blog-openclaw-cloud'
+locale: es-419
+translationKey: 'how-to-host-openclaw-in-the-cloud'
+---
+
+# Cómo alojar OpenClaw en la nube
+
+<Callout emoji="💡">
+Resumen rápido
+
+Esta guía cubre cómo alojar OpenClaw en la nube para que corra 24/7, sin necesidad de una máquina local. Obtendrás una instancia de OpenClaw persistente y siempre activa, accesible desde cualquier lugar, sin gestionar tu propio VPS o infraestructura.
+
+</Callout>
+
+<Callout emoji="❓">
+Preguntas que responde esta página
+
+- Cómo alojar OpenClaw en la nube
+- ¿Se puede ejecutar OpenClaw en un servidor en la nube?
+- Cómo hacer que OpenClaw esté siempre activo
+- Mejor hosting en la nube para OpenClaw
+- ¿Cómo ejecutar OpenClaw sin una máquina local?
+
+</Callout>
+
+OpenClaw es una plataforma de agentes de AI autónomos de código abierto con más de 140.000 estrellas en GitHub.
+
+Ejecuta tareas complejas dividiéndolas en pasos, escribiendo código, corriendo comandos e iterando hasta completarlas.
+
+A diferencia de los asistentes de AI tradicionales que responden preguntas, OpenClaw actúa.
+
+Construye apps, corrige bugs, analiza datos y automatiza workflows sin supervisión constante.
+
+La plataforma corre localmente por defecto. Cuando tu laptop entra en suspensión o se cierra, OpenClaw se detiene.
+
+Para tareas de larga duración o colaboración en equipo, necesitas hosting en la nube.
+
+## Por qué autoalojar OpenClaw requiere un servidor en la nube
+
+El despliegue local de OpenClaw tiene limitaciones:
+
+- Se detiene cuando tu computadora entra en suspensión. Las tareas fallan a mitad de ejecución.
+- Sin acceso remoto. No puedes revisar el progreso desde otro dispositivo.
+- Un solo usuario únicamente. Los miembros del equipo no pueden compartir agentes ni workflows.
+- Consume muchos recursos. Ejecutar modelos de AI agota la batería y la CPU de la laptop.
+  El hosting en la nube resuelve estos problemas. Tu agente corre 24/7 en infraestructura dedicada, accesible desde cualquier lugar, con acceso compartido para el equipo.
+
+## Opciones de hosting en la nube para OpenClaw
+
+VPS, Docker y plataformas gestionadas
+
+Tienes dos caminos: autoalojar en un VPS o usar una plataforma gestionada.
+
+El autoalojamiento te da control total. Tú configuras el servidor, gestionas las actualizaciones, te encargas de la seguridad y pagas solo por los recursos de cómputo.
+
+Las plataformas gestionadas manejan la infraestructura, la seguridad y las actualizaciones automáticamente. Tú te enfocas en usar el agente, no en mantener servidores.
+
+## Cómo autoalojar OpenClaw en un VPS
+
+El autoalojamiento requiere un servidor Linux, Docker y habilidades básicas de línea de comandos. Esta es la configuración completa.
+
+### Elige un proveedor de VPS
+
+Selecciona un proveedor según el precio y la ubicación:
+
+| Proveedor            | Costo mensual | RAM | Núcleos CPU | Almacenamiento |
+| -------------------- | ------------- | --- | ----------- | -------------- |
+| Hetzner CAX11        | $5            | 4GB | 2           | 40GB SSD       |
+| DigitalOcean Basic   | $6            | 1GB | 1           | 25GB SSD       |
+| DigitalOcean Regular | $12           | 2GB | 1           | 50GB SSD       |
+| AWS Lightsail        | $10           | 2GB | 1           | 60GB SSD       |
+| Linode Shared        | $12           | 2GB | 1           | 50GB SSD       |
+
+OpenClaw requiere un mínimo de 4GB de RAM y 2 núcleos de CPU para una operación estable. La opción de Hetzner de 5 dólares es la más rentable para un rendimiento completo.
+
+Para un uso más ligero, una instancia de 2GB (10-12 USD/mes) funciona, pero puede expirar en tareas grandes.
+
+### Aprovisiona y accede a tu servidor
+
+Crea una nueva instancia con Ubuntu 22.04 LTS. Agrega tu clave pública SSH durante la configuración.
+
+Conéctate a tu servidor:
+
+```bash
+ssh root@YOUR_SERVER_IP
+```
+
+Actualiza los paquetes del sistema:
+
+```bash
+apt update && apt upgrade -y
+```
+
+### Instala Docker
+
+Instala Docker Engine:
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+```
+
+Verifica la instalación:
+
+```bash
+docker --version
+```
+
+Habilita Docker para que inicie en el arranque:
+
+```bash
+systemctl enable docker
+```
+
+### Configura las variables de entorno
+
+Crea un directorio para OpenClaw:
+
+```bash
+mkdir -p /opt/openclaw
+cd /opt/openclaw
+```
+
+Crea un archivo de entorno:
+
+```bash
+nano .env
+```
+
+Agrega tu configuración:
+
+```plaintext
+ANTHROPIC_API_KEY=your_anthropic_key
+OPENAI_API_KEY=your_openai_key
+WORKSPACE_DIR=/workspace
+PORT=3000
+```
+
+Guarda y sal (Ctrl+X, Y, Enter).
+
+### Ejecuta OpenClaw con Docker
+
+Descarga la última imagen de OpenClaw:
+
+```bash
+docker pull openclaw/openclaw:latest
+```
+
+Ejecuta el contenedor:
+
+```bash
+docker run -d \
+  --name openclaw \
+  --restart unless-stopped \
+  -p 3000:3000 \
+  -v /opt/openclaw/workspace:/workspace \
+  --env-file /opt/openclaw/.env \
+  openclaw/openclaw:latest
+```
+
+Verifica el estado del contenedor:
+
+```bash
+docker ps
+```
+
+Mira los logs:
+
+```bash
+docker logs -f openclaw
+```
+
+### Configura el firewall y la seguridad
+
+Configura el firewall UFW:
+
+```bash
+ufw allow OpenSSH
+ufw allow 3000/tcp
+ufw enable
+```
+
+Desactiva la autenticación por contraseña:
+
+```bash
+nano /etc/ssh/sshd_config
+```
+
+Establece PasswordAuthentication no. Reinicia SSH:
+
+```bash
+systemctl restart sshd
+```
+
+### Configura SSL con Nginx (opcional)
+
+Para acceso HTTPS, instala Nginx y Certbot:
+
+```bash
+apt install nginx certbot python3-certbot-nginx -y
+```
+
+Configura el proxy inverso de Nginx:
+
+```bash
+nano /etc/nginx/sites-available/openclaw
+```
+
+Agrega la configuración:
+
+```plaintext
+server {
+    listen 80;
+    server_name your-domain.com;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+Habilita el sitio y obtén el certificado SSL:
+
+```bash
+ln -s /etc/nginx/sites-available/openclaw /etc/nginx/sites-enabled/
+certbot --nginx -d your-domain.com
+```
+
+### Monitorea y actualiza
+
+Verifica la salud de OpenClaw:
+
+```bash
+docker stats openclaw
+```
+
+Actualiza a la última versión:
+
+```bash
+docker pull openclaw/openclaw:latest
+docker stop openclaw
+docker rm openclaw
+docker run -d \
+  --name openclaw \
+  --restart unless-stopped \
+  -p 3000:3000 \
+  -v /opt/openclaw/workspace:/workspace \
+  --env-file /opt/openclaw/.env \
+  openclaw/openclaw:latest
+```
+
+Configura copias de seguridad automáticas de /opt/openclaw/workspace:
+
+```bash
+crontab -e
+```
+
+Agrega un respaldo diario:
+
+```plaintext
+0 2 * * * tar -czf /backup/openclaw-$(date +\%Y\%m\%d).tar.gz /opt/openclaw/workspace
+```
+
+## Seguridad de OpenClaw en la nube
+
+Riesgos que necesitas conocer antes de desplegar
+
+Exponer un agente de AI a internet crea una superficie de ataque.
+
+### Exposición de API keys
+
+OpenClaw almacena las API keys en variables de entorno. Si un atacante obtiene acceso al contenedor, puede extraer las claves y acumular cargos en tus cuentas.
+
+Mitigación:
+
+- Usa API keys de solo lectura cuando sea posible
+- Establece límites de gasto en las cuentas de OpenAI/Anthropic
+- Rota las claves mensualmente
+- Nunca subas archivos .env al control de versiones
+
+### Vulnerabilidades de ejecución de código
+
+OpenClaw ejecuta código arbitrario. Prompts maliciosos podrían explotar esto para correr comandos no deseados.
+
+CVE-2024-47068 afectó a plataformas de agentes de AI similares en octubre de 2024, permitiendo la ejecución remota de código mediante inyección de prompts.
+
+Mitigación:
+
+- Ejecuta OpenClaw en contenedores aislados con acceso limitado al sistema de archivos
+- Usa usuarios no root dentro de los contenedores
+- Implementa segmentación de red
+- Monitorea los logs en busca de actividad sospechosa
+
+### Riesgos de skills y plugins
+
+OpenClaw admite skills personalizadas. Las skills no verificadas pueden contener código malicioso.
+
+Mitigación:
+
+- Revisa el código fuente de la skill antes de instalarla
+- Usa solo skills oficiales o de la comunidad ya verificadas
+- Ejecuta las skills en entornos sandbox
+- Mantén una lista de permitidos de skills aprobadas
+
+## OpenClaw autoalojado frente a plataformas gestionadas de agentes de AI
+
+Las plataformas gestionadas eliminan el mantenimiento de infraestructura pero reducen la flexibilidad.
+
+### Qué obtienes con las plataformas gestionadas
+
+Las plataformas gestionadas de agentes de AI manejan:
+
+- Aprovisionamiento y escalamiento del servidor
+- Parches de seguridad y actualizaciones
+- Certificados SSL y configuración de dominios
+- Funciones de colaboración en equipo
+- Autenticación y control de acceso integrados
+- Monitoreo y alertas
+  Accedes al agente a través de una interfaz web sin tocar Docker ni comandos de Linux.
+
+### Comparación de costos
+
+| Tipo de hosting       | Costo mensual | Tiempo de configuración | Mantenimiento | Seguridad                |
+| --------------------- | ------------- | ----------------------- | ------------- | ------------------------ |
+| VPS autoalojado       | $5-20         | 1-2 horas               | Continuo      | Tu responsabilidad       |
+| Plataforma gestionada | $20-100       | 5 minutos               | Ninguno       | Manejada automáticamente |
+
+El autoalojamiento es más barato para usuarios individuales cómodos con la administración de servidores. Las plataformas gestionadas ahorran tiempo y reducen el riesgo de seguridad para los equipos.
+
+### Cuándo elegir el autoalojamiento
+
+Elige el autoalojamiento si:
+
+- Quieres el máximo control sobre la infraestructura
+- Tienes experiencia en DevOps o tiempo para aprender
+- Necesitas configuraciones personalizadas que las plataformas no admiten
+- Ejecutas cargas de trabajo sensibles que no pueden usar infraestructura compartida
+
+### Cuándo elegir el hosting gestionado
+
+Elige las plataformas gestionadas si:
+
+- Quieres empezar de inmediato sin configuración
+- Te falta experiencia en administración de servidores
+- Necesitas funciones de colaboración en equipo
+- Prefieres costos predecibles sin facturas de servidor sorpresa
+
+## Mejores alternativas gestionadas al autoalojamiento de OpenClaw
+
+Si te gustan las capacidades autónomas de OpenClaw pero quieres que se encarguen de la infraestructura en la nube por ti, varias plataformas ofrecen una funcionalidad similar con mejores funciones de equipo.
+
+Duet ofrece un agente de AI siempre activo que corre en la nube sin necesidad de configurar un servidor. A diferencia de OpenClaw autoalojado, obtienes workspaces de equipo, seguridad integrada, instrucciones reutilizables en Archivos, datos y fuentes duraderas en Entrenar e Integraciones gestionadas. Tus agentes corren de forma continua en infraestructura administrada, así que no tienes que operar el servidor ni mantener Docker por tu cuenta.
+
+La plataforma incluye funciones de colaboración que le faltan a OpenClaw: sesiones duraderas compartidas, memoria entrenada del workspace, acceso basado en roles, archivos y apps compartidos. Los miembros pueden asignar trabajo al mismo compañero de AI persistente y seguir los eventos de la sesión mientras las tareas largas continúan en la nube.
+
+Para los equipos que pasan del desarrollo local a workflows de AI en producción, Duet cierra la brecha entre las herramientas de código abierto DIY y la infraestructura totalmente gestionada. Obtén más información en duet.so.
+
+## Cómo migrar OpenClaw de local a hosting en la nube
+
+Mover una configuración existente de OpenClaw a la nube preserva tu configuración y el historial de conversaciones.
+
+### Exporta los datos locales
+
+En tu máquina local, ubica el directorio del workspace de OpenClaw. Ubicaciones por defecto:
+
+- Linux/macOS: ~/.openclaw/workspace
+- Windows: C:\Users\YourName\.openclaw\workspace
+  Archiva el workspace:
+
+```bash
+tar -czf openclaw-backup.tar.gz ~/.openclaw/workspace
+```
+
+### Transfiere al VPS
+
+Copia el archivo a tu servidor:
+
+```bash
+scp openclaw-backup.tar.gz root@YOUR_SERVER_IP:/opt/openclaw/
+```
+
+Conéctate por SSH al servidor y extrae:
+
+```bash
+cd /opt/openclaw
+tar -xzf openclaw-backup.tar.gz
+```
+
+### Actualiza la configuración
+
+Copia las variables de entorno del .env local al /opt/openclaw/.env del servidor.
+
+Verifica que las API keys funcionen probando con curl:
+
+```bash
+curl https://api.anthropic.com/v1/models \
+  -H "x-api-key: $ANTHROPIC_API_KEY"
+```
+
+### Inicia la instancia en la nube
+
+Ejecuta el contenedor de Docker con el workspace migrado:
+
+```bash
+docker run -d \
+  --name openclaw \
+  --restart unless-stopped \
+  -p 3000:3000 \
+  -v /opt/openclaw/workspace:/workspace \
+  --env-file /opt/openclaw/.env \
+  openclaw/openclaw:latest
+```
+
+Accede a través de http://YOURSERVERIP:3000 y verifica que el historial de conversaciones se haya cargado.
+
+## Mantenimiento de OpenClaw en la nube
+
+Lo que necesitas para mantenerlo funcionando
+
+OpenClaw alojado en la nube requiere mantenimiento regular.
+
+### Tareas semanales
+
+- Revisa los logs de Docker en busca de errores: docker logs openclaw --tail 100
+- Verifica el uso de disco: df -h
+- Monitorea el gasto de API en los dashboards de Anthropic/OpenAI
+
+### Tareas mensuales
+
+- Actualiza OpenClaw a la última versión (ver el Paso 8 más arriba)
+- Rota las API keys
+- Revisa y limpia los archivos viejos del workspace
+- Verifica los avisos de seguridad de las dependencias
+
+### Tareas trimestrales
+
+- Audita las skills instaladas en busca de actualizaciones
+- Revisa las reglas del firewall
+- Prueba el proceso de restauración de copias de seguridad
+- Evalúa el dimensionamiento del servidor (haz upgrade si llegas a los límites de recursos)
+
+### Automatización
+
+Reduce el trabajo manual con temporizadores de systemd o cron jobs:
+
+```bash
+# /etc/cron.weekly/openclaw-update
+#!/bin/bash
+docker pull openclaw/openclaw:latest
+docker stop openclaw
+docker rm openclaw
+docker run -d --name openclaw --restart unless-stopped -p 3000:3000 \
+  -v /opt/openclaw/workspace:/workspace \
+  --env-file /opt/openclaw/.env \
+  openclaw/openclaw:latest
+```
+
+## Configuración de alta disponibilidad de OpenClaw
+
+Balanceo de carga y failover
+
+Los despliegues de un solo servidor fallan cuando el servidor se cae. La alta disponibilidad requiere redundancia.
+
+### Configuración del balanceador de carga
+
+Despliega múltiples instancias de OpenClaw detrás de un balanceador de carga:
+
+1. Aprovisiona 2 o 3 instancias VPS idénticas
+1. Configura almacenamiento compartido (NFS o S3) para el directorio del workspace
+1. Configura Nginx o Traefik como balanceador de carga
+1. Apunta el DNS a la IP del balanceador de carga
+   El costo aumenta de 2 a 3 veces pero elimina el punto único de falla.
+
+### Replicación de base de datos
+
+Si OpenClaw almacena el estado en una base de datos, configura la replicación primario-réplica:
+
+```bash
+# On primary server
+docker run -d \
+  --name postgres-primary \
+  -e POSTGRES_PASSWORD=secure_password \
+  -e POSTGRES_USER=openclaw \
+  -p 5432:5432 \
+  postgres:15
+```
+
+Configura las réplicas para que reciban el flujo desde el primario. Actualiza la configuración de OpenClaw para usar réplicas de lectura en las consultas.
+
+### Monitoreo de salud
+
+Configura el monitoreo de uptime con UptimeRobot o Healthchecks.io:
+
+1. Crea un endpoint HTTP de health check
+1. Configura una alerta si el endpoint devuelve un estado distinto a 200
+1. Establece la notificación a email/Slack en caso de falla
+   La mayoría de los equipos no necesitan alta disponibilidad para casos de uso de desarrollo. Los workflows de producción justifican la complejidad adicional.
+
+## Reflexiones finales
+
+Alojar OpenClaw en la nube transforma una herramienta de desarrollo local en un agente autónomo 24/7. El autoalojamiento en un VPS cuesta 5-20 USD/mes y te da control total, pero requiere mantenimiento continuo de seguridad y administración de servidores.
+
+Para los equipos o quienes quieren saltarse la gestión de infraestructura, las plataformas gestionadas manejan el despliegue, la seguridad y el escalamiento automáticamente. La elección depende de tu nivel de comodidad técnica, tu presupuesto y tus requisitos de colaboración.
+
+Empieza con un despliegue básico en VPS para entender las necesidades de hosting en la nube de OpenClaw. A medida que crece el uso, migra a configuraciones de alta disponibilidad o a plataformas gestionadas que ofrezcan mejores funciones de equipo y menos sobrecarga operativa.
+
+## Preguntas frecuentes
+
+### ¿Cuánto cuesta alojar OpenClaw en la nube?
+
+Alojar OpenClaw en un VPS cuesta 5-20 USD/mes por el servidor más las tarifas de uso de API. Un Hetzner CAX11 (5 USD/mes) con 4GB de RAM maneja la mayoría de las cargas de trabajo. Agrega 10-50 USD/mes por las llamadas a la API de Anthropic/OpenAI según el uso. Los certificados SSL vía Let's Encrypt son gratuitos.
+
+### ¿Puedo ejecutar OpenClaw en la capa gratuita de AWS?
+
+La capa gratuita de AWS incluye 750 horas de instancias t2.micro con 1GB de RAM. Esto es insuficiente para OpenClaw, que requiere un mínimo de 4GB de RAM. Necesitarás una instancia t3.medium (30 USD/mes) o t3.large (60 USD/mes) para un rendimiento confiable.
+
+### ¿Cuál es la forma más fácil de desplegar OpenClaw?
+
+El método de despliegue más fácil es usar Docker en un VPS gestionado. Proveedores como DigitalOcean y Hetzner ofrecen imágenes de Docker de un clic. Después de aprovisionar, ejecuta un solo comando docker run con tus API keys. La configuración toma de 15 a 30 minutos incluyendo la configuración de SSL.
+
+### ¿Cómo aseguro las API keys en un servidor en la nube?
+
+Almacena las API keys en archivos de entorno fuera del contenedor con permisos restringidos: chmod 600 /opt/openclaw/.env. Usa API keys de solo lectura cuando sea posible. Rota las claves mensualmente. Habilita el logging de auditoría para detectar accesos no autorizados. Considera usar herramientas de gestión de secretos como Vault para despliegues de producción.
+
+### ¿OpenClaw funciona con modelos de AI personalizados?
+
+Sí, OpenClaw admite modelos personalizados mediante endpoints de API compatibles con OpenAI. Configura la variable de entorno OPENAIAPIBASE para que apunte a tu proveedor de modelos (por ejemplo, Ollama, LocalAI o LLaMA autoalojado). El rendimiento depende de la capacidad del modelo y de la infraestructura de hosting.
+
+### ¿Pueden varias personas usar la misma instancia de OpenClaw?
+
+La configuración por defecto de OpenClaw es de un solo usuario. Varias personas accediendo a la misma instancia comparten el historial de conversaciones y los archivos del workspace, lo que genera confusión. Para uso en equipo, despliega instancias separadas por usuario o usa una plataforma gestionada con soporte multiusuario integrado.
+
+### ¿Qué pasa si mi servidor se cae?
+
+Si configuraste restart unless-stopped, Docker reinicia automáticamente el contenedor de OpenClaw cuando el servidor se reinicia. Las tareas en progreso pueden fallar y requerir un reinicio manual. Implementa monitoreo de salud y alertas para detectar caídas rápidamente. Las copias de seguridad regulares del workspace previenen la pérdida de datos.

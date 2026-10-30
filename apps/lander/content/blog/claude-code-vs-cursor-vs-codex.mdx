@@ -1,0 +1,191 @@
+---
+title: 'Claude Code vs Cursor vs Codex (2026): Which AI Coder Wins'
+description: 'Honest 2026 comparison of Claude Code, Cursor, and Codex — speed, pricing, agent quality, and when to pick each. Updated for Opus 4.7 and GPT-5.5.'
+date: '2026-03-01'
+updatedAt: '2026-05-21'
+readTime: '10 min read'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/4.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'ai'
+tags: ['claude-code', 'cursor', 'codex', 'ai-coding', 'startups']
+type: 'article'
+image: '/blog/claude-code-vs-cursor-vs-codex/cover.png'
+relatedPosts:
+  - 'how-to-build-and-deploy-a-web-app-using-only-ai'
+  - 'how-to-run-claude-code-in-the-cloud'
+  - 'how-to-build-internal-tool-in-a-day-with-ai'
+  - 'how-to-use-ai-to-run-startup-operations-with-a-3-person-team'
+  - 'how-to-set-up-a-24-7-ai-agent'
+cta:
+  title: 'Run + Build in one place'
+  subtitle: 'Duet is a cloud agent workspace with persistent memory, files, apps, and durable sessions — build and run work without depending on your laptop.'
+  buttonText: 'Try Duet'
+  href: '/sign-in?from=blog-cc-vs-cursor'
+---
+
+_Last updated: May 2026_
+
+Claude Code, Cursor, and Codex are the three leading AI coding tools in 2026, but they are different kinds of product. Claude Code is Anthropic's terminal agent running Claude Opus 4.7. Cursor 3.3 is a VS Code fork built around inline AI editing and Bugbot. Codex is OpenAI's GPT-5.5 agent with multi-day automations across cloud, IDE, browser, and CLI.
+
+## TL;DR — Claude Code vs Cursor vs Codex
+
+| Tool            | What it is                                 | Default model     | Best for                                            | Pricing                        |
+| --------------- | ------------------------------------------ | ----------------- | --------------------------------------------------- | ------------------------------ |
+| **Claude Code** | Terminal-based coding agent from Anthropic | Claude Opus 4.7   | Architectural refactors, multi-file reasoning       | $20–$200/mo (Claude Pro / Max) |
+| **Cursor 3.3**  | VS Code fork with AI completion + Bugbot   | Claude Sonnet 4.6 | Active in-IDE coding, autocomplete, in-editor agent | $20 Pro / $40 Teams            |
+| **Codex**       | OpenAI's cross-surface agent product       | GPT-5.5           | Multi-day automations, plugin-heavy workflows       | $20 Plus / API usage           |
+
+<Callout emoji="❓">
+**Questions this page answers**
+
+<ul>
+  <li>What is the difference between Claude Code, Cursor, and Codex?</li>
+  <li>What is Claude Code?</li>
+  <li>What is Cursor?</li>
+  <li>What is Codex?</li>
+  <li>When should I use Claude Code vs Cursor vs Codex?</li>
+  <li>How do these compare to a cloud agent workspace like Duet?</li>
+</ul>
+</Callout>
+
+## What is Claude Code?
+
+Claude Code is Anthropic's official command-line coding agent. It runs Claude Opus 4.7 (released April 2026) by default, with Claude Sonnet 4.6 available for cheaper turns, and has direct access to your filesystem, terminal, and any tool exposed through MCP (Model Context Protocol).
+
+It is best understood as an _agent_, not an autocomplete: you give it a task, it reads files, runs commands, edits code, and reports back. The 200K-token context window plus Anthropic's prompt caching makes whole-codebase reasoning practical without runaway costs.
+
+**Key strengths:**
+
+- Whole-codebase analysis before making changes
+- Multi-step autonomous workflows (branch, edit, test, PR)
+- Native MCP support for third-party integrations
+- Language- and framework-agnostic
+- Terminal-first design that fits existing developer workflows
+
+**Key limitations:**
+
+- No inline autocomplete or tab completion
+- Requires comfort with the terminal
+- Large-context turns can get expensive without caching discipline
+- No native GUI for staged review before execution
+
+## What is Cursor?
+
+Cursor is a fork of VS Code built specifically for AI-assisted development. The 3.3 release (May 2026) adds **durable canvases** for multi-step plans and **Bugbot**, an in-editor agent that triages and fixes bugs autonomously (Cursor reports ~78% self-resolution on Bugbot's own fixes).
+
+Cursor's default chat model is Claude Sonnet 4.6, with Claude Opus 4.7 and GPT-5.5 available on Pro+. It charges $20/month for Pro (unlimited completions, 500 premium model requests) and $40/month for Teams (shared rules and prompts).
+
+**Key strengths:**
+
+- Best-in-class inline autocomplete and tab completion
+- Familiar VS Code interface with near-zero learning curve
+- `Cmd+K` to rewrite code with natural language
+- Durable canvases that persist plans across sessions
+- Bugbot runs in the background without blocking active work
+- Team-level shared rules, prompts, and rulesets
+
+**Key limitations:**
+
+- Context limited to open files plus explicit includes
+- Less effective for large architectural changes across many files
+- Suggestions can be distracting during focused work
+- Premium model quota can throttle heavy users
+
+## What is Codex?
+
+Codex is OpenAI's full agent product — not the legacy code model of the same name. As of April 2026 it has 4M weekly active users (up ~33% in two weeks) and defaults to GPT-5.5 with a 400K-token context window. It runs across **cloud, IDE, browser, and CLI**, with 90+ first-party plugins (Atlassian, GitLab, Microsoft Suite) and persistent memory.
+
+The headline 2026 feature is **multi-day automations**: Codex can run jobs that span hours or days without supervision, picking up across sessions. This is OpenAI's direct push into the persistent-execution territory previously owned by purpose-built agent platforms.
+
+**Key strengths:**
+
+- GPT-5.5 default with 400K-token context and strong tool-use reliability
+- Multi-day automations and persistent memory across sessions
+- Same agent across cloud, IDE, browser, and CLI
+- 90+ first-party plugins for major SaaS suites
+- Plus plan at $20/month covers most personal usage; API pricing competitive at scale
+
+**Key limitations:**
+
+- Multi-day jobs run on OpenAI infrastructure, not yours — less filesystem control
+- Plugin ecosystem is broad but uneven; not all integrations support write actions
+- Premium quotas can throttle long automations on Plus
+- Tied to OpenAI's stack — switching providers means leaving the product
+
+## When should you use each?
+
+**Use Claude Code when:**
+
+- You need to refactor across many files and want the agent to read the codebase first
+- You're debugging an issue that spans backend, frontend, and tests
+- You want a terminal-first agent that can run scripts and tests autonomously
+- You care about reasoning quality over completion speed
+
+**Use Cursor when:**
+
+- You're writing new features and want fast inline completions
+- You prefer a full IDE with diff review, side-by-side panes, and a familiar VS Code feel
+- You want Bugbot cleaning up bugs in the background while you keep building
+- Your team needs shared rules and prompts synced across developers
+
+**Use Codex when:**
+
+- You need long-running, low-touch automation (multi-day jobs, scheduled CI tasks)
+- You're already standardized on OpenAI and want one agent across cloud, IDE, and CLI
+- You depend on plugin coverage for Atlassian, GitLab, or Microsoft Suite
+- You want persistent memory across sessions without managing infrastructure
+
+Most high-velocity teams use at least two of the three: Cursor for daily feature work, Claude Code for architectural changes, and Codex for automated workflows. The [How to Build and Ship an Internal Tool in a Day Using AI](/blog/how-to-build-internal-tool-in-a-day-with-ai) workflow shows how those tools layer in practice.
+
+## How do they compare to a cloud agent workspace like Duet?
+
+Claude Code, Cursor, and Codex are coding tools — they help one developer write or change code. A cloud agent workspace like [Duet](/) is a different category: it is a persistent server that hosts agents, files, memory, scheduled jobs, apps, and durable team sessions in one place.
+
+The practical distinction is **Build + Run**. Coding tools build software. A cloud agent workspace also runs it: long-lived jobs, hosted internal apps, scheduled crons, shared team context, and integrations all live on the same server and survive when your laptop closes. Claude Code can be _used inside_ Duet, the same way Cursor can be used on your laptop. They are complementary, not competitors.
+
+For teams that already use Claude Code in the cloud, the [How to Run Claude Code in the Cloud](/blog/how-to-run-claude-code-in-the-cloud) guide walks through a persistent setup; Duet provides that infrastructure out of the box.
+
+## Model quality and context handling
+
+**Reasoning quality.** Claude Opus 4.7 and GPT-5.5 are the two top-tier models in May 2026. Opus 4.7 still leads on architectural reasoning and codebase-wide refactors — its tool-use and "stay on task" behavior tend to beat GPT-5.5 on long, ambiguous changes. GPT-5.5 has closed the gap on raw code generation and is competitive on most discrete tasks.
+
+**Context handling.** Codex's 400K-token context window exceeds Claude Code's 200K, useful when dumping a large schema and resolver tree into one turn. In practice, both handle multi-file analysis well; the bottleneck is usually how the agent chooses what to load, not the raw window size.
+
+**Cost.** Claude Code costs roughly $3–$15 per million tokens (Sonnet 4.6 vs Opus 4.7). Codex costs $1.25–$10 per million tokens for GPT-5.5 (cached vs uncached). For heavy usage they are comparable; the real difference is context discipline.
+
+## Cost ranges for startups
+
+- **Cursor:** $20/user (Pro), $40/user (Teams). A 5-person team typically spends $100–$200/month.
+- **Claude Code:** Variable. $50–$200/user/month for normal use, $500+/month for heavy architectural work. A 5-person team typically spends $250–$1,000/month.
+- **Codex:** $20/user (Plus) or API usage. $10–$100/month for typical automations, $500+/month for heavy scripted use.
+
+Most startups spend $500–$2,000/month total across AI coding tools — well below the developer hours they replace.
+
+## Frequently Asked Questions
+
+### What is the difference between Claude Code, Cursor, and Codex?
+
+Claude Code is a terminal-based coding agent from Anthropic running Claude Opus 4.7, focused on whole-codebase reasoning and autonomous multi-file workflows. Cursor 3.3 is a VS Code fork built around fast inline AI editing and Bugbot, an in-editor agent that resolves bugs in the background. Codex is OpenAI's cross-surface agent product on GPT-5.5, with multi-day automations and 90+ plugins across cloud, IDE, browser, and CLI.
+
+### Is Claude Code better than Cursor in 2026?
+
+Claude Code is better for full-codebase analysis, architectural changes, and autonomous multi-step workflows. Cursor is better for inline editing, autocomplete, and active in-IDE coding sessions. Most teams use both: Cursor for daily feature work, Claude Code for refactors and debugging across many files.
+
+### Which model does each tool use by default?
+
+Claude Code defaults to Claude Opus 4.7 with Sonnet 4.6 available for cheaper turns. Cursor 3.3 defaults to Claude Sonnet 4.6, with Opus 4.7 and GPT-5.5 available on Pro+. Codex defaults to GPT-5.5 with a 400K-token context window.
+
+### How does Codex compare to Claude Code?
+
+Codex offers stronger persistence — multi-day automations, persistent memory, and the same agent across cloud, IDE, browser, and CLI. Claude Code offers stronger filesystem semantics and runs locally in your terminal with direct access to your environment. For long-running automation, Codex is often the right pick; for hands-on architectural work, Claude Code usually wins.
+
+### Can you use Claude Code, Cursor, and Codex together?
+
+Yes. They do not conflict and most high-velocity teams use at least two of the three. A common pattern is Cursor for in-IDE feature work, Claude Code for refactors and debugging, and Codex for scheduled or multi-day automations.
+
+### How do they compare to Duet?
+
+Duet is a cloud agent workspace, not a coding tool — it hosts agents, files, memory, scheduled jobs, apps, and durable sessions on a persistent server. Claude Code, Cursor, and Codex build software; Duet builds and _runs_ it. The categories are complementary: coding agents can run inside a Duet workspace while the work history and outputs persist. For head-to-head breakdowns, see [Duet vs Claude Code](/guides/duet-vs-claude-code) and [Duet vs Codex](/guides/duet-vs-codex).

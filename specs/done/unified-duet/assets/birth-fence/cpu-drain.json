@@ -1,0 +1,74 @@
+{
+  "sourceCommit": "588c89b23f669e9ab158848d1ecd53707dac09b8",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/get-convex/convex-backend/588c89b23f669e9ab158848d1ecd53707dac09b8/npm-packages/system-udfs/convex/_system/frontend/listCronJobs.ts",
+      "file": "npm-packages-system-udfs-convex-_system-frontend-listCronJobs.ts.gz",
+      "sha256": "3f59f7310e7525dd581694dd1b89e7d05ff2fd39cf86bf72413dce1728b5f84a"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/get-convex/convex-backend/588c89b23f669e9ab158848d1ecd53707dac09b8/npm-packages/system-udfs/convex/_system/frontend/paginatedScheduledJobs.ts",
+      "file": "npm-packages-system-udfs-convex-_system-frontend-paginatedScheduledJobs.ts.gz",
+      "sha256": "1f0f3f6fa3fea6297500885349ac54a148d5ead89c1acda6bf8dab7935afd89f"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/get-convex/convex-backend/588c89b23f669e9ab158848d1ecd53707dac09b8/npm-packages/system-udfs/convex/schema.ts",
+      "file": "npm-packages-system-udfs-convex-schema.ts.gz",
+      "sha256": "57cf0643e12d39b6de2eb0e968251d15e93f2ce20b8d4768bd4dff1dc4563bfc"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/get-convex/convex-backend/588c89b23f669e9ab158848d1ecd53707dac09b8/crates/model/src/scheduled_jobs/types.rs",
+      "file": "crates-model-src-scheduled_jobs-types.rs.gz",
+      "sha256": "a95350bdadd453dad2c72a9914460cb085b9bc8189c820cd3a77801af89af08f"
+    }
+  ],
+  "cpuFunctionPath": "domains/workspaces/vmSize.js:reconcileWorkspaceVmSizes",
+  "cronQuery": {
+    "function": "_system/frontend/listCronJobs",
+    "args": {},
+    "projection": [
+      "name",
+      "cronSpec.udfPath",
+      "nextRun._id",
+      "nextRun.state.type",
+      "nextRun.nextTs",
+      "nextRun.prevTs",
+      "lastRun.status.type"
+    ],
+    "allowedStates": [
+      "pending",
+      "inProgress"
+    ]
+  },
+  "separatelyScheduledQuery": {
+    "function": "_system/frontend/paginatedScheduledJobs",
+    "args": {
+      "udfPath": "domains/workspaces/vmSize.js:reconcileWorkspaceVmSizes",
+      "paginationOpts": {
+        "numItems": 100,
+        "cursor": null
+      }
+    },
+    "projection": [
+      "_id",
+      "udfPath",
+      "state.type",
+      "nextTs"
+    ],
+    "allowedStates": [
+      "pending",
+      "inProgress"
+    ],
+    "index": "by_udf_path_and_next_event_ts",
+    "nonterminalOnly": true
+  },
+  "timestamps": "int64 nanoseconds; retain exact decimal strings",
+  "neverRetain": [
+    "cronSpec.udfArgs",
+    "udfArgs",
+    "argsId",
+    "logLines"
+  ],
+  "drainedPredicate": "Fenced CPU candidate query is deployed and lifecycle flag acknowledged closed; exactly one matching cron has nextRun.state.type=pending; complete indexed separately scheduled job census has no inProgress or unknown state. Missing/unreadable/unknown/truncated state blocks. Per-workspace attach, teardown and disk resize IDs plus replacement continuations must also settle. Pending future CPU jobs will receive no candidates while the same fence remains closed.",
+  "alignment": "No provider resize, restart, or reprovision is invoked by migration; only in-VM file replacement and idle gateway service restart."
+}

@@ -1,0 +1,192 @@
+---
+title: 'Who Runs Your AI Agent After You Build It?'
+metaTitle: 'AI Agent Maintenance: Who Runs It After You Build It?'
+description: 'AI agent maintenance defaults to the builder. The three handoff models, real retainer pricing, and how to run client agents without pager duty.'
+date: '2026-07-03'
+updatedAt: '2026-07-03'
+readTime: '9 min read'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/10.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'ai'
+tags: ['ai agent maintenance', 'ai agents', 'agencies', 'retainers', 'managed runtime']
+type: 'article'
+image: '/blog/who-runs-your-ai-agent-after-you-build-it/cover.png'
+relatedPosts:
+  - 'how-to-set-up-a-24-7-ai-agent'
+  - 'openclaw-vs-managed-ai-agent-platforms'
+  - 'how-to-run-claude-code-in-the-cloud'
+  - 'claude-code-pricing'
+cta:
+  title: 'Build the agent. Duet runs it.'
+  subtitle: 'Every client gets a private, always-on cloud server with memory, files, and scheduled work. You keep the relationship and the retainer.'
+  buttonText: 'Run clients on Duet'
+  href: '/use-cases/agencies'
+---
+
+If you built an AI agent for a client, you maintain it, unless the run layer is explicitly handed to someone else. There are three models: the client self-hosts, you become their DevOps shop, or a managed runtime keeps the agent running, monitored, and current while you keep the relationship and the retainer.
+
+The three doors, in short:
+
+1. **Client self-hosts** — their infra, their keys, their 2am pages.
+2. **You host it** — your infra, your keys, your on-call.
+3. **A managed runtime runs it** — near-flat cost per client, you keep the relationship.
+
+Gartner predicted in mid-2025 that over 40% of agentic AI projects will be canceled by end of 2027, for cost, unclear value, and weak risk controls, not build quality. Deployment isn't the finish line.
+
+## Who maintains AI agents after deployment?
+
+By default, whoever built it. If a contract doesn't explicitly move the run layer somewhere else, ownership of monitoring, upkeep, and 2am fixes lands on the builder. That's true whether "builder" means a solo consultant or a five-person agency.
+
+Most advice on this topic assumes an internal team with an ops function to escalate to. IBM's own [agent lifecycle management framework](https://www.ibm.com/think/topics/agent-lifecycle-management) is written for that reader. Good framework, wrong headcount for most of us.
+
+For consultants and small agencies, there's no "hand it to ops" option, because you _are_ ops, whether you signed up for that or not. When observability ownership sits unclaimed after the build, instrumentation gaps accumulate quietly until something breaks in front of the client.
+
+SMB operator reading this because you bought an agent that's now acting up: the same rule applies. Someone owns the run layer. If your contract never named who, it's probably still the person who built it.
+
+## What actually breaks after you hand off an AI agent?
+
+Integrations drift, models get deprecated, costs creep, and the agent's knowledge of the client's business goes stale, usually all at once, usually quietly. None of this means the agent was built badly. Nothing static survives contact with a moving business, and here's how that shows up at 2am:
+
+> "My clients are messaging me saying the chatbots and AI systems I built suddenly stopped working. Well… Cloudflare is down…"
+> — one automation builder, [r/automation](https://www.reddit.com/r/automation/comments/1p0eck3/my_ai_clients_are_getting_mad/)
+
+That's unpaid pager duty in one line: you eat the blame for outages you didn't cause and can't control, because you're the only name the client has.
+
+The failure taxonomy, compressed:
+
+- **Model and API drift.** A model swap changes tokenization or the logits behind the agent's decisions. Yesterday's working prompt can silently blow today's context budget.
+- **Integration breakage.** APIs change shape or meaning without warning: "1. The handoffs break 2. Source data gets messy fast…" ([r/AI_Agents](https://www.reddit.com/r/AI_Agents/comments/1tk0p4o/i_build_ai_agents_for_businesses_heres_what/)). Salesforce calls the sneaky version [semantic API drift](https://www.salesforce.com/blog/ai-agent-maintenance/): the schema stays valid, the meaning changes, nothing errors.
+- **Cost drift.** Token usage that looked fine in testing gets expensive at real volume; nobody notices until the invoice does.
+- **Context rot.** Agents rarely crash. They go stale.
+
+Context rot means two different things, and mixing them up gets you in trouble. The technical sense comes from a [July 2025 Chroma research report](https://www.trychroma.com/research/context-rot): model performance degrades as input length grows, even holding task difficulty constant.
+
+The business sense is ours: the agent's knowledge goes stale as the client's business moves without it. Pricing changes, staff turns over, a policy gets rewritten in a Slack thread nobody fed back in. Only the technical version has a research paper behind it. Both cost you clients.
+
+Agents that run continuously need someone watching continuously; see our guide on how to [set up a 24/7 AI agent](/blog/how-to-set-up-a-24-7-ai-agent).
+
+## What does AI agent maintenance actually involve?
+
+It's a checklist, not a vibe: daily triage, weekly cost and eval review, monthly context refresh and credential rotation. Nobody budgets for this because nobody names it during the sales conversation, so it becomes free labor by default.
+
+![AI agent maintenance cadence: daily triage and schema tests, weekly cost and eval review, monthly context refresh and credential rotation.](/blog/who-runs-your-ai-agent-after-you-build-it/run-cadence.png)
+
+| Cadence                 | What you actually do                                                                                                                                                                                         |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Daily**               | Triage failed runs and error alerts. Confirm the agent actually ran (a silent no-op is a failure mode). Review escalations and low-confidence outputs routed to human review.                                |
+| **Weekly**              | Pull a token-cost report per client and per workflow; investigate spikes. Run the eval suite against the golden set. Review integration health checks and deprecation warnings.                              |
+| **Monthly / quarterly** | Add newly discovered failure modes to the golden set. Test pending model upgrades before switching. Refresh business context: pricing, policy, product changes. Rotate credentials and re-audit permissions. |
+
+### How do you monitor AI agents in production?
+
+You watch behavior, not just uptime. An agent can be online, fast, and error-free while still doing the wrong thing every time, which standard monitoring never flags.
+
+Autonomous agents introduce a failure type ordinary monitoring doesn't catch: correct execution of the wrong decision. Minimum viable monitoring covers four things:
+
+1. Decision and tool-call logging, so you can reconstruct what the agent chose and why.
+2. Nightly schema-comparison checks on every connected integration.
+3. Token-cost tracking per run, not just per month.
+4. Escalation review: what got routed to a human, and why.
+
+## Who should run the client's agent? The three doors
+
+There's no universally right answer, only the right one for a given client. Here's the honest version of each door, FOR and AGAINST included.
+
+![Three models for running a client's AI agent after handoff: client self-hosts, agency hosts on own infrastructure, or a managed runtime — compared by who runs it, when it's right, what it costs, and who's on call at 2am.](/blog/who-runs-your-ai-agent-after-you-build-it/three-doors.png)
+
+| Door                           | Best for                                                    | The real cost                                                                                      |
+| ------------------------------ | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| **1. Client self-hosts**       | Compliance/data-residency needs, clients with real IT staff | Inherits the entire failure taxonomy above, minus your skills. Still calls you when it breaks.     |
+| **2. You host it**             | Agencies that want to be an infrastructure company          | Key management, monitoring, and on-call scale linearly with every new client.                      |
+| **3. Managed runtime runs it** | Most consultants and small agencies                         | Near-flat marginal cost per client, some margin goes to the platform, platform dependency is real. |
+
+### Door 1: the client self-hosts
+
+Right for real IT staff and compliance requirements. Wrong the moment you weigh the fine print: "Local deployments need dedicated hardware and maintenance teams" ([r/AI_Agents](https://www.reddit.com/r/AI_Agents/comments/1jj6xru/where_do_you_deploy_your_ai_agents_cloud_vs_local/)).
+
+They inherit the full taxonomy above, minus your muscle memory. When it breaks, they still call you first.
+
+### Door 2: you host it yourself
+
+The honest "you become an infrastructure company" door. Full control and full margin, but full responsibility for keys, monitoring, schema tests, and on-call, per client, forever. Even competitors selling agency hosting concede it: your team becomes accidental DevOps whether that was the plan or not. Client eleven costs almost as much to run as client one.
+
+### Door 3: a managed runtime runs it
+
+Practitioner consensus already trends here: "Use a managed service… Someone else runs the harness, you configure via API. Fastest path to production" ([r/AI_Agents](https://www.reddit.com/r/AI_Agents/comments/1tylqry/there_are_4_ways_to_build_an_ai_agent_in_2026/)). Marginal cost per client approaches flat and you keep the retainer.
+
+Honest AGAINST: platform dependency, less control, and a runtime can't rescue a badly designed agent. See [OpenClaw vs managed AI agent platforms](/blog/openclaw-vs-managed-ai-agent-platforms) for a deeper comparison.
+
+{/* ADD WHEN LIVE: /blog/where-to-host-ai-agents */}
+
+## What should you charge to run an AI agent?
+
+Charge a retainer, not just a build fee. A one-off build pays once and leaves you doing unpaid maintenance forever; a retainer converts the same work into a business.
+
+![One-off AI agent build revenue versus build-plus-run retainer: a single $2.5K–$15K payment and unpaid maintenance, versus the same build plus $500–$1,500 per month per client recurring.](/blog/who-runs-your-ai-agent-after-you-build-it/retainer-economics.png)
+
+Builds typically run $2,500–$15,000. The industry benchmark for ongoing maintenance on production agents is 15–20% of build cost per year, though that figure comes from enterprise incident-response deployments, not $5,000 automation builds. Treat it as an anchor, not a quote.
+
+What practitioners actually charge to run agents, month to month:
+
+| Source                     | Structure                               | Numbers                                      |
+| -------------------------- | --------------------------------------- | -------------------------------------------- |
+| Solo operator, ~40 clients | Per-client run retainer                 | $500–$1,500/mo depending on automation count |
+| Agency guide range         | Monitoring retainer on top of the build | $500–$5,000+/mo                              |
+| Structured SLA tiers       | Starter / Growth / Enterprise           | $3,000/mo · $7,500/mo · $15,000/mo           |
+
+One operator at roughly 40 clients put it plainly: "$500 to $1,500 a month… That retainer revenue is what turned project work into a business" ([r/AI_Agents](https://www.reddit.com/r/AI_Agents/comments/1uh84cx/i_charge_clients_more_to_not_build_an_ai_agent/)).
+
+The anatomy behind that number: "a base monthly retainer that covers maintenance, updates when their workflows break, and a set number of optimisation hours" ([r/b2bmarketing](https://www.reddit.com/r/b2bmarketing/comments/1rt0e1t/how_do_you_price_ongoing_ai_automation_management/)).
+
+The decision underneath is margin. Host every client yourself and run cost scales linearly: each one adds keys, a dashboard, another 2am page. A managed runtime keeps cost near-flat as clients grow.
+
+That delta is what turns run-it work into an actual ai automation agency business model, not a string of one-off gigs.
+
+{/* ADD WHEN LIVE: [Turn AI Agent Builds into Recurring Retainers](/blog/turn-ai-agent-builds-into-recurring-retainers) */}
+
+Token costs are a real line item too. Check [what Claude Code actually costs to run](/blog/claude-code-pricing) before pricing a retainer around it.
+
+## How do you set up the run layer for a client?
+
+Door 3 is the one we built Duet for. Each client gets a private cloud server where the agent actually lives: always on, with its own files, memory of the client's business, and scheduled work that keeps running whether or not anyone opens a chat. You build the agent once. Duet runs it, and you bill the retainer.
+
+The pricing is shaped for this. Each monthly plan includes credits that reset at renewal, while the paid reserve covers overage and carries across periods. One gateway covers 900+ models, which turns a model deprecation into a switch rather than a migration project.
+
+10,000+ integrations cover the stacks your clients already run on. And because Duet learns a business from the files and links you feed it, the context refresh that stops agents going stale is a workflow, not a rebuild.
+
+New accounts start with a 7-day free trial, no card required, enough time to move one client's agent in and watch it run. Here's [how agencies run Duet for clients](/use-cases/agencies).
+
+This doesn't replace the checklist from earlier. It moves most of it onto infrastructure instead of onto you. The server stops being your problem to keep alive. For the setup pattern behind the agent itself, see [how to run Claude Code in the cloud](/blog/how-to-run-claude-code-in-the-cloud).
+
+## FAQ: running AI agents for clients
+
+**Who is responsible for maintaining an AI agent built by an agency?**
+
+The builder, by default. Unless the contract explicitly moves the run layer, unclaimed ownership lands on whoever shipped the agent. The three working models are client self-hosting, agency-hosted infrastructure, or a managed runtime, with the agency keeping the client relationship and a retainer.
+
+**What cloud environment lets AI agents run continuously without resetting?**
+
+A persistent cloud server with durable memory, not a stateless chat session. The agent needs a machine that stays on between conversations, keeps files and context, and runs scheduled jobs. Managed runtimes like Duet provide this per workspace; the DIY equivalent is a VPS plus process supervision and monitoring you maintain yourself.
+
+**How much does AI agent maintenance cost?**
+
+The industry benchmark for production agents is 15–20% of the initial build cost per year. In practice, agencies price it as a monthly retainer, $500–$5,000+/mo on top of $2,500–$15,000 builds, because clients buy uptime and response quality, not tracked hours.
+
+**What should an AI agency charge for a monthly retainer?**
+
+$500–$1,500/mo per client is the practitioner-validated entry point. Structured SLA tiers run $3,000–$15,000/mo. The anatomy: a base monitoring fee, capped optimization hours, a break-fix SLA, and a strategy check-in. Price on outcomes, not hours.
+
+**Do AI agents need ongoing maintenance even if they were built well?**
+
+Yes. The flux is external, not a build-quality verdict. Model deprecations, API drift, cost spikes, and the client's business changing all hit well-built agents too. Gartner predicted in mid-2025 that over 40% of agentic AI projects will be canceled by end of 2027, citing cost, unclear value, and weak risk controls.
+
+**How do you monitor AI agents in production?**
+
+Watch behavior, not just uptime. Agents introduce a failure type standard monitoring misses: correct execution of the wrong decision. Minimum viable setup: decision and tool-call logging, nightly integration schema checks, per-run token-cost tracking, and regular escalation review.
+
+**What is an AI automation agency?**
+
+A service business that builds and runs AI agents for client companies, typically SMBs without in-house AI staff. The ones that last make money on the run side: recurring retainers for keeping agents online, monitored, and current, not one-off build fees.

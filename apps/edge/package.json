@@ -1,0 +1,26 @@
+{
+  "name": "edge",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "bun scripts/build-vercel-output.ts",
+    "check-types": "tsc --noEmit",
+    "lint": "oxlint",
+    "test": "bun test src",
+    "test:browser": "bun test --timeout 30000 tests"
+  },
+  "dependencies": {
+    "@repo/contract": "*"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.0",
+    "@repo/typescript-config": "*",
+    "@types/bun": "catalog:",
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
+  }
+}

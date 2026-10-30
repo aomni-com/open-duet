@@ -1,0 +1,1 @@
+{"ok":false,"failures":[{"artifact":"manifest.json","reason":"invalid gateway release manifest sha256"}]}

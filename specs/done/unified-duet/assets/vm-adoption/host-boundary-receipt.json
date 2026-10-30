@@ -1,0 +1,28 @@
+{
+  "helperSourceCommit": "447f364743f1019afcb450535652629651048ccc",
+  "helperBundle": "/tmp/unified-duet-vm-runtime-adoption-final447.js",
+  "helperSha256": "cf5eaa5e04e4ed9a85309296ce2dc484638aad5aea128ad0d85df963680882db",
+  "controllerSha256": "623fdfa13b5f024cf1be5b841fddaaf05239a26e035ddc97d8707c7db697bef1",
+  "runtimeVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+  "runtimePayloadRebuilt": false,
+  "liveVmsModified": false,
+  "status": "fresh-production-old-adoption-and-noop-complete",
+  "baselineOldMain": "5256",
+  "noopPreservedMain": "6864",
+  "adoptionJobCgroupAbsent": true,
+  "proof": "host-systemd-green.json",
+  "transportEdges": [
+    "synthetic Convex inventory",
+    "synthetic provider inventory",
+    "Exedev SSH commands via docker exec",
+    "SCP via docker cp then recipient ownership"
+  ],
+  "unalteredOwners": [
+    "production archive and SHA verification",
+    "final committed helper source447",
+    "transient systemd job and recovery",
+    "real held runtime startup and certification",
+    "production host settlement and cleanup"
+  ],
+  "observedLimitation": "One baseline repeat timed out in the native memory probe under emulation; the actual controller consumed failed/restored receipt and cleaned transfer. Same frozen CLI standalone diagnostic completed3903ms exit0. No helper timeout, payload bytes or verification threshold changed; a subsequent clean baseline repeat passed."
+}

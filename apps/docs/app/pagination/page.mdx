@@ -1,0 +1,39 @@
+export const metadata = {
+  title: 'Pagination',
+  description: 'Traverse Duet collections with opaque cursors.',
+  alternates: { canonical: '/pagination/' },
+}
+
+<p className="eyebrow">Protocol</p>
+
+# Cursors are positions, not page numbers
+
+When an endpoint declares pagination, pass its returned cursor back unchanged. Do not decode it,
+increment it, compare it lexically, or reuse it with different filters.
+
+## Collections can change
+
+New rows may arrive while a client walks a collection. Process items by their stable identity and
+make downstream writes idempotent so a repeated item is harmless. An empty page with
+`nextCursor: null` ends the traversal; a client-side item count does not.
+
+Every browsable collection returns `{ items, nextCursor }`. A null cursor completes the walk;
+otherwise pass the opaque cursor to the same endpoint with the same filters and subject. Page-level
+facts, when a collection has any, live in its typed `meta` object rather than changing the envelope.
+Older endpoint-specific keys such as `entries`, `events`, or `seenBy` are not aliases and fail
+schema validation.
+
+Every collection's generated endpoint reference includes the shared `invalid_cursor` refusal beside
+any operation-specific errors. The registry composes that common contract, so a newly registered
+collection cannot silently omit the cursor failure from its public documentation.
+
+An empty page can still carry a continuation, so keep walking until `nextCursor` is null. Stop if
+an endpoint returns a cursor the same walk already requested: the response is not making progress.
+The shared `iterateCollectionPages` helper enforces both rules without imposing a product-wide page
+ceiling.
+
+## Bound every walk
+
+Set a page limit the endpoint accepts, cap total work for interactive requests, and resume large
+background jobs from the last committed cursor. Query and response schemas appear in each
+endpoint's contract panel.

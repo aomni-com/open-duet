@@ -1,0 +1,213 @@
+$ bun test scripts app src lib proxy.test.ts && bun run verify:boundaries && bun run verify:public-content && bun run verify:visual-coverage
+bun test v1.3.14 (0d9b296a)
+
+proxy.test.ts:
+(pass) serves a markdown twin from the /md segment without changing the visible URL [0.61ms]
+(pass) leaves the human page alone [0.62ms]
+(pass) keeps redirecting a consolidated Spanish page even though rewriting comes first [0.07ms]
+(pass) permanently consolidates the legacy production host onto the canonical domain [0.03ms]
+
+scripts/blog-toc.test.ts:
+(pass) blog table-of-contents slugs > matches rehype-slug for repeated and already-suffixed headings [0.13ms]
+
+scripts/public-text-integrity.test.ts:
+(pass) public text integrity > finds visible encoding damage: workaroundsâif [0.12ms]
+(pass) public text integrity > finds visible encoding damage: volume Ã CTR
+(pass) public text integrity > finds visible encoding damage: revenue Ã· cost
+(pass) public text integrity > finds visible encoding damage: Sourced â Screen
+(pass) public text integrity > finds visible encoding damage: baddash
+(pass) public text integrity > finds visible encoding damage: lost � glyph [0.01ms]
+(pass) public text integrity > allows valid Unicode and the exact TÂCHES name: Las sesiones guardan archivos, historial y contexto.
+(pass) public text integrity > allows valid Unicode and the exact TÂCHES name: An em dash — and arrows → render directly.
+(pass) public text integrity > allows valid Unicode and the exact TÂCHES name: Spec-driven meta-prompting system by TÂCHES.
+
+scripts/public-visual-contract.test.ts:
+(pass) public screenshot ids stay stable when URL paths encode tag spaces [0.80ms]
+(pass) generated editorial pages use a bounded representative visual set [0.06ms]
+(pass) pricing has full-page desktop and mobile coverage in both locales
+
+scripts/check-product-copy.test.ts:
+(pass) billing copy policy > rejects a retired Duet billing claim: Start with a $10 trial. [0.15ms]
+(pass) billing copy policy > rejects a retired Duet billing claim: Duet is pay-as-you-go. [0.01ms]
+(pass) billing copy policy > rejects a retired Duet billing claim: No platform fee. You only pay for the tokens you use. [0.01ms]
+(pass) billing copy policy > rejects a retired Duet billing claim: No subscription required.
+(pass) billing copy policy > rejects a retired Duet billing claim: Start with a 14-day free trial.
+(pass) billing copy policy > rejects a retired Duet billing claim: Paga por uso, sin cargos de plataforma.
+(pass) billing copy policy > allows current or third-party billing context: OpenClaw is open source, so you only pay for AI API usage. [0.05ms]
+(pass) billing copy policy > allows current or third-party billing context: Prueba el servicio al cliente durante 3 días.
+(pass) billing copy policy > allows current or third-party billing context: Start with a 7-day free trial.
+(pass) billing copy policy > allows current or third-party billing context: The subscription includes monthly credits, then overage draws from your paid reserve.
+(pass) billing copy policy > allows current or third-party billing context: Every Duet charge produces an invoice.
+(pass) product copy policy > rejects a retired managed-product claim: Each client gets a dedicated channel where the AI maintains full history. [0.13ms]
+(pass) product copy policy > rejects a retired managed-product claim: Duet work happens in shared channels where the whole team messages the agent. [0.07ms]
+(pass) product copy policy > rejects a retired managed-product claim: Cada proyecto tiene un canal dedicado donde todos hablan con la AI.
+(pass) product copy policy > rejects a retired managed-product claim: Humans and AI collaborate in shared channels.
+(pass) product copy policy > rejects a retired managed-product claim: Los humanos y la AI colaboran en canales compartidos.
+(pass) product copy policy > rejects a retired managed-product claim: Duet lets teams collaborate in shared channels alongside Slack.
+(pass) product copy policy > rejects a retired managed-product claim: Correo electrónico, Slack y mensajes Duet mantienen al equipo al día.
+(pass) product copy policy > rejects a retired managed-product claim: Correo electrónico, Slack y canal Duet mantienen al equipo al día.
+(pass) product copy policy > rejects a retired managed-product claim: Duet has team channels alongside Slack.
+(pass) product copy policy > allows a concrete external or editorial use: Duet sends a summary to your Slack channel after every run. [0.09ms]
+(pass) product copy policy > allows a concrete external or editorial use: Duet reads each email thread and drafts a support reply.
+(pass) product copy policy > allows a concrete external or editorial use: Turn the article into a LinkedIn post and an X thread. [0.09ms]
+(pass) product copy policy > allows a concrete external or editorial use: ChatGPT is a chat window; Duet keeps durable sessions and files.
+(pass) product copy policy > allows a concrete external or editorial use: A forum thread can reveal the language customers actually use. [0.04ms]
+
+scripts/locale-spec-prose.test.ts:
+(pass) Spanish locale specs do not inherit English prose [1.31ms]
+
+scripts/locale-spec-alignment.test.ts:
+(pass) Spanish locale specs stay positionally aligned with their English base entries [0.05ms]
+
+scripts/robots.test.ts:
+(pass) AI crawlers can reach only the reviewed public prefixes [0.08ms]
+(pass) AI crawlers can reach the surfaces written for them [0.02ms]
+
+scripts/locale-paths.test.ts:
+(pass) locale paths normalize internal prerender routes and public prefixes [0.15ms]
+(pass) locale switch falls back to Spanish home when no translated route exists [0.03ms]
+
+scripts/browser-ad-cutover.test.ts:
+(pass) the lander keeps native analytics and click capture without browser ad runtimes [0.25ms]
+
+lib/public-site-config.test.ts:
+(pass) a Standard-tier message estimate is the credit grant divided by one typical message [0.03ms]
+(pass) public subscription cards render the contract catalog [0.03ms]
+(pass) each public card states the plan differences from the rails that own them [0.03ms]
+(pass) every stated difference rises strictly across the plan ladder [0.10ms]
+(pass) public trial duration is derived from the contract timebox
+(pass) the public tier ladder names the contract tiers and never carries their rates [0.03ms]
+
+src/site-config.test.ts:
+(pass) public install MCP origin > advertises the canonical root resource from DUET_MCP_PUBLIC_URL [0.07ms]
+(pass) public install MCP origin > sends both doors at the configured API origin, never a hardcoded one [463.54ms]
+
+src/home-copy.test.ts:
+(pass) the main lander copy (en) > leads with consultants and the promise to share with every client [0.05ms]
+(pass) the main lander copy (en) > claims nothing the product does not back [0.04ms]
+(pass) the main lander copy (en) > is written in whole sentences, without em dashes [0.01ms]
+(pass) the main lander copy (es-419) > leads with consultants and the promise to share with every client [0.01ms]
+(pass) the main lander copy (es-419) > claims nothing the product does not back [0.02ms]
+(pass) the main lander copy (es-419) > is written in whole sentences, without em dashes
+(pass) every locale says the same number of things [0.02ms]
+
+src/lander-entry-ctas.test.tsx:
+(pass) the hero makes one ask: book a call [8.28ms]
+(pass) the closing band makes the same single ask [1.61ms]
+(pass) the ask speaks the page language [0.80ms]
+
+src/lander-lineup.test.ts:
+(pass) lander lineup > every whole-page pitch is either the main lander or a /l/ campaign lander [0.13ms]
+(pass) lander lineup > the retired product pages are gone from the public route manifest [0.09ms]
+(pass) lander lineup > no campaign lander or retired product page is advertised in a sitemap [198.16ms]
+
+src/install-copy.test.ts:
+(pass) agent install copy > documents both sign-in rails and forbids neither [0.25ms]
+(pass) agent install copy > one human login follows memberships without a separate sync grant [0.07ms]
+(pass) agent install copy > reads the code lifetime from the contract rather than restating it [0.02ms]
+(pass) agent install copy > the published email exchange preserves machine configuration while replacing login [43.43ms]
+
+app/public-route-manifest.json/route.test.ts:
+(pass) serializes the public route owner for deployed acceptance [0.28ms]
+(pass) declares consolidated Spanish routes as permanent redirects [0.15ms]
+(pass) keeps public tag paths URL-safe without changing their prerender owner [0.23ms]
+
+lib/blog/cta-href.test.ts:
+(pass) a product path resolves against the product origin, query intact [0.09ms]
+(pass) a lander path stays relative, so it never leaves the site to re-enter it
+(pass) an in-page anchor is left alone
+
+lib/blog/cta-target.test.tsx:
+(pass) post CTAs resolve lander and product targets through their owning origins [60.77ms]
+
+lib/llms/index-text.test.ts:
+(pass) opens with the spec header a reader keys off: one H1 and one blockquote summary [388.26ms]
+(pass) links every published page exactly once, at its twin’s absolute URL [0.59ms]
+(pass) every linked twin resolves to a route the build prerenders [0.38ms]
+(pass) explains the offer inline, because a bot that fetches nothing else still learns it [0.22ms]
+(pass) teaches the whole sign-in transcript, including what the agent cannot do itself [0.25ms]
+(pass) offers no capability or scope vocabulary to reintroduce a knob that was removed [0.24ms]
+(pass) names both subscribe triggers and whose plan clears them [0.18ms]
+(pass) tells an agent where entitlement is readable before a refusal arrives [0.11ms]
+(pass) stays inside its length budget [0.27ms]
+(pass) never points a reader at a path it has to resolve itself [0.24ms]
+(pass) carries every page body in the full text, each under its own URL [72.53ms]
+
+lib/llms/routes.test.ts:
+(pass) publishes only URLs the sitemap already owns, so there is one route enumeration [187.49ms]
+(pass) carries the homepage as the overview and never a Spanish duplicate [0.10ms]
+(pass) classifies each page by the body source that owns its copy [0.07ms]
+
+lib/llms/pages.test.ts:
+(pass) renders a body for every route it publishes, so no listed URL is empty [0.14ms]
+(pass) never renders an empty heading outside fenced code [0.99ms]
+(pass) returns nothing for a path the site does not publish [0.04ms]
+(pass) carries the article body for an editorial page, not just its frontmatter [60.94ms]
+(pass) renders a vertical from its spec: subhead, outcomes and FAQ answers [0.14ms]
+(pass) drops the SERP brand suffix from a title about to sit under a Duet heading [0.03ms]
+(pass) states pricing from the product contract instead of a marketing copy of it [0.05ms]
+
+lib/llms/mdx-to-markdown.test.ts:
+(pass) drops page chrome that carries no prose [0.07ms]
+(pass) turns an accordion FAQ into question-and-answer prose [0.03ms]
+(pass) unwraps a callout so its markdown survives [0.02ms]
+(pass) lifts an answer box title and summary out of its JSX props [0.02ms]
+(pass) resolves a product link against the product origin, whatever else it is passed [0.03ms]
+(pass) unwraps a container written inline
+(pass) leaves no JSX tag behind in a real guide body [101.48ms]
+
+lib/seo/home-json-ld.test.ts:
+(pass) the homepage structured data (en) > describes the page with its own promise [0.03ms]
+(pass) the homepage structured data (en) > mirrors the questions the page answers [0.02ms]
+(pass) the homepage structured data (en) > offers the real plans, not a self-serve trial [0.07ms]
+(pass) the homepage structured data (es-419) > describes the page with its own promise
+(pass) the homepage structured data (es-419) > mirrors the questions the page answers
+(pass) the homepage structured data (es-419) > offers the real plans, not a self-serve trial [0.02ms]
+(pass) the site-wide organization tells the same story as the homepage
+
+src/config/origins.test.ts:
+(pass) lander origin ownership > maps local, staging, and production hosts without request-origin inference [0.02ms]
+(pass) lander origin ownership > resolves Vercel environments explicitly [0.02ms]
+(pass) lander origin ownership > uses the explicit product origin for a separately deployed staging lander [0.09ms]
+(pass) lander origin ownership > requires one explicit canonical lander origin in deployed builds [0.02ms]
+(pass) lander origin ownership > builds cross-origin product links while preserving attribution parameters [0.11ms]
+(pass) lander origin ownership > rejects caller-provided origins and URL parser attacks [0.03ms]
+
+src/campaigns/actions.test.ts:
+(pass) lander campaign actions > signup mints in Convex and redirects the opaque handoff with a journey cookie [0.46ms]
+(pass) lander campaign actions > a lead submission inserts one contact row and starts no campaign journey [0.95ms]
+(pass) lander campaign actions > a disabled or unknown campaign reports not found without side effects [0.05ms]
+campaign convex call failed: domains/campaigns/api:captureLead {
+  message: "convex down",
+}
+(pass) lander campaign actions > a Convex outage answers the stable 502 shape, not an error page [0.12ms]
+campaign app URL is invalid {
+  message: "\"/api/campaigns/handoff\" cannot be parsed as a URL against \"not-a-url\"",
+}
+(pass) lander campaign actions > an invalid signup target answers the stable 502 shape without minting attribution [0.08ms]
+(pass) lander campaign actions > a malformed lead body is rejected before Convex is consulted [0.04ms]
+
+src/campaigns/browser-action.test.ts:
+(pass) browser campaign actions > keeps lead metadata in generic data and carries no campaign attribution [0.04ms]
+
+app/md/[...path]/route.test.ts:
+(pass) serves the markdown twin of a page as markdown [0.15ms]
+(pass) serves the homepage twin under the index segment [0.03ms]
+(pass) 404s a path the site does not publish rather than inventing a page [0.04ms]
+(pass) prerenders one twin per published page [0.13ms]
+
+ 133 pass
+ 0 fail
+ 803 expect() calls
+Ran 133 tests across 28 files. [2.31s]
+$ bun scripts/check-product-copy.ts
+Product copy boundary reviewed 442 channel/thread/chat terms:
+- 81 an external messaging, inbox, or support workflow
+- 42 a publishing or marketing distribution channel
+- 263 unbranded editorial discussion
+- 51 a third-party or competitor capability
+- 5 a comparison with a transient chat interface
+$ bun scripts/verify-public-content.ts
+Verified 614 public routes, translation parity, and 582 asset references.
+$ bun scripts/verify-visual-coverage.ts
+Lander visual coverage verified for 306 rendered symbols across 49 representative routes; all 614 routes remain build-verified.

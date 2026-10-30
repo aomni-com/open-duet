@@ -1,0 +1,25 @@
+## Visual critique: recheck endpoint card (mobile and desktop)
+
+**Overall:** I found no serious defects. The path and code text stay inside their boxes and nothing is clipped. Only small spacing and typography issues remain.
+
+### Findings
+
+1. **Extra space at the bottom of each card (medium confidence, low severity).** In both views, the gap below the last row is about twice the gap at the top.
+   - Mobile: about 40px below "Not declared idempotent", against about 18px above the POST badge.
+   - Desktop: about 40px below the "Retry" row, against about 20px above the badge.
+   - The card above ("Declared idempotent") has the same gap, so this happens on every card. It looks like leftover margin on the last element inside the card, not deliberate padding.
+
+2. **The path is small and has a tight box on mobile (low–medium confidence, cosmetic).** The path wraps once, after `/domain`, onto a second line (`/recheck`). The break falls on a `/`, so it reads naturally, and nothing overflows or gets cut off. However:
+   - The monospace text is about 11px, noticeably smaller than the 15–17px body text. It's still readable, but it's the hardest line on the card to scan.
+   - The box has very little padding above and below the text (about 3–4px), so the two wrapped lines look crowded inside it. The same small, tight style appears in the one-line DELETE path box below.
+
+3. **The mobile description has loose line spacing (low confidence, taste).** "Request a fresh domain check or retry exhausted removal" uses about 28px line spacing on about 17px text. That makes the two-line description look spread out compared with the tighter rows beneath it. It isn't a real defect.
+
+### Checked and fine
+- **Desktop path:** it fits on one line in a full-width box, and it's vertically aligned with the POST badge.
+- **Scope chip:** `ws:{workspaceSlug}:apps` fits its box in both views with nothing cut off.
+- **Row labels and dividers:** the grey labels and grey dividers have enough contrast. The label and value columns line up consistently on desktop, and the stacked label/value pairs on mobile read clearly.
+- **Green links and badges:** the green "Response / Error body JSON schema" links and the white-on-green POST and DELETE badges are legible.
+- **Card edges:** the mobile margins are even on both sides, and neither view shows horizontal overflow.
+
+Separately, several connected tools need authorization before they can be used: claude.ai Canva, Github, Gmail, Google Calendar, Google Drive, Linear, and `natural`. You can connect the claude.ai ones in your claude.ai connector settings, and `natural` through `claude mcp` or `/mcp` in an interactive session. I didn't need any of them for this review.

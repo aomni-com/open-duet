@@ -1,0 +1,7 @@
+{
+  "sourceCommit": "667840376",
+  "fixturePath": "packages/duet/src/sync/__fixtures__/generated-config.xml",
+  "fixtureSha256": "758da8b30b5a3e9bfffeb290144190bd908e6f3f33eab29d14fbd5eb16ddcf4f",
+  "originalFixtureUnchanged": true,
+  "liveResourcesUsed": false
+}

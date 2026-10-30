@@ -1,0 +1,127 @@
+{
+  "name": "turborepo",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ],
+    "catalog": {
+      "@ai-sdk/mcp": "1.0.51",
+      "@ai-sdk/openai": "3.0.71",
+      "@convex-dev/react-query": "0.1.0",
+      "@duetso/agent": "0.1.202",
+      "@emoji-mart/data": "1.2.1",
+      "@hookform/resolvers": "5.2.2",
+      "@phosphor-icons/react": "2.1.10",
+      "@tanstack/query-async-storage-persister": "5.100.11",
+      "@tanstack/react-query": "5.100.11",
+      "@tanstack/react-query-persist-client": "5.100.11",
+      "@types/bun": "^1.3.0",
+      "@types/node": "^24.0.0",
+      "@types/react": "~19.2.0",
+      "@types/react-dom": "~19.2.0",
+      "ably": "2.21.0",
+      "ai": "6.0.205",
+      "clsx": "2.1.1",
+      "convex": "1.41.0",
+      "date-fns": "4.2.1",
+      "dedent": "1.7.2",
+      "e2b": "2.20.1",
+      "framer-motion": "11.18.2",
+      "fuse.js": "7.3.0",
+      "lodash-es": "4.18.1",
+      "markdown-to-jsx": "9.8.0",
+      "mcp-handler": "1.0.7",
+      "mime": "4.1.0",
+      "mutative": "1.3.0",
+      "nanoid": "5.1.11",
+      "next": "16.2.9",
+      "next-intl": "4.13.0",
+      "next-themes": "0.4.6",
+      "p-all": "5.0.1",
+      "postcss": "8.4.47",
+      "react": "19.2.3",
+      "react-dom": "19.2.3",
+      "react-hook-form": "7.76.0",
+      "remark-gfm": "4.0.1",
+      "superjson": "2.2.6",
+      "tailwindcss-animate": "1.0.7",
+      "tsx": "4.19.2",
+      "typescript": "7.0.1-rc",
+      "uniqolor": "1.1.1",
+      "use-debounce": "192.0.2.1",
+      "use-intl": "4.13.0",
+      "vaul": "1.1.2",
+      "vitest": "4.1.6",
+      "zod": "4.4.3",
+      "zustand": "5.0.13"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "build": "turbo build",
+    "build:mobile": "turbo build --filter=mobile",
+    "build:web": "turbo build --filter=web",
+    "check-types": "turbo check-types",
+    "clean:artifacts": "rimraf --glob '**/{.turbo,.next,.expo}'",
+    "clean:modules": "rimraf --glob '**/{node_modules,.turbo,.next,.expo}'",
+    "codegen": "turbo codegen",
+    "deploy": "turbo deploy",
+    "deploy:sandbox": "turbo run deploy:sandbox",
+    "dev": "turbo dev",
+    "dev:mobile": "turbo dev --filter=mobile --filter=@repo/backend",
+    "dev:web": "turbo dev --filter=web --filter=@repo/backend",
+    "eval": "turbo eval",
+    "format": "oxfmt --write --no-error-on-unmatched-pattern",
+    "format:check": "oxfmt --check --no-error-on-unmatched-pattern",
+    "lint": "turbo lint",
+    "lint:fix": "turbo lint -- --fix",
+    "prepare": "husky",
+    "setup": "bash scripts/setup-docker.sh",
+    "sync-env-vars": "turbo sync-env-vars",
+    "test": "turbo test",
+    "trace-tsc": "turbo trace-tsc",
+    "tunnel": "ngrok http --url=https://steady-jellyfish-77.ngrok.app 3000",
+    "ui:approve": "bash scripts/ui-playground.sh approve",
+    "ui:approve:force:in-docker": "turbo run visual:approve:force --filter=web",
+    "ui:approve:in-docker": "turbo run visual:approve --filter=web",
+    "ui:check": "bash scripts/ui-playground.sh check",
+    "ui:check:in-docker": "turbo run visual --filter=web"
+  },
+  "devDependencies": {
+    "@typescript/native-preview": "^7.0.0-dev.20260630.1",
+    "husky": "^9.1.7",
+    "oxfmt": "^0.35.0",
+    "oxlint": "^1.50.0",
+    "rimraf": "^6.0.1",
+    "shadcn": "^3.3.1",
+    "tsx": "^4.19.2",
+    "turbo": "^2.5.5",
+    "typescript": "7.0.1-rc"
+  },
+  "overrides": {
+    "react": "19.2.3",
+    "typescript": "7.0.1-rc"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "bash -c 'bun run check-types'",
+      "bash -c 'bun run lint'",
+      "bun run format"
+    ],
+    "*.{json,md,css,scss}": [
+      "bun run format"
+    ]
+  },
+  "engines": {
+    "node": ">=22 <=24"
+  },
+  "packageManager": "bun@1.3.14",
+  "patchedDependencies": {
+    "expo@57.0.4": "patches/user@example.invalid"
+  },
+  "trustedDependencies": [
+    "uniwind"
+  ]
+}

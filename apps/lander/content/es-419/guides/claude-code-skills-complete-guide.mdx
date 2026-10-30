@@ -1,0 +1,841 @@
+---
+title: 'Skills de Claude Code: la guía completa (2026)'
+metaTitle: 'Guía completa de skills de Claude Code: SKILL.md, MCP, subagentes y equipos (2026)'
+description: 'Todo lo que necesitas saber sobre los skills de Claude Code: qué son, cómo funciona SKILL.md, cuándo usar skills vs MCP vs subagentes, cómo crear tu primer skill y cómo compartirlos en un equipo.'
+date: '2026-05-02'
+updatedAt: '2026-05-08'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/4.png'
+category: 'guides'
+tags: ['claude-code', 'skills', 'mcp', 'subagents', 'SKILL.md', 'agent-sdk']
+type: 'guide'
+image: '/guides/claude-code-skills-complete-guide/cover.png'
+locale: es-419
+translationKey: 'claude-code-skills-complete-guide'
+relatedPosts:
+  - slug: 'agent-skills-101-tools-vs-mcp-vs-skills'
+    context: 'El desglose fundamental de tools, MCP y skills: empieza aquí si esta guía es tu primera parada.'
+  - slug: 'beyond-claude-code-building-a-shared-skill-library'
+    context: 'Profundiza en cómo compartir skills en un equipo, patrones que escalan y la integración de MCP + skills.'
+cta:
+  title: 'Dale a tus playbooks de Claude Code un workspace persistente.'
+  subtitle: 'Duet reúne archivos de instrucciones reutilizables, contexto duradero y un runtime administrado en un workspace compartido.'
+  buttonText: 'Usa instrucciones en Duet'
+  href: '/sign-in?from=guide-cc-skills'
+---
+
+Hace seis meses, "extender Claude" significaba escribir servidores MCP a medida o meter todo en un archivo `CLAUDE.md` de 5,000 líneas. Luego Anthropic lanzó los **skills de Claude Code** en octubre de 2025, abrió el código del formato ese diciembre, y en semanas OpenAI ya había adoptado la misma especificación `SKILL.md` para Codex y ChatGPT. De repente había una forma portátil, invocada por el modelo, de enseñarle a cualquier agente de programación cómo trabaja _tu_ equipo realmente.
+
+Los skills se volvieron, sin hacer ruido, el primitivo más importante de Claude Code. Son la diferencia entre un asistente que necesita que lo lleves de la mano en cada workflow y uno que conoce las convenciones de tu repo, tu checklist de revisión, tu baile de despliegue y otras cien cosas que de otro modo tendrías que repetir en cada prompt. Mejor aún: son baratos. Un skill cuesta unos 100 tokens de contexto hasta que Claude decide que se necesita, lo que significa que puedes tener cincuenta skills instalados y pagar casi nada por los que no estás usando ahora mismo.
+
+Pero el ecosistema avanza rápido, y hay confusión sobre qué _son_ los skills realmente, en qué se diferencian de los servidores MCP y los subagentes, qué va en el archivo `SKILL.md` y cómo los equipos deberían organizarlos. **Esta guía es la respuesta canónica.**
+
+Cubriremos qué es un skill de Claude Code, cómo se compara con MCP y los subagentes (con una matriz de decisión real), el formato `SKILL.md` hasta el frontmatter YAML, la creación concreta de tu primer skill en 5 minutos, las mejores prácticas que separan los skills que la gente de verdad invoca de los que juntan polvo, cómo compartir skills en un equipo para que se compongan en vez de fragmentarse, y dónde encontrar e instalar skills de la comunidad.
+
+<GuideTOC
+  items={[
+    { number: 1, title: '¿Qué es un skill de Claude Code?', href: '#what-is-a-claude-code-skill' },
+    {
+      number: 2,
+      title: 'Skills de Claude Code vs MCP vs subagentes',
+      href: '#claude-code-skills-vs-mcp-vs-subagents',
+    },
+    { number: 3, title: 'El formato SKILL.md', href: '#the-skillmd-format' },
+    {
+      number: 4,
+      title: 'Crea tu primer skill en 5 minutos',
+      href: '#how-to-build-your-first-claude-code-skill-in-5-minutes',
+    },
+    { number: 5, title: 'Mejores prácticas', href: '#claude-code-skills-best-practices' },
+    {
+      number: 6,
+      title: 'Compartir skills en un equipo',
+      href: '#sharing-claude-code-skills-across-a-team',
+    },
+    {
+      number: 7,
+      title: 'Dónde encontrar skills de Claude Code',
+      href: '#where-to-find-claude-code-skills',
+    },
+    {
+      number: 8,
+      title: 'Preguntas frecuentes',
+      href: '#frequently-asked-questions-about-claude-code-skills',
+    },
+  ]}
+/>
+
+---
+
+## ¿Qué es un skill de Claude Code?
+
+Un skill de Claude Code es una carpeta de instrucciones, scripts y recursos que Claude carga bajo demanda para realizar una tarea especializada de forma repetible. Cada skill vive en un directorio que contiene un único archivo `SKILL.md` con frontmatter YAML (un nombre y una descripción) e instrucciones en markdown que Claude sigue cuando el skill se activa. De manera opcional, scripts auxiliares, archivos de referencia y plantillas pueden estar junto a él.
+
+En una sola frase, un skill es conocimiento procedimental (un reutilizable "cómo hacemos XYZ aquí") empaquetado en un formato que Claude puede descubrir y cargar por su cuenta.
+
+### Cómo funciona un skill de Claude Code en tres pasos
+
+![Descubrimiento, activación y ejecución: cómo se carga y corre un skill de Claude Code](/guides/claude-code-skills-complete-guide/skill-lifecycle.png)
+
+1. **Descubrimiento.** Cuando se inicia una sesión de Claude Code, Claude escanea el nombre y la descripción del frontmatter YAML de cada skill instalado. Esto cuesta aproximadamente 100 tokens por skill, sin importar qué tan grande sea el skill en sí.
+2. **Activación.** Cuando tu prompt coincide con el propósito de un skill, Claude carga el cuerpo completo del `SKILL.md` (típicamente menos de 5,000 tokens) en el contexto. No tienes que invocarlo manualmente: los skills son _invocados por el modelo_ por defecto.
+3. **Ejecución.** Claude sigue las instrucciones del skill, llama a cualquier script incluido y consulta los archivos de apoyo solo si la tarea realmente lo necesita. Esto se llama **divulgación progresiva**, y es lo que te permite instalar docenas de skills sin inflar el contexto.
+
+### Los skills son invocados por el modelo, no por el usuario
+
+Esto es lo más importante que hay que entender sobre los skills de Claude Code:
+
+- **Los slash commands** son _invocados por el usuario._ Escribes `/deploy` y Claude lo ejecuta.
+- **Los skills** son _invocados por el modelo._ Claude lee tu prompt, decide que un skill es relevante y lo carga por su cuenta.
+
+Por eso el campo de descripción en el frontmatter YAML importa tanto. No es documentación: es el disparador. Claude lee tu descripción en cada turno y se pregunta: _"¿La solicitud del usuario coincide con esto?"_ Una descripción vaga significa un skill que nunca se activa. Una precisa significa que el skill se activa exactamente cuando debe.
+
+### ¿Qué puede hacer un skill de Claude Code?
+
+Casi cualquier cosa que de otro modo repetirías en un system prompt o pegarías en el chat:
+
+- **Workflows:** "Cómo abrimos un PR", "Cómo corremos migraciones de base de datos", "Cómo escribimos un postmortem".
+- **Marca y estilo:** guías de voz, reglas de tono, convenciones de formato.
+- **Conocimiento de dominio:** procedimientos específicos de la industria, requisitos de cumplimiento, taxonomías internas.
+- **Envoltorios de herramientas:** "Cuando el usuario pregunte por imágenes, corre este script y devuelve el resultado".
+- **Plantillas:** código boilerplate, andamiajes de documentos, checklists estándar.
+
+Un skill también puede incluir scripts (Python, Bash, Node, cualquier runtime disponible en el entorno), archivos de referencia que Claude debe leer bajo demanda, e incluso otros skills con los que se compone.
+
+### Los skills de Claude Code son multiplataforma
+
+Anthropic publicó la especificación Agent Skills como un estándar abierto en diciembre de 2025. El mismo formato `SKILL.md` ahora funciona en:
+
+- **Claude Code** (terminal, escritorio, web, extensiones de IDE)
+- **Claude.ai** (la interfaz de chat)
+- **La API de Anthropic**
+- **OpenAI Codex CLI y ChatGPT** (adoptaron el formato a finales de 2025)
+- **Gemini CLI, Cursor y otros agentes compatibles**
+
+Crea un skill una vez, ejecútalo en cualquier lugar donde tu equipo use un agente. Esta portabilidad es parte de por qué los skills pasaron tan rápido de "función interesante" a "forma por defecto de extender un agente".
+
+### Skills de Claude Code vs CLAUDE.md vs prompts
+
+La gente confunde estos tres todo el tiempo:
+
+|                 | CLAUDE.md                                | Skills                                         | Prompts                 |
+| --------------- | ---------------------------------------- | ---------------------------------------------- | ----------------------- |
+| Carga           | Siempre cargado en cada sesión           | Bajo demanda (invocado por el modelo)          | Se reingresan cada vez  |
+| Costo de tokens | Tamaño completo del archivo, cada sesión | ~100 tokens en reposo, ~5K activo              | Se paga por mensaje     |
+| Ideal para      | Convenciones globales del proyecto       | Workflows repetibles, específicos del contexto | Instrucciones puntuales |
+| Alcance         | Proyecto o todo el usuario               | Una tarea o workflow específico                | Una sola conversación   |
+
+`CLAUDE.md` está _siempre cargado._ Un skill se _carga cuando se necesita._ Esa distinción es la razón por la que una biblioteca de 50 skills no ralentiza a Claude, pero un `CLAUDE.md` de 5,000 líneas sí.
+
+### Por qué los skills de Claude Code están de repente en todas partes
+
+Tres cosas convergieron a finales de 2025:
+
+1. **La divulgación progresiva los hizo baratos.** Antes de los skills, extender Claude significaba inflar el contexto de forma permanente. Los skills se cargan bajo demanda.
+2. **La especificación se abrió.** Cuando OpenAI adoptó el mismo formato, los skills dejaron de ser una función de Claude y se volvieron un estándar de la industria.
+3. **Los equipos se dieron cuenta de que los skills se componen.** El skill de un desarrollador se vuelve el skill del equipo. El skill del equipo se vuelve el skill de la organización.
+
+---
+
+## Skills de Claude Code vs MCP vs subagentes
+
+Respuesta corta: usa skills para el _cómo_ hacer algo, MCP para el _acceso_ a sistemas externos, y subagentes para _delegar_ trabajo a un especialista con su propio contexto. La mayoría de las configuraciones de producción usan los tres. El truco está en saber qué mecanismo encaja con qué problema; elegir mal infla el costo de contexto, ralentiza tus sesiones y crea deuda de mantenimiento.
+
+### Comparación: skills vs MCP vs subagentes
+
+|                       | Skills                                             | Servidores MCP                                          | Subagentes                                                  |
+| --------------------- | -------------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------- |
+| **Qué hace**          | Le enseña a Claude cómo realizar una tarea         | Conecta a Claude con sistemas externos                  | Ejecuta trabajo especializado con su propio contexto        |
+| **Costo de contexto** | ~100 tokens en reposo, ~5K cuando está activo      | ~10K+ por servidor (siempre cargado)                    | Ventana de contexto propia, separada de la sesión principal |
+| **Ideal para**        | Conocimiento procedimental, convenciones de equipo | APIs, bases de datos, navegadores, sistemas de archivos | Trabajo asíncrono, investigación larga, tareas paralelas    |
+| **Ejemplo**           | Checklist de revisión de PR                        | GitHub MCP, Postgres, Slack                             | Agente revisor de código en Sonnet                          |
+| **Quién lo invoca**   | Claude (invocado por el modelo)                    | Claude (bajo demanda con Tool Search)                   | Tú o Claude (delegación)                                    |
+
+### Cuándo usar un skill de Claude Code
+
+Elige un skill cuando Claude necesita **conocimiento procedimental** (una forma de hacer algo) que debe activarse según el contexto.
+
+Buenos casos:
+
+- "Cómo escribimos mensajes de commit"
+- "Nuestro checklist de revisión de PR"
+- "Cómo dar formato a los correos de cara al cliente en nuestra voz de marca"
+- "Pasos para correr una migración de base de datos de forma segura"
+- "Cómo convertir un PDF a markdown limpio" (con un script incluido)
+
+Los skills brillan cuando el mismo workflow se repite en muchas sesiones y no quieres re-explicarlo cada vez.
+
+### Cuándo usar un servidor MCP
+
+Elige MCP cuando Claude necesita **acceso a un sistema que no puede alcanzar por su cuenta**: APIs, bases de datos, herramientas de terceros, tu sistema de archivos por SSH, un navegador.
+
+Buenos casos:
+
+- Leer PRs de GitHub y publicar comentarios
+- Consultar una base de datos Postgres
+- Enviar mensajes de Slack
+- Controlar un navegador headless
+- Leer desde Google Drive o Notion
+
+La trampa: **MCP es caro en contexto.** Una configuración típica de 5 servidores con 58 herramientas se come unos 55,000 tokens antes de que hayas enviado un solo prompt. La función Tool Search de Anthropic recorta esto en ~85% cargando las definiciones de herramientas bajo demanda, pero sigue siendo el más pesado de los tres primitivos. Agrega servidores MCP de forma deliberada, no a la ligera.
+
+### Cuándo usar un subagente
+
+Elige un subagente cuando necesitas un **especialista con aislamiento**: su propia ventana de contexto, sus propias herramientas, a veces un modelo distinto.
+
+Buenos casos:
+
+- Un subagente revisor de código que corre en Sonnet, tiene acceso de solo lectura a archivos y nunca modifica código
+- Un subagente de investigación en Haiku que extrae documentación y devuelve un resumen sin contaminar el contexto principal
+- Un subagente de build de larga duración que puede ejecutar comandos pero no editar archivos
+- Un subagente de revisión de seguridad en un git worktree aislado
+
+Los subagentes importan cuando el _trabajo_ debe ocurrir fuera de banda: investigación larga, exploración paralela, cualquier cosa que de otro modo saturaría tu conversación principal.
+
+### El árbol de decisión
+
+Cuando no estés seguro de cuál usar, recórrelo en orden:
+
+![Árbol de decisión: ¿Claude necesita acceso a un sistema externo? MCP. ¿Trabajo independiente? Subagente. ¿Procedimiento repetible? Skill.](/guides/claude-code-skills-complete-guide/decision-tree.png)
+
+1. **¿Claude necesita acceso a un sistema externo?** → servidor MCP.
+2. **¿Claude necesita hacer trabajo de forma independiente, con su propio contexto o modelo?** → subagente.
+3. **¿Claude necesita saber _cómo_ hacer algo de forma repetible?** → skill.
+4. **¿Todo lo anterior?** → compónlos. Un subagente puede llamar a un skill que usa MCP. Ese es el patrón más poderoso de Claude Code.
+
+### Ejemplo: cómo componer los tres
+
+Digamos que quieres que Claude revise pull requests contra los estándares de tu equipo.
+
+![Claude revisando un PR: una navaja suiza que combina servidores MCP (GitHub), un skill (code-review-checklist) y un subagente (pr-reviewer)](/guides/claude-code-skills-complete-guide/swiss-army-knife.png)
+
+- **Servidor MCP:** GitHub MCP, le da a Claude acceso a los diffs del PR, los comentarios y el contenido de los archivos.
+- **Skill:** `code-review-checklist`, las convenciones de revisión del equipo (seguridad, nomenclatura, cobertura de pruebas, formato de la descripción del PR).
+- **Subagente:** `pr-reviewer`, corre en Sonnet, tiene herramientas de solo lectura, contexto aislado. Llama al GitHub MCP para traer el PR, carga el skill `code-review-checklist` para la metodología, publica comentarios vía MCP y devuelve un resumen a la sesión principal.
+
+Tres primitivos, un especialista. Ninguno duplica a los demás.
+
+### Plugins: el envoltorio de los tres
+
+Los plugins son el formato de distribución. Un plugin puede empaquetar skills, subagentes, configs de servidores MCP, hooks y slash commands en un solo paquete instalable. Si vas a compartir capacidades en un equipo o liberarlas como código abierto para la comunidad, los plugins son la forma de entregarlas.
+
+### Qué significa esto en la práctica
+
+La mayoría de las configuraciones de Claude Code en producción terminan con:
+
+- **5 a 10 skills** adaptados al workflow del equipo
+- **3 a 5 servidores MCP** para los sistemas externos principales (GitHub es casi universal)
+- **2 a 4 subagentes** para patrones de delegación (revisión, investigación, trabajo asíncrono)
+
+Si tienes más skills que servidores MCP, probablemente lo estás haciendo bien. Si tienes más servidores MCP que skills, estás pagando un impuesto de contexto por capacidades que podrías expresar de forma más barata.
+
+---
+
+## El formato SKILL.md
+
+_El frontmatter YAML y la divulgación progresiva explicados_
+
+**Un archivo `SKILL.md` tiene dos partes: el frontmatter YAML entre marcadores `---` que le dice a Claude _cuándo_ usar el skill, e instrucciones en markdown que le dicen a Claude _cómo_.** Esa es toda la especificación.
+
+Todo lo demás (scripts, referencias, plantillas) es opcional y vive en la misma carpeta.
+
+### El SKILL.md mínimo viable
+
+```markdown
+---
+name: my-skill
+description: A clear description of what this skill does and when to use it.
+---
+
+# My Skill
+
+Instructions Claude follows when this skill is active.
+```
+
+Pon ese archivo en `~/.claude/skills/my-skill/SKILL.md` y Claude Code lo recogerá en el próximo arranque.
+
+### Campos del frontmatter YAML
+
+El frontmatter se ubica entre marcadores `---` al inicio del archivo.
+
+| Campo                      | ¿Requerido?     | Qué hace                                                                       |
+| -------------------------- | --------------- | ------------------------------------------------------------------------------ |
+| `name`                     | Recomendado     | Identificador único. Aparece en las listas de skills y manifiestos de plugins. |
+| `description`              | Muy recomendado | La señal de disparo. Claude la lee para decidir si carga el skill.             |
+| `disable-model-invocation` | Opcional        | Pon `true` para exigir invocación explícita. Por defecto: `false`.             |
+| `allowed-tools`            | Opcional        | Restringe qué herramientas puede usar el skill mientras está activo.           |
+
+Ejemplo con todos los campos:
+
+```markdown
+---
+name: api-error-handler
+description: Use when reviewing or writing API endpoints that need consistent error handling. Covers status codes, error envelope format, and retry semantics for our internal services.
+disable-model-invocation: false
+allowed-tools: Read Grep Edit
+---
+```
+
+### Cómo decide Claude cargar un skill
+
+Cuando se inicia una sesión, Claude escanea el frontmatter de cada skill instalado (nombre + descripción), lo que cuesta aproximadamente **100 tokens por skill.** Ese es todo el peso en reposo.
+
+El cuerpo del skill, los scripts y cualquier archivo de referencia no se cargan hasta que Claude decide que el skill es relevante.
+
+Claude toma esa decisión comparando tu prompt con la descripción de cada skill. Así que la descripción tiene dos trabajos:
+
+1. **Decirle a Claude qué hace el skill.**
+2. **Decirle a Claude cuándo usarlo.**
+
+Una descripción como `"Helper for emails"` rara vez se activará. Una descripción como `"Use when drafting customer-facing email replies. Applies our brand voice (warm, direct, no jargon) and our standard sign-off format."` se activará exactamente cuando debe.
+
+**Regla práctica:** si no puedes leer tu descripción y saber de inmediato cuándo invocar el skill, Claude tampoco podrá.
+
+### Divulgación progresiva: el modelo de costo
+
+La divulgación progresiva es el sistema de carga por capas que hace que los skills sean baratos:
+
+| Nivel              | Qué se carga                                | Costo de tokens               |
+| ------------------ | ------------------------------------------- | ----------------------------- |
+| **Descubrimiento** | `name` + `description` del YAML             | ~100 tokens/skill             |
+| **Activación**     | Cuerpo completo del `SKILL.md`              | ~1K–5K tokens                 |
+| **Ejecución**      | Scripts, archivos de referencia, plantillas | Solo lo que la tarea necesita |
+
+Por esto puedes tener 50 skills instalados y apenas notar el overhead. Compáralo con MCP, donde cada servidor conectado paga su costo completo de tokens en cada sesión, lo uses o no.
+
+### Estructura de la carpeta de un skill
+
+Una carpeta de skill del mundo real suele verse así:
+
+```
+~/.claude/skills/document-reader/
+├── SKILL.md              # Main instructions (under 500 lines)
+├── examples.md           # Usage examples Claude reads on demand
+├── reference/
+│   └── pdf-quirks.md     # Edge cases, loaded only when relevant
+└── scripts/
+    └── convert.py        # Helper script the skill calls
+```
+
+En el cuerpo del `SKILL.md`, referencias los archivos de apoyo por ruta relativa. Claude solo los lee cuando el workflow los necesita, que es justo el punto.
+
+### Estructura del cuerpo del SKILL.md
+
+No hay una plantilla obligatoria, pero los skills que mejor funcionan siguen una forma predecible:
+
+```markdown
+---
+name: skill-name
+description: Specific trigger description
+---
+
+# Skill Name
+
+One-paragraph summary of what this skill does and when it applies.
+
+## When to use this skill
+
+- Bullet list of trigger scenarios
+
+## When NOT to use this skill
+
+- Counter-cases that look similar but should use a different approach
+
+## Instructions
+
+Step-by-step procedure Claude should follow.
+
+## Examples
+
+Concrete before/after or input/output examples.
+
+## References
+
+- See `reference/edge-cases.md` for unusual situations
+- See `scripts/helper.py` for the conversion utility
+```
+
+### La regla de las 500 líneas
+
+La propia guía de Anthropic: **mantén el cuerpo del `SKILL.md` bajo 500 líneas.** Si te acercas a ese límite, divide el contenido en archivos de referencia en la misma carpeta y enlázalos desde el cuerpo. El cuerpo es la capa que siempre se carga cuando está activo; los archivos de referencia son la capa bajo demanda.
+
+---
+
+## Cómo crear tu primer skill de Claude Code en 5 minutos
+
+**La forma más rápida de aprender los skills de Claude Code es crear uno.** Este recorrido toma unos cinco minutos y te deja un skill funcional, invocado por el modelo, que puedes extender de inmediato. Crearemos un skill `commit-message` que genera mensajes de commit convencionales a partir de un diff.
+
+### Paso 1: crea la carpeta del skill
+
+Los skills viven en uno de dos lugares:
+
+- **A nivel de usuario (disponible en todos lados):** `~/.claude/skills/`
+- **A nivel de proyecto (subido a un repo):** `.claude/skills/` dentro del repo
+
+Para este recorrido, iremos a nivel de usuario para que esté disponible en todos los proyectos.
+
+```bash
+mkdir -p ~/.claude/skills/commit-message
+```
+
+### Paso 2: crea el archivo SKILL.md
+
+```bash
+cd ~/.claude/skills/commit-message
+touch SKILL.md
+```
+
+Abre `SKILL.md` en tu editor y pega esto:
+
+```markdown
+---
+name: commit-message
+description: Use when the user asks for a commit message, asks to commit changes, or wants to summarize a diff. Generates Conventional Commits format (type(scope): subject) with an optional body explaining the why, not the what.
+allowed-tools: Bash Read
+---
+
+# Commit Message Generator
+
+Generate a Conventional Commits-formatted commit message from the current staged changes.
+
+## When to use this skill
+
+- User says "write a commit message" or "commit this"
+- User asks you to summarize a diff
+- User wants help drafting a PR title (use the same format)
+
+## When NOT to use this skill
+
+- User wants a free-form changelog or release notes (different format)
+- User explicitly asks for a non-Conventional-Commits style
+
+## Instructions
+
+1. Run `git diff --staged` to see the staged changes.
+2. If nothing is staged, run `git diff` and warn the user the changes aren't staged yet.
+3. Identify the primary change type: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`.
+4. Pick a scope from the changed files (e.g. the top-level package or feature folder). Omit if global.
+5. Write the subject line: `type(scope): imperative verb + what changed`. Max 72 chars.
+6. If the change is non-trivial, add a body after a blank line explaining _why_, not _what_.
+7. Output ONLY the commit message — no preamble, no markdown fences.
+
+## Examples
+
+Input: a diff that adds rate limiting to the login endpoint.
+
+Output:
+feat(auth): add rate limiting to login endpoint
+
+Brute-force attempts on /login were going unthrottled. Apply the same
+sliding-window limiter we use on /signup (5 req/min per IP).
+
+## Notes
+
+- Subject line: imperative mood ("add" not "added"), no period.
+- Body: wrap at 72 characters, blank line between paragraphs.
+```
+
+Guarda el archivo.
+
+### Paso 3: prueba que cargue
+
+Abre una sesión de Claude Code en cualquier repo. Deberías ver `commit-message` listado en el banner de arranque o mediante el comando de lista de skills.
+
+### Paso 4: actívalo
+
+Prepara un cambio en un repo real:
+
+```bash
+git add some-file.js
+```
+
+Luego, en Claude Code, simplemente di: _"Escribe un mensaje de commit para esto."_
+
+Claude va a:
+
+1. Comparar tu prompt con la descripción del skill.
+2. Cargar el cuerpo del skill (~5K tokens).
+3. Correr `git diff --staged`, seguir las instrucciones y devolver un mensaje con formato Conventional Commits.
+
+No escribiste un slash command. No le recordaste a Claude el formato. **El skill se activó solo.**
+
+### Paso 5: itera
+
+**Ajusta el disparador.** Si el skill se activa en prompts que no querías, haz la descripción más específica.
+
+**Agrega un archivo de referencia.** Si tu equipo tiene una guía de estilo más larga, ponla en `~/.claude/skills/commit-message/reference/style-guide.md` y referénciala desde el cuerpo.
+
+**Agrega un script.** Si la lógica se vuelve compleja, escribe un auxiliar en `~/.claude/skills/commit-message/scripts/` y haz que el skill lo llame.
+
+**Restringe herramientas.** Este skill solo necesita `Bash` y `Read`. Configurar `allowed-tools: Bash Read` le dice a Claude que no escriba archivos desde este skill: una frontera de seguridad pequeña pero útil.
+
+### Paso 6: usa el skill skill-creator
+
+Anthropic incluye un skill oficial `skill-creator` que arma nuevos skills por ti. Una vez que hayas creado uno a mano, instala `skill-creator` y deja que Claude maneje el boilerplate la próxima vez:
+
+> _"Usa skill-creator para hacerme un skill que redacte notas de versión a partir de los PRs fusionados."_
+
+El meta-truco de los skills es que _se componen entre sí._ Un skill puede recomendar otro skill. Un subagente puede llamar a un skill. Una vez que internalizas eso, la pregunta deja de ser "cómo extiendo a Claude" y empieza a ser "cuál es la unidad reutilizable más pequeña que hace este trabajo".
+
+---
+
+## Mejores prácticas de los skills de Claude Code
+
+**La diferencia entre un skill que la gente de verdad usa y uno que junta polvo se reduce a tres cosas: un nombre que describa lo que hace, un alcance lo bastante acotado para activarse de forma confiable, y una descripción lo bastante precisa para dispararse en los prompts correctos.**
+
+### Nomenclatura: sé específico, sé buscable
+
+El campo `name` del skill es sobre todo para humanos. Optimízalo para dos cosas:
+
+- **Descubribilidad.** Un compañero que revisa una lista de skills instalados debería saber qué hace cada uno sin abrirlo.
+- **Unicidad.** Los nombres deben ser globalmente distinguibles para que puedas instalar skills de la comunidad sin colisiones.
+
+**Nombres fuertes:** `pr-review-checklist`, `migration-runner`, `customer-email-drafter`, `incident-postmortem`.
+
+**Nombres débiles:** `helper`, `reviewer` (¿de qué tipo?), `email`, `utils`.
+
+Usa minúsculas con guiones. Evita abreviaturas a menos que sean universales en tu dominio.
+
+### Alcance: un skill, un trabajo
+
+El mayor error que cometen los nuevos autores de skills es **crear skills que hacen demasiado.** Un skill que maneja "todo lo relacionado con PRs" no se activará de forma confiable porque Claude no puede emparejarlo limpiamente con ningún prompt específico.
+
+**Regla práctica:** si estás usando "y" en la descripción más de una vez, divide el skill.
+
+Malo:
+
+```
+description: Handles PR creation and PR review and PR merging and writing post-mortems for failed deployments.
+```
+
+Bueno (dividido en tres skills):
+
+```
+description: Use when drafting a new pull request title and body...
+description: Use when reviewing an open pull request against our checklist...
+description: Use when writing a post-mortem for a failed deployment...
+```
+
+Los skills pequeños y afilados se componen. Los skills grandes y desparramados colisionan.
+
+### Cómo escribir la descripción: empieza con el disparador
+
+Tu descripción es la _única señal_ que Claude usa para decidir si carga tu skill. Trátala como copy publicitario. El patrón que funciona:
+
+```
+Use when [user action or context]. [What the skill does]. [Disambiguator if needed].
+```
+
+Ejemplos concretos:
+
+```
+Use when reviewing pull requests in our backend repos. Applies our security
+checklist, naming conventions, and required test-coverage thresholds. Not for
+frontend repos — see frontend-pr-review for those.
+```
+
+```
+Use when drafting outbound sales emails to enterprise prospects. Applies our
+voice (direct, no buzzwords), inserts the standard discovery-call CTA, and
+respects the do-not-contact list in reference/exclusions.md.
+```
+
+### Patrones de invocación: invocado por el modelo vs explícito
+
+La mayoría de los skills deberían ser **invocados por el modelo**: Claude decide cuándo cargarlos. Pero hay casos en los que quieres invocación explícita:
+
+- **Operaciones destructivas o costosas.** Un skill que corre migraciones o borra datos no debería activarse solo.
+- **Skills con disparadores que se solapan.** Si dos skills podrían activarse plausiblemente en el mismo prompt, haz que uno o ambos sean explícitos.
+
+Para skills solo explícitos, pon `disable-model-invocation: true` en el frontmatter. **Por defecto, deja que los invoque el modelo.**
+
+### Restricción de herramientas: el campo `allowed-tools`
+
+Por defecto, un skill puede usar cualquier herramienta que tenga disponible la sesión. Al listar herramientas, restringes lo que el skill puede hacer _mientras está activo._
+
+```markdown
+---
+name: code-review-checklist
+description: Use when reviewing pull requests...
+allowed-tools: Read Grep Glob
+---
+```
+
+Este skill puede leer archivos y buscarlos, pero no puede editar, escribir ni correr comandos de bash.
+
+Cuándo restringir:
+
+- **Skills de solo lectura** (revisión, análisis): restringe a `Read Grep Glob`.
+- **Skills que nunca deberían escribir código:** quita `Edit Write`.
+- **Skills que nunca deberían usar la shell:** quita `Bash`.
+
+Restringe por defecto; afloja por excepción. Hace que los skills sean más seguros de compartir.
+
+### Estratificación: mantén el SKILL.md compacto
+
+Cualquier cosa que pongas en `SKILL.md` se carga en el contexto cada vez que el skill se activa. Los archivos de referencia solo se cargan cuando se le indica a Claude que los lea.
+
+Buena estratificación:
+
+- **`SKILL.md`**: el procedimiento, escrito de forma compacta. Pasos, ejemplos, reglas de decisión.
+- **`reference/*.md`**: casos límite, profundizaciones, ejemplos largos, guías de estilo completas.
+- **`scripts/*`**: cualquier cosa procedimental que funcione mejor como código que como prosa.
+- **`templates/*`**: boilerplate que Claude puede copiar y modificar.
+
+En tu `SKILL.md`, enlaza los archivos de referencia de forma explícita: _"Para tipos de archivo inusuales, lee `reference/edge-cases.md`."_ Claude cargará ese archivo solo cuando la situación lo requiera.
+
+### Pruebas: la prueba de disparo
+
+Antes de entregar cualquier skill, corre la **prueba de disparo:**
+
+1. Escribe cinco prompts que un usuario real escribiría para invocar este skill.
+2. Escribe tres prompts que un usuario real escribiría que _no_ deberían invocarlo.
+3. Corre los ocho en sesiones nuevas de Claude Code.
+4. Verifica si el skill se cargó en cada caso.
+
+Si el skill falla en los prompts del grupo 1, la descripción es demasiado estrecha. Si se activa en los prompts del grupo 2, la descripción es demasiado amplia.
+
+### Resumen de cinco reglas
+
+1. **Un skill, un trabajo.** Divide cualquier cosa que describas con "y".
+2. **Empieza las descripciones con el disparador.** "Use when..." le gana a "Helper for...".
+3. **Restringe herramientas por defecto.** Usa `allowed-tools` para acotar lo que cada skill puede hacer.
+4. **Estratifica de forma agresiva.** Cuerpo compacto, referencias profundas.
+5. **Prueba el disparo.** Cinco aciertos, tres fallos, sesiones nuevas.
+
+---
+
+## Cómo compartir skills de Claude Code en un equipo
+
+**Un skill en la laptop de un solo desarrollador es útil. El mismo skill instalado en todo un equipo es transformador, porque la mejora de workflow de cada persona se vuelve la mejora de workflow de todos.**
+
+### Por qué los skills de Claude Code compartidos en equipo se componen
+
+Cuando un desarrollador escribe un skill que captura "cómo revisamos los PRs en nuestra empresa", pasan tres cosas:
+
+1. **El autor deja de repetirse.** Cada sesión de revisión de PR carga el mismo checklist automáticamente.
+2. **Los estándares del equipo se vuelven exigibles.** Los ingenieros junior obtienen la misma profundidad de revisión que los senior, porque el skill hace el trabajo de consistencia.
+3. **El skill mejora con el uso.** Cuando un compañero topa con un caso límite que el skill no contemplaba, lo actualiza, y ahora las _siguientes_ cien revisiones se benefician.
+
+Ese es el bucle de composición. El valor de un skill no es su contenido; es el ritmo al que mejora. Los skills compartidos en equipo mejoran a velocidad de equipo. Los skills personales mejoran a velocidad de un solo desarrollador.
+
+### Tres formas de compartir skills de Claude Code con un equipo
+
+**1. Súbelos al repo (skills a nivel de proyecto)**
+
+Pon los skills en `.claude/skills/` dentro del repo y súbelos a git.
+
+```
+your-repo/
+├── .claude/
+│   └── skills/
+│       ├── pr-review-checklist/
+│       ├── migration-runner/
+│       └── commit-message/
+├── src/
+└── package.json
+```
+
+**Pros:** versionados con el codebase. Las nuevas contrataciones los obtienen en el primer clone. Los cambios de skills pasan por revisión de código como todo lo demás.
+
+**Contras:** solo se cargan en ese repo. Los skills entre repos (la voz de tu empresa, tu checklist de seguridad) necesitan otro enfoque.
+
+**Ideal para:** convenciones específicas del repo, workflows del proyecto, patrones específicos del codebase.
+
+**2. Distribúyelos como un plugin**
+
+Los plugins empaquetan skills (más subagentes, configs de MCP, hooks y slash commands opcionales) en una sola unidad instalable.
+
+```
+your-team-plugin/
+├── .claude-plugin/
+│   └── plugin.json
+└── skills/
+    ├── pr-review-checklist/
+    ├── company-voice/
+    └── incident-postmortem/
+```
+
+**Pros:** un solo comando de instalación, disponible en todos los repos. Versionados de forma independiente. Fácil de actualizar para todos a la vez.
+
+**Ideal para:** skills entre repos, convenciones de toda la empresa.
+
+**3. Guarda playbooks revisados en los Archivos compartidos del workspace**
+
+En vez de ocultar los procedimientos en carpetas personales, guarda archivos de instrucciones y scripts revisados en un workspace compartido. Los nuevos miembros pueden leer la misma fuente desde el primer día y las actualizaciones quedan visibles para todo el equipo. Esto comparte archivos; no es un instalador de skills, y el equipo conserva la responsabilidad del versionado y la revisión.
+
+**Ideal para:** equipos en crecimiento donde mantener skills empieza a sentirse como un trabajo de medio tiempo; agencias que comparten skills entre proyectos de clientes.
+
+### Qué hace que valga la pena compartir un skill
+
+No todo skill personal debería ser un skill de equipo. Los que se componen en un equipo tienen tres propiedades:
+
+- **Generalidad.** Aplica a más que el workflow de una sola persona.
+- **Estabilidad.** El procedimiento no cambia cada semana.
+- **Documentabilidad.** Puedes describir el disparador en una sola frase.
+
+Si un skill cumple las tres, es candidato. Si cumple dos, refínalo antes de compartirlo.
+
+### La biblioteca inicial en la que convergen la mayoría de los equipos
+
+En los equipos que entregan skills de Claude Code en producción, ha surgido un conjunto inicial reconocible:
+
+- **`pr-review-checklist`**: los estándares de revisión de tu equipo
+- **`commit-message`**: Conventional Commits en el estilo de tu casa
+- **`incident-postmortem`**: la plantilla + el tono para los retros
+- **`feature-spec`**: cómo escribir una especificación de función de una página
+- **`migration-safety`**: chequeos previos para cambios de esquema
+- **`code-style`**: tus convenciones no escritas, ya escritas
+- **`customer-comms`**: voz y plantillas para la escritura de cara al cliente
+
+Siete skills. Cada uno captura un procedimiento que solía vivir en una wiki o en la cabeza de un ingeniero senior. Juntos, suben el piso para todo el equipo.
+
+### Dónde encaja Duet
+
+Si tu equipo es pequeño y disciplinado, un repo `.claude-plugin` más `git pull` es suficiente. No necesitas una plataforma; necesitas convenciones.
+
+Si tu equipo está creciendo (nuevas contrataciones cada mes, varios repos, skills proliferando y sin un responsable claro), el costo operativo empieza a acumularse. Ahí es donde los Archivos compartidos, un responsable de revisión, el contexto duradero de Train y el historial visible de Sesiones empiezan a aportar valor.
+
+[Duet](/?utm_source=blog&utm_medium=organic&utm_campaign=claude-code-skills-guide) le da al equipo un workspace persistente para archivos de instrucciones revisados, código de apoyo y contexto empresarial duradero. Los archivos siguen visibles y versionables en lugar de quedar ocultos en un catálogo propietario.
+
+El punto más importante: **sea cual sea el mecanismo de distribución que elijas, entrega los skills como un primitivo de equipo, no personal.** Ahí es donde vive la composición.
+
+---
+
+## Dónde encontrar skills de Claude Code
+
+**El ecosistema de skills de Claude Code pasó de ser de base a estándar de la industria en aproximadamente seis meses; ahora hay miles de skills construidos por la comunidad, skills oficiales de Anthropic y bibliotecas de terceros verificadas.**
+
+### Fuentes oficiales (empieza aquí)
+
+| Fuente                         | Qué hay ahí                                                          | URL                                                                  |
+| ------------------------------ | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| **Anthropic Skills GitHub**    | Skills oficiales: `skill-creator`, `pdf-reader`, `claude-api`        | [github.com/anthropics/skills](https://github.com/anthropics/skills) |
+| **Claude Plugins Marketplace** | Plugins curados que empaquetan skills + MCP + subagentes             | [claude.ai/marketplace](https://claude.ai/marketplace)               |
+| **Documentación de Anthropic** | Especificación del formato, referencia de la API, guías de migración | [docs.anthropic.com](https://docs.anthropic.com)                     |
+
+Si un skill existe de forma oficial, usa la versión oficial. Estará mantenida, con revisión de seguridad y será compatible con futuros cambios de formato.
+
+### Fuentes de la comunidad
+
+- **agentskills.io**: directorio comunitario que rastrea el estándar abierto.
+- **SkillsMP** ([skillsmp.com](https://skillsmp.com/)): marketplace de terceros con skills para Claude, Codex y ChatGPT.
+- **Repositorio de skills de Hugging Face**: skills de código abierto, muchos enfocados en AI/ML.
+- **Búsqueda por tema en GitHub**: `topic:claude-code-skill` y `topic:agent-skill` muestran repos de la comunidad.
+
+Estos avanzan más rápido pero varían en calidad. Trátalos como cualquier dependencia de código abierto: lee antes de instalar.
+
+### Cómo instalar un skill de Claude Code
+
+**Copia directa (un solo skill)**
+
+```bash
+# User-level install (available everywhere)
+cp -r path/to/cloned-skill ~/.claude/skills/
+
+# Project-level install (this repo only)
+cp -r path/to/cloned-skill .claude/skills/
+```
+
+Reinicia tu sesión de Claude Code y el skill aparece.
+
+**Instalación de plugin**
+
+```bash
+claude plugins install <plugin-name>
+claude plugins install github.com/<org>/<repo>
+```
+
+Los plugins empaquetan skills con subagentes, configs de MCP y hooks, así que una sola instalación puede extender tu entorno sustancialmente.
+
+**A través de una plataforma gestionada**
+
+En un workspace administrado como Duet, los equipos pueden guardar instrucciones reutilizables y scripts de apoyo en archivos compartidos, mientras Train conserva hechos y fuentes duraderas del negocio. Esta versión de Duet no incluye una pantalla dedicada para administrar skills.
+
+### Cómo revisar un skill de Claude Code antes de instalarlo
+
+Los skills no son contenido pasivo. Son instrucciones que Claude seguirá, a veces con acceso a tu codebase, tu shell y tus credenciales. Trátalos como dependencias.
+
+- **Lee el archivo `SKILL.md` de principio a fin.** Si no puedes leer el procedimiento, no sabes qué hará el skill.
+- **Revisa el campo `allowed-tools`.** Un skill que pide `Bash`, `Edit` y `Write` hace más que leer.
+- **Inspecciona los scripts incluidos.** Un skill que corre `curl <some-url> | sh` debería ser un no rotundo.
+- **Revisa la descripción del disparador.** ¿Este skill se activará en prompts que no querías?
+- **Mira la fuente.** Anthropic de primera mano > autor establecido > repo de GitHub al azar sin estrellas.
+- **Pruébalo en un sandbox primero.** Instálalo en un `.claude/skills/` a nivel de proyecto en un repo desechable antes de promoverlo a nivel de usuario.
+
+### Cómo curar tu biblioteca de skills
+
+- **Audita trimestralmente.** Recorre `~/.claude/skills/` y elimina cualquier cosa que no hayas usado en 90 días.
+- **Mantén un `README.md` en tu carpeta de skills.** Documenta qué skills tienes, de dónde vinieron y para qué sirven.
+- **No instales todo.** Un skill que quizá uses algún día es un skill que agrega 100 tokens de overhead de descubrimiento hoy.
+
+---
+
+## Deja de enseñarle a Claude lo mismo dos veces
+
+Si eres un desarrollador solo, empieza en pequeño: crea un skill para un procedimiento que repites cada semana, instala el [`skill-creator` de Anthropic](https://github.com/anthropics/skills) y deja que tu biblioteca crezca de forma orgánica.
+
+Si eres un equipo, la mayor palanca son los **skills compartidos.** La forma más rápida de capturar el conocimiento del equipo no es otro doc de Notion: es un skill que se activa en los prompts exactos que tus desarrolladores ya están escribiendo.
+
+[Duet](/pricing?utm_source=blog&utm_medium=organic&utm_campaign=claude-code-skills-guide) le da a tu equipo un workspace compartido donde los miembros pueden usar archivos de instrucciones y scripts revisados. Guárdalos en Archivos, conserva fuentes estables en Train y usa Sesiones como registro duradero de la ejecución.
+
+[**Mira cómo Duet maneja el contexto compartido →**](/pricing?utm_source=blog&utm_medium=organic&utm_campaign=claude-code-skills-guide)
+
+---
+
+## Preguntas frecuentes sobre los skills de Claude Code
+
+### ¿Qué son los skills de Claude Code y cómo funcionan?
+
+Los skills de Claude Code son carpetas que contienen un archivo `SKILL.md` más scripts y archivos de referencia opcionales. Cada skill le enseña a Claude cómo realizar una tarea específica de forma repetible. Los skills son **invocados por el modelo**: Claude lee el nombre y la descripción de cada skill (~100 tokens por skill) en cada sesión, y luego carga el cuerpo completo del skill (hasta ~5K tokens) solo cuando tu prompt coincide. Esto se llama divulgación progresiva, y es la razón por la que puedes tener docenas de skills instalados sin ralentizar Claude Code.
+
+### Skills de Claude Code vs MCP: ¿cuándo uso cuál?
+
+Usa skills para **conocimiento procedimental** (cómo hacer algo) y MCP para **acceso** (conectar Claude con sistemas externos como GitHub, bases de datos o APIs). Una configuración típica usa ambos: un servidor MCP le da a Claude acceso a tu GitHub, y un skill le dice a Claude cómo revisar PRs contra los estándares de tu equipo. MCP es más caro en contexto: una configuración típica de 5 servidores usa ~55,000 tokens antes de que empiece cualquier conversación. Los skills cuestan ~100 tokens por skill hasta que se activan.
+
+### Skills de Claude Code vs subagentes: ¿cuál es la diferencia?
+
+Los skills son instrucciones reutilizables cargadas en tu sesión principal de Claude. Los subagentes son especialistas independientes con su propia ventana de contexto, sus herramientas y a veces su propio modelo (Sonnet, Haiku, etc.). Usa un skill cuando quieres que Claude siga un procedimiento. Usa un subagente cuando quieres delegar trabajo a un especialista que corre por separado, como un revisor de código con acceso de solo lectura, o un agente de investigación en Haiku. Los subagentes pueden llamar a skills, que es el patrón más poderoso de Claude Code.
+
+### ¿Cómo escribo un buen SKILL.md?
+
+Un buen `SKILL.md` tiene tres cosas:
+
+1. Una **descripción en el frontmatter YAML** que empieza con "Use when..." y es lo bastante específica para que Claude sepa exactamente cuándo invocarlo.
+2. Un **cuerpo bajo 500 líneas** con instrucciones claras, secciones de cuándo usar y cuándo no usar, y ejemplos concretos.
+3. **Archivos de referencia** en subcarpetas para cualquier cosa larga (casos límite, guías de estilo completas, scripts) para que el cuerpo se mantenga compacto.
+
+El campo más importante de todos es la descripción. Si tu skill no se activa, la descripción está mal, no el cuerpo.
+
+### ¿Dónde puedo encontrar ejemplos de skills de Claude Code?
+
+Empieza con el **repo oficial de Anthropic en** [github.com/anthropics/skills](https://github.com/anthropics/skills) para skills de primera mano como `skill-creator`, `pdf-reader` y `claude-api`. El **Claude Plugins marketplace** tiene plugins curados que empaquetan varios skills. Las fuentes comunitarias incluyen **agentskills.io**, **SkillsMP** ([skillsmp.com](https://skillsmp.com/)) y repos de GitHub etiquetados con el tema `claude-code-skill`.
+
+### ¿Cuántos skills de Claude Code puedo tener instalados a la vez?
+
+Prácticamente ilimitados. Gracias a la divulgación progresiva, cada skill en reposo cuesta solo ~100 tokens. La mayoría de las configuraciones de producción tienen de 5 a 10 skills adaptados al workflow del equipo. Las configuraciones de usuarios avanzados con más de 30 skills corren sin problemas de contexto: el límite mayor es la carga cognitiva humana (saber qué hay instalado) más que el costo de tokens.
+
+### ¿Se pueden compartir los skills de Claude Code en un equipo?
+
+Sí, de tres maneras. Los **skills a nivel de proyecto** en `.claude/skills/` se suben a un repo y viajan con el codebase. Los **plugins** empaquetan skills y otros elementos en paquetes instalables para convenciones entre repos. Un workspace persistente como [Duet](/pricing?utm_source=blog&utm_medium=organic&utm_campaign=claude-code-skills-guide) puede guardar archivos de instrucciones y scripts revisados en Archivos compartidos, pero tu equipo sigue siendo responsable del versionado y la revisión.
+
+### ¿Los skills de Claude Code son compatibles con otros agentes de programación con AI?
+
+Sí. La especificación Agent Skills fue liberada como código abierto por Anthropic en diciembre de 2025 y adoptada por OpenAI para Codex CLI y ChatGPT. El mismo formato `SKILL.md` también funciona con Gemini CLI, Cursor y otros agentes compatibles. Crea un skill una vez, ejecútalo en cada agente que use tu equipo.
+
+### ¿Cuál es la diferencia entre los skills de Claude Code y los slash commands?
+
+**Los slash commands** son invocados por el usuario: escribes explícitamente `/command-name` para activarlos. **Los skills** son invocados por el modelo: Claude decide cuándo cargarlos según tu prompt y la descripción del skill. Los slash commands son buenos para acciones explícitas y bajo demanda. Los skills son buenos para automatización consciente del contexto que debe ocurrir sin que el usuario tenga que acordarse de un comando.
+
+### ¿Los skills de Claude Code funcionan en la API de Claude?
+
+Sí. Los skills son parte de la especificación Agent Skills y funcionan en Claude Code, Claude.ai y la API de Anthropic. El mismo archivo `SKILL.md` funciona en los tres: no necesitas reescribir skills para distintas superficies.
+
+### ¿Cómo actualizo un skill de Claude Code en todo mi equipo a la vez?
+
+Depende de tu método de distribución. Los **skills a nivel de proyecto** se actualizan mediante el flujo normal de git: commit, push, los compañeros hacen pull. Los **skills basados en plugins** requieren subir la versión del plugin y un `claude plugins update` en la máquina de cada desarrollador. Las **plataformas gestionadas** envían las actualizaciones de forma centralizada: cambias el skill una vez en el workspace y todos lo obtienen al instante.
+
+### ¿Puede un skill de Claude Code ejecutar código?
+
+Sí. Los skills pueden incluir scripts (Python, Bash, Node, cualquier cosa disponible en el runtime) e instruir a Claude para que los llame. Esto es útil para tareas donde las instrucciones en prosa son más débiles que el código real: conversiones de formato de archivos, llamadas a APIs con autenticación compleja, operaciones deterministas. El campo `allowed-tools` controla qué herramientas puede usar el skill mientras está activo, incluido `Bash` para acceso a la shell.

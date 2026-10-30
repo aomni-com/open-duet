@@ -1,0 +1,39 @@
+{
+  "status": "reviewed-local-fix-live-restoration-owned-by-root",
+  "fixCommit": "03a7aebab",
+  "contract": "Existing executor upserts each managed Vercel key atomically with encrypted JSON file input; target topology/auth unchanged",
+  "sourceSha256": {
+    "scripts/secrets-push.mjs": "7e39960af6ba5d9284c81514b1469a372a6d02322c60249d94ad5750e3c63775",
+    "scripts/secrets-push.test.ts": "098461d0a33876e537abafedb23b42bc1ef4dcbb78572f14f617f0b9e43858c5",
+    "scripts/secret-topology.mjs": "3878184c94db8ab4ca4f92b3be483053b82dbac69f49e821f3bcd33d41b7c4fd"
+  },
+  "externalContract": "vercel api /v10/projects/<projectId>/env?upsert=true&teamId=<orgId> --method POST --input <private-file> --silent --cwd <existing-project>",
+  "grounding": "Root measured public IMAGE_REF secure-file winner against actual CLI54.21.1; author performed no live requests",
+  "checks": {
+    "focusedTests": {
+      "passed": 2,
+      "assertions": 227,
+      "failed": 0
+    },
+    "typecheck": "Passed with allowJs for existing imported.mjs owner",
+    "lint": "Passed",
+    "independentReview": "No actionable findings; focused2/227 independently green"
+  },
+  "negativeControls": [
+    "Observed original successful fanout storing every Vercel value empty through fake CLI modeled on actual lost-stdin behavior",
+    "Restored original rm/add in owner, failed production request erased prior stored value; fixed owner restored and green"
+  ],
+  "proof": [
+    "Whole declared source topology: all6 Vercel applications, staging54 managed pairs incloptional supplied inputs; every exact value compared",
+    "Injected decrypted process.env values differ from encrypted source-file placeholders; source parameters only supply names",
+    "Multiline/quotes/backslashes/shell-looking text/unicode preserved byte-exactly",
+    "Vercel argument vector contains no values; echoed success/failure responses not emitted",
+    "API write failure preserves prior production value, removes private input, and retry settles exact production closure",
+    "Every observed input file0600 and directory0700; all removed after normal/failure calls"
+  ],
+  "limits": [
+    "No live fanout or redeployment performed by author",
+    "Convex transport is existing unchanged owner",
+    "Live root restoration must verify each present source-managed target value, retaining unmanaged/optional-missing values;35 total pulled API keys is not35 managed keys"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comment": "Evidence from the closing live run of `bun run e2e:staging -- --journey agent-delegation`, 2026-08-09. The journey re-emits this shape on every run (STAGING_LIVE_JOURNEY_EVIDENCE); this copy is the record the closed spec's numbers cite.",
+  "journey": "agent-delegation",
+  "runId": "staging-e2e-synthetic",
+  "evidence": {
+    "rootSessionId": "j979rh667a0k7gx6rkzf29s42x8c20tp",
+    "calleeSessionId": "j9765fg2401dwb0s2cmpapf77n8c2xhh",
+    "rosterListedSlugs": "scout",
+    "rootTerminalType": "complete",
+    "rootResultNamesCallee": true,
+    "calleeAskSeq": 5,
+    "calleeAskQuestion": "Should the deployment summary be aimed at technical engineers, non-technical stakeholders, or a mixed audience?",
+    "calleePromptSender": { "kind": "session", "sessionId": "j979rh667a0k7gx6rkzf29s42x8c20tp" },
+    "calleeAnswerSender": { "kind": "session", "sessionId": "j979rh667a0k7gx6rkzf29s42x8c20tp" },
+    "calleeResultCarriesMarker": true,
+    "calleeResultNamesRootSlug": true,
+    "rootWaitDurationMs": 61940,
+    "rootContinuations": 0
+  },
+  "cleanup": { "status": "pass", "resourcesDeleted": 7, "orphans": 0 }
+}
