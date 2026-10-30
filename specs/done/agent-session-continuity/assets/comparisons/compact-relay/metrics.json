@@ -1,0 +1,149 @@
+{
+  "kind": "screenshot-parity-diff",
+  "generatedAt": "2026-07-20T10:43:47.647Z",
+  "note": "Lower parityDistance means the candidate is closer to the reference for this fixed pair. This is a distance metric, not an acceptance gate.",
+  "pairCount": 4,
+  "worstPair": "session-mobile",
+  "results": [
+    {
+      "id": "session-mobile",
+      "current": "session-mobile-before.png",
+      "candidate": "session-mobile-candidate.png",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "parityDistance": 0.04489,
+      "grayscale": {
+        "mae": 2.13317,
+        "rmse": 15.01491,
+        "diffRatio16": 0.01987,
+        "diffRatio32": 0.0168,
+        "diffRatio64": 0.01293,
+        "pixelmatchRatio": 0.01834
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.89384,
+        "terrainLikeRatioCandidate": 0.8959,
+        "avgLuminanceCurrent": 241.39651,
+        "avgLuminanceCandidate": 241.20662,
+        "avgLuminanceDelta": -0.18989,
+        "edgeEnergyCurrent": 0.04714,
+        "edgeEnergyCandidate": 0.05232,
+        "edgeEnergyRatio": 1.10977,
+        "edgeDiffRatio32": 0.04755
+      },
+      "artifacts": {
+        "sideBySide": "session-mobile-side-by-side.png",
+        "absDiff": "session-mobile-absdiff.png"
+      }
+    },
+    {
+      "id": "jobs-desktop",
+      "current": "jobs-desktop-before.png",
+      "candidate": "jobs-desktop-candidate.png",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "parityDistance": 0.02823,
+      "grayscale": {
+        "mae": 0.42566,
+        "rmse": 5.99002,
+        "diffRatio16": 0.00617,
+        "diffRatio32": 0.00287,
+        "diffRatio64": 0.00207,
+        "pixelmatchRatio": 0.00523
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.95293,
+        "terrainLikeRatioCandidate": 0.95266,
+        "avgLuminanceCurrent": 250.29042,
+        "avgLuminanceCandidate": 250.17188,
+        "avgLuminanceDelta": -0.11854,
+        "edgeEnergyCurrent": 0.01418,
+        "edgeEnergyCandidate": 0.01576,
+        "edgeEnergyRatio": 1.11145,
+        "edgeDiffRatio32": 0.01222
+      },
+      "artifacts": {
+        "sideBySide": "jobs-desktop-side-by-side.png",
+        "absDiff": "jobs-desktop-absdiff.png"
+      }
+    },
+    {
+      "id": "jobs-mobile",
+      "current": "jobs-mobile-before.png",
+      "candidate": "jobs-mobile-candidate.png",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "parityDistance": 0.02329,
+      "grayscale": {
+        "mae": 0.84781,
+        "rmse": 8.93166,
+        "diffRatio16": 0.01014,
+        "diffRatio32": 0.00513,
+        "diffRatio64": 0.00389,
+        "pixelmatchRatio": 0.007
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.94185,
+        "terrainLikeRatioCandidate": 0.94109,
+        "avgLuminanceCurrent": 248.2287,
+        "avgLuminanceCandidate": 247.93515,
+        "avgLuminanceDelta": -0.29354,
+        "edgeEnergyCurrent": 0.03333,
+        "edgeEnergyCandidate": 0.03577,
+        "edgeEnergyRatio": 1.07325,
+        "edgeDiffRatio32": 0.0178
+      },
+      "artifacts": {
+        "sideBySide": "jobs-mobile-side-by-side.png",
+        "absDiff": "jobs-mobile-absdiff.png"
+      }
+    },
+    {
+      "id": "session-desktop",
+      "current": "session-desktop-before.png",
+      "candidate": "session-desktop-candidate.png",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "parityDistance": 0.02246,
+      "grayscale": {
+        "mae": 0.2076,
+        "rmse": 3.40854,
+        "diffRatio16": 0.00257,
+        "diffRatio32": 0.00119,
+        "diffRatio64": 0.00082,
+        "pixelmatchRatio": 0.00138
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0.00001,
+        "blackRatioCandidate": 0.00001,
+        "terrainLikeRatioCurrent": 0.93187,
+        "terrainLikeRatioCandidate": 0.93147,
+        "avgLuminanceCurrent": 246.56157,
+        "avgLuminanceCandidate": 246.35587,
+        "avgLuminanceDelta": -0.20569,
+        "edgeEnergyCurrent": 0.02935,
+        "edgeEnergyCandidate": 0.03224,
+        "edgeEnergyRatio": 1.09856,
+        "edgeDiffRatio32": 0.0054
+      },
+      "artifacts": {
+        "sideBySide": "session-desktop-side-by-side.png",
+        "absDiff": "session-desktop-absdiff.png"
+      }
+    }
+  ]
+}

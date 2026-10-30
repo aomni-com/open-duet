@@ -1,0 +1,538 @@
+---
+title: 'Duet AI para founders: el Founder Mode como sistema operativo'
+metaTitle: 'Duet AI para founders: ejecuta el Founder Mode a cualquier tamaño'
+description: 'Duet AI convierte el Founder Mode en un sistema operativo. Opera una empresa de 3 personas como una de 50. Lanza más rápido. Sáltate la gerencia media.'
+date: '2026-04-17'
+updatedAt: '2026-04-17'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/6.png'
+  link: '/'
+category: 'guides'
+tags: ['duet-ai', 'founder-mode', 'ai-agents', 'skills', 'startup', 'paul-graham', 'brian-chesky']
+type: 'guide'
+image: '/guides/duet-ai-for-founders/cover.png'
+relatedPosts:
+  [
+    'how-to-build-your-ai-command-center',
+    'claude-code-for-founders',
+    'beyond-claude-code-building-a-shared-skill-library',
+  ]
+locale: es-419
+translationKey: 'duet-ai-for-founders'
+howTo:
+  name: 'Cómo ejecutar el Founder Mode con Duet'
+  description: 'Un sistema paso a paso para mantenerte involucrado con tu producto, tu crecimiento y tus operaciones mientras tu empresa escala, usando agents de AI en lugar de gerencia media.'
+  steps:
+    - name: 'Construye contexto duradero'
+      text: 'Guarda las fuentes en Archivos y los hechos duraderos y las fuentes conectadas en Train para que cada Sesión empiece con el contexto correcto del negocio.'
+    - name: 'Construye tu banca de playbooks'
+      text: 'Guarda instrucciones especializadas de copywriting, SEO, diseño y ops en Archivos para que los agents sigan métodos probados en lugar de empezar con un prompt vacío.'
+    - name: 'Asigna resultados, no tareas'
+      text: 'Da el brief a los agents con el estado final que quieres, los criterios de aceptación y el contexto. Deja que ellos planeen los pasos.'
+    - name: 'Corre líneas de trabajo en paralelo'
+      text: 'Corre el trabajo de producto, crecimiento y ops en Sesiones paralelas. Tú te quedas en el circuito de revisión, no en el de ejecución.'
+    - name: 'Revisa, redirige, lanza'
+      text: 'Actúa como el filtro de gusto. Ajusta el brief o la memoria cuando la salida se desvíe, no el prompt suelto.'
+cta:
+  title: 'Ejecuta el Founder Mode a cualquier escala.'
+  subtitle: 'Duet es el workspace de agents donde asignas resultados y los agents lanzan. Mantente cerca del producto, sáltate la capa de gestión.'
+  buttonText: 'Contrata a Duet'
+  href: '/sign-in?from=guide-founder-mode'
+---
+
+<HeroImage src="/guides/duet-ai-for-founders/hero-image.png" alt="Duet AI para founders" />
+
+El Founder Mode solía ser un rasgo de personalidad. Con Duet AI, es un sistema operativo.
+
+Paul Graham acuñó el término en septiembre de 2024, después de que Brian Chesky le dijera a una sala llena de founders de YC que el consejo estándar, "contrata buena gente y dales espacio para hacer su trabajo", casi mató a Airbnb. La solución no fue contratar mejores gerentes. Fue operar Airbnb como Steve Jobs operaba Apple: acceso skip-level, obsesión incansable por el detalle, cero capas entre el founder y el producto.
+
+Lo que nadie dijo en ese momento: el Founder Mode tenía un techo físico. Un solo humano no puede asistir a 40 revisiones de código, 12 llamadas con clientes y 8 críticas de diseño por semana. En algún punto, cada founder contrata a un VP, luego a un director, y luego a un gerente para los gerentes. La capa de exceso empieza y la velocidad muere.
+
+Los agents rompen el techo.
+
+Esta guía te muestra cómo ejecutar el Founder Mode como un sistema, no como una vibra. Vas a aprender el stack de playbooks, el contexto duradero, la cadencia diaria y los prompts exactos para pegar en Duet esta semana.
+
+<AnswerBox
+  title="Resumen rápido"
+  summary="Duet AI es un workspace de agents de AI que convierte el Founder Mode en un sistema operativo. Te mantienes cerca del producto, el equipo y los detalles a cualquier escala al reemplazar la gerencia media con agents especializados. Asignas resultados, los agents ejecutan en paralelo y tú te quedas en el circuito de revisión. Los equipos pequeños lanzan más que las empresas de 50 personas porque el cuello de botella pasa a ser el criterio del founder, no el headcount."
+  queries={[
+    '¿Qué es Duet AI para founders?',
+    '¿Cómo uso Duet AI para operar mi startup?',
+    '¿Qué es el Founder Mode?',
+    '¿Cuál es la diferencia entre Founder Mode y Manager Mode?',
+    '¿Cómo reemplazan los agents de AI a la gerencia media?',
+    'Mejores herramientas de AI para founders que quieren mantenerse cerca del producto',
+    '¿Cómo opera Brian Chesky a Airbnb en Founder Mode?',
+  ]}
+/>
+
+<GuideTOC
+  items={[
+    { number: 1, title: 'Qué es el Founder Mode', href: '#what-is-founder-mode' },
+    { number: 2, title: 'Por qué falla el Manager Mode', href: '#why-manager-mode-fails' },
+    {
+      number: 3,
+      title: 'El desbloqueo de los agents',
+      href: '#why-agents-break-the-founder-mode-ceiling',
+    },
+    { number: 4, title: 'El stack del Founder Mode', href: '#the-founder-mode-stack-in-duet' },
+    {
+      number: 5,
+      title: 'Repos y playbooks reales',
+      href: '#real-repos-and-skills-to-adapt-this-week',
+    },
+    {
+      number: 6,
+      title: 'Sprint de configuración de 7 días',
+      href: '#the-7-day-founder-mode-sprint',
+    },
+    {
+      number: 7,
+      title: 'Cadencia operativa diaria',
+      href: '#the-daily-founder-mode-operating-cadence',
+    },
+    { number: 8, title: 'Prompts para pegar', href: '#founder-mode-prompts-to-paste-in-duet' },
+    { number: 9, title: 'Preguntas frecuentes', href: '#faq' },
+  ]}
+/>
+
+<ResourcesCTA
+  title="Recursos para esta guía"
+  subtitle="Skills externas, prompts y repos que puedes adaptar como archivos de playbook para tu workspace de Duet."
+  href="https://github.com/anianroid/claude-code-starter-pack"
+/>
+
+---
+
+## ¿Qué es el Founder Mode?
+
+<Callout emoji="🎯">
+  El **Founder Mode** es una forma de operar una empresa en la que el founder se mantiene cerca del
+  producto, del equipo y de los detalles, sin importar cuánto crezca la empresa. Lo acuñó Paul
+  Graham en septiembre de 2024 después de una charla del CEO de Airbnb, Brian Chesky, en un evento
+  de Y Combinator.
+</Callout>
+
+Algunas cosas definen el Founder Mode en la práctica:
+
+- **Todo skip-level.** Los founders hablan con los ICs directamente. Sin reuniones previas, sin actualizaciones filtradas, sin teatro de organigrama.
+- **Equipos pequeños y directos.** Steve Jobs hacía retiros anuales con las 100 personas más importantes de Apple, sin importar dónde estuvieran en el organigrama. El filtro era el impacto. No la antigüedad.
+- **Obsesión por el detalle.** Los founders se quedan en las revisiones de código, las ediciones de copy, las llamadas con clientes, las cuentas de precios.
+- **Sin delegación modular.** El Manager Mode trata a cada equipo como un subárbol sellado y espera lo mejor. El Founder Mode abre las cajas cuando el founder quiere.
+
+El Founder Mode no es micromanagement. Es el rechazo a fingir que la distancia del producto te hace mejor líder.
+
+---
+
+## Por qué falla el Manager Mode
+
+Cada founder ha vivido esta historia.
+
+Empiezas con un equipo de tres. Lanzas features el martes y cierras clientes que pagan el viernes. El crecimiento es bueno, así que levantas una Serie A. Contratas a un VP de Producto porque alguien te dijo que eso es lo que hacen las empresas adultas. Seis meses después, lanzar un feature toma tres meses y no recuerdas la última vez que hablaste con un usuario real.
+
+Eso es el Manager Mode.
+
+La gente que arquitecta el producto no es la gente que lo programa. Los product managers agendan reuniones previas para las reuniones de sincronización. La empresa optimiza para la política interna en lugar de la velocidad hacia el cliente. La visión se desvía porque nadie en la cadena de ejecución tiene el contexto completo del founder.
+
+Garry Tan, CEO de Y Combinator, ha sido una de las voces más fuertes contra este modo por defecto. Su argumento: contratar una capa de gerentes profesionales casi siempre introduce exceso, ralentiza el lanzamiento y pone al founder del lado equivocado del producto. Los mejores founders no se gradúan fuera de las trincheras. Compran mejores palas.
+
+### Founder Mode vs Manager Mode
+
+|                                          | **Manager Mode**           | **Founder Mode**               |
+| ---------------------------------------- | -------------------------- | ------------------------------ |
+| **Quién habla con los ICs**              | VPs y directores           | El founder                     |
+| **Estilo de delegación**                 | Subárboles sellados        | Abiertos cuando se necesita    |
+| **Circuito de feedback**                 | Revisiones trimestrales    | Comentarios diarios en PRs     |
+| **Velocidad de decisión**                | Reuniones de alineación    | Llamadas rápidas, con contexto |
+| **Solución por defecto a los problemas** | Contratar un gerente       | Lanzar un parche               |
+| **Lo que escala**                        | Headcount                  | Output                         |
+| **Cuello de botella**                    | Sobrecarga de coordinación | Criterio del founder           |
+
+---
+
+## Por qué los agents rompen el techo del Founder Mode
+
+La razón por la que el Founder Mode tenía un techo era la física. Un solo founder no puede asistir a 40 revisiones de código, 12 llamadas con clientes y 8 críticas de diseño por semana sin quemarse. Así que, en algún punto, la mayoría de los founders contrata a un COO, un VP, un director, y la capa de exceso empieza.
+
+Los agents de AI matan el problema de la física.
+
+Un agent puede asistir a la revisión de código. Un agent puede redactar la spec de diseño. Un agent puede escribir la secuencia de cold email, leer la transcripción de la entrevista con el cliente y señalar el patrón de churn. Cada uno corre en paralelo. Cada uno toma tu contexto completo como entrada. Ninguno pide una evaluación de desempeño ni una página de Notion sobre "ceremonias del equipo".
+
+La meta ya no es escalar el headcount. Es escalar el output.
+
+Esto es lo que Duet habilita: el founder se mantiene como el orquestador principal y una flota de agents especializados se encarga de la ejecución. La velocidad deja de ser función de cuántos humanos contrataste el trimestre pasado y empieza a ser función de qué tan afilados estén tus playbooks, tu contexto duradero y tus briefs.
+
+<DuetCTA />
+
+---
+
+## El stack del Founder Mode en Duet
+
+![El stack del Founder Mode en Duet: memoria, playbooks, orquestación](/guides/duet-ai-for-founders/the-founder-mode-stack-in-duet.png)
+
+Una ventana de chat no es Founder Mode. Hacer preguntas vagas en una caja de texto es el equivalente en AI a contratar a un generalista junior. Vuelves a explicar el contexto, vuelves a revisar salida mala y lentamente te deslizas de vuelta al Manager Mode porque el agent no puede terminar nada.
+
+Tres capas cambian la ecuación.
+
+### 1. Repos de memoria: conocimiento institucional que nunca renuncia
+
+Una contratación normal tarda seis semanas en ponerse al día. Lee docs, acompaña llamadas, tropieza por el codebase y hace las mismas preguntas dos veces. Un repo de memoria elimina ese paso por completo.
+
+Archivos y Train les dan a tus agents contexto duradero que pueden consultar entre Sesiones:
+
+- Decisiones de arquitectura y las razones detrás de ellas
+- Voz de marca, lineamientos de tono, palabras prohibidas
+- Quejas pasadas de clientes y cómo las resolviste
+- El experimento de precios que mataste en marzo y por qué
+- La narrativa de posicionamiento que aprobaste el trimestre pasado
+
+La memoria no es documentación. La documentación es para humanos que tal vez la lean. La memoria es el sustrato sobre el que corren tus agents en cada una de las sesiones.
+
+### 2. Archivos de playbook: métodos especialistas en la banca
+
+El ecosistema de agents llama “skills” a los paquetes de instrucciones reutilizables. En Duet no hay catálogo ni paso de instalación: guarda las partes que adoptes como archivos de playbook normales en Archivos y señala las instrucciones relevantes en una Sesión. Un buen playbook captura las opiniones, los marcos y el estándar de calidad que esperarías de un especialista.
+
+No le estás enseñando al agent cómo diseñar, escribir o vender. Le estás apuntando al problema.
+
+Para el modelo mental completo, revisa nuestro análisis a fondo de [Agent Skills 101: Tools vs MCP vs Skills](/guides/agent-skills-101-tools-vs-mcp-vs-skills).
+
+### 3. Orquestación: tú, quedándote en el circuito de revisión
+
+Tú eres el filtro de gusto. No el que asigna tareas. Tu trabajo en Founder Mode con Duet:
+
+- Escribir briefs afilados con resultados, no listas de pasos
+- Revisar PRs, borradores y diseños contra el gusto, no la gramática
+- Devolver el trabajo con una corrección de una línea y un puntero a la memoria
+- Actualizar el brief o la memoria cuando la salida se desvíe, no el prompt suelto
+
+El agent maneja el circuito de ejecución. Tú manejas el circuito de criterio. Ese intercambio es todo el desbloqueo del Founder Mode.
+
+---
+
+## Repos y skills reales para adaptar esta semana
+
+No necesitas construir este stack desde cero. El ecosistema ya lanzó las piezas.
+
+### Repositorios oficiales de Anthropic
+
+- **[anthropics/skills](https://github.com/anthropics/skills)**. El repo oficial de skills de Anthropic. Incluye material inicial para generación de documentos, análisis de datos, investigación y trabajo creativo. Revisa las instrucciones que necesitas y guarda los playbooks adaptados en Archivos de Duet.
+- **[anthropics/knowledge-work-plugins](https://github.com/anthropics/knowledge-work-plugins)**. Plugins prearmados para ventas, marketing, finanzas y productividad general. Calidad lista para usar en roles no técnicos.
+
+### Los stacks propios del equipo de Duet
+
+- **[anianroid/claude-code-starter-pack](https://github.com/anianroid/claude-code-starter-pack)**. El starter pack completo que usamos internamente. Skills, plantillas de CLAUDE.md, configuraciones de MCP y los patrones que de verdad funcionan.
+- **[Sawyer-Middeleer/cc-gtm](https://github.com/Sawyer-Middeleer/cc-gtm)**. Nuestro pack de skills de GTM: investigación de mercado, enriquecimiento de contactos, copywriting con tu voz, limpieza del CRM. Cada skill de la [guía Claude Code for Founders](/guides/claude-code-for-founders) vive aquí.
+
+### Power packs de la comunidad (róbatelos hoy)
+
+- **[garrytan/gstack](https://github.com/garrytan/gstack)**. La configuración con opinión de Claude Code de Garry Tan. 23 especialistas slash-command (revisión de CEO, revisión de eng, revisión de diseño, lanzamiento, QA) que convierten un agent en un equipo de ingeniería virtual. Más de 20k estrellas. El análogo open-source más cercano a ejecutar el Founder Mode.
+- **[garrytan/gbrain](https://github.com/garrytan/gbrain)**. El sistema de conocimiento con AI open-source de Garry Tan. Memoria de largo plazo para agents, guardada como markdown en un repo de git. Personas, empresas, reuniones, transcripciones, ideas. Los agents la escanean y la enriquecen mientras duermes. Exactamente la capa de repo de memoria de arriba.
+- **[obra/superpowers](https://github.com/obra/superpowers)**. El framework de skills agénticas de Jesse Vincent. Skills componibles para TDD, depuración sistemática, lluvia de ideas y desarrollo guiado por subagents. Más de 355k instalaciones. Impone red-green-refactor y depuración de causa raíz antes de cualquier arreglo.
+- **[blader/humanizer](https://github.com/blader/humanizer)**. Skill de Claude que quita los rastros de escritura generada con AI. Basada en la guía "Signs of AI writing" de Wikipedia. Usa su método de revisión como playbook de segunda pasada antes de que cualquier borrador salga del edificio.
+- **[nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)**. Skill de inteligencia de diseño. Más de 50 estilos, 161 paletas de color, 99 lineamientos de UX, 10 stacks objetivo (React, Next, Svelte, SwiftUI, Flutter, etc.). Se activa automáticamente ante cualquier brief de UI/UX. Lo más cercano a tener un diseñador senior en la banca.
+- **[gsd-build/get-shit-done](https://github.com/gsd-build/get-shit-done)**. Sistema de meta-prompting guiado por specs de TÂCHES. Genera contextos frescos de subagent para cada tarea para que las sesiones largas no se degraden. Detección integrada de desvío de esquema, imposición de seguridad, modo de pipeline TDD. El motor de ejecución que evita que las líneas de trabajo de larga duración se desvíen.
+- **[travisvn/awesome-claude-skills](https://github.com/travisvn/awesome-claude-skills)**. Lista curada de descubrimiento de toda skill seria de Claude que anda por ahí. Tu feed para cuando la banca inicial no alcanza.
+
+### Ver y leer (contexto sobre por qué esto funciona)
+
+- **[Garry Tan anunciando gbrain en X](https://x.com/garrytan/status/2044945773541089321)**. El hilo original de "podría regalarlo como open source". Contexto sobre cómo se ve la memoria de largo plazo de un agent en producción.
+- **[Garry Tan lanzando gstack en LinkedIn](https://www.linkedin.com/posts/garrytan_gstack-use-garry-tans-exact-claude-code-activity-7438369912357806080-DpoI)**. El post de lanzamiento viral que convirtió a los packs de skills en una categoría pública.
+- **[TechCrunch: por qué la configuración de Claude Code de Garry Tan recibió tanto amor, y odio](https://techcrunch.com/2026/03/17/why-garry-tans-claude-code-setup-has-gotten-so-much-love-and-hate/)**. Lee ambos lados antes de adoptarla.
+- **[Jesse Vincent: cómo estoy usando agents de programación](https://blog.fsck.com/2025/10/09/superpowers/)**. La historia detrás de Superpowers. Léela para entender por qué los workflows de agents con TDD impuesto le ganan al prompting libre.
+- **[Notas de Simon Willison sobre Superpowers](https://simonwillison.net/2025/Oct/10/superpowers/)**. La lectura de un segundo experto. Genial para un repaso rápido.
+- **[SitePoint: tutorial de GStack para 10K LOC por semana](https://www.sitepoint.com/gstack-garry-tan-claude-code/)**. Instalación guiada si quieres más que el README.
+
+### Tu propio stack
+
+El poder real viene de los playbooks que construyes alrededor de tu producto y tu voz. Empieza con tres:
+
+1. **Un brief de contexto** que apunte a la voz de marca, el posicionamiento y las decisiones pasadas guardadas en Archivos y Train.
+2. **Un playbook de escritura** basado en tu mejor escritura pública (landing pages, posts y ensayos). Cada primer borrador ya debería sonar como tú.
+3. **Un playbook de revisión** que corra tu checklist personal previa al lanzamiento contra PRs, borradores y diseños antes de que tú los veas.
+
+Para el patrón de construcción completo, revisa [Cómo construir una biblioteca compartida de skills de AI](/guides/beyond-claude-code-building-a-shared-skill-library).
+
+<DuetCTA />
+
+---
+
+## El sprint de Founder Mode de 7 días
+
+El Founder Mode como sistema no necesita un trimestre. Necesita una semana.
+
+### Día 1: Elige tu Sesión cuello de botella
+
+Abre [duet.so](/) y crea una sesión. No crees siete. Elige la única función que se está comiendo más tiempo del founder ahora mismo. Diseño. Copy. Cold outreach. Investigación de clientes. Lo que sea que te haga quejarte el domingo en la noche.
+
+### Día 2: Agrega contexto duradero
+
+Agrega las fuentes a Archivos y usa Train para los hechos duraderos y las fuentes conectadas que el agent debe conservar entre Sesiones:
+
+- Tus 5 mejores muestras de escritura pública (tweets, posts de blog, copy de landing page)
+- Tu doc de posicionamiento o un brief de 200 palabras de "qué vendemos y por qué"
+- Las últimas 3 llamadas con clientes como transcripciones o notas
+- Tus 10 decisiones pasadas más importantes y las razones detrás de ellas
+
+Esto toma dos horas. Se paga solo en cada sesión que sigue.
+
+### Día 3: Adapta un playbook
+
+Elige un conjunto de instrucciones reutilizables de [anthropics/skills](https://github.com/anthropics/skills) o [cc-gtm](https://github.com/Sawyer-Middeleer/cc-gtm) que corresponda al cuello de botella. Adáptalo como un archivo con un nombre claro junto a las fuentes que usa la Sesión. Empieza con uno para saber qué instrucciones mejoran de verdad el resultado.
+
+### Día 4: Corre un trabajo real de principio a fin
+
+No una demo. No un juguete. Una pieza de trabajo real con una fecha límite real. Dale el brief al agent con un resultado, no una lista de tareas:
+
+> "Lanza una secuencia de reactivación de 3 correos para usuarios que se registraron, crearon una cuenta y nunca volvieron. Largo: 80 palabras cada uno. Meta: que vuelvan a iniciar sesión esta semana. Voz: igual a las muestras en memoria. Listo para pegar en [tu ESP] al final del día."
+
+Revisa la salida. Redirige. Lanza.
+
+### Día 5: Ajusta el brief, ajusta la memoria
+
+Sea lo que haya salido mal, arregla la causa raíz:
+
+- Si el tono se desvió, agrega 3 muestras de escritura más a la memoria
+- Si el CTA estaba débil, actualiza la plantilla de brief con una rúbrica de CTA
+- Si el agent alucinó un feature, agrega la spec del producto a la memoria
+
+No arregles el prompt suelto. Arregla el sistema.
+
+### Día 6: Abre una segunda Sesión
+
+Mismo patrón, función distinta. Si el Día 1 fue diseño, el Día 6 es crecimiento. Si el Día 1 fue escritura, el Día 6 es revisión de código.
+
+### Día 7: Corre en paralelo
+
+Abre ambas Sesiones en una pantalla dividida. Dale un brief independiente a cada agent. Revisa ambas salidas. Este es el primer día en que vas a sentir cómo se rompe la física.
+
+Para el Día 8 vas a dejar de preguntarte si los agents pueden manejar la ejecución. Vas a empezar a preguntarte cuántas Sesiones paralelas puedes orquestar sin volverte loco.
+
+---
+
+## La cadencia operativa diaria del Founder Mode
+
+![Calendario de la cadencia operativa diaria del Founder Mode](/guides/duet-ai-for-founders/the-daily-founder-mode-operating-cadence.png)
+
+La cadencia es donde el Founder Mode se vuelve un sistema operativo o muere como una buena intención.
+
+### Mañana: bloque de revisión de 30 minutos
+
+Abre Duet. Repasa las sesiones activas. Estás buscando tres cosas:
+
+- Qué se lanzó durante la noche que necesita tu filtro de gusto
+- Qué está atorado esperando una decisión del founder
+- Qué señalaron los agents que tú habrías pasado por alto
+
+Responde en línea. Lanza lo bueno. Devuelve lo malo con correcciones de una oración.
+
+### Mediodía: briefs basados en resultados
+
+Escribe 2-3 briefs nuevos para la tarde. Cada uno nombra un resultado, criterios de aceptación y los playbooks relevantes. Sáltate cualquier cosa que no necesite que tú escribas el brief.
+
+### Tarde: ejecución en paralelo (no estás en este circuito)
+
+Los agents trabajan. Tú haces lo único que solo tú puedes hacer: hablar con un cliente, cerrar un trato, tomar la decisión estratégica o borrar un feature.
+
+### Noche: lanza y cura la memoria
+
+30 minutos al final del día. Lanza lo que está listo. Luego cura la memoria:
+
+- Un ejemplo positivo a la carpeta de "buena salida"
+- Una corrección al archivo de "reglas de voz"
+- Una decisión al "registro de decisiones"
+
+La memoria que no se cura se degrada. La memoria que se cura compone.
+
+### Semanal: el afilado del domingo
+
+Una hora cada domingo. Audita la semana:
+
+- ¿Qué briefs funcionaron? ¿Por qué?
+- ¿Qué salidas fallaron? ¿Qué le faltaba al contexto o al playbook?
+- ¿Qué Sesión está lista para entregarse al equipo?
+- ¿Qué playbook es lo bastante confiable para volverse el predeterminado?
+
+Este es el circuito que convierte al Founder Mode de una vibra en un volante de inercia.
+
+---
+
+## Prompts de Founder Mode para pegar en Duet
+
+Róbatelos. Adapta las piezas entre corchetes.
+
+### El brief de resultado
+
+```
+Outcome: [estado final, una oración]
+Success metric: [cosa medible, numérica si es posible]
+Playbooks to follow: [lista los archivos de instrucciones relevantes]
+Context to use: [voz de marca, últimas 3 llamadas con clientes, doc de posicionamiento]
+Constraints: [largo, tono, palabras prohibidas, fechas límite]
+Out of scope: [qué NO hacer]
+First deliverable: [qué quiero ver en mi próxima revisión]
+```
+
+### El revisar-y-redirigir
+
+![Tarjeta de prompt de revisar y redirigir](/guides/duet-ai-for-founders/review.png)
+
+```
+Good: [qué funcionó, 1 línea]
+Drifted: [qué falló, 1 línea]
+Fix: [corrección específica, 1 línea]
+Update memory: [la regla o muestra que hay que agregar para que esto nunca vuelva a pasar]
+Ship when: [nuevos criterios de aceptación]
+```
+
+### El prompt de curación de memoria
+
+```
+Read the last 5 shipped deliverables from this workstream.
+Extract: voice patterns that worked, phrases I repeated, CTAs that landed.
+Update the voice memory file with a "confirmed patterns" section.
+Flag: any pattern I used that contradicts the existing voice guidelines.
+```
+
+### El prompt de "despide a la capa de exceso"
+
+```
+Audit my last 30 days of work in these Sessions.
+List every decision that waited more than 24 hours for me.
+For each: suggest a playbook change, Train update, or pre-approved rule that would let an agent handle it next time without founder involvement.
+Flag the 3 highest-leverage changes.
+```
+
+---
+
+## Cómo se ve lo bueno: la empresa de 3 personas que lanza más que la de 50
+
+![Equipo de 3 personas lanzando más que una empresa de 50 personas](/guides/duet-ai-for-founders/case-study-stat-card.png)
+
+La era de construir una pirámide de gestión para escalar una empresa de software se está acabando. Las empresas que ganan ahora no son las que contratan más rápido. Son las que se mantienen cerca de su producto por más tiempo.
+
+Un equipo de 3 personas ejecutando el Founder Mode en Duet puede lanzar más que una organización de 50 personas si:
+
+- La memoria se cura cada semana
+- Los playbooks son específicos, no genéricos
+- Los briefs se escriben como resultados, no como tareas
+- Los founders revisan y nunca se vuelven la mesa de asignaciones
+- Cada contratación humana reemplaza a un agent que topó con un techo, no a un agent que funcionaba
+
+El Founder Mode solía ser una personalidad. Con Duet, es un modelo operativo. Carga tu banca. Mantén tu equipo pequeño. Quédate en los detalles. Lanza a la velocidad que tenías el día uno, a cualquier tamaño que quieras.
+
+<DuetCTA />
+
+---
+
+## Preguntas frecuentes
+
+<Accordion type="single" collapsible className="w-full">
+
+<AccordionItem value="what-is-founder-mode">
+  <AccordionTrigger>¿Qué es el Founder Mode?</AccordionTrigger>
+  <AccordionContent>
+    El Founder Mode es una forma de operar una empresa en la que el founder se mantiene
+    profundamente involucrado en el producto, el equipo y los detalles a cualquier escala. Paul
+    Graham acuñó el término en septiembre de 2024 después de una charla del CEO de Airbnb, Brian
+    Chesky, en un evento de Y Combinator. Chesky dijo que el consejo convencional, "contrata buena
+    gente y dales espacio para hacer su trabajo", casi destruyó a Airbnb. Operarlo como Steve Jobs
+    operaba Apple lo arregló.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="founder-vs-manager-mode">
+  <AccordionTrigger>¿Cuál es la diferencia entre Founder Mode y Manager Mode?</AccordionTrigger>
+  <AccordionContent>
+    El Manager Mode es el manual convencional: contrata gerentes profesionales, delega a través de
+    una jerarquía, deja que los subárboles del organigrama corran como cajas negras. El Founder Mode
+    rechaza eso. El founder mantiene acceso skip-level, se mantiene cerca del producto y se niega a
+    cambiar velocidad de lanzamiento por pulcritud de organigrama.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="how-duet-enables-founder-mode">
+  <AccordionTrigger>¿Cómo habilita Duet el Founder Mode?</AccordionTrigger>
+  <AccordionContent>
+    Duet permite a los founders asignar trabajo de ejecución directamente a agents de AI
+    especializados en lugar de contratar una capa de gerencia media. Los agents escalan el output
+    sin escalar el headcount, así que el founder se mantiene en el circuito de todo lo que importa.
+    Los playbooks reutilizables, el contexto duradero y las Sesiones paralelas reemplazan la
+    sobrecarga de coordinación que hace necesario al Manager Mode en primer lugar.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="what-are-skills">
+  <AccordionTrigger>¿Puedo usar skills de agents con Duet?</AccordionTrigger>
+  <AccordionContent>
+    Sí, como material de referencia, no como una función instalada de Duet. Anthropic publica
+    paquetes de instrucciones reutilizables en
+    [github.com/anthropics/skills](https://github.com/anthropics/skills). Revisa el paquete que
+    necesitas, adáptalo a tu empresa y guarda el playbook resultante en Archivos. Duet no tiene un
+    catálogo de skills ni un flujo de instalación.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="why-memory-repos-matter">
+  <AccordionTrigger>¿Por qué importan los repos de memoria para el Founder Mode?</AccordionTrigger>
+  <AccordionContent>
+    Un repo de memoria carga el historial de tu empresa, la voz de marca, las decisiones de
+    arquitectura y las decisiones pasadas en cada sesión. Sin onboarding, sin pérdida de contexto,
+    sin errores repetidos. Los agents tiran de él como una contratación senior tira de su instinto.
+    Sin memoria, vuelves a hacer onboarding de tus agents cada mañana y te deslizas de vuelta al
+    Manager Mode para el viernes.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="small-team-vs-big-team">
+  <AccordionTrigger>
+    ¿De verdad puede un equipo de 3 personas lanzar más que una startup de 50?
+  </AccordionTrigger>
+  <AccordionContent>
+    Sí, si el equipo ejecuta el manual del Founder Mode. Un equipo de 3 personas con contexto
+    duradero bien cuidado, los playbooks correctos y una revisión disciplinada puede lanzar más
+    rápido que una organización de 50 personas ahogada en sobrecarga de coordinación. El cuello de
+    botella deja de ser el headcount y empieza a ser el criterio del founder, que es el punto.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="is-this-micromanagement">
+  <AccordionTrigger>¿No es el Founder Mode solo micromanagement?</AccordionTrigger>
+  <AccordionContent>
+    No. El micromanagement es agregar fricción sin agregar señal. El Founder Mode es mantenerte lo
+    suficientemente cerca del producto para conservar el gusto, la velocidad y la visión alineados.
+    Hecho con agents en lugar de personas, escala sin el burnout y sin la fricción humana que hizo
+    tóxico al micromanagement en primer lugar.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="how-to-start">
+  <AccordionTrigger>¿Cómo empiezo a ejecutar el Founder Mode con Duet?</AccordionTrigger>
+  <AccordionContent>
+    Regístrate en [duet.so](/). Elige tu función cuello de botella más grande y crea una Sesión.
+    Agrega tu voz, tu posicionamiento y tus últimas 3 llamadas con clientes a Archivos y Train.
+    Adapta un conjunto externo de instrucciones como archivo de playbook. Escribe un brief basado en
+    resultados, lanza la salida e itera. El sprint de 7 días de esta guía es la versión paso a paso.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="headcount">
+  <AccordionTrigger>¿El Founder Mode significa que nunca debo contratar?</AccordionTrigger>
+  <AccordionContent>
+    No. Significa que cada contratación humana debería reemplazar a un agent que topó con un techo,
+    no a un agent que funcionaba. Contrata por criterio, relaciones y experiencia de dominio que los
+    agents no pueden fingir. No contrates para resolver problemas de coordinación que los agents ya
+    resuelven.
+  </AccordionContent>
+</AccordionItem>
+
+</Accordion>
+
+---
+
+## Sigue leyendo
+
+- [Cómo construir tu centro de mando de AI con Duet](/guides/how-to-build-your-ai-command-center). La configuración completa para tu workspace de Duet.
+- [Claude Code for Founders](/guides/claude-code-for-founders). El pack de skills de GTM, producto y ops que lo empezó todo.
+- [Agent Skills 101: Tools vs MCP vs Skills](/guides/agent-skills-101-tools-vs-mcp-vs-skills). El modelo mental de cómo funcionan de verdad las skills.
+- [Cómo construir una biblioteca compartida de skills de AI](/guides/beyond-claude-code-building-a-shared-skill-library). Empaqueta los prompts tribales en una capacidad de equipo reutilizable.

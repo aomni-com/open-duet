@@ -1,0 +1,280 @@
+---
+title: 'How to Build Your AI Command Center with Duet'
+metaTitle: 'How to Build Your AI Command Center with Duet'
+description: 'Stop juggling scattered AI tools. Build a centralized AI command center in minutes — one place for your integrations, knowledge base, automations, and custom apps.'
+date: '2026-03-24'
+updatedAt: '2026-05-08'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/8.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'guides'
+tags: ['ai-command-center', 'automation', 'integrations', 'duet', 'productivity']
+type: 'guide'
+image: '/guides/how-to-build-your-ai-command-center/hero.png'
+howTo:
+  name: 'How to Build an AI Command Center with Duet'
+  description: 'A step-by-step guide to setting up a centralized AI workspace with integrations, knowledge bases, automations, and custom apps.'
+  steps:
+    - name: 'Sign up and explore the workspace'
+      text: 'Create an account at duet.so and explore Sessions, Apps, Files, Train, Integrations, and your private cloud server.'
+    - name: 'Choose your AI models'
+      text: 'Select from models like Claude Opus, Sonnet, Codex, and GPT 5.4 based on your speed, intelligence, and cost trade-offs.'
+    - name: 'Build your knowledge base'
+      text: 'Keep source material and reusable instructions in Files, then use Train for durable facts and connected sources.'
+    - name: 'Connect your tools and integrations'
+      text: 'Link Google Drive, Notion, CRMs, and other tools so your AI has access to your real data.'
+    - name: 'Set up scheduled automations'
+      text: 'Create cron jobs that monitor your tools and post updates — like checking Google Drive for new files every morning.'
+    - name: 'Build custom apps'
+      text: 'Describe what you need in plain English and let the AI build fully functional apps inside your workspace.'
+cta:
+  title: 'Your AI command center, ready in minutes.'
+  subtitle: 'Duet is the workspace where durable context, integrations, scheduled jobs, and custom apps live together. One hub, every agent.'
+  buttonText: 'Build your command center'
+  href: '/sign-in?from=guide-command-center'
+---
+
+If you're using Claude Code, Codex, Cursor, or any other AI-powered platform, you've probably noticed the same problem: context lives everywhere. Knowledge is scattered across tools, memories are siloed, prompts are duplicated, and nothing talks to anything else. An AI command center fixes that — it's the single hub where your company's AI operations live.
+
+<AnswerBox
+  title="Quick Summary"
+  summary="An AI command center is a centralized workspace where your AI agent, integrations, knowledge base, automations, and custom apps all live together. Instead of juggling scattered AI tools, you get one system that manages everything. Duet lets you build one in minutes with a private cloud server, pre-integrated apps, and team collaboration built in."
+  queries={[
+    'What is an AI command center?',
+    'How to centralize AI tools for my business',
+    'Best AI workspace for teams',
+    'How to connect all my apps to one AI',
+    'How to automate workflows with AI',
+  ]}
+/>
+
+This guide walks you through building an AI command center from scratch using [Duet](/) — from setting up your workspace to connecting tools, building automations, and creating custom apps. The whole thing takes minutes, not weeks.
+
+<GuideTOC
+  items={[
+    { number: 1, title: 'Why You Need One', href: '#why-you-need-an-ai-command-center' },
+    { number: 2, title: 'Getting Started', href: '#getting-started-with-duet' },
+    { number: 3, title: 'Models & Sessions', href: '#choosing-your-ai-models' },
+    { number: 4, title: 'Knowledge Base', href: '#building-your-knowledge-base' },
+    { number: 5, title: 'Connect Your Tools', href: '#connecting-your-tools' },
+    { number: 6, title: 'Automations', href: '#setting-up-scheduled-automations' },
+    { number: 7, title: 'Custom Apps', href: '#building-custom-apps' },
+    { number: 8, title: 'One System', href: '#one-system-for-all-your-tools' },
+    { number: 9, title: 'FAQ', href: '#faq' },
+  ]}
+/>
+
+---
+
+## Why you need an AI command center
+
+Once you have multiple AI systems, agents, and apps working inside your business, things get complex fast. Context lives in one place, knowledge in another, memories somewhere else. You end up repeating yourself across tools, losing track of what each system knows, and spending more time managing AI than benefiting from it.
+
+An AI command center solves this by giving you **one place** where:
+
+- Your AI agent lives with persistent memory and context
+- All your tools and integrations are connected
+- Automations run on schedule without manual intervention
+- Custom apps can be built and deployed instantly
+- Your team can collaborate with the AI and each other
+
+The alternative is setting up your own cloud server on AWS or Hetzner, installing Claude Code or OpenClaw, manually configuring every integration, and dealing with permissions, security, and team access yourself. That's a real option — but it takes days or weeks instead of minutes.
+
+---
+
+## Getting started with Duet
+
+Head to [duet.so](/) and register for an account. Once you're in, your workspace looks like this:
+
+- **Sessions in the sidebar** — each durable session holds one piece of work and its event history.
+- **Session timeline in the main view** — where you assign work, follow progress, answer questions, and inspect results.
+- **Files, Train, and Integrations** — grouped under Duet Computer in the sidebar.
+
+Everything runs on a **private cloud server** that's yours. Your data stays in your environment — the AI agent, files, automations, and apps all live there. No need to worry about provisioning servers or managing infrastructure.
+
+The other advantage: **team collaboration is built in**. If you want your team to use the AI command center, they just join — no complex permissions, no Slack/email integrations to configure. Everyone shares the same workspace, context, and tools.
+
+---
+
+## Choosing your AI models
+
+Duet supports multiple AI models with different trade-offs:
+
+| Model             | Strengths                        | Best For                          |
+| ----------------- | -------------------------------- | --------------------------------- |
+| **Claude Opus**   | Most intelligent, deep reasoning | Complex analysis, nuanced tasks   |
+| **Claude Sonnet** | Fast, capable                    | Day-to-day tasks, quick responses |
+| **Codex**         | Code-focused, strong reasoning   | Development, technical workflows  |
+| **GPT 5.4**       | Fast, versatile                  | General tasks, quick iterations   |
+
+You can switch models per-message using the model selector in the compose bar. All models are thinking models — they're agents that can use tools like web search, file creation, code execution, and more. If you've used Claude Code or Codex before, you'll feel right at home.
+
+Token usage and cost are shown at the bottom of each message, so you always know what you're spending.
+
+---
+
+## Building your knowledge base
+
+![Knowledge base and integrations flowing into a central AI hub](/guides/how-to-build-your-ai-command-center/knowledge-base.png)
+
+A command center without context is just a chatbot. The real power comes from building up a knowledge base that the AI can draw on for every interaction.
+
+### Files and Train
+
+Open **Files** in the sidebar to work with material on your server, and use **Train** for context the agent should carry across Sessions:
+
+- **Source files** — documents, examples, and other material the agent can read and edit.
+- **Instructions and playbooks** — reusable files that describe how you want the AI to approach recurring work. You own and edit them like any other workspace file.
+- **Train facts and sources** — durable knowledge and connected sources that should remain available beyond one Session.
+
+When something should outlive the current Session, add it to Train as a concise fact:
+
+> "Our Q2 target is $500K ARR, and our main competitor is Acme Corp."
+
+This is how you go from a generic AI to one that actually knows your business.
+
+### Editing the knowledge base
+
+Files keep your source material and playbooks inspectable; Train owns durable facts and connected sources. That split gives you control over what the agent can reference without hiding important business context inside one conversation.
+
+---
+
+## Connecting your tools
+
+The knowledge base gets really powerful when you connect the tools you already use. Duet comes with **pre-built integrations** for:
+
+- **Knowledge bases:** Google Drive, Notion, Confluence
+- **Task management:** Trello, Asana, Linear
+- **Data & analytics:** PostHog, Power BI
+- **Communication:** Slack, email, calendar
+- **CRMs:** HubSpot, Salesforce, Attio
+
+To connect a tool, go to **Integrations** in the sidebar, find the app, and click **Connect**. You'll authorize access, and that's it — no API keys to manage, no webhooks to configure.
+
+Once connected, you can reference these tools in conversation:
+
+> "Hey Duet, describe what's in my Google Drive."
+
+You can also explicitly add integrations to a conversation using the integrations selector in the compose bar, which ensures the AI uses that specific tool in its response.
+
+<DuetCTA />
+
+---
+
+## Setting up scheduled automations
+
+![Scheduled automations and custom app building](/guides/how-to-build-your-ai-command-center/automations.png)
+
+This is where an AI command center starts to feel like a real operations hub. Automations let you set up tasks that run on a schedule — no manual intervention needed.
+
+### Creating a scheduled task
+
+Navigate to **Scheduled Tasks** in the sidebar. You'll see any existing cron jobs, and you can create new ones. The easiest way? Just ask the AI:
+
+> "Hey Duet, create a scheduled task that checks for new files in my Google Drive every morning and reports what it finds in this session."
+
+The AI will:
+
+1. Create a cron job (a scheduled task on your server)
+2. Configure it to run at the time you specified
+3. Save the results in the session and workspace files
+
+You can verify the task exists in the Scheduled Tasks panel, and edit or delete it anytime.
+
+### Examples of useful automations
+
+- **Morning briefing:** Summarize new emails, calendar events, and Slack messages every day at 8am
+- **CRM monitoring:** Check for new leads or closed deals and save a workspace report
+- **Competitor watch:** Search the web for competitor mentions weekly and compile a report
+- **Content pipeline:** Check your editorial calendar and remind you about upcoming deadlines
+
+The key insight: the AI agent manages the entire automation system itself. You describe what you want in plain English, and it handles the scheduling, execution, and reporting.
+
+---
+
+## Building custom apps
+
+This is where things get genuinely powerful. The AI can build fully functional web apps inside your workspace — the same way you'd build in Lovable or Bolt, but integrated with all your existing tools and data.
+
+### Example: meeting prep form
+
+Here's a real example from the video. The prompt:
+
+> "Hey Duet, create an app — a meeting prep form. Before I have a meeting with someone, I want to ask them what questions they have for me. When it's submitted, create a page in Notion with the responses."
+
+The AI builds the entire app: a form with fields for name, email, and questions. It handles the Notion integration automatically. The result is a shareable URL that anyone can fill out, and every submission creates a structured database entry in your Notion workspace.
+
+**One prompt. A working app. Connected to your tools.**
+
+Now take it further. Share that URL with your team. Your cofounder sends it to every prospect before a call. Your ops lead uses the Notion database to prep briefing docs. What started as a personal tool becomes something your whole team depends on — and you built it in under a minute.
+
+Some teams take this even further. We've seen users build internal dashboards that pull from multiple APIs, add login so their teammates each get a personalized view, and run scheduled updates so the data is always fresh. They're not just building tools — they're shipping internal products to their team using nothing but natural language.
+
+### Why this matters
+
+Most small teams pay for dozens of point-solution SaaS products:
+
+- One app for scheduling
+- One for meeting notes
+- One for your CRM
+- One for task management
+- One for design brainstorming
+
+Each costs $10-30/month, each has its own login, and none of them talk to each other seamlessly. Inside your AI command center, you can replace most of these with **custom-built apps that are designed around your exact workflow** — built in minutes with a single prompt. And because everything runs on your server with your integrations already connected, there's no glue code, no webhook configuration, and no separate hosting to manage.
+
+---
+
+## One system for all your tools
+
+The whole point of an AI command center is consolidation. Instead of:
+
+- Context scattered across Claude, ChatGPT, Gemini, and Cursor
+- Integrations configured separately in every tool
+- Automations split between Zapier, Make, and n8n
+- Custom tools built in Lovable but disconnected from your data
+
+You get **one system** where the AI has full context, every tool is connected, automations run natively, and custom apps live alongside your sessions.
+
+| Before                                | After                                     |
+| ------------------------------------- | ----------------------------------------- |
+| Multiple AI tools with siloed context | One AI with durable, shared context       |
+| Manual integration setup per tool     | Pre-built integrations, one-click connect |
+| Separate automation platforms         | Native scheduled tasks, managed by AI     |
+| Disconnected point-solution apps      | Custom apps built on demand               |
+| Solo AI usage, complex team setup     | Team collaboration built in               |
+
+But the real unlock goes beyond personal productivity. When your apps, automations, and integrations all live in one place, something interesting happens: the things you build start becoming useful to your whole team. That meeting prep form from earlier? Share the URL with your team. The competitor dashboard you built with one prompt? Your cofounder checks it every morning.
+
+This is the difference between a tool builder and an app platform. Other AI coding tools will help you build something — but then you're on your own for hosting, auth, and getting it in front of people. Inside your AI command center, every app you build is already live, already connected to your data, and already shareable with your team. One prompt gets you from idea to something your whole team relies on.
+
+For the founder-level operating playbook that pulls the command center, reusable instructions, and memory together into one daily rhythm, see [Duet AI for Founders: Founder Mode as an Operating System](/guides/duet-ai-for-founders).
+
+---
+
+## FAQ
+
+### What tools can I connect to my AI command center?
+
+Duet supports hundreds of integrations out of the box — Google Drive, Notion, Slack, Linear, Trello, Asana, HubSpot, PostHog, Power BI, and many more. New integrations are added regularly, and you can also build custom integrations using the AI's code execution capabilities.
+
+### Do I need technical skills to set up an AI command center?
+
+No. Everything from connecting tools to building automations to creating custom apps is done through natural language conversation with the AI. If you can describe what you want, the AI can build it.
+
+### How is this different from just using Claude Code or Codex directly?
+
+Claude Code and Codex are powerful but require your own infrastructure — you need to set up a cloud server, manage security, configure integrations manually, and handle team access yourself. Duet packages all of that into a managed platform where everything is pre-configured and ready to use.
+
+### Can my whole team use the AI command center?
+
+Yes. Team collaboration is built into Duet — members join your workspace and can access shared sessions, the AI coworker, files, and apps according to their role. No additional infrastructure setup is needed.
+
+### How much does it cost?
+
+Duet offers a 7-day free trial to get started. After that, Starter, Pro, and Max include monthly credits, with a paid reserve for overage. Check [Duet pricing](/pricing) for the current plans.
+
+### Can I build apps that other people outside my team can use?
+
+Yes. Apps built in your workspace can be shared via public URLs. For example, the meeting prep form in this guide generates a link that anyone can access — no Duet account required.

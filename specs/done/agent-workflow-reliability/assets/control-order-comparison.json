@@ -1,0 +1,92 @@
+{
+  "sourceRevision": "529aa4ce5b7e421a6ece7de7f61c5d3fee913b27",
+  "eventsSha256": "5331ef3987165b94df0177f7a0eea6ed963c594b15546c7ec6bfcbea029ef0ee",
+  "model": "vercel-ai-gateway:deepseek/deepseek-v4.1-flash",
+  "resolved": {
+    "provider": "vercel-ai-gateway",
+    "id": "deepseek/deepseek-v4.1-flash",
+    "api": "openai-completions"
+  },
+  "thinkingLevel": "medium",
+  "trialsPerVariant": 3,
+  "order": [
+    "baseline",
+    "candidate",
+    "baseline",
+    "candidate",
+    "baseline",
+    "candidate"
+  ],
+  "maxTokens": 4096,
+  "timeoutMs": 90000,
+  "toolsExecuted": false,
+  "retries": 0,
+  "success": "exactly one tool call: select_state_machine_state with decision.state awaiting_correction",
+  "candidate": "THIS PARENT PASS MUST END WITH ONE select_state_machine_state TOOL CALL. A parent pass accepts only one terminating control result. Do not combine this selection with ask_user_question or another selection in the same response. If user input is needed, select the park state alone now; after this completed-state transition to park, the runner automatically starts another parent pass, where you can call ask_user_question. Selecting park ends this pass, not that later opportunity to ask. Text or narration alone does not advance the state machine.",
+  "results": {
+    "trials": [
+      {
+        "variant": "baseline",
+        "repetition": 1,
+        "status": "wrong_control",
+        "elapsedMs": 6492,
+        "calls": [
+          "select_state_machine_state",
+          "ask_user_question"
+        ]
+      },
+      {
+        "variant": "baseline",
+        "repetition": 2,
+        "status": "wrong_control",
+        "elapsedMs": 6828,
+        "calls": [
+          "ask_user_question",
+          "select_state_machine_state"
+        ]
+      },
+      {
+        "variant": "baseline",
+        "repetition": 3,
+        "status": "wrong_control",
+        "elapsedMs": 6983,
+        "calls": [
+          "select_state_machine_state",
+          "ask_user_question"
+        ]
+      },
+      {
+        "variant": "candidate",
+        "repetition": 1,
+        "status": "park_only",
+        "elapsedMs": 5072,
+        "calls": [
+          "select_state_machine_state"
+        ]
+      },
+      {
+        "variant": "candidate",
+        "repetition": 2,
+        "status": "park_only",
+        "elapsedMs": 4396,
+        "calls": [
+          "select_state_machine_state"
+        ]
+      },
+      {
+        "variant": "candidate",
+        "repetition": 3,
+        "status": "park_only",
+        "elapsedMs": 2247,
+        "calls": [
+          "select_state_machine_state"
+        ]
+      }
+    ],
+    "actorCalls": 6,
+    "toolsExecuted": 0,
+    "implicitRetries": 0,
+    "totalCost": 0.02236908
+  },
+  "interpretation": "Supports one-control-per-pass clarification on this saved case; diagnostic only, not a task-matrix pass or proof of report accuracy."
+}

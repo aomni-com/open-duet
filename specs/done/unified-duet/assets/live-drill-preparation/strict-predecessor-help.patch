@@ -1,0 +1,10 @@
+--- a/packages/duet/src/cli/help.ts
++++ b/packages/duet/src/cli/help.ts
+@@ -11,6 +11,6 @@
+ export function runHelpText(packageName: string): string {
+   return `
+-duet — Local agents, workspaces and file sync
++duet — Local agents, workspaces and file sync (disposable predecessor)
+
+ USAGE
+   duet [options] [prompt]

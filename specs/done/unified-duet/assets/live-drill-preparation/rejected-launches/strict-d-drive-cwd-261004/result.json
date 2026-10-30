@@ -1,0 +1,13 @@
+{
+  "status": "failed",
+  "provenance": {
+    "fixtureId": "staging-e2e-synthetic",
+    "vmName": "duet-test-staging-e2e-synthetic",
+    "execution": "provider-vm",
+    "controlPlane": "controlled-loopback"
+  },
+  "error": "Fixture remote operation failed; retain its owned result/log files\n\n1 !== 0\n",
+  "cleanup": {
+    "verifiedAbsent": true
+  }
+}

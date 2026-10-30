@@ -1,0 +1,7 @@
+# Inherited ripgrep search path
+
+The first final-helper production canary safely deferred on Example User's existing node service. Its PATH began with the platform ripgrep package's bin directory, containing only `rg`, followed by an executable stock `rg`. The old and imported `withBundledRipgrep` owner prepends that directory to every shell child; its documented optional-dependency behavior already falls back to ordinary PATH. The service's PID/start and the old gateway were unchanged.
+
+The temporary census now recognizes this specific command-search metadata: an owned platform ripgrep package under the old candidate rail, an rg-only executable directory, and the first surviving executable lookup later in the same PATH resolving to the image's stock `/usr/bin/rg`. It does not exempt direct file pointers or arbitrary candidate directories. The stock binary's version may differ during an ordinary runtime update; no running process is redirected, paused or killed.
+
+[The receipt](receipt.json) binds the deferred and corrected helper hashes separately. Compressed observations report only identity and predicate classifications, plus public rg versions. The actual directory predicate was checked read-only with the corrected bytes; full live adoption remains the parent operator's acceptance gate. The tests prove executable fallback, absent fallback, nonexecutable stock, unexpected directory contents and wrong package owner. No application payload or installed binary changed.

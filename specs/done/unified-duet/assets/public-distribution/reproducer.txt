@@ -1,0 +1,2 @@
+Public package directory: /tmp/unified-public-pack/reproduce/package
+PASS external npm package; evidence: /tmp/unified-public-pack/reproduce/evidence

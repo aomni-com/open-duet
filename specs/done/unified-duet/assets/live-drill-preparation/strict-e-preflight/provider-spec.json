@@ -1,0 +1,8 @@
+{
+  "runId": "staging-e2e-synthetic",
+  "phase": "strict",
+  "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+  "archive": "/tmp/unified-duet-provider-strict-packet-261004-e.tar",
+  "archiveSha256": "f29fe7d9192b1046f69f41971eb4d87cadf33958780503a95d21695a24182588",
+  "outputDir": "/tmp/unified-duet-provider-strict-run-261004-e"
+}

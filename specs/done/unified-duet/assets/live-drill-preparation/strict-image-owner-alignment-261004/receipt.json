@@ -1,0 +1,50 @@
+{
+  "status": "passed disposable Linux OS-user ownership probe",
+  "image": "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+  "platform": "linux/amd64",
+  "network": "none",
+  "beforeFix": {
+    "exitCode": 1,
+    "error": "EACCES opening target duet.partial as exedev after root setup"
+  },
+  "afterFix": {
+    "exitCode": 0,
+    "rootInstallerPreservesReleaseParentOwner": true,
+    "ordinaryExedevApplyAndCompleteInventoryVerified": true
+  },
+  "cleanup": {
+    "exactContainers": ["duet-strict-owner-red-261004", "duet-strict-owner-green-261004"],
+    "verifiedAbsent": true
+  },
+  "limits": [
+    "Synthetic inventory bytes prove OS ownership and existing manager behavior, not native CLI ABI",
+    "No systemd started or provider VM allocated",
+    "No actual user state or credentials touched"
+  ],
+  "evidenceSha256": {
+    "red.log": "92a897b181fc66f53210341f510ec286cf7b4f95bdd7f7eefee05af9bcf1cbea",
+    "green.log": "cb875e7fb3b46fd4de97c91825d8e198e106859bacb6ffec3f4848f36a28bfc2",
+    "probe.ts": "9b1de626a87bb2febd29f27fcae56f9ff0ac401638ae3436992c34c7ac428e06"
+  },
+  "executedProbeBundleSha256": "04377bbb07d969e19d23f7ec970707683864efdc2c37811cb3742790b2533b07",
+  "executedScratchSourceSha256": "ffead60ed0bf577a70a92bfca0b3f1ff7ee2c8fa5ece0f6daf0526c03ba4a746",
+  "executedScratchSourceNote": "Retained probe changes only absolute imports to repository-relative imports and formatting.",
+  "driverSourceSha256": "298f9e612c47704b8136aa9331e5a3ce3036e29efe1a2d1dc7b3aec4a6fe787d",
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--name",
+    "<exact color fixture name>",
+    "--platform",
+    "linux/amd64",
+    "--network",
+    "none",
+    "--entrypoint",
+    "/opt/duet/gateway-runtime/bin/bun",
+    "-v",
+    "/tmp/unified-duet-strict-owner-probe-261004.js:/tmp/strict-owner-probe.js:ro",
+    "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+    "/tmp/strict-owner-probe.js"
+  ]
+}

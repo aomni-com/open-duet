@@ -1,0 +1,45 @@
+{
+  "status": "partial; stopped before further unchanged-helper launches",
+  "confirmedComplete": [
+    "workspace-redacted"
+  ],
+  "confirmedFailedAndRestored": [
+    "workspace-redacted",
+    "workspace-redacted"
+  ],
+  "confirmedDeferredAndRestored": [
+    "workspace-redacted"
+  ],
+  "thirdBatch": "No platform job/adoption operation launched; both exact checksum-bound staging transfers were removed after host termination",
+  "cause": "Legacy40-bun-runtime.conf overrides new unit ExecStartPre, runs old bootstrap and switches current to old4955 without duet",
+  "frozenRuntimeUnchanged": true,
+  "oldHelperSha256": "e8603337408bad602fbff58f82d928a96982bf2e1b709c82aa48814b1558f5ed",
+  "next": "Review separately built helper that snapshots/retires/restores legacy launch override and verifies effective systemd commands; no unchanged retry",
+  "productionUpdatesPaused": true,
+  "productionLifecycleFenced": true,
+  "productionApiStillOld": true,
+  "remainingAttachmentsOutstanding": 13,
+  "metadataSha256": {
+    "diagnosis-receipt.json": "5a9626a62c4485f89f210c0bea375dc1a8cd23f1185fe923176c37947bd3ca77",
+    "compatible-deployment.json": "86fdf9587bb2f30198ebf98d90a0df8d61ed603e18bc61d18436875c1009760e",
+    "fenced-control.json": "ba20d4686f9fb16a7a7120a0e0fe4432e6434668112e1ebfd2e2805ce4b56de2",
+    "diagnosis-phydr-old-metadata.json": "655e8e8f6e019467d29cc09f7b055c34140a0b2bf3d380627459bfbf6c1b2ff7",
+    "Example User-unlaunched-transfer-cleanup.json": "d8f281783461a00c73739277a445fbf87d087e67f8cf55caa24af9796866ae90",
+    "aide-current-readability.json": "9194209660b60363c7f494de999fdc15a31bfc98116ecd820edbf2ce7c141644",
+    "fleet-receipt.json": "c304b723d636f1076e776b480328c3edac0610b91db8e4b5c6ac79102130ed92",
+    "diagnosis-phydr-old-override.json": "a0a9555b13ef23ae5664a59c5c17459fbb96c32659b68b63bdd40da39260bb66",
+    "stopped-host-bundle-cleanup.json": "fa8af5b57722bd6af4a746961b0e44a7b52cd6d41d88e8b1f09301fd82559d64",
+    "pause-control.json": "06dc52d505459eebc27838f75775b9f3e0ccfe7ffad9a9422daaa50cba407076",
+    "before-deployment.json": "e132e1de03aa012e088564944d2a332027bb40de787997bb6bb1d52951b940b0",
+    "fence-start.json": "88f843292e2cecf18f2d9664422416d3b8845cc3b47dadc9f20ff13f4e1092f2",
+    "hub-transition-audit.json": "f2b94b5dbfc091d99e00453b4c0c059cbefcce6fd56eb73bd8f0aab41942b98e",
+    "diagnosis-old-parser-held-counterexample.json": "fb48e5f1e4cf97d772d019851c2ad8e54c25ab92c833c7c7ea08f2ada6186b85",
+    "Example User-unlaunched-transfer-cleanup.json": "c92e3830cdd15b5b09b13e24d9737cd17371b3e33aaeae57115c869e29cf90e7",
+    "diagnosis-Example User-metadata.json": "04883baa76dffe4b38ed40c2825234430c2ab981e55b5ad953a5b0ec45b60f1e",
+    "host-stop.json": "08e194ec0574fb999c027ce256619ec693d36482b00b758345b66f03eb66ee06",
+    "closed-census.json": "478174d77676d89f875faa80149a64921f372536feae2f1a9f0b22b0bacb0a4c",
+    "diagnosis-Example User-override.json": "fc1a8158cadd4f8a3fb795b79f3b7b7a5fc0f8065c555c44fb3c3aaaff82765c"
+  },
+  "hubCurrentRuntimeIndependentlyVerified": true,
+  "aideCurrentReadOnlyResample": "idle:true; original exception remains unrecorded, so retry retains normal helper admission gate"
+}

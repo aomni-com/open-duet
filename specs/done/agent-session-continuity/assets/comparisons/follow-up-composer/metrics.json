@@ -1,0 +1,79 @@
+{
+  "kind": "screenshot-parity-diff",
+  "generatedAt": "2026-07-20T09:42:12.423Z",
+  "note": "Lower parityDistance means the candidate is closer to the reference for this fixed pair. This is a distance metric, not an acceptance gate.",
+  "pairCount": 2,
+  "worstPair": "composer-mobile",
+  "results": [
+    {
+      "id": "composer-mobile",
+      "current": "mobile-before.png",
+      "candidate": "mobile-candidate.png",
+      "dimensions": {
+        "width": 390,
+        "height": 170
+      },
+      "parityDistance": 0.02646,
+      "grayscale": {
+        "mae": 0.52341,
+        "rmse": 7.12208,
+        "diffRatio16": 0.00588,
+        "diffRatio32": 0.00446,
+        "diffRatio64": 0.00371,
+        "pixelmatchRatio": 0.0054
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.74985,
+        "terrainLikeRatioCandidate": 0.74814,
+        "avgLuminanceCurrent": 217.97365,
+        "avgLuminanceCandidate": 217.50947,
+        "avgLuminanceDelta": -0.46417,
+        "edgeEnergyCurrent": 0.08682,
+        "edgeEnergyCandidate": 0.09543,
+        "edgeEnergyRatio": 1.09917,
+        "edgeDiffRatio32": 0.01234
+      },
+      "artifacts": {
+        "sideBySide": "mobile-side-by-side.png",
+        "absDiff": "mobile-absdiff.png"
+      }
+    },
+    {
+      "id": "composer-desktop",
+      "current": "desktop-before.png",
+      "candidate": "desktop-candidate.png",
+      "dimensions": {
+        "width": 800,
+        "height": 140
+      },
+      "parityDistance": 0.01681,
+      "grayscale": {
+        "mae": 0.33528,
+        "rmse": 5.47151,
+        "diffRatio16": 0.00319,
+        "diffRatio32": 0.00264,
+        "diffRatio64": 0.0022,
+        "pixelmatchRatio": 0.00297
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.80377,
+        "terrainLikeRatioCandidate": 0.80284,
+        "avgLuminanceCurrent": 226.74246,
+        "avgLuminanceCandidate": 226.51447,
+        "avgLuminanceDelta": -0.228,
+        "edgeEnergyCurrent": 0.07135,
+        "edgeEnergyCandidate": 0.0759,
+        "edgeEnergyRatio": 1.06381,
+        "edgeDiffRatio32": 0.00704
+      },
+      "artifacts": {
+        "sideBySide": "desktop-side-by-side.png",
+        "absDiff": "desktop-absdiff.png"
+      }
+    }
+  ]
+}

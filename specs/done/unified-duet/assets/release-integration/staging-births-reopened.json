@@ -1,0 +1,193 @@
+{
+  "status": "staging-creation-reopened",
+  "observedAt": "2026-10-04T19:12:18.836Z",
+  "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+  "deploymentId": "dpl_9Na6YCtYTPoAohqy5mF2hUrL32mh",
+  "deploymentUrl": "https://service.example.invalid",
+  "deployment": {
+    "revision": "cd504d0ea843044d02960a8540fea1507f01eaa6",
+    "backend": {
+      "revision": "cd504d0ea843044d02960a8540fea1507f01eaa6",
+      "schema": 1
+    },
+    "runtime": {
+      "version": "0.0.0+9bf3ec593e72f4c041bbfb5f7449adfeb44b9628cb7d33083063ae99ef9a5177"
+    }
+  },
+  "ready": true,
+  "allSevenStagingAppsReady": true,
+  "configurationVerification": "staging-vercel-value-verification.json",
+  "closedFenceCensus": {
+    "environment": "staging",
+    "since": "2026-10-04T12:11:35.000Z",
+    "observedAt": "2026-10-04T19:09:06.127Z",
+    "backendIdentity": {
+      "revision": "cd504d0ea843044d02960a8540fea1507f01eaa6",
+      "schema": 1
+    },
+    "fenceClosed": true,
+    "runtimeUpdatesPaused": false,
+    "plan": {
+      "environment": "staging",
+      "items": [
+        {
+          "workspaceId": "ns769tvfcsmvzhfab4bshkpcjx8btf8d",
+          "slug": "official-agents-hub",
+          "vmName": "workspace-redacted",
+          "sshDest": "service.example.invalid",
+          "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+          "oldRuntimeVersion": "0.0.0+9bf3ec593e72f4c041bbfb5f7449adfeb44b9628cb7d33083063ae99ef9a5177",
+          "workspaceStatus": "active",
+          "servicingStatus": "active",
+          "providerStatus": "running",
+          "appAnchorPaths": [
+            "agents/account-researcher/apps/account-board",
+            "agents/code-reviewer/apps/connect-repos",
+            "agents/seo-specialist/apps/content-board",
+            "agents/seo-specialist/apps/connect-search-console",
+            "agents/social-media-manager/apps/connect-accounts",
+            "agents/support-agent/apps/connect-helpdesk",
+            "agents/people-researcher/apps/dossier-board",
+            "agents/brand-designer/apps/setup-brand",
+            "agents/writer/apps/setup-voice"
+          ],
+          "blockers": [],
+          "warnings": []
+        },
+        {
+          "workspaceId": "ns7bkd20x918mfvwjftzgp1zm98bxrek",
+          "slug": "Example User-zhang-s-workspace",
+          "vmName": "workspace-redacted",
+          "sshDest": "service.example.invalid",
+          "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+          "oldRuntimeVersion": "0.0.0+9bf3ec593e72f4c041bbfb5f7449adfeb44b9628cb7d33083063ae99ef9a5177",
+          "workspaceStatus": "active",
+          "servicingStatus": "active",
+          "providerStatus": "running",
+          "appAnchorPaths": [],
+          "blockers": [],
+          "warnings": []
+        }
+      ],
+      "unprovisionedWorkspaces": [
+        {
+          "workspaceId": "ns79wjv4acec9t9vnefmexw1vx8by5zn",
+          "slug": "duet-so-abuse-mshd4nyl-s-workspace",
+          "status": "provisioning",
+          "appAnchorPaths": [
+            "welcome/hello-app"
+          ],
+          "servicingStatus": "paused"
+        },
+        {
+          "workspaceId": "ns7dq1pfat2phkj18gxbsx27a98d0s8h",
+          "slug": "duet",
+          "status": "provisioning",
+          "appAnchorPaths": [
+            "welcome/hello-app"
+          ],
+          "servicingStatus": "paused"
+        }
+      ],
+      "otherEnvironmentVms": [
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted",
+        "workspace-redacted"
+      ],
+      "unattributedProviderVms": []
+    },
+    "lifecycle": {
+      "paused": true,
+      "cpuExecutions": [
+        {
+          "id": "mc22x8pcw12k5s4h2qtxvk6h1n8bha2b",
+          "state": "pending",
+          "nextTs": "1791141316129915748"
+        }
+      ],
+      "blockers": []
+    },
+    "tableProofs": {
+      "stripeWebhookEvents": {
+        "pagesRead": 1,
+        "completeTable": true,
+        "completeSinceCutoff": true,
+        "selectedRows": 0
+      },
+      "workspaces": {
+        "pagesRead": 1,
+        "completeTable": true,
+        "completeSinceCutoff": true,
+        "selectedRows": 602
+      },
+      "auditEvents": {
+        "pagesRead": 1,
+        "completeTable": false,
+        "completeSinceCutoff": true,
+        "selectedRows": 18
+      },
+      "creditTransactions": {
+        "pagesRead": 1,
+        "completeTable": false,
+        "completeSinceCutoff": true,
+        "selectedRows": 0
+      }
+    },
+    "lifecycleEvents": [],
+    "recentBilling": [],
+    "webhookMetadata": [],
+    "changedWorkspaces": [],
+    "historicalComparison": [
+      {
+        "workspaceId": "ns79wjv4acec9t9vnefmexw1vx8by5zn",
+        "beforeStatus": "provisioning",
+        "beforeServicingStatus": "paused",
+        "afterStatus": "provisioning",
+        "afterServicingStatus": "paused",
+        "afterHasVm": false,
+        "newlyAcceptedResume": false
+      },
+      {
+        "workspaceId": "ns7dq1pfat2phkj18gxbsx27a98d0s8h",
+        "beforeStatus": "provisioning",
+        "beforeServicingStatus": "paused",
+        "afterStatus": "provisioning",
+        "afterServicingStatus": "paused",
+        "afterHasVm": false,
+        "newlyAcceptedResume": false
+      }
+    ],
+    "limits": [
+      "Provider list is read-only; no VM SSH/boot identity was remeasured.",
+      "No replay follows from provisioning status alone; root decides only from explicit interval acceptance metadata.",
+      "Recent table scans paginate creation order down through cutoff; full workspaces and existing owner attachment/anchor pagination are complete."
+    ]
+  },
+  "openControl": {
+    "environment": "staging",
+    "backendRevision": "cd504d0ea843044d02960a8540fea1507f01eaa6",
+    "schema": 1,
+    "updates": {
+      "id": "q57e21rf0x0nr5f3tf51fh2z058fnf1r",
+      "paused": false,
+      "updatedAt": 1791135869418,
+      "reason": "unified-duet verified runtime artifact routes; resume ordinary rollout"
+    },
+    "lifecycleFence": "0",
+    "observedAt": "2026-10-04T19:12:18.836Z"
+  },
+  "acceptedBirthsReplayed": [],
+  "acceptedPayersReplayed": [],
+  "providerRestartResizeReprovision": false
+}

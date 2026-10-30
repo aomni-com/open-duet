@@ -1,0 +1,56 @@
+{
+  "status": "held-strict-human-identity-source",
+  "parentCommit": "066b6e930",
+  "liveActions": false,
+  "requiredBeforeDeploymentInEachEnvironment": [
+    "additive backend deployed and new API promoted",
+    "migrateHumanIdentityKeys031026 completed",
+    "expireLegacyDeviceCodes031026 completed",
+    "refreshed complete human census has no scopes/workspaceIds/workspaceId",
+    "refreshed complete human census has no appId/oauthGrantId/audience/rotatedAt",
+    "refreshed complete device census has no scopes/capabilities/workspaceIds/deviceName",
+    "refreshed complete credential census has zero sync_device rows and no syncthingDeviceId in any kind",
+    "human bearer hash and user identity preservation verified against the before census"
+  ],
+  "choices": [
+    "Only actual human identity/lifecycle/pagination metadata remains on user rows; managed bindings move into their existing variant unchanged",
+    "Existing migration exports remain usable with explicit historical local input types; no suppression, new UDF or migration framework",
+    "Independent syncMachines and mirror actor grammar remain; only retired credential identity branches are removed",
+    "Immutable audit/analytics history remains untouched",
+    "The raw admin reader owns operational census; delete the unused rollout query",
+    "Historical input lives in one test fixture for migration replay; strict storage rejects it",
+    "Retired live integration fixture that wrote grants onto user keys is removed; historical migration and current membership consumers own those respective contracts"
+  ],
+  "redEvidence": [
+    "Strict human-key storage test resolved the stale grant write before schema removal",
+    "Restoring audience to shared metadata falsified the managed-only boundary test",
+    "Restoring deviceName to the live schema falsified the device storage test",
+    "Whoami decoded a retired sync credential before the kind was removed"
+  ],
+  "rootReportedBeforeCensus": {
+    "stagingObservedAt": "2026-10-04T15:03:31Z",
+    "productionObservedAt": "2026-10-04T15:03:44Z",
+    "humanManagedOnlyFieldCount": 0,
+    "credentialPeerFieldsByKind": {},
+    "syncDeviceCredentialCount": 0,
+    "isPostMigrationDeploymentClearance": false
+  },
+  "gates": {
+    "storageMigrationMembershipMachines": { "tests": 27, "assertions": 131 },
+    "realBackendHumanAndManagedConsumers": { "tests": 7, "assertions": 49 },
+    "apiIdentityMirrorAccountConsumers": { "tests": 37, "assertions": 140 },
+    "realApiDeviceLogin": { "tests": 3, "assertions": 64 },
+    "contractAuthIdentityAndMirrorGrammar": { "tests": 66, "assertions": 227 },
+    "journeySelectionAndMachineCleanup": { "tests": 15, "assertions": 27 },
+    "types": ["backend", "api", "contract", "test-harness"],
+    "compiler": "TypeScript 7.0.1-rc",
+    "formatAndLint": "focused changed source passed"
+  },
+  "independentReview": "No actionable defects in schema ownership, managed consumers, migration replay or removed identity branches. Reviewer ran 110 focused local tests and backend/API/contract types; implementing checkout also ran the real local backend/API integration gates recorded above.",
+  "limits": [
+    "Root performs live migrations and refreshed deployment censuses",
+    "Expanded before censuses do not replace refreshed post-migration full census",
+    "No deployment, live writes, VM operations, publication or root checkout mutation",
+    "Root full gate and live staging journey remain feature closeout work"
+  ]
+}

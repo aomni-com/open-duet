@@ -1,0 +1,28 @@
+import { EndpointReference } from '../../components/endpoint-reference'
+
+export const metadata = {
+  title: 'Endpoint reference',
+  description: 'Contract-owned Duet API methods, paths, scopes, and wire schemas.',
+  alternates: { canonical: '/reference/' },
+}
+
+<p className="eyebrow">Reference</p>
+
+# Public endpoint reference
+
+This page is generated from the public registry in `packages/contract`. An endpoint appears only
+after its route, authorization requirement, and request and response schemas are ready to support as
+a developer contract.
+
+`api_key` means a valid credential. `human` requires the person's identity, as used by the CLI and
+dashboard. `workspace_member` additionally requires membership in the workspace named by the path.
+Workspace capabilities come from a human's current role or an app/OAuth credential's explicit grant.
+Operations absent from this registry are not a public promise.
+
+<EndpointReference />
+
+## Why the list can be shorter than the server
+
+The API contains internal callbacks, administrative routes, and work still being migrated. Server
+reachability is not publication. The registry is intentionally allowlisted so an implementation
+detail cannot become a public promise through documentation drift.

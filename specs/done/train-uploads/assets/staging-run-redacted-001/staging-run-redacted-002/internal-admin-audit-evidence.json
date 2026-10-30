@@ -1,0 +1,26 @@
+[
+  {
+    "operation": "servicing-paused",
+    "auditId": "pd75xzmw2yh1qjnwvz3ev3vess8akad0"
+  },
+  {
+    "operation": "servicing-restored",
+    "auditId": "pd7fq95esr0jw3fzd67bn0y8en8akgb6"
+  },
+  {
+    "operation": "credit-added",
+    "auditId": "pd73fnwvcndbq0wk1880vhxwwd8akg65"
+  },
+  {
+    "operation": "credit-restored",
+    "auditId": "pd79zttwe9aghfjwap5x7sg1vs8ajg8k"
+  },
+  {
+    "operation": "command-uptime",
+    "auditId": "pd75bw3w3280p3x53ntx8x2fq58aj167"
+  },
+  {
+    "operation": "vm-cleanup",
+    "auditId": "pd76cn191h1vc1tjtazda6xnz58ajtaq"
+  }
+]

@@ -1,0 +1,46 @@
+{
+  "scope": "Current request app with baseline HEAD catalog, controlled preflight and upstream; no network inference",
+  "rows": [
+    {
+      "model": "openai/gpt-5.6-luna",
+      "tier": null,
+      "status": 200,
+      "preflights": 1,
+      "upstreams": 1,
+      "body": {
+        "choices": []
+      }
+    },
+    {
+      "model": "openai/gpt-5.6-luna",
+      "tier": "economy",
+      "status": 200,
+      "preflights": 1,
+      "upstreams": 1,
+      "body": {
+        "choices": []
+      }
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "tier": null,
+      "status": 403,
+      "preflights": 0,
+      "upstreams": 0,
+      "body": {
+        "error": "tier_not_allowed",
+        "code": "tier_not_allowed"
+      }
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "tier": "economy",
+      "status": 200,
+      "preflights": 1,
+      "upstreams": 1,
+      "body": {
+        "choices": []
+      }
+    }
+  ]
+}

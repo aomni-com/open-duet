@@ -1,0 +1,12 @@
+{
+  "extends": "@repo/typescript-config/base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "noEmit": true,
+    "types": ["node", "bun"],
+    "allowImportingTsExtensions": true
+  },
+  "include": ["src", "scripts"],
+  "//": "probe-attribution-e2e-driver.ts is a standalone `bun build` entry that imports gateway/contract source directly (the real resolver + pipeline it exercises); the bundler validates it, and it must not pull cross-package source under this package's tsc rootDir.",
+  "exclude": ["node_modules", "dist", "scripts/probe-attribution-e2e-driver.ts"]
+}

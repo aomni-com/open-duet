@@ -1,0 +1,29 @@
+{
+  "forcedSetup": "First three parent selections forced; scripts and detector executed real production paths.",
+  "instructionConstraint": "System instructions explicitly direct missing external approval to a grounded blocked terminal.",
+  "claim": "Three live Balanced continuations after actual warning selected grounded blocked terminal without another identical script attempt.",
+  "notClaimed": [
+    "Causal improvement versus no-warning condition",
+    "Unprompted autonomous retry discovery",
+    "Full final-report factual evaluation"
+  ],
+  "assertionRevision": "After live execution, unknown decision-object type guards added; final assertions replayed against all three saved samples without paid repeats.",
+  "runtimeSource": "0cd51fb9130ff6a9d095b8dc6e70288bfcce7c40",
+  "integratedEvalSource": "d5449bbe54eebd86971778410e83e06a11a16aea",
+  "evidenceDirectory": "/tmp/workflow-retry-recovery-live",
+  "result": {
+    "passed": 5,
+    "failed": 0,
+    "assertions": 38,
+    "liveSamples": 3,
+    "offlineNegativeControls": 2
+  },
+  "files": {
+    "sample-3/events.jsonl": "7448652d0db355638a6a72b48b83146507020a87bb1640f36a96b07f3e585c66",
+    "sample-3/recovery.json": "157285dbcd3a7241d261ceacf27780352768bab845cc6229c5aa3badd5db724f",
+    "sample-2/events.jsonl": "181927697856d62e800431a89bdc87c37dd7563e1297b09b9776f62b9540b5de",
+    "sample-2/recovery.json": "7fe33f734a9f661a0e0eb8e97851a2dcdbafc7264f15313375418db9f92b497f",
+    "sample-1/events.jsonl": "f45f17beda9c9161d9deba6be36ecd4dc0abd1db5fff3930c14e28ce65b72f26",
+    "sample-1/recovery.json": "0e7406fe3da9bd1124b8f5e8a5b21dba5c35af31a7fa27bdc0396dc90ea80e3e"
+  }
+}

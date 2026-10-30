@@ -1,0 +1,4 @@
+{
+  "readyState": "complete",
+  "resources": ["/api/duet/whoami", "/api/duet/whoami"]
+}

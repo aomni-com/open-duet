@@ -1,0 +1,32 @@
+{
+  "backupId": "nd7ef5yjdqdssmbtsvntewkasx8fdjct",
+  "sha256": "e9cde6cfb90aec0007ed9e952b7bb9fe7b565f24f58b86d251d952285a65be96",
+  "bytes": 335430,
+  "counts": {
+    "processedFiles": 45,
+    "processedRecords": 282,
+    "capturedBytes": 1522734,
+    "uploadedBytes": 335430,
+    "warningCount": 0,
+    "warningSummary": []
+  },
+  "archivedSession": "j9779bq8ja357sqnr7e37w6ngx8fd4px",
+  "childSession": "j973572fmjngjr2906gfb3mxfd8fd03v",
+  "fullEventCeiling": 260,
+  "runId": "staging-e2e-synthetic",
+  "liveJourney": {
+    "backupId": "nd7ef5yjdqdssmbtsvntewkasx8fdjct",
+    "bytes": 335430,
+    "sha256": "e9cde6cfb90aec0007ed9e952b7bb9fe7b565f24f58b86d251d952285a65be96",
+    "partialWarning": "unsupported_node",
+    "eventCeiling": 260,
+    "retainedAfterReplacement": true,
+    "freshRecoveryWorkspaceId": "ns7bddwxcegdjxbmard0exrh2h8fc94j",
+    "deletedObjectStatus": 404
+  },
+  "cleanup": {
+    "status": "pass",
+    "resourcesDeleted": 8,
+    "orphans": []
+  }
+}

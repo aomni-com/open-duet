@@ -1,0 +1,1218 @@
+{
+  "environment": "production",
+  "since": "2026-10-04T22:13:46.862Z",
+  "observedAt": "2026-10-04T22:17:08.054Z",
+  "backendIdentity": {
+    "revision": "f728ae9c07f710e2be5fb02b92dbb8d57d653350",
+    "schema": 1
+  },
+  "fenceClosed": true,
+  "runtimeUpdatesPaused": true,
+  "plan": {
+    "environment": "production",
+    "items": [
+      {
+        "workspaceId": "qs708hbn04gmf6dsd6phz1jmgn8bt9qk",
+        "slug": "official-agents-hub",
+        "vmName": "workspace-redacted",
+        "sshDest": "service.example.invalid",
+        "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+        "oldRuntimeVersion": "0.0.0+4955b7a09dde",
+        "workspaceStatus": "active",
+        "servicingStatus": "active",
+        "providerStatus": "running",
+        "appAnchorPaths": [
+          "agents/data-analyst/apps/analysis-dashboard",
+          "agents/account-researcher/apps/account-board",
+          "agents/code-reviewer/apps/connect-repos",
+          "agents/seo-specialist/apps/content-board",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/support-agent/apps/connect-helpdesk",
+          "agents/people-researcher/apps/dossier-board",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/writer/apps/setup-voice"
+        ],
+        "blockers": [],
+        "warnings": []
+      },
+      {
+        "workspaceId": "qs71vgxq0f3ms7rgb6xh7qze7n8c9bek",
+        "slug": "Example User-zhang-s-workspace",
+        "vmName": "workspace-redacted",
+        "sshDest": "service.example.invalid",
+        "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+        "oldRuntimeVersion": "0.0.0+4955b7a09dde",
+        "workspaceStatus": "active",
+        "servicingStatus": "active",
+        "providerStatus": "running",
+        "appAnchorPaths": [
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board",
+          "agents/account-researcher/apps/account-board",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/go-to-market/apps/gtm-pipeline",
+          "agents/website-builder/project"
+        ],
+        "blockers": [],
+        "warnings": []
+      },
+      {
+        "workspaceId": "qs7c6gevaegwkcs3t5zfx9dced8ch9xt",
+        "slug": "phydr-old",
+        "vmName": "workspace-redacted",
+        "sshDest": "service.example.invalid",
+        "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+        "oldRuntimeVersion": "0.0.0+4955b7a09dde",
+        "workspaceStatus": "active",
+        "servicingStatus": "active",
+        "providerStatus": "running",
+        "appAnchorPaths": [
+          "welcome/hello-app"
+        ],
+        "blockers": [],
+        "warnings": []
+      },
+      {
+        "workspaceId": "qs73dkyjehbe4n132dhjjx0r618cgycb",
+        "slug": "aide",
+        "vmName": "workspace-redacted",
+        "sshDest": "service.example.invalid",
+        "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+        "oldRuntimeVersion": "0.0.0+4955b7a09dde",
+        "workspaceStatus": "active",
+        "servicingStatus": "active",
+        "providerStatus": "running",
+        "appAnchorPaths": [
+          "apps/aide-gateway",
+          "apps/aide-holding"
+        ],
+        "blockers": [],
+        "warnings": []
+      },
+      {
+        "workspaceId": "qs70pqmjc77me0c7pzy5pcwq5n8cj91r",
+        "slug": "Example User-paden-s-workspace",
+        "vmName": "workspace-redacted",
+        "sshDest": "service.example.invalid",
+        "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+        "oldRuntimeVersion": "0.0.0+4955b7a09dde",
+        "workspaceStatus": "active",
+        "servicingStatus": "active",
+        "providerStatus": "running",
+        "appAnchorPaths": [],
+        "blockers": [],
+        "warnings": []
+      },
+      {
+        "workspaceId": "qs71dvp3hgaf8gga0m5wqzpc018cmwp3",
+        "slug": "Example User-a-s-workspace",
+        "vmName": "workspace-redacted",
+        "sshDest": "service.example.invalid",
+        "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+        "oldRuntimeVersion": "0.0.0+4955b7a09dde",
+        "workspaceStatus": "active",
+        "servicingStatus": "active",
+        "providerStatus": "running",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/code-reviewer/apps/connect-repos",
+          "agents/support-agent/apps/connect-helpdesk"
+        ],
+        "blockers": [],
+        "warnings": []
+      },
+      {
+        "workspaceId": "qs7b18qxsjmj5mvpqf0nvc6ncd8cm5n4",
+        "slug": "samara-amadi-s-workspace",
+        "vmName": "workspace-redacted",
+        "sshDest": "service.example.invalid",
+        "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+        "oldRuntimeVersion": "0.0.0+4955b7a09dde",
+        "workspaceStatus": "active",
+        "servicingStatus": "active",
+        "providerStatus": "running",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/code-reviewer/apps/connect-repos"
+        ],
+        "blockers": [],
+        "warnings": []
+      },
+      {
+        "workspaceId": "qs75nfw09e6etnqze2tt2cx7wx8cmqsf",
+        "slug": "consigliere",
+        "vmName": "workspace-redacted",
+        "sshDest": "service.example.invalid",
+        "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+        "oldRuntimeVersion": "0.0.0+4955b7a09dde",
+        "workspaceStatus": "active",
+        "servicingStatus": "active",
+        "providerStatus": "running",
+        "appAnchorPaths": [
+          "apps/consigliere"
+        ],
+        "blockers": [],
+        "warnings": []
+      },
+      {
+        "workspaceId": "qs7c4fc5gyr66ddmbeq4xj8p418cn0y2",
+        "slug": "Example User-s-workspace",
+        "vmName": "workspace-redacted",
+        "sshDest": "service.example.invalid",
+        "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+        "oldRuntimeVersion": "0.0.0+4955b7a09dde",
+        "workspaceStatus": "active",
+        "servicingStatus": "active",
+        "providerStatus": "running",
+        "appAnchorPaths": [
+          "agents/brand-designer/apps/setup-brand",
+          "agents/support-agent/apps/connect-helpdesk",
+          "agents/people-researcher/apps/dossier-board",
+          "public/agent-org",
+          "public/crm-view"
+        ],
+        "blockers": [],
+        "warnings": []
+      },
+      {
+        "workspaceId": "qs7d27bheh4pf3dsm0zasrgbmn8d44zc",
+        "slug": "phydra",
+        "vmName": "workspace-redacted",
+        "sshDest": "service.example.invalid",
+        "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+        "oldRuntimeVersion": "0.0.0+4955b7a09dde",
+        "workspaceStatus": "active",
+        "servicingStatus": "active",
+        "providerStatus": "running",
+        "appAnchorPaths": [
+          "agents/danwaldschmidt-com/apps/danwaldschmidt",
+          "agents/phydra/apps/phydra-start",
+          "agents/posts/apps/content-kit",
+          "agents/posts/apps/instagram-publish",
+          "agents/posts/apps/posts",
+          "apps/files-app",
+          "agents/phydra/apps/phydra",
+          "agents/posts/apps/beehiiv-integration",
+          "agents/paige/apps/beehiiv-book-publisher",
+          "agents/chief-of-staff/apps/cloze-integration",
+          "agents/chief-of-staff/apps/sunsama-mcp",
+          "agents/chief-of-staff/apps/credential-intake",
+          "agents/ideas-research/apps/sage",
+          "agents/ideas-research/apps/paige-forwarder",
+          "agents/chief-of-staff/apps/cron-dashboard"
+        ],
+        "blockers": [],
+        "warnings": []
+      },
+      {
+        "workspaceId": "qs74228b93kkybg94c22r163hd8d5kbr",
+        "slug": "peartel",
+        "vmName": "workspace-redacted",
+        "sshDest": "service.example.invalid",
+        "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+        "oldRuntimeVersion": "0.0.0+4955b7a09dde",
+        "workspaceStatus": "active",
+        "servicingStatus": "active",
+        "providerStatus": "running",
+        "appAnchorPaths": [
+          "apps/peartel5"
+        ],
+        "blockers": [],
+        "warnings": []
+      },
+      {
+        "workspaceId": "qs7av43c57ymtq3qc465c9agnd8dr2mf",
+        "slug": "total-talent-mindset",
+        "vmName": "workspace-redacted",
+        "sshDest": "service.example.invalid",
+        "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+        "oldRuntimeVersion": "0.0.0+4955b7a09dde",
+        "workspaceStatus": "active",
+        "servicingStatus": "active",
+        "providerStatus": "running",
+        "appAnchorPaths": [
+          "agents/sales-development-rep/apps/crm-dashboard",
+          "apps/booking-manager",
+          "agents/don/apps/ttm-pitch",
+          "agents/don/apps/ttm-brief",
+          "agents/don/apps/ttm-onepager",
+          "agents/don/apps/ttm-lyft-slide",
+          "agents/website-builder/apps/home-preview",
+          "agents/website-builder/apps/site-analytics",
+          "agents/social-media-manager/apps/connect-accounts"
+        ],
+        "blockers": [],
+        "warnings": []
+      },
+      {
+        "workspaceId": "qs78h9pe00sbhjzwgkrm05s2g98e6q2d",
+        "slug": "newera",
+        "vmName": "workspace-redacted",
+        "sshDest": "service.example.invalid",
+        "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+        "oldRuntimeVersion": "0.0.0+4955b7a09dde",
+        "workspaceStatus": "active",
+        "servicingStatus": "active",
+        "providerStatus": "running",
+        "appAnchorPaths": [
+          "newera-job-refresh/engine",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/website-builder/apps/newera-ticket-board",
+          "agents/website-builder/apps/newera-development"
+        ],
+        "blockers": [],
+        "warnings": []
+      },
+      {
+        "workspaceId": "qs78rdwwnp43a3qc67tqdm6y9h8fbajk",
+        "slug": "parallax",
+        "vmName": "workspace-redacted",
+        "sshDest": "service.example.invalid",
+        "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:f784540dcdd160adaa002832031bedc378f800a520414d1bcad47f26c7cd9a56",
+        "oldRuntimeVersion": "0.0.0+4955b7a09dde",
+        "workspaceStatus": "active",
+        "servicingStatus": "active",
+        "providerStatus": "running",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "public/parallax-prospector",
+          "public/osmium-perspective",
+          "public/hero-mockups",
+          "public/barn-books",
+          "public/council-tldr",
+          "public/parallax-v2",
+          "public/content-kit",
+          "public/parallax-redesign",
+          "public/parallax-editor",
+          "public/crm-app",
+          "public/ubersuggest-mcp"
+        ],
+        "blockers": [],
+        "warnings": []
+      }
+    ],
+    "unprovisionedWorkspaces": [
+      {
+        "workspaceId": "qs7fv3n4ybap0e5245rkrj0ed18ckrdm",
+        "slug": "cosmic-forest567-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board",
+          "agents/writing-editor/apps/editorial-desk",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/code-reviewer/apps/connect-repos",
+          "agents/support-agent/apps/connect-helpdesk",
+          "agents/people-researcher/apps/dossier-board",
+          "agents/account-researcher/apps/account-board"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs70n44e6bhnmx4xse339rzkj18cke05",
+        "slug": "silent-pixel149-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board",
+          "agents/writing-editor/apps/editorial-desk",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/code-reviewer/apps/connect-repos",
+          "agents/support-agent/apps/connect-helpdesk",
+          "agents/account-researcher/apps/account-board",
+          "agents/people-researcher/apps/dossier-board"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7bct5vsxz9thsp6jef4cn1qx8ckee6",
+        "slug": "rapid-storm791-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board",
+          "agents/writing-editor/apps/editorial-desk"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7fbn47vwcsxst1qes2xsph4n8ckan4",
+        "slug": "jaccob25-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/code-reviewer/apps/connect-repos",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7dbzbng5px6bagsbdte1pdc58cpb3p",
+        "slug": "vovadjankcity-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/code-reviewer/apps/connect-repos",
+          "agents/support-agent/apps/connect-helpdesk",
+          "agents/people-researcher/apps/dossier-board",
+          "agents/writer/apps/setup-voice",
+          "agents/account-researcher/apps/account-board"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs72g6phjmrnngt75mmg4vs8jn8cqt2y",
+        "slug": "marseellee-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/code-reviewer/apps/connect-repos",
+          "agents/support-agent/apps/connect-helpdesk",
+          "agents/people-researcher/apps/dossier-board",
+          "agents/account-researcher/apps/account-board",
+          "agents/writer/apps/setup-voice"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7ceq6qqhfwskzrhmt84bmg2x8cqsv8",
+        "slug": "texgnbrt-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/code-reviewer/apps/connect-repos",
+          "agents/support-agent/apps/connect-helpdesk",
+          "agents/people-researcher/apps/dossier-board",
+          "agents/account-researcher/apps/account-board",
+          "agents/writer/apps/setup-voice"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs72qvmt6vx97qs54spxba822n8csjmb",
+        "slug": "70r3arh0gzmy-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/people-researcher/apps/dossier-board",
+          "agents/account-researcher/apps/account-board",
+          "agents/writer/apps/setup-voice",
+          "agents/code-reviewer/apps/connect-repos",
+          "agents/support-agent/apps/connect-helpdesk"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs77fer37tsfc2nmtrdbs3n0ys8csma3",
+        "slug": "goslingf41-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/code-reviewer/apps/connect-repos",
+          "agents/support-agent/apps/connect-helpdesk",
+          "agents/people-researcher/apps/dossier-board",
+          "agents/account-researcher/apps/account-board",
+          "agents/writer/apps/setup-voice"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs72ygymy1w2nzwzbjtp16zwbs8cr15t",
+        "slug": "dnsyjtnw-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/code-reviewer/apps/connect-repos"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7djge83zjqatv0mjh6m0vkhn8ct0np",
+        "slug": "nelsonm070569-9wldf-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/code-reviewer/apps/connect-repos"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs76h52vpenfysey1dsxn7cw4h8cxnb8",
+        "slug": "chinasit-maneebenjarat-ajchi-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs774yjrz72ezbjqtv5b4srhs98cxcra",
+        "slug": "768laureen-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/code-reviewer/apps/connect-repos",
+          "agents/writer/apps/setup-voice"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs789hq1bnxx7v4cyj5wn3v0nx8cyr2m",
+        "slug": "dhruv-chouhan-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board",
+          "agents/social-media-manager/apps/connect-accounts"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs78sm6q6sd1dfhfwdeb7ajhex8d0nkg",
+        "slug": "hivos86829-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/code-reviewer/apps/connect-repos",
+          "agents/support-agent/apps/connect-helpdesk",
+          "agents/people-researcher/apps/dossier-board",
+          "agents/account-researcher/apps/account-board",
+          "agents/writer/apps/setup-voice"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7dqj851984e003jb803vk6g58d7d1b",
+        "slug": "zrfvmmbv-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs782yqxxv3nbcr424mcn608sd8d6ngh",
+        "slug": "nation-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/social-media-manager/apps/connect-accounts"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs746mcz9say5k4yjf3nwz4ed58d6z78",
+        "slug": "pop-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/writer/apps/setup-voice",
+          "agents/people-researcher/apps/dossier-board",
+          "agents/social-media-manager/apps/connect-accounts"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7009a5zerdxy8met3z91fdg98d656h",
+        "slug": "student-5127d035-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/brand-designer/apps/setup-brand"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs735tdzk53ype2by240swerfh8dc8t7",
+        "slug": "student-8383e91e-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/social-media-manager/apps/connect-accounts"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7bnxz8n90r3msa2mgtngkqnn8ddyqj",
+        "slug": "jessica-carter-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs71w7ejtsgjdtxf0r0hfn3fa18ddsr1",
+        "slug": "stanislav-s-s-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/social-media-manager/apps/connect-accounts"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs725avmk5bx1nf7qf5z030q258dd6c7",
+        "slug": "molja4447-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7bs2z2hm540g5nzn53421vw98dfhjm",
+        "slug": "inalo15-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7bgn18vxsatrvxhf3e2vwz0d8dk2nm",
+        "slug": "student-689a4d8b-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/social-media-manager/apps/connect-accounts"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7a7sa50hj0ppjm1extj5gezx8dkda7",
+        "slug": "student-f401e215-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7425dfvfjpkn59cwc56s3yvn8djwec",
+        "slug": "ognennygrom-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/writer/apps/setup-voice"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs77fgj8mqgmam80p1k3n3y4558dn7yc",
+        "slug": "nabbytt-lyrics-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7fm1zbe27rvkp7n31kamngr58dq9yp",
+        "slug": "augusto-madureira-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs76s233ddf8x70f88rxxasza98dp7cv",
+        "slug": "cpiuwer-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/support-agent/apps/connect-helpdesk"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7f8rv7acta05pedxxpycwq9n8dpw06",
+        "slug": "bowskv-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board",
+          "agents/writer/apps/setup-voice"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs78m2bt60g2ep1bjgwta90g7d8dp7rt",
+        "slug": "dbd8guahxju0ra-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/social-media-manager/apps/connect-accounts"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs751eqv7wqgw8atg5d6dpskys8dpy7h",
+        "slug": "dilan-beltran-s-workspace-2",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/support-agent/apps/connect-helpdesk",
+          "agents/writer/apps/setup-voice",
+          "agents/code-reviewer/apps/connect-repos",
+          "agents/account-researcher/apps/account-board",
+          "agents/people-researcher/apps/dossier-board"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7cp69r66j0k96hpep0mhf0598drqvd",
+        "slug": "vfyhjv",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs76wt3xgndtyzxf2nn5r0xhzs8dsnfy",
+        "slug": "vfcyap",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs70sh75nvpyk6nctm20a1texd8dvnpc",
+        "slug": "mtdzmtv-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/people-researcher/apps/dossier-board",
+          "agents/code-reviewer/apps/connect-repos",
+          "agents/support-agent/apps/connect-helpdesk",
+          "agents/account-researcher/apps/account-board",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board",
+          "agents/writer/apps/setup-voice",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/brand-designer/apps/setup-brand"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs77rc09gbatp2v836zmenvw858dv5hb",
+        "slug": "keyontef0-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/social-media-manager/apps/connect-accounts",
+          "agents/people-researcher/apps/dossier-board"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7bvay6rr4518j7v12t9vytph8dzbgd",
+        "slug": "jernellmolas-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7b9zmzgzgcc2da8825twywnn8e030z",
+        "slug": "gtnogtqvmfpexdghgq-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app"
+        ],
+        "servicingStatus": "paused"
+      },
+      {
+        "workspaceId": "qs7c50s4f2k4qzw04xg8yyt3dn8e1kja",
+        "slug": "elaboratemoccasin-s-workspace",
+        "status": "provisioning",
+        "appAnchorPaths": [
+          "welcome/hello-app",
+          "agents/writer/apps/setup-voice",
+          "agents/brand-designer/apps/setup-brand",
+          "agents/seo-specialist/apps/connect-search-console",
+          "agents/seo-specialist/apps/content-board"
+        ],
+        "servicingStatus": "paused"
+      }
+    ],
+    "otherEnvironmentVms": [
+      "workspace-redacted",
+      "workspace-redacted"
+    ],
+    "unattributedProviderVms": []
+  },
+  "lifecycle": {
+    "paused": true,
+    "cpuExecutions": [
+      {
+        "id": "mc2aggzapk26df1j4s2ckxep3n8bgttn",
+        "state": "pending",
+        "nextTs": "1791154611963158647"
+      }
+    ],
+    "blockers": []
+  },
+  "tableProofs": {
+    "auditEvents": {
+      "pagesRead": 1,
+      "completeTable": false,
+      "completeSinceCutoff": true,
+      "selectedRows": 0
+    },
+    "workspaces": {
+      "pagesRead": 1,
+      "completeTable": true,
+      "completeSinceCutoff": true,
+      "selectedRows": 826
+    },
+    "creditTransactions": {
+      "pagesRead": 1,
+      "completeTable": false,
+      "completeSinceCutoff": true,
+      "selectedRows": 7
+    },
+    "stripeWebhookEvents": {
+      "pagesRead": 1,
+      "completeTable": true,
+      "completeSinceCutoff": true,
+      "selectedRows": 0
+    }
+  },
+  "lifecycleEvents": [],
+  "recentBilling": [],
+  "webhookMetadata": [],
+  "changedWorkspaces": [],
+  "historicalComparison": [
+    {
+      "workspaceId": "qs7fv3n4ybap0e5245rkrj0ed18ckrdm",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs70n44e6bhnmx4xse339rzkj18cke05",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7bct5vsxz9thsp6jef4cn1qx8ckee6",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7fbn47vwcsxst1qes2xsph4n8ckan4",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7dbzbng5px6bagsbdte1pdc58cpb3p",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs72g6phjmrnngt75mmg4vs8jn8cqt2y",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7ceq6qqhfwskzrhmt84bmg2x8cqsv8",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs72qvmt6vx97qs54spxba822n8csjmb",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs77fer37tsfc2nmtrdbs3n0ys8csma3",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs72ygymy1w2nzwzbjtp16zwbs8cr15t",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7djge83zjqatv0mjh6m0vkhn8ct0np",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs76h52vpenfysey1dsxn7cw4h8cxnb8",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs774yjrz72ezbjqtv5b4srhs98cxcra",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs789hq1bnxx7v4cyj5wn3v0nx8cyr2m",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs78sm6q6sd1dfhfwdeb7ajhex8d0nkg",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7dqj851984e003jb803vk6g58d7d1b",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs782yqxxv3nbcr424mcn608sd8d6ngh",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs746mcz9say5k4yjf3nwz4ed58d6z78",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7009a5zerdxy8met3z91fdg98d656h",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs735tdzk53ype2by240swerfh8dc8t7",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7bnxz8n90r3msa2mgtngkqnn8ddyqj",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs71w7ejtsgjdtxf0r0hfn3fa18ddsr1",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs725avmk5bx1nf7qf5z030q258dd6c7",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7bs2z2hm540g5nzn53421vw98dfhjm",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7bgn18vxsatrvxhf3e2vwz0d8dk2nm",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7a7sa50hj0ppjm1extj5gezx8dkda7",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7425dfvfjpkn59cwc56s3yvn8djwec",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs77fgj8mqgmam80p1k3n3y4558dn7yc",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7fm1zbe27rvkp7n31kamngr58dq9yp",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs76s233ddf8x70f88rxxasza98dp7cv",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7f8rv7acta05pedxxpycwq9n8dpw06",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs78m2bt60g2ep1bjgwta90g7d8dp7rt",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs751eqv7wqgw8atg5d6dpskys8dpy7h",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7cp69r66j0k96hpep0mhf0598drqvd",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs76wt3xgndtyzxf2nn5r0xhzs8dsnfy",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs70sh75nvpyk6nctm20a1texd8dvnpc",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs77rc09gbatp2v836zmenvw858dv5hb",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7bvay6rr4518j7v12t9vytph8dzbgd",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7b9zmzgzgcc2da8825twywnn8e030z",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    },
+    {
+      "workspaceId": "qs7c50s4f2k4qzw04xg8yyt3dn8e1kja",
+      "beforeStatus": "provisioning",
+      "beforeServicingStatus": "paused",
+      "afterStatus": "provisioning",
+      "afterServicingStatus": "paused",
+      "afterHasVm": false,
+      "newlyAcceptedResume": false
+    }
+  ],
+  "limits": [
+    "Provider list is read-only; no VM SSH/boot identity was remeasured.",
+    "No replay follows from provisioning status alone; root decides only from explicit interval acceptance metadata.",
+    "Recent table scans paginate creation order down through cutoff; full workspaces and existing owner attachment/anchor pagination are complete."
+  ]
+}

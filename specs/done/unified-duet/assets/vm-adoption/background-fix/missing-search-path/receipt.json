@@ -1,0 +1,260 @@
+{
+  "baseSource": "1708ce18e0424f7ee4905b5a505136d6849e633e",
+  "previousHelperSha256": "f15806e27bc53a0242f02500ea1c5235536e6bc9b288f2462783acbd1b6c714a",
+  "finalHelperSha256": "ecccf4f4768f648d012565db8bb01df5ade08dc057f0993e92b3c772320596e8",
+  "sourceSha256": "eb360c8cd308a032161a24a280087cea2d2888c2cb113208a524be5eef5a2bad",
+  "testSha256": "f5c68f05d6f19de1b143379f835debfa99bed7af15596d289f5f22f410919761",
+  "gate": {
+    "tests": 13,
+    "assertions": 57,
+    "failures": 0,
+    "typecheck": true,
+    "lint": true
+  },
+  "observedContract": "Missing and non-directory PATH segments cannot provide executable lookup; ENOENT/ENOTDIR are ignored, other metadata errors remain inconclusive. Direct pointer and existing-directory fallback guards are unchanged.",
+  "processOnlyClassification": true,
+  "ledgerSkippedInDiagnosticsOnly": true,
+  "actualAdoptionPermissionClaimed": false,
+  "gatewaySignalsOrRestarts": false,
+  "backgroundsClassifiedAllowed": 31,
+  "cohort": [
+    {
+      "vmName": "workspace-redacted",
+      "gatewayMain": 1351947,
+      "bootId": "c1105297-961c-4ed9-8dc2-301bd0b2ae09",
+      "allowedBackgrounds": [
+        {
+          "pid": 70712,
+          "started": "5032658",
+          "parent": 1
+        },
+        {
+          "pid": 71293,
+          "started": "5049003",
+          "parent": 1
+        },
+        {
+          "pid": 54152,
+          "started": "4472943",
+          "parent": 1
+        }
+      ],
+      "deniedCurrentWork": [],
+      "metadataSha256": "ccfcdbb30947e2854eb8ee710936a3e87240a65ff4de270eb27207aabb6ad1cc"
+    },
+    {
+      "vmName": "workspace-redacted",
+      "gatewayMain": 486322,
+      "bootId": "fe995f52-5d4b-41a9-a2d6-80392a7b0266",
+      "allowedBackgrounds": [
+        {
+          "pid": 291571,
+          "started": "27253851",
+          "parent": 1
+        },
+        {
+          "pid": 291572,
+          "started": "27253851",
+          "parent": 291571
+        }
+      ],
+      "deniedCurrentWork": [],
+      "metadataSha256": "0a347237a2db76bb5b5c91ab46b2ac03a84b3650d1443c2f11c015fc2af8d638"
+    },
+    {
+      "vmName": "workspace-redacted",
+      "gatewayMain": 1021181,
+      "bootId": "ab4809ae-ec84-46cd-a55c-7f7d079cf44e",
+      "allowedBackgrounds": [
+        {
+          "pid": 1223189,
+          "started": "124367538",
+          "parent": 1
+        }
+      ],
+      "deniedCurrentWork": [
+        {
+          "pid": 1383940,
+          "started": "347374191",
+          "parent": 1021181,
+          "rpc": true
+        },
+        {
+          "pid": 1384113,
+          "started": "347379284",
+          "parent": 1383940,
+          "rpc": false
+        },
+        {
+          "pid": 1384117,
+          "started": "347379302",
+          "parent": 1384113,
+          "rpc": false
+        }
+      ],
+      "metadataSha256": "f19b6db6bcf578b025b838a92ef3b9bdc19e3ce1b2a13bc23b68c76383519cb8"
+    },
+    {
+      "vmName": "workspace-redacted",
+      "gatewayMain": 2945438,
+      "bootId": "12b4307f-9204-4143-abc6-9bc21c0bb61e",
+      "allowedBackgrounds": [
+        {
+          "pid": 1265890,
+          "started": "86804327",
+          "parent": 1
+        },
+        {
+          "pid": 1266285,
+          "started": "86823524",
+          "parent": 1
+        },
+        {
+          "pid": 1393955,
+          "started": "94676992",
+          "parent": 1
+        },
+        {
+          "pid": 1393956,
+          "started": "94676996",
+          "parent": 1393955
+        },
+        {
+          "pid": 1393957,
+          "started": "94676996",
+          "parent": 1393955
+        },
+        {
+          "pid": 1393958,
+          "started": "94676996",
+          "parent": 1393955
+        },
+        {
+          "pid": 1393959,
+          "started": "94676996",
+          "parent": 1393955
+        },
+        {
+          "pid": 1393960,
+          "started": "94676996",
+          "parent": 1393955
+        },
+        {
+          "pid": 1393962,
+          "started": "94676998",
+          "parent": 1393955
+        },
+        {
+          "pid": 1393963,
+          "started": "94676998",
+          "parent": 1393955
+        },
+        {
+          "pid": 1393964,
+          "started": "94676998",
+          "parent": 1393955
+        },
+        {
+          "pid": 2468696,
+          "started": "148016054",
+          "parent": 1
+        },
+        {
+          "pid": 2468774,
+          "started": "148016099",
+          "parent": 2468696
+        },
+        {
+          "pid": 2468775,
+          "started": "148016099",
+          "parent": 2468774
+        },
+        {
+          "pid": 2468833,
+          "started": "148016126",
+          "parent": 2468775
+        },
+        {
+          "pid": 2468834,
+          "started": "148016126",
+          "parent": 2468833
+        },
+        {
+          "pid": 2078057,
+          "started": "122143656",
+          "parent": 1
+        },
+        {
+          "pid": 2078081,
+          "started": "122143687",
+          "parent": 2078057
+        },
+        {
+          "pid": 2078082,
+          "started": "122143687",
+          "parent": 2078081
+        },
+        {
+          "pid": 2078109,
+          "started": "122143704",
+          "parent": 2078082
+        }
+      ],
+      "deniedCurrentWork": [],
+      "metadataSha256": "26f95be1b9e9f17353944343926485023d3540c18f86da1b2fcac9cf12748050"
+    },
+    {
+      "vmName": "workspace-redacted",
+      "gatewayMain": 1344955,
+      "bootId": "af5c3704-7022-4bff-8ff1-ae08232da54d",
+      "allowedBackgrounds": [
+        {
+          "pid": 1275915,
+          "started": "69452188",
+          "parent": 1
+        },
+        {
+          "pid": 1275939,
+          "started": "69452247",
+          "parent": 1275915
+        },
+        {
+          "pid": 1275967,
+          "started": "69452254",
+          "parent": 1275939
+        },
+        {
+          "pid": 1276250,
+          "started": "69457811",
+          "parent": 1
+        },
+        {
+          "pid": 861758,
+          "started": "48964710",
+          "parent": 1
+        }
+      ],
+      "deniedCurrentWork": [
+        {
+          "pid": 1682101,
+          "started": "92550036",
+          "parent": 1344955,
+          "rpc": true
+        },
+        {
+          "pid": 1683790,
+          "started": "92575551",
+          "parent": 1682101,
+          "rpc": false
+        },
+        {
+          "pid": 1684145,
+          "started": "92578590",
+          "parent": 1683790,
+          "rpc": false
+        }
+      ],
+      "metadataSha256": "78b421d2f6e68ab0f3a39e6e206593fd2ec1165cab9bd91638194066c9a26133"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "status": "deferred; exact runner predicate under investigation",
+  "sourceRevision": "78a495a437dbbbc11f9f816d0b448b2859776b6f",
+  "helperSha256": "0e0b880610e5a95f53ea15b10b6eea5ff87f8ccff1a506e5b9dc74966ba48428",
+  "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+  "vmName": "workspace-redacted",
+  "workspaceId": "qs71dvp3hgaf8gga0m5wqzpc018cmwp3",
+  "originalOSBootUnchanged": true,
+  "oldGatewayRestored": true,
+  "backgroundProcessesPreserved": 5,
+  "syncthingAndDesktopProcessIdentitiesPreserved": true,
+  "hostExitCode": 1,
+  "hostReceiptSha256": "964e036bd88439da2d913b0dc92352be21a91c07641a3ac6ab9b723f8c5809d9",
+  "observations": {
+    "host-deferred.json.gz": "bd62368cfdee11db149374eb1b325c81b2b72c555dee628220d971521a525261",
+    "before-processes.json.gz": "b65a22f6f60f91a41c6acd804fb04d63699cc03780e30cc0908eebd81e0011c9",
+    "after-processes.json.gz": "dce7bda596460b09700d58092c52369b335d378e3d7fe9863347773debe5210b"
+  },
+  "fullFleetPassClaimed": false
+}

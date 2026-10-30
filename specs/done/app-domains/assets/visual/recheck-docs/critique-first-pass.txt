@@ -1,0 +1,47 @@
+# Visual critique: app-domains recheck screenshots
+
+I read all six images. The two crops sit at or near native resolution. The two full-page shots were heavily downscaled when I viewed them: desktop 1440×9040 shown at 319 px wide (4.5×), and mobile 390×14002 shown at 56 px wide (7×). So for the full pages I can only judge structure, not text-level defects.
+
+## Crops (desktop and mobile "domain copy", native and 2×)
+
+**No clipping, overflow or broken wrapping.**
+- No inline code chip breaks across lines or runs past the text column. This holds on mobile too, including the widest chips: `operatorRepairRequired` and `GET /v1/ws/{workspace}/apps/{slug}/launch`.
+- On mobile, chips that start a line (`active`) or end a sentence (`verifying`.) wrap cleanly.
+- Mobile left and right padding look even (about 16–19 px).
+- Headings wrap to two tidy lines on mobile.
+- Text cut off at the top and bottom edges of each crop comes from where the crop was taken, not from the page.
+
+**Issues:**
+
+1. **Desktop lines are too long.** Medium-high confidence. Visible in the crop, and the 2× crop confirms it. The prose column is about 765 CSS px of roughly 16 px text, so lines reach about 100–105 characters. For example: "Removal stops custom-host serving immediately and cleans up the provider assignment in the background. A". That's well past the comfortable 60–80. Dense paragraphs like the Attach and Full domain responses ones read as walls of text.
+
+2. **Inline code is noticeably smaller than body text.** Medium confidence, visible in both crops. The monospace chips look about 70–75% of body size, with a light gray fill and a thin border. At 2× they're fine. At desktop 1× the long tokens get harder to scan than the words around them, notably `operatorRepairRequired`, `lastCheckedAt` and `retryRequired`. It's not a contrast failure; the dark gray on near-white is adequate.
+
+3. **Desktop crop has a large empty area on the right.** Low-medium confidence, visible in the crop only. The content hugs the left edge (about 29 px margin) and leaves about 285 px blank on the right. That's either an unfilled right rail or a layout at a breakpoint without the sidebar. It looks unbalanced, but it may just be how the crop was framed.
+
+4. **Section headings are weak.** Low-medium confidence, visible in both crops. The H2s are thin, only about 1.4× body size, and share the body's gray. The extra space above them does most of the separating. It's acceptable, but the headings don't stand out.
+
+## Full pages
+
+**Crops don't match the desktop page.** Medium confidence. The desktop crops are 1080 CSS px wide with no sidebar. In the 1440 full page, the prose column looks roughly 1000 px wide, judged from the thumbnail. So the crops seem to come from a different viewport or position than the full page. If the 1440 prose really is about 1000 px wide, issue 1 is worse there, around 130 characters per line. I can't confirm that at this scale.
+
+**Structure looks sound at thumbnail scale:**
+- Sidebar, hero, dark code sample, prose sections, a green callout box, the "Apps" endpoint list with its operation count, and a one-line footer are all there.
+- Nothing obviously overlaps or breaks.
+- The endpoint cards are laid out consistently.
+
+**Can't check at this scale:**
+- Contrast of the green-on-green callout text.
+- Readability of the small gray footer line and the top-right header links.
+- Whether the endpoint path chips and field tables truncate or overflow on mobile.
+- Whether the dark code block scrolls horizontally or clips on mobile.
+
+These need native-resolution crops of the callout, one endpoint card (desktop and mobile), the mobile code block, and the footer.
+
+## Summary
+
+The domain-copy crops have no clipping, overflow or token-wrapping defects. The real issues are long desktop lines (medium-high), small inline code (medium), and weak heading hierarchy and an off-balance desktop crop (low-medium). The full-page areas outside the crops are unverified.
+
+I didn't edit any files or run any commands.
+
+**Connectors:** Several connectors need authorizing before they can be used: claude.ai Canva, Github, Gmail, Google Calendar, Google Drive and Linear (in your claude.ai connector settings), and `natural` (through `claude mcp` or `/mcp` in an interactive session). Until then they're unavailable. None were needed for this review.

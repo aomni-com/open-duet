@@ -1,0 +1,472 @@
+$ bash scripts/ui-playground.sh check "internal-admin covers workspace operations"
+[0.17ms] ".env.production"
+bun install v1.3.14 (0d9b296a)
+Resolving dependencies
+Resolved, downloaded and extracted [2]
+
++ @dotenvx/dotenvx@2.17.2
++ @typescript/native-preview@7.0.0-dev.20260707.2
++ convex@1.42.3
++ next@16.2.10
++ oxfmt@0.57.0
++ oxlint@1.75.0
++ pixelmatch@7.2.0
++ pngjs@7.0.0
++ rimraf@6.1.3
++ turbo@2.10.6
++ typescript@7.0.1-rc
+
+1020 packages installed [4.45s]
+
+Attention:
+Turborepo now collects completely anonymous telemetry regarding usage.
+This information is used to shape the Turborepo roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://turborepo.dev/docs/telemetry
+
+• turbo 2.10.6
+
+   • Packages in scope: @repo/ui, web
+   • Running check-types, lint in 2 packages
+   • Remote caching disabled
+
+@repo/agent:check-types: cache miss, executing 6757bc186aa8997d
+@repo/agent:lint: cache miss, executing 69564f583d48a18b
+@repo/agent:check-types: $ tsc --noEmit && tsc -p tsconfig.build.json --emitDeclarationOnly
+@repo/agent:lint: $ oxlint src/
+@repo/agent:lint:
+@repo/agent:lint:   ! typescript(no-explicit-any): Unexpected `any`. Specify a different type.
+@repo/agent:lint:     ,-[src/turn-runner/agent-events.ts:16:60]
+@repo/agent:lint:  15 | export function createAgentEventTranslator(): (event: AgentEvent) => TurnStepEvent[] {
+@repo/agent:lint:  16 |   const inputByToolCallId = new Map<string, Record<string, any> | undefined>();
+@repo/agent:lint:     :                                                            ^^^
+@repo/agent:lint:  17 |
+@repo/agent:lint:     `----
+@repo/agent:lint:   help: Use `unknown` instead, this will force you to explicitly, and safely, assert the type is correct.
+@repo/agent:lint:
+@repo/agent:lint:   ! typescript(no-explicit-any): Unexpected `any`. Specify a different type.
+@repo/agent:lint:     ,-[src/model-resolution/resolver.ts:59:56]
+@repo/agent:lint:  58 |
+@repo/agent:lint:  59 | export function resolveModelName(model: string): Model<any> {
+@repo/agent:lint:     :                                                        ^^^
+@repo/agent:lint:  60 |   model = resolveModelReference(model);
+@repo/agent:lint:     `----
+@repo/agent:lint:   help: Use `unknown` instead, this will force you to explicitly, and safely, assert the type is correct.
+@repo/agent:lint:
+@repo/agent:lint:   ! typescript(no-explicit-any): Unexpected `any`. Specify a different type.
+@repo/agent:lint:     ,-[src/model-resolution/resolver.ts:87:74]
+@repo/agent:lint:  86 |   // forwards a missing model untouched at runtime.
+@repo/agent:lint:  87 |   return clampModelOutputTokens(catalogModel(provider, modelId) as Model<any>);
+@repo/agent:lint:     :                                                                          ^^^
+@repo/agent:lint:  88 | }
+@repo/agent:lint:     `----
+@repo/agent:lint:   help: Use `unknown` instead, this will force you to explicitly, and safely, assert the type is correct.
+@repo/agent:lint:
+@repo/agent:lint:   ! typescript(no-explicit-any): Unexpected `any`. Specify a different type.
+@repo/agent:lint:     ,-[src/model-resolution/resolver.ts:91:67]
+@repo/agent:lint:  90 | /** Resolve an auxiliary actor through configured metered router order only. */
+@repo/agent:lint:  91 | export function resolveMeteredModelName(modelName: string): Model<any> {
+@repo/agent:lint:     :                                                                   ^^^
+@repo/agent:lint:  92 |   return resolveModelName(resolveRouterModelReference(modelName));
+@repo/agent:lint:     `----
+@repo/agent:lint:   help: Use `unknown` instead, this will force you to explicitly, and safely, assert the type is correct.
+@repo/agent:lint:
+@repo/agent:lint:   ! typescript(no-explicit-any): Unexpected `any`. Specify a different type.
+@repo/agent:lint:     ,-[src/core/structured-output.ts:92:40]
+@repo/agent:lint:  91 |
+@repo/agent:lint:  92 | function forcedToolChoice(model: Model<any>, toolName: string): Record<string, unknown> {
+@repo/agent:lint:     :                                        ^^^
+@repo/agent:lint:  93 |   if (model.api === "anthropic-messages") {
+@repo/agent:lint:     `----
+@repo/agent:lint:   help: Use `unknown` instead, this will force you to explicitly, and safely, assert the type is correct.
+@repo/agent:lint:
+@repo/agent:lint:   ! typescript(no-explicit-any): Unexpected `any`. Specify a different type.
+@repo/agent:lint:      ,-[src/core/structured-output.ts:116:49]
+@repo/agent:lint:  115 |  */
+@repo/agent:lint:  116 | function injectResponsesToolChoice(model: Model<any>, payload: unknown, toolName: string): unknown {
+@repo/agent:lint:      :                                                 ^^^
+@repo/agent:lint:  117 |   if (model.api !== "openai-responses" && model.api !== "azure-openai-responses") {
+@repo/agent:lint:      `----
+@repo/agent:lint:   help: Use `unknown` instead, this will force you to explicitly, and safely, assert the type is correct.
+@repo/agent:lint:
+@repo/agent:lint:   ! typescript(no-explicit-any): Unexpected `any`. Specify a different type.
+@repo/agent:lint:     ,-[src/types/guardrails.ts:26:38]
+@repo/agent:lint:  25 |   | { kind: "pattern"; rules: PatternGuardrailRuleConfig[] }
+@repo/agent:lint:  26 |   | { kind: "semantic"; model: Model<any>; policy: string };
+@repo/agent:lint:     :                                      ^^^
+@repo/agent:lint:  27 |
+@repo/agent:lint:     `----
+@repo/agent:lint:   help: Use `unknown` instead, this will force you to explicitly, and safely, assert the type is correct.
+@repo/agent:lint:
+@repo/agent:lint:   ! typescript(no-explicit-any): Unexpected `any`. Specify a different type.
+@repo/agent:lint:      ,-[src/types/protocol.ts:363:30]
+@repo/agent:lint:  362 |       /** Tool arguments as parsed by the model. Shape is tool-specific. */
+@repo/agent:lint:  363 |       input?: Record<string, any>;
+@repo/agent:lint:      :                              ^^^
+@repo/agent:lint:  364 |     }
+@repo/agent:lint:      `----
+@repo/agent:lint:   help: Use `unknown` instead, this will force you to explicitly, and safely, assert the type is correct.
+@repo/agent:lint:
+@repo/agent:lint:   ! typescript(no-explicit-any): Unexpected `any`. Specify a different type.
+@repo/agent:lint:      ,-[src/types/protocol.ts:377:30]
+@repo/agent:lint:  376 |       /** Tool arguments echoed from the matching `tool_call_start`. */
+@repo/agent:lint:  377 |       input?: Record<string, any>;
+@repo/agent:lint:      :                              ^^^
+@repo/agent:lint:  378 |       /** Whether the tool finished with an error. */
+@repo/agent:lint:      `----
+@repo/agent:lint:   help: Use `unknown` instead, this will force you to explicitly, and safely, assert the type is correct.
+@repo/agent:lint:
+@repo/agent:lint:   ! typescript(no-explicit-any): Unexpected `any`. Specify a different type.
+@repo/agent:lint:      ,-[src/memory/observational.ts:371:30]
+@repo/agent:lint:  370 | export interface ModelByInputTokensConfig {
+@repo/agent:lint:  371 |   upTo: Record<number, Model<any>>;
+@repo/agent:lint:      :                              ^^^
+@repo/agent:lint:  372 | }
+@repo/agent:lint:      `----
+@repo/agent:lint:   help: Use `unknown` instead, this will force you to explicitly, and safely, assert the type is correct.
+@repo/agent:lint:
+@repo/agent:lint:   ! typescript(no-explicit-any): Unexpected `any`. Specify a different type.
+@repo/agent:lint:      ,-[src/memory/observational.ts:375:68]
+@repo/agent:lint:  374 | export class ModelByInputTokens {
+@repo/agent:lint:  375 |   private readonly thresholds: Array<{ limit: number; model: Model<any> }>;
+@repo/agent:lint:      :                                                                    ^^^
+@repo/agent:lint:  376 |
+@repo/agent:lint:      `----
+@repo/agent:lint:   help: Use `unknown` instead, this will force you to explicitly, and safely, assert the type is correct.
+@repo/agent:lint:
+@repo/agent:lint:   ! typescript(no-explicit-any): Unexpected `any`. Specify a different type.
+@repo/agent:lint:      ,-[src/memory/observational.ts:395:39]
+@repo/agent:lint:  394 |
+@repo/agent:lint:  395 |   resolve(inputTokens: number): Model<any> {
+@repo/agent:lint:      :                                       ^^^
+@repo/agent:lint:  396 |     for (const { limit, model } of this.thresholds) {
+@repo/agent:lint:      `----
+@repo/agent:lint:   help: Use `unknown` instead, this will force you to explicitly, and safely, assert the type is correct.
+@repo/agent:lint:
+@repo/agent:lint: Found 12 warnings and 0 errors.
+@repo/agent:lint: Finished in 92ms on 99 files with 125 rules using 18 threads.
+@repo/email:lint: cache miss, executing ed3ead8450c572ee
+@repo/email:lint: $ oxlint
+@repo/email:lint: Found 0 warnings and 0 errors.
+@repo/email:lint: Finished in 52ms on 11 files with 125 rules using 18 threads.
+@repo/web-locale:lint: cache miss, executing e9abfd46197e5bfd
+@repo/web-locale:lint: $ oxlint
+@repo/web-locale:lint: Found 0 warnings and 0 errors.
+@repo/web-locale:lint: Finished in 32ms on 2 files with 125 rules using 18 threads.
+@repo/contract:lint: cache miss, executing 66859debef45370f
+@repo/contract:lint: $ oxlint
+@repo/contract:lint: Found 0 warnings and 0 errors.
+@repo/contract:lint: Finished in 247ms on 145 files with 125 rules using 18 threads.
+@repo/email:check-types: cache miss, executing c0845b5b2787a2f2
+@repo/email:check-types: $ tsc --noEmit
+@repo/web-locale:check-types: cache miss, executing 0bed15888b8b1054
+@repo/web-locale:check-types: $ tsc --noEmit
+@repo/ui:lint: cache miss, executing 216071a7941a8f34
+@repo/ui:lint: $ oxlint
+@repo/ui:lint: Found 0 warnings and 0 errors.
+@repo/ui:lint: Finished in 72ms on 83 files with 125 rules using 18 threads.
+@repo/seed-drive:lint: cache miss, executing dd590a29eb87d308
+@repo/seed-drive:lint: $ oxlint
+@repo/seed-drive:lint: Found 0 warnings and 0 errors.
+@repo/seed-drive:lint: Finished in 107ms on 12 files with 125 rules using 18 threads.
+@repo/sync-tunnel:lint: cache miss, executing 83c23e614ebfb268
+@repo/sync-tunnel:lint: $ oxlint
+@repo/sync-tunnel:lint: Found 0 warnings and 0 errors.
+@repo/sync-tunnel:lint: Finished in 99ms on 2 files with 125 rules using 18 threads.
+@repo/ui:check-types: cache miss, executing 5f337dfc667185d5
+@repo/ui:check-types: $ tsc --noEmit
+@repo/gateway:lint: cache miss, executing c26202094e5e1413
+@repo/gateway:lint: $ oxlint
+@repo/gateway:lint: Found 0 warnings and 0 errors.
+@repo/gateway:lint: Finished in 140ms on 285 files with 125 rules using 18 threads.
+web:lint: cache miss, executing 3733b160b837bdae
+web:lint: $ oxlint
+web:lint:
+web:lint:   ! next(no-html-link-for-pages): Do not use `<a>` elements to navigate between Next.js pages.
+web:lint:      ,-[components/playground/onboarding-journey-playground.tsx:162:13]
+web:lint:  161 |
+web:lint:  162 | ,->             <a
+web:lint:  163 | |                 href="/playground"
+web:lint:  164 | |                 className="mt-1.5 block w-full rounded-lg px-3 py-2 text-center text-xs text-muted-foreground hover:bg-foreground/[0.05] hover:text-foreground"
+web:lint:  165 | |->             >
+web:lint:      : `---- Replace with `<Link>` from `next/link`
+web:lint:  166 |                   ← Back to playground
+web:lint:      `----
+web:lint:   help: Use `<Link />` from `next/link` instead for internal navigation. See https://nextjs.org/docs/messages/no-html-link-for-pages
+web:lint:
+web:lint:   ! next(no-html-link-for-pages): Do not use `<a>` elements to navigate between Next.js pages.
+web:lint:      ,-[components/playground/onboarding-journey-playground.tsx:178:13]
+web:lint:  177 |                 </button>
+web:lint:  178 | ,->             <a
+web:lint:  179 | |                 href="/playground"
+web:lint:  180 | |                 className="rounded-r-lg border border-l-0 border-foreground/20 bg-background px-2.5 py-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground shadow-lg hover:text-foreground [writing-mode:vertical-rl]"
+web:lint:  181 | |->             >
+web:lint:      : `---- Replace with `<Link>` from `next/link`
+web:lint:  182 |                   Exit
+web:lint:      `----
+web:lint:   help: Use `<Link />` from `next/link` instead for internal navigation. See https://nextjs.org/docs/messages/no-html-link-for-pages
+web:lint:
+web:lint:   ! next(no-img-element): Using `<img>` could result in slower LCP and higher bandwidth.
+web:lint:     ,-[spa/sessions/session-markdown.tsx:78:8]
+web:lint:  77 |     return (
+web:lint:  78 |       <img
+web:lint:     :        ^|^
+web:lint:     :         `-- Use `<Image />` from `next/image` instead.
+web:lint:  79 |         key={resolved.src}
+web:lint:     `----
+web:lint:   help: Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images.
+web:lint:   note: See https://nextjs.org/docs/messages/no-img-element
+web:lint:
+web:lint:   ! next(no-img-element): Using `<img>` could result in slower LCP and higher bandwidth.
+web:lint:      ,-[spa/drive/drive-file-icon.tsx:104:6]
+web:lint:  103 |   return (
+web:lint:  104 |     <img
+web:lint:      :      ^|^
+web:lint:      :       `-- Use `<Image />` from `next/image` instead.
+web:lint:  105 |       src={src}
+web:lint:      `----
+web:lint:   help: Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images.
+web:lint:   note: See https://nextjs.org/docs/messages/no-img-element
+web:lint:
+web:lint:   ! next(no-img-element): Using `<img>` could result in slower LCP and higher bandwidth.
+web:lint:      ,-[spa/files/media-preview.tsx:108:10]
+web:lint:  107 |       <div className="relative grid min-h-0 flex-1 place-items-center overflow-auto bg-muted/10 p-4">
+web:lint:  108 |         <img
+web:lint:      :          ^|^
+web:lint:      :           `-- Use `<Image />` from `next/image` instead.
+web:lint:  109 |           key={displayed.sourceKey}
+web:lint:      `----
+web:lint:   help: Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images.
+web:lint:   note: See https://nextjs.org/docs/messages/no-img-element
+web:lint:
+web:lint:   ! react-hooks(exhaustive-deps): React Hook useEffect has a missing dependency: 'state.recommendations'
+web:lint:      ,-[spa/onboarding/onboarding-experience.tsx:271:6]
+web:lint:  234 |     if (state.step !== 'team') return
+web:lint:  235 |     if (!recommendationsRequestNeeded(state.recommendations, composedPurpose)) return
+web:lint:      :                                       ^^|^^
+web:lint:      :                                         `-- useEffect uses `state.recommendations` here
+web:lint:  236 |     const purpose = composedPurpose
+web:lint:  237 |     const tagHints =
+web:lint:  238 |       state.goal.kind === 'preset' ? getOnboardingGoal(state.goal.goalId).tagHints : undefined
+web:lint:  239 |     recommendationsAbort.current?.abort()
+web:lint:  240 |     const controller = new AbortController()
+web:lint:  241 |     recommendationsAbort.current = controller
+web:lint:  242 |     // The timeout settles the state itself: aborting only asks the source to
+web:lint:  243 |     // reject, and a source that ignores the signal would leave the skeleton up
+web:lint:  244 |     // forever. The reducer's purpose guard makes the later settle a no-op.
+web:lint:  245 |     const timeout = setTimeout(() => {
+web:lint:  246 |       controller.abort()
+web:lint:  247 |       dispatch({ type: 'recommendations-settle', purpose, items: [] })
+web:lint:  248 |     }, RECOMMENDATIONS_CLIENT_TIMEOUT_MS)
+web:lint:  249 |     dispatch({ type: 'recommendations-pending', purpose })
+web:lint:  250 |     void recommendationsSource
+web:lint:  251 |       .recommendOnboardingAgents(
+web:lint:  252 |         workspaceSlug,
+web:lint:  253 |         { purpose, ...(tagHints === undefined ? {} : { tagHints: [...tagHints] }) },
+web:lint:  254 |         controller.signal,
+web:lint:  255 |       )
+web:lint:  256 |       .then(({ recommendations }) =>
+web:lint:  257 |         dispatch({ type: 'recommendations-settle', purpose, items: recommendations }),
+web:lint:  258 |       )
+web:lint:  259 |       .catch(() => dispatch({ type: 'recommendations-settle', purpose, items: [] }))
+web:lint:  260 |       .finally(() => clearTimeout(timeout))
+web:lint:  261 |     return () => {
+web:lint:  262 |       controller.abort()
+web:lint:  263 |       clearTimeout(timeout)
+web:lint:  264 |     }
+web:lint:  265 |     /* `state.recommendations` is read above but is deliberately NOT a
+web:lint:  266 |        dependency: the effect itself moves it to `pending`, and listing it
+web:lint:  267 |        re-ran the effect on that very change — whose cleanup aborted the request
+web:lint:  268 |        it had just sent, so the rail always settled empty against a real
+web:lint:  269 |        network. Each run is a fresh closure, so the guard still reads the
+web:lint:  270 |        current state whenever the step or the purpose actually changes. */
+web:lint:  271 |   }, [state.step, state.goal, composedPurpose, recommendationsSource, workspaceSlug])
+web:lint:      :      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+web:lint:  272 |
+web:lint:      `----
+web:lint:   help: Either include it or remove the dependency array.
+web:lint:
+web:lint: Found 6 warnings and 0 errors.
+web:lint: Finished in 292ms on 767 files with 125 rules using 18 threads.
+@repo/contract:check-types: cache miss, executing 4421f57b5b858ce2
+@repo/contract:check-types: $ tsc --noEmit
+@repo/seed-drive:check-types: cache miss, executing fa7c04243116587a
+@repo/sync-tunnel:check-types: cache miss, executing 05218dab45125ba8
+@repo/seed-drive:check-types: $ tsc --noEmit
+@repo/sync-tunnel:check-types: $ tsc --noEmit
+@repo/gateway:check-types: cache miss, executing fd39748fc0a1d4b3
+@repo/gateway:check-types: $ tsc --noEmit -p tsconfig.check.json
+web:check-types: cache miss, executing 65037b6af6a2df6e
+web:check-types: $ tsc --noEmit
+
+ Tasks:    18 successful, 18 total
+Cached:    0 cached, 18 total
+  Time:    13.357s
+
+$ bun scripts/verify-visual-coverage.ts
+Web visual coverage verified for 716 product rendered symbols.
+$ bun scripts/verify-visual-coverage.ts
+Shared UI visual coverage verified for 204 rendered symbols.
+$ bun scripts/verify-visual-owner-union.ts
+Verified the complete lander/web/docs/ui/official-apps visual owner union and contact-sheet index.
+$ bun scripts/verify-asset-ownership.ts
+Verified 321 public asset paths, exact web reachability, 10 approved cross-app hash groups, and no tracked runtime artifacts.
+• turbo 2.10.6
+
+   • Packages in scope: @repo/ui, web
+   • Running build in 2 packages
+   • Remote caching disabled
+
+@repo/agent:build: cache miss, executing e0530baf12055e60
+@repo/agent:build: $ tsc -p tsconfig.build.json && bun build src/memory/store/index.ts --target=node --format=esm --outfile dist/src/memory-store.js && bun scripts/build-workflow-fixtures.ts
+@repo/agent:build: Bundled 7 modules in 3ms
+@repo/agent:build:
+@repo/agent:build:   memory-store.js  21.63 KB  (entry point)
+@repo/agent:build:
+@repo/gateway:build: cache miss, executing a3154c04842c14bb
+@repo/gateway:build: $ bun run --cwd ../agent build && bun run routing:export && bun build src/index.ts --target=bun --outdir=dist --entry-naming=index.js && bun build src/attribution/helper-main.ts --target=bun --outfile=dist/helper.js && bun build src/runtime-bootstrap.ts --target=bun --outfile=dist/runtime-bootstrap.js
+@repo/gateway:build: $ tsc -p tsconfig.build.json && bun build src/memory/store/index.ts --target=node --format=esm --outfile dist/src/memory-store.js && bun scripts/build-workflow-fixtures.ts
+@repo/gateway:build: Bundled 7 modules in 4ms
+@repo/gateway:build:
+@repo/gateway:build:   memory-store.js  21.63 KB  (entry point)
+@repo/gateway:build:
+@repo/gateway:build: $ bun scripts/export-routing-table.mjs
+@repo/gateway:build: Bundled 358 modules in 40ms
+@repo/gateway:build:
+@repo/gateway:build:   index.js  2.23 MB  (entry point)
+@repo/gateway:build:
+@repo/gateway:build: Bundled 162 modules in 20ms
+@repo/gateway:build:
+@repo/gateway:build:   helper.js  0.91 MB  (entry point)
+@repo/gateway:build:
+@repo/gateway:build: Bundled 174 modules in 20ms
+@repo/gateway:build:
+@repo/gateway:build:   runtime-bootstrap.js  0.95 MB  (entry point)
+@repo/gateway:build:
+web:build: cache miss, executing 72f812978e4e7a8a
+web:build: $ next build
+web:build: Attention: Next.js now collects completely anonymous telemetry regarding usage.
+web:build: This information is used to shape Next.js' roadmap and prioritize features.
+web:build: You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+web:build: https://nextjs.org/telemetry
+web:build:
+web:build: ▲ Next.js 16.2.10 (Turbopack)
+web:build:
+web:build:   Creating an optimized production build ...
+web:build: ✓ Compiled successfully in 7.6s
+web:build:   Running TypeScript ...
+web:build:   Detected @typescript/native-preview as TypeScript compiler. Some Next.js TypeScript features (like type checking during build) require the standard typescript package.
+web:build:   Finished TypeScript in 88ms ...
+web:build:   Collecting page data using 17 workers ...
+web:build:   Generating static pages using 17 workers (0/154) ...
+web:build: Error: ENVIRONMENT_FALLBACK
+web:build:     at <unknown> (.next/server/chunks/ssr/_096venu._.js:1:2616)
+web:build:     at <unknown> (.next/server/chunks/ssr/apps_web_spa_files_1uz2s99._.js:1:61022) {
+web:build:   code: 'ENVIRONMENT_FALLBACK'
+web:build: }
+web:build: Error: ENVIRONMENT_FALLBACK
+web:build:     at <unknown> (.next/server/chunks/ssr/_096venu._.js:1:2616)
+web:build:     at J (.next/server/chunks/ssr/apps_web_spa_routes_internal-admin_tsx_0pnw9tl._.js:1:3721) {
+web:build:   code: 'ENVIRONMENT_FALLBACK'
+web:build: }
+web:build:   Generating static pages using 17 workers (38/154)
+web:build:   Generating static pages using 17 workers (76/154)
+web:build:   Generating static pages using 17 workers (115/154)
+web:build: ✓ Generating static pages using 17 workers (154/154) in 820ms
+web:build:   Finalizing page optimization ...
+web:build:
+web:build: Route (app)
+web:build: ┌ ƒ /
+web:build: ├ ○ /_not-found
+web:build: ├ ƒ /api/auth/magic-link
+web:build: ├ ƒ /api/campaigns/handoff
+web:build: ├ ƒ /api/duet/[...path]
+web:build: ├ ƒ /api/duet/pending-share
+web:build: ├ ƒ /api/duet/session
+web:build: ├ ƒ /api/version
+web:build: ├ ƒ /auth/magic-link/callback
+web:build: ├ ƒ /device
+web:build: ├ ƒ /invite/[token]
+web:build: ├ ○ /manifest.json
+web:build: ├ ƒ /oauth/authorize
+web:build: ├ ƒ /onboarding
+web:build: ├ ○ /playground
+web:build: ├ ● /playground/[id]
+web:build: │ ├ /playground/workspace-app-domains
+web:build: │ ├ /playground/app-domains-management
+web:build: │ ├ /playground/workspace-backups-empty
+web:build: │ └ [+140 more paths]
+web:build: ├ ○ /playground/desktop-frame
+web:build: ├ ○ /product-route-manifest.json
+web:build: ├ ƒ /publish/[workspaceSlug]/[publishSlug]/[[...path]]
+web:build: ├ ƒ /share/[token]
+web:build: ├ ƒ /sign-in
+web:build: ├ ƒ /sign-out
+web:build: └ ƒ /w/[workspaceSlug]/apps/[slug]/open
+web:build:
+web:build:
+web:build: ƒ Proxy (Middleware)
+web:build:
+web:build: ○  (Static)   prerendered as static content
+web:build: ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+web:build: ƒ  (Dynamic)  server-rendered on demand
+web:build:
+
+ Tasks:    3 successful, 3 total
+Cached:    0 cached, 3 total
+  Time:    16.252s
+
+$ bun scripts/verify-build-output.ts
+Verified 5 static playground routes, 5 dynamic identity/product routes, 3 SPA rewrites, and no removed route owners.
+• turbo 2.10.6
+
+   • Packages in scope: web
+   • Running visual in 1 packages
+   • Remote caching disabled
+
+web:visual: cache bypass, force executing 5499b20ce1c345bc
+web:visual: $ playwright test -g "(playground|docs|auth|lander|official-apps)/(internal-admin covers workspace operations)" --pass-with-no-tests
+web:visual: [WebServer] $ next start --port 3000
+web:visual:
+web:visual: Running 2 tests using 2 workers
+web:visual:
+web:visual:   ✘  2 [mobile] › tests/visual/playground.spec.ts:9895:1 › playground/internal-admin covers workspace operations, VM tooling, triage, credits, and states (1.9s)
+web:visual: Testing stopped early after 1 maximum allowed failures.
+web:visual:   ✘  1 [desktop] › tests/visual/playground.spec.ts:9895:1 › playground/internal-admin covers workspace operations, VM tooling, triage, credits, and states (1.9s)
+web:visual:
+web:visual:
+web:visual:   1) [mobile] › tests/visual/playground.spec.ts:9895:1 › playground/internal-admin covers workspace operations, VM tooling, triage, credits, and states
+web:visual:
+web:visual:     Error: the Runtime heading must stay visible beside Workspace at the runtime ending
+web:visual:
+web:visual:     expect(received).toBe(expected) // Object.is equality
+web:visual:
+web:visual:     Expected: true
+web:visual:     Received: false
+web:visual:
+web:visual:       10039 |       }),
+web:visual:       10040 |       'the Runtime heading must stay visible beside Workspace at the runtime ending',
+web:visual:     > 10041 |     ).toBe(true)
+web:visual:             |       ^
+web:visual:       10042 |     await scrollArea.evaluate(element => element.scrollTo({ left: 0, behavior: 'instant' }))
+web:visual:       10043 |     await expect.poll(() => scrollArea.evaluate(element => element.scrollLeft)).toBe(0)
+web:visual:       10044 |     await page.evaluate(() => {
+web:visual:         at /work/apps/web/tests/visual/playground.spec.ts:10041:7
+web:visual:
+web:visual:     Error Context: test-results/playground-playground-inte-529d8-g-triage-credits-and-states-mobile/error-context.md
+web:visual:
+web:visual:   1 failed
+web:visual:     [mobile] › tests/visual/playground.spec.ts:9895:1 › playground/internal-admin covers workspace operations, VM tooling, triage, credits, and states
+web:visual:   1 interrupted
+web:visual:     [desktop] › tests/visual/playground.spec.ts:9895:1 › playground/internal-admin covers workspace operations, VM tooling, triage, credits, and states
+web:visual:   1 error was not a part of any test, see above for details
+web:visual: error: script "visual" exited with code 1
+web#visual:  ERROR  command (/work/apps/web) /usr/bin/bun run visual -g (playground|docs|auth|lander|official-apps)/(internal-admin covers workspace operations) --pass-with-no-tests exited (1)
+
+ Tasks:    0 successful, 1 total
+Cached:    0 cached, 1 total
+  Time:    5.173s
+Failed:    web#visual
+
+ ERROR  run failed: command  exited (1)
+error: script "ui:check" exited with code 1

@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Account Board</title>
+    <script>
+      const requestedTheme = new URLSearchParams(location.search).get('theme')
+      if (requestedTheme === 'light' || requestedTheme === 'dark') {
+        document.documentElement.dataset.theme = requestedTheme
+      }
+    </script>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --canvas: #f2f0e9;
+        --surface: rgba(255, 255, 255, 0.78);
+        --solid: #fffefa;
+        --ink: #17201f;
+        --muted: #68716e;
+        --line: rgba(23, 32, 31, 0.13);
+        --teal: #087f71;
+        --teal-soft: #d8f3ec;
+        --amber: #d97a16;
+        --amber-soft: #fff0d6;
+        --blue: #3457d5;
+        --blue-soft: #e4e8ff;
+        --shadow: 0 22px 70px rgba(43, 53, 49, 0.1);
+      }
+
+      :root[data-theme='dark'] {
+        --canvas: #111716;
+        --surface: rgba(27, 35, 33, 0.86);
+        --solid: #1c2422;
+        --ink: #eff5f2;
+        --muted: #a5b0ac;
+        --line: rgba(239, 245, 242, 0.13);
+        --teal: #62dbc6;
+        --teal-soft: #193d37;
+        --amber: #ffb457;
+        --amber-soft: #49331d;
+        --blue: #9bacff;
+        --blue-soft: #29325b;
+        --shadow: 0 22px 70px rgba(0, 0, 0, 0.32);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) {
+          --canvas: #111716;
+          --surface: rgba(27, 35, 33, 0.86);
+          --solid: #1c2422;
+          --ink: #eff5f2;
+          --muted: #a5b0ac;
+          --line: rgba(239, 245, 242, 0.13);
+          --teal: #62dbc6;
+          --teal-soft: #193d37;
+          --amber: #ffb457;
+          --amber-soft: #49331d;
+          --blue: #9bacff;
+          --blue-soft: #29325b;
+          --shadow: 0 22px 70px rgba(0, 0, 0, 0.32);
+        }
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        min-width: 0;
+        min-height: 100vh;
+        margin: 0;
+        overflow-x: hidden;
+        background:
+          radial-gradient(circle at 12% 3%, color-mix(in srgb, var(--teal) 14%, transparent), transparent 26rem),
+          radial-gradient(circle at 94% 90%, color-mix(in srgb, var(--amber) 11%, transparent), transparent 30rem),
+          var(--canvas);
+        color: var(--ink);
+        font: 15px/1.5 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      button { color: inherit; font: inherit; }
+      .shell { width: min(100% - 2rem, 88rem); margin: 0 auto; padding: 1.3rem 0 3rem; }
+      header { display: flex; align-items: end; justify-content: space-between; gap: 1rem; padding: 1rem 0 1.7rem; }
+      .eyebrow { margin: 0 0 .35rem; color: var(--teal); font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+      h1 { margin: 0; font: 500 clamp(2.2rem, 4vw, 4.25rem)/.98 ui-serif, Georgia, serif; letter-spacing: -.05em; }
+      .live { display: inline-flex; align-items: center; gap: .5rem; color: var(--muted); font-size: .78rem; font-weight: 700; }
+      .live::before { width: .52rem; height: .52rem; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 .24rem color-mix(in srgb, var(--teal) 18%, transparent); content: ''; }
+      .layout { display: grid; grid-template-columns: minmax(16rem, .72fr) minmax(0, 2fr); gap: 1rem; align-items: start; }
+      .panel { border: 1px solid var(--line); border-radius: 1.35rem; background: var(--surface); box-shadow: var(--shadow); backdrop-filter: blur(18px); }
+      .rail { position: sticky; top: 1rem; overflow: hidden; }
+      .panel-head { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.05rem; border-bottom: 1px solid var(--line); }
+      .panel-head strong { font-size: .82rem; letter-spacing: .02em; }
+      .count { color: var(--muted); font-size: .72rem; }
+      #accounts { display: grid; gap: .42rem; padding: .55rem; }
+      .account-button { width: 100%; min-height: 4.25rem; padding: .8rem; border: 1px solid transparent; border-radius: .95rem; background: transparent; text-align: left; cursor: pointer; }
+      .account-button:hover, .account-button.active { border-color: var(--line); background: var(--solid); }
+      .account-row { display: flex; align-items: center; justify-content: space-between; gap: .6rem; }
+      .account-name { overflow: hidden; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+      .domain { display: block; margin-top: .2rem; overflow: hidden; color: var(--muted); font-size: .74rem; text-overflow: ellipsis; white-space: nowrap; }
+      .status { flex: 0 0 auto; padding: .2rem .48rem; border-radius: 999px; background: var(--blue-soft); color: var(--blue); font-size: .64rem; font-weight: 800; text-transform: uppercase; }
+      .status.ready { background: var(--teal-soft); color: var(--teal); }
+      .status.needs-review { background: var(--amber-soft); color: var(--amber); }
+      .empty { padding: 2.5rem 1.4rem; color: var(--muted); text-align: center; }
+      .empty strong { display: block; margin-bottom: .35rem; color: var(--ink); }
+      .detail { min-height: 36rem; overflow: hidden; }
+      .hero { padding: clamp(1.25rem, 3vw, 2rem); border-bottom: 1px solid var(--line); background: linear-gradient(135deg, color-mix(in srgb, var(--teal-soft) 58%, transparent), transparent 65%); }
+      .hero-top { display: flex; align-items: start; justify-content: space-between; gap: 1rem; }
+      h2 { margin: 0; font: 520 clamp(1.8rem, 3vw, 2.8rem)/1 ui-serif, Georgia, serif; letter-spacing: -.035em; }
+      .updated { margin-top: .55rem; color: var(--muted); font-size: .75rem; }
+      .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: .65rem; margin-top: 1.6rem; }
+      .metric { padding: .85rem; border: 1px solid var(--line); border-radius: .95rem; background: color-mix(in srgb, var(--solid) 72%, transparent); }
+      .metric span { display: block; color: var(--muted); font-size: .68rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+      .metric strong { display: block; margin-top: .25rem; font-size: 1.3rem; }
+      .body { padding: clamp(1rem, 2.4vw, 1.5rem); }
+      .section-title { display: flex; align-items: center; justify-content: space-between; margin: 0 0 .7rem; }
+      h3 { margin: 0; font-size: .82rem; letter-spacing: .05em; text-transform: uppercase; }
+      .facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
+      .fact { min-width: 0; padding: .9rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--solid); }
+      .fact-head { display: flex; justify-content: space-between; gap: .5rem; }
+      .fact-label { font-weight: 760; }
+      .fact-state { color: var(--muted); font-size: .67rem; font-weight: 800; text-transform: uppercase; }
+      .fact-state.found { color: var(--teal); }
+      .fact-value { margin: .65rem 0 .75rem; font-size: 1rem; }
+      .fact-source { color: var(--muted); font-size: .7rem; }
+      .fact-source a { color: var(--teal); }
+      .contacts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
+      .contact { min-width: 0; padding: .9rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--solid); }
+      .contact-head { display: flex; align-items: center; gap: .65rem; }
+      .avatar { flex: 0 0 auto; width: 2.6rem; height: 2.6rem; border: 1px solid var(--line); border-radius: 50%; background: var(--teal-soft); color: var(--teal); font-size: .8rem; font-weight: 800; object-fit: cover; }
+      .avatar-fallback { display: inline-flex; align-items: center; justify-content: center; }
+      .contact-copy { min-width: 0; }
+      .contact-name { overflow: hidden; font-weight: 760; text-overflow: ellipsis; white-space: nowrap; }
+      .contact-name a { color: var(--teal); }
+      .contact-title { display: block; margin-top: .15rem; overflow: hidden; color: var(--muted); font-size: .74rem; text-overflow: ellipsis; white-space: nowrap; }
+      .contact-reason { margin: .6rem 0 .55rem; font-size: .84rem; }
+      .contact-line { display: flex; align-items: center; gap: .4rem; margin-top: .35rem; overflow-wrap: anywhere; color: var(--muted); font-size: .74rem; }
+      .contact-line strong { color: var(--ink); font-weight: 650; }
+      .chip { flex: 0 0 auto; padding: .16rem .42rem; border-radius: 999px; background: var(--blue-soft); color: var(--blue); font-size: .6rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+      .chip.verified { background: var(--teal-soft); color: var(--teal); }
+      .chip.unverified { background: var(--amber-soft); color: var(--amber); }
+      .enrich { margin-top: .5rem; padding: .38rem .7rem; border: 1px solid var(--teal); border-radius: 999px; background: transparent; color: var(--teal); font-size: .74rem; font-weight: 750; cursor: pointer; }
+      .enrich:hover:enabled { background: var(--teal-soft); }
+      .enrich:disabled { border-color: var(--line); color: var(--muted); cursor: progress; }
+      .contact-roles { margin: .5rem 0 0; padding: 0; color: var(--muted); font-size: .72rem; list-style: none; }
+      .views { display: grid; gap: .65rem; margin-top: 1.45rem; }
+      .view { border: 1px solid var(--line); border-radius: 1rem; background: var(--solid); }
+      .view summary { display: flex; align-items: center; justify-content: space-between; min-height: 3.4rem; padding: .8rem .95rem; cursor: pointer; font-weight: 760; list-style: none; }
+      .view summary::-webkit-details-marker { display: none; }
+      .view summary::after { color: var(--muted); content: '+'; font-size: 1.2rem; }
+      .view[open] summary::after { content: '−'; }
+      /* A deliverable opened on purpose reads top to bottom; a nested scrollbox
+         inside the product's own iframe would fight the page for the wheel. */
+      .view-content { padding: .2rem .95rem 1.15rem; border-top: 1px solid var(--line); font-size: .84rem; line-height: 1.62; overflow-wrap: break-word; }
+      .view-content > :first-child { margin-top: .9rem; }
+      .view-content a { color: var(--teal); }
+      .view-content code { padding: .08rem .22rem; border-radius: .35rem; background: color-mix(in srgb, var(--teal) 13%, transparent); font: .86em/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+      /* A section heading has to be seen, not inferred from spacing: each level
+         steps in size, not weight alone. */
+      .md-heading { margin: 1.3rem 0 .4rem; font-weight: 780; letter-spacing: -.015em; }
+      h4.md-heading { font-size: 1.25rem; }
+      h5.md-heading { font-size: 1.02rem; }
+      h6.md-heading { color: var(--muted); font-size: .78rem; letter-spacing: .07em; text-transform: uppercase; }
+      .md-paragraph { margin: .5rem 0; }
+      .md-list { margin: .5rem 0; padding-left: 1.25rem; }
+      .md-item { margin: .22rem 0; }
+      .md-item > .md-paragraph { margin: 0; }
+      .md-item > .md-list { margin: .22rem 0; }
+      .md-quote { margin: .75rem 0; padding-left: .85rem; border-left: 2px solid var(--teal); }
+      .md-code { margin: .75rem 0; padding: .7rem .8rem; overflow-x: auto; border: 1px solid var(--line); border-radius: .7rem; background: color-mix(in srgb, var(--canvas) 65%, transparent); }
+      .md-code code { padding: 0; background: none; font-size: .78rem; }
+      .md-rule { margin: 1.1rem 0; border: 0; border-top: 1px solid var(--line); }
+      .md-table-wrap { margin: .75rem 0; overflow-x: auto; border: 1px solid var(--line); border-radius: .7rem; }
+      .md-table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+      .md-table th, .md-table td { padding: .5rem .65rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+      .md-table th + th, .md-table td + td { border-left: 1px solid var(--line); }
+      .md-table tr:last-child td { border-bottom: 0; }
+      .md-table th { background: color-mix(in srgb, var(--teal) 9%, transparent); font-weight: 760; }
+      .error { margin: 1rem; padding: .8rem; border-radius: .8rem; background: var(--amber-soft); color: var(--amber); }
+      @media (max-width: 760px) {
+        .shell { width: min(100% - 1rem, 88rem); padding-top: .5rem; }
+        header { align-items: center; padding: .8rem .35rem 1rem; }
+        .layout { grid-template-columns: 1fr; }
+        .rail { position: static; }
+        #accounts { display: flex; overflow-x: auto; }
+        .account-button { min-width: 13rem; }
+        .metrics, .facts, .contacts { grid-template-columns: 1fr; }
+        .detail { min-height: 28rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <div><p class="eyebrow">Research workspace</p><h1>Account Board</h1></div>
+        <div class="live">Live from disk</div>
+      </header>
+      <div class="layout">
+        <aside class="panel rail">
+          <div class="panel-head"><strong>Accounts</strong><span id="count" class="count">0 tracked</span></div>
+          <div id="accounts"><div class="empty">Loading accounts…</div></div>
+        </aside>
+        <section id="detail" class="panel detail"><div class="empty"><strong>No account selected</strong>Research an account to build its dossier and seller views.</div></section>
+      </div>
+    </main>
+    <script type="module">
+      const accountsNode = document.querySelector('#accounts')
+      const detailNode = document.querySelector('#detail')
+      const countNode = document.querySelector('#count')
+      let accounts = []
+      let selectedId
+
+      const formatDate = value => new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' }).format(new Date(value))
+      const el = (tag, className, text) => {
+        const node = document.createElement(tag)
+        if (className) node.className = className
+        if (text !== undefined) node.textContent = text
+        return node
+      }
+      const initials = name => name.split(/\s+/).slice(0, 2).map(part => part[0] || '').join('').toUpperCase()
+      const avatarNode = (accountId, contact) => {
+        if (!contact.avatar) {
+          const fallback = el('span', 'avatar avatar-fallback', initials(contact.name))
+          fallback.setAttribute('aria-hidden', 'true')
+          return fallback
+        }
+        const image = el('img', 'avatar')
+        image.src = `/api/accounts/${accountId}/contacts/${contact.id}/avatar?v=${encodeURIComponent(contact.avatar.capturedAt)}`
+        image.alt = `${contact.name}, from their ${contact.avatar.source === 'x' ? 'X' : 'LinkedIn'} profile`
+        return image
+      }
+
+      // A view arrives as the same Markdown the agent wrote to disk. Rendering it
+      // to nodes — never to HTML — keeps a dossier quote from becoming markup.
+      const ITEM = /^(\s*)([-*+]|\d+[.)])\s+/
+      const BLOCK = /^\s*(?:#{1,6}\s|```|~~~|>|[-*+]\s|\d+[.)]\s|(?:[-*_]\s*){3,}$)/
+      const SAFE_HREF = /^(?:https?:|mailto:)/i
+      const indentOf = line => line.match(/^\s*/)[0].length
+
+      function inlineNodes(text) {
+        // Bold and italics only in their asterisk spelling: `_` is a word
+        // character in the identifiers these views quote, not emphasis.
+        // Emphasis never opens or closes on whitespace, so arithmetic and a
+        // stray asterisk survive as themselves.
+        const emphasis = String.raw`[^*\s](?:[^*]*[^*\s])?`
+        const pattern = new RegExp(
+          String.raw`\`([^\`]+)\`|\[([^\]]+)\]\(([^)\s]+)\)|\*\*(${emphasis})\*\*|\*(${emphasis})\*|~~([^~]+)~~`,
+          'g',
+        )
+        const nodes = []
+        let cursor = 0
+        let match
+        while ((match = pattern.exec(text)) !== null) {
+          if (match.index > cursor) nodes.push(document.createTextNode(text.slice(cursor, match.index)))
+          cursor = match.index + match[0].length
+          if (match[1] !== undefined) nodes.push(el('code', '', match[1]))
+          else if (match[2] !== undefined) nodes.push(linkNode(match[2], match[3]))
+          else if (match[4] !== undefined) nodes.push(inlineWrap('strong', match[4]))
+          else if (match[5] !== undefined) nodes.push(inlineWrap('em', match[5]))
+          else nodes.push(inlineWrap('s', match[6]))
+        }
+        if (cursor < text.length) nodes.push(document.createTextNode(text.slice(cursor)))
+        return nodes
+      }
+
+      function inlineWrap(tag, text) {
+        const node = el(tag)
+        node.append(...inlineNodes(text))
+        return node
+      }
+
+      function linkNode(text, href) {
+        if (!SAFE_HREF.test(href)) return document.createTextNode(`[${text}](${href})`)
+        const link = el('a')
+        link.href = href
+        link.target = '_blank'
+        link.rel = 'noreferrer'
+        link.append(...inlineNodes(text))
+        return link
+      }
+
+      function renderMarkdown(text, title) {
+        const lines = String(text).replace(/\r\n?/g, '\n').split('\n')
+        // The card is already labelled with the view's title, so the artifact's
+        // own title line would print the same words twice, one atop the other.
+        const first = lines.findIndex(line => line.trim() !== '')
+        const opener = first === -1 ? null : lines[first].match(/^\s*#\s+(.*)$/)
+        const same = value => value.replace(/\s+/g, ' ').trim().toLowerCase()
+        if (opener !== null && same(opener[1]) === same(title)) lines.splice(first, 1)
+        const content = el('div', 'view-content')
+        appendMarkdown(content, lines)
+        return content
+      }
+
+      function appendMarkdown(target, lines) {
+        let index = 0
+        while (index < lines.length) {
+          const line = lines[index]
+          if (line.trim() === '') { index += 1; continue }
+
+          const fence = line.match(/^\s*(```|~~~)/)
+          if (fence) {
+            const body = []
+            index += 1
+            while (index < lines.length && !lines[index].trim().startsWith(fence[1])) body.push(lines[index++])
+            if (index < lines.length) index += 1
+            const block = el('pre', 'md-code')
+            block.append(el('code', '', body.join('\n')))
+            target.append(block)
+            continue
+          }
+
+          const heading = line.match(/^\s*(#{1,6})\s+(.*)$/)
+          if (heading) {
+            // The page already owns h1–h3, so a view's own outline starts at h4.
+            const node = el(`h${Math.min(6, heading[1].length + 3)}`, 'md-heading')
+            node.append(...inlineNodes(heading[2].replace(/\s+#+\s*$/, '')))
+            target.append(node)
+            index += 1
+            continue
+          }
+
+          if (/^\s*(?:[-*_]\s*){3,}$/.test(line)) { target.append(el('hr', 'md-rule')); index += 1; continue }
+
+          if (/^\s*>/.test(line)) {
+            const body = []
+            while (index < lines.length && lines[index].trim() !== '') body.push(lines[index++].replace(/^\s*>\s?/, ''))
+            const quote = el('blockquote', 'md-quote')
+            appendMarkdown(quote, body)
+            target.append(quote)
+            continue
+          }
+
+          const table = tableAt(lines, index)
+          if (table !== undefined) { target.append(table.node); index = table.next; continue }
+
+          if (ITEM.test(line)) { index = appendMarkdownList(target, lines, index); continue }
+
+          const paragraph = []
+          while (index < lines.length && lines[index].trim() !== '' && (paragraph.length === 0 || !BLOCK.test(lines[index]))) {
+            paragraph.push(lines[index++].trim())
+          }
+          const text = el('p', 'md-paragraph')
+          text.append(...inlineNodes(paragraph.join(' ')))
+          target.append(text)
+        }
+      }
+
+      function appendMarkdownList(target, lines, start) {
+        const opener = lines[start].match(ITEM)
+        const indent = opener[1].length
+        const ordered = /\d/.test(opener[2])
+        const list = el(ordered ? 'ol' : 'ul', 'md-list')
+        if (ordered) {
+          const first = Number.parseInt(opener[2], 10)
+          if (first !== 1) list.start = first
+        }
+        let index = start
+        while (index < lines.length) {
+          const item = lines[index].match(ITEM)
+          if (item === null || item[1].length !== indent || /\d/.test(item[2]) !== ordered) break
+          // An item owns every following line indented past its own marker, so a
+          // nested list re-enters this parser already dedented to its own column.
+          const body = [lines[index].slice(item[0].length)]
+          index += 1
+          while (index < lines.length) {
+            const next = lines[index]
+            if (next.trim() === '') {
+              const after = lines[index + 1]
+              if (after === undefined || after.trim() === '' || indentOf(after) <= indent) break
+              body.push('')
+              index += 1
+              continue
+            }
+            if (indentOf(next) <= indent && (ITEM.test(next) || BLOCK.test(next))) break
+            body.push(next.slice(Math.min(indentOf(next), item[0].length)))
+            index += 1
+          }
+          const entry = el('li', 'md-item')
+          appendMarkdown(entry, body)
+          list.append(entry)
+        }
+        target.append(list)
+        return index
+      }
+
+      function tableAt(lines, index) {
+        const header = lines[index]
+        const divider = lines[index + 1]
+        // A pipe in a list item is punctuation, not a one-column table.
+        if (divider === undefined || !header.includes('|') || !divider.includes('|')) return undefined
+        if (ITEM.test(header)) return undefined
+        if (!/^\s*\|?(?:\s*:?-+:?\s*\|)*\s*:?-+:?\s*\|?\s*$/.test(divider)) return undefined
+        const cells = row => row.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(cell => cell.trim())
+        const alignments = cells(divider).map(cell =>
+          cell.startsWith(':') && cell.endsWith(':') ? 'center' : cell.endsWith(':') ? 'right' : '',
+        )
+        const cell = (tag, text, column) => {
+          const node = el(tag)
+          node.append(...inlineNodes(text))
+          if (alignments[column]) node.style.textAlign = alignments[column]
+          return node
+        }
+        const head = el('tr')
+        cells(header).forEach((text, column) => head.append(cell('th', text, column)))
+        const body = el('tbody')
+        let cursor = index + 2
+        while (cursor < lines.length && lines[cursor].includes('|')) {
+          const row = el('tr')
+          cells(lines[cursor]).forEach((text, column) => row.append(cell('td', text, column)))
+          body.append(row)
+          cursor += 1
+        }
+        const table = el('table', 'md-table')
+        const headSection = el('thead')
+        headSection.append(head)
+        table.append(headSection, body)
+        const wrapper = el('div', 'md-table-wrap')
+        wrapper.append(table)
+        return { node: wrapper, next: cursor }
+      }
+
+      async function enrichPhone(accountId, contactId) {
+        try {
+          const response = await fetch(`/api/accounts/${accountId}/contacts/${contactId}/phone`, { method: 'POST' })
+          if (!response.ok) {
+            const body = await response.json().catch(() => ({}))
+            detailNode.prepend(el('div', 'error', body.error || `The lookup could not start (${response.status}).`))
+            return
+          }
+          await refresh()
+        } catch (error) {
+          detailNode.prepend(el('div', 'error', `The lookup could not start: ${error.message}`))
+        }
+      }
+
+      function renderContact(accountId, contact) {
+        const card = el('article', 'contact')
+        const head = el('div', 'contact-head')
+        const copy = el('div', 'contact-copy')
+        const name = el('div', 'contact-name')
+        const link = el('a', '', contact.name)
+        link.href = contact.profileUrl
+        link.target = '_blank'
+        link.rel = 'noreferrer'
+        name.append(link)
+        copy.append(name, el('span', 'contact-title', contact.title || 'Title unfound'))
+        head.append(avatarNode(accountId, contact), copy)
+        card.append(head, el('p', 'contact-reason', contact.reason))
+
+        const email = el('div', 'contact-line')
+        if (contact.email?.status === 'found') {
+          email.append(el('strong', '', contact.email.address), el('span', `chip ${contact.email.verification === 'DELIVERABLE' ? 'verified' : 'unverified'}`, contact.email.verification))
+        } else if (contact.email?.status === 'unfound') {
+          email.append(el('span', '', 'No email found'), el('span', 'chip unverified', 'unfound'))
+        } else {
+          email.append(el('span', '', 'Email not looked up'))
+        }
+        card.append(email)
+
+        const phone = contact.phone
+        const phoneLine = el('div', 'contact-line')
+        if (phone.state === 'found') {
+          phoneLine.append(el('strong', '', phone.number), el('span', 'chip verified', phone.region || 'found'))
+          card.append(phoneLine)
+        } else if (phone.state === 'unfound') {
+          phoneLine.append(el('span', '', 'No number found'), el('span', 'chip unverified', 'unfound'))
+          card.append(phoneLine)
+        } else if (phone.state === 'enriching') {
+          phoneLine.append(el('span', '', 'Looking up a number…'))
+          const button = el('button', 'enrich', 'Looking up…')
+          button.type = 'button'
+          button.disabled = true
+          card.append(phoneLine, button)
+        } else {
+          if (phone.state === 'failed') phoneLine.append(el('span', '', phone.reason))
+          else phoneLine.append(el('span', '', 'No phone number yet'))
+          const button = el('button', 'enrich', phone.state === 'failed' ? 'Try the phone lookup again' : 'Enrich phone')
+          button.type = 'button'
+          button.addEventListener('click', () => enrichPhone(accountId, contact.id))
+          card.append(phoneLine, button)
+        }
+
+        if (contact.roles.length > 0) {
+          const roles = el('ul', 'contact-roles')
+          for (const role of contact.roles.slice(0, 3)) {
+            roles.append(el('li', '', `${role.title}, ${role.company} · ${role.start || '—'} → ${role.end || 'present'}`))
+          }
+          card.append(roles)
+        }
+        return card
+      }
+
+      async function refresh() {
+        try {
+          const response = await fetch('/api/accounts')
+          if (!response.ok) throw new Error(`API returned ${response.status}`)
+          accounts = (await response.json()).accounts
+          if (!accounts.some(account => account.id === selectedId)) selectedId = accounts[0]?.id
+          render()
+        } catch (error) {
+          const message = el('div', 'error', `Could not load accounts: ${error.message}`)
+          detailNode.replaceChildren(message)
+        }
+      }
+
+      function render() {
+        countNode.textContent = `${accounts.length} tracked`
+        if (accounts.length === 0) {
+          accountsNode.replaceChildren(el('div', 'empty', 'No researched accounts yet.'))
+          detailNode.innerHTML = '<div class="empty"><strong>No account selected</strong>Research an account to build its dossier and seller views.</div>'
+          return
+        }
+        accountsNode.replaceChildren(...accounts.map(account => {
+          const button = el('button', `account-button${account.id === selectedId ? ' active' : ''}`)
+          button.type = 'button'
+          button.addEventListener('click', () => { selectedId = account.id; render() })
+          const row = el('div', 'account-row')
+          row.append(el('span', 'account-name', account.name), el('span', `status ${account.status}`, account.status.replace('-', ' ')))
+          button.append(row, el('span', 'domain', account.domain || 'Domain unfound'))
+          return button
+        }))
+        renderDetail(accounts.find(account => account.id === selectedId))
+      }
+
+      function renderDetail(account) {
+        const found = account.dossier.facts.filter(fact => fact.status !== 'unfound').length
+        const unfound = account.dossier.facts.filter(fact => fact.status === 'unfound').length
+        const hero = el('div', 'hero')
+        const heroTop = el('div', 'hero-top')
+        const title = el('div')
+        title.append(el('h2', '', account.name), el('div', 'updated', `Updated ${formatDate(account.updatedAt)} · ${account.domain || 'domain unfound'}`))
+        heroTop.append(title, el('span', `status ${account.status}`, account.status.replace('-', ' ')))
+        const metrics = el('div', 'metrics')
+        for (const [label, value] of [['Supported facts', found], ['Unfound fields', unfound], ['Generated views', account.views.length]]) {
+          const metric = el('div', 'metric'); metric.append(el('span', '', label), el('strong', '', String(value))); metrics.append(metric)
+        }
+        hero.append(heroTop, metrics)
+
+        const body = el('div', 'body')
+        const factsTitle = el('div', 'section-title'); factsTitle.append(el('h3', '', 'Dossier coverage'), el('span', 'count', `${account.dossier.facts.length} fields`))
+        const facts = el('div', 'facts')
+        if (account.dossier.facts.length === 0) facts.append(el('div', 'empty', 'The dossier has not been added yet.'))
+        for (const fact of account.dossier.facts) {
+          const card = el('article', 'fact')
+          const head = el('div', 'fact-head'); head.append(el('span', 'fact-label', fact.label), el('span', `fact-state ${fact.status}`, fact.status))
+          card.append(head, el('div', 'fact-value', fact.status === 'unfound' ? 'Unfound' : fact.value))
+          const source = el('div', 'fact-source')
+          if (fact.source) {
+            const link = el('a', '', fact.source.title); link.href = fact.source.url; link.target = '_blank'; link.rel = 'noreferrer'
+            source.append(link, document.createTextNode(` · retrieved ${formatDate(fact.retrievedAt)}`))
+          } else source.textContent = `${fact.note || 'No supported value retrieved.'} · checked ${formatDate(fact.retrievedAt)}`
+          card.append(source); facts.append(card)
+        }
+        body.append(factsTitle, facts)
+
+        const contacts = account.contacts
+        const contactsTitle = el('div', 'section-title')
+        contactsTitle.style.marginTop = '1.45rem'
+        contactsTitle.append(el('h3', '', 'Who to reach'), el('span', 'count', `${contacts.length} contacts`))
+        body.append(contactsTitle)
+        if (contacts.length === 0) {
+          body.append(el('div', 'empty', 'No buying group recommended yet.'))
+        } else {
+          const list = el('div', 'contacts')
+          for (const contact of contacts) list.append(renderContact(account.id, contact))
+          body.append(list)
+        }
+
+        const views = el('div', 'views')
+        const viewsTitle = el('div', 'section-title'); viewsTitle.append(el('h3', '', 'Seller views'), el('span', 'count', `${account.views.length} ready`))
+        views.append(viewsTitle)
+        if (account.views.length === 0) views.append(el('div', 'empty', 'No ABM Plan or Battlecard generated yet.'))
+        for (const view of account.views) {
+          const card = el('details', 'view')
+          card.append(el('summary', '', view.title), renderMarkdown(view.content, view.title))
+          views.append(card)
+        }
+        body.append(views)
+        detailNode.replaceChildren(hero, body)
+      }
+
+      new EventSource('/events').onmessage = () => refresh()
+      refresh()
+    </script>
+  </body>
+</html>

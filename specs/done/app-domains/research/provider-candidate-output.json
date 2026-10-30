@@ -1,0 +1,1083 @@
+[
+  {
+    "id": "add-ready",
+    "requests": [
+      {
+        "method": "POST",
+        "pathname": "/v10/projects/project-placeholder/domains",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": "{\"name\":\"example.com\",\"gitBranch\":\"staging\"}"
+      },
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v6/domains/example.com/config",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "return",
+      "value": {
+        "hostname": "example.com",
+        "apexName": "example.com",
+        "ownershipVerified": true,
+        "misconfigured": false,
+        "records": [],
+        "conflicts": [],
+        "target": {
+          "projectId": "project-placeholder",
+          "gitBranch": "staging"
+        }
+      }
+    }
+  },
+  {
+    "id": "read-subdomain-txt-cname",
+    "requests": [
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v6/domains/tools.example.com/config",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "return",
+      "value": {
+        "hostname": "tools.example.com",
+        "apexName": "example.com",
+        "ownershipVerified": false,
+        "misconfigured": true,
+        "records": [
+          {
+            "type": "TXT",
+            "domain": "_vercel.tools.example.com",
+            "value": "ownership-placeholder",
+            "reason": "pending-ownership"
+          },
+          {
+            "type": "CNAME",
+            "domain": "tools.example.com",
+            "value": "preferred.vercel-dns.example"
+          }
+        ],
+        "conflicts": [
+          {
+            "name": "tools.example.com",
+            "type": "CNAME",
+            "value": "old.example"
+          }
+        ],
+        "target": {
+          "projectId": "project-placeholder",
+          "gitBranch": "staging"
+        }
+      }
+    }
+  },
+  {
+    "id": "add-apex-txt-a",
+    "requests": [
+      {
+        "method": "POST",
+        "pathname": "/v10/projects/project-placeholder/domains",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": "{\"name\":\"example.com\",\"gitBranch\":\"staging\"}"
+      },
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v6/domains/example.com/config",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "return",
+      "value": {
+        "hostname": "example.com",
+        "apexName": "example.com",
+        "ownershipVerified": false,
+        "misconfigured": true,
+        "records": [
+          {
+            "type": "TXT",
+            "domain": "_vercel.example.com",
+            "value": "ownership-placeholder"
+          },
+          {
+            "type": "A",
+            "domain": "example.com",
+            "value": "192.0.2.10"
+          },
+          {
+            "type": "A",
+            "domain": "example.com",
+            "value": "192.0.2.11"
+          }
+        ],
+        "conflicts": [],
+        "target": {
+          "projectId": "project-placeholder",
+          "gitBranch": "staging"
+        }
+      }
+    }
+  },
+  {
+    "id": "read-ownership-pending-routing-ready",
+    "requests": [
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v6/domains/tools.example.com/config",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "return",
+      "value": {
+        "hostname": "tools.example.com",
+        "apexName": "example.com",
+        "ownershipVerified": false,
+        "misconfigured": false,
+        "records": [
+          {
+            "type": "TXT",
+            "domain": "_vercel.tools.example.com",
+            "value": "ownership-placeholder",
+            "reason": "pending-ownership"
+          }
+        ],
+        "conflicts": [],
+        "target": {
+          "projectId": "project-placeholder",
+          "gitBranch": "staging"
+        }
+      }
+    }
+  },
+  {
+    "id": "read-ownership-ready-routing-pending",
+    "requests": [
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v6/domains/tools.example.com/config",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "return",
+      "value": {
+        "hostname": "tools.example.com",
+        "apexName": "example.com",
+        "ownershipVerified": true,
+        "misconfigured": true,
+        "records": [
+          {
+            "type": "CNAME",
+            "domain": "tools.example.com",
+            "value": "preferred.vercel-dns.example"
+          }
+        ],
+        "conflicts": [
+          {
+            "name": "tools.example.com",
+            "type": "CNAME",
+            "value": "old.example"
+          }
+        ],
+        "target": {
+          "projectId": "project-placeholder",
+          "gitBranch": "staging"
+        }
+      }
+    }
+  },
+  {
+    "id": "verify-ready",
+    "requests": [
+      {
+        "method": "POST",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com/verify",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v6/domains/tools.example.com/config",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "return",
+      "value": {
+        "hostname": "tools.example.com",
+        "apexName": "example.com",
+        "ownershipVerified": true,
+        "misconfigured": false,
+        "records": [],
+        "conflicts": [],
+        "target": {
+          "projectId": "project-placeholder",
+          "gitBranch": "staging"
+        }
+      }
+    }
+  },
+  {
+    "id": "verify-both-pending",
+    "requests": [
+      {
+        "method": "POST",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com/verify",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v6/domains/tools.example.com/config",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "return",
+      "value": {
+        "hostname": "tools.example.com",
+        "apexName": "example.com",
+        "ownershipVerified": false,
+        "misconfigured": true,
+        "records": [
+          {
+            "type": "TXT",
+            "domain": "_vercel.tools.example.com",
+            "value": "ownership-placeholder",
+            "reason": "pending-ownership"
+          },
+          {
+            "type": "CNAME",
+            "domain": "tools.example.com",
+            "value": "preferred.vercel-dns.example"
+          }
+        ],
+        "conflicts": [
+          {
+            "name": "tools.example.com",
+            "type": "CNAME",
+            "value": "old.example"
+          }
+        ],
+        "target": {
+          "projectId": "project-placeholder",
+          "gitBranch": "staging"
+        }
+      }
+    }
+  },
+  {
+    "id": "read-multilabel-apex-heuristic",
+    "requests": [
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/example.co.uk",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/example.co.uk",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v6/domains/example.co.uk/config",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "return",
+      "value": {
+        "hostname": "example.co.uk",
+        "apexName": "example.co.uk",
+        "ownershipVerified": true,
+        "misconfigured": true,
+        "records": [
+          {
+            "type": "A",
+            "domain": "example.co.uk",
+            "value": "192.0.2.10"
+          },
+          {
+            "type": "A",
+            "domain": "example.co.uk",
+            "value": "192.0.2.11"
+          }
+        ],
+        "conflicts": [],
+        "target": {
+          "projectId": "project-placeholder",
+          "gitBranch": "staging"
+        }
+      }
+    }
+  },
+  {
+    "id": "read-subdomain-a-fallback",
+    "requests": [
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v6/domains/tools.example.com/config",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "return",
+      "value": {
+        "hostname": "tools.example.com",
+        "apexName": "example.com",
+        "ownershipVerified": true,
+        "misconfigured": true,
+        "records": [
+          {
+            "type": "A",
+            "domain": "tools.example.com",
+            "value": "192.0.2.10"
+          }
+        ],
+        "conflicts": [],
+        "target": {
+          "projectId": "project-placeholder",
+          "gitBranch": "staging"
+        }
+      }
+    }
+  },
+  {
+    "id": "read-no-recommendations",
+    "requests": [
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v6/domains/tools.example.com/config",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "return",
+      "value": {
+        "hostname": "tools.example.com",
+        "apexName": "example.com",
+        "ownershipVerified": false,
+        "misconfigured": true,
+        "records": [],
+        "conflicts": [],
+        "target": {
+          "projectId": "project-placeholder",
+          "gitBranch": "staging"
+        }
+      }
+    }
+  },
+  {
+    "id": "read-missing",
+    "requests": [
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "return",
+      "value": null
+    }
+  },
+  {
+    "id": "remove-missing",
+    "requests": [
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "DELETE",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "return",
+      "value": {
+        "$undefined": true
+      }
+    }
+  },
+  {
+    "id": "remove-present",
+    "requests": [
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "DELETE",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "return",
+      "value": {
+        "$undefined": true
+      }
+    }
+  },
+  {
+    "id": "add-conflict",
+    "requests": [
+      {
+        "method": "POST",
+        "pathname": "/v10/projects/project-placeholder/domains",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": "{\"name\":\"tools.example.com\",\"gitBranch\":\"staging\"}"
+      }
+    ],
+    "outcome": {
+      "kind": "throw",
+      "error": {
+        "name": "VercelDomainError",
+        "message": "Vercel domain request failed (409)"
+      }
+    },
+    "errorDetails": {
+      "code": "provider_error",
+      "retryable": false,
+      "status": 409
+    }
+  },
+  {
+    "id": "read-rate-limit",
+    "requests": [
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "throw",
+      "error": {
+        "name": "VercelDomainError",
+        "message": "Vercel domain request failed (429)"
+      }
+    },
+    "errorDetails": {
+      "code": "provider_error",
+      "retryable": true,
+      "status": 429
+    }
+  },
+  {
+    "id": "read-provider-failure",
+    "requests": [
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "throw",
+      "error": {
+        "name": "VercelDomainError",
+        "message": "Vercel domain request failed (503)"
+      }
+    },
+    "errorDetails": {
+      "code": "provider_error",
+      "retryable": true,
+      "status": 503
+    }
+  },
+  {
+    "id": "verify-provider-failure",
+    "requests": [
+      {
+        "method": "POST",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com/verify",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "throw",
+      "error": {
+        "name": "VercelDomainError",
+        "message": "Vercel domain request failed (500)"
+      }
+    },
+    "errorDetails": {
+      "code": "provider_error",
+      "retryable": true,
+      "status": 500
+    }
+  },
+  {
+    "id": "remove-provider-failure",
+    "requests": [
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "DELETE",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "throw",
+      "error": {
+        "name": "VercelDomainError",
+        "message": "Vercel domain request failed (502)"
+      }
+    },
+    "errorDetails": {
+      "code": "provider_error",
+      "retryable": true,
+      "status": 502
+    }
+  },
+  {
+    "id": "config-provider-failure",
+    "requests": [
+      {
+        "method": "POST",
+        "pathname": "/v10/projects/project-placeholder/domains",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": "{\"name\":\"tools.example.com\",\"gitBranch\":\"staging\"}"
+      },
+      {
+        "method": "GET",
+        "pathname": "/v9/projects/project-placeholder/domains/tools.example.com",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      },
+      {
+        "method": "GET",
+        "pathname": "/v6/domains/tools.example.com/config",
+        "query": [
+          [
+            "teamId",
+            "team-placeholder"
+          ]
+        ],
+        "headers": {
+          "authorization": "REDACTED",
+          "content-type": "application/json"
+        },
+        "body": null
+      }
+    ],
+    "outcome": {
+      "kind": "throw",
+      "error": {
+        "name": "VercelDomainError",
+        "message": "Vercel domain request failed (503)"
+      }
+    },
+    "errorDetails": {
+      "code": "provider_error",
+      "retryable": true,
+      "status": 503
+    }
+  }
+]

@@ -1,0 +1,520 @@
+---
+title: 'Duet AI for Founders: Founder Mode as an Operating System'
+metaTitle: 'Duet AI for Founders: Run Founder Mode at Any Size'
+description: 'Duet AI turns Founder Mode into an operating system. Run a 3-person company like a 50-person one. Ship faster. Skip middle management. Stay close to the product.'
+date: '2026-04-17'
+updatedAt: '2026-04-17'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/6.png'
+  link: '/'
+category: 'guides'
+tags: ['duet-ai', 'founder-mode', 'ai-agents', 'skills', 'startup', 'paul-graham', 'brian-chesky']
+type: 'guide'
+image: '/guides/duet-ai-for-founders/cover.png'
+relatedPosts:
+  [
+    'how-to-build-your-ai-command-center',
+    'claude-code-for-founders',
+    'beyond-claude-code-building-a-shared-skill-library',
+  ]
+howTo:
+  name: 'How to Run Founder Mode with Duet'
+  description: 'A step-by-step system for staying hands-on with your product, growth, and operations while your company scales, using AI agents instead of middle management.'
+  steps:
+    - name: 'Build durable context'
+      text: 'Keep source material in Files and durable facts and connected sources in Train so every agent Session can start with the right business context.'
+    - name: 'Build your playbook bench'
+      text: 'Keep specialized copywriting, SEO, design, and ops instructions in Files so agents can follow proven methods instead of starting from a blank prompt.'
+    - name: 'Assign outcomes, not tasks'
+      text: 'Brief agents with the final state you want, the acceptance criteria, and the context. Let them plan the steps.'
+    - name: 'Run parallel workstreams'
+      text: 'Run product, growth, and ops work in parallel Sessions. You stay in the review loop, not the execution loop.'
+    - name: 'Review, redirect, ship'
+      text: 'Act as the taste filter. Tighten the brief or the memory when output drifts, not the one-off prompt.'
+cta:
+  title: 'Run Founder Mode at any scale.'
+  subtitle: 'Duet is the agent workspace where you assign outcomes and the agents ship. Stay hands-on with the product, skip the management layer.'
+  buttonText: 'Hire Duet'
+  href: '/sign-in?from=guide-founder-mode'
+---
+
+<HeroImage src="/guides/duet-ai-for-founders/hero-image.png" alt="Duet AI for Founders" />
+
+Founder Mode used to be a personality trait. With Duet AI, it's an operating system.
+
+Paul Graham coined the term in September 2024 after Brian Chesky told a room of YC founders that the standard advice, "hire good people and give them room to do their job," nearly killed Airbnb. The fix was not hiring better managers. It was running Airbnb the way Steve Jobs ran Apple: skip-level access, relentless detail obsession, zero layers between the founder and the product.
+
+The thing nobody said at the time: Founder Mode had a physical ceiling. One human cannot sit in 40 code reviews, 12 customer calls, and 8 design crits a week. At some point every founder hires a VP, then a director, then a manager for the managers. The bloat layer begins and velocity dies.
+
+Agents break the ceiling.
+
+This guide shows you how to run Founder Mode as a system, not a vibe. You'll learn the playbook stack, the durable context, the daily cadence, and the exact prompts to paste into Duet this week.
+
+<AnswerBox
+  title="Quick Summary"
+  summary="Duet AI is an AI agent workspace that turns Founder Mode into an operating system. You stay hands-on with product, team, and details at any scale by replacing middle management with specialized agents. You assign outcomes, the agents execute in parallel, and you stay in the review loop. Small teams out-ship 50-person companies because the bottleneck becomes founder judgment, not headcount."
+  queries={[
+    'What is Duet AI for founders?',
+    'How do I use Duet AI to run my startup?',
+    'What is Founder Mode?',
+    'What is the difference between Founder Mode and Manager Mode?',
+    'How do AI agents replace middle management?',
+    'Best AI tools for founders who want to stay hands-on',
+    'How does Brian Chesky run Airbnb in Founder Mode?',
+  ]}
+/>
+
+<GuideTOC
+  items={[
+    { number: 1, title: 'What Founder Mode Is', href: '#what-is-founder-mode' },
+    { number: 2, title: 'Why Manager Mode Fails', href: '#why-manager-mode-fails' },
+    { number: 3, title: 'The Agent Unlock', href: '#why-agents-break-the-founder-mode-ceiling' },
+    { number: 4, title: 'The Founder Mode Stack', href: '#the-founder-mode-stack-in-duet' },
+    {
+      number: 5,
+      title: 'Real Repos & Playbooks',
+      href: '#real-repos-and-skills-to-adapt-this-week',
+    },
+    { number: 6, title: '7-Day Setup Sprint', href: '#the-7-day-founder-mode-sprint' },
+    {
+      number: 7,
+      title: 'Daily Operating Cadence',
+      href: '#the-daily-founder-mode-operating-cadence',
+    },
+    { number: 8, title: 'Prompts to Paste', href: '#founder-mode-prompts-to-paste-in-duet' },
+    { number: 9, title: 'FAQ', href: '#faq' },
+  ]}
+/>
+
+<ResourcesCTA
+  title="Resources for this guide"
+  subtitle="External skills, prompts, and repos you can adapt into playbook files for your Duet workspace."
+  href="https://github.com/anianroid/claude-code-starter-pack"
+/>
+
+---
+
+## What is Founder Mode?
+
+<Callout emoji="🎯">
+  **Founder Mode** is a way of running a company where the founder stays hands-on with the product,
+  the team, and the details, no matter how big the company gets. Coined by Paul Graham in September
+  2024 after a talk by Airbnb CEO Brian Chesky at a Y Combinator event.
+</Callout>
+
+A few things define Founder Mode in practice:
+
+- **Skip-level everything.** Founders talk to ICs directly. No pre-meetings, no filtered updates, no org-chart theatrics.
+- **Small, direct teams.** Steve Jobs ran annual retreats with the 100 most important people at Apple, regardless of where they sat on the org chart. Impact was the filter. Seniority was not.
+- **Detail obsession.** Founders stay in the code reviews, the copy edits, the customer calls, the pricing math.
+- **No modular delegation.** Manager Mode treats every team as a sealed subtree and hopes for the best. Founder Mode opens the boxes whenever the founder wants.
+
+Founder Mode is not micromanagement. It is the refusal to pretend that distance from the product makes you a better leader.
+
+---
+
+## Why Manager Mode fails
+
+Every founder has lived this story.
+
+You start with a team of three. You ship features on Tuesday and close paying customers on Friday. Growth is good, so you raise a Series A. You hire a VP of Product because someone told you that's what grown-up companies do. Six months later, shipping a feature takes three months, and you can't remember the last time you talked to a real user.
+
+That is Manager Mode.
+
+The people architecting the product are not the people coding it. Product managers schedule pre-meetings for the sync meetings. The company optimizes for internal politics instead of customer velocity. Vision drifts because no one in the execution chain has the founder's full context.
+
+Garry Tan, CEO of Y Combinator, has been one of the loudest voices against this default. His argument: hiring a layer of professional managers almost always introduces bloat, slows shipping, and puts the founder on the wrong side of the product. The best founders do not graduate out of the trenches. They buy better shovels.
+
+### Founder Mode vs Manager Mode
+
+|                              | **Manager Mode**      | **Founder Mode**         |
+| ---------------------------- | --------------------- | ------------------------ |
+| **Who talks to ICs**         | VPs and directors     | The founder              |
+| **Delegation style**         | Sealed subtrees       | Opened whenever needed   |
+| **Feedback loop**            | Quarterly reviews     | Daily PR comments        |
+| **Decision speed**           | Alignment meetings    | Fast, high-context calls |
+| **Default fix for problems** | Hire a manager        | Ship a patch             |
+| **What scales**              | Headcount             | Output                   |
+| **Bottleneck**               | Coordination overhead | Founder judgment         |
+
+---
+
+## Why agents break the Founder Mode ceiling
+
+The reason Founder Mode had a ceiling was physics. One founder cannot sit in 40 code reviews, 12 customer calls, and 8 design crits a week without burning out. So at some point, most founders hire a COO, a VP, a director, and the bloat layer begins.
+
+AI agents kill the physics problem.
+
+An agent can sit in the code review. An agent can draft the design spec. An agent can write the cold email sequence, read the customer interview transcript, and flag the churn pattern. Each one runs in parallel. Each one takes your full context as input. None of them ask for a performance review or a Notion page about "team ceremonies."
+
+The goal is no longer to scale headcount. It is to scale output.
+
+This is what Duet enables: the founder stays the primary orchestrator, and a fleet of specialized agents handles execution. Velocity stops being a function of how many humans you hired last quarter and starts being a function of how sharp your playbooks, durable context, and briefs are.
+
+<DuetCTA />
+
+---
+
+## The Founder Mode stack in Duet
+
+![The Founder Mode stack in Duet: memory, playbooks, orchestration](/guides/duet-ai-for-founders/the-founder-mode-stack-in-duet.png)
+
+A chat window is not Founder Mode. Asking vague questions in a text box is the AI equivalent of hiring a junior generalist. You re-explain context, re-review bad output, and slowly drift back toward Manager Mode because the agent cannot finish anything.
+
+Three layers change the equation.
+
+### 1. Memory repos: institutional knowledge that never quits
+
+A normal hire takes six weeks to get up to speed. They read docs, shadow calls, fumble through the codebase, and ask the same questions twice. A memory repo removes that step entirely.
+
+Files and Train give your agents durable context they can draw on across Sessions:
+
+- Architectural decisions and the reasons behind them
+- Brand voice, tone guidelines, banned words
+- Past customer complaints and how you resolved them
+- The pricing experiment you killed in March and why
+- The positioning narrative you approved last quarter
+
+Memory is not documentation. Documentation is for humans who might read it. Memory is the substrate your agents run on every single session.
+
+### 2. Playbook files: specialist methods on the bench
+
+The wider agent ecosystem calls reusable instruction bundles “skills.” In Duet, there is no catalog or install step: keep the parts you adopt as ordinary playbook files in Files, then point the agent at the relevant instructions in a Session. A strong playbook captures the opinions, frameworks, and quality bar you would expect from a specialist.
+
+You are not teaching the agent how to design, write, or sell. You are pointing it at the problem.
+
+For the full mental model, see our deep-dive on [Agent Skills 101: Tools vs MCP vs Skills](/guides/agent-skills-101-tools-vs-mcp-vs-skills).
+
+### 3. Orchestration: you, staying in the review loop
+
+You are the taste filter. Not the task assigner. Your job in Founder Mode with Duet:
+
+- Write sharp briefs with outcomes, not step lists
+- Review PRs, drafts, and designs against taste, not grammar
+- Send work back with a one-line correction and a pointer to memory
+- Update the brief or the memory when the output drifts, not the one-off prompt
+
+The agent handles the execution loop. You handle the judgment loop. That trade is the entire Founder Mode unlock.
+
+---
+
+## Real repos and skills to adapt this week
+
+You do not need to build this stack from scratch. The ecosystem already shipped the pieces.
+
+### Official Anthropic repositories
+
+- **[anthropics/skills](https://github.com/anthropics/skills)**. Anthropic's official skills repo. It includes starter material for document generation, data analysis, research, and creative work. Review the instructions you need and keep the adapted playbooks in Duet Files.
+- **[anthropics/knowledge-work-plugins](https://github.com/anthropics/knowledge-work-plugins)**. Pre-built plugins for sales, marketing, finance, and general productivity. Drop-in quality for non-engineering roles.
+
+### Duet team's own stacks
+
+- **[anianroid/claude-code-starter-pack](https://github.com/anianroid/claude-code-starter-pack)**. The full starter pack we use internally. Skills, CLAUDE.md templates, MCP configs, and the patterns that actually stick.
+- **[Sawyer-Middeleer/cc-gtm](https://github.com/Sawyer-Middeleer/cc-gtm)**. Our GTM skill pack: market research, contact enrichment, copywriting in your voice, CRM cleanup. Every skill from the [Claude Code for Founders guide](/guides/claude-code-for-founders) lives here.
+
+### Community power packs (steal these today)
+
+- **[garrytan/gstack](https://github.com/garrytan/gstack)**. Garry Tan's opinionated Claude Code setup. 23 slash-command specialists (CEO review, eng review, design review, ship, QA) that turn one agent into a virtual engineering team. 20k+ stars. The closest open-source analog to running Founder Mode.
+- **[garrytan/gbrain](https://github.com/garrytan/gbrain)**. Garry Tan's open-source AI knowledge system. Long-term memory for agents, stored as markdown in a git repo. People, companies, meetings, transcripts, ideas. Agents scan and enrich it while you sleep. Exactly the memory repo layer above.
+- **[obra/superpowers](https://github.com/obra/superpowers)**. Jesse Vincent's agentic skills framework. Composable skills for TDD, systematic debugging, brainstorming, and subagent-driven development. 355k+ installs. Enforces red-green-refactor and root-cause debugging before any fix.
+- **[blader/humanizer](https://github.com/blader/humanizer)**. Claude skill that strips AI-generated tells from writing. Based on Wikipedia's "Signs of AI writing" guide. Use its review method as a second-pass playbook before any draft leaves the building.
+- **[nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)**. Design intelligence skill. 50+ styles, 161 color palettes, 99 UX guidelines, 10 stack targets (React, Next, Svelte, SwiftUI, Flutter, etc.). Activates automatically on any UI/UX brief. Closest thing to a senior designer on the bench.
+- **[gsd-build/get-shit-done](https://github.com/gsd-build/get-shit-done)**. Spec-driven meta-prompting system by TÂCHES. Spawns fresh subagent contexts for each task so long sessions do not degrade. Built-in schema drift detection, security enforcement, TDD pipeline mode. The execution engine that keeps long-running workstreams from drifting.
+- **[travisvn/awesome-claude-skills](https://github.com/travisvn/awesome-claude-skills)**. Curated discovery list of every serious Claude skill in the wild. Your feed for when the starter bench isn't enough.
+
+### Watch and read (context on why this works)
+
+- **[Garry Tan announcing gbrain on X](https://x.com/garrytan/status/2044945773541089321)**. The original "I might give it away as open source" thread. Context on what long-term agent memory looks like in production.
+- **[Garry Tan launching gstack on LinkedIn](https://www.linkedin.com/posts/garrytan_gstack-use-garry-tans-exact-claude-code-activity-7438369912357806080-DpoI)**. The viral launch post that turned skill packs into a public category.
+- **[TechCrunch: Why Garry Tan's Claude Code setup got so much love, and hate](https://techcrunch.com/2026/03/17/why-garry-tans-claude-code-setup-has-gotten-so-much-love-and-hate/)**. Read both sides before adopting.
+- **[Jesse Vincent: How I'm using coding agents](https://blog.fsck.com/2025/10/09/superpowers/)**. The backstory behind Superpowers. Read it to understand why TDD-enforced agent workflows beat free-form prompting.
+- **[Simon Willison's notes on Superpowers](https://simonwillison.net/2025/Oct/10/superpowers/)**. A second expert's read. Great for quick skim.
+- **[SitePoint: GStack Tutorial for 10K LOC/Week](https://www.sitepoint.com/gstack-garry-tan-claude-code/)**. Guided install if you want more than the README.
+
+### Your own stack
+
+The real power comes from the playbooks you build around your product and your voice. Start with three:
+
+1. **A context brief** that points to brand voice, positioning, and past decisions stored in Files and Train.
+2. **A writing playbook** grounded in your best public writing (landing pages, posts, and essays). Every first draft should already sound like you.
+3. **A review playbook** that runs your personal pre-ship checklist against PRs, drafts, and designs before you look at them.
+
+For the full build pattern, see [How to Build a Shared AI Skill Library](/guides/beyond-claude-code-building-a-shared-skill-library).
+
+<DuetCTA />
+
+---
+
+## The 7-day Founder Mode sprint
+
+Founder Mode as a system does not need a quarter. It needs a week.
+
+### Day 1: Pick your bottleneck session
+
+Open [duet.so](/) and create one session. Do not create seven. Pick the single function eating the most founder time right now. Design. Copy. Cold outreach. Customer research. Whatever makes you groan on Sunday night.
+
+### Day 2: Add durable context
+
+Add the source material to Files, and use Train for the durable facts and connected sources the agent should carry across Sessions:
+
+- Your top 5 public writing samples (tweets, blog posts, landing page copy)
+- Your positioning doc or a 200-word "what we sell and why" brief
+- The last 3 customer calls as transcripts or notes
+- Your 10 most important past decisions and the reasons behind them
+
+This takes two hours. It pays back every session after.
+
+### Day 3: Adapt one playbook
+
+Pick one reusable instruction set from [anthropics/skills](https://github.com/anthropics/skills) or [cc-gtm](https://github.com/Sawyer-Middeleer/cc-gtm) that maps to the bottleneck. Adapt it into a clearly named file alongside the source material used by the Session. Start with one so you can see which instructions actually improve the result.
+
+### Day 4: Run one real job end-to-end
+
+Not a demo. Not a toy. A real piece of work with a real deadline. Brief the agent with an outcome, not a task list:
+
+> "Ship a 3-email re-engagement sequence for users who signed up, created an account, and never came back. Length: 80 words each. Goal: get them to log back in this week. Voice: match the samples in memory. Ready to paste into [your ESP] by EOD."
+
+Review the output. Redirect. Ship.
+
+### Day 5: Tighten the brief, tighten the memory
+
+Whatever went wrong, fix the root cause:
+
+- If the tone drifted, add 3 more writing samples to memory
+- If the CTA was weak, update the brief template with a CTA rubric
+- If the agent hallucinated a feature, add the product spec to memory
+
+Do not fix the one-off prompt. Fix the system.
+
+### Day 6: Start a second session
+
+Same pattern, different function. If Day 1 was design, Day 6 is growth. If Day 1 was writing, Day 6 is code review.
+
+### Day 7: Run parallel
+
+Run both sessions. Brief the agent with two independent outcomes and review both outputs. This is the first day you will feel the physics break.
+
+By Day 8 you will stop asking whether agents can run execution. You will start asking how many concurrent sessions you can sanely orchestrate.
+
+---
+
+## The daily Founder Mode operating cadence
+
+![The daily Founder Mode operating cadence schedule](/guides/duet-ai-for-founders/the-daily-founder-mode-operating-cadence.png)
+
+Cadence is where Founder Mode either becomes an operating system or dies as a good intention.
+
+### Morning: 30-minute review block
+
+Open Duet. Skim the active sessions. You are looking for three things:
+
+- What shipped overnight that needs your taste filter
+- What is stuck waiting on a founder decision
+- What the agents flagged that you would have missed
+
+Respond in-line. Ship the good stuff. Send the bad stuff back with one-sentence corrections.
+
+### Midday: outcome-based briefs
+
+Write 2-3 new briefs for the afternoon. Each one names an outcome, acceptance criteria, and the relevant playbooks. Skip anything that does not need you to write the brief yourself.
+
+### Afternoon: parallel execution (you are not in this loop)
+
+The agents work. You do the thing only you can do: talk to a customer, close a deal, make the strategic call, or delete a feature.
+
+### Evening: ship and curate memory
+
+30 minutes at end of day. Ship what's ready. Then curate memory:
+
+- One positive example into the "good output" folder
+- One correction into the "voice rules" file
+- One decision into the "decision log"
+
+Memory that does not get curated decays. Memory that gets curated compounds.
+
+### Weekly: the Sunday sharpen
+
+One hour every Sunday. Audit the week:
+
+- Which briefs worked? Why?
+- Which outputs missed? What did the context or playbook lack?
+- Which Session is ready to hand off to the team?
+- Which playbook is reliable enough to become the default?
+
+This is the loop that turns Founder Mode from a vibe into a flywheel.
+
+---
+
+## Founder Mode prompts to paste in Duet
+
+Steal these. Adapt the bracketed pieces.
+
+### The outcome brief
+
+```
+Outcome: [final state, one sentence]
+Success metric: [measurable thing, numeric if possible]
+Playbooks to follow: [list the relevant instruction files]
+Context to use: [brand voice, last 3 customer calls, positioning doc]
+Constraints: [length, tone, banned words, deadlines]
+Out of scope: [what NOT to do]
+First deliverable: [what I want to see in my next review]
+```
+
+### The review-and-redirect
+
+![Review and redirect prompt card](/guides/duet-ai-for-founders/review.png)
+
+```
+Good: [what worked, 1 line]
+Drifted: [what missed, 1 line]
+Fix: [specific correction, 1 line]
+Update memory: [the rule or sample to add so this never happens again]
+Ship when: [new acceptance criteria]
+```
+
+### The memory curation prompt
+
+```
+Read the last 5 shipped deliverables from this workstream.
+Extract: voice patterns that worked, phrases I repeated, CTAs that landed.
+Update the voice memory file with a "confirmed patterns" section.
+Flag: any pattern I used that contradicts the existing voice guidelines.
+```
+
+### The "fire the bloat layer" prompt
+
+```
+Audit my last 30 days of work in these Sessions.
+List every decision that waited more than 24 hours for me.
+For each: suggest a playbook change, Train update, or pre-approved rule that would let an agent handle it next time without founder involvement.
+Flag the 3 highest-leverage changes.
+```
+
+---
+
+## What good looks like: the 3-person company that out-ships the 50-person company
+
+![3-person team out-shipping 50-person company](/guides/duet-ai-for-founders/case-study-stat-card.png)
+
+The era of building a management pyramid to scale a software company is ending. The companies winning now are not the ones that hire the fastest. They are the ones that stay close to their product the longest.
+
+A 3-person team running Founder Mode in Duet can out-ship a 50-person org if:
+
+- Memory is curated weekly
+- Playbooks are specific, not generic
+- Briefs are written as outcomes, not tasks
+- Founders review, and never become the assignment desk
+- Every human hire replaces an agent that hit a ceiling, not an agent that worked
+
+Founder Mode used to be a personality. With Duet, it is an operating model. Load your bench. Keep your team small. Stay in the details. Ship at the speed you did on day one, at any size you want.
+
+<DuetCTA />
+
+---
+
+## FAQ
+
+<Accordion type="single" collapsible className="w-full">
+
+<AccordionItem value="what-is-founder-mode">
+  <AccordionTrigger>What is Founder Mode?</AccordionTrigger>
+  <AccordionContent>
+    Founder Mode is a way of running a company where the founder stays deeply involved in the
+    product, the team, and the details at any scale. Paul Graham coined the term in September 2024
+    after a talk by Airbnb CEO Brian Chesky at a Y Combinator event. Chesky said the conventional
+    advice, "hire good people and give them room to do their job," nearly destroyed Airbnb. Running
+    it like Steve Jobs ran Apple fixed it.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="founder-vs-manager-mode">
+  <AccordionTrigger>What is the difference between Founder Mode and Manager Mode?</AccordionTrigger>
+  <AccordionContent>
+    Manager Mode is the conventional playbook: hire professional managers, delegate through a
+    hierarchy, let subtrees of the org chart run as black boxes. Founder Mode rejects that. The
+    founder keeps skip-level access, stays hands-on with the product, and refuses to trade shipping
+    velocity for org chart neatness.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="how-duet-enables-founder-mode">
+  <AccordionTrigger>How does Duet enable Founder Mode?</AccordionTrigger>
+  <AccordionContent>
+    Duet lets founders assign execution work directly to specialized AI agents instead of hiring a
+    middle management layer. Agents scale output without scaling headcount, so the founder stays in
+    the loop on everything that matters. Reusable playbooks, durable context, and parallel Sessions
+    replace the coordination overhead that makes Manager Mode necessary in the first place.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="what-are-skills">
+  <AccordionTrigger>Can I use agent skills with Duet?</AccordionTrigger>
+  <AccordionContent>
+    Yes, as source material rather than an installed Duet feature. Anthropic publishes reusable
+    instruction bundles at [github.com/anthropics/skills](https://github.com/anthropics/skills).
+    Review the bundle you need, adapt it to your company, and keep the resulting playbook in Files.
+    Duet does not have a skills catalog or an install flow.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="why-memory-repos-matter">
+  <AccordionTrigger>Why do memory repos matter for Founder Mode?</AccordionTrigger>
+  <AccordionContent>
+    A memory repo loads your company's history, brand voice, architectural choices, and past
+    decisions on every session. No onboarding, no context loss, no repeated mistakes. Agents pull
+    from it the way a senior hire pulls from instinct. Without memory, you re-onboard your agents
+    every morning and drift back into Manager Mode by Friday.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="small-team-vs-big-team">
+  <AccordionTrigger>Can a 3-person team really out-ship a 50-person startup?</AccordionTrigger>
+  <AccordionContent>
+    Yes, if the team runs the Founder Mode playbook. A 3-person team with sharp durable context, the
+    right playbooks, and disciplined review can ship faster than a 50-person org drowning in
+    coordination overhead. The bottleneck stops being headcount and starts being founder judgment,
+    which is the point.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="is-this-micromanagement">
+  <AccordionTrigger>Isn't Founder Mode just micromanagement?</AccordionTrigger>
+  <AccordionContent>
+    No. Micromanagement is adding friction without adding signal. Founder Mode is staying close
+    enough to the product to keep taste, speed, and vision aligned. Done with agents instead of
+    people, it scales without the burnout and without the human friction that made micromanagement
+    toxic in the first place.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="how-to-start">
+  <AccordionTrigger>How do I start running Founder Mode with Duet?</AccordionTrigger>
+  <AccordionContent>
+    Sign up at [duet.so](/). Pick your single biggest bottleneck function and create one Session.
+    Add your voice, positioning, and last 3 customer calls to Files and Train. Adapt one external
+    instruction set into a playbook file. Write an outcome-based brief, ship the output, and
+    iterate. The 7-day sprint in this guide is the step-by-step version.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="headcount">
+  <AccordionTrigger>Does Founder Mode mean I should never hire?</AccordionTrigger>
+  <AccordionContent>
+    No. It means every human hire should replace an agent that hit a ceiling, not an agent that was
+    working. Hire for judgment, relationships, and domain expertise agents cannot fake. Do not hire
+    to solve coordination problems agents already solve.
+  </AccordionContent>
+</AccordionItem>
+
+</Accordion>
+
+---
+
+## Keep reading
+
+- [How to Build Your AI Command Center with Duet](/guides/how-to-build-your-ai-command-center). The full setup for your Duet workspace.
+- [Claude Code for Founders](/guides/claude-code-for-founders). The GTM, product, and ops skill pack that started it all.
+- [Agent Skills 101: Tools vs MCP vs Skills](/guides/agent-skills-101-tools-vs-mcp-vs-skills). The mental model for how skills actually work.
+- [How to Build a Shared AI Skill Library](/guides/beyond-claude-code-building-a-shared-skill-library). Package tribal prompts into reusable team capability.

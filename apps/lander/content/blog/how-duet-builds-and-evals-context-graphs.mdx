@@ -1,0 +1,185 @@
+---
+title: 'How Duet Builds Agent Memory with Context Graphs'
+metaTitle: 'Agent Memory and Context Graphs: How Duet Builds and Evals Them (2026)'
+description: 'Context engineering is more than a bigger window. A context graph captures the why behind every agent decision — what was weighed, rejected, and overridden. How Duet records and evals it.'
+date: '2026-05-18'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/2.png'
+category: 'ai'
+tags:
+  [
+    'agent-memory',
+    'context-graphs',
+    'context-engineering',
+    'evals',
+    'long-term-memory',
+    'duet-agent',
+    'ai-agents',
+  ]
+type: 'article'
+image: '/blog/context-graphs/cover.png'
+relatedPosts:
+  - slug: 'how-to-run-claude-code-in-the-cloud'
+    context: 'How persistent cloud agents stay useful across sessions.'
+  - slug: 'how-to-set-up-a-24-7-ai-agent'
+    context: 'Configure always-on agents that survive your laptop closing.'
+cta:
+  title: 'Hire an AI coworker that actually remembers.'
+  subtitle: 'Duet records the why behind every decision so your agent doesn’t forget your conventions, your overrides, or what you tried last week.'
+  buttonText: 'Try Duet'
+  href: '/sign-in?from=blog-context-graphs'
+---
+
+<Callout emoji="💡">
+**Quick Summary**
+
+Most agent memory systems store outcomes. Context engineering done right stores the _precedent_ behind every decision — what was considered, rejected, applied, and overridden. Duet's agent memory is built as a context graph in three observation layers, each gated by its own eval. This post walks through how the graph is captured and how we keep the layers honest.
+
+</Callout>
+
+<Callout emoji="❓">
+**Questions this page answers**
+
+<ul>
+  <li>What is a context graph?</li>
+  <li>What is context engineering, and how is it different from a bigger context window?</li>
+  <li>What is agent memory, and what does long-term memory for AI agents actually mean?</li>
+  <li>Why isn't a chat transcript or summary enough for an AI agent's memory?</li>
+  <li>How does Duet record decision traces from real conversations?</li>
+  <li>How do you eval an agent's memory layer without hand-grading it?</li>
+  <li>How does this compare to mem0, Letta, LangChain memory, and Claude memory?</li>
+</ul>
+</Callout>
+
+## What is context engineering, and what is a context graph?
+
+**Context engineering** is the discipline of shaping what an AI agent actually sees on each turn — not just the prompt, but the retrieved memory, the precedent, the project rules, and the user steers that should override defaults. A bigger context window doesn't solve it. A search index over old transcripts doesn't either. The hard part is deciding _what is worth carrying forward_ and _in what shape_.
+
+A **context graph** is one answer to that question. The framing comes from Foundation Capital's piece [Context Graphs: AI's Trillion-Dollar Opportunity](https://foundationcapital.com/ideas/context-graphs-ais-trillion-dollar-opportunity). Their argument, distilled: the durable value of a knowledge worker's day-to-day isn't the artifacts they ship. It's the **graph of precedents around each decision** — what alternatives were weighed, who approved the exception, which policy was leaned on, which prior call this one built on.
+
+Outcomes get written down. The CRM has the closed-won deal. Git has the merged PR. The doc has the final wording.
+
+The graph almost never does. The discount got approved on a Zoom call. The architecture pivot happened in a Slack thread. The "we don't treat them as legacy" rule came out of one sentence in code review. None of it lands in a system of record, so the next agent — human or AI — re-derives it from scratch and usually picks differently.
+
+For an [AI teammate](/use-cases/small-businesses), that gap is fatal. An agent that only sees outcomes will cheerfully suggest the option you rejected three weeks ago, re-litigate a convention you already settled, or quietly drop the exception you explicitly carved out. It feels forgetful even when its raw recall is perfect, because **recall of outcomes without recall of precedent is not memory of the work — it's memory of the artifact**.
+
+A context graph is the thing that closes that gap. Concretely, for every decision the agent makes or sees you make, it tries to capture six dimensions:
+
+- **Inputs gathered.** Which files, errors, tool results, or prior messages actually shaped the call.
+- **Alternatives considered and rejected.** What was tried first and dropped, what was proposed and vetoed.
+- **User steers, approvals, overrides.** Your near-verbatim wording when you push back, redirect, or sign off.
+- **Convention or policy applied.** Which `AGENTS.md` rule, project guideline, or prior decision was leaned on.
+- **Prior precedent.** Which earlier memory row, PR, or session this decision built on.
+- **Exception / override flag.** Whether the path taken deviates from the default, and why.
+
+A decision row that records the outcome alone — `"refactored auth into middleware"` — has lost the entire graph. A row that records `"User vetoed the per-route guard approach as overengineered; we extracted a single middleware per the project's 'one auth surface' rule established in the prior auth refactor — exception: keep the legacy `/health` route un-guarded"` is a graph edge a future agent can actually reuse.
+
+## Why bare outcomes aren't enough for agent memory
+
+Most agent memory systems today — whether they call themselves long-term memory, agentic memory, or just "context" — land somewhere on a spectrum between two failure modes.
+
+**Transcript memory.** Keep the whole chat. Look it up by embedding. This is technically lossless but operationally useless: the signal-to-noise ratio is brutal, the relevant precedent is buried inside tool output and small talk, and the agent ends up re-reading the same conversation every turn. Worse, the **graph is implicit** — the agent has to re-derive "you preferred the middleware approach" from the raw exchange every time it's needed.
+
+**Summary memory.** Compress conversations into bullet points. Cheap to retrieve, but the compressor optimizes for outcomes (`"shipped auth middleware on May 14"`) and strips the graph (`"chose middleware over per-route guards after user pushback"`). The agent ends up with a neat little outcome log and no idea why anything is the way it is. Two weeks later it proposes the rejected approach again, and you wonder why it doesn't seem to learn.
+
+A context graph is the third option: deliberately structured around the graph dimensions, with the prompts and the evals both written to keep the graph intact end to end.
+
+## How Duet records agent memory in three layers
+
+Duet builds the context graph in three layers. Each one can independently destroy the graph if it isn't careful, so each one is designed around a single job and gated by its own test.
+
+### Layer 1 — the observer
+
+After every turn, an observer model reads the exchange and writes a small set of observation rows into a memory store living inside the user's workspace. This is where the graph dimensions enter the system.
+
+The observer is not instructed to "summarize this exchange" — that's the failure mode that collapses precedent into outcomes. It's instructed to capture decision traces, with each dimension named and exemplified. The single most important instruction it gets is to preserve **user steers, approvals, and overrides** near-verbatim:
+
+> When the user pushes back, redirects, vetoes, or explicitly approves a path, preserve their wording near-verbatim and treat it as an authority signal. Quotes like _"I think this is overengineered"_, _"we should not treat them as legacy"_, _"do X instead"_, _"go ahead"_ are the equivalent of a VP approving a discount on a Zoom call: not in any system of record until you write it down. These are the highest-signal observations, because they are the precedent that overrides defaults.
+
+The observer also gets two anti-patterns spelled out, because both are easy traps:
+
+1. **Re-readable ground truth is not memory.** If the only thing the exchange produced was "the agent listed a directory and found these files," the row gets dropped — the agent can list the directory again next turn. Memory is reserved for things the agent can't trivially re-discover.
+2. **Bare outcomes are invalid.** "X was fixed" isn't a decision trace. A row has to attribute the call to at least one of the six dimensions above, or it isn't worth keeping.
+
+### Layer 2 — the in-session reflector
+
+Within a single session, observations accumulate fast. The in-session reflector periodically compacts them into a rolled-up view that the agent re-loads at the top of each turn. This is the layer that keeps the context graph visible without bloating the prompt.
+
+The compaction step is the second place the graph can die. If the reflector treats user steers as "narrative fluff" and strips them — leaving only the outcome — every downstream layer is starved. The reflector is explicitly told not to: a row that survives compaction has to keep its attribution intact (user steer, convention, prior precedent, observed symptom, or "no precedent — fresh judgement call").
+
+### Layer 3 — the global reflector
+
+Across sessions, the cross-session pool gets periodically atomized into durable, long-term rows. This is the layer that turns a week of work into the institutional memory the agent loads in future sessions.
+
+The constraint here is harder: a row that lands in this layer has to be readable cold, by a future agent that has never seen the original conversation. That means full mini-narratives — trigger → journey → decision → rationale — with concrete identifiers (file paths, PR numbers, dates, version tags) that the future agent can grep for.
+
+A row that survives into this layer is the closest thing the system has to a permanent graph edge. We treat it accordingly.
+
+## How we eval the agent memory layer
+
+Prompts are the easy part. Keeping prompts honest as the system evolves is the hard part. A prompt change that quietly drops "user steers" from the extraction instructions doesn't break any normal test — but it silently amputates the graph from that day forward.
+
+So the memory layer has its own eval suite. The pattern is the same in each one: drive the real layer end-to-end against a live model with a hand-crafted scenario, then grade the output with a domain-specific LLM judge.
+
+### Gating the observer
+
+The observer eval feeds it a short exchange that contains a clear, verbatim user steer — for example, the user pushing back on a file layout and stating _"treat that as the project convention going forward."_ It then asserts that the observation written to memory preserves the steer: phrasing, intent, and precedent flag intact. If a future prompt change makes the observer collapse the exchange into a bare outcome, the eval fails at the judge step. The amputated graph gets caught at the layer where it would otherwise enter the system.
+
+### Gating the reflectors
+
+The in-session reflector and the global reflector share a prompt, so one eval covers both. It runs the reflector against a pool of observations that include user steers, conventions, and exception flags, and grades the rolled-up output against three independent judges:
+
+1. **Narrative shape.** Does each row read as a trigger → journey → decision → rationale mini-story, or has it collapsed back to a bare headline?
+2. **Concrete identifiers.** Does each row contain at least one grep-able anchor (file path, PR number, date, version tag) a future agent could actually look up?
+3. **User-steer preservation.** Does the row still carry the user's near-verbatim wording, or has it been laundered into generic phrasing?
+
+A reflector that strips any of those gets caught before its output ever reaches a real user.
+
+### Gating the judges
+
+This is the part that's easy to miss. **A judge prompt is just another prompt.** If the judge drifts — too strict, too lenient, fooled by a particular phrasing — every eval downstream of it goes quietly wrong.
+
+So each judge has its own eval with known-answer fixtures: hand-crafted positive cases that must pass, and hand-crafted negative cases that must fail. A judge prompt change has to keep both sets correct before the layer-level evals run. The graders are graded.
+
+## Why this matters for an AI teammate with long-term memory
+
+Build it without the graph and you ship a chatbot with good recall: it remembers what you said, replays your last conversation, finds the file you mentioned. Pleasant. Forgettable. (Memory only starts to matter when the agent is also [always-on across sessions](/blog/how-to-set-up-a-24-7-ai-agent) — otherwise there is nothing to accumulate.)
+
+Build it with the graph and you ship something different in kind. The agent shows up to the next session knowing not just what got done last week, but **why** — which option you rejected, which convention you set, which exception you carved out. It stops re-litigating settled calls. It starts catching its own drift before you do. Over months, it accumulates the kind of institutional memory that's normally locked inside whoever has been at the company longest — the difference between a coding assistant you reset every week and [a coding agent that runs in the cloud and stays with you](/blog/how-to-run-claude-code-in-the-cloud).
+
+That's the bet. The trillion-dollar opportunity in Foundation Capital's framing isn't a model with bigger context — it's a teammate with better precedent. We're [building toward the second](/use-cases).
+
+## Frequently Asked Questions
+
+### What is context engineering?
+
+Context engineering is the practice of designing _what an AI agent sees_ on every turn — the retrieved memory, the project conventions, the user steers, the precedent. It's the layer that decides which past information is worth carrying forward and in what shape. A bigger context window is plumbing; context engineering is the editorial step that decides what flows through it. A context graph is one approach inside that discipline: structured precedent, not raw transcripts.
+
+### What is agent memory, and what does long-term memory for AI agents actually mean?
+
+Agent memory is whatever an AI agent persists across turns or sessions so it doesn't have to re-derive the same context every time. Short-term memory is the current conversation window. Long-term memory for AI agents is the durable layer — the user's conventions, prior decisions, exceptions, and overrides — that survives across sessions. Duet's agent memory is structured as a context graph so what survives isn't just the outcome but the precedent behind it.
+
+### What is the difference between a context graph and a vector memory store?
+
+A vector store indexes raw text by semantic similarity. It can retrieve "things related to auth middleware" but it can't tell you _why_ the middleware approach was chosen over per-route guards, or that you explicitly vetoed the per-route approach as overengineered. A context graph layers a structured decision trace — alternatives, user steers, conventions applied, exceptions — on top of (or instead of) the raw text. Vector recall is necessary but not sufficient.
+
+### How does this compare to mem0, Letta, LangChain memory, or Claude memory?
+
+Most dedicated agent-memory libraries (mem0, Letta, LangChain memory) and product-level memory features (Claude memory, ChatGPT memory) focus on extracting _facts_ from a conversation and recalling them later — things like "the user prefers TypeScript," "the project deploys to Vercel." Useful, but still primarily a fact store. Duet's context graph is built around _decisions and precedent_: not just "the user prefers X," but "the user vetoed Y in favor of X on this date, because of Z, and the exception is W." That graph is what lets an AI teammate stop re-litigating settled calls. The two approaches are complementary — facts are necessary; precedent is what makes the agent feel like it has actually been in the room with you.
+
+### Can I see the observations Duet is storing about my work?
+
+Yes. They live in a local memory store inside your own Duet workspace, and Duet exposes commands to inspect, search, and reflect on them. Nothing leaves your sandbox unless you explicitly share it. The observer and reflector models run through your configured AI gateway, the same as your agent turns.
+
+### How is this different from CLAUDE.md or AGENTS.md project rules?
+
+Project-rule files (`CLAUDE.md`, `AGENTS.md`, similar) are the _policies_ an agent leans on. A context graph is the _case law_ — the actual decisions, exceptions, and overrides that have accumulated on top of those policies. The graph dimensions explicitly include "convention or policy applied" so the case law cites the rule, but the rule alone isn't enough: the value lives in the precedent.
+
+### Won't capturing all this make the agent's prompt enormous?
+
+That's exactly the problem the three layers solve. The observer writes everything. The in-session reflector compacts within a session. The global reflector atomizes across sessions into durable rows that are loaded based on relevance. The agent's actual prompt only sees the slice of the graph that the current turn likely needs — usage-bumped, decayed by freshness, and ranked.
+
+### Where can I read the source?
+
+The memory layer lives in [`duet-agent`](https://github.com/dzhng/duet-agent) under `src/memory/`, and the evals are under `evals/`. The prompts in `src/memory/observational-prompts.ts` are the load-bearing artifact — they're worth reading top to bottom if you're designing your own memory system.

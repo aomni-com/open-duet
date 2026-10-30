@@ -1,0 +1,419 @@
+---
+title: 'Precios de Claude Code en 2026: planes, costo por tokens y la opción en la nube'
+metaTitle: 'Precios de Claude Code en 2026: planes, tokens y nube'
+description: 'Precios de Claude Code en 2026: Pro a $20, Max a $100/$200, costo por tokens en la API y cuánto cuesta correr Claude Code en la nube.'
+date: '2026-04-24'
+updatedAt: '2026-05-15'
+readTime: '9 min read'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/3.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'guides'
+tags: ['claude-code', 'pricing', 'claude-pro', 'claude-max', 'anthropic-api', 'team-plans']
+type: 'article'
+image: '/blog/claude-code-pricing/cover.png'
+locale: es-419
+translationKey: 'claude-code-pricing'
+relatedPosts:
+  - 'how-to-run-claude-code-in-the-cloud'
+  - 'claude-code-vs-cursor-vs-codex'
+  - 'how-to-build-and-deploy-a-web-app-using-only-ai'
+  - 'how-to-set-up-a-24-7-ai-agent'
+cta:
+  title: 'Todos los modelos de Claude, una sola contratación plana.'
+  subtitle: 'Duet corre Opus, Sonnet y Haiku a la profundidad correcta para cada tarea. Elige un plan mensual y mantén visible el uso adicional de la reserva.'
+  buttonText: 'Prueba Duet gratis'
+  href: '/sign-in?from=blog-claude-pricing'
+---
+
+## Precios de Claude Code de un vistazo (2026)
+
+| Plan                   | Precio                                    | Ideal para                                             |
+| ---------------------- | ----------------------------------------- | ------------------------------------------------------ |
+| **Claude Pro**         | **$20 / mes**                             | Dev solitario, uso ocasional de Claude Code            |
+| **Claude Max 5x**      | **$100 / mes**                            | Uso diario que ya choca con los límites de Pro         |
+| **Claude Max 20x**     | **$200 / mes**                            | Claude Code como IDE principal, todo el día            |
+| **Team Premium**       | **$100 / asiento / mes** (mínimo 5)       | Equipos pequeños que quieren SSO y admin               |
+| **API de Anthropic**   | **Pago por token** ($1 a $25 / 1M tokens) | Agencias, seguimiento de costo por cliente             |
+| **Córrelo en la nube** | **Plan mensual gestionado**               | Trabajo asíncrono o 24/7 sin tener un desktop prendido |
+
+**O córrelo en la nube con un plan mensual:** [Duet](/pricing) hospeda Claude Code en un sandbox persistente. Los créditos incluidos se reinician al renovar y la reserva pagada cubre el uso adicional.
+
+El resto de esta página va a fondo en cada nivel: qué significan realmente los límites de tasa, dónde vive la trampa del uso extra en modo API y qué plan le conviene a un dev solitario vs un equipo de cinco vs una agencia corriendo Claude Code en una docena de codebases de clientes.
+
+Al final, sabrás exactamente lo que Claude Code te costará _a ti_, no a algún usuario intensivo hipotético, y qué plan elegir.
+
+<Callout emoji="💡">
+**TL;DR**
+
+Claude Code se ofrece bajo cuatro modelos de precios: Pro a $20/mes, Max 5x a $100 y Max 20x a $200, API por uso ($1 a $25 por millón de tokens), y asientos Team Premium a $100/asiento con un mínimo de 5 asientos. La respuesta correcta depende de cuánto lo usas, de si eres solitario o estás en un equipo, y de cuánta predictibilidad de facturación necesitas.
+
+- Dev solitario bajo 50M tokens/mes: Claude Pro a $20. No le des tantas vueltas.
+- Claude Code es tu IDE principal: Max 20x a $200. Deja de pelear con los límites de tasa.
+- Equipo de 3 a 10 con uso disparejo: una plataforma administrada con uso compartido como Duet le gana a los cálculos de $100/asiento de Team Premium.
+- Agencia con trabajo de clientes a ráfagas: Duet por predictibilidad, API por seguimiento puro de costo por cliente.
+
+</Callout>
+
+![Claude Code pricing tiers at a glance](/blog/claude-code-pricing/hero.png)
+
+## Claude Code Pro vs Max vs uso de API
+
+Claude Code tiene tres modelos de precios que se ven similares en la superficie pero se comportan de forma muy distinta en la práctica. Elige el equivocado y o chocas con un muro a media tarde o pagas dos a tres veces lo que necesitabas.
+
+### Planes de suscripción (Claude Pro y Claude Max)
+
+Este es el punto de entrada más común. Pagas una tarifa mensual plana y obtienes una asignación de tokens que se reinicia en una ventana móvil de 5 horas, con un techo semanal por encima. Hay tres niveles:
+
+- **Claude Pro: $20/mes.** Acceso a Sonnet 4.6 y Opus 4.7, aproximadamente 44,000 tokens por ventana de 5 horas, y cerca de 40 a 80 horas de uso de Sonnet por semana. Suficiente para sesiones de programación concentradas, no suficiente para usar Claude Code todo el día como tu IDE principal.
+- **Claude Max 5x: $100/mes.** Alrededor de 88,000 tokens por ventana de 5 horas y 140 a 280 horas de Sonnet más 15 a 35 horas de Opus por semana. Hecho para desarrolladores que chocaban con los límites de Pro a diario.
+- **Claude Max 20x: $200/mes.** Aproximadamente 220,000 tokens por ventana de 5 horas, 240 a 480 horas de Sonnet, y 24 a 40 horas de Opus por semana. Este es el nivel donde los límites de tasa dejan de interrumpir tu día.
+
+![Claude Code plan token allowances compared](/blog/claude-code-pricing/plan-ladder.png)
+
+Un detalle importante: tu límite de uso se comparte entre el chat de Claude.ai y Claude Code. Si quemas tokens chateando con Claude en el navegador, eso consume del mismo balde del que Claude Code extrae.
+
+### Precios de API de Claude Code
+
+En vez de una suscripción, puedes pagar por token a través de la API de Anthropic. Claude Code se autentica con una API key y te cobra según lo que realmente usas.
+
+Tarifas actuales:
+
+- Opus 4.7: $5 por millón de tokens de entrada, $25 por millón de tokens de salida
+- Sonnet 4.6: $3 de entrada, $15 de salida por millón de tokens
+- Haiku 4.5: $1 de entrada, $5 de salida por millón de tokens
+- Prompt caching: las escrituras de caché de 5 minutos cuestan 1.25x la tarifa de entrada, las escrituras de caché de 1 hora cuestan 2x, las lecturas de caché cuestan 0.1x
+
+Algo a vigilar: Opus 4.7 viene con un nuevo tokenizador que puede producir hasta un 35% más de tokens para el mismo texto de entrada en comparación con Opus 4.6. La tarifa por token no cambia, pero tu costo efectivo por prompt puede ser más alto simplemente porque el mismo código se tokeniza en más piezas.
+
+La facturación por API es precisa pero impredecible. Un uso intensivo de Opus en un codebase grande puede llegar fácilmente a $30 a $60 por día. Ese es el impuesto de la flexibilidad.
+
+### Planes de equipo y Enterprise de Claude Code
+
+Para grupos, Anthropic ofrece planes Team que empiezan en $20/asiento/mes en Standard, pero Claude Code solo se incluye en asientos Premium a $100/asiento/mes (facturación anual) o $125/asiento/mes (facturación mensual), con un mínimo de 5 asientos. Puedes mezclar asientos Standard y Premium en el mismo equipo.
+
+Enterprise desbloquea una ventana de contexto de 500K, preparación para HIPAA, SSO, retención de datos personalizada y precios personalizados a través de ventas de Anthropic. Es la opción correcta si compliance o procurement están en la sala.
+
+### El nuevo detalle del "uso extra"
+
+En 2026, Anthropic añadió un interruptor de "uso extra" en cada plan de consumidor pagado. Cuando llegas a tu límite incluido, en vez de detenerte en seco, puedes optar por continuar a tarifas estándar de API con un tope mensual de gasto que tú controlas.
+
+Esto importa más de lo que suena. Convierte la decisión de Pro vs Max de "qué techo quiero" a "qué línea base quiero, y cuánto desborde estoy cómodo pagando".
+
+![Extra usage toggle in Claude account settings](/blog/claude-code-pricing/extra-usage-toggle.png)
+
+### La trampa en la que todos caen
+
+Si tienes una variable de entorno `ANTHROPIC_API_KEY` configurada en tu máquina, Claude Code usará la API key en silencio en vez de tu suscripción Pro o Max.
+
+Te seguirán cobrando a través de la API mientras tu plan Max de $200/mes queda ahí sin usarse.
+
+Revisa tu perfil de shell antes de pagar por una suscripción. Este es el error de precios de Claude Code más común que vemos.
+
+![Checking for ANTHROPIC_API_KEY in your shell](/blog/claude-code-pricing/api-key-trap.png)
+
+## Comparación de precios de Claude Code
+
+Esta es la tabla para guardar en marcadores. Cada plan que vende Anthropic, más la opción de API y dónde encaja una plataforma administrada, dispuestos para que veas las concesiones reales de un vistazo.
+
+| Plan               | Precio                                   | Modelos               | Ventana de 5 hrs              | Límite semanal (Sonnet)         | Límite semanal (Opus)           | Mejor para                                                                     |
+| ------------------ | ---------------------------------------- | --------------------- | ----------------------------- | ------------------------------- | ------------------------------- | ------------------------------------------------------------------------------ |
+| **Claude Pro**     | $20/mes                                  | Sonnet 4.6, Opus 4.7  | ~44K tokens                   | 40–80 hrs                       | Limitado                        | Devs solitarios, proyectos paralelos, unas pocas horas concentradas/día        |
+| **Claude Max 5x**  | $100/mes                                 | Sonnet 4.6, Opus 4.7  | ~88K tokens                   | 140–280 hrs                     | 15–35 hrs                       | Usuarios diarios de Claude Code que chocan con los límites de Pro cada semana  |
+| **Claude Max 20x** | $200/mes                                 | Sonnet 4.6, Opus 4.7  | ~220K tokens                  | 240–480 hrs                     | 24–40 hrs                       | Workflows de Claude Code de día completo, repos grandes                        |
+| **Team (Premium)** | $100/asiento/mes (anual), mín 5 asientos | Sonnet 4.6, Opus 4.7  | Equivalente a Max por asiento | Por asiento                     | Por asiento                     | Equipos de 5+ con facturación centralizada                                     |
+| **Enterprise**     | Personalizado                            | Todos + contexto 500K | Personalizado                 | Personalizado                   | Personalizado                   | Compliance, SSO, HIPAA, procurement                                            |
+| **API (por uso)**  | $3–25 por M tokens                       | Todos los modelos     | Sin tope                      | Sin tope                        | Sin tope                        | Uso impredecible o muy bajo, automatización                                    |
+| **Duet**           | Plan mensual Starter, Pro o Max          | Claude (administrado) | Créditos mensuales compartidos | La reserva cubre uso adicional  | Sin bucket por asiento           | Equipos que quieren nube gestionada y acceso compartido                        |
+
+### Más sobre la tabla
+
+**Columna de precio.** Max 5x y Max 20x no son "un Pro mejor". Son baldes más grandes. El techo sube, el acceso al modelo se mantiene igual.
+
+**Ventana de 5 horas.** Este es el presupuesto móvil. Cada prompt cuesta tokens; los tokens se reinician 5 horas después de tu primera solicitud de una sesión. Si pasas esto por alto, vas a pensar que Claude Code "se rompió" a las 3 p. m.
+
+**Límites semanales.** Añadidos en agosto de 2025 para frenar el uso en segundo plano 24/7. La mayoría de los usuarios nunca los alcanza. Los usuarios intensivos que corren Claude Code en varios repos toda la semana pueden hacerlo.
+
+**Modelos.** Pro, Max y Team obtienen los mismos modelos de Claude. Lo que difiere es cuánto puedes usarlos.
+
+**Opus vs Sonnet.** Opus es el modelo caro y más inteligente. En planes Max obtienes una asignación semanal separada para Opus encima de Sonnet. En Pro, el acceso a Opus es lo suficientemente limitado como para que la mayoría de los usuarios de Pro usen Sonnet por defecto.
+
+### ¿Qué plan de Claude Code le conviene a qué comprador?
+
+- **Aficionado, estudiante, usuario ocasional.** Claude Pro. No vas a sobrepasar los $20/mes.
+- **Desarrollador en activo programando de 4 a 6 horas/día.** Pro con uso extra habilitado, o Max 5x si chocas con el muro cada semana.
+- **Claude Code es tu IDE principal.** Max 20x. Deja de pelear con los límites.
+- **Equipo de 5+ con una sola factura.** Asientos Team Premium, o una plataforma administrada con precios planos.
+- **Agencia con cargas variables y a ráfagas.** API para las ráfagas, o Duet por predictibilidad.
+- **Salud, finanzas, regulado.** Enterprise, sin atajos.
+
+### Dónde la tabla de comparación miente un poco
+
+Dos asteriscos que vale la pena conocer:
+
+1. **"Tokens por ventana de 5 horas"** es la estimación de Anthropic basada en uso promedio. Los codebases grandes queman tokens 3 a 5x más rápido que el promedio porque cada archivo que cargas consume contexto. Un monorepo de 200K líneas en Pro chocará con los límites mucho antes de lo que sugiere "44K tokens".
+2. **Los asientos de Team** requieren un mínimo de 5 asientos. Una startup de 3 personas no tiene una opción limpia con Anthropic. O compras 5 asientos y desperdicias 2, o apilas suscripciones Max individuales y pierdes la facturación centralizada.
+
+Aquí es donde los precios de Claude Code dejan de ser una tabla y empiezan a ser una decisión. La siguiente sección recorre cuatro escenarios reales con números mensuales concretos.
+
+## Escenarios de costo de Claude Code
+
+Los precios de lista mienten. Lo que importa es lo que llega a tu tarjeta al final del mes una vez que tomas en cuenta cómo trabajas en realidad. Aquí hay cuatro escenarios honestos con números reales.
+
+![Which Claude Code plan fits which buyer](/blog/claude-code-pricing/four-personas.png)
+
+### El desarrollador solitario (proyecto paralelo + trabajo de tiempo completo)
+
+**Perfil.** Trabajo de tiempo completo, publica un proyecto paralelo en las noches y los fines de semana. Usa Claude Code 1 a 2 horas al día, principalmente Sonnet, Opus ocasional para bugs difíciles.
+
+**Uso mensual estimado.** ~25M tokens.
+
+**Desglose de costo:**
+
+- **Pro ($20/mes).** Encaja cómodamente, quizá 2 a 3 momentos de "llegaste a tu límite" por mes. La mejor opción.
+- **Max 5x ($100/mes).** Excesivo. Usarías el 20% de la asignación.
+- **API por uso.** ~$40 a $60/mes a tarifas de Sonnet. Más caro que Pro y menos predecible.
+
+**Veredicto.** Pro a $20/mes. Activa el uso extra como red de seguridad.
+
+### El usuario de Claude Code de tiempo completo
+
+**Perfil.** Desarrollador que se ha volcado por completo a Claude Code como su IDE principal. 6 a 8 horas al día, repo grande, uso intensivo de Opus para trabajo de arquitectura.
+
+**Uso mensual estimado.** ~300M tokens.
+
+**Desglose de costo:**
+
+- **Pro ($20/mes).** Chocarás con el muro de las 5 horas antes del almuerzo. No.
+- **Max 5x ($100/mes).** Funcional la mayoría de los días. Chocarás con los límites semanales de Opus para el viernes.
+- **Max 20x ($200/mes).** Los límites de tasa dejan de ser un factor. Este es el nivel hecho para ti.
+- **API por uso.** Aproximadamente $800 a $1,500/mes a este volumen. Un caso de estudio de un desarrollador mostró $15,000 en cargos de API a lo largo de 8 meses vs ~$800 en Max. Una diferencia del 93%.
+
+**Veredicto.** Max 20x a $200/mes. La cuenta ni se acerca.
+
+### El equipo de 5
+
+**Perfil.** Equipo de ingeniería de cinco personas, todos usando Claude Code a diario, mezcla de Sonnet y Opus, una persona de cuentas por pagar que quiere una sola factura.
+
+**Uso mensual estimado.** Varía por dev; 3 intensivos, 2 ligeros.
+
+**Desglose de costo:**
+
+| Opción                              | Costo mensual          | Notas                                                                          |
+| ----------------------------------- | ---------------------- | ------------------------------------------------------------------------------ |
+| 5× Max 5x individuales              | $500                   | Sin facturación central, sin controles de admin, dolor de cabeza de reembolsos |
+| 5× Max 20x individuales             | $1,000                 | El mismo problema, más caro                                                    |
+| Anthropic Team (5 asientos Premium) | $500                   | Facturación centralizada, pero 2 usuarios ligeros pagan de más                 |
+| Mezcla: 3 Premium + 2 Standard      | $380                   | Solo si los 2 usuarios ligeros no necesitan Claude Code en absoluto            |
+| Plataforma administrada (Duet)      | Precio plano de equipo | Asientos ilimitados, acceso compartido, mensual predecible                     |
+
+Si cada ingeniero programa con Claude a diario, Team Premium a $500/mes está bien. Si el uso es disparejo, lo que casi siempre ocurre, una plataforma administrada con precios planos evita pagar $100/asiento por alguien que usa Claude Code dos veces por semana.
+
+### La agencia
+
+**Perfil.** Ocho desarrolladores rotando entre una docena de codebases de clientes, muy a ráfagas (todos al frente durante semanas de sprint, tranquilidad entre medias). Necesita acceso compartido, no cálculos por asiento.
+
+**Uso mensual estimado.** 500M+ tokens, con picos.
+
+**Desglose de costo:**
+
+- **8× Max 20x.** $1,600/mes. Pagas de más en las semanas tranquilas, aún limitado por tasa por cuenta durante las ráfagas.
+- **Anthropic Team (8 Premium).** $800/mes. Mejor, pero las asignaciones por asiento no se comparten. Un desarrollador puede chocar con los límites mientras el balde de otro queda sin usarse.
+- **API por uso.** $2,000 a $4,000/mes a este volumen, completamente variable. Genial para seguimiento de costo por cliente, brutal para el flujo de caja.
+- **Duet (administrado, plan de equipo).** Créditos mensuales compartidos en el workspace, con una reserva pagada para uso adicional y sin topes individuales por asiento.
+
+Las agencias son donde "mensual predecible + uso compartido" le gana a los precios por asiento de Anthropic casi siempre. O Duet o una conversación de Enterprise con Anthropic.
+
+### El patrón
+
+Mira los cuatro escenarios y una cosa resalta: los precios directos de Anthropic están optimizados para el **usuario intensivo individual** (Max 20x es genuinamente una ganga a 300M+ tokens).
+
+Se vuelve incómodo para **equipos con uso disparejo** y **agencias con cargas a ráfagas**, porque las asignaciones por asiento no se comparten y los precios de Team asumen que todos lo usan por igual.
+
+Esa es la brecha que llenan las plataformas administradas. Más sobre eso dos secciones más abajo.
+
+## Costos ocultos de Claude Code que vigilar (tokens, ventanas de contexto, llamadas MCP)
+
+El precio de lista es solo la mitad de la historia. Lo que hace que los precios de Claude Code sean genuinamente difíciles de predecir son las mecánicas por debajo, las cosas que multiplican en silencio tu consumo de tokens sin aparecer en la página de comparación de planes. Aquí están los cuatro que más confunden a la gente.
+
+### El impuesto de la ventana de contexto
+
+Cada vez que Claude Code lee un archivo, ese archivo se queda en la ventana de contexto por el resto de la conversación. Pídele a Claude que "mire el módulo de auth" en un repo grande y podrías cargar 40,000 tokens antes de haber escrito un solo prompt real. Cada mensaje posterior reenvía ese contexto.
+
+El efecto práctico: una sesión de 30 minutos en un codebase grande puede quemar 300K a 500K tokens aunque solo hayas enviado 10 mensajes. En Pro, eso es una porción significativa de tu asignación de 5 horas perdida antes del almuerzo. En la API, eso son dólares reales. Una sesión larga de Opus puede costar en silencio $15 a $25.
+
+**Qué hacer.** Usa `/clear` entre tareas no relacionadas. Evita cargar directorios enteros cuando un solo archivo basta. Si estás en Pro y chocas con los límites rápido, el 80% del tiempo el culpable es el contexto, no la cantidad de prompts.
+
+### Los tokens de salida cuestan 5x los tokens de entrada
+
+Los precios de API tienen dos números por una razón. Los tokens de entrada (lo que envías) son baratos. Los tokens de salida (lo que Claude escribe de vuelta) son 5x más caros en todos los modelos. Una solicitud que cuesta $0.10 en entrada puede costar $0.50 en salida si Claude escribe un archivo largo.
+
+Esto importa más para Claude Code específicamente, porque la generación de código es intensiva en salida. "Reescribe este componente de 400 líneas" es un prompt caro. "Revisa este componente de 400 líneas y sugiere 3 cambios" es 10x más barato.
+
+**Qué hacer.** Prefiere ediciones puntuales en vez de reescrituras completas. Pide diffs, no archivos. Si estás en facturación por API, este único hábito puede reducir tu gasto mensual a la mitad.
+
+### Servidores MCP y llamadas de herramientas
+
+Los servidores del Model Context Protocol extienden Claude Code con herramientas externas: GitHub, bases de datos, navegadores, APIs personalizadas. Son poderosos, pero cada llamada de herramienta es un viaje de ida y vuelta. Claude lee la salida de la herramienta, lo que se suma al contexto, lo que se suma al costo.
+
+Una sola llamada MCP de "revisa los últimos 20 PRs" puede cargar 8,000 tokens de metadatos de PRs al contexto, donde luego se quedan por el resto de tu sesión. Encadena tres o cuatro llamadas MCP en una conversación y habrás añadido 30K a 50K tokens de ruido de fondo a cada prompt posterior.
+
+**Qué hacer.** Audita qué MCPs se cargan en cada sesión vs bajo demanda. Apaga los que no uses. Para MCPs caros (como indexadores de repo completos), prefiere las llamadas explícitas en vez de la carga automática.
+
+### Prompt caching
+
+Este corta para el otro lado. Es un _ahorro_ oculto. El prompt caching de Anthropic te deja reutilizar una porción del contexto sin pagar el precio completo de entrada. Las escrituras de caché cuestan 1.25x la tarifa de entrada, pero las lecturas de caché cuestan apenas el **10%** de la tarifa de entrada.
+
+Para Claude Code, esto importa enormemente. Tu system prompt, los archivos comunes del proyecto y el historial de conversación de larga duración pueden cachearse todos. Cuando el caché funciona bien, los costos de entrada pueden bajar entre 80 y 90%.
+
+El truco: el caché solo ayuda en la facturación por API. Los planes Pro y Max ya incluyen el caché en su tarifa plana, pero no ves el ahorro, simplemente obtienes un uso un poco más efectivo. Si estás en API, asegúrate de que el caché esté realmente habilitado. Muchas configuraciones de Claude Code no lo activan por defecto.
+
+### La trampa de sobreescritura de suscripción
+
+Vale la pena repetirlo de antes: si `ANTHROPIC_API_KEY` está configurada en tu shell, Claude Code usa la API key y te cobra a tarifas de API, ignorando por completo tu suscripción de $20 a $200. La gente descubre esto cuando ve una factura de API de $400 encima de su plan Max de $200.
+
+**Qué hacer.** Corre `echo $ANTHROPIC_API_KEY` en tu terminal. Si imprime algo, o la desactivas antes de usar Claude Code, o aceptas que tu suscripción no está haciendo nada.
+
+### La meta-lección
+
+El costo real de Claude Code no es el plan que eliges. Es cómo trabajas. Un usuario disciplinado de Pro puede lograr más que un usuario descuidado de Max 20x, porque el usuario de Pro no está quemando 200K tokens por sesión en contexto rancio y reescrituras verbosas. Trata tu ventana de contexto como un presupuesto, no como un colchón.
+
+## Dónde encaja Duet
+
+Cada plan que hemos cubierto hasta ahora es una relación directa con Anthropic. Les pagas, obtienes tokens, administras los asientos tú mismo. Para muchos compradores, esa es la respuesta correcta.
+
+Para otros, crea más problemas de los que resuelve: uso disparejo en un equipo, cargas a ráfagas de agencia, el mínimo de 5 asientos de Team, límites de tasa por desarrollador que no se comparten, y el hecho de que la facturación es o predecible-pero-derrochadora (suscripciones) o flexible-pero-volátil (API).
+
+Esta es la brecha que llenan las plataformas administradas como [Duet](/).
+
+![Duet shared workspace running Claude Code for a team](/blog/claude-code-pricing/duet-workspace.png)
+
+### Qué significa "administrado" en realidad
+
+En vez de que cada desarrollador instale Claude Code localmente con su propia API key o suscripción, Duet corre Claude dentro de un entorno de equipo compartido. Cada compañero obtiene acceso a través del mismo workspace, así que los prompts, el contexto y las conversaciones ocurren en un solo lugar que todo el equipo puede ver.
+
+La implicación de precios es lo que la mayoría busca: **planes mensuales con créditos incluidos compartidos y una reserva pagada para uso adicional.**
+
+### Cuándo Duet le gana a comprar Anthropic directo
+
+**Un equipo de 3 a 10 con uso disparejo.** El plan Team de Anthropic exige 5 asientos Premium a $100 cada uno, incluso si dos desarrolladores usan Claude Code dos veces por semana. Los créditos mensuales de Duet se comparten en el workspace en lugar de dividirse por asiento.
+
+**Quieres una base predecible con uso adicional visible.** El precio del plan fija la base mensual y la reserva pagada hace explícito un mes intenso mediante recargas manuales o automáticas y una factura por cada cargo.
+
+**Quieres contexto compartido.** En Claude Code directo, la sesión de cada desarrollador está aislada. En Duet, tu equipo trabaja en sesiones duraderas compartidas, así que la investigación, las decisiones y los resultados anteriores permanecen disponibles en vez de quedar atrapados en terminales individuales.
+
+**Eres una agencia rotando entre codebases de clientes.** Duet te deja levantar workspaces separados por cliente sin suscripciones separadas de Anthropic, y el uso se comparte en todo tu equipo en vez de estar fijado a asientos individuales.
+
+**Quieres Claude Code _más_ el resto de tu stack.** Duet combina el acceso a Claude con integraciones para GitHub, Google Sheets, Slack y cientos de otras herramientas a través de fronteras de integración administradas. No solo estás pagando por Claude. Estás pagando por la infraestructura que hace a Claude útil para los equipos.
+
+### Cuándo comprar Anthropic directo le gana a Duet
+
+Dijimos que seríamos honestos, así que:
+
+- **Desarrollador solitario en Pro ($20/mes).** Nada le gana a Pro para un solo dev con uso moderado. No le des tantas vueltas a esto.
+- **Usuario único intensivo en Max 20x.** Si eres una persona haciendo 300M+ tokens al mes a través de Claude Code exclusivamente, $200/mes directo es la opción imbatible.
+- **Enterprise con restricciones de SSO, HIPAA o procurement.** Anthropic Enterprise es la respuesta correcta cuando compliance está en la sala.
+- **Automatización pura de API.** Si estás cableando Claude dentro de un producto (no para desarrolladores), la API es la primitiva correcta.
+
+### La comparación real
+
+| Tipo de comprador                             | Mejor opción           |
+| --------------------------------------------- | ---------------------- |
+| Dev solitario, bajo 50M tokens/mes            | Anthropic Pro          |
+| Usuario intensivo solitario, 200M+ tokens/mes | Anthropic Max 20x      |
+| Equipo de 3–4, uso disparejo                  | **Duet**               |
+| Equipo de 5+, uso parejo                      | Anthropic Team Premium |
+| Equipo de 5+, disparejo o a ráfagas           | **Duet**               |
+| Agencia con varios clientes                   | **Duet**               |
+| Enterprise regulado                           | Anthropic Enterprise   |
+| API pura / integración de producto            | Anthropic API          |
+
+Duet no está tratando de reemplazar a Claude Code para desarrolladores individuales.
+
+Está tratando de arreglar el medio incómodo, los equipos y las agencias donde los cálculos por asiento de Anthropic dejan de tener sentido, mientras incluye la capa de colaboración que Claude Code no tiene por sí solo.
+
+Si esa es tu situación, [revisa la página de precios](/pricing). Si eres un dev solitario programando los fines de semana, quédate con Pro. Seguiremos aquí cuando tu equipo crezca.
+
+## Epílogo
+
+Los precios de Claude Code parecen complicados porque lo son, pero una vez que quitas los niveles y las tablas de tokens, la decisión se reduce a tres preguntas:
+
+**¿Cuánto lo usas en realidad?** Bajo 50M tokens al mes, Pro o API está bien. Por encima de 200M, Max 20x gana por mucho. El medio es donde las elecciones importan.
+
+**¿Eres una persona o un equipo?** Los planes directos de Anthropic recompensan a los individuos y penalizan a los equipos disparejos. Una plataforma administrada equilibra eso.
+
+**¿Cuánto te importa la predictibilidad?** Los precios de API son la opción más barata en un buen mes y la más cara en uno malo. Las suscripciones aplanan esa curva. Las plataformas administradas la aplanan aún más.
+
+El peor resultado no es pagar de más $50/mes. Es elegir un plan, chocar con un muro a media tarde y perder tres horas de estado de flow por un límite de tasa. Lo que sea que elijas, elígelo con suficiente margen para no volver a pensar en ello.
+
+## ¿Todavía adivinando?
+
+Si eres un desarrollador solitario, la [página de precios de Anthropic](https://claude.com/pricing) es el lugar correcto para empezar. Toma Pro o Max y vuelve a publicar.
+
+Si eres un equipo de 3+ con uso disparejo, una agencia haciendo malabares con codebases de clientes, o cualquiera que quiera acceso a Claude combinado con colaboración de equipo, contexto compartido y precios planos predecibles, mira cómo se compara [Duet](/pricing).
+
+Sin buckets por asiento, con el uso adicional de la reserva visible y sin muros de 5 horas en medio de un sprint.
+
+[Mira los precios de Duet →](/pricing)
+
+## Preguntas frecuentes
+
+### ¿Claude Code es gratis?
+
+No. No hay un nivel gratis de Claude Code. Necesitas al menos una suscripción Pro ($20/mes), un plan Max, un asiento Team Premium o créditos de API para usarlo. Anthropic experimentó brevemente con incluir Claude Code en los niveles gratis pero dio marcha atrás.
+
+### ¿Cuánto cuesta Claude Code por mes?
+
+Claude Code cuesta $20/mes en Claude Pro, $100/mes en Claude Max 5x, o $200/mes en Claude Max 20x. Los planes Team son $100/asiento/mes para asientos Premium (mínimo 5 asientos). También puedes pagar por token a través de la API de Anthropic, que va de $1 a $25 por millón de tokens según el modelo.
+
+### ¿Cuál es la diferencia entre Claude Pro y Claude Code?
+
+Claude Pro es la suscripción de $20/mes que incluye Claude.ai (la interfaz de chat) _y_ Claude Code (el agente de programación en tu terminal). Comparten los mismos límites de uso. "Precios de Claude Code" es en realidad "precios de la suscripción de Claude, aplicados a Claude Code".
+
+### Claude Pro vs Max: ¿cuál da más de todo?
+
+A grandes rasgos, sí. Max 5x te da aproximadamente 5x la asignación de tokens de Pro por ventana de 5 horas, y límites semanales proporcionalmente más grandes. Max 20x te da aproximadamente 20x Pro. El acceso al modelo es idéntico en todos los niveles. Estás pagando por un balde más grande, no por un Claude mejor.
+
+### ¿Puedes usar una suscripción Pro para Claude Code en la API?
+
+No, estos son sistemas de facturación separados. Tu suscripción Pro o Max cubre el uso a través de la autenticación integrada de Claude Code. El acceso a la API se factura por separado por token. Y si tienes `ANTHROPIC_API_KEY` configurada en tu entorno, Claude Code usará la API y te cobrará por separado de tu suscripción.
+
+### ¿Qué pasa cuando llego a mi límite de uso de Claude Code?
+
+En Pro y Max, Claude Code deja de responder hasta que se reinicia tu ventana de 5 horas. Si habilitaste el "uso extra", el desborde continúa a tarifas estándar de API hasta un tope mensual que tú fijas. En la API, no hay tope. Sigues pagando por token.
+
+### ¿Vale la pena Claude Max 20x para la mayoría de los desarrolladores?
+
+Solo si Claude Code es tu entorno de desarrollo principal y programas 6+ horas al día. Para la mayoría de los desarrolladores en activo, Max 5x a $100/mes es el punto justo. Para usuarios ocasionales, Pro es suficiente.
+
+### ¿Cómo funcionan los planes de equipo de Claude Code?
+
+Los planes Team de Anthropic empiezan en $20/asiento/mes (anual) para acceso Standard, pero Claude Code específicamente requiere un asiento Premium a $100/asiento/mes (anual) o $125/asiento/mes (mensual), con un mínimo de 5 asientos. Puedes mezclar asientos Standard y Premium en un equipo. El uso no se comparte entre asientos. Cada desarrollador tiene sus propios límites.
+
+### ¿Hay una alternativa más barata a Claude Max 20x para usuarios intensivos?
+
+La respuesta honesta es no, no de Anthropic directamente. Max 20x a $200/mes ya tiene un precio agresivo frente al uso equivalente de API. Si eres un equipo, las plataformas administradas como Duet pueden ser más baratas porque el uso se comparte entre desarrolladores, pero para un solo usuario intensivo, Max 20x es el mejor trato del mercado.
+
+### ¿Los precios de Claude Code incluyen Opus 4.7?
+
+Sí. A abril de 2026, Opus 4.7 está disponible en todos los niveles pagados: Pro, Max 5x, Max 20x y Team Premium. Anthropic ha movido Opus 4.6 a estado heredado. El nivel gratis sigue limitado a Sonnet 4.6. Revisa la [página de precios de Anthropic](https://claude.com/pricing) para la lista de modelos más reciente.
+
+### ¿Puedes cambiar entre planes de Claude Code?
+
+Sí. Puedes subir o bajar de nivel mensualmente. Las bajadas de nivel surten efecto en el siguiente ciclo de facturación. No hay contratos a largo plazo para Pro o Max. Puedes pasar de Max 20x de vuelta a Pro en cualquier momento.
+
+## Una cosa más
+
+Los precios de Claude Code son un blanco móvil. Anthropic ajusta los niveles, introduce nuevos interruptores de desborde y cambia las listas de modelos cada pocos meses. Guarda este post en marcadores, o suscríbete al newsletter de Duet donde rastreamos los cambios de precios la misma semana en que llegan.
+
+[Prueba Duet gratis →](/pricing)
+
+### Sigue leyendo
+
+- [Cómo correr Claude Code en la nube 24/7](/blog/how-to-run-claude-code-in-the-cloud)
+- [Claude Duet: el workspace de Claude Code siempre activo](/guides/duet-ai-for-founders)
+- [Duet vs Claude Code: qué es realmente distinto](/guides/duet-vs-claude-code)
+- [Claude Code para fundadores: automatización de GTM y operaciones](/guides/claude-code-for-founders)
+- [Claude Code vs Cursor vs Codex](/blog/claude-code-vs-cursor-vs-codex)

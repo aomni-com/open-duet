@@ -1,0 +1,145 @@
+{
+  "kind": "screenshot-parity-diff",
+  "generatedAt": "2026-10-04T03:24:06.838Z",
+  "note": "Lower parityDistance means the candidate is closer to the reference for this fixed pair. This is a distance metric, not an acceptance gate.",
+  "pairCount": 4,
+  "worstPair": "device-login-pending",
+  "results": [
+    {
+      "id": "device-login-pending",
+      "current": "../reference/device-login-pending.png",
+      "candidate": "../candidate/device-login-pending.png",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "parityDistance": 0.14041,
+      "grayscale": {
+        "mae": 5.07043,
+        "rmse": 21.62599,
+        "diffRatio16": 0.04449,
+        "diffRatio32": 0.03356,
+        "diffRatio64": 0.02519,
+        "pixelmatchRatio": 0.04131
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.98607,
+        "terrainLikeRatioCandidate": 0.9892,
+        "avgLuminanceCurrent": 244.01861,
+        "avgLuminanceCandidate": 244.15291,
+        "avgLuminanceDelta": 0.1343,
+        "edgeEnergyCurrent": 0.03194,
+        "edgeEnergyCandidate": 0.01992,
+        "edgeEnergyRatio": 0.62348,
+        "edgeDiffRatio32": 0.06438
+      },
+      "artifacts": {
+        "sideBySide": "device-login-pending-side-by-side.png"
+      }
+    },
+    {
+      "id": "oauth-grants-settings",
+      "current": "../reference/oauth-grants-settings.png",
+      "candidate": "../candidate/oauth-grants-settings.png",
+      "dimensions": {
+        "width": 896,
+        "height": 498
+      },
+      "parityDistance": 0.08025,
+      "grayscale": {
+        "mae": 6.30992,
+        "rmse": 25.69736,
+        "diffRatio16": 0.07932,
+        "diffRatio32": 0.05406,
+        "diffRatio64": 0.03887,
+        "pixelmatchRatio": 0.07398
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.98421,
+        "terrainLikeRatioCandidate": 0.98262,
+        "avgLuminanceCurrent": 244.41595,
+        "avgLuminanceCandidate": 244.22968,
+        "avgLuminanceDelta": -0.18628,
+        "edgeEnergyCurrent": 0.08316,
+        "edgeEnergyCandidate": 0.08508,
+        "edgeEnergyRatio": 1.02312,
+        "edgeDiffRatio32": 0.15156
+      },
+      "artifacts": {
+        "sideBySide": "oauth-grants-settings-side-by-side.png"
+      }
+    },
+    {
+      "id": "settings-api-key-secret-once",
+      "current": "../reference/settings-api-key-secret-once.png",
+      "candidate": "../candidate/settings-api-key-secret-once.png",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "parityDistance": 0.04395,
+      "grayscale": {
+        "mae": 4.67514,
+        "rmse": 21.48395,
+        "diffRatio16": 0.04063,
+        "diffRatio32": 0.02809,
+        "diffRatio64": 0.02088,
+        "pixelmatchRatio": 0.03773
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0.0256,
+        "blackRatioCandidate": 0.0256,
+        "terrainLikeRatioCurrent": 0.96233,
+        "terrainLikeRatioCandidate": 0.96403,
+        "avgLuminanceCurrent": 241.5484,
+        "avgLuminanceCandidate": 241.0461,
+        "avgLuminanceDelta": -0.50229,
+        "edgeEnergyCurrent": 0.03972,
+        "edgeEnergyCandidate": 0.03805,
+        "edgeEnergyRatio": 0.95794,
+        "edgeDiffRatio32": 0.06156
+      },
+      "artifacts": {
+        "sideBySide": "settings-api-key-secret-once-side-by-side.png"
+      }
+    },
+    {
+      "id": "spa-shell-user-api-keys",
+      "current": "../reference/spa-shell-user-api-keys.png",
+      "candidate": "../candidate/spa-shell-user-api-keys.png",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "parityDistance": 0.04284,
+      "grayscale": {
+        "mae": 3.58818,
+        "rmse": 19.47343,
+        "diffRatio16": 0.04238,
+        "diffRatio32": 0.02574,
+        "diffRatio64": 0.0207,
+        "pixelmatchRatio": 0.03857
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.98717,
+        "terrainLikeRatioCandidate": 0.98918,
+        "avgLuminanceCurrent": 246.64566,
+        "avgLuminanceCandidate": 246.99933,
+        "avgLuminanceDelta": 0.35367,
+        "edgeEnergyCurrent": 0.04152,
+        "edgeEnergyCandidate": 0.04046,
+        "edgeEnergyRatio": 0.97447,
+        "edgeDiffRatio32": 0.07438
+      },
+      "artifacts": {
+        "sideBySide": "spa-shell-user-api-keys-side-by-side.png"
+      }
+    }
+  ]
+}

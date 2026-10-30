@@ -1,0 +1,258 @@
+---
+title: 'Codex vs Claude Code: Which AI Coding Agent Wins in 2026?'
+metaTitle: 'Codex vs Claude Code 2026: Benchmarks, Pricing & Verdict'
+description: 'Codex vs Claude Code compared: SWE-bench scores, $20 to $200 pricing, speed, and security. Which AI coding agent should you use in 2026? Full breakdown with a clear verdict.'
+date: '2026-05-02'
+updatedAt: '2026-07-20'
+readTime: '10 min read'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/6.png'
+category: 'ai'
+tags: ['codex', 'claude-code', 'ai-coding', 'comparison', 'openai', 'anthropic']
+type: 'article'
+image: '/blog/codex-vs-claude-code/cover.png'
+relatedPosts:
+  - slug: 'claude-code-vs-cursor-vs-codex'
+    context: 'Broader comparison including Cursor for teams that want inline IDE autocomplete alongside agentic tools.'
+  - slug: 'how-to-run-claude-code-in-the-cloud'
+    context: 'Step-by-step guide for running Claude Code on persistent cloud servers.'
+  - slug: 'claude-code-pricing'
+    context: 'Full breakdown of Claude Code pricing tiers, API costs, and how to control spend.'
+cta:
+  title: 'Or hire one teammate that uses both.'
+  subtitle: 'Duet runs Claude Code and Codex side by side and picks the right one per task. No tool switching, no double subscriptions.'
+  buttonText: 'Hire Duet'
+  href: '/sign-in?from=blog-codex-vs-cc'
+---
+
+<Callout emoji="💡">
+**Quick Summary**
+
+Codex and Claude Code are the two leading AI coding agents in 2026. Both run in the terminal, both can edit files and execute commands autonomously, but they make fundamentally different tradeoffs. This comparison covers features, pricing, benchmarks, sandboxing, and the workflows where each tool actually wins.
+
+</Callout>
+
+<Callout emoji="❓">
+**Questions this page answers**
+
+<ul>
+  <li>Is Codex or Claude Code better for coding in 2026?</li>
+  <li>How does Codex CLI compare to Claude Code?</li>
+  <li>What are the pricing differences between Codex and Claude Code?</li>
+  <li>Which AI coding agent has better benchmarks?</li>
+  <li>Can Codex and Claude Code run autonomously?</li>
+  <li>What is the difference between Codex sandbox and Claude Code hooks?</li>
+</ul>
+</Callout>
+
+## Codex vs Claude Code at a Glance
+
+Both tools are terminal-native AI coding agents. You point them at a codebase, describe what you want, and they read files, write code, run commands, and iterate until the task is done.
+
+The difference is in philosophy. Claude Code prioritizes reasoning depth and supervised autonomy. Codex prioritizes speed, parallelism, and open-source flexibility.
+
+|                 | Claude Code                  | Codex CLI                     |
+| --------------- | ---------------------------- | ----------------------------- |
+| Developer       | Anthropic                    | OpenAI                        |
+| Default model   | Claude Opus 4.6 / Sonnet 4.6 | GPT-5.4 / GPT-5.3-Codex       |
+| Context window  | 1M tokens                    | 1.05M tokens                  |
+| License         | Proprietary (free to use)    | Apache 2.0 (open source)      |
+| Sandbox         | Permission-based (hooks)     | OS-level (Seatbelt, Landlock) |
+| Autonomy modes  | Plan mode, auto-accept       | Suggest, auto-edit, full-auto |
+| Cloud execution | Via third-party (Duet, etc.) | Native (ChatGPT dashboard)    |
+| MCP support     | Yes (native)                 | Yes (via config)              |
+| GitHub stars    | ~40K                         | ~67K                          |
+
+## What is Claude Code?
+
+Claude Code is Anthropic's official CLI agent. It connects Claude Opus 4.6 or Sonnet 4.6 directly to your filesystem and terminal, letting the model read your entire codebase, edit files, run tests, and execute multi-step workflows.
+
+The 1M token context window is the largest of any coding agent. In practice, Claude Code uses intelligent context management rather than loading everything at once, but the headroom means it handles large monorepos without chunking workarounds.
+
+**What sets it apart:**
+
+- **Hooks system.** 17 lifecycle events (PreToolUse, PostToolUse, Notification, etc.) let you run custom scripts before or after any tool call. You can enforce linting on every file write, block dangerous commands, or trigger CI pipelines automatically.
+- **Plan mode.** Claude Code can explore a codebase and propose a structured implementation plan before writing any code. You review and approve the plan, then it executes.
+- **MCP integration.** Native support for Model Context Protocol servers means you can connect Claude Code to databases, APIs, design tools, or any custom data source.
+- **Subagent architecture.** Claude Code spawns specialized child agents for parallel subtasks (file search, test execution, research) while maintaining a coordinating parent context.
+
+**Limitations:**
+
+- No open-source option. You need a Claude API key or Claude Pro/Max subscription.
+- No native cloud execution. Running Claude Code persistently requires setting up your own server or using a platform like [Duet](/).
+- No built-in parallel task execution from a dashboard. It's one agent, one terminal session.
+
+## What is Codex CLI?
+
+Codex CLI is OpenAI's open-source terminal agent, released under Apache 2.0. It runs GPT-5.4 or GPT-5.3-Codex against your local codebase with OS-level sandboxing that restricts file and network access during execution.
+
+The open-source approach has driven rapid adoption. Over 67,000 GitHub stars and an active contributor community mean the tool evolves quickly and integrates with a wide range of workflows.
+
+**What sets it apart:**
+
+- **Open source.** You can fork it, modify it, embed it in CI pipelines, or run it with any OpenAI-compatible API endpoint.
+- **OS-level sandboxing.** On macOS, Codex uses Apple's Seatbelt framework. On Linux, it uses Landlock LSM and seccomp-bpf. This provides kernel-enforced isolation rather than relying on the model to respect permission boundaries.
+- **Full-auto mode.** Codex can run completely autonomously with network access disabled, applying changes and running commands without any human approval steps.
+- **Native cloud execution.** Through ChatGPT Pro/Plus, you can spawn Codex agents in the cloud, run multiple in parallel, and manage them from a web dashboard.
+- **Token efficiency.** OpenAI claims GPT-5.3-Codex processes 4x more tokens per dollar than competing models at similar quality levels.
+
+**Limitations:**
+
+- Sandbox restrictions can block legitimate workflows. If your task requires network access (installing packages, hitting APIs), full-auto mode won't work, and you need to step through approvals.
+- Cloud execution requires a ChatGPT subscription. The open-source CLI alone doesn't include cloud features.
+- Smaller ecosystem of first-party integrations compared to Claude Code's MCP ecosystem.
+
+## Feature Comparison
+
+### Context and Reasoning
+
+Claude Code's 1M token context and Opus 4.6 model give it an edge on tasks that require understanding large, interconnected codebases. Architectural refactors, debugging issues that span multiple services, and planning complex migrations are where the deeper reasoning model pays off.
+
+Codex's 1.05M context is technically larger, but the practical difference is negligible. Where Codex differs is in speed. GPT-5.3-Codex was built for high-throughput code tasks and returns results faster on straightforward implementations.
+
+### Autonomy and Safety
+
+The tools take opposite approaches to the autonomy-safety tradeoff.
+
+Claude Code uses a **permission-based model**. By default, it asks before executing commands or writing files. You can relax this with auto-accept flags or hooks that whitelist specific operations. The hooks system gives you fine-grained control: you can allow `npm test` but block `rm -rf`, permit writes to `src/` but not `.env`.
+
+Codex uses **sandbox-based isolation**. In full-auto mode, the model runs freely but inside a kernel-enforced sandbox that prevents network access and restricts filesystem operations to the project directory. The philosophy is: let the model do whatever it wants, but limit what damage it can do.
+
+Neither approach is strictly better. Claude Code's permission model is more flexible but relies on correct configuration. Codex's sandbox is more restrictive but harder to misconfigure.
+
+![Codex uses OS-level sandbox isolation while Claude Code uses permission hooks for safety](/blog/codex-vs-claude-code/sandbox-vs-hooks.png)
+
+### Cloud and Parallel Execution
+
+Codex has a clear advantage here. ChatGPT Pro subscribers can launch multiple Codex agents simultaneously from a web dashboard, each working on a separate branch or feature. The agents run in cloud sandboxes and deliver pull requests when done.
+
+Claude Code doesn't offer native parallel execution. Running multiple instances requires multiple terminal sessions, and there's no built-in dashboard to manage them. Platforms like [Duet](/) solve this by providing persistent cloud environments where Claude Code agents run 24/7 with team-wide visibility.
+
+### Extensibility
+
+Claude Code's MCP support is more mature. You can connect it to Postgres databases, Figma designs, Notion pages, Slack channels, and thousands of other tools through MCP servers. The hooks system adds another layer: you can trigger external scripts on any lifecycle event.
+
+Codex supports MCP through configuration but has fewer first-party integrations. The open-source nature compensates, as the community builds adapters and plugins, but the out-of-the-box integration story is thinner.
+
+## Benchmark Comparison
+
+Benchmarks are imperfect proxies for real-world performance, but they're the closest thing to an objective comparison.
+
+| Benchmark                     | Claude Code (Opus 4.6) | Codex (GPT-5.3-Codex) |
+| ----------------------------- | ---------------------- | --------------------- |
+| SWE-bench Verified            | 80.9%                  | ~80%                  |
+| Terminal-Bench                | 65.4%                  | 77.3%                 |
+| Aider polyglot                | 68.6%                  | 62.8%                 |
+| Blind code quality preference | 67% win rate           | 33% win rate          |
+
+![Benchmark comparison of Claude vs Codex across SWE-bench, Terminal-bench, Aider Polyglot, and Blind Preference tests](/blog/codex-vs-claude-code/benchmark-chart.png)
+
+**What the numbers mean:**
+
+- **SWE-bench** tests the ability to fix real GitHub issues. Both tools are essentially tied, meaning either can handle standard bug fixes and feature implementations.
+- **Terminal-Bench** measures shell and system administration tasks. Codex leads significantly here, suggesting GPT-5.3-Codex is better at command-line operations and system-level work.
+- **Aider polyglot** tests multi-language code editing. Claude leads, reflecting stronger performance on complex multi-file edits.
+- **Blind preference** studies show developers prefer Claude's code quality 2:1 when they don't know which model wrote it. This aligns with the general pattern: Claude produces more readable, well-structured code on complex tasks.
+
+The takeaway: Claude Code tends to produce higher quality output on complex reasoning tasks. Codex tends to be faster and more efficient on straightforward coding and terminal operations.
+
+## Pricing Comparison
+
+Both tools offer a subscription tier and an API tier.
+
+### Subscription Pricing
+
+| Plan       | Claude Code                | Codex                   |
+| ---------- | -------------------------- | ----------------------- |
+| Entry tier | Claude Pro, $20/month      | ChatGPT Plus, $20/month |
+| Mid tier   | Claude Max 5x, $100/month  | ChatGPT Pro, $200/month |
+| High tier  | Claude Max 20x, $200/month | ChatGPT Pro, $200/month |
+
+Claude Pro includes limited Claude Code usage. Max 5x provides 5x the usage cap, and Max 20x provides 20x. The exact token limits aren't published, but heavy users typically need Max 5x or above.
+
+ChatGPT Plus includes Codex access with usage limits. Pro removes most limits and adds priority access to cloud execution.
+
+### API Pricing
+
+|        | Claude Opus 4.6 | GPT-5.4      |
+| ------ | --------------- | ------------ |
+| Input  | $5 / MTok       | $1.25 / MTok |
+| Output | $25 / MTok      | $10 / MTok   |
+
+|        | Claude Sonnet 4.6 | GPT-5.3-Codex |
+| ------ | ----------------- | ------------- |
+| Input  | $1.50 / MTok      | ~$0.50 / MTok |
+| Output | $7.50 / MTok      | ~$2 / MTok    |
+
+On raw API pricing, OpenAI's models are significantly cheaper per token. For teams running agents at scale through the API, this cost difference compounds. However, Claude's higher accuracy on complex tasks can offset the price difference if it means fewer iterations to reach a working solution.
+
+## When to Use Claude Code
+
+**Complex architectural work.** If you're refactoring a service layer, migrating a database schema, or planning a large feature that touches dozens of files, Claude Code's reasoning depth and plan mode give you higher confidence in the output.
+
+**Teams with existing MCP infrastructure.** If your team already uses MCP servers for databases, design tools, or internal APIs, Claude Code integrates natively.
+
+**Code quality is the priority.** When the output needs to be production-ready with minimal review, Claude's 2:1 blind preference advantage matters. This is especially relevant for open-source projects or codebases with strict review standards.
+
+**Custom workflow automation.** The hooks system lets you build sophisticated guardrails and automations around Claude Code's execution. If you need every file write to pass a linter, every test run to report to Slack, or every PR to follow a specific template, hooks make this possible without modifying the tool itself.
+
+## When to Use Codex
+
+**Parallel task execution.** If you have 5 independent features to build or bugs to fix, Codex's cloud dashboard lets you run them simultaneously. Claude Code can't match this without external infrastructure.
+
+**Terminal-heavy workflows.** Codex scores 12 points higher on Terminal-Bench. If your work involves heavy shell scripting, server administration, or CLI tool development, Codex handles it better.
+
+**Budget-sensitive teams.** At roughly 2.5-4x lower API pricing, Codex is the better choice for teams running high-volume automated workflows where cost per token matters more than peak reasoning quality.
+
+**Open-source requirements.** If you need to embed an AI coding agent in your CI pipeline, fork it for a custom workflow, or run it against a non-OpenAI API endpoint, Codex's Apache 2.0 license makes this possible. Claude Code is closed source.
+
+**Security-first environments.** Codex's OS-level sandboxing provides stronger isolation guarantees than Claude Code's permission-based model. For regulated industries or security-conscious teams, the kernel-enforced sandbox is a meaningful advantage.
+
+## Using Both Together
+
+![Decision flowchart: when to use Codex vs Claude Code based on your use case](/blog/codex-vs-claude-code/decision-flowchart.png)
+
+Many teams use both tools. The workflow typically looks like:
+
+- **Claude Code for architecture and planning.** Use plan mode to analyze the codebase and design the approach for a large feature or refactor.
+- **Codex for parallel implementation.** Once the plan is set, spawn multiple Codex agents to implement different parts of the plan simultaneously.
+- **Claude Code for review and refinement.** Use Claude Code's deeper reasoning to review the Codex-generated PRs, catch subtle issues, and ensure consistency across the parallel outputs.
+
+This isn't theoretical. Teams running both report that the combination ships faster than either tool alone, because you get Claude's reasoning quality for the hard parts and Codex's speed and parallelism for the straightforward parts.
+
+## Running AI Coding Agents in the Cloud
+
+Both tools benefit from cloud execution, but for different reasons.
+
+Codex has native cloud support through ChatGPT. You get a dashboard, parallel agents, and managed infrastructure out of the box.
+
+Claude Code requires a cloud setup. You either SSH into a VM and run it in tmux, or use a platform like [Duet](/) that provides persistent cloud environments with team collaboration, scheduling, and always-on execution.
+
+The cloud advantage is the same for both: your agents keep working when you close your laptop, multiple team members can interact with the same session, and you get a consistent environment that doesn't depend on anyone's local setup.
+
+## Frequently Asked Questions
+
+### Is Codex better than Claude Code?
+
+Neither tool is universally better. Codex is faster, cheaper per token, and offers native parallel cloud execution. Claude Code produces higher quality code on complex tasks and has deeper integration capabilities through MCP and hooks. For straightforward coding tasks, Codex is more cost-effective. For architectural work and complex reasoning, Claude Code delivers better results.
+
+### Can I use Codex CLI for free?
+
+Codex CLI is open source (Apache 2.0) and free to install. However, it requires an OpenAI API key to run, which means you pay per token for API usage. There is no completely free tier for running Codex against real codebases. ChatGPT Plus ($20/month) includes some Codex cloud usage.
+
+### Is Claude Code open source?
+
+No. Claude Code is a proprietary tool from Anthropic. It's free to install and use with a Claude API key or subscription, but you cannot fork, modify, or redistribute it. If open-source licensing is a requirement, Codex CLI is the better choice.
+
+### Which AI coding agent is better for startups?
+
+For most startups, Claude Code is the better starting point because of its stronger reasoning on complex tasks and plan mode for architectural decisions. Add Codex when you need parallel execution or have budget constraints on high-volume automated workflows. The $20/month entry tier is the same for both, so the real cost difference shows up at scale through API pricing.
+
+### How do Codex and Claude Code handle security?
+
+Codex uses OS-level sandboxing (Seatbelt on macOS, Landlock + seccomp on Linux) that restricts file and network access at the kernel level. Claude Code uses a permission-based model with hooks for custom validation. Codex's approach is harder to bypass but more restrictive. Claude Code's approach is more flexible but depends on correct configuration. Both prevent the model from accessing files outside the project directory by default.
+
+### Can I run both Codex and Claude Code on the same project?
+
+Yes. They don't conflict. Claude Code runs in one terminal, Codex in another. Many teams use Claude Code for planning and review, and Codex for parallel implementation. The only consideration is that both tools may modify the same files, so coordinate through git branches to avoid conflicts.

@@ -1,0 +1,164 @@
+---
+title: 'Where Should You Host Your AI Agents? A 2026 Decision Guide'
+metaTitle: 'Where to Host AI Agents: DIY vs Serverless vs Managed'
+description: 'Not sure where to host your AI agents? Compare DIY VPS, serverless, and managed runtimes on real cost and uptime risk.'
+date: '2026-07-03'
+updatedAt: '2026-07-03'
+readTime: '9 min read'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/10.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'ai'
+tags:
+  [
+    'ai agent hosting',
+    'self-hosted ai agents',
+    'ai agent deployment platform',
+    'ai agent infrastructure',
+    'managed ai agent runtime',
+  ]
+type: 'article'
+image: '/blog/where-to-host-ai-agents/cover.png'
+relatedPosts:
+  - 'how-to-run-claude-code-in-the-cloud'
+  - 'openclaw-vs-managed-ai-agent-platforms'
+  - 'claude-code-pricing'
+  - '6-best-ai-agent-builders-in-2026'
+cta:
+  title: 'Stop hosting your agent. Start running it.'
+  subtitle: "Duet is a persistent, always-on cloud server built to keep an agent's memory, schedule, and context intact between sessions. Free first week."
+  buttonText: 'Hire Duet'
+  href: '/sign-in?from=blog-where-to-host-ai-agents'
+---
+
+Hosting an AI model and hosting an AI agent are different problems. Model hosting serves predictions on demand; agent hosting keeps a stateful, tool-using process alive between actions. In practice that leaves three real options: a self-hosted VPS, serverless functions, or a managed agent runtime, and each trades control for operational burden differently.
+
+## What's the difference between hosting an AI model and hosting an AI agent?
+
+An AI agent is a harness, a model, and state. The harness is the code that drives the loop: calling the model, running tool calls, tracking progress. The model is usually just an API call to an LLM provider. State is everything the agent needs to keep working that isn't in the current context window: conversation history, task progress, files, credentials.
+
+"Hosting an AI agent" means keeping that harness alive with its state intact, not just serving a model endpoint. This is exactly where a lot of comparison content gets confused. Pages that rank for "AI hosting" (like guides covering SageMaker, Vertex AI, HuggingFace Endpoints, or Replicate) are describing model-inference infrastructure. That's a real and useful category. It just isn't the same question as "where does my agent's process actually live, stay alive, and remember what it was doing."
+
+If you've built a working agent and are now asking where it should run in production, you've already moved past model hosting. The question in front of you is one of three paths: run it yourself, run it on serverless compute, or hand the "keep it alive" job to a managed runtime. If you're still choosing how to build the agent itself rather than where to run it, [these AI agent builders](/blog/6-best-ai-agent-builders-in-2026) are a better starting point than this piece.
+
+![Simple branching diagram: "You built an agent. Where does it actually run?" splits into three labeled outcome boxes — DIY VPS ("Full control, full responsibility"), Serverless ("Cheap, but time-boxed"), and Managed runtime ("Someone else owns uptime").](/blog/where-to-host-ai-agents/diagram-b-three-paths.png)
+
+## What are the three real ways to host an AI agent in 2026?
+
+Every hosting decision for an agent collapses into one of three paths. A DIY VPS or container gives you full control and no time limits, at the cost of owning every patch and uptime check yourself. Serverless functions are cheap when idle but were built for short web requests, not standing processes. A managed agent runtime hands persistence, patching, and uptime to someone else.
+
+Here's how the three compare on the criteria that actually matter once an agent is running in production, not just on day one:
+
+| Criteria          | DIY VPS / self-hosted                 | Serverless                                         | Managed agent runtime                             |
+| ----------------- | ------------------------------------- | -------------------------------------------------- | ------------------------------------------------- |
+| Cost shape        | Low sticker price, real ongoing hours | Near-zero idle cost, cold-start/timeout tuning tax | Flat price, bundles the ops time                  |
+| Control           | Full, you own every dial              | Limited to the function's runtime                  | Limited by design, traded for hands-off operation |
+| Uptime ownership  | You: patches, restarts, 2am pages     | Provider's infra, but not your agent's state       | Provider owns the "keep it alive" job             |
+| Time limits       | None                                  | Hard execution ceilings (minutes)                  | None, built for standing processes                |
+| State persistence | Manual, you build it                  | Not by default, needs a durability layer           | Built in                                          |
+
+None of these is universally "best." They're three different bets about who does the operational work. If you've already got a cloud VM running something like [Claude Code](/blog/how-to-run-claude-code-in-the-cloud), you've effectively already chosen the DIY path for that workload, whether or not it was a deliberate decision.
+
+## Should you self-host your AI agent on a VPS?
+
+Self-hosting makes sense if you have real DevOps capacity and want to control every part of the stack. A VPS or container gives an agent unlimited runtime and full access to the box, but every security patch, uptime check, and "it silently stopped responding" incident becomes your job, not a vendor's.
+
+There's a security nuance worth naming directly: control is not the same as isolation. Containers on a shared host share a kernel, and a single kernel vulnerability can compromise every workload on that node. This isn't theoretical. The Linux kernel eBPF flaw [CVE-2023-2163](https://nvd.nist.gov/vuln/detail/CVE-2023-2163) scored 10.0 CRITICAL under Google's own CNA assessment (8.8 HIGH under NVD's base score), and the runc container-escape bug CVE-2024-21626 scored 8.6 HIGH. Neither is hypothetical for agents that execute LLM-generated or otherwise untrusted code, which is an increasingly common pattern for coding and data-analysis agents.
+
+What self-hosting actually costs you, beyond the server bill:
+
+- **Security patching** on a recurring schedule, not a one-time setup step
+- **Monitoring for silent failures**, since a cron job that stopped firing doesn't send you an alert by default
+- **Restoring lost context** manually after a crash or restart wipes in-memory state
+- **Being the person who gets paged** when any of the above happens at 2am
+
+Budget VPS tiers typically run in the $5–$40/month range depending on specs, but that figure only covers the box. It says nothing about the hours spent keeping the agent actually running.
+
+## Is serverless a good fit for hosting an AI agent?
+
+Serverless can work for an agent, but not out of the box. Platforms like AWS Lambda and Google Cloud Run are stateless and time-boxed by design, which fights against how agents actually behave: long-running, memory-dependent, multi-step. Without extra engineering, an agent that outlives its execution window doesn't just disconnect, it loses its place entirely.
+
+The hard ceilings are real and vendor-documented, not estimates:
+
+- **AWS Lambda:** [a hard 15-minute execution limit](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html), no exceptions
+- **Google Cloud Run / Cloud Functions 2nd gen:** default 5 minutes, extendable to a 60-minute maximum
+- **Azure Functions (HTTP-triggered):** capped at 230 seconds regardless of your configured function timeout, due to the platform's load-balancer idle-timeout default
+
+Serverless does buy you real isolation. AWS Lambda itself runs on Firecracker micro-VMs under the hood, and vendors building on similar technology report meaningful advantages: Blaxel reports sub-25-millisecond resume times from a warm standby snapshot in its own micro-VM sandboxing product, building on a peer-reviewed 2020 benchmark study that measured standard Docker container startup in the mid-hundreds of milliseconds.
+
+![Two swimlanes contrasting a short "web request" bar that finishes cleanly with a checkmark well before a dashed "execution ceiling" line, against a much longer "multi-step task" bar that crosses the same ceiling and fades into a broken tail marked "lost context," captioned "Without a durability layer, an agent that outlives the ceiling loses its place, not just its connection."](/blog/where-to-host-ai-agents/diagram-c-serverless-mismatch.png)
+
+The isolation is real, but it doesn't solve statelessness. That takes a durability layer bolted on top. [Google's own guide to long-running agents](https://developers.googleblog.com/build-long-running-ai-agents-that-pause-resume-and-never-lose-context-with-adk/) recommends explicit state machines instead of replaying chat history: define named checkpoints, write the current state into the prompt on every wake, and let each tool call atomically advance the checkpoint.
+
+The clearest proof this works at scale is Dosu, a knowledge-infrastructure tool used across 50,000 software projects, including open-source standouts like Poetry and Apache Airflow. [DBOS's case study on Dosu's migration](https://www.dbos.dev/blog/making-ai-agents-fault-tolerant-on-google-cloud-run) describes moving all of its agentic workflows onto Cloud Run with a Postgres-backed durability layer, achieving zero downtime with exactly one infrastructure change: switching Cloud Run to instance-based billing so background work could keep running between requests. That's a real, engineered result, not a default behavior of serverless compute. If your agent needs to run continuously rather than in scheduled bursts, [setting it up to actually stay on](/blog/how-to-set-up-a-24-7-ai-agent) is worth reading before you commit to this path.
+
+## What is a managed AI agent runtime, and when does it make sense?
+
+A managed agent runtime is a persistent, always-on environment built specifically to keep an agent process alive, remembering, and running on schedule, without you managing servers, containers, or uptime yourself. It's an attempt to get both things DIY and serverless struggle to deliver together: persistence and hands-off operation.
+
+This category already has real, paying customers, not just hypothetical demand. agent37.com sells hosted OpenClaw and Hermes containers starting at $3.99/month with 1,000+ integrations through managed connectors. That's genuine proof the market exists. It's worth noting, though, that most products in this category, agent37 included, sell raw container access: a box that stays running, with no memory layer, no team console, and no on-call story built in.
+
+An "ai agent deployment platform" in this sense should be judged on more than uptime. The useful question is whether it manages the full operating relationship (state, memory, scheduling, and human approval for risky actions) or just keeps a container from crashing.
+
+## Should you self-host or use a managed AI agent service?
+
+Choose self-hosted if you have real DevOps depth and want to own every dial in the stack. Choose managed if what you actually want is to ship the agent and stop thinking about infrastructure. That's the honest version of this decision, and it's less about which option is "better" and more about which operational job you're willing to take on.
+
+Self-hosting wins when you need infrastructure control that a managed product won't give you: custom networking, specific compliance requirements, or workloads cheap enough at scale that the ongoing DevOps hours are worth it. Managed runtimes win when the agent is meant to run reliably for months without a dedicated person watching it, which describes most agents built by a solo consultant or a small team without a DevOps function. For a closer look at how [managed AI agent platforms](/blog/openclaw-vs-managed-ai-agent-platforms) differ from each other once you've picked this lane, that comparison goes deeper than this piece needs to.
+
+## What does hosting an AI agent actually cost, and what does "cost" leave out?
+
+The sticker price is the smallest part of the real cost. Every hosting comparison scores day-one setup price; almost none scores what happens in month three, which is where patch hours, silently-failed scheduled jobs, and lost context after a restart actually show up.
+
+![Three iceberg-style columns above and below a "Day 1 price / Month 3 reality" waterline: DIY VPS shows a small "server bill" cap over a large submerged "patch hours, uptime pages, lost-context recovery"; Serverless shows a small "near-zero idle cost" cap over "cold-start and timeout tuning, durability layer to build"; Managed runtime shows the largest visible "flat monthly price" cap over the smallest submerged "trusting someone else's uptime."](/blog/where-to-host-ai-agents/diagram-d-cost-iceberg.png)
+
+Here's the honest cost shape for each path, not just the invoice:
+
+- **DIY VPS:** low sticker price, but real ongoing hours spent patching, monitoring, and recovering from failures that don't announce themselves
+- **Serverless:** near-zero idle cost, offset by a cold-start and timeout-tuning tax, plus engineering time to build a durability layer if the agent needs to survive a restart
+- **Managed runtime:** a flat monthly price that bundles the operational time into the bill, in exchange for trusting someone else's uptime
+
+Whether a managed runtime is actually cheaper depends on how much your own time is worth and how many agents you're keeping alive. Token and model costs are a related but separate line item. If you're already tracking [what Claude Code actually costs to run](/blog/claude-code-pricing), the same logic applies here: the visible number on a pricing page is rarely the full number.
+
+## How is hosting an agent for a client different from hosting one for yourself?
+
+Hosting your own agent is a decision about your own risk tolerance. Hosting a client's agent makes you accountable for someone else's uptime and someone else's bill, which is a different problem entirely.
+
+Consultants and agencies building agents for SMB clients face a specific choice that most hosting content skips entirely: host everything for every client under one roof, or set each client up in their own accounts. Commenters on r/automation and similar communities describe wrestling with exactly this tradeoff when scaling past a handful of clients. Hosting everything yourself gives you one consistent view and one support surface, but you now own every outage across every client on your books. Setting each client up in their own accounts means they own their bill and access, but you lose the single pane of glass and have to support N different environments instead of one.
+
+![Side-by-side comparison: "Hosting your own agent" shows one figure connected to one server ("Your risk, your call"); "Hosting a client's agent" shows one operator connected to two outcomes — "Host it yourself" (single pane of glass, you own every outage) and "Set it up in their accounts" (they own the bill, you lose the single view) — captioned "Same job, different accountability."](/blog/where-to-host-ai-agents/diagram-e-yourself-vs-client.png)
+
+Neither answer is universally right. It depends on how many clients you run, how much you're already charging for ongoing support, and whether you're positioned as an infrastructure vendor or an operations partner. This is also the exact question of who operates an agent day-to-day once it's live, a decision that deserves its own deeper treatment beyond hosting alone.
+
+## How does Duet host AI agents?
+
+Once you've decided a managed runtime is the right lane, the next question is what "managed" actually includes. Most products in this category, agent37's $3.99/mo hosted containers among them, sell raw compute: a box that stays on, nothing more. Duet takes a different stance. It's a persistent, always-on cloud server built to keep an agent's context intact across sessions, not just its process alive between requests.
+
+Concretely, Duet gives every workspace a persistent server, durable sessions, searchable files, reusable training sources, integrations, and hosted apps. Scheduled and long-running work survives a closed browser, while session events leave an inspectable record of what happened. External actions still require your explicit approval before anything actually sends or posts, which is an operating relationship a raw container doesn't give you.
+
+If you're already running, or planning to run, agents for clients, [see how Duet's Build + Run model works](/pricing).
+
+## Frequently asked questions
+
+**Where should I host an AI agent?**
+It depends on how much infrastructure work you want to own. A DIY VPS gives full control with no time limits, but you own every patch and uptime check. Serverless is cheap when idle but needs an added durability layer. A managed runtime, a persistent server someone else operates, usually fits best if you lack a dedicated DevOps function.
+
+**What's the difference between AI hosting and AI agent hosting?**
+"AI hosting" means serving a model for prediction requests, like SageMaker or HuggingFace Endpoints. "Agent hosting" means keeping a standing, tool-using process alive between actions. Several well-ranking comparison pages use the terms interchangeably; they answer a different question than most agent builders are actually asking.
+
+**Is it cheaper to self-host or use a managed AI agent runtime?**
+A DIY VPS in the $5–$40/month range looks cheaper at first glance, but that excludes the ongoing hours spent patching, watching for silently failed jobs, and being the person who gets paged. Whether managed is actually cheaper depends on how much your own time is worth.
+
+**Can I use serverless functions to host an AI agent?**
+Yes, but not without extra engineering. AWS Lambda's 15-minute hard execution ceiling and Cloud Run's 60-minute extendable limit are stateless and time-boxed by design. Teams that do this well, like Dosu in DBOS's Cloud Run case study, add a durable-execution layer so work survives timeouts and crashes.
+
+**What's the real cost of self-hosting an AI agent?**
+More than the server bill. The sticker price is just infrastructure; the real cost is the hours spent patching, monitoring for silent failures, and being on call when something breaks, none of which shows up on a pricing page.
+
+**How is hosting an agent for a client different from hosting your own?**
+You're accountable for someone else's uptime and cost, not just your own risk tolerance. Host everything yourself for one consistent view but own every outage, or set each client up in their own accounts and lose that single pane of glass.
+
+**What is a managed AI agent runtime?**
+A persistent server environment built to keep an agent process alive, remembering, and running on schedule, without the operator managing servers or uptime themselves. It's the operational equivalent of a "run" service rather than a raw compute product.

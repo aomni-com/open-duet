@@ -1,0 +1,341 @@
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+
+import { SANDBOX_GATEWAY_SECRET } from '@repo/shared/constants/sandbox'
+import { APP_HOST_SUFFIX } from '@repo/shared/constants/site'
+
+import { createResolutionCache } from '@/lib/resolution-cache'
+
+export const maxDuration = 400
+
+// Default favicon served when a hosted app doesn't define one of its own.
+// Read once at module init; falls back to an empty buffer if the file is
+// missing so the gateway never crashes on cold start.
+const DEFAULT_FAVICON: ArrayBuffer = (() => {
+  try {
+    const buf = readFileSync(join(process.cwd(), 'public', 'duet-favicon.ico'))
+    const ab = new ArrayBuffer(buf.byteLength)
+    new Uint8Array(ab).set(buf)
+    return ab
+  } catch {
+    return new ArrayBuffer(0)
+  }
+})()
+
+const FAVICON_PATHS = new Set(['/favicon.ico', '/favicon.png', '/favicon.svg'])
+
+function defaultFaviconResponse(): Response {
+  return new Response(new Blob([DEFAULT_FAVICON], { type: 'image/x-icon' }), {
+    status: 200,
+    headers: {
+      'Content-Type': 'image/x-icon',
+      'Cache-Control': 'public, max-age=86400',
+      'X-Duet-Default-Favicon': '1',
+    },
+  })
+}
+
+const CACHE_TTL_MS = 60_000
+const PROXY_TIMEOUT_MS = 300_000
+const RESOLVE_TIMEOUT_MS = 300_000
+// Retry a resolve that never reached the sandbox connect (network error, 429,
+// 503) a few times with linear backoff instead of surfacing a user-facing 502.
+// A 502 is excluded: Convex already retried the e2b connect with its own
+// backoff, and a second ladder on top multiplies the reconnects.
+const RESOLVE_MAX_ATTEMPTS = 4
+const RESOLVE_RETRY_DELAY_MS = 750
+// A paused sandbox is resumed lazily during resolve, so the in-VM gateway is
+// often still spinning up when we first hit /health. Give it a wake-appropriate
+// budget instead of failing in ~3s; the polling loop + 502 fallback still cover
+// a genuinely dead box, and maxDuration (400s) leaves ample headroom.
+const HEALTH_CHECK_TIMEOUT_MS = 30_000
+const HEALTH_CHECK_POLL_MS = 200
+const IGNORED_SUBDOMAINS = new Set(['www', 'app', 'api', 'mail'])
+
+function getConvexSiteUrl(): string {
+  const siteUrl = process.env.NEXT_PUBLIC_CONVEX_SITE_URL
+  if (!siteUrl) {
+    throw new Error('NEXT_PUBLIC_CONVEX_SITE_URL is not set')
+  }
+  return siteUrl
+}
+
+const customDomainCache = new Map<string, { orgSlug: string; appSlug: string; expiresAt: number }>()
+
+// Host suffixes this gateway owns. Anything else is a customer custom domain.
+const DUET_HOST_SUFFIXES = [APP_HOST_SUFFIX]
+
+function isDuetHost(hostname: string): boolean {
+  return DUET_HOST_SUFFIXES.some(suffix => hostname.endsWith(suffix))
+}
+
+function extractSubdomain(host: string): string | null {
+  const hostname = host.split(':')[0]!
+  const firstDot = hostname.indexOf('.')
+  if (firstDot === -1) return null
+  const subdomain = hostname.slice(0, firstDot)
+  if (IGNORED_SUBDOMAINS.has(subdomain)) return null
+  return subdomain
+}
+
+async function resolveCustomDomain(
+  host: string,
+): Promise<{ orgSlug: string; appSlug: string } | null> {
+  const hostname = host.split(':')[0]!.toLowerCase()
+  const cached = customDomainCache.get(hostname)
+  if (cached && cached.expiresAt > Date.now()) {
+    return { orgSlug: cached.orgSlug, appSlug: cached.appSlug }
+  }
+
+  const response = await fetch(`${getConvexSiteUrl()}/sandbox/resolve-domain`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Sandbox-Secret': SANDBOX_GATEWAY_SECRET,
+    },
+    body: JSON.stringify({ domain: hostname }),
+    signal: AbortSignal.timeout(RESOLVE_TIMEOUT_MS),
+  })
+
+  if (response.status === 404 || response.status === 409) {
+    return null
+  }
+  if (!response.ok) {
+    const body = await response.text()
+    throw new Error(`resolve-domain failed (${response.status}): ${body}`)
+  }
+
+  const data = (await response.json()) as { orgSlug: string; appSlug: string }
+  customDomainCache.set(hostname, {
+    orgSlug: data.orgSlug,
+    appSlug: data.appSlug,
+    expiresAt: Date.now() + CACHE_TTL_MS,
+  })
+  return { orgSlug: data.orgSlug, appSlug: data.appSlug }
+}
+
+function parseSubdomain(subdomain: string): {
+  orgSlug: string
+  appSlug?: string
+} {
+  const separatorIdx = subdomain.indexOf('--')
+  if (separatorIdx === -1) return { orgSlug: subdomain }
+  return {
+    appSlug: subdomain.slice(0, separatorIdx),
+    orgSlug: subdomain.slice(separatorIdx + 2),
+  }
+}
+
+function isRetryableResolveStatus(status: number): boolean {
+  return status === 429 || (status >= 500 && status < 600 && status !== 502)
+}
+
+async function fetchSandboxUrl(orgSlug: string): Promise<string> {
+  let lastError: unknown
+  for (let attempt = 1; attempt <= RESOLVE_MAX_ATTEMPTS; attempt++) {
+    let retryable = true
+    try {
+      const response = await fetch(`${getConvexSiteUrl()}/sandbox/resolve`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Sandbox-Secret': SANDBOX_GATEWAY_SECRET,
+        },
+        body: JSON.stringify({ slug: orgSlug }),
+        signal: AbortSignal.timeout(RESOLVE_TIMEOUT_MS),
+      })
+
+      if (response.ok) {
+        const data = (await response.json()) as { sandboxUrl: string }
+        return data.sandboxUrl
+      }
+
+      const body = await response.text()
+      lastError = new Error(`Resolve failed (${response.status}): ${body}`)
+      retryable = isRetryableResolveStatus(response.status)
+    } catch (err) {
+      // fetch/abort/timeout — transient by nature, fall through to retry.
+      lastError = err
+    }
+
+    if (!retryable || attempt === RESOLVE_MAX_ATTEMPTS) {
+      break
+    }
+    await new Promise(resolve => setTimeout(resolve, RESOLVE_RETRY_DELAY_MS * attempt))
+  }
+
+  throw lastError instanceof Error ? lastError : new Error(String(lastError))
+}
+
+const sandboxUrls = createResolutionCache(fetchSandboxUrl)
+
+async function ensureGatewayHealthy(sandboxUrl: string): Promise<void> {
+  const deadline = Date.now() + HEALTH_CHECK_TIMEOUT_MS
+  while (Date.now() < deadline) {
+    try {
+      const res = await fetch(`${sandboxUrl}/health`, {
+        signal: AbortSignal.timeout(deadline - Date.now()),
+      })
+      if (res.ok) {
+        const text = await res.text()
+        if (!text) {
+          throw new Error('Gateway returned empty response for GET /health')
+        }
+        const body = JSON.parse(text) as { status?: string; ready?: boolean }
+        if (body.status === 'ok' && body.ready === true) {
+          return
+        }
+      }
+    } catch {
+      // Network error — gateway not up yet
+    }
+    if (deadline - Date.now() > HEALTH_CHECK_POLL_MS) {
+      await new Promise(resolve => setTimeout(resolve, HEALTH_CHECK_POLL_MS))
+    }
+  }
+  throw new Error('Gateway health check timed out')
+}
+
+async function proxyToSandbox({
+  request,
+  sandboxUrl,
+  host,
+  hostname,
+  orgSlug,
+  appSlug,
+}: {
+  request: Request
+  sandboxUrl: string
+  host: string
+  hostname: string
+  orgSlug: string
+  appSlug?: string
+}): Promise<Response> {
+  // this is needed to make sure that the gateway can receive requests before routing
+  await ensureGatewayHealthy(sandboxUrl)
+
+  const url = new URL(request.url)
+  const targetUrl = `${sandboxUrl}/public${url.pathname}${url.search}`
+
+  const headers = new Headers(request.headers)
+  headers.set('X-Forwarded-Host', host)
+  headers.set('X-Sandbox-Slug', orgSlug)
+  if (appSlug) {
+    headers.set('X-App-Slug', appSlug)
+  }
+  headers.delete('host')
+
+  const proxyResponse = await fetch(targetUrl, {
+    method: request.method,
+    headers,
+    body: request.body,
+    // @ts-expect-error -- Next.js extends RequestInit with duplex
+    duplex: 'half',
+    signal: AbortSignal.timeout(PROXY_TIMEOUT_MS),
+  })
+
+  // Hosted apps often don't ship a favicon. Serve the Duet logo as a default
+  // when the upstream either 404s the favicon path or returns a non-image (e.g.
+  // SPA catch-alls that serve index.html for /favicon.ico with status 200).
+  if (request.method === 'GET' && FAVICON_PATHS.has(url.pathname)) {
+    const upstreamType = proxyResponse.headers.get('content-type') ?? ''
+    if (proxyResponse.status === 404 || !upstreamType.startsWith('image/')) {
+      return defaultFaviconResponse()
+    }
+  }
+
+  const responseHeaders = new Headers(proxyResponse.headers)
+  responseHeaders.delete('content-encoding')
+
+  // Block search indexing of *.duet.chat user-app subdomains so they don't
+  // cannibalize duet.chat brand authority. Custom domains opt in to indexing.
+  if (isDuetHost(hostname)) {
+    responseHeaders.set('X-Robots-Tag', 'noindex, nofollow')
+  }
+
+  return new Response(proxyResponse.body, {
+    status: proxyResponse.status,
+    statusText: proxyResponse.statusText,
+    headers: responseHeaders,
+  })
+}
+
+async function handleRequest(request: Request): Promise<Response> {
+  const host = request.headers.get('host')
+  if (!host) {
+    return Response.json({ error: 'Missing Host header' }, { status: 400 })
+  }
+
+  const hostname = host.split(':')[0]!.toLowerCase()
+
+  let orgSlug: string
+  let appSlug: string | undefined
+
+  if (isDuetHost(hostname)) {
+    const subdomain = extractSubdomain(host)
+    if (!subdomain) {
+      return Response.json({ error: 'Unsupported domain' }, { status: 400 })
+    }
+    const parsed = parseSubdomain(subdomain)
+    orgSlug = parsed.orgSlug
+    appSlug = parsed.appSlug
+  } else {
+    try {
+      const mapping = await resolveCustomDomain(host)
+      if (!mapping) {
+        return Response.json({ error: 'Custom domain not registered' }, { status: 404 })
+      }
+      orgSlug = mapping.orgSlug
+      appSlug = mapping.appSlug
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err)
+      console.error(`Failed to resolve custom domain "${hostname}":`, message)
+      return Response.json(
+        { error: 'Failed to resolve custom domain', detail: message },
+        { status: 502 },
+      )
+    }
+  }
+
+  let sandboxUrl: string
+  try {
+    sandboxUrl = await sandboxUrls.get(orgSlug)
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err)
+    console.error(`Failed to resolve sandbox for "${hostname}":`, message)
+    return Response.json({ error: 'Failed to resolve sandbox', detail: message }, { status: 502 })
+  }
+
+  const retryRequest = request.clone()
+
+  try {
+    return await proxyToSandbox({ request, sandboxUrl, host, hostname, orgSlug, appSlug })
+  } catch {
+    // Proxy failed — the sandbox may have gone idle. Invalidate cache,
+    // re-resolve (which wakes/sets up the sandbox), and retry once.
+    sandboxUrls.invalidate(orgSlug)
+  }
+
+  try {
+    sandboxUrl = await sandboxUrls.get(orgSlug)
+    return await proxyToSandbox({
+      request: retryRequest,
+      sandboxUrl,
+      host,
+      hostname,
+      orgSlug,
+      appSlug,
+    })
+  } catch (err) {
+    console.error(`Proxy to sandbox failed for "${hostname}" after retry:`, err)
+    return Response.json({ error: 'Gateway not available' }, { status: 502 })
+  }
+}
+
+export const GET = handleRequest
+export const POST = handleRequest
+export const PUT = handleRequest
+export const PATCH = handleRequest
+export const DELETE = handleRequest
+export const HEAD = handleRequest
+export const OPTIONS = handleRequest

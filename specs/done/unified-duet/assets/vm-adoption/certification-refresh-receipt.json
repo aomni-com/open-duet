@@ -1,0 +1,36 @@
+{
+  "runtimeVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+  "runtimePayloadRebuilt": false,
+  "helperBundle": "/tmp/unified-duet-vm-runtime-adoption-cert-refresh-final.js",
+  "helperSha256": "e8603337408bad602fbff58f82d928a96982bf2e1b709c82aa48814b1558f5ed",
+  "productionBootThresholdUnchanged": {
+    "minimumUptimeMs": 60000,
+    "minimumCompletedSyncs": 3
+  },
+  "helperCadence": {
+    "healthMs": 1000,
+    "refreshMs": 15000,
+    "refreshRequestMaximumMs": 30000,
+    "processWaitMs": 10
+  },
+  "existingRefreshEndpoint": "POST /v1/agents/roster/refresh",
+  "fixtureIdlePollAfterMs": 300000,
+  "fixtureCertificationDeadlineMs": 75000,
+  "results": {
+    "before": "actual held target had1 sync and was uncertified after80s; bounded job restored old layout",
+    "after": "actual held target certified at67s through complete source sink, then opened normally",
+    "parentDeath": "after a refresh request during held certification, all job mutators gone before original layout restored"
+  },
+  "tests": {
+    "cases": 10,
+    "assertions": 25,
+    "types": 0,
+    "lint": 0
+  },
+  "limitations": [
+    "ARM/Rosetta attribution limitation remains",
+    "One recovery probe attempt hit emulated native memory timeout and safely restored; unchanged helper/payload subsequently passed parent-death recovery",
+    "75s disposable certification cap exceeds original60s probation; it reproduces300s polling incompatibility without waiting the live180s cap"
+  ],
+  "liveVmWrites": false
+}

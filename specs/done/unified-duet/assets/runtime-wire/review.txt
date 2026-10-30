@@ -1,0 +1,6 @@
+Shape/diff/docs review: one runtime desired identity; no component selector,
+npm install manager or mutable child-path owner remains in gateway composition.
+Independent full review reproduced backup admission after activation and stale
+app-domain deployment fixtures. Both were corrected and narrow recovery gates
+passed. Independent correction review: no actionable defects,28 focused tests.
+Live staging and fleet adoption remain unexecuted; this is a source checkpoint.

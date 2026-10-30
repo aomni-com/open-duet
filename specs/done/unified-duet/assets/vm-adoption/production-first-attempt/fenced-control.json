@@ -1,0 +1,13 @@
+{
+  "environment": "production",
+  "backendRevision": "f728ae9c07f710e2be5fb02b92dbb8d57d653350",
+  "schema": 1,
+  "updates": {
+    "id": "q979smgsc3m72dxmza2c0btfdh8fn9dm",
+    "paused": true,
+    "updatedAt": 1791152012147,
+    "reason": "unified-duet in-place alignment; workspace work continues"
+  },
+  "lifecycleFence": "1",
+  "observedAt": "2026-10-04T22:14:52.081Z"
+}

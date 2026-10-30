@@ -1,0 +1,432 @@
+{
+  "environment": "staging",
+  "targetEnvironment": "preview",
+  "observedAt": "2026-10-04T18:49:52.780Z",
+  "source": ".env.staging via explicit primary dotenvx keys",
+  "topology": "scripts/secret-topology.mjs",
+  "reader": "installed Vercel CLI pullEnvRecords endpoint, default preview and staging branch, captured in process memory",
+  "initialReaderLimitation": "getEnvRecords decrypt=true returned decrypted:false and ciphertext; not used as value proof",
+  "valuesPersisted": false,
+  "valueHashesPersisted": false,
+  "projectCount": 6,
+  "presentSourcePairs": 53,
+  "matchedPairs": 53,
+  "projects": [
+    {
+      "project": "api",
+      "readSucceeded": true,
+      "presentSourcePairs": 23,
+      "matchedPairs": 23
+    },
+    {
+      "project": "lander",
+      "readSucceeded": true,
+      "presentSourcePairs": 10,
+      "matchedPairs": 10
+    },
+    {
+      "project": "model-gateway",
+      "readSucceeded": true,
+      "presentSourcePairs": 4,
+      "matchedPairs": 4
+    },
+    {
+      "project": "web",
+      "readSucceeded": true,
+      "presentSourcePairs": 8,
+      "matchedPairs": 8
+    },
+    {
+      "project": "mcp",
+      "readSucceeded": true,
+      "presentSourcePairs": 5,
+      "matchedPairs": 5
+    },
+    {
+      "project": "edge",
+      "readSucceeded": true,
+      "presentSourcePairs": 3,
+      "matchedPairs": 3
+    }
+  ],
+  "comparisons": [
+    {
+      "key": "COMPOSIO_API_KEY",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "CONVEX_DEPLOY_KEY",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "CONVEX_DEPLOYMENT",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "CRUSTDATA_API_KEY",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DATAFORSEO_BASE64_PASSWORD",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_API_INTERNAL_KEY",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_API_URL",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_APP_URL",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_EDGE_HOST",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_EDGE_INTERNAL_KEY",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_ENABLE_FAKE_OAUTH_ISSUER",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_MCP_PUBLIC_URL",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_MODEL_GATEWAY_URL",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_PROGRAMMATIC_LOGIN_SECRET",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_V1_FAKE_BRIDGE",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_V1_FAKE_PAYERS",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_V2_MIGRATION_SECRET",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_VM_IMAGE_REF",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "ELEVENLABS_API_KEY",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "EXE_TOKEN",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "FIRECRAWL_API_KEY",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "FULLENRICH_API_KEY",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "SOCIALAPI_API_KEY",
+      "target": "vercel:api",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "CONVEX_DEPLOYMENT",
+      "target": "vercel:edge",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_EDGE_INTERNAL_KEY",
+      "target": "vercel:edge",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_PROGRAMMATIC_LOGIN_SECRET",
+      "target": "vercel:edge",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "AI_GATEWAY_API_KEY",
+      "target": "vercel:lander",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "CONVEX_DEPLOYMENT",
+      "target": "vercel:lander",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_API_INTERNAL_KEY",
+      "target": "vercel:lander",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_API_URL",
+      "target": "vercel:lander",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_MCP_PUBLIC_URL",
+      "target": "vercel:lander",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "FIRECRAWL_API_KEY",
+      "target": "vercel:lander",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "NEXT_PUBLIC_DUET_APP_URL",
+      "target": "vercel:lander",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "NEXT_PUBLIC_DUET_LANDER_URL",
+      "target": "vercel:lander",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "NEXT_PUBLIC_POSTHOG_HOST",
+      "target": "vercel:lander",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "NEXT_PUBLIC_POSTHOG_KEY",
+      "target": "vercel:lander",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "CONVEX_DEPLOYMENT",
+      "target": "vercel:mcp",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_API_URL",
+      "target": "vercel:mcp",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_MCP_PUBLIC_URL",
+      "target": "vercel:mcp",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_MODEL_GATEWAY_URL",
+      "target": "vercel:mcp",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_PROGRAMMATIC_LOGIN_SECRET",
+      "target": "vercel:mcp",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "AI_GATEWAY_API_KEY",
+      "target": "vercel:model-gateway",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "CONVEX_DEPLOYMENT",
+      "target": "vercel:model-gateway",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_API_INTERNAL_KEY",
+      "target": "vercel:model-gateway",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_PROGRAMMATIC_LOGIN_SECRET",
+      "target": "vercel:model-gateway",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "CONVEX_DEPLOYMENT",
+      "target": "vercel:web",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_API_URL",
+      "target": "vercel:web",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_APP_URL",
+      "target": "vercel:web",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_MCP_PUBLIC_URL",
+      "target": "vercel:web",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "DUET_PROGRAMMATIC_LOGIN_SECRET",
+      "target": "vercel:web",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "NEXT_PUBLIC_FINGERPRINT_API_KEY",
+      "target": "vercel:web",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "NEXT_PUBLIC_POSTHOG_HOST",
+      "target": "vercel:web",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    },
+    {
+      "key": "NEXT_PUBLIC_POSTHOG_KEY",
+      "target": "vercel:web",
+      "matched": true,
+      "defaultMatched": true,
+      "stagingBranchMatched": true
+    }
+  ],
+  "skipped": [
+    {
+      "key": "DUET_V1_BRIDGE_URL",
+      "target": "vercel:api",
+      "reason": "source_absent"
+    }
+  ]
+}

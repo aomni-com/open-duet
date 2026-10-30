@@ -1,0 +1,33 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "arrowParens": "avoid",
+  "endOfLine": "lf",
+  "importSorting": true,
+  "semi": false,
+  "singleQuote": true,
+  "sortImports": {
+    "customGroups": [
+      {
+        "elementNamePattern": ["@repo/*", "@repo/**"],
+        "groupName": "repo"
+      }
+    ],
+    "groups": [
+      "side_effect_style",
+      "side_effect",
+      "builtin",
+      "external",
+      "repo",
+      ["internal", "subpath"],
+      ["parent", "sibling", "index"],
+      "style",
+      "unknown"
+    ],
+    "newlinesBetween": true,
+    "sortSideEffects": false
+  },
+  "sortPackageJson": true,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "useTabs": false
+}

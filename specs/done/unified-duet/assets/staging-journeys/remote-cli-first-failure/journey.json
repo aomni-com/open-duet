@@ -1,0 +1,115 @@
+{
+  "journey": "unified-duet",
+  "runId": "staging-e2e-synthetic",
+  "artifactDirectory": "/work/artifacts/unified-duet/live-acceptance/staging-journey/staging-e2e-synthetic",
+  "vmNames": [
+    "workspace-redacted",
+    "workspace-redacted"
+  ],
+  "cleanup": {
+    "runId": "staging-e2e-synthetic",
+    "status": "pass",
+    "resources": [
+      {
+        "kind": "user",
+        "id": "n979a8f2ddqc6660a6wmsrk8a18fmfjr",
+        "label": "staging-e2e-synthetic:owner:user@example.invalid",
+        "recordedAt": 1791147002884,
+        "status": "deleted"
+      },
+      {
+        "kind": "workspace",
+        "id": "ns7e58p6gn4gayz0c3rej9f19d8fmj5c",
+        "label": "staging-e2e-synthetic:workspace:unified-duet-staging-e2e-synthetic",
+        "recordedAt": 1791147003400,
+        "status": "deleted"
+      },
+      {
+        "kind": "mail-message",
+        "id": "<user@example.invalid>",
+        "label": "staging-e2e-synthetic:mail-message:<user@example.invalid>",
+        "recordedAt": 1791147027151,
+        "status": "deleted"
+      },
+      {
+        "kind": "workspace",
+        "id": "ns7a8gar23d9hb0sbng0n5dx798fm7av",
+        "label": "staging-e2e-synthetic:workspace:unified-873008",
+        "recordedAt": 1791147042761,
+        "status": "deleted"
+      },
+      {
+        "kind": "user",
+        "id": "user@example.invalid",
+        "label": "staging-e2e-synthetic:invite-identity:user@example.invalid",
+        "recordedAt": 1791147052821,
+        "status": "deleted"
+      },
+      {
+        "kind": "invite",
+        "id": "p578gg90hxb8g6nvqn8v0wx4b58fn8gw",
+        "label": "staging-e2e-synthetic:invite:p578gg90hxb8g6nvqn8v0wx4b58fn8gw:user@example.invalid",
+        "recordedAt": 1791147054163,
+        "status": "deleted"
+      },
+      {
+        "kind": "mail-message",
+        "id": "<user@example.invalid>",
+        "label": "staging-e2e-synthetic:mail-message:<user@example.invalid>",
+        "recordedAt": 1791147056611,
+        "status": "deleted"
+      },
+      {
+        "kind": "mail-message",
+        "id": "<user@example.invalid>",
+        "label": "staging-e2e-synthetic:mail-message:<user@example.invalid>",
+        "recordedAt": 1791147063112,
+        "status": "deleted"
+      },
+      {
+        "kind": "device-code",
+        "id": "3JQ8-SDUL",
+        "label": "staging-e2e-synthetic:device-login:3JQ8-SDUL",
+        "recordedAt": 1791147070884,
+        "status": "deleted"
+      },
+      {
+        "kind": "api-key",
+        "id": "[REDACTED_DUET_KEY]",
+        "label": "staging-e2e-synthetic:device-login-key:[REDACTED_DUET_KEY]",
+        "recordedAt": 1791147080004,
+        "status": "deleted"
+      },
+      {
+        "kind": "sync-machine",
+        "id": "ph75da5dgkvmq4vh2z4yrect5d8fn2rv",
+        "label": "staging-e2e-synthetic:scratch-machine:ph75da5dgkvmq4vh2z4yrect5d8fn2rv",
+        "recordedAt": 1791147133407,
+        "status": "deleted"
+      },
+      {
+        "kind": "sync-machine",
+        "id": "ph7c4pjzhh5t7jw8nzsb06qg2n8fm10p",
+        "label": "staging-e2e-synthetic:scratch-machine:ph7c4pjzhh5t7jw8nzsb06qg2n8fm10p",
+        "recordedAt": 1791147137635,
+        "status": "deleted"
+      },
+      {
+        "kind": "api-key",
+        "id": "jh7bs87ewfrbkab4qb43yqs7jx8fnv9a",
+        "label": "staging-e2e-synthetic:replacement-key",
+        "recordedAt": 1791147150147,
+        "status": "deleted"
+      },
+      {
+        "kind": "session",
+        "id": "j978awjsxphaxb8q54pmw90vv98fme4s",
+        "label": "staging-e2e-synthetic:managed-cli",
+        "recordedAt": 1791147182644,
+        "status": "deleted"
+      }
+    ],
+    "orphans": []
+  },
+  "error": "Explicit remote CLI command failed\n\n1 !== 0\n"
+}

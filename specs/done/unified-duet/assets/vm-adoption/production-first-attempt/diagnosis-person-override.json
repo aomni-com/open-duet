@@ -1,0 +1,45 @@
+{
+  "overrideSha256": "14551d3dcee64fe8d54e1174e0d2525584836bb61a6a272531cfc2536414992f",
+  "execDirectives": [
+    {
+      "directive": "ExecStartPre",
+      "reset": true,
+      "pathArgumentsOnly": []
+    },
+    {
+      "directive": "ExecStartPre",
+      "reset": false,
+      "pathArgumentsOnly": [
+        "/opt/duet/gateway-runtime/bin/bun",
+        "/opt/duet/bin/gateway-bootstrap.js"
+      ]
+    },
+    {
+      "directive": "ExecStart",
+      "reset": true,
+      "pathArgumentsOnly": []
+    },
+    {
+      "directive": "ExecStart",
+      "reset": false,
+      "pathArgumentsOnly": [
+        "/opt/duet/gateway-runtime/bin/bun",
+        "/opt/duet/current/index.js"
+      ]
+    }
+  ],
+  "ownedGatewayBootstrapEvents": [
+    {
+      "at": "1791152313354794",
+      "operation": "gateway_release_bootstrap",
+      "status": "adopted",
+      "version": "0.0.0+4955b7a09dde"
+    },
+    {
+      "at": "1791152313978441",
+      "operation": "gateway_release_bootstrap",
+      "status": "healthy",
+      "version": "0.0.0+4955b7a09dde"
+    }
+  ]
+}

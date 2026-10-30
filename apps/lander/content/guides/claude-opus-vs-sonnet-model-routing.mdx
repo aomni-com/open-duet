@@ -1,0 +1,291 @@
+---
+title: 'The $47,000 Claude Code Bill (and How Smart Model Routing Prevents It)'
+metaTitle: 'Claude Opus vs Sonnet vs Haiku: Model Routing Guide to Cut Your AI Bill'
+description: 'Developers have burned $47K in days on Claude Code. Learn model routing with Opus, Sonnet, and Haiku to cut your AI bill by 50-70%.'
+date: '2026-05-29'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/7.png'
+category: 'guides'
+tags: ['claude-code', 'opus', 'sonnet', 'haiku', 'model-routing', 'cost-optimization', 'ai-pricing']
+type: 'guide'
+image: '/guides/claude-opus-vs-sonnet-model-routing/cover.png'
+relatedPosts:
+  - slug: 'duet-vs-claude-code'
+    context: 'Side-by-side comparison covering pricing, tier limits, and how each tool controls per-task spend.'
+  - slug: 'duet-vs-codex'
+    context: 'How Duet stacks up against OpenAI Codex for teams evaluating multi-model coding tools.'
+  - slug: 'claude-code-for-teams'
+    context: 'How to set up Claude Code for your team with pooled usage, shared skills, and predictable billing.'
+cta:
+  title: 'Stop picking models manually.'
+  subtitle: 'Duet routes every task to the right model automatically. No config, no scripts, no surprise bills.'
+  buttonText: 'Try Duet'
+  href: '/sign-in?from=guide-model-routing'
+howTo:
+  name: 'How to Route Claude Models to Reduce Costs'
+  description: 'A step-by-step guide to routing Claude Opus, Sonnet, and Haiku to the right tasks to reduce your AI coding bill.'
+  steps:
+    - name: 'Understand the model lineup'
+      text: 'Learn the pricing and capabilities of Claude Opus ($15/$75 per M tokens), Sonnet ($3/$15), and Haiku ($0.25/$1.25).'
+    - name: 'Map tasks to models'
+      text: 'Use the complexity ladder: Haiku for simple tasks, Sonnet for standard work, Opus for complex reasoning.'
+    - name: 'Apply cost-saving methods at your level'
+      text: 'Start with subscription optimization and context management, then progress to manual model flags, shell wrappers, or a full model router.'
+    - name: 'Track and optimize'
+      text: 'Use /cost, audit logs, or Duet built-in tracking to measure savings and refine your routing.'
+---
+
+<GuideTOC
+  items={[
+    { number: 1, title: 'The Bill Shock Is Real', href: '#the-bill-shock-is-real' },
+    {
+      number: 2,
+      title: 'Three Models, Three Price Points',
+      href: '#three-models-three-price-points-three-jobs',
+    },
+    { number: 3, title: 'The Model-Task Matrix', href: '#the-model-task-matrix' },
+    {
+      number: 4,
+      title: 'How to Save Money (Beginner to Pro)',
+      href: '#how-to-save-money-from-beginner-to-pro',
+    },
+    {
+      number: 5,
+      title: 'Before & After Cost Scenarios',
+      href: '#before-and-after-real-cost-scenarios',
+    },
+    { number: 6, title: 'Why Duet Handles This for You', href: '#why-duet-handles-this-for-you' },
+    { number: 7, title: 'FAQ', href: '#frequently-asked-questions' },
+  ]}
+/>
+
+## The bill shock is real
+
+A developer ran 23 subagents on a code-quality project. Three days later, the bill hit [$47,000](https://www.verdent.ai/guides/claude-code-pricing-2026). Not a typo. Forty-seven thousand dollars on AI-generated code reviews.
+
+That's the extreme end. But the pattern is everywhere. A [49-subagent typescript-checks run](https://www.verdent.ai/guides/claude-code-pricing-2026) clocked $8,000 to $15,000. Someone left Claude Code running overnight with a looping script and [woke up to $6,000 gone](https://www.makeuseof.com/someone-left-claude-code-running-overnight-and-it-cost-6000/). One developer [burned through $15,000 in eight months](https://buildtolaunch.substack.com/p/claude-code-token-optimization) on API billing. That same usage would have cost $800 on a Max subscription.
+
+Then there's enterprise scale. [Uber burned through its entire 2026 AI coding budget in four months](https://fortune.com/2026/05/26/uber-coo-ai-spending-tokens-claude-code/). Per-engineer bills ranged from $150 to $2,000 a month. Their COO called it a "head-exploding moment." Microsoft responded by canceling most of its Claude Code licenses entirely.
+
+The common thread in every one of these stories? People running the most expensive model for every task. Opus for commit messages. Opus for formatting. Opus for boilerplate CRUD that Haiku could handle in its sleep.
+
+You don't need to stop using Claude Code. You need to stop using the wrong model.
+
+## Three models, three price points, three jobs
+
+Claude comes in three tiers. Each one exists for a reason.
+
+### Haiku: the fast, cheap workhorse
+
+$0.25 per million input tokens. $1.25 per million output tokens. That's 60x cheaper than Opus.
+
+Haiku is built for speed and volume. It handles simple, well-defined tasks where reasoning depth doesn't matter. Commit messages, boilerplate generation, formatting, string manipulation, quick Q&A about your codebase. The kind of work that makes up a surprising chunk of every coding session.
+
+Most developers never even try Haiku for these tasks. They should.
+
+### Sonnet: the daily driver
+
+$3 per million input tokens. $15 per million output tokens. Five times cheaper than Opus, and the quality gap is smaller than most people think.
+
+Sonnet handles 70 to 80 percent of typical development work at near-Opus quality. Landing pages, API routes, test writing, refactoring, content writing, standard code review. If the task has a clear goal and doesn't require multi-step architectural reasoning, Sonnet gets it done.
+
+This is the model you should be using by default. Not Opus.
+
+### Opus: the heavy hitter
+
+$15 per million input tokens. $75 per million output tokens. The most capable and the most expensive.
+
+Opus earns its price on tasks where getting it wrong costs more than the tokens. Architecture design, debugging subtle multi-file issues, complex database migrations, security audits, framework upgrades. Tasks that require deep reasoning across long context windows.
+
+The mistake isn't using Opus. The mistake is using Opus for everything.
+
+## The model-task matrix
+
+Here's the cheat sheet. Every common task mapped to the right model.
+
+For each task below, **Best** means it's the right model for the job. **Good** means it works but you're overpaying. **Overkill** means you're lighting money on fire.
+
+### Simple tasks (use Haiku)
+
+| Task               | Haiku ($0.25/$1.25) | Sonnet ($3/$15)   | Opus ($15/$75)        |
+| ------------------ | ------------------- | ----------------- | --------------------- |
+| Commit messages    | **Best** (~$0.01)   | Overkill (~$0.12) | Way overkill (~$0.60) |
+| Formatting/linting | **Best**            | Overkill          | Way overkill          |
+| Boilerplate/CRUD   | Good                | **Best**          | Overkill              |
+| Simple Q&A         | **Best**            | Overkill          | Way overkill          |
+| Regex/string ops   | **Best**            | Good              | Overkill              |
+
+### Standard tasks (use Sonnet)
+
+| Task                       | Haiku | Sonnet ($3/$15)          | Opus ($15/$75)                 |
+| -------------------------- | ----- | ------------------------ | ------------------------------ |
+| Landing pages/UI           | Weak  | **Best** (~$0.15-0.50)   | Good but 5x cost               |
+| Blog/content writing       | Weak  | **Best**                 | Good for complex long-form     |
+| Test writing               | Weak  | **Best**                 | Good for integration suites    |
+| Feature development        | Weak  | **Best** (most features) | Best for multi-system features |
+| Code review (standard PRs) | Weak  | **Best**                 | Overkill                       |
+| Bug fixes (clear repro)    | Weak  | **Best**                 | Overkill                       |
+| Refactoring                | Weak  | **Best** (targeted)      | Best for large-scale refactors |
+
+### Complex tasks (use Opus)
+
+| Task                              | Haiku | Sonnet             | Opus ($15/$75) |
+| --------------------------------- | ----- | ------------------ | -------------- |
+| Architecture design               | No    | Risky              | **Best**       |
+| Multi-file debugging              | No    | Struggles          | **Best**       |
+| Database migrations               | No    | OK for simple      | **Best**       |
+| Security audits                   | No    | Misses subtleties  | **Best**       |
+| Complex reasoning (100K+ context) | No    | Degrades           | **Best**       |
+| Framework upgrades                | No    | OK for minor bumps | **Best**       |
+
+The pattern is clear. Most tasks fall in the simple or standard category. That means most of your token spend should be on Haiku and Sonnet, not Opus.
+
+<DuetCTA
+  title="Don't want to think about model selection?"
+  subtitle="Duet analyzes every task and picks the right model automatically. Your code gets Opus when it needs it, Haiku when it doesn't."
+  buttonText="Try Duet"
+  href="/sign-in?utm_source=guide&utm_medium=model-routing&utm_campaign=matrix"
+/>
+
+## How to save money, from beginner to pro
+
+Not everyone wants to build a model router. Here's every method, graded by technical skill required. Start at your level and work up.
+
+### Level 1: No code required
+
+These work for anyone, even if you've never opened a terminal.
+
+- **Switch to Claude Max** ($100/month) instead of API billing. One developer spending $15,000 over 8 months on API billing would have paid $800 on Max. That's a 93% savings.
+- **Use /compact and /clear** to manage your context window. Tokens equal money. A bloated context window means every message costs more.
+- **Start new sessions for new tasks.** Don't cram everything into one massive conversation. Fresh sessions reset context and reduce per-message token counts.
+- **Run /cost** to check your spend in real-time. You can't optimize what you don't measure.
+- **Set spending limits** in your Anthropic dashboard. Put a ceiling on monthly API spend so surprise bills literally can't happen.
+
+These five steps alone will cut most developers' bills by 50% or more. If you do nothing else, do these.
+
+### Level 2: Some config, no scripting
+
+You know your way around a config file. You've edited `settings.json` before.
+
+- **Use the --model flag** to manually select cheaper models. Run `claude --model claude-haiku-4` for simple tasks.
+- **Write a CLAUDE.md** that sets Sonnet as default: "Use Sonnet for all tasks. Only escalate to Opus when the task involves architecture, complex debugging, or security analysis."
+- **Limit subagent parallelism** in CLAUDE.md. "Never spawn more than 3 subagents at once." This is how $47,000 bills happen. Each subagent carries its own context window.
+- **Use project-scoped settings** to enforce model defaults per repo. Different repos have different complexity profiles.
+- **Cache frequently-used context** via the Project space. Stop re-uploading the same files every session.
+- **Set per-session token budgets.** Know your ceiling before you start.
+
+### Level 3: Shell scripts and hooks
+
+You're comfortable writing bash scripts and configuring development tools.
+
+- **Build a shell wrapper** that routes to different models based on task keywords or file types. "refactor" or "test" goes to Sonnet, "architecture" or "security" goes to Opus, everything else goes to Haiku.
+- **Create a PostToolUse hook** that tracks token usage per session and alerts when thresholds are hit. Same concept as an audit trail hook, but focused on cost.
+- **Use Haiku as a complexity classifier.** Feed it the task description, get back "simple/standard/complex", route to the corresponding model. Cost: fractions of a cent per classification.
+- **Build a cost-tracking hook** that logs every API call: model, tokens in, tokens out, estimated dollar cost. Store it in a daily log file.
+- **Generate weekly cost reports** from your logs. Know exactly where your money goes: by project, by task type, by model.
+
+<DuetCTA
+  title="This is a lot of plumbing to build yourself."
+  subtitle="Duet ships with model routing, cost tracking, and usage reports out of the box. No hooks, no scripts, no maintenance."
+  buttonText="Skip the plumbing"
+  href="/sign-in?utm_source=guide&utm_medium=model-routing&utm_campaign=level3"
+/>
+
+### Level 4: Full model router (or just use Duet)
+
+You want automated, intelligent routing with zero manual intervention.
+
+- **Build a complete model routing system:** request classifier, complexity scorer, model selector, execution layer, cost tracker. The classifier uses Haiku (pennies per call) to analyze task complexity, then routes to the right model.
+- **Add rule-based fallbacks** for speed: file type detection, git diff size, keyword patterns. These bypass the classifier for obvious cases.
+- **A/B test model selection.** Run the same tasks on Sonnet vs Opus, measure quality. You'll find Sonnet wins more often than you'd expect.
+- **Build a cost dashboard** showing per-task, per-model, and per-project breakdowns.
+- **Or skip all of this and use Duet.** Duet routes tasks to the right model automatically, tracks cost per agent, and handles the entire optimization pipeline. No config, no scripts, no maintenance.
+
+## Before and after: real cost scenarios
+
+Let's make the savings tangible.
+
+### Scenario 1: Full-stack feature (landing page + API + tests)
+
+**All-Opus approach:** 2 million tokens across planning, implementation, and testing. Cost: roughly $120 to $160.
+
+**Routed approach:** Planning on Opus (300K tokens, ~$25). Implementation on Sonnet (1.2M tokens, ~$22). Boilerplate and test scaffolds on Haiku (500K tokens, ~$0.75). **Total: roughly $48. Savings: 65-70%.**
+
+### Scenario 2: Content production (10 blog posts)
+
+**All-Opus approach:** 5 million tokens. Cost: roughly $350 to $450.
+
+**Routed approach:** All writing on Sonnet (4.5M tokens, ~$72). Formatting and metadata on Haiku (500K tokens, ~$0.75). **Total: roughly $73. Savings: 80%+.**
+
+### Scenario 3: Code review sprint (20 PRs)
+
+**All-Opus approach:** 3 million tokens. Cost: roughly $200 to $250.
+
+**Routed approach:** Standard PRs on Sonnet (2.4M tokens, ~$40). Complex architectural PRs on Opus (600K tokens, ~$50). **Total: roughly $90. Savings: 55-65%.**
+
+In every scenario, quality stays the same on the tasks that matter. You're not cutting corners. You're cutting waste.
+
+<DuetCTA
+  title="Want these savings without building the router?"
+  subtitle="Duet's model routing is tuned on thousands of real tasks. You get the cost savings from day one."
+  buttonText="Start saving"
+  href="/sign-in?utm_source=guide&utm_medium=model-routing&utm_campaign=scenarios"
+/>
+
+## Why Duet handles this for you
+
+Building a model router works. We just showed you how. But building it is one thing. Maintaining it across model updates, pricing changes, new model releases, and evolving team workflows is another.
+
+Duet has model routing built in. Every task gets analyzed in real-time. Simple tasks go to faster, cheaper models. Complex tasks get escalated to Opus when the stakes justify it. No configuration. No classifier to train. No cost-tracking scripts to maintain.
+
+- **Automatic complexity scoring** on every task
+- **Real-time routing** to the optimal model
+- **Built-in cost tracking** per agent, per task, per project
+- **Teams don't need to think about model selection.** The system handles it.
+
+If you'd rather ship than build infrastructure, Duet handles model routing out of the box.
+
+<DuetCTA
+  title="Model routing, handled."
+  subtitle="Duet picks the right model for every task. Your team ships faster, your bill stays predictable."
+  buttonText="Try Duet free"
+  href="/sign-in?utm_source=guide&utm_medium=model-routing&utm_campaign=duet-section"
+/>
+
+## Frequently Asked Questions
+
+<Accordion>
+  <AccordionItem title="Is Claude Opus always better than Sonnet?">
+    No. For 70 to 80 percent of typical development tasks, Sonnet produces equivalent results. Opus
+    shines on complex reasoning and multi-step tasks. For everything else, you're paying 5x more for
+    the same output.
+  </AccordionItem>
+  <AccordionItem title="How much can model routing actually save?">
+    50 to 70 percent on typical development workflows. Content-heavy workflows can see 80%+ savings.
+    The exact number depends on your task mix, but the pattern holds across every scenario we've
+    tested.
+  </AccordionItem>
+  <AccordionItem title="Does switching models mid-workflow cause quality issues?">
+    Not if you route correctly. Each model gets full context for its task. The key is matching
+    complexity to capability, not using the same model for everything out of habit.
+  </AccordionItem>
+  <AccordionItem title="Can I use model routing with Claude Code CLI?">
+    Yes. Use the --model flag to specify per-session, or build a wrapper script that routes based on
+    task type. Level 3 in our skill breakdown covers this in detail.
+  </AccordionItem>
+  <AccordionItem title="What about extended thinking? Does that change the cost equation?">
+    Extended thinking uses more tokens but produces better results on complex tasks. The routing
+    principle still applies: route extended thinking tasks to Opus, use standard mode for Sonnet and
+    Haiku tasks. Don't enable extended thinking on simple tasks.
+  </AccordionItem>
+  <AccordionItem title="Is Haiku good enough for real coding tasks?">
+    For simple tasks like formatting, boilerplate, commit messages, and quick completions, yes. For
+    anything requiring reasoning about code logic or multi-step problem solving, use Sonnet or Opus.
+  </AccordionItem>
+  <AccordionItem title="How does Duet's model routing compare to building your own?">
+    Duet's router has been tuned on thousands of real tasks and updates automatically with new
+    models and pricing. Building your own works but requires ongoing maintenance, classifier tuning,
+    and keeping up with Anthropic's model releases. Duet handles all of that automatically.
+  </AccordionItem>
+</Accordion>

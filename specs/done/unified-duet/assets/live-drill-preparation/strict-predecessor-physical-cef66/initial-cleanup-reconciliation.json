@@ -1,0 +1,9 @@
+{
+  "containerId": "6a1987930e311e9b7cd298c4d376fae01a66676dbfa42def3ff3a31f14945ea8",
+  "inspectExitCode": 1,
+  "inspectMessage": "error: no such object",
+  "exactIdListExitCode": 0,
+  "exactIdListEmpty": true,
+  "verifiedAbsent": true,
+  "originalHarnessCaseMismatch": true
+}

@@ -1,0 +1,57 @@
+{
+  "scope": "read-only canary diagnosis; no migration relaunch, freeze, service mutation or VM restart",
+  "oldGatewayMainPid": 1284726,
+  "procCount": 205,
+  "environmentErrorsByCode": {
+    "ESRCH": 187
+  },
+  "environmentErrorParents": [
+    0,
+    2
+  ],
+  "nonKernelEnvironmentErrors": [],
+  "sample": [
+    {
+      "pid": 2,
+      "parent": 0,
+      "comm": "kthreadd",
+      "rpc": false,
+      "field": "environ",
+      "code": "ESRCH"
+    },
+    {
+      "pid": 3,
+      "parent": 2,
+      "comm": "pool_workqueue_release",
+      "rpc": false,
+      "field": "environ",
+      "code": "ESRCH"
+    },
+    {
+      "pid": 4,
+      "parent": 2,
+      "comm": "kworker/R-kvfree_rcu_reclaim",
+      "rpc": false,
+      "field": "environ",
+      "code": "ESRCH"
+    }
+  ],
+  "workJournalReadMetadata": [
+    {
+      "path": "/home/synthetic-user/.duet/train/job-ledger-v3.json",
+      "code": "ENOENT"
+    },
+    {
+      "path": "/home/synthetic-user/.duet/backups/worker.json",
+      "code": "ENOENT"
+    }
+  ],
+  "fix": "Read process topology/command first; inspect environments only for gateway ancestry/cgroup or potential detached RPC runner. Unknown relevant environment remains deferred.",
+  "regression": {
+    "red": "Unrelated unreadable environments caused Work state cannot be read conclusively",
+    "green": "Unrelated unreadable environments leave idle classification intact; unreadable gateway child and potential detached RPC both defer",
+    "tests": 8,
+    "assertions": 22
+  },
+  "independentReview": "No actionable defects; 12 additional scratch census checks passed"
+}

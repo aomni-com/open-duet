@@ -1,0 +1,8 @@
+{
+  // check-types config. tsconfig.json is Node-neutral (base dropped DOM); this
+  // re-adds DOM so gateway.test.ts, which drives the HTTP gateway with Web-API
+  // types (Response overloads, Headers, .json()), still type-checks. Production
+  // gateway src is Node-typed and does not depend on DOM.
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "lib": ["ESNext", "DOM", "DOM.Iterable"] }
+}

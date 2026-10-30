@@ -1,0 +1,24 @@
+# /etc/systemd/system/duet-gateway.service
+[Unit]
+Description=Duet in-VM gateway
+After=network-online.target duet-syncthing.service
+Wants=network-online.target duet-syncthing.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=exedev
+Group=exedev
+WorkingDirectory=/opt/duet
+Environment=PORT=3000
+Environment=DUET_STATE_DIR=/home/synthetic-user/.duet
+Environment=DUET_DRIVE_DIR=/home/synthetic-user/drive
+Environment=PATH=/home/synthetic-user/.duet/cli-rail/bin:/home/synthetic-user/.bun/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PassEnvironment=DUET_PROVISIONING_TOKEN DUET_API_URL DUET_MODEL_GATEWAY_URL DUET_WEB_APP_ORIGIN DUET_WORKSPACE_HINT DUET_IMAGE_VERSION DUET_GATEWAY_EXTRA_HEADERS_JSON DUET_CONNECT_FAKE_ISSUER_URL
+ExecStartPre=/home/synthetic-user/.bun/bin/bun /opt/duet/bin/gateway-bootstrap.js
+ExecStart=/home/synthetic-user/.bun/bin/bun /opt/duet/current/index.js
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target

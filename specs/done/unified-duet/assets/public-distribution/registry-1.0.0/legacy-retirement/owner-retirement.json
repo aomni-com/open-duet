@@ -1,0 +1,28 @@
+{
+  "observedAt": "2026-10-05T04:58:42.506188+00:00",
+  "status": "retired-publishing-owner",
+  "npmDeprecation": "waived-by-user",
+  "oldRepo": "Example User/duet-agent",
+  "newRepo": "aomni-com/duet",
+  "oldWorkflowStates": {
+    "271933189": "disabled_manually",
+    "375054463": "disabled_manually"
+  },
+  "temporaryBranch": "codex/retire-duetfs-1.0.0",
+  "temporaryBranchResponse": 404,
+  "oldSecretNames": [],
+  "newSecretNames": [
+    {
+      "name": "DOTENV_PRIVATE_KEY_STAGING",
+      "updatedAt": "2026-07-16T15:02:42Z"
+    },
+    {
+      "name": "NPM_TOKEN",
+      "updatedAt": "2026-10-04T11:23:45Z"
+    }
+  ],
+  "oldNpmTokenCopyRemoved": true,
+  "newNpmTokenRetained": true,
+  "underlyingTokenRevoked": false,
+  "oldLocalSourceModified": false
+}

@@ -1,0 +1,196 @@
+---
+title: 'What Is an Enterprise AI Stack — and Why Are Enterprises Ditching Single-Vendor AI?'
+metaTitle: 'Enterprise AI Stack: Why Multi-Model Beats Single-Vendor AI'
+description: 'What is an enterprise AI stack? See the layers, lock-in risks, and a 90-day path enterprises use to go multi-model without a control plane.'
+date: '2026-07-18'
+updatedAt: '2026-07-18'
+readTime: '12 min read'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/10.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'ai'
+tags:
+  [
+    'enterprise ai stack',
+    'multi-model ai strategy',
+    'ai vendor lock-in',
+    'multi-model ai platform',
+    'ai strategy',
+  ]
+type: 'article'
+image: '/blog/enterprise-ai-stack/cover.png'
+relatedPosts:
+  - 'how-to-choose-the-right-ai-model-for-your-business'
+  - 'how-we-benchmark-ai-models-on-real-work'
+  - 'where-to-host-ai-agents'
+cta:
+  title: 'One workspace, every model.'
+  subtitle: 'Duet routes every task to the right model from the major providers, while files, memory, and prior work stay in one private workspace. One bill, one quality tier to choose.'
+  buttonText: 'See Duet pricing'
+  href: '/pricing'
+---
+
+> An enterprise AI stack is the set of layers that let an organization run production AI—models, data, evaluation, operations, and the work surface where agents, files, and memory live. Multi-model is now the default because no single provider wins every workload. Keep the workspace stable; treat the model as a replaceable choice.
+
+Most people hear "AI stack" and picture a chatbot subscription or a routing dashboard. It's neither. Here's the actual anatomy, the market data behind the shift, and a 90-day path that doesn't start with buying a control plane.
+
+## What is an enterprise AI stack?
+
+An enterprise AI stack is the full set of layers an organization needs to run AI in production: models and inference, data and context, evaluation, operations, and the work surface where agents, files, and memory actually live. Most vendor content stops at layer four.
+
+IDC puts the reframe plainly: "design for a model portfolio, not a single stack." Model choice is one layer, not the whole stack.
+
+![Five-layer enterprise AI stack diagram. From the bottom: models and inference; data and context including RAG, prompts, and memory; evaluation; operations covering security, cost, and observability; and at the top the work surface where agents, files, memory, and collaboration live. The work surface is marked stable — it persists across model changes — while the model layer at the bottom is marked replaceable, swappable per workload.](/blog/enterprise-ai-stack/diagram-stack-layers.png)
+
+| Layer                                               | Job                                                  | What must stay portable                                   | Common lock-in                                          | Honest role / boundary                                                                                         |
+| --------------------------------------------------- | ---------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Models / inference                                  | Runs the actual inference calls                      | The prompt, the eval, the calling code                    | Provider-tuned prompts and tool-calling that don't port | Not a Duet claim                                                                                               |
+| Data & context (RAG, prompts, memory)               | Feeds the model what it needs at call time           | The retrieval pipeline, prompt templates, memory store    | Context trapped in one vendor's proprietary format      | Not a Duet claim                                                                                               |
+| Evaluation                                          | Measures whether a model actually does the job       | The eval suite and its pass/fail history                  | Leaderboard-chasing instead of internal evals           | Not a Duet claim                                                                                               |
+| Operations                                          | Tracks spend, access, reliability                    | Cost data, security policy, logs                          | Billing and access tied to one vendor's console         | Not a Duet claim                                                                                               |
+| Work surface (agents, files, memory, collaboration) | Where agents and prior work actually live day to day | The workspace itself — agents, files, memory, team access | Losing years of context when a vendor's terms change    | Duet's honest claim: a private workspace where per-agent model choice persists independent of any one provider |
+
+Competitors consistently skip the last layer. It's where agents, files, and memory persist no matter which model answers a given call — the layer that decides whether switching providers costs an afternoon or a quarter. For the tactical, per-task version of this decision, see [choosing the right model for each workload](/blog/how-to-choose-the-right-ai-model-for-your-business).
+
+## Why are enterprises going multi-model now?
+
+Multi-model adoption has already happened, and the driver isn't fear of lock-in — it's that no single provider wins every workload, and the capability frontier moves every quarter.
+
+37% of enterprises now run five or more models, up from 29% the year before ([a16z, 2025](https://a16z.com/ai-enterprise-2025/)). Three vendors — Anthropic, OpenAI, and Google — still account for 88% of enterprise LLM API usage ([Menlo Ventures, 2025](https://menlovc.com/perspective/2025-the-state-of-generative-ai-in-the-enterprise/)).
+
+But _which_ three keeps changing. Anthropic's enterprise LLM share rose from 12% in 2023 to 40% in 2025; OpenAI's fell from 50% to 27%; Google's climbed from 7% to 21% (Menlo Ventures, 2025).
+
+![Grouped horizontal bar chart of enterprise LLM share of usage in 2023 versus 2025. Anthropic rose from 12% to 40%, OpenAI fell from 50% to 27%, and Google rose from 7% to 21%. Source: Menlo Ventures, 2025 State of Generative AI in the Enterprise.](/blog/enterprise-ai-stack/chart-market-share.png)
+
+| Vendor    | 2023 share | 2025 share |
+| --------- | ---------: | ---------: |
+| Anthropic |        12% |        40% |
+| OpenAI    |        50% |        27% |
+| Google    |         7% |        21% |
+
+_Source: Menlo Ventures, 2025 State of Generative AI in the Enterprise — share of enterprise LLM API usage, not revenue._
+
+a16z asked 100 CIOs why they buy from multiple vendors, and the answer wasn't hedge-your-bets caution: "Model differentiation by use case … is the main reason enterprises buy models from multiple vendors." Betting the whole stack on one provider bets against a frontier that reshuffles every year.
+
+## What is AI vendor lock-in in a multi-model world?
+
+Vendor lock-in used to mean a contract. Now it mostly means a workflow — agentic prompts, tool-calling semantics, and QA tuned so tightly to one provider that switching costs are _rising_, not falling.
+
+An anonymous enterprise leader quoted in a16z's CIO survey put it this way:
+
+> "all the prompts have been tuned for OpenAI. Each one of them has their own set of instructions and prompts and details. How LLMs get instructions to do agentic processing—it takes lots of pages of instruction. Also, quality assurance of agents is not super easy, so changing models is now a task that can take a lot of engineering time."
+
+a16z's own framing backs it up: "the rise of agentic workflows has started making it _more_ difficult to switch between models." A second provider on paper helps less than people assume if the actual switching cost lives in the prompts, not the contract.
+
+Run this audit before your next renewal:
+
+- Where does your context actually live — a portable store, or inside one vendor's product?
+- Is your prompt and eval library portable, or hand-tuned to one provider's syntax?
+- Do you have a _tested_ offramp for your top provider, not a theoretical one?
+- Is any single vendor carrying more than half your production tokens with no fallback plan?
+- Could you switch your highest-volume agent to a different model this week, or would it take an engineering sprint?
+
+## Picker vs. router vs. control plane vs. workspace: what do you actually need?
+
+The market collapses four distinct products into "multi-model platform." A model picker, an automatic router, a failover layer, and a governance control plane solve different problems at different maturity levels — and most enterprises need the first one before any of the other three.
+
+![Four-panel comparison. Model picker: a person deliberately assigns one model to an agent and the choice persists until reviewed — the recommended starting point. Auto-router: software classifies each request and sends it to one of several models — a later purchase. Failover layer: requests reroute to a standby provider during outages — later engineering. Governance control plane: policy, audit, and compliance enforced across all models — a later, larger purchase. Most enterprises need the picker long before the other three.](/blog/enterprise-ai-stack/diagram-taxonomy.png)
+
+| Product class            | What it actually does                                                      | Who decides            | Maturity gate                                            | Honest claim boundary                                 |
+| ------------------------ | -------------------------------------------------------------------------- | ---------------------- | -------------------------------------------------------- | ----------------------------------------------------- |
+| Model picker             | A human assigns a provider/model to an agent or workload                   | Human                  | Ship this first                                          | Duet's shipped mechanism — user-controlled, per-agent |
+| Auto-router              | Software classifies each request and sends it to a model automatically     | Software               | Add once request volume and patterns are well understood | Not a Duet claim                                      |
+| Failover layer           | Reroutes to a standby provider automatically during an outage              | Software (engineered)  | Add once outages carry real cost                         | Not a Duet claim                                      |
+| Governance control plane | Enforces policy, audit, and compliance across every model in use           | Software + policy team | Add once you're regulated or auditors ask                | Not a Duet claim                                      |
+| Coworker workspace       | Keeps agents, files, memory, and prior work in one place while models vary | Human, per assignment  | Foundational — do this regardless of the rest            | Duet's defensible center                              |
+
+A picker is a human decision: someone assigns a provider and model to an agent, and it persists until reviewed. A router is software making that same call automatically, per request — [our guide to routing between Claude Opus and Sonnet](/guides/claude-opus-vs-sonnet-model-routing) is the concrete single-vendor version of that mechanism.
+
+Failover and governance solve later problems — outages and audits — that most enterprises haven't hit yet. Even [the best AI agent builders](/blog/6-best-ai-agent-builders-in-2026) tend to sell routing or governance tooling as the entry point, because that's the more expensive thing to sell, not because it's what most teams need first.
+
+Anthropic's engineering team frames the underlying spectrum the same way — plain calls, then routing, then full orchestrator-worker systems — and warns that "the most successful implementations use simple, composable patterns rather than complex frameworks" ([Anthropic — Building effective agents](https://www.anthropic.com/engineering/building-effective-agents)).
+
+## What does multi-model actually look like in production?
+
+Real deployments assign models per task, by hand. Nobody serious runs one model for everything, and nobody serious runs a fully automatic router either.
+
+- **Amazon Rufus** pairs an in-house model with Bedrock foundation models, including Nova and Claude, routed by task, serving 250 million users.
+- **Intuit Assist / TurboTax** runs Claude for explanations and GPT for Q&A inside a shared human-and-LLM-judge eval pipeline, covering 44 million annual tax returns.
+- **CBRE's PULSE** assistant uses Amazon Nova Pro for SQL generation and Claude Haiku for retrieval in one app — 67% faster SQL generation, 60% less token use.
+- **Salesforce** packs multiple models onto shared inference endpoints for up to an eightfold reduction in infrastructure cost. The "up to" matters — it's a ceiling, not an average.
+
+Not every attempt goes cleanly. One private university built a [LiteLLM proxy](https://www.zenml.io/llmops-database/privacy-preserving-university-chatbot-with-litellm-proxy-for-multi-model-governance-and-cost-control) to unify multi-model access and hit real friction: delayed support for new provider features, stability issues, and custom workarounds it hadn't budgeted for. That's the honest cost side of "just add a routing layer" — worth knowing before it's your rollout.
+
+None of this is guesswork before it ships. a16z's CIOs were direct about it: "you still need to assess yourself. It's hard to pick without really trialing things and getting employee feedback." Public benchmarks are a first filter, not a decision — we cover the follow-up in [how we benchmark models on real work](/blog/how-we-benchmark-ai-models-on-real-work).
+
+## How do you fix the economics without promising magic savings?
+
+The first real saving is boring, not magical: stop paying for duplicated per-seat subscriptions, and stop defaulting every task to the frontier-tier model.
+
+Enterprise gen-AI spend hit $37 billion in 2025, up 3.2x year over year from $11.5 billion (Menlo Ventures, 2025). This is not small money, and tier-matching is a structural lever inside it, not a routing product.
+
+AWS Prescriptive Guidance frames the tradeoff in dollars: 95% accuracy at $0.50 per conversation versus 90% at $0.05 — a real accuracy difference, and a 10x cost gap to match. Their own guidance: "Don't assume bigger is better."
+
+Tier-matching is already happening at scale, not hypothetical: 67% of OpenAI's own enterprise users have deployed non-frontier models in production, compared with 41% for Google and 27% for Anthropic (a16z, 2025). CIOs consistently tell a16z they'd rather pay by usage than by outcome — tier-matching is what that preference looks like once it ships.
+
+Treat any vendor's flat percentage-savings claim with suspicion unless it shows its cost accounting. "Up to 90% cheaper" without a comparable workload attached is marketing, not math.
+
+## When is a single vendor still the right choice?
+
+Sometimes. A single vendor is entirely rational for a narrow, low-risk, well-bounded deployment — even genuinely multi-model enterprises concentrate most of their usage across just a few providers.
+
+Staying single-vendor makes sense when:
+
+- The deployment is a contained internal tool with a small, known blast radius.
+- The pilot is compliance-bounded, with a scope too narrow to justify a second vendor's overhead.
+- The team is too small to carry evaluation and prompt-maintenance work across multiple providers.
+
+The argument here isn't against single-vendor pilots. It's against _accidental_ dependence — no offramp, no evals, and organizational context trapped in one vendor's product because nobody planned an exit.
+
+## What does a 90-day multi-model adoption path look like?
+
+Multi-model maturity is a ladder, not a purchase order. Climb it in order — most of the value sits on the first two rungs, and the rest waits until volume and risk justify it.
+
+1. Consolidate work and context in a vendor-neutral workspace.
+2. Choose models deliberately per agent or workload, and document why.
+3. Evaluate on real internal work, not generic leaderboards.
+4. Add routing, failover, and observability only when volume and risk justify the operational tax.
+5. Keep an explicit provider offramp at every stage.
+
+The first two rungs are the practical start, where most of the value already lives; the last three are later-stage infrastructure to earn only when volume and risk justify the cost.
+
+This is where a coworker workspace earns its place in the stack. Duet gives every agent the whole frontier — models from OpenAI, Anthropic, xAI, Z.ai and more — and routes each task to whichever one is best at it, while that agent's files, memory, and prior work stay in one private workspace no matter which model answers. There's no governance layer to configure: a person picks a quality tier rather than a model name, that choice persists until someone reviews it, and the whole team works from [one workspace, one bill](/pricing) — a monthly plan with included credits and a paid reserve for overage, rather than a per-seat tax. It's the first two rungs of the ladder above, packaged: consolidate the work, then let the routing hold the quality-versus-cost line. Routing happens inside the tier you chose; nothing here claims to enforce policy across providers or arbitrate spend for you — that's a different, later-stage purchase, and most organizations don't need it yet. What they need is the place the portfolio actually lives.
+
+## Frequently asked questions
+
+### What is an enterprise AI stack?
+
+The full set of layers needed to run AI in production: model access, data and context, evaluation, operations, and the work surface where agents, files, and memory actually live. Most vendor content only covers the first four — the work surface decides whether switching models is easy or painful.
+
+### Does multi-model mean automatic routing?
+
+No. Routing — software classifying a request and sending it to a model — is one workflow pattern, not the definition of multi-model. Only 16% of enterprise deployments qualify as true autonomous agents (Menlo, 2025); most production AI is deliberate, human-assigned selection per task.
+
+### Is multi-model automatically cheaper?
+
+Only if you also do the boring work: cut duplicated per-seat subscriptions, and stop defaulting every task to the frontier-tier model. Tier-matching alone can mean the gap between $0.50 and $0.05 per conversation at comparable accuracy (AWS Prescriptive Guidance). Treat any vendor's flat "savings" claim with skepticism unless it shows its cost accounting.
+
+### Does using more providers automatically make you more resilient?
+
+Not by default. Resilience requires tested failover engineering, which a second provider alone doesn't give you. There's a subtler risk too: agentic workflows can make switching _harder_ even across vendors, because prompts and QA get tuned to one provider's semantics.
+
+### What's the real difference between a model picker and a model router?
+
+A picker is a human decision — someone assigns a provider and model to an agent, and it persists until reviewed. A router is software choosing a model per request, automatically. Most enterprises need a reliable picker long before they need a router.
+
+### Is a single AI vendor ever the right choice?
+
+Yes — for a narrow, well-bounded, low-risk deployment. Even enterprises that call themselves multi-model concentrate most of their usage across just a few providers. The real risk isn't one vendor; it's _accidental_ dependence, with no offramp and no evaluation plan.
+
+### How does a coworker workspace fit into a multi-model stack?
+
+It keeps agents, files, memory, and prior work in one place the organization controls, while each agent's model can be chosen and changed independently — the picker and workspace layers, made real. Not a router, not a governance control plane.
+
+If the ladder above matches how your team already works, the model-picker step is free to start inside a coworker workspace — no router required.

@@ -1,0 +1,202 @@
+---
+title: 'How to Reduce LLM Cost Without Losing Quality: A Finance-First Decision Ladder'
+metaTitle: 'Reduce LLM Cost Without Losing Quality | Duet'
+description: 'Cut enterprise LLM spend without hurting output quality. A finance-first, 9-step decision ladder — from seat waste to model right-sizing to routing.'
+date: '2026-07-19'
+updatedAt: '2026-07-19'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/6.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'ai'
+tags:
+  [
+    'reduce llm cost',
+    'cut ai spend',
+    'enterprise ai cost',
+    'llm cost optimization',
+    'fixed cost ai',
+    'ai models',
+  ]
+type: 'article'
+image: '/blog/cut-enterprise-llm-spend/cover.png'
+relatedPosts:
+  - slug: 'frontier-model-orchestrator'
+    context: 'The mechanism-first deep dive on orchestrator-worker vs. model routing'
+  - slug: 'how-to-choose-the-right-ai-model-for-your-business'
+    context: 'A practical guide to matching AI models to tasks'
+  - slug: 'how-we-benchmark-ai-models-on-real-work'
+    context: 'Build the golden eval set instead of trusting leaderboards'
+cta:
+  title: 'Right-size every agent, not the whole bill.'
+  subtitle: 'Duet gives every agent in your workspace its own model across providers — on a monthly plan whose included credits reset at renewal, with a paid reserve covering overage.'
+  buttonText: 'Try Duet free'
+  href: '/sign-in?from=blog-cut-enterprise-llm-spend'
+---
+
+> **Reduce LLM cost by lowering cost per successful task while holding a pre-defined quality and latency floor. Start with that floor and a spend baseline, stop runaway usage, and remove seat, markup, and default-model waste. Then right-size models by task. Reach for caching, routing infrastructure, or fixed compute only when workload math justifies them.**
+
+<Callout type="tip" title="Before you cut anything">
+
+Pick 50–200 representative tasks, set a pass/fail threshold, and name a rollback owner. Every lever below needs that quality gate before it's declared a win.
+
+</Callout>
+
+Most AI cost articles hand you a tactic list in no particular order. That's backward for a budget owner. Below is the order: cheapest and safest first, complexity last, only when the math earns it.
+
+## What should you cut first when AI spend spikes?
+
+Don't blanket-switch to a cheaper model. Freeze runaway usage and define your quality floor first — most enterprises hit by a spike have neither one.
+
+[The Economist reported in June 2026 that companies are scrambling to curtail soaring AI costs](https://www.economist.com/business/2026/06/14/companies-are-scrambling-to-curtail-soaring-ai-costs), coining "tokenmaxxing" for unchecked usage — one big-tech executive called the coming squeeze "an absolute nightmare." Agents that read, interpret, and act burn more tokens than a chatbot; run across hundreds of programs, that spiral compounds fast.
+
+The pattern repeats in team-level anecdotes: usage gets encouraged for months, costs triple almost overnight, and the bill was creeping up long before anyone with budget authority noticed. The fix isn't a panic downgrade — it's a baseline, a cap, and a floor, in that order.
+
+## What actually drives enterprise AI cost?
+
+Enterprise AI spend is at least four different economic problems, not one — each needs its own audit question.
+
+Worldwide AI spending will hit [$2.52 trillion in 2026, up 44% year over year, according to Gartner](https://www.gartner.com/en/newsroom/press-releases/2026-1-15-gartner-says-worldwide-ai-spending-will-total-2-point-5-trillion-dollars-in-2026), with the AI Models segment at $26.4 billion. Enterprise-specific: [Menlo Ventures found LLM API spend doubled from $3.5 billion in late 2024 to $8.4 billion by mid-2025](https://menlovc.com/perspective/2025-the-state-of-generative-ai-in-the-enterprise/) — the most current published trend line.
+
+![Four-panel diagram of the four ways enterprises pay for AI: per-seat licenses that bill flat per user whether used or not; direct token usage metered per million tokens with input and output priced differently; marked-up usage where a tool or intermediary adds a cut on top of tokens; and committed or self-hosted compute with a fixed cost that only wins at sustained high utilization. Each panel carries its own audit question.](/blog/cut-enterprise-llm-spend/diagram-four-shapes.png)
+
+| Cost shape                      | How it bills                                               | Typical range                                       | First audit question                                            |
+| ------------------------------- | ---------------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------------------- |
+| Per-seat licenses               | Flat fee per user per month                                | $20–$25/seat/mo standard; $100–$125/seat/mo premium | Who actually uses it, and how much?                             |
+| Direct token usage              | Metered per million tokens, input/output priced separately | $0.14–$30 input per MTok across tiers               | Which tasks burn the most tokens?                               |
+| Marked-up usage                 | Token rate plus a tool or reseller's cut                   | Varies — often opaque                               | What's the actual pass-through rate over provider cost?         |
+| Committed / self-hosted compute | Fixed cost regardless of use                               | Case-by-case; depends on GPU utilization            | Is utilization high and sustained enough to beat token pricing? |
+
+Seat pricing spans a range: [ChatGPT Business runs $20–$25/user/month](https://openai.com/api/pricing/), Claude Team prices the same, and Claude Premium runs $100–$125/seat/month. A seat on top of [what Claude Code actually costs](/blog/claude-code-pricing) often means paying twice for the same work.
+
+## What does LLM cost optimization actually mean?
+
+The governing metric is cost per successful task, not cost per token — a cheap request that fails and needs a retry can cost more than a pricier one that succeeds first time.
+
+![Formula card comparing a cheap model at $0.002 per call with a 45% first-pass rate, needing 1.8 average attempts for $0.0036 per successful task, against a pricier model at $0.01 per call with a 95% first-pass rate, needing 1.05 attempts for $0.0105 per successful task — illustrating that cost per success, not cost per call, is the real metric.](/blog/cut-enterprise-llm-spend/card-cost-per-success.png)
+
+A $0.002-per-call model succeeding 45% of the time needs 1.8 attempts on average — $0.0036 per successful task. A $0.01 model at 95% success needs 1.05 attempts — $0.0105. Change the failure rate and the ranking flips; illustrative arithmetic, not a benchmark, but the direction holds in production.
+
+![Nine-step ladder ranked from first to last: define a quality floor and baseline; remove commercial waste like unused seats; stop runaway spend with budgets and loop limits; enable prompt caching; right-size models per task; batch latency-tolerant work; reduce token waste; then, only when justified, evaluate routing infrastructure; and finally fixed or self-hosted compute. Effort and complexity increase down the ladder; quality risk is zero for the first four steps.](/blog/cut-enterprise-llm-spend/diagram-decision-ladder.png)
+
+| #   | Lever                              | Savings range             | Quality risk | Effort    | Proof required                            |
+| --- | ---------------------------------- | ------------------------- | ------------ | --------- | ----------------------------------------- |
+| 1   | Define quality floor + baseline    | Enables everything below  | None         | 1 week    | Golden eval set + cost-per-success metric |
+| 2   | Remove commercial waste            | 10–40% of bill            | Zero         | Days      | Seat utilization audit                    |
+| 3   | Stop runaway spend                 | Prevents crises           | Zero         | Days      | Budget alerts + loop limits live          |
+| 4   | Enable prompt caching              | 40–90% on repeated input  | Zero         | Config    | Cache hit rate measured                   |
+| 5   | Right-size models by task          | 40–80% on model costs     | Low–medium   | 1–2 weeks | Golden eval pass rate at new tier         |
+| 6   | Batch latency-tolerant work        | 50% on eligible workloads | Zero         | Config    | Eligible-volume audit                     |
+| 7   | Reduce token waste                 | 10–30% on token costs     | Low          | 1–2 weeks | Output-token audit                        |
+| 8   | Evaluate routing/gateway           | 10–30% additional         | Medium       | 2–4 weeks | Manual-policy breakdown documented        |
+| 9   | Evaluate fixed/self-hosted compute | Variable                  | High         | 4–8 weeks | Sustained-utilization math                |
+
+Steps 1–3 carry zero quality risk and take days; steps 8–9 carry real complexity and only get evaluated once the earlier steps are exhausted.
+
+## How do you stop runaway AI spend before it becomes a crisis?
+
+Install budgets, per-team spend alerts, and agent loop limits before chasing a percentage anywhere else — config changes, not infrastructure projects, with zero quality risk.
+
+A per-team or per-agent budget with an alert before overage, not after, catches a spike while it's still cheap to fix. A max-iteration cap on any agent loop stops one runaway automation from becoming the month's line item — exactly the scenario The Economist's "hundreds of software programs" framing describes.
+
+The overcorrection is just as common: after months of encouraging AI adoption, some organizations swing to a flat per-user cap overnight. That protects the budget but also blocks a power user doing valuable work while a light user's allowance goes unused. Scoped alerts beat blunt caps.
+
+## Where is the commercial waste hiding in your AI bill?
+
+Unused seats, reseller markup, and defaulting every task to the priciest model are pure waste — zero quality risk to remove, often 10–40% of the total bill.
+
+![Bar chart comparing a 500-seat flat subscription at $10,000 per month against a usage-based estimate of $3,400 per month for a mixed light-and-heavy-user population, a 66% reduction — with a warning that if all 500 users were power users, usage-based billing would cost $25,000 per month instead, 150% more than seats. Attribution of actual usage comes before choosing a pricing model.](/blog/cut-enterprise-llm-spend/chart-seat-vs-usage.png)
+
+Run the seat math before assuming either model wins. A 500-person team on $20/seat/month seats pays $10,000/month flat. Usage-based billing on a realistic mix — 50 power users at $50/month, 450 light users at $2/month — totals $3,400/month, 66% cheaper.
+
+But if all 500 are power users at $50/month, usage billing hits $25,000/month, 150% more than seats. The answer depends entirely on your usage distribution — attribution comes before you pick a pricing model.
+
+The same waste hides in model choice: defaulting every task to your most capable model is a premium-default tax. Our [breakdown of when the most expensive model isn't worth it](/blog/when-not-to-use-claude-fable-5) covers which tasks don't need frontier-plus pricing.
+
+## How do you right-size models by task without losing quality?
+
+Moving even part of a workload from a frontier model to a cheaper tier that still clears your quality floor is the single biggest lever here. Operationally, that means assigning a model per agent or task, not one default for everything.
+
+![Log-scale bar chart of published input prices per million tokens: DeepSeek V4 Flash $0.14, GPT-5.4-nano $0.20, Claude Haiku 4.5 $1, Kimi K3 $3, Claude Opus 4.8 and GPT-5.6-sol $5, Claude Fable 5 $10, GPT-5.5-pro $30 — a 214× spread from cheapest to frontier-plus, and 25× within OpenAI's own lineup. A callout marks the Haiku-versus-Opus right-sizing example at 80% savings on identical volume.](/blog/cut-enterprise-llm-spend/chart-pricing-spread.png)
+
+| Tier            | Model                                        | Input  | Output  | Ratio to cheapest |
+| --------------- | -------------------------------------------- | ------ | ------- | ----------------- |
+| Budget open     | DeepSeek V4 Flash                            | $0.14  | $0.28   | 1×                |
+| Budget open     | DeepSeek V4 Pro                              | $0.435 | $0.87   | 3.1×              |
+| Mid proprietary | GPT-5.4-nano                                 | $0.20  | $1.25   | 1.4×              |
+| Mid proprietary | Claude Haiku 4.5                             | $1.00  | $5.00   | 7.1×              |
+| Mid open        | Kimi K3                                      | $3.00  | $15.00  | 21.4×             |
+| Frontier        | Claude Sonnet 5 (intro, through Aug 31 2026) | $2.00  | $10.00  | 14.3×             |
+| Frontier        | Claude Opus 4.8                              | $5.00  | $25.00  | 35.7×             |
+| Frontier        | GPT-5.6-sol                                  | $5.00  | $30.00  | 35.7×             |
+| Frontier+       | Claude Fable 5                               | $10.00 | $50.00  | 71.4×             |
+| Frontier+       | GPT-5.5-pro                                  | $30.00 | $180.00 | 214×              |
+
+_After Aug 31, 2026, Sonnet 5 reverts to standard pricing at $3/$15._
+
+At 10 million input plus 2 million output tokens a day, Claude Opus 4.8 runs $3,000/month; the same volume on Claude Haiku 4.5 runs $600/month — 80% cheaper on workloads that clear Haiku's bar. Our [guide to choosing the right AI model per task](/blog/how-to-choose-the-right-ai-model-for-your-business) covers that line; [Kimi K3](/blog/kimi-k3-open-source-ai-models) pushes it further for structured work.
+
+Right-sizing only sticks if it's a habit, not a one-time audit: someone needs to deliberately assign a model to each agent or task — the low-volume classification job on a budget tier, the customer-facing reasoning task on a frontier tier — and see, in plain dollars, whether that assignment is actually cheaper.
+
+This is the operational form of everything above. Duet gives every agent in a workspace its own model choice across providers — OpenAI, Anthropic, and others — so right-sizing is a per-agent decision, not an all-or-nothing default.
+
+Because Duet bills tokens at a flat rate per quality tier rather than per seat, the bill maps to actual usage — the same spend-visibility problem that hides seat waste above doesn't happen here. Workspaces stay private, and the pricing model itself avoids the light-user/heavy-user subsidy problem described earlier.
+
+<ProductLink path="/sign-in?from=blog-cut-enterprise-llm-spend" paragraph>Start a workspace and see the real per-agent cost.</ProductLink>
+
+## Can caching and batching cut cost with zero quality risk?
+
+Yes — caching and batching cut cost with zero change to model quality. Enable both before touching model choice.
+
+![Two before-and-after bar charts. First: prompt caching on a 60%-cacheable prefix drops daily cost from $50 to $23 at steady state, a 54% reduction. Second: batch processing drops daily cost from $2 to $1, a 50% reduction. Both are arithmetic on published prices with the same model and zero change in output quality.](/blog/cut-enterprise-llm-spend/chart-zero-risk-levers.png)
+
+[Anthropic's prompt caching](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching) gives a 90% discount on cache reads with one added request field; OpenAI applies the same discount automatically on prompts of 1,024+ tokens, no code changes. On a 10-million-token daily workload with a 60% cacheable prefix, steady-state cost drops from $50/day to $23/day — 54% off input costs alone.
+
+[OpenAI's Batch API](https://platform.openai.com/docs/guides/batch) and Anthropic's Message Batches both cut cost 50% flat for latency-tolerant work — evals, classification, bulk generation, embeddings. On 1 million tokens/day of batchable work, that's $2/day to $1/day, same model, zero quality change. If your app repeats system prompts or RAG context, this is a billing fix, not an engineering project.
+
+## When does model routing make sense — and when is it overkill?
+
+Manual per-task model policy is enough for most organizations. Automated routing earns its complexity only once manual policy breaks under multiple teams, apps, and providers.
+
+RouteLLM, a 2024 academic benchmark published at ICLR 2025, reported up to 85% cost reduction while holding 95% of GPT-4-level performance — but that figure is a specific MT-Bench configuration on GPT-4-era models, not a general production guarantee. It's also roughly two years old now; treat it as a directional research result, not an expected outcome for your traffic.
+
+Vendor-modeled numbers push the same direction with less rigor: TrueFoundry reports that combining caching, routing, and on-prem shifts can "routinely deliver 50–80% cost reduction," including a hypothetical $150K-to-$60K/month scenario — a vendor-authored model, not an observed customer result.
+
+For the mechanics of routing versus multi-model orchestration, see our [deep dive on orchestrator-worker patterns versus model routing](/blog/frontier-model-orchestrator); for routing within the Claude family specifically, see [Claude Opus vs. Sonnet model routing](/guides/claude-opus-vs-sonnet-model-routing). Routing is one ranked lever here, not the first purchase.
+
+## When, if ever, does fixed or self-hosted compute make sense?
+
+Committed or self-hosted compute only beats token-based pricing at sustained high utilization. It's not automatically cheaper, and it's the last rung to evaluate, not the first.
+
+The break-even depends on GPU utilization and operations overhead most teams underestimate. In one widely shared account, a team said it was burning $50,000 a month on Claude and began evaluating a local, self-hosted swap to bring that down — real motivation, not proof self-hosting would win the math.
+
+Run the utilization numbers before assuming fixed compute wins. No vendor-claimed self-hosting savings percentage should be treated as fact here — it's the last rung for a reason.
+
+## How do you prove a cost cut didn't hurt quality?
+
+Every lever above needs a quality gate before it's declared a win: a golden eval set, a pass/fail threshold, a latency boundary, a named rollback owner.
+
+Without that gate, "we cut spend 40%" and "we can't prove quality held" are the same sentence — a pattern real teams run into after the fact, not before it. Build the eval set from 50–200 representative tasks pulled from real production traffic, not synthetic examples.
+
+Our guide on [how we benchmark AI models on real work](/blog/how-we-benchmark-ai-models-on-real-work) walks through building that test set instead of trusting leaderboard scores that don't match your workload.
+
+## Frequently asked questions
+
+**What's the difference between reducing LLM cost and just using AI less?**
+Reducing LLM cost means lowering the cost of each successful task, not cutting usage indiscriminately. Blunt caps — a common first reaction to a spike — often suppress valuable work. The better lever is removing waste (unused seats, markup, oversized default models) and right-sizing models per task while holding a quality floor.
+
+**Is Claude or GPT cheaper for enterprise use?**
+It depends on the task and tier, not the brand. Within OpenAI's own lineup, the spread between GPT-5.4-nano ($0.20/MTok input) and GPT-5.6-sol ($5.00/MTok input) is 25×; within Anthropic's, Haiku 4.5 ($1/MTok) to Fable 5 ($10/MTok) is 10×. The right question isn't "Claude or GPT" — it's which tier of either provider clears your quality floor for this specific task.
+
+**Does prompt caching actually save money, or is it marketing?**
+It's a real, provider-documented discount. OpenAI applies a 90% discount to cached input automatically for prompts of 1,024+ tokens, zero code changes. Anthropic offers the same 90% discount on cache reads with one added request field. If your application repeats system prompts or RAG context across calls, which most production LLM apps do, this is available today.
+
+**Should we cap AI spend per user?**
+A flat per-user cap is a blunt instrument — it stops catastrophic spend but can also block a power user doing valuable work while a light user's allowance goes to waste. Better guardrails: budget alerts scoped by team or agent, loop limits, and an exception process with a named owner and expiry date.
+
+**Is self-hosting an open-source model cheaper than API pricing?**
+Sometimes, but only at sustained high utilization, and never automatically. Open-weight models like DeepSeek V4 Flash ($0.14/MTok input) are dramatically cheaper per token than frontier APIs, but self-hosting adds GPU utilization risk and operations overhead that token pricing doesn't carry. Run the utilization and total-cost math first; it's the last lever to evaluate, not the first.
+
+**How much can enterprises realistically expect to save?**
+There's no single honest percentage — it depends on how much of your bill is seat waste, markup, or genuinely necessary frontier-tier work. What's verifiable: right-sizing from a frontier to a mid-tier model can cut that line item by roughly 80%, and caching or batching each cut 50–90% on the tokens they apply to, with zero quality risk. Vendor claims of blanket 30–80% reduction are vendor-modeled, not observed outcomes.

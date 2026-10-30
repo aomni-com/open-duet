@@ -1,0 +1,1564 @@
+/*
+ * Landing design system — scoped under `.landing-v2`. Imported once by
+ * `LandingChrome`, which wraps every marketing surface (the landing
+ * page, pricing, blog, guides). The TS sibling `landing-styles.ts`
+ * exports `serifStyle`, the inline pointer used on display headlines.
+ *
+ * Anything that *can* be expressed as a Tailwind utility lives in
+ * `tailwind.config.ts` (the `bg-lv2-*`, `text-lv2-*`, etc.). This file
+ * holds the variable definitions, the keyframes, and the compound
+ * editorial utilities that don't fit cleanly inline.
+ */
+
+.landing-v2 {
+  /* Daylight palette — porcelain canvas tinted toward the brand hue, deep
+     blue ink, and the canonical Duet blue as the recurring accent. The
+     audience is the SMB owner reading on a laptop between tasks; the
+     lander should read like a printed magazine spread on a morning desk,
+     not a server-room demo. Every section lives in this one palette —
+     no dark theater interludes, no inverted bands. The bright hero video
+     does the dramatic work; the page that follows is calm daylight,
+     but with confident strokes of brand blue so it never reads as a
+     beige template. */
+  --lv2-bg: hsl(214 38% 96%);
+  --lv2-surface: hsl(210 30% 99%);
+  --lv2-surface-alt: hsl(214 30% 93%);
+  --lv2-surface-sunk: hsl(214 28% 88%);
+  --lv2-fg: hsl(218 42% 14%);
+  --lv2-fg-soft: hsl(218 30% 26%);
+  --lv2-muted: hsl(216 20% 42%);
+  --lv2-line: hsl(214 28% 82%);
+  --lv2-line-strong: hsl(214 26% 70%);
+  /* Brand blue — canonical Duet color (matches --brand in the global
+     token set). Used confidently: chapter numerals, the typing cursor,
+     active states, primary CTAs. */
+  --lv2-accent: hsl(214 65% 50%);
+  --lv2-accent-hover: hsl(214 70% 44%);
+  --lv2-accent-soft: hsl(214 70% 92%);
+  --lv2-accent-strong: hsl(218 75% 38%);
+  /* Marker highlighter (morph-hero copy sync) — the translucent blue swiped
+     behind key words plus the faint whole-sentence wash. `--lv2-marker` is an
+     H S L triplet; `--lv2-marker-boost` scales the per-stroke alpha so the mark
+     reads as brightly on the dark canvas as it does on porcelain. */
+  --lv2-marker: 214 72% 54%;
+  --lv2-marker-boost: 1;
+  /* Glow gate — 0 in daylight (no glow needed on porcelain), 1 on the dark
+     canvas so active key words emit a soft luminous halo. */
+  --lv2-marker-glow: 0;
+  /* Warm complementary — used very sparingly (the AssetScene swatches,
+     occasional decorative dot) so the page has more than one note. */
+  --lv2-warm: hsl(25 75% 52%);
+  /* Tinted section bands — used to give alternating sections a
+     barely-visible color shift so the page doesn't read as one flat
+     sheet of porcelain. Cool tint sits closer to the brand blue, warm
+     tint warms the page up around the editorial moments. */
+  --lv2-band-cool: hsl(214 42% 94%);
+  --lv2-band-warm: hsl(36 50% 95%);
+  /* Tile shadow — used by floating tile elements (ToolWall pinned
+     tiles, thumbtacks). Tokenized so the dark mode override can
+     replace it with a deeper shadow that still reads on dark bg. */
+  --lv2-tile-shadow: 0 16px 28px -18px hsl(218 50% 28% / 0.45), 0 2px 4px hsl(218 50% 28% / 0.06);
+  --lv2-tile-shadow-sm: 0 2px 3px hsl(218 50% 28% / 0.35);
+  /* Code-block surface — dark in light mode (GitHub-style code-on-paper),
+     subtly lifted in dark mode so the block doesn't blend into the page. */
+  --lv2-code-bg: hsl(216 40% 10%);
+  --lv2-code-fg: hsl(40 22% 92%);
+  /* Halo behind mascots — pulled toward the brand blue so the character
+     lifts off the canvas with a soft daylight vignette, not an AI orb. */
+  --lv2-halo: hsl(214 55% 78% / 0.55);
+  /* Drop shadow beneath mascot portraits — tuned for light backgrounds
+     (brand-tinted, not heavy black). */
+  --lv2-mascot-shadow: 0 22px 32px hsl(218 50% 28% / 0.18), 0 4px 10px hsl(218 50% 28% / 0.1);
+  /* Editorial card shadow — barely-there lift used on inset surfaces like
+     the DuetCanvas studio. */
+  --lv2-card-shadow:
+    0 1px 0 hsl(210 22% 100% / 0.6) inset, 0 22px 48px -22px hsl(218 50% 28% / 0.22);
+  background-color: var(--lv2-bg);
+  color: var(--lv2-fg);
+}
+
+/* Dark-mode variant. When the app shell applies .dark (the project's
+   global dark token), the lander adapts: deep ink-blue canvas, soft
+   parchment text, the same vibrant brand blue. The hero text and the
+   primary CTA are intentionally hardcoded elsewhere so they don't
+   shift here (the hero video is the same in both modes). */
+.dark .landing-v2 {
+  --lv2-bg: hsl(216 35% 7%);
+  --lv2-surface: hsl(216 30% 11%);
+  --lv2-surface-alt: hsl(216 28% 15%);
+  --lv2-surface-sunk: hsl(216 26% 19%);
+  --lv2-fg: hsl(40 28% 94%);
+  --lv2-fg-soft: hsl(40 22% 82%);
+  --lv2-muted: hsl(40 14% 62%);
+  --lv2-line: hsl(216 22% 24%);
+  --lv2-line-strong: hsl(216 22% 34%);
+  --lv2-accent: hsl(214 78% 66%);
+  --lv2-accent-hover: hsl(214 82% 72%);
+  --lv2-accent-soft: hsl(214 55% 24%);
+  --lv2-accent-strong: hsl(214 90% 80%);
+  /* Marker on the dark canvas — brighter, more saturated blue and ~1.6× alpha
+     so the highlighter glows against deep ink instead of sinking into it. */
+  --lv2-marker: 214 94% 70%;
+  --lv2-marker-boost: 1.6;
+  --lv2-marker-glow: 1;
+  --lv2-warm: hsl(28 75% 68%);
+  /* Bands in dark mode stay in the cool palette — warm brown tints
+     against a blue canvas read as muddy. Both bands sit slightly
+     lighter than the page bg so sections still differentiate, with
+     a tiny hue shift between cool and warm. */
+  --lv2-band-cool: hsl(216 30% 10%);
+  --lv2-band-warm: hsl(218 32% 11%);
+  --lv2-halo: hsl(214 60% 32% / 0.45);
+  --lv2-mascot-shadow: 0 22px 32px hsl(216 60% 4% / 0.6), 0 4px 10px hsl(216 60% 4% / 0.4);
+  --lv2-card-shadow: 0 1px 0 hsl(216 40% 28% / 0.4) inset, 0 22px 48px -22px hsl(216 70% 2% / 0.6);
+  /* Tile shadow in dark mode — pure-black drop with higher opacity
+     since dark-on-dark needs more punch to read. */
+  --lv2-tile-shadow: 0 18px 32px -16px hsl(216 70% 2% / 0.7), 0 2px 4px hsl(216 70% 2% / 0.4);
+  --lv2-tile-shadow-sm: 0 2px 4px hsl(216 70% 2% / 0.5);
+  /* Code block in dark mode — slightly lighter than the page bg so the
+     block reads as raised. Foreground stays cream. */
+  --lv2-code-bg: hsl(216 26% 14%);
+  --lv2-code-fg: hsl(40 22% 92%);
+}
+
+.landing-v2 .text-foreground {
+  color: var(--lv2-fg);
+}
+.landing-v2 .text-muted-foreground {
+  color: var(--lv2-muted);
+}
+.landing-v2 .bg-background {
+  background-color: var(--lv2-bg);
+}
+.landing-v2 .bg-background\/40 {
+  background-color: color-mix(in oklab, var(--lv2-bg) 40%, transparent);
+}
+
+/* Legacy white/black token remap — many content pages (pricing, blog,
+   guides) were authored when .landing-v2 was a dark theme and use
+   text-white / border-white / bg-white-alpha utilities throughout.
+   Rather than rewrite each file, we remap those classes to the
+   foreground token here so they invert with the theme automatically. */
+.landing-v2 .text-white {
+  color: var(--lv2-fg);
+}
+.landing-v2 .text-white\/25 {
+  color: color-mix(in oklab, var(--lv2-fg) 25%, transparent);
+}
+.landing-v2 .text-white\/30 {
+  color: color-mix(in oklab, var(--lv2-fg) 30%, transparent);
+}
+.landing-v2 .text-white\/35 {
+  color: color-mix(in oklab, var(--lv2-fg) 35%, transparent);
+}
+.landing-v2 .text-white\/40 {
+  color: color-mix(in oklab, var(--lv2-fg) 40%, transparent);
+}
+.landing-v2 .text-white\/45 {
+  color: color-mix(in oklab, var(--lv2-fg) 45%, transparent);
+}
+.landing-v2 .text-white\/50 {
+  color: color-mix(in oklab, var(--lv2-fg) 50%, transparent);
+}
+.landing-v2 .text-white\/55 {
+  color: color-mix(in oklab, var(--lv2-fg) 55%, transparent);
+}
+.landing-v2 .text-white\/60 {
+  color: color-mix(in oklab, var(--lv2-fg) 60%, transparent);
+}
+.landing-v2 .text-white\/65 {
+  color: color-mix(in oklab, var(--lv2-fg) 65%, transparent);
+}
+.landing-v2 .text-white\/70 {
+  color: color-mix(in oklab, var(--lv2-fg) 70%, transparent);
+}
+.landing-v2 .text-white\/75 {
+  color: color-mix(in oklab, var(--lv2-fg) 75%, transparent);
+}
+.landing-v2 .text-white\/80 {
+  color: color-mix(in oklab, var(--lv2-fg) 80%, transparent);
+}
+.landing-v2 .text-white\/85 {
+  color: color-mix(in oklab, var(--lv2-fg) 85%, transparent);
+}
+.landing-v2 .text-white\/90 {
+  color: color-mix(in oklab, var(--lv2-fg) 90%, transparent);
+}
+.landing-v2 .hover\:text-white:hover {
+  color: var(--lv2-fg);
+}
+.landing-v2 .hover\:text-white\/50:hover {
+  color: color-mix(in oklab, var(--lv2-fg) 50%, transparent);
+}
+.landing-v2 .hover\:text-white\/60:hover {
+  color: color-mix(in oklab, var(--lv2-fg) 60%, transparent);
+}
+.landing-v2 .hover\:text-white\/70:hover {
+  color: color-mix(in oklab, var(--lv2-fg) 70%, transparent);
+}
+.landing-v2 .hover\:text-white\/80:hover {
+  color: color-mix(in oklab, var(--lv2-fg) 80%, transparent);
+}
+.landing-v2 .hover\:text-white\/90:hover {
+  color: color-mix(in oklab, var(--lv2-fg) 90%, transparent);
+}
+/* group-hover / peer-hover variants. Without these, hovering a card on
+   the blog or guides listing in light mode turned titles and arrows
+   pure white over the daylight bg — invisible. */
+.landing-v2 .group:hover .group-hover\:text-white,
+.landing-v2 .group\/title:hover .group-hover\/title\:text-white {
+  color: var(--lv2-fg);
+}
+.landing-v2 .group:hover .group-hover\:text-white\/70 {
+  color: color-mix(in oklab, var(--lv2-fg) 70%, transparent);
+}
+.landing-v2 .group:hover .group-hover\:text-white\/90 {
+  color: color-mix(in oklab, var(--lv2-fg) 90%, transparent);
+}
+.landing-v2 .hover\:bg-white\/10:hover {
+  background-color: color-mix(in oklab, var(--lv2-fg) 10%, transparent);
+}
+.landing-v2 .hover\:bg-white\/\[0\.04\]:hover {
+  background-color: color-mix(in oklab, var(--lv2-fg) 4%, transparent);
+}
+.landing-v2 .hover\:bg-white\/\[0\.05\]:hover {
+  background-color: color-mix(in oklab, var(--lv2-fg) 5%, transparent);
+}
+.landing-v2 .hover\:bg-white\/\[0\.07\]:hover {
+  background-color: color-mix(in oklab, var(--lv2-fg) 7%, transparent);
+}
+.landing-v2 .hover\:border-white\/15:hover {
+  border-color: color-mix(in oklab, var(--lv2-fg) 15%, transparent);
+}
+.landing-v2 .hover\:border-white\/20:hover {
+  border-color: color-mix(in oklab, var(--lv2-fg) 20%, transparent);
+}
+.landing-v2 .hover\:border-white\/30:hover {
+  border-color: color-mix(in oklab, var(--lv2-fg) 30%, transparent);
+}
+.landing-v2 .bg-white\/20 {
+  background-color: color-mix(in oklab, var(--lv2-fg) 20%, transparent);
+}
+
+.landing-v2 .border-white\/5 {
+  border-color: color-mix(in oklab, var(--lv2-fg) 5%, transparent);
+}
+.landing-v2 .border-white\/10 {
+  border-color: color-mix(in oklab, var(--lv2-fg) 10%, transparent);
+}
+.landing-v2 .border-white\/15 {
+  border-color: color-mix(in oklab, var(--lv2-fg) 15%, transparent);
+}
+.landing-v2 .border-white\/20 {
+  border-color: color-mix(in oklab, var(--lv2-fg) 20%, transparent);
+}
+.landing-v2 .border-white\/25 {
+  border-color: color-mix(in oklab, var(--lv2-fg) 25%, transparent);
+}
+
+.landing-v2 .bg-white\/\[0\.02\] {
+  background-color: color-mix(in oklab, var(--lv2-fg) 2%, transparent);
+}
+.landing-v2 .bg-white\/\[0\.03\] {
+  background-color: color-mix(in oklab, var(--lv2-fg) 3%, transparent);
+}
+.landing-v2 .bg-white\/\[0\.04\] {
+  background-color: color-mix(in oklab, var(--lv2-fg) 4%, transparent);
+}
+.landing-v2 .bg-white\/\[0\.05\] {
+  background-color: color-mix(in oklab, var(--lv2-fg) 5%, transparent);
+}
+.landing-v2 .bg-white\/\[0\.06\] {
+  background-color: color-mix(in oklab, var(--lv2-fg) 6%, transparent);
+}
+.landing-v2 .bg-white\/\[0\.08\] {
+  background-color: color-mix(in oklab, var(--lv2-fg) 8%, transparent);
+}
+.landing-v2 .bg-white\/10 {
+  background-color: color-mix(in oklab, var(--lv2-fg) 10%, transparent);
+}
+
+.landing-v2 .ring-white\/10 {
+  --tw-ring-color: color-mix(in oklab, var(--lv2-fg) 10%, transparent);
+}
+.landing-v2 .ring-white\/15 {
+  --tw-ring-color: color-mix(in oklab, var(--lv2-fg) 15%, transparent);
+}
+
+/* Dark "device frame" escape hatch. Some marketing surfaces (e.g. the
+   Reddit-ad hero visuals) embed dark UI mocks built from text-white /
+   bg-white / border-white utilities and seat them on a dark slab — the way
+   the homepage seats dark code blocks on the light canvas. The remap above
+   would resolve those utilities to the page foreground, which is dark ink in
+   the light theme, rendering the mock invisible (dark-on-dark). Re-pinning
+   --lv2-fg to the cream foreground inside the frame makes the remapped
+   utilities read light again, in either page theme. */
+.landing-v2 .lv2-dark-frame {
+  --lv2-fg: hsl(40 28% 94%);
+}
+
+/* lv2-* utility classes — scoped under `.landing-v2` on purpose so they
+   only resolve on marketing surfaces. Kept out of `tailwind.config.ts`
+   so they don't appear in IntelliSense or get accidentally pulled into
+   product-app code where the underlying CSS variables aren't
+   defined. Add new utilities here when needed; mirror the Tailwind
+   naming so usage feels native (`<div className="text-lv2-fg">`). */
+.landing-v2 .text-lv2-fg {
+  color: var(--lv2-fg);
+}
+.landing-v2 .text-lv2-fg-soft {
+  color: var(--lv2-fg-soft);
+}
+.landing-v2 .text-lv2-muted {
+  color: var(--lv2-muted);
+}
+.landing-v2 .text-lv2-accent {
+  color: var(--lv2-accent);
+}
+.landing-v2 .bg-lv2-accent {
+  background-color: var(--lv2-accent);
+}
+.landing-v2 .bg-lv2-surface {
+  background-color: var(--lv2-surface);
+}
+/* Chrome repaints autofilled fields with its own background — a pale blue in
+   light mode and a 40%-ALPHA slate (rgba(70 90 126 / .4)) in dark — which over
+   the hero video reads as the email input "going transparent". background-color
+   can't win against the UA's internal autofill style, so repaint the surface
+   with the classic inset box-shadow and pin the text ink. Scoped to the landing
+   surface, where translucency is actually visible over media. */
+.landing-v2 input:-webkit-autofill,
+.landing-v2 input:-webkit-autofill:hover,
+.landing-v2 input:-webkit-autofill:focus {
+  -webkit-box-shadow: inset 0 0 0 1000px var(--lv2-surface);
+  -webkit-text-fill-color: var(--lv2-fg);
+  caret-color: var(--lv2-fg);
+}
+.landing-v2 .bg-lv2-surface-alt {
+  background-color: var(--lv2-surface-alt);
+}
+.landing-v2 .bg-lv2-surface-sunk {
+  background-color: var(--lv2-surface-sunk);
+}
+.landing-v2 .bg-lv2-line-strong {
+  background-color: var(--lv2-line-strong);
+}
+.landing-v2 .bg-lv2-band-cool {
+  background-color: var(--lv2-band-cool);
+}
+.landing-v2 .bg-lv2-band-warm {
+  background-color: var(--lv2-band-warm);
+}
+.landing-v2 .border-lv2-line {
+  border-color: var(--lv2-line);
+}
+.landing-v2 .border-lv2-line-strong {
+  border-color: var(--lv2-line-strong);
+}
+.landing-v2 .shadow-lv2-card {
+  box-shadow: var(--lv2-card-shadow);
+}
+
+/* Eyebrow label — small caps used at the top of each section. Brand
+   blue gives it presence; without the color the page reads as a
+   gray editorial template. */
+.landing-v2 .lv2-eyebrow {
+  display: inline-block;
+  max-width: 100%;
+  color: var(--lv2-accent);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  text-transform: uppercase;
+}
+
+/* Chapter numeral — large, brand-blue, set in the display serif. Used
+   on JobsDuetDoes to give each chapter a confident anchor. */
+.landing-v2 .lv2-numeral {
+  color: var(--lv2-accent);
+  font-family: var(--font-display), Georgia, serif;
+  font-feature-settings: 'lnum' 1;
+  line-height: 1;
+}
+
+/* Pilcrow / section mark — small brand-blue glyph used inline before
+   editorial labels (folio entries, footer notes). */
+.landing-v2 .lv2-masthead-mark {
+  color: var(--lv2-accent);
+}
+
+/* Marginalia — small italic gutter notes that make the page feel
+   hand-edited. Set in the serif italic at a quiet size, with a brand
+   blue paragraph mark as a marker so the eye finds them. */
+.landing-v2 .lv2-marginalia {
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--lv2-fg-soft);
+  letter-spacing: 0.005em;
+}
+.landing-v2 .lv2-marginalia::before {
+  content: '¶ ';
+  color: var(--lv2-accent);
+  font-style: normal;
+  margin-right: 2px;
+}
+
+/* Colophon — for the footer. Body-text size in the serif italic with
+   small caps for proper nouns. Quiet, considered, signed-off. */
+.landing-v2 .lv2-colophon {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--lv2-muted);
+}
+.landing-v2 .lv2-colophon em {
+  font-style: italic;
+  color: var(--lv2-fg-soft);
+}
+.landing-v2 .lv2-sc {
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.08em;
+}
+
+/* Paper fiber — a barely-there diagonal weave applied to bands or
+   surfaces that should read as printed paper rather than just a flat
+   tint. Multiply blend keeps it inside existing colors. */
+.landing-v2 .lv2-paper {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      hsl(218 50% 28% / 0.018) 0px,
+      hsl(218 50% 28% / 0.018) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      hsl(218 50% 28% / 0.012) 0px,
+      hsl(218 50% 28% / 0.012) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+}
+
+/* Folio number — a small printed page-number style mark. Used in the
+   footer corner and could be reused elsewhere. */
+.landing-v2 .lv2-folio {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--lv2-muted);
+}
+
+/* Quiet link — muted at rest, inks up on hover. The hover state is part
+   of the rhythm of the page so it lives next to the color tokens, not
+   sprinkled across every nav/footer in arbitrary form. */
+.landing-v2 .lv2-link {
+  color: var(--lv2-muted);
+  transition: color 160ms ease;
+}
+.landing-v2 .lv2-link:hover {
+  color: var(--lv2-fg);
+}
+
+/* Headline rule — a single hairline that signals "new section" without
+   wrapping anything in a card. A brand-blue ornament sits at center so
+   the rule reads as editorial detail, not just a divider. */
+.landing-v2 .lv2-rule {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--lv2-line) 18%,
+    var(--lv2-line) 82%,
+    transparent
+  );
+}
+.landing-v2 .lv2-rule::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background-color: var(--lv2-accent);
+  border-radius: 1px;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* Slow halo pulse for any CTA wrapper. Tailwind doesn't have a slow
+   "breathing" pulse out of the box; this gives action buttons a faint
+   life-sign without the rave-strobe of Tailwind's animate-pulse. */
+@keyframes lv2-halo-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.44;
+    transform: scale(1.03);
+  }
+}
+.landing-v2 .lv2-halo-pulse {
+  animation: lv2-halo-pulse 4.4s ease-in-out infinite;
+}
+
+/* Subtle living backdrop — two soft tone-blobs drift very slowly behind the
+   marketplace hero for gentle depth (see subtle-backdrop.tsx). Neutral band
+   tones only, so no decorative brand blue. Frozen under reduced motion. */
+@keyframes lv2-aurora-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(5%, -4%, 0) scale(1.14);
+  }
+}
+@keyframes lv2-aurora-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.06);
+  }
+  50% {
+    transform: translate3d(-6%, 5%, 0) scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lv2-aurora {
+    animation: none !important;
+  }
+}
+
+/* Ripple — concentric rings that gently breathe outward, used by the economy
+   hero "Pulse" backdrop (adapted from Magic UI). Each ring sets its own
+   animation-delay so the set reads as a slow expanding pulse. Frozen (centered,
+   no scale) under reduced motion. */
+@keyframes lv2-ripple {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.09);
+  }
+}
+.landing-v2 .lv2-ripple-ring {
+  animation: lv2-ripple 3.8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing-v2 .lv2-ripple-ring {
+    animation: none;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Shine sweep — a diagonal highlight band that slides across the
+   element on hover. Apply to a positioned, overflow-hidden container.
+   The hover trigger is on .lv2-shine itself, so the parent element
+   should carry both classes. Tailwind arbitrary-value gradients with
+   multiple commas get unreliable, so the gradient lives here. */
+.landing-v2 .lv2-shine {
+  position: relative;
+  overflow: hidden;
+}
+.landing-v2 .lv2-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, hsl(0 0% 100% / 0.32) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+.landing-v2 .lv2-shine:hover::after {
+  transform: translateX(120%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-v2 .lv2-halo-pulse {
+    animation: none;
+    opacity: 0.35;
+    transform: none;
+  }
+  .landing-v2 .lv2-shine::after,
+  .landing-v2 .lv2-shine:hover::after {
+    transition: none;
+    transform: translateX(-120%);
+  }
+}
+
+/* Hero/nav text utilities. These reference the foreground tokens so
+   the nav adapts to system theme on pricing/blog/guides. */
+.landing-v2 .lv2-hero-ink {
+  color: var(--lv2-fg);
+  text-shadow:
+    0 1px 0 hsl(0 0% 100% / 0.55),
+    0 2px 18px hsl(0 0% 100% / 0.3);
+}
+.landing-v2 .lv2-hero-ink-soft {
+  color: var(--lv2-fg-soft);
+  text-shadow:
+    0 1px 0 hsl(0 0% 100% / 0.55),
+    0 2px 18px hsl(0 0% 100% / 0.3);
+}
+/* In dark mode the halo flips to a deep ink-blue glow tuned to the
+   night canvas. Against the solid dark page bg on content pages
+   (pricing/blog/guides) the shadow is near-invisible — same hue family
+   as the bg — so the nav reads cleanly. Over the night hero video on
+   the landing page, the same glow gently lifts cream text off any
+   brighter highlights in the footage without that "white halo"
+   artefact a light shadow would create. */
+.dark .landing-v2 .lv2-hero-ink {
+  color: hsl(0 0% 100%);
+  text-shadow:
+    0 1px 0 hsl(216 60% 4% / 0.55),
+    0 2px 18px hsl(216 60% 4% / 0.45);
+}
+.dark .landing-v2 .lv2-hero-ink-soft {
+  color: hsl(40 30% 94%);
+  text-shadow:
+    0 1px 0 hsl(216 60% 4% / 0.55),
+    0 2px 18px hsl(216 60% 4% / 0.45);
+}
+
+/* Legibility halo — a tight white aura that wraps the hero subhead so the dark
+   ink lifts cleanly off the bright, busy band at the video's horizon. Layered
+   after the ink rules so it wins their text-shadow. Dark mode flips to a deep
+   ink halo to do the same on the night canvas. */
+.landing-v2 .lv2-text-legible {
+  text-shadow:
+    0 0 1px hsl(0 0% 100% / 0.6),
+    0 1px 1px hsl(0 0% 100% / 0.65),
+    0 0 6px hsl(0 0% 100% / 0.4),
+    0 2px 12px hsl(0 0% 100% / 0.28);
+}
+.dark .landing-v2 .lv2-text-legible {
+  text-shadow:
+    0 0 1px hsl(216 70% 3% / 0.85),
+    0 1px 1px hsl(216 70% 3% / 0.9),
+    0 0 8px hsl(216 70% 3% / 0.7),
+    0 2px 16px hsl(216 70% 3% / 0.55);
+}
+
+/* Glow chip — a slim announcement pill with a milled, top-lit edge and a
+   single warm-white glint that drifts around the border. Brand blue is left
+   for the one meaningful token inside (the raise amount), never the border —
+   so the chip reads as a quiet, premium label rather than a button.
+
+   Construction:
+   • box-shadow paints the crafted edge: a 1px top highlight (lit-from-above
+     bevel) over a whisper of lift off the bright video.
+   • ::before is a 1px-padded box masked (padding-box XOR border-box) so only
+     the hairline band shows. It layers a faint top→bottom edge gradient
+     (the static bevel) under a rotating conic glint. The angle is a
+     registered @property so it can animate; where unsupported the glint sits
+     still and the static hairline alone carries the edge — graceful. */
+@property --lv2-chip-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+.landing-v2 .lv2-glow-chip {
+  position: relative;
+  isolation: isolate;
+  box-shadow:
+    inset 0 1px 0 hsl(0 0% 100% / 0.7),
+    0 1px 2px hsl(218 50% 28% / 0.08),
+    0 6px 18px -10px hsl(218 50% 28% / 0.18);
+}
+.landing-v2 .lv2-glow-chip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  /* Uniform faint hairline so the comet reads with the same contrast all the
+     way around; the top-lit bevel is carried by the box-shadow above, not
+     this ring. Comet: a soft pastel sweep — orange → light green → light
+     purple — with transparent ends so it travels like light dispersing along
+     a milled edge rather than a hard band. */
+  background:
+    conic-gradient(
+      from var(--lv2-chip-angle),
+      transparent 195deg,
+      hsl(28 70% 66% / 0) 205deg,
+      hsl(28 72% 66% / 0.62) 250deg,
+      hsl(142 42% 64% / 0.62) 295deg,
+      hsl(278 50% 76% / 0.62) 340deg,
+      hsl(278 50% 76% / 0) 360deg
+    ),
+    linear-gradient(hsl(218 22% 32% / 0.16), hsl(218 22% 32% / 0.16));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: lv2-chip-spin 5s linear infinite;
+}
+.dark .landing-v2 .lv2-glow-chip {
+  box-shadow:
+    inset 0 1px 0 hsl(40 28% 94% / 0.12),
+    0 1px 2px hsl(216 70% 2% / 0.4),
+    0 6px 18px -10px hsl(216 70% 2% / 0.55);
+}
+.dark .landing-v2 .lv2-glow-chip::before {
+  /* Same pastel comet, a touch brighter; faint light hairline on the dark
+     surface. */
+  background:
+    conic-gradient(
+      from var(--lv2-chip-angle),
+      transparent 195deg,
+      hsl(28 72% 70% / 0) 205deg,
+      hsl(28 74% 70% / 0.6) 250deg,
+      hsl(142 46% 68% / 0.6) 295deg,
+      hsl(278 54% 80% / 0.6) 340deg,
+      hsl(278 54% 80% / 0) 360deg
+    ),
+    linear-gradient(hsl(40 28% 94% / 0.2), hsl(40 28% 94% / 0.2));
+}
+@keyframes lv2-chip-spin {
+  to {
+    --lv2-chip-angle: 360deg;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing-v2 .lv2-glow-chip::before {
+    animation: none;
+  }
+}
+
+@keyframes lv2-fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.landing-v2 .animate-fade-rise {
+  animation: lv2-fade-rise 0.8s ease-out both;
+}
+.landing-v2 .animate-fade-rise-delay {
+  animation: lv2-fade-rise 0.8s ease-out 0.3s both;
+}
+.landing-v2 .animate-fade-rise-delay-2 {
+  animation: lv2-fade-rise 0.8s ease-out 0.55s both;
+}
+
+@keyframes lv2-mask-sweep {
+  from {
+    clip-path: inset(0 100% 0 0);
+    transform: translateY(12px);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0);
+  }
+}
+.landing-v2 .mask-sweep {
+  display: block;
+  clip-path: inset(0 100% 0 0);
+  /* 0.65s reveal — short enough that LCP paints inside the "good" CWV
+     window, long enough that the editorial sweep still reads. */
+  animation: lv2-mask-sweep 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.landing-v2 .mask-sweep-2 {
+  animation-delay: 0.12s;
+}
+.landing-v2 .mask-sweep-3 {
+  animation-delay: 0.24s;
+}
+
+/* Mascot float — faint vertical drift so the character feels alive
+   without becoming a distraction. */
+@keyframes lv2-mascot-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.landing-v2 .lv2-mascot-float {
+  animation: lv2-mascot-float 6s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Mascot liquid floor — an animated reflective puddle beneath each
+   character so it reads as *standing on a surface*, not floating in dead
+   air. Authored by `MascotFloor`; positioned inside the square mascot box
+   and stacked behind the character `<Image>`. Every colour comes from the
+   lv2 tokens so it tracks light/dark.
+
+   `--lv2-floor-base` = the feet line (% from top of the box). The mirror,
+   pool, ripples and contact shadow all anchor to it. `--lv2-floor-w` = the
+   pool width as a fraction of the box. `--lv2-floor-reflection` = the
+   mascot image url, set inline per instance.
+   ──────────────────────────────────────────────────────────────────── */
+.landing-v2 .lv2-floor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* Tilt the whole floor about the feet line to sit on an angled ground
+     plane (defaults to flat). */
+  transform: rotate(var(--lv2-floor-tilt, 0deg));
+  transform-origin: 50% var(--lv2-floor-base);
+  /* Mirror translate for the reflection: flip the square about the feet
+     line. A point at y maps to 2·base − y, so after scaleY(-1) (about the
+     element centre → H − y) we translate by 2·base − H. As a fraction of
+     the element's own height that is 2·base − 100%. */
+  --lv2-floor-ty: calc(2 * var(--lv2-floor-base) - 100%);
+  /* Pool half-height (the ellipse is wide and shallow for perspective). */
+  --lv2-floor-h: calc(var(--lv2-floor-w) * 0.3);
+}
+
+/* The reflection: a vertically-mirrored copy of the whole mascot, blurred
+   and faded so only the near-the-feet part reads, gently wobbling like a
+   disturbed surface. Background sizing mirrors the mascot's object-contain
+   so the two line up exactly. */
+.landing-v2 .lv2-floor__reflection {
+  position: absolute;
+  inset: 0;
+  background-image: var(--lv2-floor-reflection);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  transform: translateY(var(--lv2-floor-ty)) scaleY(-1);
+  transform-origin: center center;
+  opacity: 0.3;
+  filter: blur(0.8px) saturate(1.04);
+  /* Confine the mirror to an elliptical puddle and fade it away from the
+     feet, so it reads as a reflection *in a pool* rather than a full-width
+     rectangle. Two masks composited: a vertical fade (after the flip,
+     screen-down is local-up, so the opaque end is local-bottom) intersected
+     with a horizontal ellipse centred on the feet line. */
+  -webkit-mask-image: linear-gradient(to top, #000 4%, rgb(0 0 0 / 0.55) 28%, transparent 56%);
+  mask-image: linear-gradient(to top, #000 4%, rgb(0 0 0 / 0.55) 28%, transparent 56%);
+  animation: lv2-floor-wobble 7s ease-in-out infinite;
+}
+
+/* The glossy liquid disk under the feet. Brand-tinted radial fill with a
+   brighter near rim so it reads as a wet, reflective surface; a specular
+   highlight band (::after) drifts across it. */
+.landing-v2 .lv2-floor__pool {
+  position: absolute;
+  left: 50%;
+  top: var(--lv2-floor-base);
+  width: var(--lv2-floor-w);
+  height: var(--lv2-floor-h);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  overflow: hidden;
+  background:
+    /* thin specular highlight along the near rim → glint of a wet surface */
+    radial-gradient(
+      ellipse 44% 26% at 50% 14%,
+      color-mix(in oklab, white 55%, transparent) 0%,
+      transparent 64%
+    ),
+    /* brand-tinted glass body — semi-transparent so the reflection beneath
+       reads through it like colour in water */
+    radial-gradient(
+      ellipse 74% 70% at 50% 48%,
+      color-mix(in oklab, var(--lv2-accent) 32%, transparent) 0%,
+      color-mix(in oklab, var(--lv2-accent) 17%, transparent) 50%,
+      transparent 76%
+    ),
+    /* soft outer wash so the edge doesn't read as a hard cut */
+    radial-gradient(
+      ellipse 94% 96% at 50% 52%,
+      color-mix(in oklab, var(--lv2-accent) 11%, transparent) 0%,
+      transparent 74%
+    );
+  box-shadow:
+    0 3px 14px color-mix(in oklab, var(--lv2-accent) 24%, transparent),
+    inset 0 1px 2px color-mix(in oklab, white 34%, transparent),
+    inset 0 -4px 9px color-mix(in oklab, var(--lv2-accent-strong) 22%, transparent);
+}
+.landing-v2 .lv2-floor__pool::after {
+  content: '';
+  position: absolute;
+  inset: -40% -10%;
+  border-radius: 50%;
+  background: linear-gradient(
+    104deg,
+    transparent 38%,
+    color-mix(in oklab, white 70%, transparent) 50%,
+    transparent 62%
+  );
+  transform: translateX(-60%);
+  animation: lv2-floor-shimmer 6.5s ease-in-out infinite;
+}
+
+/* Expanding ripple rings — slow concentric drips radiating from the feet. */
+.landing-v2 .lv2-floor__ripple {
+  position: absolute;
+  left: 50%;
+  top: var(--lv2-floor-base);
+  width: var(--lv2-floor-w);
+  height: var(--lv2-floor-h);
+  border-radius: 50%;
+  border: 1.5px solid color-mix(in oklab, var(--lv2-accent) 60%, transparent);
+  transform: translate(-50%, -50%) scale(0.25);
+  opacity: 0;
+  animation: lv2-floor-ripple 5.4s ease-out infinite;
+}
+.landing-v2 .lv2-floor__ripple--b {
+  animation-delay: 1.8s;
+}
+.landing-v2 .lv2-floor__ripple--c {
+  animation-delay: 3.6s;
+}
+
+/* Tight contact shadow right where the feet touch the surface — seats the
+   character so it isn't just hovering over the disk. */
+.landing-v2 .lv2-floor__contact {
+  position: absolute;
+  left: 50%;
+  top: var(--lv2-floor-base);
+  width: calc(var(--lv2-floor-w) * 0.52);
+  height: calc(var(--lv2-floor-h) * 0.5);
+  transform: translate(-50%, -42%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse 60% 60% at 50% 50%,
+    color-mix(in oklab, var(--lv2-accent-strong) 36%, transparent) 0%,
+    transparent 72%
+  );
+  filter: blur(3px);
+}
+
+@keyframes lv2-floor-wobble {
+  0%,
+  100% {
+    transform: translateY(var(--lv2-floor-ty)) scaleY(-1) skewX(0deg) scaleX(1);
+  }
+  50% {
+    transform: translateY(var(--lv2-floor-ty)) scaleY(-1) skewX(2.2deg) scaleX(1.012);
+  }
+}
+
+@keyframes lv2-floor-shimmer {
+  0% {
+    transform: translateX(-65%);
+  }
+  55%,
+  100% {
+    transform: translateX(65%);
+  }
+}
+
+@keyframes lv2-floor-ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0.28);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.62;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-v2 .lv2-floor__reflection,
+  .landing-v2 .lv2-floor__pool::after,
+  .landing-v2 .lv2-floor__ripple {
+    animation: none;
+  }
+  .landing-v2 .lv2-floor__ripple--b,
+  .landing-v2 .lv2-floor__ripple--c {
+    display: none;
+  }
+  .landing-v2 .lv2-floor__ripple--a {
+    opacity: 0.4;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .landing-v2 .lv2-floor__pool::after {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-v2 .lv2-mascot-float,
+  .landing-v2 .animate-fade-rise,
+  .landing-v2 .animate-fade-rise-delay,
+  .landing-v2 .animate-fade-rise-delay-2,
+  .landing-v2 .mask-sweep,
+  .landing-v2 .mask-sweep-2,
+  .landing-v2 .mask-sweep-3 {
+    animation: none;
+    clip-path: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* Hero speech bubbles — cartoon thought bubbles that pop in above the mascots
+   in the hero video. Each Duet cycles through "just finished X" lines, pausing
+   on a "Working…" typing indicator between them.
+
+   • Centred over its mascot (outer holds a static -50% recentre); an inner
+     element does a slow float once popped in.
+   • Cartoon tail: two puffs below the pill build up small → bigger → full pill
+     (staggered pop-in delays), like a comic thought bubble rising from the
+     mascot.
+   • Sized in `em` off the body's font-size × `--bubble-scale`, so closer
+     mascots get a larger bubble and the one further back a smaller one (depth).
+   • The active line is absolutely stacked over an invisible sizer (the longest
+     line), so the pill never reflows while the text morphs between states.
+   • A *very* subtle hue of the mascot's colour tints the glass (no dot).
+     Light + dark are both first-class; dark adds a soft same-hue glow. */
+@keyframes lv2-bubble-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes lv2-bubble-typing {
+  0%,
+  70%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  35% {
+    opacity: 1;
+    transform: translateY(-0.24em);
+  }
+}
+.landing-v2 .hero-bubble {
+  /* Centre on the mascot WITHOUT a transform: a transformed ancestor creates a
+     "backdrop root" that silently breaks the bubble's backdrop-filter (it
+     computes but blurs nothing). A zero-width flex box centres on `left`.
+     Crucially there is NO opacity/transform animation here — an ancestor that
+     fades through opacity < 1 toggles backdrop-root on every frame and leaves
+     the child's blur un-composited until a repaint (the "works after HMR, not
+     on hard refresh" bug). The fade lives on the body/puffs' own opacity. */
+  display: flex;
+  width: 0;
+  justify-content: center;
+}
+.landing-v2 .hero-bubble-inner {
+  position: relative;
+  display: inline-block;
+  /* The whole bubble scales off this; body + puffs read its em. No transform
+     here either — it would re-break the backdrop-filter below. */
+  font-size: calc(0.8125rem * var(--bubble-scale, 1));
+}
+.landing-v2 .hero-bubble-body {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 0.5em 0.9em;
+  border-radius: 1.15em;
+  /* Fade lives here (own opacity) — backdrop-filter stays on the whole time,
+     so there's no backdrop-root toggle to re-composite. */
+  animation: lv2-bubble-fade 0.7s ease var(--hero-bubble-delay, 0s) both;
+  /* Light: frosted glass — translucent so the blurred video reads through it,
+     a soft white glass rim, and a lift shadow for separation. */
+  /* Solid white (with a whisper of the mascot's hue) so the tinted deliverable
+     icons + text stay crisp over the bright video instead of washing out. */
+  background: color-mix(in srgb, var(--bubble-accent, white) 6%, hsl(0 0% 100%));
+  border: 1px solid hsl(0 0% 100% / 0.55);
+  color: hsl(218 42% 14%);
+  font-size: 1em;
+  font-weight: 500;
+  line-height: 1;
+  box-shadow:
+    0 0.7em 1.6em -0.55em hsl(218 50% 28% / 0.34),
+    inset 0 1px 0 hsl(0 0% 100% / 0.85);
+  /* Heavy blur so the busy field behind dissolves into a calm frost and the
+     bubble's own text always reads cleanly on top. */
+  -webkit-backdrop-filter: blur(48px) saturate(1.4);
+  backdrop-filter: blur(48px) saturate(1.4);
+}
+.landing-v2 .hero-bubble-text {
+  position: relative;
+  display: inline-block;
+}
+.landing-v2 .hero-bubble-sizer {
+  /* inline-flex (not block) so the trailing icon aligns to the text instead of
+     adding baseline line-height — keeps the pill slim. */
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  visibility: hidden;
+}
+.landing-v2 .hero-bubble-line {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+.landing-v2 .hero-bubble-working {
+  /* Muted while the work is in progress, so the shipped result reads as the
+     confident state by contrast. */
+  font-style: italic;
+  opacity: 0.5;
+}
+.landing-v2 .hero-bubble-icon {
+  flex: none;
+  margin-left: 0.4em;
+  font-size: 0.95em;
+  /* Tinted toward the mascot's hue but darkened for legibility on the pale
+     bubble; lightened in dark mode. */
+  color: color-mix(in srgb, var(--bubble-accent, hsl(214 65% 50%)) 78%, hsl(218 42% 14%));
+}
+.dark .landing-v2 .hero-bubble-icon {
+  color: color-mix(in srgb, var(--bubble-accent, white) 80%, white);
+}
+.landing-v2 .hero-bubble-lead {
+  flex: none;
+  margin-right: 0.34em;
+  font-size: 0.95em;
+}
+.landing-v2 .hero-bubble-dots {
+  display: inline-flex;
+  align-items: flex-end;
+  /* Sit on the baseline at the bottom of the line, not vertically centred. */
+  align-self: flex-end;
+  gap: 0.16em;
+  margin-left: 0.34em;
+  padding-bottom: 0.12em;
+}
+.landing-v2 .hero-bubble-dots i {
+  width: 0.26em;
+  height: 0.26em;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: lv2-bubble-typing 1.1s ease-in-out infinite;
+}
+.landing-v2 .hero-bubble-dots i:nth-child(2) {
+  animation-delay: 0.16s;
+}
+.landing-v2 .hero-bubble-dots i:nth-child(3) {
+  animation-delay: 0.32s;
+}
+/* Cartoon tail — two puffs that trail off the SIDE of the bubble (the edge
+   nearest the mascot, set by --tail-dir) toward the character, not beneath it.
+   The `dir * (50% + …)` anchors them just past the bubble's side edge
+   regardless of the pill's width. They fade in with the bubble (no pop). */
+.landing-v2 .hero-bubble-puff {
+  position: absolute;
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  /* Solid white (with a whisper of the mascot's hue) so the tinted deliverable
+     icons + text stay crisp over the bright video instead of washing out. */
+  background: color-mix(in srgb, var(--bubble-accent, white) 6%, hsl(0 0% 100%));
+  border: 1px solid hsl(0 0% 100% / 0.55);
+  /* Soft, wide lift shadow like the main bubble's, a touch more subtle. */
+  box-shadow:
+    0 0.5em 1.1em -0.15em hsl(218 50% 28% / 0.42),
+    inset 0 1px 0 hsl(0 0% 100% / 0.85);
+  -webkit-backdrop-filter: blur(32px) saturate(1.3);
+  backdrop-filter: blur(32px) saturate(1.3);
+  animation: lv2-bubble-fade 0.7s ease var(--hero-bubble-delay, 0s) both;
+}
+.landing-v2 .hero-bubble-puff-2 {
+  width: 0.92em;
+  height: 0.92em;
+  top: calc(100% - 0.85em);
+  left: calc(50% + var(--tail-dir, 1) * (50% + 0.55em));
+}
+.landing-v2 .hero-bubble-puff-1 {
+  width: 0.58em;
+  height: 0.58em;
+  top: calc(100% - 0.05em);
+  left: calc(50% + var(--tail-dir, 1) * (50% + 1.7em));
+}
+
+/* Dark mode — glass bubble with cream ink and a soft halo in the mascot's
+   colour so each one reads as its own little voice on the night canvas. */
+.dark .landing-v2 .hero-bubble-body {
+  /* Frosted dark glass — translucent so the (heavily blurred) night scene
+     reads through, like the light pills. A soft top rim, no coloured halo. */
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--bubble-accent, white) 10%, hsl(216 28% 18% / 0.6)),
+    color-mix(in srgb, var(--bubble-accent, white) 7%, hsl(216 44% 11% / 0.64))
+  );
+  border-color: hsl(0 0% 100% / 0.16);
+  color: hsl(40 30% 94%);
+  box-shadow:
+    0 0.9em 2em -0.55em hsl(216 84% 2% / 0.85),
+    inset 0 1px 0 hsl(0 0% 100% / 0.32);
+}
+/* Light from above — a crisp lit rim (the inset shadow above) plus a soft
+   white sheet that's brightest at the very top edge and gone by ~38% of the
+   height. Kept tiny so it reads as a glint, not a gradient fill. */
+.dark .landing-v2 .hero-bubble-body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(to bottom, hsl(0 0% 100% / 0.14), hsl(0 0% 100% / 0) 38%);
+}
+.dark .landing-v2 .hero-bubble-puff {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--bubble-accent, white) 10%, hsl(216 28% 18% / 0.6)),
+    color-mix(in srgb, var(--bubble-accent, white) 7%, hsl(216 44% 11% / 0.64))
+  );
+  border-color: hsl(0 0% 100% / 0.18);
+  box-shadow:
+    0 0.55em 1.2em -0.15em hsl(216 84% 2% / 0.72),
+    inset 0 0.7px 0 hsl(0 0% 100% / 0.42);
+}
+/* Same light-from-above on the little tail puffs, pushed a bit harder (they're
+   small, so it needs more to read) — a glossy top so they actually stand out. */
+.dark .landing-v2 .hero-bubble-puff::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(to bottom, hsl(0 0% 100% / 0.32), hsl(0 0% 100% / 0) 55%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-v2 .hero-bubble-dots i {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+/* Per-item nav chips — solid pills that sit cleanly over the hero
+   video. Light theme: opaque near-white surface so the dark navy nav
+   text reads with maximum contrast. Dark theme: opaque deep ink
+   surface so the cream text pops just as cleanly. A faint hairline
+   border and a soft drop shadow lift the chip off the video without
+   leaning on transparency. */
+.landing-v2 .lv2-nav-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 2.25rem;
+  padding: 0 0.95rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+  /* Chips stay porcelain white with deep navy text in BOTH themes,
+     so they read as a consistent branded element no matter what the
+     hero video underneath looks like. The chip owns its own color
+     and ignores the .dark .landing-v2 token override; the dark
+     shadow below is the only thing that adapts. */
+  background-color: hsl(210 30% 99%);
+  color: hsl(218 30% 26%);
+  border: 1px solid hsl(218 42% 14% / 0.08);
+  box-shadow: 0 2px 8px -2px hsl(218 50% 28% / 0.18);
+  /* Chip text sits on a flat white surface, so the hero-ink halos
+     (white in light, dark in dark) have nothing to lift against and
+     read as smudges. Kill all text-shadow inside the chip regardless
+     of which legacy ink class is also applied. */
+  text-shadow: none;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
+}
+.landing-v2 .lv2-nav-chip,
+.landing-v2 .lv2-nav-chip *,
+.dark .landing-v2 .lv2-nav-chip,
+.dark .landing-v2 .lv2-nav-chip * {
+  text-shadow: none;
+}
+.landing-v2 .lv2-nav-chip:hover {
+  background-color: hsl(214 30% 93%);
+  color: hsl(218 42% 14%);
+  border-color: hsl(218 42% 14% / 0.14);
+  box-shadow: 0 4px 14px -2px hsl(218 50% 28% / 0.22);
+}
+/* Active-state chip — same white surface, just bumps the text to
+   full ink so the current section reads as selected. */
+.landing-v2 .lv2-nav-chip.lv2-nav-chip-active {
+  color: hsl(218 42% 14%);
+}
+/* Dark-mode override: chip body steps back from pure-white to a
+   translucent porcelain so the night video shows through softly — the
+   chip reads as a frosted disc instead of a stark cutout against the
+   dark canvas. Backdrop blur turns whatever sits behind into a clean
+   bokeh so the dark text on top stays legible. Text also steps a notch
+   deeper so it still feels punchy on the slightly-less-bright surface. */
+.dark .landing-v2 .lv2-nav-chip {
+  background-color: hsl(210 30% 99% / 0.82);
+  color: hsl(218 50% 10%);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  box-shadow: 0 2px 12px -2px hsl(216 70% 2% / 0.55);
+}
+.dark .landing-v2 .lv2-nav-chip:hover {
+  background-color: hsl(210 30% 99% / 0.92);
+  color: hsl(216 60% 4%);
+  box-shadow: 0 4px 18px -2px hsl(216 70% 2% / 0.65);
+}
+.dark .landing-v2 .lv2-nav-chip.lv2-nav-chip-active {
+  color: hsl(216 60% 4%);
+}
+/* Round-icon chip variant for the theme toggle — same chip everything
+   else uses, just square so the moon/sun stays centered. Height is
+   already 2.25rem from the base chip, so we only override the
+   horizontal padding and width. */
+.landing-v2 .lv2-nav-chip-icon {
+  padding: 0;
+  width: 2.25rem;
+}
+/* Ghost variant — secondary controls (e.g. the theme toggle) that shouldn't
+   compete with the primary porcelain chips. Drops the solid fill for a
+   translucent backdrop-blurred glass so the control recedes into the scene
+   while staying tappable. The blurred field behind reads through it, and the
+   icon tints to the page ink so it stays legible in both themes. */
+.landing-v2 .lv2-nav-chip.lv2-nav-chip-ghost {
+  background-color: hsl(0 0% 100% / 0.14);
+  color: hsl(218 30% 26%);
+  border-color: hsl(0 0% 100% / 0.4);
+  box-shadow: none;
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  backdrop-filter: blur(16px) saturate(120%);
+}
+.landing-v2 .lv2-nav-chip.lv2-nav-chip-ghost:hover {
+  background-color: hsl(0 0% 100% / 0.26);
+  color: hsl(218 42% 14%);
+  border-color: hsl(0 0% 100% / 0.55);
+  box-shadow: none;
+}
+.dark .landing-v2 .lv2-nav-chip.lv2-nav-chip-ghost {
+  background-color: hsl(216 40% 12% / 0.32);
+  color: hsl(40 28% 90%);
+  border-color: hsl(0 0% 100% / 0.14);
+  box-shadow: none;
+}
+.dark .landing-v2 .lv2-nav-chip.lv2-nav-chip-ghost:hover {
+  background-color: hsl(216 40% 14% / 0.46);
+  color: hsl(40 30% 96%);
+  border-color: hsl(0 0% 100% / 0.22);
+  box-shadow: none;
+}
+
+/* ===================================================================
+   Trusted-by depth field
+   ===================================================================
+   A social-proof "logo cloud" that drifts right → left in three parallax
+   lanes. Depth is carried by size + opacity + blur + speed (set inline per
+   lane in trusted-by.tsx); this file owns the layout, the seamless-loop
+   keyframe, the edge dissolve mask, and the hover behaviour.
+
+   Logos are painted via `mask-image` + `currentColor`, so each mark is a
+   single ink that adapts to the theme; the lane's `color` token tints it by
+   depth. The field is clipped both ways: `overflow: hidden` trims the lanes
+   and a left/right gradient mask fades logos in and out at the edges. */
+.landing-v2 .tb-field {
+  position: relative;
+  /* Master size dial for the whole cloud. Every size token below (lane
+     heights, gaps, offsets, and this field height) is multiplied by it,
+     so shrinking it on narrow screens makes the logos smaller and packs
+     more of them across — restoring the depth-cloud density that the wide
+     desktop field gets for free. Width is NOT scaled, so the field still
+     spans the column. Fluid: 0.55 on a ~390px phone, ramping to 1 by
+     768px, then capped — so phones get the dense cloud and tablet/desktop
+     are untouched. */
+  --tb-scale: clamp(0.55, calc(0.55 + (100vw - 390px) / 840px), 1);
+  /* Tall enough to hold three overlapping lanes (front lane sits ~92px down at
+     35px tall, plus jitter, float and the vertical scroll-parallax travel). */
+  height: calc(154px * var(--tb-scale));
+  overflow: hidden;
+  /* Edge dissolve — logos enter softly on the left and melt away on the
+     right, so the strip reads as an endless flow rather than a clipped band. */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 11%,
+    #000 89%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to right, transparent 0%, #000 11%, #000 89%, transparent 100%);
+}
+/* Parallax wrapper — owns the subtle scroll-driven shift. The section
+   publishes its viewport progress as `--tb-scroll` (-1..1); each wrapper
+   translates vertically by its own `--tb-par` depth, so nearer lanes move a
+   touch more. No transition — it tracks scroll 1:1. Kept off the marquee
+   element so the two transforms never collide. */
+.landing-v2 .tb-lane-wrap {
+  position: absolute;
+  left: 0;
+  width: max-content;
+  transform: translate3d(0, calc(var(--tb-scroll, 0) * var(--tb-par, 0) * 1px), 0);
+  will-change: transform;
+}
+.landing-v2 .tb-lane {
+  display: flex;
+  width: max-content;
+  /* Continuous right → left drift. Two identical groups + a -50% travel makes
+     the loop seamless (see component comment for the gap maths). GPU-composited
+     via translate3d so the parallax stays at 60fps. */
+  animation: lv2-tb-scroll var(--tb-dur, 60s) linear infinite;
+  will-change: transform;
+}
+@keyframes lv2-tb-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+/* Vertical float — a slow bob that makes the lane feel suspended. Lives on the
+   groups (not the lane) so it doesn't clash with the horizontal marquee; both
+   groups share the same timing so the seam stays aligned. */
+.landing-v2 .tb-group {
+  display: flex;
+  align-items: center;
+  animation: lv2-tb-float var(--tb-fdur, 8s) ease-in-out var(--tb-fdelay, 0s) infinite alternate;
+}
+@keyframes lv2-tb-float {
+  from {
+    transform: translate3d(0, calc(var(--tb-famp, 3px) * -1), 0);
+  }
+  to {
+    transform: translate3d(0, var(--tb-famp, 3px), 0);
+  }
+}
+/* Front lane lift — a soft shadow that follows each logo's silhouette (filter
+   drop-shadow respects the mask alpha) so the nearest mark sits above the plane.
+   Theme-aware, so it reads on both the porcelain and ink canvases. */
+.landing-v2 .tb-front .tb-logo {
+  filter: drop-shadow(0 3px 6px hsl(218 50% 28% / 0.28));
+}
+.dark .landing-v2 .tb-front .tb-logo {
+  filter: drop-shadow(0 3px 7px hsl(216 70% 2% / 0.55));
+}
+.landing-v2 .tb-cell {
+  display: inline-flex;
+  align-items: center;
+  /* Trailing margin (not flex gap) so each group is an exact n×(logo+gap)
+     wide — that's what makes the -50% loop land seamlessly. */
+  margin-right: var(--tb-gap, 64px);
+}
+/* Paint an SVG as one ink: the artwork becomes a mask over `currentColor`, so
+   a logo adapts to light and dark and to whatever tone its surroundings set,
+   instead of shipping two files. The caller supplies `mask-image` and a box;
+   this owns everything else about the painting. */
+.landing-v2 .lv2-ink-mask {
+  display: block;
+  background-color: currentColor;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+.landing-v2 .tb-logo {
+  height: var(--tb-h, 32px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing-v2 .tb-lane,
+  .landing-v2 .tb-group {
+    animation: none;
+  }
+  /* No mouse-driven diorama shift when motion is reduced. */
+  .landing-v2 .tb-lane-wrap {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ===================================================================
+   Hero video cinematic overlay
+   ===================================================================
+   A single backdrop-blur layer sits on top of the hero <video> to turn
+   a stock loop into an editorial canvas without touching the source
+   asset. No color tints — the raw video carries the palette, the
+   blur carries the focus.
+   Layered z-order (bottom → top):
+     1. video itself
+     2. vignette  — circular backdrop blur, sharp lower half
+   The overlay is pointer-events: none so it never intercepts clicks
+   on the nav or hero copy painted above it.
+*/
+
+/* Vignette — a *blur*-based focus pull, not a color darken. Reads as
+   cinema lens depth-of-field instead of "dark mode bolted on." The
+   element applies a moderate backdrop blur, then a vertical mask
+   confines it to the top header strip only: the blur sits behind the
+   sticky nav so the chrome stays legible over busy footage, then the
+   strip dissolves to fully sharp by the time you reach the
+   announcement pill and headline. Everything below the header — pill,
+   headline, CTA, the video's centerpiece subject — rides the actual,
+   un-blurred video. */
+.landing-v2 .lv2-hero-vignette {
+  -webkit-backdrop-filter: blur(10px) saturate(105%);
+  backdrop-filter: blur(10px) saturate(105%);
+  /* Top-strip mask: fully blurred across the sticky nav (its measured
+     72px band), then dissolving to fully sharp by 112px — clear of the
+     announcement pill, which starts at ~120px. Everything from the pill
+     down rides the un-blurred video. */
+  -webkit-mask-image: linear-gradient(to bottom, black 0, black 72px, transparent 112px);
+  mask-image: linear-gradient(to bottom, black 0, black 72px, transparent 112px);
+}
+.dark .landing-v2 .lv2-hero-vignette {
+  /* Night canvas — push the blur a touch harder; the night video's
+     darker palette absorbs softening, so 10px reads less in dark mode
+     than in light. Same circular mask so the bottom stays sharp. */
+  -webkit-backdrop-filter: blur(14px) saturate(108%);
+  backdrop-filter: blur(14px) saturate(108%);
+}
+
+/* Without JavaScript the reveal-on-scroll wrappers never fire, which used to
+   leave every section header (and anything else reveal-gated) invisible —
+   the no-JS page was mostly voids. `scripting: none` matches exactly the
+   browsers that will never run the observer; `!important` beats the inline
+   initial styles the reveal components render with. */
+@media (scripting: none) {
+  [data-section-reveal],
+  [data-section-reveal] * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Without JavaScript the logo marquee freezes mid-parallax: ghosted depth
+   lanes and the seamless-loop duplicate read as a broken double exposure.
+   Show the front lane only, once, statically. */
+@media (scripting: none) {
+  .landing-v2 .tb-lane-wrap:not(:has(.tb-front)) {
+    display: none;
+  }
+  .landing-v2 .tb-lane {
+    animation: none !important;
+  }
+  .landing-v2 .tb-group[aria-hidden='true'] {
+    display: none;
+  }
+  .landing-v2 .tb-cell,
+  .landing-v2 .tb-logo {
+    opacity: 1 !important;
+  }
+}

@@ -1,0 +1,68 @@
+import { EndpointReference } from '../../components/endpoint-reference'
+
+export const metadata = {
+  title: 'Billing boundaries',
+  description: 'Understand Duet payer ownership, usage, top-ups, and spend limits.',
+  alternates: { canonical: '/billing/' },
+}
+
+<p className="eyebrow">Resource guide</p>
+
+# Billing belongs to the payer
+
+Workspace usage can be visible to members, while payment methods, automatic top-ups, and personal
+limits and the subscription belong to the designated billing user. A workspace owner may designate
+another owner as the payer; that does not let the first owner manage the second person's billing.
+
+The payer must remain a live workspace owner. Reassignment, role demotion, and removal are checked
+inside the same durable mutation, so concurrent administration cannot leave a workspace with an
+ineligible payer. The audit log records each sensitive transition.
+
+{/* schema: BillingTopupConfigSchema */}
+
+```json
+{
+  "autoTopupEnabled": true,
+  "autoTopupThresholdMicroUsd": 5000000,
+  "autoTopupAmountMicroUsd": 20000000,
+  "maxMonthlySpendMicroUsd": 100000000
+}
+```
+
+## Keep units explicit
+
+Contract amounts use integer micro-US dollars. Convert only at the display boundary and keep the
+integer value through calculations so rounding cannot create or erase spend.
+
+Ledger metadata is an internal finite-JSON audit context capped at 16 KiB before
+storage. Public history deliberately projects only the billing facts it names;
+it never truncates metadata while paging or returns the private context.
+
+## Handle payment blocks as ownership flows
+
+A payment-required response should send the responsible payer to billing settings. Retrying with a
+different key does not repair an inactive subscription, depleted balance, or monthly cap.
+
+## Keep card data on Stripe
+
+Duet creates Stripe-hosted Checkout and Customer Portal sessions. Card entry and payment-method
+management therefore stay on Stripe's origin; Duet stores only the customer reference needed for
+webhooks and a readiness timestamp written only after Stripe verifies a successful setup or payment.
+A canceled Checkout never enables the portal or automatic top-ups. Successful top-ups still become
+credits through the idempotent webhook-to-ledger path.
+
+Subscription Checkout accepts a catalog plan name, never a Stripe price reference. Duet resolves
+the environment-owned price at the server boundary. Upgrades invoice immediately, while downgrades
+and cancellation take effect at the paid-through boundary. In every case, a verified paid invoice
+is the only authority that grants a new monthly credit bucket; requesting a plan change never writes
+credits directly.
+
+The Customer Portal is intentionally narrower than the first-party subscription controls. It owns
+payment-method updates and invoice history, while Duet owns plan changes so every tier follows the
+same payer authorization and catalog-price rules.
+
+The `/v1/user/billing/*` routes accept the same human identity used by the CLI and the dashboard.
+They act on that person's payer account; holding a workspace owner's role does not let you manage
+another person's billing. App and OAuth credentials do not become personal account access.
+
+<EndpointReference category="billing" />

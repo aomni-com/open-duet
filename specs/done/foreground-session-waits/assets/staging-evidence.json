@@ -1,0 +1,68 @@
+{
+  "summaryType": "manually-derived-redacted-harness-result",
+  "runId": "staging-e2e-synthetic",
+  "deployedCommit": "df50952d",
+  "root": {
+    "inputSeq": 2,
+    "terminalSeq": 5,
+    "terminalType": "complete",
+    "requestDurationMs": 18249,
+    "continuations": 0
+  },
+  "child": {
+    "inputSeq": 2,
+    "terminalSeq": 5,
+    "terminalType": "complete",
+    "requestDurationMs": 22571,
+    "continuations": 0,
+    "parentLineageVerified": true
+  },
+  "parentFollowUp": {
+    "inputSeq": 6,
+    "terminalSeq": 9,
+    "terminalType": "complete",
+    "requestDurationMs": 16660,
+    "continuations": 0,
+    "canonicalParentReused": true
+  },
+  "ask": {
+    "inputSeq": 2,
+    "terminalSeq": 5,
+    "terminalType": "ask",
+    "requestDurationMs": 53008,
+    "continuations": 0
+  },
+  "answer": {
+    "inputSeq": 6,
+    "terminalSeq": 9,
+    "terminalType": "complete",
+    "requestDurationMs": 16428,
+    "continuations": 0,
+    "askingSessionReused": true
+  },
+  "abortRecovery": {
+    "inputSeq": 10,
+    "terminalSeq": 21,
+    "terminalType": "complete",
+    "requestDurationMs": 19080,
+    "continuations": 0,
+    "observerAborted": true,
+    "matchingPromptCount": 1
+  },
+  "background": {
+    "responseDurationMs": 6090,
+    "dispatched": false,
+    "statusObservedAfterResponse": "running"
+  },
+  "liveCoverageGap": "no-safe-transient-outage-control;720-second-timeout-unit-tested",
+  "cleanup": {
+    "status": "pass",
+    "deleted": {
+      "user": 1,
+      "workspace": 1,
+      "mailMessage": 1,
+      "session": 4
+    },
+    "orphans": []
+  }
+}

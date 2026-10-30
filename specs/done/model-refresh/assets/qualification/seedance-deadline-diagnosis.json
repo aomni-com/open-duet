@@ -1,0 +1,68 @@
+{
+  "scope": "staging read-only after workspace teardown",
+  "observedAt": "2026-09-28T01:11:28.375Z",
+  "totalGenerationRows": 20,
+  "generations": [
+    {
+      "_id": "md7682jgjqf6dsk8s7f477q5618f9dwk",
+      "model": "google/veo-3.1-generate-001",
+      "modality": "video",
+      "status": "released",
+      "billingMode": "reservation",
+      "createdAt": 1790557255015,
+      "updatedAt": 1790557285376,
+      "error": "missing_generation_id",
+      "settledAt": 1790557285376,
+      "upstreamMetadataKeys": []
+    },
+    {
+      "_id": "md70ypz0rmvcv2j7pn38jxx21n8f9gp2",
+      "model": "spacexai/grok-imagine-video-1.5",
+      "modality": "video",
+      "status": "settled",
+      "billingMode": "reservation",
+      "createdAt": 1790557288615,
+      "updatedAt": 1790557332369,
+      "upstreamGenerationId": "gen_01M3JRFYEB3Z2G6NTR7B44K5F9",
+      "upstreamCostMicroUsd": 560000,
+      "billedCostMicroUsd": 560000,
+      "settledAt": 1790557332369,
+      "upstreamProvider": "xai",
+      "usage": {
+        "cachedInputTokens": 0,
+        "outputTokens": 0,
+        "uncachedInputTokens": 0
+      },
+      "upstreamMetadataKeys": [
+        "cacheCreationInputTokens",
+        "provider",
+        "usage"
+      ]
+    },
+    {
+      "_id": "md7aek5eemgsr2yzq79hezng3x8f9rp0",
+      "model": "bytedance/seedance-2.5",
+      "modality": "video",
+      "status": "settled",
+      "billingMode": "reservation",
+      "createdAt": 1790557318390,
+      "updatedAt": 1790557641984,
+      "upstreamGenerationId": "gen_01M3JRGVHGPDSMW09A6B8CAPQR",
+      "upstreamCostMicroUsd": 932890,
+      "billedCostMicroUsd": 932890,
+      "settledAt": 1790557641984,
+      "upstreamProvider": "bytedance",
+      "usage": {
+        "cachedInputTokens": 0,
+        "outputTokens": 0,
+        "uncachedInputTokens": 0
+      },
+      "upstreamMetadataKeys": [
+        "cacheCreationInputTokens",
+        "provider",
+        "usage"
+      ]
+    }
+  ],
+  "transactions": []
+}

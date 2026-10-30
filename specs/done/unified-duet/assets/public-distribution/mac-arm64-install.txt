@@ -1,0 +1,8 @@
+bun add v1.3.14 (0d9b296a)
+Resolving dependencies
+Resolved, downloaded and extracted [7]
+
+installed @duetso/agent@/tmp/unified-public-pack/duetso-agent-1.0.0.tgz with binaries:
+ - duet
+
+18 packages installed [401.00ms]

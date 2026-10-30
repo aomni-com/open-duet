@@ -1,0 +1,32 @@
+I found no clipping, overflow, or broken wrapping in any of the four screenshots. There are a few concrete problems with how the state reads and a couple of smaller polish issues.
+
+## Defects
+
+1. **The screen says both "failed" and "checking" at once (medium-high confidence).** While the recheck is running, the "Previous check" box keeps its full error styling: red border, red heading, red body. It's the loudest thing on screen and pulls the eye away from the neutral grey "Rechecking…" line above it. The "Previous check" label does say the error is old, but it's styled exactly like the error text, so it doesn't stand out. At a glance the domain still looks like it has failed.
+
+2. **The error message asks for an action that's already happening (high confidence).** "Check your DNS records and **recheck**" appears while a recheck is in progress and the Recheck button is disabled. While a check is running, that last part should be dropped or softened.
+
+3. **"Rechecking…" appears twice, with two spinners (high confidence).** There's one in the status line and one on the disabled button, about 150px apart. It isn't wrong, but it's redundant, and it gives the eye two competing places to look for status.
+
+4. **The disabled button's label is hard to read (medium confidence).** "Rechecking…" on the button is light grey on a near-white background, roughly 2.5–3:1 contrast, and its spinner is fainter still. Disabled controls are technically exempt from contrast rules, but this label carries state information. It's only acceptable because issue 3 repeats it in the status line.
+
+5. **The ellipsis looks vertically centred (medium confidence).** In both 2x crops, the dots after "Rechecking" sit at mid-letter height ("Rechecking⋯") rather than on the baseline. That suggests U+22EF "⋯" (or a font fallback) is being used instead of U+2026 "…". It's visible in both the status line and the button.
+
+6. **Mobile buttons are short for tapping (medium confidence).** In `mobile-failed.png` both buttons are about 35px tall, below the usual 44px minimum for touch targets. "Remove domain" is the only active action, so it's the one that matters.
+
+## Observations, not defects
+
+- **The header layout differs between sizes.** The title and subtitle are left-aligned on desktop and centred on mobile, while everything below them stays left-aligned on both. That's probably intentional for the mobile sheet, but on mobile the centred header sits a little oddly above the left-aligned content.
+- **"Remove domain" stays enabled during the recheck.** Visually that's fine. Whether removing a domain mid-check is safe is a behaviour question the screenshots can't answer.
+- **The mobile screenshot only shows the dialog.** It's 390×346, so I can't judge where the dialog sits in the viewport, how the backdrop looks, or whether the buttons are within thumb reach.
+
+## Checked, no issues
+
+- Nothing is clipped at either width.
+- The error text fits on one line on desktop and wraps cleanly onto two on mobile.
+- The status description wraps cleanly on mobile.
+- The close button is visible and reachable on both.
+- The red error text has enough contrast against its pale background.
+- Padding and spacing are consistent.
+
+Separately: several MCP connectors (Canva, Github, Gmail, Google Calendar, Google Drive, Linear) and the `natural` server need authorising before they can be used. For claude.ai connectors that's in your claude.ai connector settings; for the others, use `claude mcp` or `/mcp` in an interactive session. None of them were needed for this review.

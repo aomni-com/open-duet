@@ -1,0 +1,15 @@
+1 | import assert from "node:assert/strict"; assert.equal(process.arch,"x64"); assert.equal(process.platform,"darwin"); console.log(JSON.stringify({version:Bun.version,arch:process.arch,platform:process.platform,execPath:process.execPath}));
+                                                    ^
+AssertionError: Expected values to be strictly equal:
+
+'arm64' !== 'x64'
+
+ generatedMessage: true,
+     actual: "arm64",
+   expected: "x64",
+   operator: "strictEqual",
+       code: "ERR_ASSERTION"
+
+      at /Users/synthetic-user/.codex/worktrees/unified-public-pack/duet/[eval]:1:49
+
+Bun v1.3.14 (macOS arm64)

@@ -1,0 +1,109 @@
+import { EndpointReference } from '../../components/endpoint-reference'
+
+export const metadata = {
+  title: 'Train',
+  description: 'Submit bounded source material to Duet memory training.',
+  alternates: { canonical: '/train/' },
+}
+
+<p className="eyebrow">Resource guide</p>
+
+# Training is an asynchronous ingestion job
+
+Start with an empty body to train everything already waiting in the workspace inbox, or union that
+snapshot with ad-hoc inline files, public URLs, and drive-file references. A successful start returns
+`202` immediately with the job identity; it means the corpus was accepted, not that training has
+finished.
+
+The gateway owns the long-running job. It moves through honest coarse phases: snapshotting the
+inbox, training the immutable job corpus, then finalizing the durable record. Poll the job resource
+until its public state is `done` or `failed`; do not hold the start request open. Job status exposes
+that coarse `phase` vocabulary directly and does not invent a numeric completion percentage.
+
+## Stage large files directly on the workspace VM
+
+Raw training files do not pass through the public API. First create an upload session as an
+authenticated workspace member. The response supplies the VM base URL, exact upload path, and
+short-lived values. Append the encoded filename to `uploadPath`, then send the upload token as
+`Authorization: Bearer …` on that `PUT` request to the VM. The expiration tells you when to mint a
+new session. The filename is one safe path segment, and the bytes are stored unchanged.
+
+List or delete staged files through the public API when a CLI or server caller should not connect
+to the VM directly. The list reports each filename and byte count, the shared inbox quota, and
+whether training is running. Starting a job atomically moves the inbox into that job's snapshot and
+recreates an empty inbox, so uploads made during training wait safely for the next run. Deletion
+is unavailable while a job is running.
+
+To stage a public web page without connecting to the VM, post its absolute HTTP or HTTPS URL to
+the URL-upload endpoint. Duet scrapes the page's main content into a markdown file with inspectable
+`url`, `title`, and `scrapedAt` frontmatter, then stores it through the same inbox quota. Re-adding
+the same URL replaces the deterministic filename. A `source_fetch_failed` response distinguishes
+`timeout`, `malformed_response`, and `non_2xx` details; a full inbox remains a `413` response.
+
+{/* schema: TrainStartRequestSchema */}
+
+```json
+{
+  "urls": ["https://example.com/handbook"],
+  "driveFiles": ["reports/q2.pdf"],
+  "files": [
+    {
+      "filename": "release-notes.md",
+      "content": "# Release notes\n\nThe migration is complete.",
+      "encoding": "utf8"
+    }
+  ]
+}
+```
+
+The body is optional. To consume only the staged inbox, send no body at all:
+
+```text
+POST /v1/ws/acme/train
+Authorization: Bearer duet_sk_…
+```
+
+If the staged inbox and every ad-hoc source are empty, the request fails with `400 empty_corpus`.
+Scraped URLs are carried only in that start request and never leak into the next inbox.
+
+## Bound inline material before starting
+
+The start schema keeps inline JSON deliberately small. Large or binary sources belong in the raw
+upload inbox, while existing workspace files should be named through `driveFiles`. The gateway
+copies every accepted source byte-for-byte into one immutable job directory before returning 202.
+
+## Records are durable memory, not job output
+
+Jobs describe ingestion work. Records are the durable result and remain available after job history
+ages out. Each record is a markdown file in the agent's `.agents/memories` folder. List records to
+discover their stable slug, fetch one to inspect its synthesized content, and use the update
+operation for a deliberate human correction. Updating content does not rerun the model or replace
+the archived source corpus. Deletion removes both the memory file and its private source archive.
+
+A fetched record also reports the sources it was trained from — each archived file's path and byte
+count, plus the `url`, `title`, and `scrapedAt` of any file that was a scraped page. Reading one
+source returns the bytes the archive kept, so a caller can inspect exactly what the synthesis saw.
+Sources appear on a single record and never on the record list: resolving them opens each archived
+file, which listing many records must not pay for. A record whose archive has been pruned reports
+`hasArchive: false` and carries no sources.
+
+## Retraining replaces a memory instead of adding one
+
+Restage a record to reload its archived sources into the inbox. That replaces whatever was staged,
+and each archived URL is re-scraped so a page that changed is picked up; a URL whose fetch fails
+keeps its archived copy and is named in `fellBack`, so reloading sources never costs a memory its
+corpus. Then start a job naming that record's slug as `targetSlug`, and the run installs over it:
+the slug, its address, and its archive lifecycle stay the same, and any manual edit to the content
+is replaced. A `targetSlug` that does not resolve in the same scope, or that names an inherited
+record, is refused — tolerating it would create a second memory while reporting the first as
+replaced. Restaging is unavailable while a job is running, since it clears an inbox that job is
+reading.
+
+## Add and recall one memory directly
+
+Automation that already has a single normalized observation can add it without creating a training
+job. Direct memory search is a bounded relevance lookup over private observational memory; trained
+files are already pinned into agent context and are intentionally absent from that search. Use
+training for source ingestion and synthesis; use direct add/search for already-shaped observations.
+
+<EndpointReference category="train" />

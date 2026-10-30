@@ -1,0 +1,2 @@
+{"type":"error","provider":"openai-codex","code":"login_failed"}
+Fatal: Connected-provider login failed.

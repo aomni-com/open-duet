@@ -1,0 +1,1 @@
+exedev ALL=(root) NOPASSWD: /usr/bin/systemctl start duet-desktop.target, /usr/bin/systemctl stop duet-desktop.target, /usr/bin/systemctl is-active duet-desktop.target, /usr/bin/systemctl start duet-desktop-browser.service, /usr/bin/systemctl stop duet-desktop-browser.service, /usr/bin/systemctl is-active --quiet duet-desktop-browser.service, /opt/duet/bin/update-shared-chrome *

@@ -1,0 +1,18 @@
+{
+  "contract": "Local operational artifacts are excluded from normal Vercel uploads.",
+  "red": {
+    "entryPoint": "vercel deploy --dry --format=json",
+    "operationalFilesIncluded": 14,
+    "totalSize": 472778801,
+    "assertion": "Deployment upload includes local operational artifacts"
+  },
+  "green": {
+    "entryPoint": "vercel deploy --dry --format=json",
+    "operationalFilesIncluded": 0,
+    "totalSize": 253915768,
+    "fileCount": 3179
+  },
+  "implementation": "One artifacts exclusion in the existing .vercelignore owner.",
+  "deploymentPerformed": false,
+  "runtimeRevisionAcceptance": "Not tested by this upload-only dry run. Actual deployment must pin and verify the exact frozen source SHA in both build and runtime environments."
+}

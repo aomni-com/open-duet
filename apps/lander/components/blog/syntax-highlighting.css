@@ -1,0 +1,168 @@
+/* Blog code-block syntax highlighting. */
+
+/* Base code block styles - NO background/padding here */
+/* The <pre> wrapper handles that to avoid double styling */
+.hljs {
+  color: oklch(var(--foreground));
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.8rem;
+}
+
+/* Pre wrapper handles background and padding */
+pre .hljs {
+  display: block;
+  overflow-x: auto;
+}
+
+/* Standalone hljs (not in pre) gets full styling */
+.hljs:not(pre .hljs) {
+  background-color: oklch(var(--muted) / 0.4);
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+}
+
+/* Comments and documentation */
+.hljs-comment,
+.hljs-quote {
+  color: oklch(var(--muted-foreground));
+  font-style: italic;
+}
+
+/* Keywords and control flow */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #8e4ec6;
+  font-weight: 600;
+}
+
+.dark .hljs-keyword,
+.dark .hljs-selector-tag,
+.dark .hljs-subst {
+  color: #c792ea;
+}
+
+/* Numbers and literals */
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable {
+  color: #d96332;
+}
+
+.dark .hljs-number,
+.dark .hljs-literal,
+.dark .hljs-variable,
+.dark .hljs-template-variable {
+  color: #f78c6c;
+}
+
+/* Strings and documentation tags */
+.hljs-string,
+.hljs-doctag {
+  color: #7a9f3a;
+}
+
+.dark .hljs-string,
+.dark .hljs-doctag {
+  color: #c3e88d;
+}
+
+/* Function and section titles */
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #4a7acc;
+  font-weight: 600;
+}
+
+.dark .hljs-title,
+.dark .hljs-section,
+.dark .hljs-selector-id {
+  color: #82aaff;
+}
+
+/* Types and classes */
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #d9a000;
+}
+
+.dark .hljs-type,
+.dark .hljs-class .hljs-title {
+  color: #ffcb6b;
+}
+
+/* Tags and attributes */
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #c63649;
+  font-weight: normal;
+}
+
+.dark .hljs-tag,
+.dark .hljs-name,
+.dark .hljs-attribute {
+  color: #f07178;
+}
+
+/* Regular expressions and links */
+.hljs-regexp,
+.hljs-link {
+  color: #00a0c6;
+}
+
+.dark .hljs-regexp,
+.dark .hljs-link {
+  color: #89ddff;
+}
+
+/* Symbols and bullets */
+.hljs-symbol,
+.hljs-bullet {
+  color: #8e4ec6;
+}
+
+.dark .hljs-symbol,
+.dark .hljs-bullet {
+  color: #c792ea;
+}
+
+/* Built-in functions */
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #4a7acc;
+}
+
+.dark .hljs-built_in,
+.dark .hljs-builtin-name {
+  color: #82aaff;
+}
+
+/* Meta information */
+.hljs-meta {
+  color: #00a0c6;
+}
+
+.dark .hljs-meta {
+  color: #89ddff;
+}
+
+/* Diff highlighting */
+.hljs-deletion {
+  background: #ff5370;
+}
+
+.hljs-addition {
+  background: #c3e88d;
+}
+
+/* Text emphasis */
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: 700;
+}

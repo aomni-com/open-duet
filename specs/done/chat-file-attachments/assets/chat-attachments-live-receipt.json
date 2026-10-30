@@ -1,0 +1,54 @@
+{
+  "deployment": {
+    "integratedCommit": "13fb9b54a80d4b4aaaee8bbee6eeb5683382af26",
+    "webDeploymentId": "dpl_Ayzn2wVnw7AStJw8ZM8Db6JXqyZu",
+    "webAlias": "https://service.example.invalid",
+    "apiDeploymentId": "dpl_BGEbrU7tuSTfnStuXXUev8eyJmKb",
+    "apiAlias": "https://service.example.invalid",
+    "convexDeployment": "Example User-2dce6:duet-v2:staging",
+    "gatewayRelease": "0.0.0+a00ef7614d80",
+    "finalWebBoundaryCommit": "7dd4325dc84d9967b3c0fe38ab6c9273baea0057"
+  },
+  "journey": {
+    "command": "bun run e2e:staging -- --journey chat-attachments",
+    "runId": "staging-e2e-synthetic",
+    "status": "pass",
+    "registeredAgent": {
+      "largeAttachmentBytes": 27262976,
+      "uploadingObserved": true,
+      "sendGatedWhileUploading": true,
+      "bubbleCardNames": ["brief-p-64d085.txt", "large-p-64d085.bin"],
+      "viewerPathname": "/w/chat-attachments-staging-e2e-synthetic/files/agents/attach-p-64d085/uploads/brief-p-64d085.txt",
+      "userAttributedPaths": [
+        "agents/attach-p-64d085/uploads/brief-p-64d085.txt",
+        "agents/attach-p-64d085/uploads/large-p-64d085.bin"
+      ],
+      "summaryMarker": "ORCHID-p-64d085",
+      "removedFileDeleted": true
+    },
+    "onboardingAgent": {
+      "agentSlug": "brand-designer",
+      "uploadedPaths": [
+        "agents/brand-designer/uploads/logo-p-64d085.svg",
+        "agents/brand-designer/uploads/typeface-p-64d085.woff2"
+      ],
+      "lockedBeforeAttachment": true,
+      "summaryMarker": "LOCKED-p-64d085"
+    },
+    "cleanup": {
+      "status": "pass",
+      "resourceCount": 12,
+      "deletedResourceCounts": {
+        "user": 1,
+        "workspace": 1,
+        "mail-message": 1,
+        "agent": 1,
+        "file": 5,
+        "session": 2,
+        "official-agent-subscription": 1
+      },
+      "workspaceVmTeardownVerified": true,
+      "orphans": []
+    }
+  }
+}

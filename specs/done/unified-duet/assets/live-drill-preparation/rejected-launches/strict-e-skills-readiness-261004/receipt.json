@@ -1,0 +1,25 @@
+{
+  "status": "failed",
+  "strictDrillsPassed": false,
+  "cleanupVerifiedAbsent": true,
+  "actualFailure": "The socket connection was closed unexpectedly; no HTTP response status/body was received",
+  "actualControlledOperations": {
+    "sync": 14,
+    "modelStarted": 0,
+    "relay": 0
+  },
+  "sourceCounterexample": "Strict fixture sync omitted skills entirely, while shipping native starts await the first tracked skills install",
+  "localRedGreen": "Actual fixture HTTP response + real skills installer/gate: absent descriptor failed; verified synthetic bundle bytes install and unblock readiness",
+  "narrowChecks": {
+    "testsPassed": 8,
+    "assertions": 24,
+    "typecheck": "passed",
+    "lint": "passed"
+  },
+  "independentReview": {
+    "findings": "none actionable",
+    "driverBuild": "passed",
+    "testRerun": "review sandbox cannot bind localhost; ROOT actual tests pass"
+  },
+  "causalLimit": "The request closed without a response. Fixture omission is directly proven locally; do not invent a returned skills error or claim a strict native pass."
+}

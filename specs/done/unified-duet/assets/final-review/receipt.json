@@ -1,0 +1,70 @@
+{
+  "status": "all observed failures corrected and affected checks passed",
+  "fullRunStartedAtRevision": "c302f56093005ce3d8f71768be6cf32eda67f71e",
+  "rootFullRunExitCode": 1,
+  "packageTasks": {
+    "successful": 23,
+    "total": 26
+  },
+  "initialFailedCases": [
+    "GatewayClient mirror tunnel minting > registers only a token digest through the mirror-owned gateway route",
+    "TurnState serialization > includes both configured base instructions and system prompt files",
+    "TurnState serialization > loads AGENTS.md into the system prompt by default",
+    "TurnState serialization > overrides default system prompt files",
+    "V1 migration notice bridge > refuses a credential that is not the signed-in product tab",
+    "api v1: vm sync and registration > workspace create returns before attach and status advances after VM registration",
+    "workspace invitations and authenticated bootstrap > the internal device API inspects and approves or denies codes for an actor"
+  ],
+  "correctedFixtureFiles": [
+    "packages/agent/test/turn-runner-serialization.test.ts",
+    "packages/backend/src/invitations.test.ts",
+    "apps/api/src/routes/v1-migration.test.ts",
+    "apps/api/src/gateway/client.test.ts",
+    "apps/api/src/vm.test.ts"
+  ],
+  "narrowRestoredChecks": {
+    "agentSerialization": 9,
+    "backendDevice": 1,
+    "v1Notice": 15,
+    "mirrorClient": 52,
+    "vmCreateLifecycle": 1,
+    "syncSuite": 74
+  },
+  "syncTypeChecks": [
+    "Duet",
+    "test-harness"
+  ],
+  "separateRemainingRootGatesPassed": [
+    "shared UI coverage",
+    "visual owner union",
+    "asset ownership"
+  ],
+  "wholeFeatureReview": {
+    "findings": [
+      "daemon machine identity stale after account change",
+      "same-slug mirror storage collision across servers/workspaces"
+    ],
+    "bothCorrected": true,
+    "finalReview": "No actionable regressions",
+    "reviewSandboxSocketLimit": "Host sync suite passed all74; reviewer could not bind loopback sockets"
+  },
+  "observations": {
+    "unified-duet-root-closeout-test-261004.log.gz": "5f22a7e03d19ce2d4af8dbea149f2691a5645d79b3258fdb5640d1acbb2c6bc1",
+    "unified-duet-root-closeout-remaining-assets-261004.log.gz": "d068ced96eeceae9ad25bd537b6896d73612dcccef175ee0f83092e4664eb66d",
+    "unified-duet-final-codex-review-261004.log.gz": "323c0c9c5f026b0a1040e6c62feeb3da99b0e0b69de67e151f455c99799418ad",
+    "unified-duet-closeout-fixes-codex-review-261004.log.gz": "04bd56c4c3e359be2e4416408f54eb682c17cf17c4e04813e3bc9397bd4ceab9",
+    "unified-duet-final-sync-storage-codex-review-261004.log.gz": "83e6e36a99881b255d04de8bfab665e955469b453b68c2b3c33586212db45efc",
+    "unified-duet-final-closeout-confirmation-codex-review.log.gz": "b1c283c10c8713060964272101b53ab08287f27556585370d4749412f19f5a74",
+    "unified-duet-fixture-agent-restored-green.log.gz": "cf67983b4eac2a5758e3713b83236c3c0c18958d13cab1f48780d113f68974b6",
+    "unified-duet-fixture-backend-device-restored-green.log.gz": "2cab7fde340bfad930a924bdbffcb5d804132a6c785e85c1d308167c5903c24d",
+    "unified-duet-v1-boundary-restored-green.log.gz": "32ad4f94e8d43c29fa7a4113f0c613eb3c6f976bb24fa0306937592e995d6357",
+    "unified-duet-mirror-machine-restored-green.log.gz": "1d3801b47313ba7025b3d71217c916a8caef641b0a5e20b7b24ec79bf3953065",
+    "unified-duet-vm-create-memberships-restored-green.log.gz": "28f91e21d3f298d8b98aa6ee25410e2774223a8c9e4c494e4b37c2e9f9a57aca",
+    "unified-sync-account-red.log.gz": "a075b3e674e6b3cfcfa18cc9ebe1540f3ef2311d737a70f4e5696929d18268cb",
+    "unified-sync-storage-red.log.gz": "ec2e25e340e94dd62e6b08d58a34a0528b01d96f5f027076a6f6bfe5d160ded1",
+    "unified-sync-prerequisite-red.log.gz": "7aa12f52d6aa985b74b4e750ea383875d80494a5635e7e211ff988b473bd3dbd",
+    "unified-sync-final-suite-green.log.gz": "186418fe098520d82c757f4f4f1873681524d99e14ef21db086f489e3e6acfea",
+    "unified-sync-final-types-green.log.gz": "48a7429244207d660fd9089d8481ec3cbc9c491aac93b801256ceab700c17237",
+    "unified-sync-harness-types.log.gz": "48a7429244207d660fd9089d8481ec3cbc9c491aac93b801256ceab700c17237"
+  }
+}

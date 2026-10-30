@@ -1,0 +1,113 @@
+{
+  "status": "complete",
+  "controllerSha256": "623fdfa13b5f024cf1be5b841fddaaf05239a26e035ddc97d8707c7db697bef1",
+  "helperSha256": "cf5eaa5e04e4ed9a85309296ce2dc484638aad5aea128ad0d85df963680882db",
+  "outcomes": [
+    {
+      "workspaceId": "fixture-workspace",
+      "slug": "fixture-workspace",
+      "vmName": "fixture-vm",
+      "sshDest": "synthetic-adoption-fixture.invalid",
+      "imageRef": "fixture-old-image",
+      "workspaceStatus": "active",
+      "providerStatus": "running",
+      "appAnchorPaths": [],
+      "blockers": [],
+      "warnings": [],
+      "status": "complete",
+      "phase": "complete",
+      "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "restored": false,
+      "previousGatewayVersion": "0.0.0+01212abf6ba1",
+      "bootIdBefore": "5a3f2a10-7bc3-4ae9-98db-56282788ca59",
+      "bootIdAfter": "5a3f2a10-7bc3-4ae9-98db-56282788ca59"
+    },
+    {
+      "workspaceId": "fixture-workspace",
+      "slug": "fixture-workspace",
+      "vmName": "fixture-vm",
+      "sshDest": "synthetic-adoption-fixture.invalid",
+      "imageRef": "fixture-old-image",
+      "workspaceStatus": "active",
+      "providerStatus": "running",
+      "appAnchorPaths": [],
+      "blockers": [],
+      "warnings": [],
+      "status": "complete",
+      "phase": "complete",
+      "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "restored": false,
+      "previousGatewayVersion": "0.0.0+01212abf6ba1",
+      "bootIdBefore": "5a3f2a10-7bc3-4ae9-98db-56282788ca59",
+      "bootIdAfter": "5a3f2a10-7bc3-4ae9-98db-56282788ca59"
+    }
+  ],
+  "settlements": [
+    {
+      "unit": "duet-runtime-adoption.service",
+      "runId": "b930853a-c43c-46a8-b331-547ae6e4a0a5",
+      "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "settled": true
+    },
+    {
+      "unit": "duet-runtime-adoption.service",
+      "runId": "abccbf56-21f2-41e9-93c3-6e53a26b75eb",
+      "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "settled": true
+    }
+  ],
+  "oldMain": "5256",
+  "oldLayout": {
+    "current": "/opt/duet/releases/0.0.0+01212abf6ba1",
+    "cliVersion": "0.3.36",
+    "gatewayBunAbsent": true
+  },
+  "cgroupAbsent": true,
+  "firstTargetMain": "6864",
+  "noopMain": "6864",
+  "before": {
+    "hashes": {
+      "/home/synthetic-user/.duet/vm-token": "9c5e904d11e3d0e0d1cfc65d356f058e27a4735773fdd7a3a32045dd9d2ccdd5",
+      "/home/synthetic-user/.duet/chrome/Default/Cookies": "6d3b4ace9512442b262f8aac6f34e448970986418028c242e721ed4e9e487c81",
+      "/home/synthetic-user/.duet/connected-providers/fixture/credential": "b936c070f785bb80c60becf1b3b21148dd997068923fddf9343598a4065696f0",
+      "/home/synthetic-user/.local/state/syncthing/identity": "0deffb78b19605ce571455e686d4695ac02111d7e235072b360d89cbb264a0d1",
+      "/home/synthetic-user/drive/unchanged.txt": "a313e6c9e1ced45f2d340e9152563c8cb1b8b4b60c90ce5c48aa5ddd0aec23e6"
+    },
+    "bootId": "5a3f2a10-7bc3-4ae9-98db-56282788ca59",
+    "syncthingPid": "177",
+    "workspaceBun": "1.3.14"
+  },
+  "after": {
+    "hashes": {
+      "/home/synthetic-user/.duet/vm-token": "9c5e904d11e3d0e0d1cfc65d356f058e27a4735773fdd7a3a32045dd9d2ccdd5",
+      "/home/synthetic-user/.duet/chrome/Default/Cookies": "6d3b4ace9512442b262f8aac6f34e448970986418028c242e721ed4e9e487c81",
+      "/home/synthetic-user/.duet/connected-providers/fixture/credential": "b936c070f785bb80c60becf1b3b21148dd997068923fddf9343598a4065696f0",
+      "/home/synthetic-user/.local/state/syncthing/identity": "0deffb78b19605ce571455e686d4695ac02111d7e235072b360d89cbb264a0d1",
+      "/home/synthetic-user/drive/unchanged.txt": "a313e6c9e1ced45f2d340e9152563c8cb1b8b4b60c90ce5c48aa5ddd0aec23e6"
+    },
+    "bootId": "5a3f2a10-7bc3-4ae9-98db-56282788ca59",
+    "syncthingPid": "177",
+    "workspaceBun": "1.3.14"
+  },
+  "memory": [
+    {
+      "id": "mem_cZMOrwGOYpV5",
+      "content": "fixture memory must survive runtime adoption",
+      "kind": "note",
+      "source": "user",
+      "priority": "medium",
+      "createdAt": "2026-10-04T11:19:18.939Z",
+      "lastUsedAt": "2026-10-04T11:19:18.939Z",
+      "observedDate": "2026-10-04",
+      "tags": [],
+      "packScore": 2.9911512646753495
+    }
+  ],
+  "jobState": "0\n0\ninactive",
+  "transferDirectoriesRemoved": [
+    "/tmp/duet-runtime-adoption-1ee28431-c36a-4c37-a884-72e118030482",
+    "/tmp/duet-runtime-adoption-8a5162d0-784b-46e1-a1be-bd34ef8d357f"
+  ],
+  "archiveChecks": 2,
+  "liveVmsModified": false
+}

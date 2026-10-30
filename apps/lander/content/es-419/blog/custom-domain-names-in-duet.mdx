@@ -1,0 +1,208 @@
+---
+title: 'Dominios personalizados para apps creadas con AI: guía de configuración para Duet'
+metaTitle: 'Dominios personalizados en Duet | Publica apps creadas con AI en tu propio dominio'
+description: 'Las herramientas con AI en subdominios genéricos parecen demos. Los dominios personalizados en Duet te dejan publicar herramientas internas y apps para clientes en tu URL, con HTTPS automático.'
+date: '2026-04-25'
+updatedAt: '2026-05-08'
+readTime: '6 min read'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/7.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'updates'
+tags: ['custom-domains', 'deployment', 'internal-tools', 'ai-apps']
+type: 'article'
+image: '/blog/custom-domain-names-in-duet/cover.png'
+locale: es-419
+translationKey: 'custom-domain-names-in-duet'
+relatedPosts:
+  - 'how-to-build-internal-tool-in-a-day-with-ai'
+  - 'how-to-build-and-deploy-a-web-app-using-only-ai'
+  - 'how-to-build-client-analytics-dashboard-without-developer'
+  - 'claude-opus-4-7-gpt-5-4-extended-thinking-duet'
+cta:
+  title: 'Publica la app, no la URL de demo.'
+  subtitle: 'Crea una herramienta interna o una app para clientes en Duet, apunta tu dominio hacia ella y el TLS queda activo en minutos. Sin script de deploy, sin gimnasia de DNS.'
+  buttonText: 'Prueba Duet gratis'
+  href: '/sign-in?from=blog-custom-domains'
+---
+
+Las apps de Duet ahora pueden correr en tu propio dominio. Agrega un registro CNAME y Duet se encarga de la verificación, el aprovisionamiento de TLS y el enrutamiento de forma automática. La configuración toma unos minutos por app, sin costo adicional.
+
+Construiste un dashboard para un cliente con AI en 20 minutos. Funciona. Los datos están en vivo. El cliente podría usarlo hoy mismo.
+
+Entonces miras la URL: `app-7f3x2.duet.so`.
+
+No vas a enviarle eso a un cliente. No vas a compartirlo con tu equipo y llamarlo herramienta interna. Parece un prototipo en la plataforma de otra persona, porque eso es exactamente lo que dice la URL.
+
+Esta es la brecha entre "construí algo útil" y "publiqué algo que mi equipo realmente usa". Y es una brecha que mata la adopción. La gente no guarda en marcadores herramientas en subdominios al azar. No confían en dashboards que se ven temporales. No integran apps en su workflow cuando la URL grita "esto podría desaparecer".
+
+Las apps de Duet ahora pueden correr en tu propio dominio: `tools.tuempresa.com`, `reports.tuagencia.com`, `tracker.tustartup.io`. Tu URL, tu marca, HTTPS automático, activo en minutos. (Una vez que tu herramienta esté en vivo en tu dominio, la siguiente pregunta suele ser "¿cómo la mantengo corriendo 24/7?". Mira [cómo correr Claude Code en la nube](/blog/how-to-run-claude-code-in-the-cloud) y [cómo configurar un agente de AI 24/7](/blog/how-to-set-up-a-24-7-ai-agent).)
+
+<AnswerBox
+  title="Dominios personalizados en Duet"
+  summary="Las apps creadas en Duet pueden correr en tu propio dominio. Agrega un dominio en Configuración > Apps, apunta un CNAME a Duet y Duet se encarga de la verificación, los certificados TLS y el ruteo automáticamente. Cada app tiene su propio dominio personalizado, sin costo adicional. La configuración toma minutos."
+  bullets={[
+    'Conecta cualquier app de Duet a tu dominio raíz o subdominio.',
+    'HTTPS automático con aprovisionamiento y renovación de certificados TLS administrados.',
+    'Sin trabajo de DevOps, sin configs de nginx, sin scripts de renovación de SSL.',
+    'Un dominio por app. Apps ilimitadas por workspace.',
+    'Incluido para todos los usuarios de Duet sin costo extra.',
+  ]}
+  queries={[
+    '¿Puedo usar mi propio dominio para las apps de Duet?',
+    '¿Cómo configuro un dominio personalizado para una herramienta creada con AI?',
+    '¿Duet maneja el SSL automáticamente?',
+    '¿Cuánto tarda la configuración de un dominio personalizado?',
+    '¿Puedo hospedar apps de AI en mi propio dominio?',
+    'Dominio personalizado para Claude Duet',
+    'Desplegar una app de AI en tu propio dominio',
+  ]}
+  faq={[
+    {
+      question: '¿Hay un costo adicional por los dominios personalizados?',
+      answer:
+        'No. Los dominios personalizados están incluidos para todos los usuarios de Duet sin costo extra. Solo necesitas ser dueño del dominio y tener acceso a su configuración de DNS.',
+    },
+    {
+      question: '¿Cuánto tarda en activarse un dominio personalizado?',
+      answer:
+        'Una vez que agregas el registro CNAME, Duet se encarga de la verificación y el aprovisionamiento de TLS de forma automática. La mayoría de los dominios se activan en pocos minutos, según la propagación de DNS. Algunos proveedores de DNS tardan hasta 24 horas, pero eso es poco común.',
+    },
+    {
+      question: '¿Puedo cambiar o quitar un dominio personalizado más adelante?',
+      answer:
+        'Sí. Actualiza o quita las asignaciones de dominio personalizado en cualquier momento desde Settings > Apps. Si quitas un dominio, el tráfico vuelve al subdominio predeterminado de Duet. Tu app sigue funcionando de cualquier manera.',
+    },
+    {
+      question: '¿Necesito configurar algo para HTTPS?',
+      answer:
+        'No. Duet aprovisiona y renueva los certificados TLS automáticamente. Tu dominio personalizado se sirve por HTTPS desde el momento en que se activa. No hay configuración manual de certificados, ni proceso de renovación, ni tiempo de inactividad.',
+    },
+    {
+      question: '¿Puedo usar un subdominio como tools.miempresa.com?',
+      answer:
+        'Sí. Los subdominios son la configuración más común. Apunta un CNAME para tu subdominio hacia Duet y el resto se maneja de forma automática. La mayoría de los equipos usan patrones como tools.empresa.com, reports.empresa.com o app.empresa.com.',
+    },
+    {
+      question: '¿Puedo usar dominios personalizados para apps de cara al cliente?',
+      answer:
+        'Sí. Si estás creando herramientas para clientes, puedes usar un subdominio bajo tu propio dominio (como clientename.tuagencia.com) o hacer que el cliente apunte su propio dominio hacia la app. Ambos enfoques funcionan con la misma configuración de CNAME.',
+    },
+  ]}
+/>
+
+## El problema con los subdominios predeterminados
+
+Cada builder de AI te da una URL generada cuando publicas algo. Está bien para pruebas. Es un callejón sin salida para todo lo demás.
+
+Esto es lo que realmente pasa cuando tus herramientas viven en subdominios genéricos:
+
+**Las herramientas internas no se adoptan.** Construyes un dashboard de inteligencia competitiva para tu equipo de ventas. Compartes el link en Slack. La mitad del equipo no le hace clic porque la URL se ve sospechosa. La otra mitad lo guarda en marcadores, pero cuando ve `app-7f3x2.duet.so` en sus marcadores tres semanas después, ya olvidó qué es. La herramienta muere en silencio.
+
+**El trabajo de cara al cliente se ve amateur.** Si eres una agencia o freelancer que crea herramientas para clientes, la URL es parte del entregable. Enviar a un cliente a un subdominio genérico socava el valor de lo que construiste. Da la señal de "hack rápido" en vez de "solución profesional".
+
+**TI y compliance se ponen nerviosos.** En equipos más grandes, las herramientas en dominios desconocidos generan preguntas. "¿Qué es esto?". "¿Está aprobado?". "¿Quién controla esto?". Tu propio dominio responde todas esas preguntas antes de que se hagan.
+
+**Sin valor de SEO ni de marca.** Si estás creando herramientas públicas como calculadoras, dashboards o contenido interactivo, un subdominio genérico significa cero asociación con tu marca. El tráfico va a la autoridad de dominio de otra persona.
+
+Los dominios personalizados resuelven todo esto. La misma herramienta, una percepción completamente distinta.
+
+## Cómo funcionan los dominios personalizados en Duet
+
+Tres pasos. Sin ingeniería, sin tickets de DevOps, sin infraestructura que administrar.
+
+### Paso 1: agrega tu dominio
+
+Ve a **Settings > Apps** en [Duet](/guides/duet-ai-for-founders). Selecciona la app que quieres asignar. Ingresa el dominio que quieres usar.
+
+Esto funciona con dominios raíz (`tuempresa.com`) o subdominios (`tools.tuempresa.com`, `reports.tuagencia.com`). Los subdominios son el patrón más común para herramientas internas.
+
+### Paso 2: apunta tu DNS
+
+Agrega un registro CNAME en tu proveedor de DNS que apunte tu dominio hacia Duet. Este es el único paso que ocurre fuera de Duet. Si alguna vez configuraste un dominio personalizado para algo (un blog, una landing page, un servicio de email), este es el mismo proceso.
+
+### Paso 3: Duet se encarga del resto
+
+Una vez que el DNS se propaga (normalmente unos minutos), Duet automáticamente:
+
+- Verifica la propiedad del dominio
+- Aprovisiona un certificado TLS (HTTPS desde el día uno)
+- Enruta el tráfico hacia tu app
+- Registra el estado en tu panel de configuración
+
+Sin gestión manual de certificados. Sin configs de nginx. Sin recordatorios de renovación de SSL.
+
+## Un dominio por app. Apps ilimitadas.
+
+Cada app de Duet recibe su propio dominio personalizado. Esto significa que puedes construir un namespace coherente para tus herramientas:
+
+- `intel.tuempresa.com`: rastreador de inteligencia competitiva
+- `metrics.tuempresa.com`: dashboard semanal de KPI
+- `onboard.tuempresa.com`: checklist de onboarding de nuevos empleados
+- `pricing.tuempresa.com`: calculadora de precios dinámicos
+
+O si eres una agencia que construye para clientes:
+
+- `reports.nombrecliente.com`: dashboard de reportes automatizados
+- `analytics.nombrecliente.com`: analítica de tráfico y conversión
+- `pipeline.nombrecliente.com`: rastreador del pipeline de ventas
+
+Todo administrado desde la misma pantalla de configuración en Duet. Sin cuentas de hosting separadas, sin gestión de servidores, sin pipelines de deploy.
+
+## Lo que obtienes
+
+| Característica        | Detalles                                                       |
+| --------------------- | -------------------------------------------------------------- |
+| Certificados TLS      | Aprovisionamiento y renovación automáticos, cero configuración |
+| Verificación de DNS   | Configuración guiada con seguimiento de estado en tiempo real  |
+| Enrutamiento          | Automático, sin configuración de servidor                      |
+| Múltiples dominios    | Uno por app, apps ilimitadas                                   |
+| Tiempo de instalación | Minutos desde el cambio de DNS hasta la app en vivo            |
+| Costo                 | Incluido para todos los usuarios de Duet, sin cargo adicional  |
+| Subdominios           | Soporte completo, el mismo proceso de configuración            |
+
+## Cuándo los dominios personalizados cambian el resultado
+
+Los dominios personalizados no son una característica cosmética. Cambian si la herramienta que construiste realmente se usa o no.
+
+**Herramientas internas que perduran.** Un dashboard en `metrics.tuempresa.com` se guarda en marcadores, se comparte en Slack y se vuelve parte de la rutina diaria del equipo. El mismo dashboard en un subdominio generado se usa dos veces y se olvida. (Para más sobre publicar herramientas internas rápido con AI, mira [cómo crear una herramienta interna en un día con AI](/blog/how-to-build-internal-tool-in-a-day-with-ai).)
+
+**Entregables para clientes que justifican la tarifa.** Cuando le entregas a un cliente una herramienta corriendo en su propio dominio, se siente como un desarrollo a medida, porque lo es. El valor percibido se dispara. El cliente la comparte internamente. Se vuelve un punto de referencia, no algo de una sola vez.
+
+**Herramientas públicas que construyen marca.** Si estás usando Duet para crear herramientas gratuitas, calculadoras o contenido interactivo para generación de leads, esas herramientas en tu dominio aportan valor de SEO y reconocimiento de marca de vuelta hacia ti.
+
+---
+
+Los dominios personalizados están en vivo ahora en **Settings > Apps**. **¿Nuevo en Duet?** [Inicia un espacio de trabajo gratis](/) y publica tu primera app en tu propio dominio en minutos.
+
+## Preguntas frecuentes
+
+### ¿Hay un costo adicional por los dominios personalizados?
+
+No. Los dominios personalizados están incluidos para todos los usuarios de Duet sin costo extra. Solo necesitas ser dueño del dominio y tener acceso a su configuración de DNS.
+
+### ¿Cuánto tarda en activarse un dominio personalizado?
+
+Una vez que agregas el registro CNAME, Duet se encarga de la verificación y el aprovisionamiento de TLS de forma automática. La mayoría de los dominios se activan en pocos minutos, según la propagación de DNS. Algunos proveedores de DNS tardan hasta 24 horas, pero eso es poco común.
+
+### ¿Puedo cambiar o quitar un dominio personalizado más adelante?
+
+Sí. Actualiza o quita las asignaciones de dominio personalizado en cualquier momento desde Settings > Apps. Si quitas un dominio, el tráfico vuelve al subdominio predeterminado de Duet. Tu app sigue funcionando de cualquier manera.
+
+### ¿Necesito configurar algo para HTTPS?
+
+No. Duet aprovisiona y renueva los certificados TLS automáticamente. Tu dominio personalizado se sirve por HTTPS desde el momento en que se activa. No hay configuración manual de certificados, ni proceso de renovación, ni tiempo de inactividad.
+
+### ¿Puedo usar un subdominio como tools.miempresa.com?
+
+Sí. Los subdominios son la configuración más común. Apunta un CNAME para tu subdominio hacia Duet y el resto se maneja de forma automática. La mayoría de los equipos usan patrones como `tools.empresa.com`, `reports.empresa.com` o `app.empresa.com`.
+
+### ¿Puedo usar dominios personalizados para apps de cara al cliente?
+
+Sí. Si estás creando herramientas para clientes, puedes usar un subdominio bajo tu propio dominio (como `clientename.tuagencia.com`) o hacer que el cliente apunte su propio dominio hacia la app. Ambos enfoques funcionan con la misma configuración de CNAME.
+
+### ¿Los dominios personalizados funcionan con apps que usan Claude o GPT-5.4 por debajo?
+
+Sí. Los dominios personalizados aplican a cualquier app de Duet, ya sea que esté impulsada por Claude Opus 4.7, GPT-5.4 u otro modelo soportado. Para más sobre elegir el modelo correcto para cada app, mira nuestra guía para [elegir el modelo de tu agente de AI](/blog/claude-opus-4-7-gpt-5-4-extended-thinking-duet).

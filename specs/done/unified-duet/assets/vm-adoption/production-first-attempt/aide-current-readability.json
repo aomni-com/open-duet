@@ -1,0 +1,56 @@
+{
+  "status": "current-idle-readability-proved-original-exception-unknown",
+  "vmName": "workspace-redacted",
+  "workspaceId": "qs73dkyjehbe4n132dhjjx0r618cgycb",
+  "observedAt": "2026-10-04T22:39:10.812Z",
+  "sourceEvidence": "/tmp/unified-duet-aide-census-diagnosis.json",
+  "frozenHelperSha256": "e8603337408bad602fbff58f82d928a96982bf2e1b709c82aa48814b1558f5ed",
+  "gatewayBunSha256": "a83d263767d839e4d2649ca8e35d07159c7afc99afdc96d731ced29e056dda0c",
+  "retainedAppAnchors": [
+    "apps/aide-gateway",
+    "apps/aide-holding"
+  ],
+  "originalOutcome": {
+    "phase": "restored",
+    "reason": "Work state cannot be read conclusively",
+    "restored": true,
+    "status": "deferred",
+    "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2"
+  },
+  "originalErrnoRetained": false,
+  "originalFailedInputRetained": false,
+  "currentReadOnlyCensus": {
+    "idle": true
+  },
+  "bootId": "29b69f09-89ef-4185-8a11-5b743f998b88",
+  "gatewayUnit": {
+    "ActiveState": "active",
+    "ControlGroup": "/system.slice/duet-gateway.service",
+    "ControlPID": "0",
+    "LoadState": "loaded",
+    "MainPID": "157727"
+  },
+  "adoptionUnit": {
+    "ActiveState": "inactive",
+    "ControlGroup": "",
+    "ControlPID": "0",
+    "LoadState": "not-found",
+    "MainPID": "0"
+  },
+  "trainJobCount": 0,
+  "trainOutboxCount": 0,
+  "backupWorkerPresent": false,
+  "scratch": {
+    "cleanupVerified": true,
+    "ownedTemporary": true,
+    "path": "/tmp/duet-aide-census-diagnosis-u39kqat0",
+    "realVmStateMutated": false
+  },
+  "limits": [
+    "Original frozen helper outer catch discarded errno/path; do not infer or rewrite its historical deferred result.",
+    "Current successful resample establishes current readable/idle census, not the original transient failure cause.",
+    "No gateway freeze, signals, helper adoption retry, registry operation, provider reboot or reprovision occurred.",
+    "Only an explicitly owned temporary copy of ledger inputs and diagnostic helper was written; it was removed in finally. Real VM state was not mutated.",
+    "Root may repeat actual admission/census through the corrected helper; this read-only probe does not authorize skipping that cutover gate."
+  ]
+}

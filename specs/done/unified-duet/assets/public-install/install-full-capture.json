@@ -1,0 +1,66 @@
+[
+  {
+    "name": "desktop",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "deviceScaleFactor": 1,
+    "status": 200,
+    "errors": [],
+    "copied": [
+      {
+        "exact": true,
+        "bytes": 122
+      },
+      {
+        "exact": true,
+        "bytes": 222
+      },
+      {
+        "exact": true,
+        "bytes": 1830
+      },
+      {
+        "exact": true,
+        "bytes": 883
+      }
+    ],
+    "width": 1440,
+    "documentWidth": 1440,
+    "height": 3996,
+    "text": "Install DuetAgent-readable setup, human-approved login.Two ways in — device pairing, or email sign-in. Both sign you in as the person. Your current workspace memberships and roles determine access.Open install.txtBack homeSign in: pick a doorFirst the CLI, which both doors end up using — door A signs in with it, door B checks its key with it.# Bun 1.3.14 and Node 22+ required.\n# Install on your own computer.\n# Duet VMs include the command.\nnpm i -g @duetso/agentThen choose the sign-in method that fits. Both save your human login for subsequent commands.Door A: device pairingTake this one when your human can open a browser: they approve a code you show them.# 1. Start device pairing. A human must approve the displayed code in the browser.\nduet --api-url https://service.example.invalid login\n\n# 2. Inspect your current workspaces and roles. The key stays in ~/.duet/config.json.\nduet whoamiorDoor B: email sign-inTake this one when your human can read their email: they read a code back to you.# 1. Mail a sign-in code to your human's address, keeping the 202's request_id.\nDUET_API_URL=\"https://service.example.invalid\"\nDUET_REQUEST_ID=$(curl -fsS -X POST \\\n  \"$DUET_API_URL/v1/auth/email/start\" \\\n  -H 'content-type: application/json' \\\n  -d '{\n    \"email\":\"user@example.invalid\",\n    \"client_name\":\"Claude Code\"\n  }' \\\n  | node -pe 'JSON.parse(\n      require(\"fs\").readFileSync(\n        0, \"utf8\",\n      ),\n    ).request_id')\nexport DUET_REQUEST_ID\n\n# 2. Exchange the code your human read back. Same shell as step 1, whose export it reads.\nDUET_API_URL=\"https://service.example.invalid\" DUET_CODE=\"<the code they read back>\" \\\nnode --input-type=module <<'NODE'\nimport {\n  chmodSync, existsSync, mkdirSync,\n  readFileSync, writeFileSync,\n} from \"node:fs\";\nimport { join } from \"node:path\";\nconst {\n  DUET_API_URL: apiUrl,\n  DUET_REQUEST_ID, DUET_CODE,\n} = process.env;\nconst response = await fetch(\n  `${apiUrl}/v1/auth/email/verify`, {\n  method: \"POST\",\n  headers: { \"content-type\": \"application/json\" },\n  body: JSON.stringify({\n    request_id: DUET_REQUEST_ID,\n    code: DUET_CODE,\n  }),\n});\nconst body = await response.json();\nif (!response.ok) throw new Error(`${response.status} ${JSON.stringify(body)}`);\nconst duetDir = join(process.env.HOME, \".duet\");\nmkdirSync(duetDir, { recursive: true, mode: 0o700 });\nconst outPath = join(duetDir, \"config.json\");\nconst config = existsSync(outPath)\n  ? JSON.parse(readFileSync(\n      outPath, \"utf8\",\n    ))\n  : {};\nObject.assign(config, {\n  apiKey: body.access_token,\n  defaultWorkspace:\n    body.workspace.slug,\n  apiUrl,\n});\nwriteFileSync(\n  outPath,\n  JSON.stringify(config, null, 2)\n    + \"\\n\",\n  { mode: 0o600 },\n);\nchmodSync(outPath, 0o600);\nconsole.log(`Signed in to ${body.workspace.slug}. Wrote ${outPath}; key not printed.`);\nNODE\n\n# 3. Inspect your current workspaces and roles.\nduet whoamiConnect MCP, from whichever door you tookPoint an MCP client at the hosted server, reading the key the door already wrote. Never print it.# Prepare a local MCP config without printing the bearer token.\nDUET_MCP_PUBLIC_URL=\"https://service.example.invalid\" node <<'NODE'\nconst fs = require(\"node:fs\");\nconst path = require(\"node:path\");\nconst duetDir = path.join(process.env.HOME, \".duet\");\nconst cfg = JSON.parse(\n  fs.readFileSync(\n    path.join(duetDir, \"config.json\"),\n    \"utf8\",\n  ),\n);\nif (typeof cfg.apiKey !== \"string\" || cfg.apiKey.length === 0) throw new Error(\"Sign in first.\");\nconst outPath = path.join(duetDir, \"mcp.json\");\nfs.writeFileSync(\n  outPath,\n  JSON.stringify(\n    {\n      name: \"duet\",\n      transport: \"streamable-http\",\n      url: process.env.DUET_MCP_PUBLIC_URL,\n      headers: { authorization: `Bearer ${cfg.apiKey}` },\n    },\n    null,\n    2,\n  ) + \"\\n\",\n  { mode: 0o600 },\n);\nfs.chmodSync(outPath, 0o600);\nconsole.log(`Wrote ${outPath}. Import it into your MCP client; bearer token not printed.`);\nNODE"
+  },
+  {
+    "name": "mobile",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "deviceScaleFactor": 2,
+    "status": 200,
+    "errors": [],
+    "copied": [
+      {
+        "exact": true,
+        "bytes": 122
+      },
+      {
+        "exact": true,
+        "bytes": 222
+      },
+      {
+        "exact": true,
+        "bytes": 1830
+      },
+      {
+        "exact": true,
+        "bytes": 883
+      }
+    ],
+    "width": 390,
+    "documentWidth": 390,
+    "height": 4752,
+    "text": "Install DuetAgent-readable setup, human-approved login.Two ways in — device pairing, or email sign-in. Both sign you in as the person. Your current workspace memberships and roles determine access.Open install.txtBack homeSign in: pick a doorFirst the CLI, which both doors end up using — door A signs in with it, door B checks its key with it.# Bun 1.3.14 and Node 22+ required.\n# Install on your own computer.\n# Duet VMs include the command.\nnpm i -g @duetso/agentThen choose the sign-in method that fits. Both save your human login for subsequent commands.Door A: device pairingTake this one when your human can open a browser: they approve a code you show them.# 1. Start device pairing. A human must approve the displayed code in the browser.\nduet --api-url https://service.example.invalid login\n\n# 2. Inspect your current workspaces and roles. The key stays in ~/.duet/config.json.\nduet whoamiorDoor B: email sign-inTake this one when your human can read their email: they read a code back to you.# 1. Mail a sign-in code to your human's address, keeping the 202's request_id.\nDUET_API_URL=\"https://service.example.invalid\"\nDUET_REQUEST_ID=$(curl -fsS -X POST \\\n  \"$DUET_API_URL/v1/auth/email/start\" \\\n  -H 'content-type: application/json' \\\n  -d '{\n    \"email\":\"user@example.invalid\",\n    \"client_name\":\"Claude Code\"\n  }' \\\n  | node -pe 'JSON.parse(\n      require(\"fs\").readFileSync(\n        0, \"utf8\",\n      ),\n    ).request_id')\nexport DUET_REQUEST_ID\n\n# 2. Exchange the code your human read back. Same shell as step 1, whose export it reads.\nDUET_API_URL=\"https://service.example.invalid\" DUET_CODE=\"<the code they read back>\" \\\nnode --input-type=module <<'NODE'\nimport {\n  chmodSync, existsSync, mkdirSync,\n  readFileSync, writeFileSync,\n} from \"node:fs\";\nimport { join } from \"node:path\";\nconst {\n  DUET_API_URL: apiUrl,\n  DUET_REQUEST_ID, DUET_CODE,\n} = process.env;\nconst response = await fetch(\n  `${apiUrl}/v1/auth/email/verify`, {\n  method: \"POST\",\n  headers: { \"content-type\": \"application/json\" },\n  body: JSON.stringify({\n    request_id: DUET_REQUEST_ID,\n    code: DUET_CODE,\n  }),\n});\nconst body = await response.json();\nif (!response.ok) throw new Error(`${response.status} ${JSON.stringify(body)}`);\nconst duetDir = join(process.env.HOME, \".duet\");\nmkdirSync(duetDir, { recursive: true, mode: 0o700 });\nconst outPath = join(duetDir, \"config.json\");\nconst config = existsSync(outPath)\n  ? JSON.parse(readFileSync(\n      outPath, \"utf8\",\n    ))\n  : {};\nObject.assign(config, {\n  apiKey: body.access_token,\n  defaultWorkspace:\n    body.workspace.slug,\n  apiUrl,\n});\nwriteFileSync(\n  outPath,\n  JSON.stringify(config, null, 2)\n    + \"\\n\",\n  { mode: 0o600 },\n);\nchmodSync(outPath, 0o600);\nconsole.log(`Signed in to ${body.workspace.slug}. Wrote ${outPath}; key not printed.`);\nNODE\n\n# 3. Inspect your current workspaces and roles.\nduet whoamiConnect MCP, from whichever door you tookPoint an MCP client at the hosted server, reading the key the door already wrote. Never print it.# Prepare a local MCP config without printing the bearer token.\nDUET_MCP_PUBLIC_URL=\"https://service.example.invalid\" node <<'NODE'\nconst fs = require(\"node:fs\");\nconst path = require(\"node:path\");\nconst duetDir = path.join(process.env.HOME, \".duet\");\nconst cfg = JSON.parse(\n  fs.readFileSync(\n    path.join(duetDir, \"config.json\"),\n    \"utf8\",\n  ),\n);\nif (typeof cfg.apiKey !== \"string\" || cfg.apiKey.length === 0) throw new Error(\"Sign in first.\");\nconst outPath = path.join(duetDir, \"mcp.json\");\nfs.writeFileSync(\n  outPath,\n  JSON.stringify(\n    {\n      name: \"duet\",\n      transport: \"streamable-http\",\n      url: process.env.DUET_MCP_PUBLIC_URL,\n      headers: { authorization: `Bearer ${cfg.apiKey}` },\n    },\n    null,\n    2,\n  ) + \"\\n\",\n  { mode: 0o600 },\n);\nfs.chmodSync(outPath, 0o600);\nconsole.log(`Wrote ${outPath}. Import it into your MCP client; bearer token not printed.`);\nNODE"
+  }
+]

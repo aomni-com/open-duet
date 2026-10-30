@@ -1,0 +1,84 @@
+{
+  "kind": "screenshot-scene-metrics",
+  "generatedAt": "2026-10-05T22:26:30.176Z",
+  "note": "Absolute per-image telemetry, no reference involved. Low values locate flat, sparse, or empty captures; they never accept or reject an image on their own.",
+  "imageCount": 4,
+  "results": [
+    {
+      "id": "new-desktop-dark",
+      "image": "specs/done/app-key-export/assets/agent-acceptance/new-desktop-dark.png",
+      "dimensions": {
+        "width": 1280,
+        "height": 800
+      },
+      "sceneMetrics": {
+        "colorBuckets": 53,
+        "colorEntropyBits": 0.29976,
+        "edgeDensity": 0.03323,
+        "dominantColorShare": 0.97362,
+        "transparentShare": 0,
+        "luminanceMean": 27.61066,
+        "luminanceP5": 25.3754,
+        "luminanceP95": 25.3754,
+        "luminanceContrast": 0
+      }
+    },
+    {
+      "id": "new-desktop-light",
+      "image": "specs/done/app-key-export/assets/agent-acceptance/new-desktop-light.png",
+      "dimensions": {
+        "width": 1280,
+        "height": 800
+      },
+      "sceneMetrics": {
+        "colorBuckets": 50,
+        "colorEntropyBits": 0.27134,
+        "edgeDensity": 0.03005,
+        "dominantColorShare": 0.97569,
+        "transparentShare": 0,
+        "luminanceMean": 240.80493,
+        "luminanceP5": 243.1364,
+        "luminanceP95": 243.1364,
+        "luminanceContrast": 0
+      }
+    },
+    {
+      "id": "new-mobile-dark",
+      "image": "specs/done/app-key-export/assets/agent-acceptance/new-mobile-dark.png",
+      "dimensions": {
+        "width": 800,
+        "height": 1600
+      },
+      "sceneMetrics": {
+        "colorBuckets": 46,
+        "colorEntropyBits": 0.50882,
+        "edgeDensity": 0.08812,
+        "dominantColorShare": 0.94488,
+        "transparentShare": 0,
+        "luminanceMean": 32.69984,
+        "luminanceP5": 25.3754,
+        "luminanceP95": 72.231,
+        "luminanceContrast": 46.8556
+      }
+    },
+    {
+      "id": "new-mobile-light",
+      "image": "specs/done/app-key-export/assets/agent-acceptance/new-mobile-light.png",
+      "dimensions": {
+        "width": 800,
+        "height": 1600
+      },
+      "sceneMetrics": {
+        "colorBuckets": 40,
+        "colorEntropyBits": 0.48386,
+        "edgeDensity": 0.08677,
+        "dominantColorShare": 0.94641,
+        "transparentShare": 0,
+        "luminanceMean": 235.84125,
+        "luminanceP5": 221.0682,
+        "luminanceP95": 243.1364,
+        "luminanceContrast": 22.0682
+      }
+    }
+  ]
+}

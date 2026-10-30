@@ -1,0 +1,28 @@
+{
+  "source": "5ddacdc1959a74362832687e1dca9f5a944cf537",
+  "purpose": "Static post-Turbo gates not reached by interrupted full run; run separately without repeating the suite",
+  "checks": [
+    {
+      "command": "bun --cwd=packages/ui run verify:visual-coverage",
+      "exitCode": 0,
+      "result": "204 rendered-symbol coverage entries verified",
+      "log": "/tmp/workflow-ui-coverage-closeout.log"
+    },
+    {
+      "command": "bun visual:union",
+      "exitCode": 0,
+      "result": "Visual owner union and contact-sheet index verified",
+      "log": "/tmp/workflow-visual-union-closeout.log"
+    },
+    {
+      "command": "bun assets:verify",
+      "exitCode": 0,
+      "result": "328 public paths and 11 approved cross-app hash groups verified; no tracked runtime artifacts",
+      "log": "/tmp/workflow-assets-closeout.log"
+    }
+  ],
+  "limitations": [
+    "Static ownership/coverage checks, not pixel rendering or deployed journeys.",
+    "Does not replace the interrupted backend suite or clear model outcome failures."
+  ]
+}

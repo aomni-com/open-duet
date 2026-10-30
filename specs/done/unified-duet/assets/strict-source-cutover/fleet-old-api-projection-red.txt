@@ -1,0 +1,40 @@
+bun test v1.3.14 (0d9b296a)
+
+convex/domains/internalAdmin/model.test.ts:
+58 |       truncated: false,
+59 |       versions: { runtime: [{ label: 'build-a', count: 1 }] },
+60 |       vms: [{ slug: 'live', vmName: 'live-vm' }],
+61 |     })
+62 |     // Both APIs can parse this backend response during the promotion window.
+63 |     expect(result.versions).toEqual({
+                                 ^
+error: expect(received).toEqual(expected)
+
+  {
+-   "agent": [],
+-   "duetfs": [],
+-   "gateway": [
+-     {
+-       "count": 1,
+-       "label": "build-a",
+-     },
+-   ],
+    "runtime": [
+      {
+        "count": 1,
+        "label": "build-a",
+      },
+    ],
+  }
+
+- Expected  - 8
++ Received  + 0
+
+      at <anonymous> (/Users/synthetic-user/.codex/worktrees/unified-birth-fence/duet/packages/backend/convex/domains/internalAdmin/model.test.ts:63:29)
+(fail) fleet health counts live VMs even after more than a page of VM-less workspaces [28.89ms]
+
+ 0 pass
+ 1 filtered out
+ 1 fail
+ 2 expect() calls
+Ran 1 test across 1 file. [93.00ms]

@@ -1,0 +1,416 @@
+---
+title: 'Top 10 Claude Code Hooks to Use in 2026'
+metaTitle: 'Top 10 Claude Code Hooks (2026): Copy-Paste Configs for Your Workflow'
+description: 'Copy-paste 10 Claude Code hooks into your settings.json today. Auto-format files, block destructive commands, get notifications, enforce git workflows, and more.'
+date: '2026-05-29'
+readTime: '12 min read'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/5.png'
+category: 'ai'
+tags: ['claude-code', 'hooks', 'automation', 'developer-tools', 'ai-coding']
+type: 'article'
+image: '/blog/claude-code-hooks/cover.png'
+relatedPosts:
+  - slug: 'claude-code-vs-cursor-vs-codex'
+    context: 'Broader comparison of Claude Code against Cursor and Codex for teams evaluating AI coding tools.'
+  - slug: 'codex-vs-claude-code'
+    context: 'Head-to-head comparison of Codex CLI vs Claude Code on features, pricing, and benchmarks.'
+  - slug: 'how-to-run-claude-code-in-the-cloud'
+    context: 'Run Claude Code on persistent cloud servers where hooks run 24/7 without your laptop.'
+cta:
+  title: 'Let Duet handle the hooks for you.'
+  subtitle: 'Duet runs Claude Code in the cloud with built-in guardrails, formatting, and team-wide consistency. No settings.json required.'
+  buttonText: 'Try Duet'
+  href: '/sign-in?from=blog-hooks'
+howTo:
+  name: 'How to Set Up Claude Code Hooks'
+  description: 'A four-step recipe for adding Claude Code hooks to your project: edit settings.json, register an event, test the script outside Claude, then reload to verify.'
+  steps:
+    - name: 'Open your settings file'
+      text: 'Open .claude/settings.json in your project root (project-scoped) or ~/.claude/settings.json (user-scoped).'
+    - name: 'Add a hook definition'
+      text: 'Add a hooks object with the event type (PreToolUse, PostToolUse, Notification, or Stop), an optional matcher, and the shell command to run.'
+    - name: 'Test outside Claude Code'
+      text: 'Pipe sample JSON through your hook script to verify it works before registering it.'
+    - name: 'Reload and verify'
+      text: 'Open the /hooks menu in Claude Code to verify your hooks are registered and enabled.'
+---
+
+Claude Code ships with a hook system that most developers never touch.
+
+That's a mistake. Hooks are shell commands that fire automatically at specific points in Claude Code's workflow -- before a tool runs, after a file is written, when a task finishes. They turn a generic AI coding assistant into _your_ AI coding assistant.
+
+This guide gives you 10 hooks you can copy-paste into your `.claude/settings.json` today. No custom tooling, no complex setup. Each one solves a real problem that slows down AI-assisted development.
+
+<GuideTOC
+  items={[
+    { number: 1, title: 'What are Claude Code Hooks?', href: '#what-are-claude-code-hooks' },
+    { number: 2, title: 'How Claude Code Hooks Work', href: '#how-claude-code-hooks-work' },
+    { number: 3, title: '10 Claude Code Hooks to Steal', href: '#10-claude-code-hooks-to-steal' },
+    { number: 4, title: 'How to Debug Failing Hooks', href: '#how-to-debug-failing-hooks' },
+    { number: 5, title: 'Hooks Best Practices', href: '#hooks-best-practices' },
+    {
+      number: 6,
+      title: 'How to Share Hooks Across a Team',
+      href: '#how-to-share-hooks-across-a-team',
+    },
+    { number: 7, title: 'Frequently Asked Questions', href: '#frequently-asked-questions' },
+  ]}
+/>
+
+## What are Claude Code Hooks?
+
+Claude Code hooks are shell commands that execute automatically during specific events in Claude Code's lifecycle. Think of them as git hooks, but for your AI coding assistant instead of your version control system.
+
+Without hooks, Claude Code is powerful but generic. It writes code, runs commands, and edits files -- but it does all of this the same way for every developer on every project.
+
+Hooks let you customize that behavior at the system level:
+
+- Auto-format every file the moment it's written, so you never commit messy code
+- Block destructive commands like `rm -rf` or `DROP TABLE` before they execute
+- Get a desktop notification when a long-running task finishes
+- Log every change Claude makes to a file for audit trails
+- Inject project-specific context automatically at session start
+
+Hooks are defined in your settings file and run as standard shell scripts. If you can write a bash one-liner, you can write a hook.
+
+## How Claude Code Hooks Work
+
+Hooks fire at four points in Claude Code's execution lifecycle. Understanding these events is the key to writing hooks that work.
+
+**PreToolUse** fires before any tool executes. Your hook receives the tool name and its input as JSON on stdin. This is where you intercept and block -- exit code 0 means proceed, exit code 2 blocks the tool call entirely. Use this for security gates, validation, and anything where prevention beats cleanup.
+
+**PostToolUse** fires after a tool finishes. Your hook receives the tool name, input, and output. This is the workhorse event -- auto-formatting, logging, notifications, and follow-up actions all live here. Exit code doesn't block anything at this stage; the tool already ran.
+
+**Notification** fires when Claude Code sends a notification (typically when a task completes or needs attention). Good for routing alerts to Slack, Discord, or your preferred notification channel.
+
+**Stop** fires when Claude Code completes a response and stops executing. Useful for session-end cleanup, summary generation, or triggering downstream workflows.
+
+Every hook receives context as JSON on stdin. The shape depends on the event type, but it always includes the tool name and relevant input/output data. You parse it with `jq`, process it however you want, and exit with the appropriate code.
+
+Here's the anatomy of a hook definition in `.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "command": "./scripts/my-hook.sh"
+      }
+    ]
+  }
+}
+```
+
+The `matcher` field is optional. If omitted, the hook fires on every tool call for that event type. If specified, it filters by tool name -- and it's case-sensitive, so `"Bash"` won't match `"bash"`.
+
+## 10 Claude Code Hooks to Steal
+
+Every hook below includes the `settings.json` config and a brief explanation of what it does. Copy the ones that fit your workflow.
+
+### 1. Desktop notifications for completed tasks
+
+You kick off a long task, switch to Slack or your browser, and forget to check back. Ten minutes later you realize Claude finished ages ago.
+
+This hook fires a native desktop notification whenever Claude Code sends a notification event. On macOS it uses `osascript`, on Linux it uses `notify-send`.
+
+```json
+{
+  "hooks": {
+    "Notification": [
+      {
+        "command": "if command -v osascript &>/dev/null; then osascript -e 'display notification \"Task complete\" with title \"Claude Code\"'; elif command -v notify-send &>/dev/null; then notify-send 'Claude Code' 'Task complete'; fi"
+      }
+    ]
+  }
+}
+```
+
+This is the single most useful hook for anyone who multitasks while Claude works. Set it once, forget about it.
+
+### 2. Destructive command blocker
+
+Claude occasionally runs commands that can cause real damage -- `rm -rf` on the wrong directory, `DROP TABLE` in production, `git push --force` to main. By the time you notice, it's too late.
+
+This `PreToolUse` hook intercepts Bash commands and blocks anything matching a list of dangerous patterns. Exit code 2 stops the command cold.
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "command": "DANGEROUS='rm -rf|DROP TABLE|git push.*--force|git reset --hard|mkfs|dd if=|:(){ :|:& };:'; CMD=$(cat | jq -r '.tool_input.command // empty'); if echo \"$CMD\" | grep -qEi \"$DANGEROUS\"; then echo \"BLOCKED: Destructive command detected\" >&2; exit 2; fi"
+      }
+    ]
+  }
+}
+```
+
+You can customize the `DANGEROUS` pattern list to match your environment. Add database-specific commands, deployment scripts, or anything else that shouldn't run without explicit human approval.
+
+### 3. Auto-formatter on file write
+
+Claude writes functional code, but it doesn't always match your project's formatting rules. You end up with a noisy diff full of whitespace changes mixed in with actual logic changes.
+
+This `PostToolUse` hook detects when Claude writes or edits a file, then runs your formatter on it automatically. It supports Prettier for JS/TS, Black for Python, and gofmt for Go -- add whatever formatters your project uses.
+
+```json
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "command": "FILE=$(cat | jq -r '.tool_input.file_path // empty'); if [ -n \"$FILE\" ]; then case \"$FILE\" in *.js|*.ts|*.jsx|*.tsx) npx prettier --write \"$FILE\" 2>/dev/null;; *.py) black --quiet \"$FILE\" 2>/dev/null;; *.go) gofmt -w \"$FILE\" 2>/dev/null;; esac; fi"
+      }
+    ]
+  }
+}
+```
+
+The beauty of this hook is that it's invisible. Files are formatted the instant they're written, so every diff you review is clean.
+
+### 4. Sensitive file protector
+
+Claude can read and edit any file in your project. That includes `.env` files, credentials, private keys, and other files that should never be modified by an AI assistant.
+
+This `PreToolUse` hook blocks Write and Edit operations on files matching sensitive patterns. It checks the file path against a list of protected patterns and exits with code 2 if there's a match.
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "command": "PROTECTED='\\.env|\\.env\\\\.|credentials|secrets|private.key|id_rsa|\\.pem$'; FILE=$(cat | jq -r '.tool_input.file_path // empty'); if echo \"$FILE\" | grep -qEi \"$PROTECTED\"; then echo \"BLOCKED: Cannot modify sensitive file: $FILE\" >&2; exit 2; fi"
+      }
+    ]
+  }
+}
+```
+
+Pair this with the destructive command blocker for a solid security baseline. Between the two, you've covered the most common ways an AI assistant can accidentally cause damage.
+
+### 5. Git branch enforcer
+
+Claude doesn't know your branching strategy. It might commit directly to main, push to a protected branch, or create commits on the wrong branch entirely.
+
+This hook checks the current git branch before any Bash command runs. If you're on main or master, it blocks the operation and tells Claude to switch branches first.
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "command": "CMD=$(cat | jq -r '.tool_input.command // empty'); if echo \"$CMD\" | grep -qE 'git (commit|push|merge)'; then BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null); if [ \"$BRANCH\" = 'main' ] || [ \"$BRANCH\" = 'master' ]; then echo \"BLOCKED: Cannot commit/push to $BRANCH. Switch to a feature branch first.\" >&2; exit 2; fi; fi"
+      }
+    ]
+  }
+}
+```
+
+This is especially useful in teams where pushing to main requires a PR. The hook enforces the workflow at the tool level, before git's own branch protections even come into play.
+
+### 6. Auto-linter on file save
+
+Formatting is one thing, but linting catches actual code quality issues -- unused variables, missing imports, type errors. Claude doesn't always run your linter after writing code.
+
+This `PostToolUse` hook runs ESLint (or your linter of choice) on every file Claude writes or edits. If the linter finds issues, the output goes to stderr so Claude can see them and fix them in the next step.
+
+```json
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "command": "FILE=$(cat | jq -r '.tool_input.file_path // empty'); if [ -n \"$FILE\" ]; then case \"$FILE\" in *.js|*.ts|*.jsx|*.tsx) npx eslint --fix \"$FILE\" 2>&1;; *.py) ruff check --fix \"$FILE\" 2>&1;; esac; fi"
+      }
+    ]
+  }
+}
+```
+
+Stack this with the auto-formatter hook. Run the formatter first (for whitespace), then the linter (for logic). Order matters -- put the formatter hook before the linter hook in your settings array.
+
+### 7. Change logger and audit trail
+
+When Claude modifies dozens of files across a session, it's hard to track what changed, when, and why. Git diff helps after the fact, but a real-time log is better for debugging.
+
+This `PostToolUse` hook logs every file write and edit to a timestamped log file. It captures the file path, the tool used, and the timestamp so you can reconstruct exactly what happened during a session.
+
+```json
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|Bash",
+        "command": "INPUT=$(cat); TOOL=$(echo $INPUT | jq -r '.tool_name // empty'); FILE=$(echo $INPUT | jq -r '.tool_input.file_path // .tool_input.command // empty'); echo \"[$(date -Iseconds)] $TOOL: $FILE\" >> /tmp/claude-audit.log"
+      }
+    ]
+  }
+}
+```
+
+For production use, replace `/tmp/claude-audit.log` with a path inside your project directory (and gitignore it). You can also extend this to log to a remote service or append the git diff for each changed file.
+
+### 8. Context injector
+
+Every new Claude Code session starts cold. Claude doesn't know your project's conventions, architecture decisions, or current sprint goals unless you tell it every time.
+
+This hook injects project context at session start by reading from a context file and passing it to Claude as part of the tool input. You maintain a single `CONTEXT.md` file with your project's key decisions, and the hook ensures Claude always has it.
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "command": "if [ -f \"$CLAUDE_PROJECT_DIR/.claude/CONTEXT.md\" ]; then echo \"Project context: $(cat $CLAUDE_PROJECT_DIR/.claude/CONTEXT.md)\" >&2; fi"
+      }
+    ]
+  }
+}
+```
+
+Keep your `CONTEXT.md` concise -- architecture decisions, naming conventions, key dependencies, and current priorities. Claude reads it on every tool call, so shorter is better.
+
+### 9. Test runner on code changes
+
+Claude writes code that looks correct but breaks existing tests. You don't find out until you manually run the test suite, by which point Claude has moved on to the next task.
+
+This `PostToolUse` hook runs relevant tests whenever Claude modifies a source file. It detects the corresponding test file by convention (`foo.ts` -> `foo.test.ts`) and runs just that file's tests, keeping feedback fast and targeted.
+
+```json
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "command": "FILE=$(cat | jq -r '.tool_input.file_path // empty'); if [ -n \"$FILE\" ] && echo \"$FILE\" | grep -qE '\\.(ts|js|py)$' && ! echo \"$FILE\" | grep -qE '\\.(test|spec)\\.'; then TEST=$(echo \"$FILE\" | sed 's/\\.(ts|js|py)$/.test.\\1/'); if [ -f \"$TEST\" ]; then npx jest \"$TEST\" --no-coverage 2>&1 | tail -5; fi; fi"
+      }
+    ]
+  }
+}
+```
+
+The `tail -5` at the end keeps the output short. Claude sees the pass/fail summary without getting flooded by verbose test output. If tests fail, it can read the full output by running the test command itself.
+
+### 10. Slack/Discord notification on task completion
+
+Desktop notifications work when you're at your computer, but what about when you step away? Or when you want your whole team to see that a task finished?
+
+This hook sends a message to a Slack or Discord webhook whenever Claude Code completes a task. It uses the `Stop` event so it only fires once per response, not on every tool call.
+
+```json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "command": "curl -s -X POST -H 'Content-type: application/json' --data '{\"text\":\"Claude Code task completed in '\"$CLAUDE_PROJECT_DIR\"'\"}' $SLACK_WEBHOOK_URL"
+      }
+    ]
+  }
+}
+```
+
+Set `SLACK_WEBHOOK_URL` in your shell environment (not in the hook config, to keep the webhook URL out of version control). For Discord, swap the payload format to match Discord's webhook API -- the structure is nearly identical.
+
+<DuetCTA />
+
+## How to Debug Failing Hooks
+
+Hooks fail silently by default. Claude Code won't throw an error if your hook never runs -- it just moves on. Here's how to track down what's going wrong.
+
+**Hook not firing at all.** Open the `/hooks` menu in Claude Code and verify three things: the event type matches what you expect, the matcher string is case-sensitive (a matcher for `"Bash"` won't catch `"bash"`), and the hook is actually enabled. Most "broken" hooks are just misconfigured matchers.
+
+**Hook fires but errors appear in the transcript.** Isolate the problem by running the hook manually. Pipe sample JSON into your script and check the exit code:
+
+```bash
+echo '{"tool_name":"Bash","tool_input":{"command":"ls"}}' | ./your-hook.sh && echo $?
+```
+
+If this works in your terminal but fails in Claude Code, your shell profile is likely the culprit. `.bashrc` or `.zshrc` might print welcome messages or run commands that corrupt the JSON stream. Guard any output with `[[ $- == *i* ]]` so it only runs in interactive shells.
+
+**Need the full picture?** Run `claude --debug-file /tmp/claude.log` to capture detailed execution traces, including hook invocations and their exit codes. The `/hooks` browser also gives you a read-only view of all registered hooks and their current state.
+
+## Hooks Best Practices
+
+A few principles that'll save you from debugging hooks at 2am.
+
+**Keep hooks fast.** Default timeout is 600s but hooks block execution. Aim for under 1 second. If you need to do something slow -- posting to Slack, running a linter on a large codebase -- fire it async. Background the process, write to a log, and move on.
+
+**Exit code 2 is your friend.** It's the only code that blocks. Exit 1 is a non-blocking error -- this trips people up. Unless you're building a security gate (like blocking destructive commands), default to exit code 0.
+
+**Fail open, not closed.** If your hook script errors, Claude continues. Design for this. A hook that returns exit code 2 on an unexpected error will block all matched tool calls until you figure out what broke. Reserve exit code 2 for intentional blocks.
+
+**Use jq for input parsing.** Every hook receives JSON on stdin. `jq -r '.tool_input.file_path'` is the standard pattern. Don't try to parse JSON with grep or sed.
+
+**One hook, one job.** It's tempting to build a mega-hook that lints, logs, and notifies. Don't. Separate hooks are easier to debug, easier to disable, and easier to share with your team. Compose behavior by stacking multiple hooks on the same event.
+
+**Test outside Claude Code first.** Pipe realistic JSON through your hook script before registering it. Edge cases like tool inputs with special characters, newlines in commands, or missing fields will surface immediately.
+
+## How to Share Hooks Across a Team
+
+Hooks become powerful when the whole team runs them. The key is `.claude/settings.json` -- it's project-scoped, lives in your repo, and applies to everyone who clones it.
+
+Commit your hook scripts to `.claude/hooks/` and reference them with relative paths in the settings file. When a new developer pulls the repo, they get every guardrail automatically. No setup docs, no onboarding checklist, no "oh you need to install the pre-commit hook."
+
+For hooks that are personal preference -- desktop notifications, custom formatters -- use `~/.claude/settings.json` instead. That's user-scoped and won't pollute the team config. `.claude/settings.local.json` is gitignored by default for exactly this purpose.
+
+For enterprise teams, managed policy settings allow org-wide enforcement. You can also package hooks as a reusable plugin with `hooks/hooks.json`. And use `$CLAUDE_PROJECT_DIR` in your scripts for portable paths that work regardless of where the repo is cloned.
+
+## Epilogue
+
+Hooks turn Claude Code from a chat-with-an-AI experience into something closer to a real development environment -- one with guardrails, automation, and team-wide consistency.
+
+Start small. Pick one or two hooks from this list that solve a real friction point in your workflow. The destructive command blocker and auto-formatter are the easiest wins. Once those are running, layer in logging, notifications, or context injection as you find new pain points.
+
+The full hook system is more capable than what we've covered here. Custom matchers, chained scripts, and enterprise policy enforcement open up workflows we haven't even touched. But the 10 hooks above will handle 90% of what most teams need.
+
+Grab the configs, drop them in your `.claude/settings.json`, and ship.
+
+## Frequently Asked Questions
+
+<Accordion>
+  <AccordionItem title="What are Claude Code hooks and how do they work?">
+    Hooks are shell commands that run automatically at specific points in Claude Code's workflow.
+    You define them in your settings file with an event type (like PreToolUse or PostToolUse), an
+    optional matcher to target specific tools, and the command to execute. When Claude Code hits a
+    matching event, it pipes context as JSON to your script's stdin and uses the exit code to decide
+    what happens next -- 0 to proceed, 2 to block, 1 to warn but continue.
+  </AccordionItem>
+  <AccordionItem title="What are the best Claude Code hooks to use?">
+    It depends on your workflow, but the 10 hooks covered in this guide are a strong starting point.
+    The most universally useful are the destructive command blocker (saves you from accidental rm
+    -rf), auto-formatting on file write, and desktop notifications for long-running tasks. Start
+    with one or two, then layer in more as you find friction points.
+  </AccordionItem>
+  <AccordionItem title="How to add a notification hook in Claude Code?">
+    Add a Notification hook in your .claude/settings.json with no matcher (so it fires on
+    everything), and point it at a script that calls notify-send on Linux or osascript on Mac. The
+    full recipe with cross-platform detection is in hook #1 above.
+  </AccordionItem>
+  <AccordionItem title="Why isn't my Claude Code hook firing?">
+    Check three things: the matcher is case-sensitive ("Bash" won't match "bash"), the event type is
+    correct (PreToolUse vs PostToolUse), and the hook is registered in the right settings file. Open
+    /hooks in Claude Code for a read-only view of all registered hooks.
+  </AccordionItem>
+  <AccordionItem title="Can Claude Code hooks block dangerous commands?">
+    Yes. If your hook script exits with code 2, Claude Code will stop the matched tool call
+    entirely. This is how the destructive command blocker and sensitive file protector work. Exit
+    code 0 means proceed, exit code 1 logs a warning but doesn't block.
+  </AccordionItem>
+  <AccordionItem title="Do hooks slow down Claude Code?">
+    They can if you're not careful. Hooks run synchronously, so a slow script adds latency to every
+    matched tool call. Keep hooks under one second. If you need to do something expensive like
+    posting to an API, background the process and exit immediately.
+  </AccordionItem>
+  <AccordionItem title="How to share hooks with my team?">
+    Commit your hook scripts to .claude/hooks/ in your repo and define them in
+    .claude/settings.json, which is project-scoped. Every developer who clones the repo gets the
+    same hooks automatically. Personal-preference hooks go in ~/.claude/settings.json so they don't
+    affect the team.
+  </AccordionItem>
+</Accordion>

@@ -1,0 +1,6 @@
+9c5e904d11e3d0e0d1cfc65d356f058e27a4735773fdd7a3a32045dd9d2ccdd5  /home/synthetic-user/.duet/vm-token
+6d3b4ace9512442b262f8aac6f34e448970986418028c242e721ed4e9e487c81  /home/synthetic-user/.duet/chrome/Default/Cookies
+b936c070f785bb80c60becf1b3b21148dd997068923fddf9343598a4065696f0  /home/synthetic-user/.duet/connected-providers/fixture/credential
+0deffb78b19605ce571455e686d4695ac02111d7e235072b360d89cbb264a0d1  /home/synthetic-user/.local/state/syncthing/identity
+a313e6c9e1ced45f2d340e9152563c8cb1b8b4b60c90ce5c48aa5ddd0aec23e6  /home/synthetic-user/drive/unchanged.txt
+MainPID=328

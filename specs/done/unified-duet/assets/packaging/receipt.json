@@ -1,0 +1,134 @@
+{
+  "sourceCommit": "cad4c4ee7ab6ad822e11e9f64bf296cc2acd05b4",
+  "build": {
+    "reference": "benchmarks/swebench/src/packaging.ts prepareDuetArtifact (unmodified), plus existing Photon WASM sidecar",
+    "runtime": "Bun1.3.14 Linux x64 baseline",
+    "platform": "linux/amd64",
+    "baseImageDigest": "sha256:e10577f0db68676a7024391c6e5cb4b879ebd17188ab750cf10024a6d700e5c4",
+    "sourceInputs": "Clean frozen Git archive; original lock and Pi patch; --frozen-lockfile --ignore-scripts --os linux --cpu x64",
+    "replication": "Reference build and source/candidate proof passed; current reproducer preserves missing/corrupt Photon controls and TUI transcript assertions. Its exact new failure-loop was executed against immutable final payload; whole-runtime proof was retained rather than rerun.",
+    "determinism": {
+      "observed": "Two frozen builds produce different binary hashes because Bun embeds random scratch directory in Photon __dirname. First differing offset101633307. AllPGlite sidecars identical. No binary reproducibility claimed.",
+      "replicatedBinarySha256": "56af6681f60a1bca3591dbd413fdba1ff646325ae8e2175ecc07157142ace6d8",
+      "releaseImplication": "Image/API must consume same immutable built inventory; use stable staging path in production constructor to avoid random build-path identity churn."
+    }
+  },
+  "payload": {
+    "artifacts": [
+      {
+        "name": "duet-linux-x64",
+        "sha256": "08ccfbbc3c0a5616ca5aa6b43dd2f0d9e5baae4bce681718dadfd2fcf4140af3",
+        "byteLength": 116000896
+      },
+      {
+        "name": "initdb.wasm",
+        "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+        "byteLength": 169969
+      },
+      {
+        "name": "pglite.data",
+        "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+        "byteLength": 5289109
+      },
+      {
+        "name": "pglite.wasm",
+        "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+        "byteLength": 8739902
+      },
+      {
+        "name": "vector.tar.gz",
+        "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+        "byteLength": 46108
+      },
+      {
+        "name": "photon_rs_bg.wasm",
+        "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+        "byteLength": 1881634
+      }
+    ],
+    "uncompressedBytes": 132127618,
+    "initialFiveFileArchive": {
+      "byteLength": 44460027,
+      "sha256": "6ec26ea403202354db1cfe2eec287ff287af13f254b4ed07fa79e30ceebc6a87"
+    },
+    "archiveScope": "Initial five-file reference archive; final release inventory includes required Photon sidecar."
+  },
+  "nativeClosure": {
+    "embedded": "OpenTUI Linux x64 library initialized via real PTY without checkout/node_modules",
+    "osPrerequisites": [
+      "glibc loader",
+      "libc.so.6",
+      "libpthread.so.0",
+      "libdl.so.2",
+      "libm.so.6",
+      "ripgrep14.1.1 for bash rg (existing VM OS dependency)"
+    ],
+    "pgliteSidecars": "All4 individually removed and corrupted; every memory open returned nonzero and runtime-specific diagnostics",
+    "photon": "Missing sidecar causes actual read tool to omit oversized image. Adjacent existing SDK WASM restores matching2000x2 resized image with no patch. Corrupted adjacent WASM also omits the image and fails the same assertion."
+  },
+  "runtime": {
+    "network": "Docker --network none; controlled loopback model/embedding server only",
+    "candidateMounts": [
+      "Compiled executable +5sidecars",
+      "stdlib-only probe",
+      "evidence output"
+    ],
+    "homes": "Fresh /tmp scratch removed in finally",
+    "rpc": "Both prompts accepted before single completed chain terminal; actual image read/resize and bash\u2192rg successful tool result; four controlled actor requests",
+    "memory": "CLI DB note write; separate-process reopen; keyword-free query uses3072dim pgvector semantic retrieval",
+    "tui": "Matched120x40PTY source/candidate transcripts require DUET AGENT/todos/relays/context and no initialization errors. Blank/hung process and synthetic loader failure both rejected by preserved gate.",
+    "measurements": {
+      "version": {
+        "elapsedMs": 504,
+        "sampledPeakRssKiB": 117280
+      },
+      "help": {
+        "elapsedMs": 1361,
+        "sampledPeakRssKiB": 226060
+      },
+      "skills": {
+        "elapsedMs": 1345,
+        "sampledPeakRssKiB": 223344
+      },
+      "provider": {
+        "elapsedMs": 1272,
+        "sampledPeakRssKiB": 224396
+      }
+    }
+  },
+  "parity": {
+    "equalContracts": [
+      "version",
+      "help",
+      "skills",
+      "provider",
+      "rpc",
+      "complete model/embedding request bodies",
+      "memory content"
+    ],
+    "normalizations": [
+      "scratch directory",
+      "elapsed time",
+      "sampled RSS"
+    ],
+    "memoryMetadata": "Generated IDs/timestamps/ranking are not compared; content and actual vector retrieval are asserted."
+  },
+  "redGreen": {
+    "pglite": "Binary-only payload fails actual memory add on absent $bunfs pglite.data/vector archive; complete payload green",
+    "photon": "Unmodified five-file reference red: read tool says image omitted and lacks expected2000x2 result. Existing Photon sidecar restores source parity. Replacing that WASM with invalid bytes earns red on the same omitted-image contract; valid bytes remain untouched in the green payload."
+  },
+  "review": {
+    "shape": "Focused frozen-reference reproduction and consumer probes; no new production packaging framework",
+    "diff": "Assertions target exact tool results, complete transports, recovery diagnostics. No real keys or host state touched. Independent integration review found missing durable Photon controls and timeout-only TUI gate; both corrected and falsified.",
+    "docs": "Linux proof distinguished from separately owned deployed delivery proof",
+    "codex": "Independent review could not execute: account rejected configured gpt-6.1-sol and attempted gpt-5.4 asunsupported. No completed Codex review claimed."
+  },
+  "limitations": [
+    "Not a live target VM/image proof; slice07/08 own those",
+    "No live billed evals",
+    "Transport proof separately owned by assets/delivery",
+    "TUI evidence is initialization transcript, not screenshot visual acceptance",
+    "20ms sampled RSS is an observation, not an OS peak/performance gate",
+    "CLIversion reflects unchanged frozen source0.3.36; public1.0.0 belongs subsequent slices"
+  ]
+}

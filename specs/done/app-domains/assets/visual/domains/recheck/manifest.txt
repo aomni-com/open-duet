@@ -1,0 +1,6 @@
+desktop-active.png
+desktop-failed.png
+desktop-closed-manager.png
+mobile-active.png
+mobile-failed.png
+mobile-closed-manager.png

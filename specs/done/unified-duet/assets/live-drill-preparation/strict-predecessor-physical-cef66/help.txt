@@ -1,0 +1,116 @@
+
+duet — Local agents, workspaces and file sync (disposable predecessor)
+
+USAGE
+  duet [options] [prompt]
+  duet login [--no-browser] [--client-name <name>] [--json]
+  duet whoami [--json]
+  duet workspace create|ls|status|use ... [--json]
+  duet ls|cat|rm|mkdir <workspace:/path> [--json]
+  duet push <local> <workspace:/path> [--json]
+  duet pull <workspace:/path> <local> [--json]
+  duet history <workspace:/path> [--json]
+  duet seen-by <workspace:/path> [--json]
+  duet memory add|recall ... --workspace <slug> [--json]
+  duet train --workspace <slug> --url <url> [--file <path>] [--json]
+  duet agent run|answer|interrupt ... [--workspace <slug>] [--json]
+  duet import <claude-code|codex|openclaw> [--dry-run] [--workspace <slug>] [--json]
+  duet billing usage [workspace] [--period daily|weekly|monthly] [--json]
+  duet sync install|uninstall|status [--json]
+  duet sync run <workspace> [dir] [--once] [--json]
+  duet connect [--status [--json] | --disconnect <provider>]
+  duet env [--env-file <path>] [--import [path]|--keys]
+  duet skills [--workdir <path>]
+  duet memory [--db <path>] [--json] [filters]
+  duet model -m <model> [--type text|image|video] [prompt]
+  duet send-feedback [--file <path>] [text...]
+  duet upgrade [--manager npm|bun|pnpm|yarn]
+  echo "prompt" | duet
+
+COMMANDS
+  login                    Sign in once for agents, workspace operations and Mac sync
+  connect                  Show or remove connected ChatGPT and GitHub Copilot subscriptions
+  env                      Import/paste keys; saves Duet login to config and other providers to env
+  skills                   List installed skills + collisions as JSON
+  memory                   Browse memories in a TUI, or query them with --json/filters (alias: memories)
+  model                    Call a gateway model directly (text/image/video) via the AI SDK
+  route                    Probe the live virtual-model classifier (duet route "<prompt>")
+  config export            Write the built-in routing table to .duet/models.json for tweaking
+  send-feedback            Send free-form markdown feedback to the Duet team
+  upgrade                  Upgrade the global @duetso/agent installation
+
+CONFIGURATION
+  ~/.duet/config.json owns the saved apiKey, apiUrl, defaultWorkspace and machineId.
+  duet workspace use <slug> selects the default remote/model billing workspace.
+  memory and train stay local unless --workspace explicitly selects REST mode.
+  Bare prompts run locally; duet agent operates remote sessions.
+  --workspace <slug> overrides the target; conflicting address/flag targets fail.
+  --api-url <url> or DUET_API_URL overrides the saved API origin.
+  DUET_API_KEY and DUET_WORKSPACE remain explicit process inputs.
+
+OPTIONS
+  -m, --model <name>       Virtual tier (frontier|balanced) or concrete model pin
+  --memory-model <name>    Observational memory model (default inferred from provider env)
+  --provider <name>        Pin the provider and use its catalog default model.
+                            Accepts: duet, vercel, openrouter.
+                            Mutually exclusive with --model / --memory-model.
+  -i, --incognito          Keep memory in-process; do not read or write durable memory
+  --db <path>              Memory database path (default: ~/.duet/memory.db); ignored under --incognito
+  -w, --workdir <path>     Working directory (default: cwd)
+  -r, --resume <id>        Resume a saved session
+  --resume-history-messages <n>
+                            Replay the last n user-turn exchanges from the prior session in the TUI (default: 5)
+  --system-prompt <text>   Additional system instructions for the runner
+  --system-prompt-file <path>
+                            Load a file into the system prompt; repeatable
+  --no-system-prompt-files Disable default AGENTS.md system prompt loading
+  --env-file <path>        Shared env file to load after <workdir>/.env (default: ~/.duet/.env)
+  --no-auto-upgrade         Skip the auto-upgrade probe for this run (also: DUET_NO_AUTO_UPGRADE=1)
+  --rpc                     Bare turn-runner control surface. Reads newline-delimited RpcRunnerCommand
+                            JSON from stdin and writes RpcEvent JSON to stdout. Prompt, answer, and wake
+                            commands require requestId and emit command_accepted after runner delivery.
+                            The first command must be "start"; the process exits after the single turn
+                            reaches its terminal event. Bypasses session persistence entirely.
+  --session <id>            (--rpc only) Attribute memory written during the process to this caller-owned
+                            session id. One RPC process is one logical session; omit to write with no id.
+  -v, --version            Print the installed duet version and exit
+  -h, --help               Show this help
+
+INTERACTIVE
+  In a TTY, duet keeps one local session open after terminal events.
+  Type /exit or /quit to end the conversation. Type @ followed by a
+  filename to insert a repo-relative path into the prompt.
+
+MODELS
+  The default is the routed frontier tier. Use frontier or balanced
+  to select a routing policy, or a concrete shorthand to bypass routing and pin.
+  Concrete names include opus, sonnet, haiku, and sol (versionless families), or versioned forms like opus-5.5.
+  They map to the first configured router that supports that model.
+  Full provider:modelId syntax is also supported, e.g. duet:anthropic/claude-opus-5.5.
+  --provider pins that provider's concrete default; the memory model remains concrete.
+
+  duet-gateway: routes through the Duet gateway proxy
+  (https://service.example.invalid by default; override via DUET_GATEWAY_BASE_URL).
+  It mirrors vercel-ai-gateway's model catalog and authenticates with
+  DUET_API_KEY.
+
+EXAMPLES
+  duet "build a REST API with Express and TypeScript"
+  duet -m sol "analyze the performance of our test suite"
+  duet --memory-model sonnet-5 "summarize this repo"
+  duet --provider openrouter "explain this codebase"
+  duet --provider duet "refactor the auth module"
+  duet -m opus-5.5 "refactor the auth module"
+  duet --system-prompt "Prefer concise answers." "review this repo"
+  duet --system-prompt-file TEAM.md "review this repo"
+  duet --env-file ~/.config/duet/env "review this repo"
+  duet --workdir ./my-project "refactor the auth module"
+  duet --resume session_abc123 --workdir ./my-project
+  duet login
+  duet env
+  duet memory
+  duet model -m openai/gpt-6.1-sol "write a haiku about gateways"
+  duet model -m black-forest-labs/flux-1.1-pro -o art.png "a fox in snow"
+  duet train ./docs/my-project
+  duet send-feedback "the TUI flickers when..."
+  duet upgrade

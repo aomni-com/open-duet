@@ -1,0 +1,6 @@
+{
+  "environment": "production",
+  "censusCutoffIso": "2026-10-04T22:13:46.862299+00:00",
+  "censusCutoffMs": 1791152026862,
+  "note": "Conservative cutoff before pre-fence census and flag-write; actual fence acknowledgement recorded separately"
+}

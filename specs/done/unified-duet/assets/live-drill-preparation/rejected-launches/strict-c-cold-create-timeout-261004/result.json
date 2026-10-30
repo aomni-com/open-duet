@@ -1,0 +1,13 @@
+{
+  "status": "failed",
+  "provenance": {
+    "fixtureId": "staging-e2e-synthetic",
+    "vmName": "duet-test-staging-e2e-synthetic",
+    "execution": "provider-vm",
+    "controlPlane": "controlled-loopback"
+  },
+  "error": "exe.dev command failed: new --name duet-test-staging-e2e-synthetic --image ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869 --pool pool-duet --cpu 2 --memory 4GB --comment duet-test --tag duet-test --tag duet-ephemeral --tag duet-fixture-staging --tag duet-run-staging-e2e-synthetic --env [REDACTED] --env [REDACTED] --env [REDACTED] --env [REDACTED] --no-email (exit 255)\n",
+  "cleanup": {
+    "verifiedAbsent": true
+  }
+}

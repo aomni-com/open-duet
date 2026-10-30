@@ -1,0 +1,106 @@
+{
+  "identity": {
+    "duetHead": "ab8b7f07582840d37b5c97c4ae0f62afdddf2e9a",
+    "agentSource": "0cd51fb9130ff6a9d095b8dc6e70288bfcce7c40",
+    "agentVersion": "0.3.30",
+    "agentPackageFile": "/Users/synthetic-user/dev/duet/node_modules/@duetso/agent/package.json",
+    "allPackageFilesMatchTarball": 677,
+    "hashes": {
+      "package.json": "64ea293e728ada8339dcb997817e4acddfa706102cee2c829aa9fbe90a584cdb",
+      "bun.lock": "fe9bc5eee64228ed41abfc7d056ba160585f96436c2ca3be1da8a5f75d03edb6",
+      "packages/backend/src/agent-sessions.test.ts": "515933312ced011c2fa18081067447048a3c5e252ac40093b4aa690ff056ebf1"
+    },
+    "purpose": "Serial continuation of unfinished backend coverage; original diagnostics identities retained in diagnostics.json"
+  },
+  "ledger": [
+    {
+      "event": "run_started",
+      "identitySha256": "05d282b18ccbb47a81aa64a7477b7fdbcafc7dc42df87f18fc3e0790b1064a84",
+      "files": 35,
+      "time": "2026-09-29T03:08:16.535525+00:00"
+    },
+    {
+      "event": "file_started",
+      "file": "src/action-retrier.test.ts",
+      "command": [
+        "bun",
+        "test",
+        "src/action-retrier.test.ts",
+        "--parallel=1",
+        "--timeout",
+        "60000"
+      ],
+      "cwd": "/Users/synthetic-user/dev/duet/packages/backend",
+      "log": "/private/tmp/workflow-candidate-root/backend-01-action-retrier.test.log",
+      "freeBytes": 19141943296,
+      "time": "2026-09-29T03:08:16.536497+00:00"
+    },
+    {
+      "event": "file_finished",
+      "file": "src/action-retrier.test.ts",
+      "exitCode": 0,
+      "reason": "completed",
+      "freeBytes": 19020177408,
+      "time": "2026-09-29T03:09:22.318398+00:00"
+    },
+    {
+      "event": "file_started",
+      "file": "src/agent-sessions.test.ts",
+      "command": [
+        "bun",
+        "test",
+        "src/agent-sessions.test.ts",
+        "--parallel=1",
+        "--timeout",
+        "60000"
+      ],
+      "cwd": "/Users/synthetic-user/dev/duet/packages/backend",
+      "log": "/private/tmp/workflow-candidate-root/backend-02-agent-sessions.test.log",
+      "freeBytes": 19020177408,
+      "time": "2026-09-29T03:09:22.319045+00:00"
+    },
+    {
+      "event": "file_finished",
+      "file": "src/agent-sessions.test.ts",
+      "exitCode": -15,
+      "reason": "signal",
+      "freeBytes": 18840989696,
+      "time": "2026-09-29T03:14:37.596121+00:00"
+    },
+    {
+      "event": "run_stopped",
+      "reason": "signal",
+      "file": "src/agent-sessions.test.ts",
+      "time": "2026-09-29T03:14:37.597003+00:00"
+    }
+  ],
+  "disposition": "Parent stopped the owned runner when session test failures appeared; no automatic retries.",
+  "actionRetrier": {
+    "passes": 3,
+    "failures": 0,
+    "assertions": 9,
+    "elapsedSeconds": 65.71
+  },
+  "agentSessionsPartial": {
+    "passes": 45,
+    "failures": 2,
+    "failuresObserved": [
+      "prepare flushes queued notes with the triggering message and mark is monotonic",
+      "long undelivered note tails do not hide an older image or the pending prompt"
+    ],
+    "failureClass": "Convex function execution exceeded maximum duration 1s",
+    "log": "/tmp/workflow-candidate-root/backend-02-agent-sessions.test.log"
+  },
+  "modelGateway": {
+    "command": "bun run test",
+    "exitCode": 1,
+    "passes": 94,
+    "failures": 2,
+    "assertions": 461,
+    "elapsedSeconds": 155.59,
+    "failureClass": "Convex function execution exceeded maximum duration 1s",
+    "log": "/tmp/workflow-candidate-root/model-gateway.log"
+  },
+  "limits": "At this host checkpoint backend and model-gateway were unqualified and API had not run. Subsequent Linux model-gateway/API results are recorded in duet-linux-check.json; original assertions and deadlines remain unchanged.",
+  "restoration": "Root original package.json, bun.lock, bunfig.toml and generated routing restored; published 0.3.29 reinstalled. This temporary restoration was subsequently superseded by the real published 0.3.30 pin; see published-package.json."
+}

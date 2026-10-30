@@ -1,0 +1,49 @@
+export const metadata = {
+  title: 'Overview',
+  description:
+    'The API for building agents you own — their memory, skill files, and apps — and sharing or selling them.',
+  alternates: { canonical: '/' },
+}
+
+<p className="eyebrow">Duet API</p>
+
+# Build agents you own
+
+Duet is a platform for building agents you own, and this API is how they get built. An agent is a
+folder of plain files you control — the instructions that define it, the memory it accumulates, the
+skill files that teach it your methods, the apps it builds and hosts — and every endpoint here
+operates on that material: agent sessions, files, applications, memory, integrations, sharing,
+publishing, and usage, all inside a workspace-scoped boundary. These docs separate protocol facts
+from the reasoning that helps you combine them safely.
+
+## You own what you build
+
+Nothing an agent is hides in a proprietary format. Its prompt is a file, its skills are files, its
+memory is files, and the apps it ships are folders you can read — which is why an agent can be
+shared with a team like a folder, listed and sold as a product, or exported wholesale. The API
+never holds your material hostage, and anything a signed-in user can do on the platform, a
+credentialed integration or the agent itself can do: agents start sessions, create agents, and
+operate every surface these pages document.
+
+## Start with authority
+
+One human key identifies the person. Current workspace membership and role determine access;
+choose the workspace for each operation without signing in again. Device authorization approves
+the person, while app and OAuth credentials retain their explicit delegated boundaries.
+
+1. Read [API keys and scopes](/api-keys) before storing a credential.
+2. Follow [Getting started](/getting-started) to shape your first request.
+3. Use the resource guides for workflow and the [endpoint reference](/reference) for exact wire
+   facts.
+
+## Two sources, one contract
+
+The endpoint panels on this site render from `packages/contract`. That package owns method, path,
+scope, and Zod wire schemas. The surrounding MDX owns tradeoffs, sequencing, and examples. If a
+route is implemented but not in the public registry, these docs intentionally do not promise it.
+
+## Design for interruption
+
+Network calls fail, long work streams reconnect, and users revoke credentials. Treat cursors and
+event positions as opaque, retry only when the operation declares safe retry semantics, and surface
+authorization failures instead of silently widening scopes.

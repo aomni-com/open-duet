@@ -1,0 +1,14 @@
+The tightening appears correct under the stated deployment prerequisites, including migration precedence and idempotence, but two existing provisioning tests retain a rejected argument. All four focused in-memory tests passed; no deployments, live resources, migrations, or full tests were run.
+
+Review comment:
+
+- [P2] Update provisioning fixtures to omit activityGeneration — /Users/synthetic-user/.codex/worktrees/unified-birth-fence/duet/packages/backend/convex/domains/workspaces/vmSync.ts:96-97
+  Removing this argument breaks two existing provisioning tests: `syncObservation` in `packages/backend/src/provisioning.test.ts:1689–1702` still adds `activityGeneration` when called with `true`, as happens at lines 1005 and 1376. The strict validator rejects those observations before either test reaches its decommission assertions; an in-memory probe confirms `Unexpected field activityGeneration`. Remove the obsolete helper parameter and update its callers rather than retaining the argument bridge.
+The tightening appears correct under the stated deployment prerequisites, including migration precedence and idempotence, but two existing provisioning tests retain a rejected argument. All four focused in-memory tests passed; no deployments, live resources, migrations, or full tests were run.
+
+Review comment:
+
+- [P2] Update provisioning fixtures to omit activityGeneration — /Users/synthetic-user/.codex/worktrees/unified-birth-fence/duet/packages/backend/convex/domains/workspaces/vmSync.ts:96-97
+  Removing this argument breaks two existing provisioning tests: `syncObservation` in `packages/backend/src/provisioning.test.ts:1689–1702` still adds `activityGeneration` when called with `true`, as happens at lines 1005 and 1376. The strict validator rejects those observations before either test reaches its decommission assertions; an in-memory probe confirms `Unexpected field activityGeneration`. Remove the obsolete helper parameter and update its callers rather than retaining the argument bridge.
+
+Resolution: obsolete helper parameter/callers removed; both named local integration tests passed. Production/schema/migration findings were clean.

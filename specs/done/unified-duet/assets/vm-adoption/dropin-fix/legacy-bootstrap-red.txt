@@ -1,0 +1,3 @@
+{"operation":"gateway_release_bootstrap","status":"healthy","version":"0.0.0+01212abf6ba1"}
+{"operation":"gateway_release_bootstrap","status":"adopted","version":"0.0.0+01212abf6ba1"}
+{"operation":"gateway_release_bootstrap","status":"healthy","version":"0.0.0+01212abf6ba1"}

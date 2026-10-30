@@ -1,0 +1,9 @@
+{
+  "status": "failed",
+  "actualDiagnostic": "CLI stderr reports invalid_union: no matching type discriminator in the agent-turn-only grammar after valid session creation",
+  "sourceCounterexample": "The API streams session_created, prompt_submitted and compact stored turn markers from its shared full timeline grammar; remote CLI was parsing only the native turn grammar",
+  "fixOwner": "packages/duet/src/agent.ts must consume the existing shared AgentSessionTimelineEventReadSchema",
+  "cleanup": "all recorded resources deleted; no orphans",
+  "runtimeImageArtifactConsequence": "After the client fix, deploy and inspect the newly built complete runtime, build the new image from actual served bytes, and bind strict physical and journey receipts to that actual target",
+  "production": "unchanged"
+}

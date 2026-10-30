@@ -1,0 +1,23 @@
+{
+  "controllerSha256": "8b6a1d2cbe655e8aa907e5124efb2ab5caa6d38c18a49bb6d41d6f152e20ed0d",
+  "transportUser": "exedev",
+  "metadata": "0:0 600 /tmp/duet-runtime-adoption-e8dcf16b-5e33-4f24-9c46-78bd303cb8b6/result.json\n0:0 600 /tmp/duet-runtime-adoption-e8dcf16b-5e33-4f24-9c46-78bd303cb8b6/result.json.settled.json",
+  "readExitCode": 1,
+  "readStderr": "cat: /tmp/duet-runtime-adoption-e8dcf16b-5e33-4f24-9c46-78bd303cb8b6/result.json.settled.json: Permission denied",
+  "actualReceipt": {
+    "status": "complete",
+    "phase": "complete",
+    "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "restored": false,
+    "previousGatewayVersion": "0.0.0+01212abf6ba1",
+    "bootIdBefore": "5a3f2a10-7bc3-4ae9-98db-56282788ca59",
+    "bootIdAfter": "5a3f2a10-7bc3-4ae9-98db-56282788ca59"
+  },
+  "actualSettlement": {
+    "unit": "duet-runtime-adoption.service",
+    "runId": "ba9403da-902b-43ec-8ade-ef4d85e1a6ae",
+    "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "settled": true
+  },
+  "consequence": "controller reports transfer-or-observation-failed and retains transfer after successful migration"
+}

@@ -1,0 +1,588 @@
+{
+  "scenarioId": "populated-search",
+  "fixture": {
+    "packageVersion": "0.3.30",
+    "sha256": "b77b40a888f6fd5e581124d2f1bf6fa4e9c0e5b3a3d7cb37b10db183b93011a5"
+  },
+  "revision": 2,
+  "tier": "balanced",
+  "elapsedMs": 66686,
+  "probes": [
+    {
+      "category": "people",
+      "query": "engineers in Berlin",
+      "expectedIds": [
+        "person-ada"
+      ],
+      "nonce": "7c8d1d57-919e-47f4-91ba-3f7bec04dec3"
+    },
+    {
+      "category": "jobs",
+      "query": "remote engineering jobs",
+      "expectedIds": [
+        "job-platform"
+      ],
+      "nonce": "07b39c02-014a-4ab0-b03f-9e2015313158"
+    },
+    {
+      "category": "people",
+      "query": "user@example.invalid",
+      "expectedIds": [
+        "person-ada"
+      ],
+      "nonce": "80f10ffd-909e-47f5-815e-f19b44de8c8f"
+    },
+    {
+      "category": "people",
+      "query": "user@example.invalid",
+      "expectedIds": [
+        "person-bo"
+      ],
+      "nonce": "f0f7bd73-29ac-4975-af89-4b68ea6cccf7"
+    },
+    {
+      "category": "people",
+      "query": "Studio",
+      "expectedIds": [
+        "person-bo"
+      ],
+      "nonce": "f5055ad2-df3f-4216-988b-67c701690c0c"
+    },
+    {
+      "category": "jobs",
+      "query": "Studio",
+      "expectedIds": [
+        "job-designer"
+      ],
+      "nonce": "159a75ce-43c0-42fa-b9ad-227fa274814b"
+    },
+    {
+      "category": "jobs",
+      "query": "Orbit",
+      "expectedIds": [
+        "job-platform"
+      ],
+      "nonce": "5ddfe581-5dc4-4216-bdf9-d3b84ebe93b0"
+    },
+    {
+      "category": "people",
+      "query": "designers in Oslo",
+      "expectedIds": [
+        "person-bo"
+      ],
+      "nonce": "b3f692f7-6dbd-4986-9c05-bfeb792fd288"
+    },
+    {
+      "category": "jobs",
+      "query": "non-remote designer jobs in Oslo",
+      "expectedIds": [
+        "job-designer"
+      ],
+      "nonce": "b553906b-c3b2-45ac-98e5-314aa5ee6dd9"
+    },
+    {
+      "category": "people",
+      "query": "engineers in Oslo",
+      "expectedIds": [],
+      "nonce": "83cd3259-06ed-4d4f-94c7-e98ab963060a"
+    },
+    {
+      "category": "jobs",
+      "query": "designers in Berlin",
+      "expectedIds": [],
+      "nonce": "ceb0ba7c-134c-4b4e-94bd-6e63872d3f05"
+    },
+    {
+      "category": "jobs",
+      "query": "remote designer jobs",
+      "expectedIds": [],
+      "nonce": "66d771e9-1e1a-44ae-8cf9-0f6d0e4f1834"
+    },
+    {
+      "category": "jobs",
+      "query": "user@example.invalid",
+      "expectedIds": [],
+      "nonce": "b690076c-cfd0-4b85-b004-3b8f96c26d1d"
+    },
+    {
+      "category": "people",
+      "query": "remote engineering jobs",
+      "expectedIds": [],
+      "nonce": "3598003f-33dd-43b1-9fd9-600f1e6a04d5"
+    },
+    {
+      "category": "people",
+      "query": "volcanologists on Neptune",
+      "expectedIds": [],
+      "nonce": "629eac21-677c-41a8-8b45-45aa4efcf309"
+    },
+    {
+      "category": "jobs",
+      "query": "volcanologists on Neptune",
+      "expectedIds": [],
+      "nonce": "3f3f9658-6c23-4b39-95fa-1b1204bdab6f"
+    }
+  ],
+  "responses": [
+    {
+      "nonce": "7c8d1d57-919e-47f4-91ba-3f7bec04dec3",
+      "status": 200,
+      "body": {
+        "ids": [
+          "person-ada"
+        ],
+        "nonce": "7c8d1d57-919e-47f4-91ba-3f7bec04dec3"
+      }
+    },
+    {
+      "nonce": "07b39c02-014a-4ab0-b03f-9e2015313158",
+      "status": 200,
+      "body": {
+        "ids": [
+          "job-platform"
+        ],
+        "nonce": "07b39c02-014a-4ab0-b03f-9e2015313158"
+      }
+    },
+    {
+      "nonce": "80f10ffd-909e-47f5-815e-f19b44de8c8f",
+      "status": 200,
+      "body": {
+        "ids": [
+          "person-ada"
+        ],
+        "nonce": "80f10ffd-909e-47f5-815e-f19b44de8c8f"
+      }
+    },
+    {
+      "nonce": "f0f7bd73-29ac-4975-af89-4b68ea6cccf7",
+      "status": 200,
+      "body": {
+        "ids": [
+          "person-bo"
+        ],
+        "nonce": "f0f7bd73-29ac-4975-af89-4b68ea6cccf7"
+      }
+    },
+    {
+      "nonce": "f5055ad2-df3f-4216-988b-67c701690c0c",
+      "status": 200,
+      "body": {
+        "ids": [
+          "person-bo"
+        ],
+        "nonce": "f5055ad2-df3f-4216-988b-67c701690c0c"
+      }
+    },
+    {
+      "nonce": "159a75ce-43c0-42fa-b9ad-227fa274814b",
+      "status": 200,
+      "body": {
+        "ids": [
+          "job-designer"
+        ],
+        "nonce": "159a75ce-43c0-42fa-b9ad-227fa274814b"
+      }
+    },
+    {
+      "nonce": "5ddfe581-5dc4-4216-bdf9-d3b84ebe93b0",
+      "status": 200,
+      "body": {
+        "ids": [
+          "job-platform"
+        ],
+        "nonce": "5ddfe581-5dc4-4216-bdf9-d3b84ebe93b0"
+      }
+    },
+    {
+      "nonce": "b3f692f7-6dbd-4986-9c05-bfeb792fd288",
+      "status": 200,
+      "body": {
+        "ids": [
+          "person-bo"
+        ],
+        "nonce": "b3f692f7-6dbd-4986-9c05-bfeb792fd288"
+      }
+    },
+    {
+      "nonce": "b553906b-c3b2-45ac-98e5-314aa5ee6dd9",
+      "status": 200,
+      "body": {
+        "ids": [
+          "job-designer"
+        ],
+        "nonce": "b553906b-c3b2-45ac-98e5-314aa5ee6dd9"
+      }
+    },
+    {
+      "nonce": "83cd3259-06ed-4d4f-94c7-e98ab963060a",
+      "status": 200,
+      "body": {
+        "ids": [],
+        "nonce": "83cd3259-06ed-4d4f-94c7-e98ab963060a"
+      }
+    },
+    {
+      "nonce": "ceb0ba7c-134c-4b4e-94bd-6e63872d3f05",
+      "status": 200,
+      "body": {
+        "ids": [],
+        "nonce": "ceb0ba7c-134c-4b4e-94bd-6e63872d3f05"
+      }
+    },
+    {
+      "nonce": "66d771e9-1e1a-44ae-8cf9-0f6d0e4f1834",
+      "status": 200,
+      "body": {
+        "ids": [],
+        "nonce": "66d771e9-1e1a-44ae-8cf9-0f6d0e4f1834"
+      }
+    },
+    {
+      "nonce": "b690076c-cfd0-4b85-b004-3b8f96c26d1d",
+      "status": 200,
+      "body": {
+        "ids": [],
+        "nonce": "b690076c-cfd0-4b85-b004-3b8f96c26d1d"
+      }
+    },
+    {
+      "nonce": "3598003f-33dd-43b1-9fd9-600f1e6a04d5",
+      "status": 200,
+      "body": {
+        "ids": [],
+        "nonce": "3598003f-33dd-43b1-9fd9-600f1e6a04d5"
+      }
+    },
+    {
+      "nonce": "629eac21-677c-41a8-8b45-45aa4efcf309",
+      "status": 200,
+      "body": {
+        "ids": [],
+        "nonce": "629eac21-677c-41a8-8b45-45aa4efcf309"
+      }
+    },
+    {
+      "nonce": "3f3f9658-6c23-4b39-95fa-1b1204bdab6f",
+      "status": 200,
+      "body": {
+        "ids": [],
+        "nonce": "3f3f9658-6c23-4b39-95fa-1b1204bdab6f"
+      }
+    }
+  ],
+  "providerCalls": [
+    {
+      "category": "people",
+      "query": "user@example.invalid",
+      "nonce": "n1",
+      "status": 200,
+      "ids": [
+        "person-ada"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "Find platform engineers in Berlin",
+      "nonce": "n1",
+      "status": 200,
+      "ids": [
+        "person-ada"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "designers in Oslo",
+      "nonce": "n1",
+      "status": 200,
+      "ids": [
+        "person-bo"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "Orbit",
+      "nonce": "n1",
+      "status": 200,
+      "ids": [
+        "person-ada"
+      ]
+    },
+    {
+      "category": "jobs",
+      "query": "remote platform engineer jobs",
+      "nonce": "n1",
+      "status": 200,
+      "ids": [
+        "job-platform"
+      ]
+    },
+    {
+      "category": "jobs",
+      "query": "Studio",
+      "nonce": "n1",
+      "status": 200,
+      "ids": [
+        "job-designer"
+      ]
+    },
+    {
+      "category": "jobs",
+      "query": "non-remote designer in Oslo",
+      "nonce": "n1",
+      "status": 200,
+      "ids": [
+        "job-designer"
+      ]
+    },
+    {
+      "category": "jobs",
+      "query": "Studio berlin",
+      "nonce": "n1",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "people",
+      "query": "volcanologists",
+      "nonce": "n1",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "jobs",
+      "query": "zzz",
+      "nonce": "n1",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "people",
+      "query": "volcanologists on Neptune",
+      "nonce": "smoke",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "people",
+      "query": "engineers in Berlin",
+      "nonce": "7c8d1d57-919e-47f4-91ba-3f7bec04dec3",
+      "status": 200,
+      "ids": [
+        "person-ada"
+      ]
+    },
+    {
+      "category": "jobs",
+      "query": "remote engineering jobs",
+      "nonce": "07b39c02-014a-4ab0-b03f-9e2015313158",
+      "status": 200,
+      "ids": [
+        "job-platform"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "user@example.invalid",
+      "nonce": "80f10ffd-909e-47f5-815e-f19b44de8c8f",
+      "status": 200,
+      "ids": [
+        "person-ada"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "user@example.invalid",
+      "nonce": "f0f7bd73-29ac-4975-af89-4b68ea6cccf7",
+      "status": 200,
+      "ids": [
+        "person-bo"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "Studio",
+      "nonce": "f5055ad2-df3f-4216-988b-67c701690c0c",
+      "status": 200,
+      "ids": [
+        "person-bo"
+      ]
+    },
+    {
+      "category": "jobs",
+      "query": "Studio",
+      "nonce": "159a75ce-43c0-42fa-b9ad-227fa274814b",
+      "status": 200,
+      "ids": [
+        "job-designer"
+      ]
+    },
+    {
+      "category": "jobs",
+      "query": "Orbit",
+      "nonce": "5ddfe581-5dc4-4216-bdf9-d3b84ebe93b0",
+      "status": 200,
+      "ids": [
+        "job-platform"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "designers in Oslo",
+      "nonce": "b3f692f7-6dbd-4986-9c05-bfeb792fd288",
+      "status": 200,
+      "ids": [
+        "person-bo"
+      ]
+    },
+    {
+      "category": "jobs",
+      "query": "non-remote designer jobs in Oslo",
+      "nonce": "b553906b-c3b2-45ac-98e5-314aa5ee6dd9",
+      "status": 200,
+      "ids": [
+        "job-designer"
+      ]
+    },
+    {
+      "category": "people",
+      "query": "engineers in Oslo",
+      "nonce": "83cd3259-06ed-4d4f-94c7-e98ab963060a",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "jobs",
+      "query": "designers in Berlin",
+      "nonce": "ceb0ba7c-134c-4b4e-94bd-6e63872d3f05",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "jobs",
+      "query": "remote designer jobs",
+      "nonce": "66d771e9-1e1a-44ae-8cf9-0f6d0e4f1834",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "jobs",
+      "query": "user@example.invalid",
+      "nonce": "b690076c-cfd0-4b85-b004-3b8f96c26d1d",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "people",
+      "query": "remote engineering jobs",
+      "nonce": "3598003f-33dd-43b1-9fd9-600f1e6a04d5",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "people",
+      "query": "volcanologists on Neptune",
+      "nonce": "629eac21-677c-41a8-8b45-45aa4efcf309",
+      "status": 200,
+      "ids": []
+    },
+    {
+      "category": "jobs",
+      "query": "volcanologists on Neptune",
+      "nonce": "3f3f9658-6c23-4b39-95fa-1b1204bdab6f",
+      "status": 200,
+      "ids": []
+    }
+  ],
+  "search": {
+    "failures": []
+  },
+  "retries": {
+    "failures": []
+  },
+  "runId": "staging-e2e-synthetic",
+  "agentVersion": "0.3.30",
+  "gatewayVersion": "0.0.0+b7e7da3fc547",
+  "settledExecution": {
+    "model": "anthropic/claude-sonnet-5.5",
+    "status": "settled",
+    "tier": "balanced",
+    "upstreamMetadata": {
+      "cacheCreationInputTokens": 37434,
+      "provider": "claudeaws",
+      "usage": {
+        "cachedInputTokens": 0,
+        "outputTokens": 121,
+        "uncachedInputTokens": 37438
+      }
+    }
+  },
+  "advisorEnabledByTier": {
+    "frontier": false,
+    "balanced": false,
+    "economy": false,
+    "openai-frontier": false,
+    "openai-max": false,
+    "anthropic-frontier": false,
+    "anthropic-max": false
+  },
+  "toolNames": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "bash"
+  ],
+  "unchangedFiles": [
+    {
+      "path": "data.json",
+      "sha256": "d26181d39639bce8abd9b1784d639912cf9f8bbed70c2336be6d04691f9c70b6"
+    },
+    {
+      "path": "display.ts",
+      "sha256": "b79a1b2bf8c7e28b87b27c3fcfb47fa8cebc7c33bf188756db54ebfd05185a0c"
+    },
+    {
+      "path": "README.md",
+      "sha256": "b8995fb1734096fc9c7322213d29cd2399411e2a6df1e851dfcc954c5ab16d79"
+    },
+    {
+      "path": "server.ts",
+      "sha256": "f19a6538015006614aa18502e082967f8d40198c9605d375e97c63b1976b0b01"
+    }
+  ],
+  "cleanup": {
+    "status": "pass",
+    "orphans": [],
+    "resources": [
+      {
+        "kind": "user",
+        "status": "deleted"
+      },
+      {
+        "kind": "workspace",
+        "status": "deleted"
+      },
+      {
+        "kind": "mail-message",
+        "status": "deleted"
+      },
+      {
+        "kind": "agent",
+        "status": "deleted"
+      },
+      {
+        "kind": "app",
+        "status": "deleted"
+      },
+      {
+        "kind": "session",
+        "status": "deleted"
+      },
+      {
+        "kind": "app",
+        "status": "deleted"
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "failure": "gateway.test.ts read the completion stamp after observing only the active skill file",
+  "orderingProbe": {
+    "existingFilesystemBoundary": "rename of .skills-hash",
+    "skillVisibleBeforeStamp": true,
+    "stampBefore": "ENOENT",
+    "stampAfterMatches": true
+  },
+  "finalFalsification": {
+    "expectedRegressionObserved": true,
+    "productionMutation": "await held installation",
+    "exitCode": 1,
+    "outerKillRequired": false,
+    "testDeadlineMs": 1000,
+    "log": "/tmp/model-refresh-skills-detached-clean-red.log"
+  },
+  "verification": {
+    "gatewaySkillsTests": 4,
+    "installerTests": 17,
+    "assertions": 59,
+    "failed": 0,
+    "fileLint": "pass",
+    "review": "clean"
+  },
+  "productionChanged": false,
+  "testMargin": {
+    "oldMs": 100,
+    "newMs": 1000,
+    "reason": "sync has unrelated filesystem work; the held download still must not block it"
+  },
+  "cleanup": "both falsification worktrees removed; bounded final falsification exited naturally"
+}

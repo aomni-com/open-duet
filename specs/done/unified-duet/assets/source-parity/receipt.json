@@ -1,0 +1,109 @@
+{
+  "status": "Fresh committed-source frozen-lock constructor-built production-entrypoint parity passed",
+  "sourceCommit": "cad4c4ee7ab6ad822e11e9f64bf296cc2acd05b4",
+  "sourceGolden": {
+    "path": "../packaging/source-runtime.json.gz",
+    "sha256": "bb0d9df6badda9e5e6ae31d52abf78879d6d240a54e97f16fb1cfee366021bac"
+  },
+  "build": {
+    "constructor": "packages/agent/benchmarks/swebench/src/packaging.ts prepareDuetArtifact (actual production constructor)",
+    "entrypoint": "packages/duet/src/cli-entry.ts",
+    "runtime": "Bun 1.3.14 Linux x64 baseline",
+    "platform": "linux/amd64",
+    "rootLockSha256": "0a9741ee09e13d737a4e513d1a5a518970071e03cd30a7b12c6391a28e558a75",
+    "frozenInputCount": 775,
+    "frozenInputsSha256": "f07c3f4c645c9ec6ce27daaaafc5514229e9fdb4a10a98acc2e0c9ee70036275",
+    "constructorSha256": "71454572d7121469f7424d54c70c7feb307392d60ab564753ca53b782bfd0dc7",
+    "installation": "--frozen-lockfile --ignore-scripts --os linux --cpu x64 --filter @repo/agent --filter @duetso/agent; 566 packages",
+    "scratch": "Source and dependencies copied into internal container filesystem; Bun compilation on host VirtioFS bind produced rename ENOENT; internal constructor build succeeds",
+    "repoRevision": "335a2d33da36245179a2f12c92c06b6c9043e678",
+    "provenance": "Fresh payload built from committed trimmed source and current complete workspace manifest snapshot; all 775 recorded inputs still match working tree after proof. Supersedes prior post-build metadata/formatting qualifications; no assumption of executable byte equality."
+  },
+  "payload": {
+    "artifacts": [
+      {
+        "name": "duet-linux-x64",
+        "sha256": "793fe31345f58ca5b692d821a31d7290aaa5d1cccae96f2be61de6652a207a18",
+        "byteLength": 116095104
+      },
+      {
+        "name": "initdb.wasm",
+        "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+        "byteLength": 169969
+      },
+      {
+        "name": "pglite.data",
+        "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+        "byteLength": 5289109
+      },
+      {
+        "name": "pglite.wasm",
+        "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+        "byteLength": 8739902
+      },
+      {
+        "name": "photon_rs_bg.wasm",
+        "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+        "byteLength": 1881634
+      },
+      {
+        "name": "vector.tar.gz",
+        "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+        "byteLength": 46108
+      }
+    ],
+    "totalBytes": 132221826,
+    "sidecars": "All five sidecar hashes identical to frozen-source complete Linux payload; binary bytes differ for expected layout/package/version/build-path reasons"
+  },
+  "runtime": {
+    "network": "Docker --network none; controlled loopback fixtures only",
+    "mounts": [
+      "Final six-file compiled payload",
+      "shared stdlib-only probe",
+      "evidence directory"
+    ],
+    "controlledContracts": [
+      "version/help",
+      "skills/provider initialization",
+      "durable memory write/reopen",
+      "keyword-free pgvector semantic retrieval",
+      "both RPC prompts accepted in one completed chain",
+      "actual read of 4096x4 PNG \u2192 2000x2 inline image",
+      "actual bash \u2192 rg exact result",
+      "all four PGlite missing/corrupt sidecar cases",
+      "nativeTUI DUET AGENT/todos/relays/context with no initialization errors"
+    ],
+    "probeCommand": "timeout --signal=KILL 90s bun /probe.ts; exact hardened shared packaging/probe.ts",
+    "probeSha256": "ffde098160ad6d1f6c1bc29ad50f4c53acf74593d92d7ce558839c0a4075a061",
+    "externalEvaluations": "No paid models/evals, live API, fleet, registry publishing, or real-home state"
+  },
+  "comparison": {
+    "bodyParity": "Complete controlled model and embedding request bodies equal to frozen source after scratch-path normalization",
+    "outputParity": "Observable command outputs and RPC acceptance/result equal",
+    "normalizations": [
+      "00 oracle scratch path, elapsed-time and sampled RSS normalization",
+      "explicit user-requested versionstdout0.3.36\u21921.0.0",
+      "explicit user-requested RPCstderr packageversion0.3.36\u21921.0.0"
+    ],
+    "memoryMetadata": "Generated row IDs/timestamps/ranking excluded; actual written/reopened/vector-recalled content checked exactly",
+    "negativeControl": {
+      "mutation": "One complete request model changed to unexpected-model-drift",
+      "result": "Comparison rejected with exit1; healthy final candidate returned0"
+    }
+  },
+  "harnessRecovery": {
+    "observed": "Original buffered-stdin producer stalled beyond child deadline, with no CLI child remaining. Retained live handle examined then stopped. Parent-phase logging diagnostic completed actual behavior; explicitflush producer then passed.",
+    "fix": "Await each BunSink stdin.flush; release outstanding firstModelGate in finally before server.stop; enforce 90s outer container-process bound. No CLI/core runtime patch.",
+    "hangNegativeControl": "Live Bun interval under a 1s outer bound returned 137, which cannot satisfy the successful probe gate",
+    "causeBoundary": "Missing explicitflush/fixture cleanup is an observed harness defect. Exact cause of original stream wait is not proved."
+  },
+  "dependencyClosureReference": "../source-ownership/closure.json owns full version/integrity and peer audit; one metadata-only bun-ffi TypeScript peer difference disclosed there",
+  "limitations": [
+    "Controlled command/model paths are verified; this is not every CLI provider/eval scenario",
+    "NativeTUI initialization transcript, not screenshot/style acceptance",
+    "No live VM/image/fleet/update proof",
+    "SDK compile-path byte nondeterminism remains documented in slice00",
+    "Photon missing/corrupt controls are retained by shared00reproducer; runtime/loader asset bytes are unchanged here"
+  ],
+  "jsVariationReference": "js-variation.json: same-cwd EOF blank did not alter JS; changing only build directory changed Photon CJS absolute-path bytes. Earlier root assertion failure remains unexplained; actual fresh executable behavior is independently verified."
+}

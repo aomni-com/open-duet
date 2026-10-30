@@ -1,0 +1,9 @@
+Shape: one temporary config reader, existing lifecycle owners and one explicit-ID replay mutation; no schema/table/lease/recurring worker.
+Diff review found deferred subscription recovery was not pinned, then that an already admitted archive teardown could release the new pin before replay. Both were reproduced through servicing/deletion and fixed using the existing pin and attach-after owner.
+Final independent focused Codex review: existing teardown only is marked for attachment; no new teardown behind the fence. Backup deletion remains blocked through VM clearance and teardown completion. All 46 focused lifecycle tests passed. No unresolved findings.
+Docs/choices reviewed; operational proof is separate from any future live cutover receipt.
+
+Lifecycle follow-up: the disk worker restarts its existing VM, and the CPU/memory cron also restarts VMs without a per-workspace retrier ID. The same temporary fence now gates disk scheduling and CPU candidate reads; admitted work remains unfenced and the operator drains existing retrier plus platform cron/scheduler state. No new worker/controller/schema was added.
+Review found the deployment patch stale during the rename and that deferred paid disk upgrades needed an actual reopening trigger. Refreshed the cumulative eight-file production-only patch, reproduced the tested source from both deployed baselines, and added an explicit-payer replay through the existing disk-policy owner for accepted fence-interval requests only. This is separate from alignment and runs zero times when no requests were accepted.
+Final independent focused review found no substantive correctness issue. Its stale-count receipt finding is corrected to match the retained95-test/349-assertion evidence.
+Alignment invokes no provider resize/reboot/reprovision; only in-VM file replacement and idle gateway service restart. Read-only live CPU drain metadata is retained separately and is not a closed-fence receipt.

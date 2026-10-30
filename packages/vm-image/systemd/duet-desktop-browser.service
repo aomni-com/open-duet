@@ -1,0 +1,19 @@
+[Unit]
+Description=Duet shared headful Chrome
+PartOf=duet-desktop.target
+After=duet-desktop.service
+
+[Service]
+Type=simple
+User=exedev
+Group=exedev
+Environment=HOME=/home/exedev
+Environment=DISPLAY=:1
+Environment=BAMF_DESKTOP_FILE_HINT=/usr/share/applications/duet-browser.desktop
+Environment=CHROME_DESKTOP=duet-browser.desktop
+ExecStart=/opt/duet/bin/start-shared-chrome
+ExecStop=/opt/duet/bin/stop-shared-chrome.py
+Restart=always
+RestartSec=1
+KillMode=mixed
+TimeoutStopSec=15

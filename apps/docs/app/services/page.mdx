@@ -1,0 +1,23 @@
+import { EndpointReference } from '../../components/endpoint-reference'
+
+export const metadata = {
+  title: 'Services',
+  description: 'Discover and call catalogued third-party APIs through Duet.',
+  alternates: { canonical: '/services/' },
+}
+
+# Services
+
+Duet exposes paid third-party APIs through a catalog. Search with
+`duet services search`, inspect a service with `duet services show`, read the
+linked vendor documentation, then call an allowed route with `duet services call`.
+Duet injects vendor authentication; callers provide their Duet key and select a
+workspace with `x-duet-workspace` when needed.
+
+Successful calls are billed at vendor cost plus Duet's standard margin and
+return the customer charge in `x-duet-charge-usd`. Errors are not charged.
+Routes outside the catalog return 404. Shared resources are readable and usable
+by design, while mutation belongs to the creating workspace and temporary items
+follow the pool TTL.
+
+<EndpointReference category="services" />

@@ -1,0 +1,282 @@
+---
+title: 'Cómo construir tu centro de comando de AI con Duet'
+metaTitle: 'Cómo construir tu centro de comando de AI con Duet'
+description: 'Deja de hacer malabares con herramientas de AI dispersas. Crea un centro de comando de AI centralizado en minutos: integraciones, base de conocimiento, automatizaciones y apps a medida en un lugar.'
+date: '2026-03-24'
+updatedAt: '2026-05-08'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/8.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'guides'
+tags: ['ai-command-center', 'automation', 'integrations', 'duet', 'productivity']
+type: 'guide'
+image: '/guides/how-to-build-your-ai-command-center/hero.png'
+locale: es-419
+translationKey: 'how-to-build-your-ai-command-center'
+howTo:
+  name: 'Cómo construir un centro de comando de AI con Duet'
+  description: 'Una guía paso a paso para configurar un workspace de AI centralizado con integraciones, bases de conocimiento, automatizaciones y apps a medida.'
+  steps:
+    - name: 'Regístrate y explora el workspace'
+      text: 'Crea una cuenta en duet.so y explora Sesiones, Apps, Archivos, Train, Integraciones y tu servidor privado en la nube.'
+    - name: 'Elige tus modelos de AI'
+      text: 'Selecciona entre modelos como Claude Opus, Sonnet, Codex y GPT 5.4 según tus compromisos de velocidad, inteligencia y costo.'
+    - name: 'Construye tu base de conocimiento'
+      text: 'Guarda las fuentes y las instrucciones reutilizables en Archivos, y usa Train para los hechos duraderos y las fuentes conectadas.'
+    - name: 'Conecta tus herramientas e integraciones'
+      text: 'Vincula Google Drive, Notion, CRMs y otras herramientas para que tu AI tenga acceso a tus datos reales.'
+    - name: 'Configura automatizaciones programadas'
+      text: 'Crea cron jobs que monitoreen tus herramientas y publiquen actualizaciones, como revisar Google Drive en busca de archivos nuevos cada mañana.'
+    - name: 'Construye apps a medida'
+      text: 'Describe lo que necesitas en lenguaje natural y deja que la AI cree apps totalmente funcionales dentro de tu workspace.'
+cta:
+  title: 'Tu centro de comando de AI, listo en minutos.'
+  subtitle: 'Duet es el workspace donde el contexto duradero, las integraciones, las tareas programadas y las apps a medida conviven. Un solo hub, todos los agentes.'
+  buttonText: 'Construye tu centro de comando'
+  href: '/sign-in?from=guide-command-center'
+---
+
+Si usas Claude Code, Codex, Cursor o cualquier otra plataforma impulsada por AI, probablemente notaste el mismo problema: el contexto vive en todas partes. El conocimiento está disperso entre herramientas, las memorias están aisladas, los prompts están duplicados y nada se comunica con nada. Un centro de comando de AI resuelve eso: es el único hub donde viven las operaciones de AI de tu empresa.
+
+<AnswerBox
+  title="Resumen rápido"
+  summary="Un centro de comando de AI es un workspace centralizado donde tu agente de AI, las integraciones, la base de conocimiento, las automatizaciones y las apps a medida conviven juntos. En lugar de hacer malabares con herramientas de AI dispersas, obtienes un solo sistema que lo gestiona todo. Duet te permite construir uno en minutos, con un servidor privado en la nube, apps preintegradas y colaboración en equipo incluida."
+  queries={[
+    '¿Qué es un centro de comando de AI?',
+    'Cómo centralizar las herramientas de AI de mi negocio',
+    'Mejor workspace de AI para equipos',
+    'Cómo conectar todas mis apps a una sola AI',
+    'Cómo automatizar workflows con AI',
+  ]}
+/>
+
+Esta guía te lleva paso a paso por la construcción de un centro de comando de AI desde cero usando [Duet](/), desde configurar tu workspace hasta conectar herramientas, crear automatizaciones y armar apps a medida. Todo el proceso toma minutos, no semanas.
+
+<GuideTOC
+  items={[
+    { number: 1, title: 'Por qué necesitas uno', href: '#why-you-need-an-ai-command-center' },
+    { number: 2, title: 'Primeros pasos', href: '#getting-started-with-duet' },
+    { number: 3, title: 'Modelos y sesiones', href: '#choosing-your-ai-models' },
+    { number: 4, title: 'Base de conocimiento', href: '#building-your-knowledge-base' },
+    { number: 5, title: 'Conecta tus herramientas', href: '#connecting-your-tools' },
+    { number: 6, title: 'Automatizaciones', href: '#setting-up-scheduled-automations' },
+    { number: 7, title: 'Apps a medida', href: '#building-custom-apps' },
+    { number: 8, title: 'Un solo sistema', href: '#one-system-for-all-your-tools' },
+    { number: 9, title: 'FAQ', href: '#faq' },
+  ]}
+/>
+
+---
+
+## Por qué necesitas un centro de comando de AI
+
+Una vez que tienes varios sistemas de AI, agentes y apps trabajando dentro de tu negocio, las cosas se complican rápido. El contexto vive en un lugar, el conocimiento en otro, las memorias en algún otro sitio. Terminas repitiéndote entre herramientas, perdiendo el rastro de lo que sabe cada sistema y dedicando más tiempo a gestionar la AI que a beneficiarte de ella.
+
+Un centro de comando de AI resuelve esto al darte **un solo lugar** donde:
+
+- Tu agente de AI vive con memoria y contexto persistentes
+- Todas tus herramientas e integraciones están conectadas
+- Las automatizaciones corren según una programación sin intervención manual
+- Las apps a medida se pueden construir y desplegar al instante
+- Tu equipo puede colaborar con la AI y entre sí
+
+La alternativa es configurar tu propio servidor en la nube en AWS o Hetzner, instalar Claude Code u OpenClaw, configurar manualmente cada integración y encargarte tú mismo de los permisos, la seguridad y el acceso del equipo. Esa es una opción real, pero toma días o semanas en lugar de minutos.
+
+---
+
+## Primeros pasos con Duet
+
+Ve a [duet.so](/) y regístrate para crear una cuenta. Una vez dentro, tu workspace se ve así:
+
+- **Sesiones en la barra lateral**: cada sesión duradera contiene una tarea y su historial de eventos.
+- **Timeline de la sesión en la vista principal**: donde asignas trabajo, sigues el progreso, respondes preguntas e inspeccionas resultados.
+- **Archivos, Train e Integraciones**: agrupados bajo Duet Computer en la barra lateral.
+
+Todo corre en un **servidor privado en la nube** que es tuyo. Tus datos quedan en tu entorno: el agente de AI, los archivos, las automatizaciones y las apps viven ahí. No tienes que preocuparte por aprovisionar servidores ni gestionar infraestructura.
+
+La otra ventaja: **la colaboración en equipo viene incluida**. Si quieres que tu equipo use el centro de comando de AI, solo se une, sin permisos complejos ni integraciones de Slack o email que configurar. Todos comparten el mismo workspace, contexto y herramientas.
+
+---
+
+## Cómo elegir tus modelos de AI
+
+Duet admite múltiples modelos de AI con distintos compromisos:
+
+| Modelo            | Fortalezas                                | Ideal para                              |
+| ----------------- | ----------------------------------------- | --------------------------------------- |
+| **Claude Opus**   | El más inteligente, razonamiento profundo | Análisis complejos, tareas con matices  |
+| **Claude Sonnet** | Rápido, capaz                             | Tareas del día a día, respuestas ágiles |
+| **Codex**         | Enfocado en código, razonamiento sólido   | Desarrollo, workflows técnicos          |
+| **GPT 5.4**       | Rápido, versátil                          | Tareas generales, iteraciones rápidas   |
+
+Puedes cambiar de modelo por mensaje usando el selector de modelos en la barra de composición. Todos son modelos de razonamiento: son agentes que pueden usar herramientas como búsqueda web, creación de archivos, ejecución de código y más. Si ya usaste Claude Code o Codex, te sentirás como en casa.
+
+El uso de tokens y el costo se muestran al final de cada mensaje, así que siempre sabes cuánto estás gastando.
+
+---
+
+## Cómo construir tu base de conocimiento
+
+![Base de conocimiento e integraciones que fluyen hacia un hub central de AI](/guides/how-to-build-your-ai-command-center/knowledge-base.png)
+
+Un centro de comando sin contexto es solo un chatbot. El verdadero poder viene de construir una base de conocimiento de la que la AI pueda nutrirse en cada interacción.
+
+### Archivos y Train
+
+Abre **Archivos** en la barra lateral para trabajar con el material de tu servidor y usa **Train** para el contexto que el agent debe conservar entre Sesiones:
+
+- **Archivos fuente**: documentos, ejemplos y otros materiales que el agent puede leer y editar.
+- **Instrucciones y playbooks**: archivos reutilizables que describen cómo quieres que la AI aborde el trabajo recurrente. Tú los administras y editas como cualquier otro archivo del workspace.
+- **Hechos y fuentes de Train**: conocimiento duradero y fuentes conectadas que deben seguir disponibles más allá de una Sesión.
+
+Cuando algo deba sobrevivir a la Sesión actual, agrégalo a Train como un hecho conciso:
+
+> "Nuestra meta del Q2 es $500K de ARR y nuestro principal competidor es Acme Corp."
+
+Así pasas de una AI genérica a una que de verdad conoce tu negocio.
+
+### Cómo editar la base de conocimiento
+
+Archivos mantiene inspeccionables tus fuentes y playbooks; Train es dueño de los hechos duraderos y las fuentes conectadas. Esa separación te da control sobre lo que el agent puede consultar sin esconder contexto importante del negocio dentro de una sola conversación.
+
+---
+
+## Cómo conectar tus herramientas
+
+La base de conocimiento se vuelve realmente poderosa cuando conectas las herramientas que ya usas. Duet viene con **integraciones preconstruidas** para:
+
+- **Bases de conocimiento:** Google Drive, Notion, Confluence
+- **Gestión de tareas:** Trello, Asana, Linear
+- **Datos y analítica:** PostHog, Power BI
+- **Comunicación:** Slack, email, calendario
+- **CRMs:** HubSpot, Salesforce, Attio
+
+Para conectar una herramienta, ve a **Integrations** en la barra lateral, busca la app y haz clic en **Connect**. Autorizarás el acceso y listo: sin API keys que gestionar, sin webhooks que configurar.
+
+Una vez conectadas, puedes referirte a estas herramientas en la conversación:
+
+> "Oye Duet, describe qué hay en mi Google Drive."
+
+También puedes agregar explícitamente integraciones a una conversación usando el selector de integraciones en la barra de composición, lo que asegura que la AI use esa herramienta específica en su respuesta.
+
+<DuetCTA />
+
+---
+
+## Cómo configurar automatizaciones programadas
+
+![Automatizaciones programadas y construcción de apps a medida](/guides/how-to-build-your-ai-command-center/automations.png)
+
+Aquí es donde un centro de comando de AI empieza a sentirse como un verdadero hub de operaciones. Las automatizaciones te permiten configurar tareas que corren según una programación, sin necesidad de intervención manual.
+
+### Cómo crear una tarea programada
+
+Ve a **Scheduled Tasks** en la barra lateral. Verás los cron jobs existentes y podrás crear nuevos. ¿La forma más fácil? Solo pídeselo a la AI:
+
+> "Oye Duet, crea una tarea programada que revise si hay archivos nuevos en mi Google Drive cada mañana y reporte lo que encuentre en esta sesión."
+
+La AI hará lo siguiente:
+
+1. Crear un cron job (una tarea programada en tu servidor)
+2. Configurarlo para que corra a la hora que especificaste
+3. Guardar los resultados en la sesión y en los archivos del workspace
+
+Puedes verificar que la tarea existe en el panel de Scheduled Tasks, y editarla o eliminarla cuando quieras.
+
+### Ejemplos de automatizaciones útiles
+
+- **Resumen matutino:** Resume los correos nuevos, los eventos del calendario y los mensajes de Slack todos los días a las 8 a.m.
+- **Monitoreo del CRM:** Revisa si hay nuevos leads o tratos cerrados y guarda un reporte en el workspace
+- **Vigilancia de la competencia:** Busca menciones de competidores en la web cada semana y arma un informe
+- **Pipeline de contenido:** Revisa tu calendario editorial y te recuerda las fechas límite que se acercan
+
+La idea clave: el agente de AI gestiona todo el sistema de automatización por sí mismo. Tú describes lo que quieres en lenguaje natural y él se encarga de la programación, la ejecución y los reportes.
+
+---
+
+## Cómo construir apps a medida
+
+Aquí es donde las cosas se vuelven genuinamente poderosas. La AI puede construir apps web totalmente funcionales dentro de tu workspace, igual que lo harías en Lovable o Bolt, pero integradas con todas tus herramientas y datos existentes.
+
+### Ejemplo: formulario de preparación de reuniones
+
+Aquí hay un ejemplo real del video. El prompt:
+
+> "Oye Duet, crea una app: un formulario de preparación de reuniones. Antes de tener una reunión con alguien, quiero preguntarle qué dudas tiene para mí. Cuando se envíe, crea una página en Notion con las respuestas."
+
+La AI construye la app entera: un formulario con campos para nombre, correo y preguntas. Maneja la integración con Notion automáticamente. El resultado es una URL que puedes compartir y que cualquiera puede llenar, y cada envío crea una entrada estructurada en la base de datos de tu workspace de Notion.
+
+**Un solo prompt. Una app funcionando. Conectada a tus herramientas.**
+
+Ahora ve más allá. Comparte esa URL con tu equipo. Tu cofundador la envía a cada prospecto antes de una llamada. Tu líder de operaciones usa la base de datos de Notion para preparar documentos de briefing. Lo que empezó como una herramienta personal se convierte en algo de lo que depende todo tu equipo, y lo construiste en menos de un minuto.
+
+Algunos equipos llevan esto aún más lejos. Hemos visto usuarios construir dashboards internos que extraen datos de múltiples APIs, agregar un login para que cada compañero obtenga una vista personalizada y correr actualizaciones programadas para que los datos siempre estén frescos. No solo están construyendo herramientas: están enviando productos internos a su equipo usando nada más que lenguaje natural.
+
+### Por qué esto importa
+
+La mayoría de los equipos pequeños paga por decenas de productos SaaS de solución puntual:
+
+- Una app para agendar
+- Una para notas de reuniones
+- Una para tu CRM
+- Una para gestión de tareas
+- Una para lluvia de ideas de diseño
+
+Cada una cuesta entre $10 y $30 al mes, cada una tiene su propio login y ninguna se comunica con las demás sin fricciones. Dentro de tu centro de comando de AI, puedes reemplazar la mayoría con **apps a medida diseñadas en torno a tu workflow exacto**, construidas en minutos con un solo prompt. Y como todo corre en tu servidor con tus integraciones ya conectadas, no hay código de pegamento, ni configuración de webhooks, ni hosting separado que gestionar.
+
+---
+
+## Un solo sistema para todas tus herramientas
+
+El objetivo de un centro de comando de AI es la consolidación. En lugar de:
+
+- Contexto disperso entre Claude, ChatGPT, Gemini y Cursor
+- Integraciones configuradas por separado en cada herramienta
+- Automatizaciones repartidas entre Zapier, Make y n8n
+- Herramientas a medida construidas en Lovable, pero desconectadas de tus datos
+
+Obtienes **un solo sistema** donde la AI tiene contexto completo, todas las herramientas están conectadas, las automatizaciones corren de forma nativa y las apps a medida conviven junto a tus sesiones.
+
+| Antes                                                    | Después                                            |
+| -------------------------------------------------------- | -------------------------------------------------- |
+| Múltiples herramientas de AI con contexto aislado        | Una sola AI con contexto duradero y compartido     |
+| Configuración manual de integración por herramienta      | Integraciones preconstruidas, conexión con un clic |
+| Plataformas de automatización separadas                  | Tareas programadas nativas, gestionadas por la AI  |
+| Apps de solución puntual desconectadas                   | Apps a medida construidas según la demanda         |
+| Uso de AI en solitario, configuración de equipo compleja | Colaboración en equipo incluida                    |
+
+Pero el verdadero desbloqueo va más allá de la productividad personal. Cuando tus apps, automatizaciones e integraciones viven todas en un mismo lugar, pasa algo interesante: las cosas que construyes empiezan a ser útiles para todo tu equipo. ¿Ese formulario de preparación de reuniones de antes? Comparte la URL con tu equipo. ¿El dashboard de la competencia que construiste con un solo prompt? Tu cofundador lo revisa cada mañana.
+
+Esta es la diferencia entre un constructor de herramientas y una plataforma de apps. Otras herramientas de programación con AI te ayudan a construir algo, pero después quedas solo con el hosting, la autenticación y ponerlo frente a la gente. Dentro de tu centro de comando de AI, cada app que construyes ya está activa, ya está conectada a tus datos y ya se puede compartir con tu equipo. Un solo prompt te lleva de la idea a algo de lo que depende todo tu equipo.
+
+Para conocer el playbook operativo a nivel de fundador que une el centro de comando, las instrucciones reutilizables y la memoria en un mismo ritmo diario, consulta [Duet AI para fundadores: el modo fundador como sistema operativo](/guides/duet-ai-for-founders).
+
+---
+
+## FAQ
+
+### ¿Qué herramientas puedo conectar a mi centro de comando de AI?
+
+Duet admite cientos de integraciones listas para usar: Google Drive, Notion, Slack, Linear, Trello, Asana, HubSpot, PostHog, Power BI y muchas más. Se agregan integraciones nuevas con regularidad, y también puedes construir integraciones a medida usando las capacidades de ejecución de código de la AI.
+
+### ¿Necesito conocimientos técnicos para configurar un centro de comando de AI?
+
+No. Todo, desde conectar herramientas hasta crear automatizaciones y construir apps a medida, se hace mediante una conversación en lenguaje natural con la AI. Si puedes describir lo que quieres, la AI puede construirlo.
+
+### ¿En qué se diferencia esto de usar Claude Code o Codex directamente?
+
+Claude Code y Codex son potentes, pero requieren tu propia infraestructura: tienes que configurar un servidor en la nube, gestionar la seguridad, configurar las integraciones manualmente y encargarte tú mismo del acceso del equipo. Duet empaca todo eso en una plataforma gestionada donde todo viene preconfigurado y listo para usar.
+
+### ¿Puede todo mi equipo usar el centro de comando de AI?
+
+Sí. La colaboración en equipo viene incluida en Duet: los miembros se unen al workspace y pueden acceder a sesiones compartidas, al compañero de AI, a los archivos y a las apps según su rol. No hace falta configurar infraestructura adicional.
+
+### ¿Cuánto cuesta?
+
+Duet ofrece una prueba gratis de 7 días. Después, Starter, Pro y Max incluyen créditos mensuales, con una reserva pagada para uso adicional. Consulta los [planes actuales](/pricing).
+
+### ¿Puedo construir apps que usen personas ajenas a mi equipo?
+
+Sí. Las apps construidas en tu workspace se pueden compartir mediante URLs públicas. Por ejemplo, el formulario de preparación de reuniones de esta guía genera un enlace al que cualquiera puede acceder, sin necesidad de una cuenta de Duet.

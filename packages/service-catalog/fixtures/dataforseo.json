@@ -1,0 +1,4 @@
+[
+  {"route":"/v3/serp/google/organic/task_post","request":{"method":"POST","json":[{"keyword":"example","language_code":"en","location_code":2840}]},"response":{"status":200,"json":{"cost":0.001}}},
+  {"route":"/v3/serp/google/organic/task_get/task-1","request":{"method":"POST"},"response":{"status":200,"json":{"cost":0.001}}}
+]

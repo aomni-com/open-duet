@@ -1,0 +1,17 @@
+{
+  "baseline": "f1dace86e3d227d39141b1306fbcc1da9f7c77c9",
+  "date": "2026-10-04",
+  "gatewayTestFile": {
+    "pass": 169,
+    "fail": 0,
+    "assertions": 886
+  },
+  "targetedAdmissionTests": {
+    "pass": 2,
+    "assertions": 13
+  },
+  "falsification": "Removing synchronous controller admission block resumes an accepted input during construction:1 runner instead of0.",
+  "types": "Gateway package tsc passed",
+  "review": "Configured Codex review: no issues; new tests and5 related maintenance/update tests passed",
+  "scope": "Source-only target admission hold; no VM mutation or migration-completion claim"
+}

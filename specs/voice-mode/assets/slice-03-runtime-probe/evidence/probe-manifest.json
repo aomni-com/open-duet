@@ -1,0 +1,72 @@
+{
+  "cold_candidate_id": "deepgram-gemma-fish-free-default",
+  "candidates": [
+    {
+      "candidate_id": "deepgram-gemma-fish-free-default",
+      "llm": "google/gemma-4-31b-it",
+      "stt": "deepgram/flux-general-en",
+      "tts": "fishaudio/s2.1-pro-free",
+      "voice": "documented-default"
+    },
+    {
+      "candidate_id": "assembly-gemini-fish-pro-example",
+      "llm": "google/gemini-3.1-flash-lite",
+      "stt": "assemblyai/universal-streaming",
+      "tts": "fishaudio/s2.1-pro",
+      "voice": "documented-example"
+    },
+    {
+      "candidate_id": "deepgram-gemini-fish-free-third",
+      "llm": "google/gemini-3.1-flash-lite",
+      "stt": "deepgram/flux-general-en",
+      "tts": "fishaudio/s2.1-pro-free",
+      "voice": "third-stock"
+    }
+  ],
+  "runs": [
+    {
+      "activation_state": "warm",
+      "browser_floor": "chromium-desktop",
+      "samples": 20,
+      "scenario": "candidate_response"
+    },
+    {
+      "activation_state": "cold",
+      "browser_floor": "chromium-desktop",
+      "samples": 5,
+      "scenario": "candidate_response"
+    },
+    {
+      "activation_state": "warm",
+      "browser_floor": "chromium-desktop",
+      "samples": 20,
+      "scenario": "fixed_interruption"
+    },
+    {
+      "activation_state": "warm",
+      "browser_floor": "ios-safari",
+      "samples": 20,
+      "scenario": "candidate_response"
+    },
+    {
+      "activation_state": "warm",
+      "browser_floor": "ios-safari",
+      "samples": 20,
+      "scenario": "fixed_interruption"
+    }
+  ],
+  "voices": [
+    {
+      "name": "documented-default",
+      "voice_id": "933563129e564b19a115bedd57b7406a"
+    },
+    {
+      "name": "documented-example",
+      "voice_id": "b347db033a6549378b48d00acb0d06cd"
+    },
+    {
+      "environment": "LIVEKIT_FISH_STOCK_VOICE_ID_3",
+      "name": "third-stock"
+    }
+  ]
+}

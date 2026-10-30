@@ -1,0 +1,237 @@
+{
+  "active": {
+    "rendererCpuCores": 1.7124696815805227,
+    "rendererRssBytes": 2426929152,
+    "totalChromeCpuCores": 1.8599670702130058,
+    "totalChromeRssBytes": 3302531072
+  },
+  "chromeVersion": "Google Chrome 151.0.7922.137",
+  "discard": {
+    "activeTab": {
+      "policySkipped": true,
+      "remainedActive": true,
+      "remainedUndiscarded": true,
+      "tabId": 1886468307
+    },
+    "candidates": [
+      {
+        "discardedAfterActivation": false,
+        "discardedObserved": true,
+        "domMarkerAfter": "dom-b6ac69ee-bce8-4558-b72d-ec91ddf3de45",
+        "domMarkerBefore": "dom-25fb8bcf-b45c-449b-baa0-e5d6c28ff4ea",
+        "localStorageAfter": "local-persistent",
+        "localStorageBefore": "local-persistent",
+        "memoryMarkerAfter": "memory-b6ac69ee-bce8-4558-b72d-ec91ddf3de45",
+        "memoryMarkerBefore": "memory-25fb8bcf-b45c-449b-baa0-e5d6c28ff4ea",
+        "navigationAfter": 2,
+        "navigationBefore": 1,
+        "replacementTabId": 1886468318,
+        "sessionStorageAfter": "session-persistent",
+        "sessionStorageBefore": "session-persistent",
+        "tabId": 1886468310,
+        "tabRetained": true,
+        "targetIdAfter": "B7924347E908A85D0C77E7B4ED6A8B21",
+        "targetIdBefore": "F39AB6C3A5D5F5A4C5021E22C482F833",
+        "targetIdDiscarded": "B7924347E908A85D0C77E7B4ED6A8B21",
+        "timerAfterActivation": 1,
+        "timerBefore": 28,
+        "url": "http://192.0.2.1:34351/candidate?index=0",
+        "windowId": 1886468309
+      },
+      {
+        "discardedAfterActivation": false,
+        "discardedObserved": true,
+        "domMarkerAfter": "dom-f73fb3ff-c588-4ead-a5a3-6afa08f9a167",
+        "domMarkerBefore": "dom-d9bbbe5e-ff53-4b82-afda-75ab35107c68",
+        "localStorageAfter": "local-persistent",
+        "localStorageBefore": "local-persistent",
+        "memoryMarkerAfter": "memory-f73fb3ff-c588-4ead-a5a3-6afa08f9a167",
+        "memoryMarkerBefore": "memory-d9bbbe5e-ff53-4b82-afda-75ab35107c68",
+        "navigationAfter": 2,
+        "navigationBefore": 1,
+        "replacementTabId": 1886468319,
+        "sessionStorageAfter": "session-persistent",
+        "sessionStorageBefore": "session-persistent",
+        "tabId": 1886468313,
+        "tabRetained": true,
+        "targetIdAfter": "950F6BB7729663A89A245F0B04E00AB1",
+        "targetIdBefore": "E5980765A653C1FCE54DDE9CD9044290",
+        "targetIdDiscarded": "950F6BB7729663A89A245F0B04E00AB1",
+        "timerAfterActivation": 1,
+        "timerBefore": 26,
+        "url": "http://192.0.2.1:34351/candidate?index=1",
+        "windowId": 1886468312
+      },
+      {
+        "discardedAfterActivation": false,
+        "discardedObserved": true,
+        "domMarkerAfter": "dom-365f3a3c-db1c-4a64-9566-4b3da110e9ab",
+        "domMarkerBefore": "dom-fcf981ae-85a1-4fba-a556-f39eb5831020",
+        "localStorageAfter": "local-persistent",
+        "localStorageBefore": "local-persistent",
+        "memoryMarkerAfter": "memory-365f3a3c-db1c-4a64-9566-4b3da110e9ab",
+        "memoryMarkerBefore": "memory-fcf981ae-85a1-4fba-a556-f39eb5831020",
+        "navigationAfter": 2,
+        "navigationBefore": 1,
+        "replacementTabId": 1886468320,
+        "sessionStorageAfter": "session-persistent",
+        "sessionStorageBefore": "session-persistent",
+        "tabId": 1886468316,
+        "tabRetained": true,
+        "targetIdAfter": "F11C31A4CF81E7B7CCCDB9969C3063FF",
+        "targetIdBefore": "9CC32B7CB74C1C8C4D33117AA25855FB",
+        "targetIdDiscarded": "F11C31A4CF81E7B7CCCDB9969C3063FF",
+        "timerAfterActivation": 1,
+        "timerBefore": 26,
+        "url": "http://192.0.2.1:34351/candidate?index=2",
+        "windowId": 1886468315
+      }
+    ],
+    "commands": [
+      {
+        "requestId": "r38",
+        "result": {
+          "discarded": true,
+          "tabId": 1886468318
+        },
+        "type": "response"
+      },
+      {
+        "requestId": "r39",
+        "result": {
+          "discarded": true,
+          "tabId": 1886468319
+        },
+        "type": "response"
+      },
+      {
+        "requestId": "r40",
+        "result": {
+          "discarded": true,
+          "tabId": 1886468320
+        },
+        "type": "response"
+      }
+    ]
+  },
+  "discarded": {
+    "rendererCpuCores": 0,
+    "rendererRssBytes": 1853620224,
+    "totalChromeCpuCores": 0.16749593332436088,
+    "totalChromeRssBytes": 2736279552
+  },
+  "freeze": {
+    "activeTab": {
+      "remainedActive": true,
+      "remainedUnfrozen": true,
+      "tabId": 1886468307,
+      "updateRejected": true
+    },
+    "candidates": [
+      {
+        "domMarkerAfter": "dom-25fb8bcf-b45c-449b-baa0-e5d6c28ff4ea",
+        "domMarkerBefore": "dom-25fb8bcf-b45c-449b-baa0-e5d6c28ff4ea",
+        "frozenAfterActivation": false,
+        "frozenObserved": false,
+        "localStorageAfter": "local-persistent",
+        "localStorageBefore": "local-persistent",
+        "memoryMarkerAfter": "memory-25fb8bcf-b45c-449b-baa0-e5d6c28ff4ea",
+        "memoryMarkerBefore": "memory-25fb8bcf-b45c-449b-baa0-e5d6c28ff4ea",
+        "navigationAfter": 1,
+        "navigationBefore": 1,
+        "sessionStorageAfter": "session-persistent",
+        "sessionStorageBefore": "session-persistent",
+        "tabId": 1886468310,
+        "targetIdAfter": "F39AB6C3A5D5F5A4C5021E22C482F833",
+        "targetIdBefore": "F39AB6C3A5D5F5A4C5021E22C482F833",
+        "targetIdFrozen": "F39AB6C3A5D5F5A4C5021E22C482F833",
+        "timerAfter": 7,
+        "timerAfterActivation": 15,
+        "timerBefore": 3,
+        "url": "http://192.0.2.1:34351/candidate?index=0",
+        "windowId": 1886468309
+      },
+      {
+        "domMarkerAfter": "dom-d9bbbe5e-ff53-4b82-afda-75ab35107c68",
+        "domMarkerBefore": "dom-d9bbbe5e-ff53-4b82-afda-75ab35107c68",
+        "frozenAfterActivation": false,
+        "frozenObserved": false,
+        "localStorageAfter": "local-persistent",
+        "localStorageBefore": "local-persistent",
+        "memoryMarkerAfter": "memory-d9bbbe5e-ff53-4b82-afda-75ab35107c68",
+        "memoryMarkerBefore": "memory-d9bbbe5e-ff53-4b82-afda-75ab35107c68",
+        "navigationAfter": 1,
+        "navigationBefore": 1,
+        "sessionStorageAfter": "session-persistent",
+        "sessionStorageBefore": "session-persistent",
+        "tabId": 1886468313,
+        "targetIdAfter": "E5980765A653C1FCE54DDE9CD9044290",
+        "targetIdBefore": "E5980765A653C1FCE54DDE9CD9044290",
+        "targetIdFrozen": "E5980765A653C1FCE54DDE9CD9044290",
+        "timerAfter": 7,
+        "timerAfterActivation": 14,
+        "timerBefore": 3,
+        "url": "http://192.0.2.1:34351/candidate?index=1",
+        "windowId": 1886468312
+      },
+      {
+        "domMarkerAfter": "dom-fcf981ae-85a1-4fba-a556-f39eb5831020",
+        "domMarkerBefore": "dom-fcf981ae-85a1-4fba-a556-f39eb5831020",
+        "frozenAfterActivation": false,
+        "frozenObserved": false,
+        "localStorageAfter": "local-persistent",
+        "localStorageBefore": "local-persistent",
+        "memoryMarkerAfter": "memory-fcf981ae-85a1-4fba-a556-f39eb5831020",
+        "memoryMarkerBefore": "memory-fcf981ae-85a1-4fba-a556-f39eb5831020",
+        "navigationAfter": 1,
+        "navigationBefore": 1,
+        "sessionStorageAfter": "session-persistent",
+        "sessionStorageBefore": "session-persistent",
+        "tabId": 1886468316,
+        "targetIdAfter": "9CC32B7CB74C1C8C4D33117AA25855FB",
+        "targetIdBefore": "9CC32B7CB74C1C8C4D33117AA25855FB",
+        "targetIdFrozen": "9CC32B7CB74C1C8C4D33117AA25855FB",
+        "timerAfter": 6,
+        "timerAfterActivation": 13,
+        "timerBefore": 2,
+        "url": "http://192.0.2.1:34351/candidate?index=2",
+        "windowId": 1886468315
+      }
+    ],
+    "commands": [
+      {
+        "requestId": "r16",
+        "result": {
+          "error": "TypeError: Error in invocation of tabs.update(optional integer tabId, object updateProperties, optional function callback): Error at parameter 'updateProperties': Unexpected property: 'frozen'."
+        },
+        "type": "response"
+      },
+      {
+        "requestId": "r17",
+        "result": {
+          "error": "TypeError: Error in invocation of tabs.update(optional integer tabId, object updateProperties, optional function callback): Error at parameter 'updateProperties': Unexpected property: 'frozen'."
+        },
+        "type": "response"
+      },
+      {
+        "requestId": "r18",
+        "result": {
+          "error": "TypeError: Error in invocation of tabs.update(optional integer tabId, object updateProperties, optional function callback): Error at parameter 'updateProperties': Unexpected property: 'frozen'."
+        },
+        "type": "response"
+      }
+    ]
+  },
+  "frozen": {
+    "rendererCpuCores": 1.934964865875448,
+    "rendererRssBytes": 2347130880,
+    "totalChromeCpuCores": 1.9424647296966704,
+    "totalChromeRssBytes": 3202682880
+  },
+  "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:71285a0068a6ed54ca33dd48791d0fe5ad2c3ccf69738ed5b25c9f9bd5c327dd",
+  "schemaVersion": 1,
+  "workload": {
+    "candidateCount": 3,
+    "sampleDurationMs": 4000
+  }
+}

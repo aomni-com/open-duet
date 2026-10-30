@@ -1,0 +1,1552 @@
+[
+  {
+    "target": "app/[locale]/blog/[slug]/page.tsx#BlogPostPage",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "app/[locale]/blog/[slug]/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "app/[locale]/blog/category/[category]/page.tsx#CategoryPage",
+    "kind": "owned-by",
+    "owner": "route:/blog/category/ai"
+  },
+  {
+    "target": "app/[locale]/blog/category/[category]/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/blog/category/ai"
+  },
+  {
+    "target": "app/[locale]/blog/page.tsx#BlogPage",
+    "kind": "owned-by",
+    "owner": "route:/blog"
+  },
+  {
+    "target": "app/[locale]/blog/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/blog"
+  },
+  {
+    "target": "app/[locale]/blog/tag/[tag]/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/blog/tag/ai-agents"
+  },
+  {
+    "target": "app/[locale]/blog/tag/[tag]/page.tsx#TagPage",
+    "kind": "owned-by",
+    "owner": "route:/blog/tag/ai-agents"
+  },
+  {
+    "target": "app/[locale]/data-protection/page.tsx#DataProtection",
+    "kind": "owned-by",
+    "owner": "route:/data-protection"
+  },
+  {
+    "target": "app/[locale]/data-protection/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/data-protection"
+  },
+  {
+    "target": "app/[locale]/for/[vertical]/page.tsx#FaqJsonLd",
+    "kind": "owned-by",
+    "owner": "route:/for/med-spas"
+  },
+  {
+    "target": "app/[locale]/for/[vertical]/page.tsx#Faqs",
+    "kind": "owned-by",
+    "owner": "route:/for/med-spas"
+  },
+  {
+    "target": "app/[locale]/for/[vertical]/page.tsx#FinalCta",
+    "kind": "owned-by",
+    "owner": "route:/for/med-spas"
+  },
+  {
+    "target": "app/[locale]/for/[vertical]/page.tsx#Hero",
+    "kind": "owned-by",
+    "owner": "route:/for/med-spas"
+  },
+  {
+    "target": "app/[locale]/for/[vertical]/page.tsx#Kickoff",
+    "kind": "owned-by",
+    "owner": "route:/for/med-spas"
+  },
+  {
+    "target": "app/[locale]/for/[vertical]/page.tsx#Outcomes",
+    "kind": "owned-by",
+    "owner": "route:/for/med-spas"
+  },
+  {
+    "target": "app/[locale]/for/[vertical]/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/for/med-spas"
+  },
+  {
+    "target": "app/[locale]/for/[vertical]/page.tsx#VerticalLandingPage",
+    "kind": "owned-by",
+    "owner": "route:/for/med-spas"
+  },
+  {
+    "target": "app/[locale]/for/page.tsx#ForHubPage",
+    "kind": "owned-by",
+    "owner": "route:/es/for"
+  },
+  {
+    "target": "app/[locale]/for/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/es/for"
+  },
+  {
+    "target": "app/[locale]/guides/[slug]/page.tsx#GuidePage",
+    "kind": "owned-by",
+    "owner": "route:/guides/claude-code-for-founders"
+  },
+  {
+    "target": "app/[locale]/guides/[slug]/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/guides/claude-code-for-founders"
+  },
+  {
+    "target": "app/[locale]/guides/page.tsx#GuideCard",
+    "kind": "owned-by",
+    "owner": "route:/es/guides"
+  },
+  {
+    "target": "app/[locale]/guides/page.tsx#GuidesPage",
+    "kind": "owned-by",
+    "owner": "route:/es/guides"
+  },
+  {
+    "target": "app/[locale]/guides/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/es/guides"
+  },
+  {
+    "target": "app/[locale]/l/[slug]/page.tsx#CampaignLanderPage",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "app/[locale]/l/[slug]/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "app/[locale]/layout.tsx#LocaleHtmlLang",
+    "kind": "owned-by",
+    "owner": "route:/"
+  },
+  {
+    "target": "app/[locale]/layout.tsx#LocaleLayout",
+    "kind": "owned-by",
+    "owner": "route:/"
+  },
+  {
+    "target": "app/[locale]/page.tsx#Home",
+    "kind": "owned-by",
+    "owner": "route:/"
+  },
+  {
+    "target": "app/[locale]/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/"
+  },
+  {
+    "target": "app/[locale]/pricing/page.tsx#Comparisons",
+    "kind": "owned-by",
+    "owner": "route:/es/pricing"
+  },
+  {
+    "target": "app/[locale]/pricing/page.tsx#FinalCta",
+    "kind": "owned-by",
+    "owner": "route:/es/pricing"
+  },
+  {
+    "target": "app/[locale]/pricing/page.tsx#Hero",
+    "kind": "owned-by",
+    "owner": "route:/es/pricing"
+  },
+  {
+    "target": "app/[locale]/pricing/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/es/pricing"
+  },
+  {
+    "target": "app/[locale]/pricing/page.tsx#PricingPage",
+    "kind": "owned-by",
+    "owner": "route:/es/pricing"
+  },
+  {
+    "target": "app/[locale]/pricing/page.tsx#Tiers",
+    "kind": "owned-by",
+    "owner": "route:/es/pricing"
+  },
+  {
+    "target": "app/[locale]/privacy-policy/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/es/privacy-policy"
+  },
+  {
+    "target": "app/[locale]/privacy-policy/page.tsx#PrivacyPolicy",
+    "kind": "owned-by",
+    "owner": "route:/es/privacy-policy"
+  },
+  {
+    "target": "app/[locale]/terms/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/es/terms"
+  },
+  {
+    "target": "app/[locale]/terms/page.tsx#TermsOfService",
+    "kind": "owned-by",
+    "owner": "route:/es/terms"
+  },
+  {
+    "target": "app/[locale]/use-cases/[persona]/[leaf]/page.tsx#Breadcrumbs",
+    "kind": "owned-by",
+    "owner": "route:/use-cases/small-businesses/shopify-store"
+  },
+  {
+    "target": "app/[locale]/use-cases/[persona]/[leaf]/page.tsx#LeafJsonLd",
+    "kind": "owned-by",
+    "owner": "route:/use-cases/small-businesses/shopify-store"
+  },
+  {
+    "target": "app/[locale]/use-cases/[persona]/[leaf]/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/use-cases/small-businesses/shopify-store"
+  },
+  {
+    "target": "app/[locale]/use-cases/[persona]/[leaf]/page.tsx#RelatedRails",
+    "kind": "owned-by",
+    "owner": "route:/use-cases/small-businesses/shopify-store"
+  },
+  {
+    "target": "app/[locale]/use-cases/[persona]/[leaf]/page.tsx#UseCaseLeafPage",
+    "kind": "owned-by",
+    "owner": "route:/use-cases/small-businesses/shopify-store"
+  },
+  {
+    "target": "app/[locale]/use-cases/agencies/page.tsx#AgenciesUseCasesPage",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/agencies"
+  },
+  {
+    "target": "app/[locale]/use-cases/agencies/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/agencies"
+  },
+  {
+    "target": "app/[locale]/use-cases/by-job/[slug]/page.tsx#Breadcrumbs",
+    "kind": "owned-by",
+    "owner": "route:/use-cases/by-job/content-marketing"
+  },
+  {
+    "target": "app/[locale]/use-cases/by-job/[slug]/page.tsx#JobJsonLd",
+    "kind": "owned-by",
+    "owner": "route:/use-cases/by-job/content-marketing"
+  },
+  {
+    "target": "app/[locale]/use-cases/by-job/[slug]/page.tsx#LeavesRail",
+    "kind": "owned-by",
+    "owner": "route:/use-cases/by-job/content-marketing"
+  },
+  {
+    "target": "app/[locale]/use-cases/by-job/[slug]/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/use-cases/by-job/content-marketing"
+  },
+  {
+    "target": "app/[locale]/use-cases/by-job/[slug]/page.tsx#PersonaRail",
+    "kind": "owned-by",
+    "owner": "route:/use-cases/by-job/content-marketing"
+  },
+  {
+    "target": "app/[locale]/use-cases/by-job/[slug]/page.tsx#UseCaseByJobPage",
+    "kind": "owned-by",
+    "owner": "route:/use-cases/by-job/content-marketing"
+  },
+  {
+    "target": "app/[locale]/use-cases/by-job/page.tsx#Breadcrumbs",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/by-job"
+  },
+  {
+    "target": "app/[locale]/use-cases/by-job/page.tsx#ByJobBreadcrumbJsonLd",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/by-job"
+  },
+  {
+    "target": "app/[locale]/use-cases/by-job/page.tsx#ByJobFinalCta",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/by-job"
+  },
+  {
+    "target": "app/[locale]/use-cases/by-job/page.tsx#ByJobGrid",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/by-job"
+  },
+  {
+    "target": "app/[locale]/use-cases/by-job/page.tsx#ByJobHero",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/by-job"
+  },
+  {
+    "target": "app/[locale]/use-cases/by-job/page.tsx#ByJobItemListJsonLd",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/by-job"
+  },
+  {
+    "target": "app/[locale]/use-cases/by-job/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/by-job"
+  },
+  {
+    "target": "app/[locale]/use-cases/by-job/page.tsx#UseCasesByJobIndexPage",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/by-job"
+  },
+  {
+    "target": "app/[locale]/use-cases/founders/page.tsx#FoundersUseCasesPage",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/founders"
+  },
+  {
+    "target": "app/[locale]/use-cases/founders/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/founders"
+  },
+  {
+    "target": "app/[locale]/use-cases/operations/page.tsx#OperationsUseCasesPage",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/operations"
+  },
+  {
+    "target": "app/[locale]/use-cases/operations/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/operations"
+  },
+  {
+    "target": "app/[locale]/use-cases/page.tsx#HubBuiltForSmb",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "app/[locale]/use-cases/page.tsx#HubByJob",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "app/[locale]/use-cases/page.tsx#HubByRole",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "app/[locale]/use-cases/page.tsx#HubCategories",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "app/[locale]/use-cases/page.tsx#HubDefinition",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "app/[locale]/use-cases/page.tsx#HubFaq",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "app/[locale]/use-cases/page.tsx#HubFeatured",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "app/[locale]/use-cases/page.tsx#HubFinalCta",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "app/[locale]/use-cases/page.tsx#HubHero",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "app/[locale]/use-cases/page.tsx#HubHireSteps",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "app/[locale]/use-cases/page.tsx#HubHowToChoose",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "app/[locale]/use-cases/page.tsx#HubItemListJsonLd",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "app/[locale]/use-cases/page.tsx#HubLeanStack",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "app/[locale]/use-cases/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "app/[locale]/use-cases/page.tsx#UseCasesHubPage",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "app/[locale]/use-cases/sales-teams/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/sales-teams"
+  },
+  {
+    "target": "app/[locale]/use-cases/sales-teams/page.tsx#SalesTeamsUseCasesPage",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/sales-teams"
+  },
+  {
+    "target": "app/[locale]/use-cases/small-businesses/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/small-businesses"
+  },
+  {
+    "target": "app/[locale]/use-cases/small-businesses/page.tsx#SmallBusinessesUseCasesPage",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/small-businesses"
+  },
+  {
+    "target": "app/[locale]/vs/[slug]/page.tsx#AtAGlance",
+    "kind": "owned-by",
+    "owner": "route:/vs/claude-code"
+  },
+  {
+    "target": "app/[locale]/vs/[slug]/page.tsx#Breadcrumbs",
+    "kind": "owned-by",
+    "owner": "route:/vs/claude-code"
+  },
+  {
+    "target": "app/[locale]/vs/[slug]/page.tsx#ComparisonJsonLd",
+    "kind": "owned-by",
+    "owner": "route:/vs/claude-code"
+  },
+  {
+    "target": "app/[locale]/vs/[slug]/page.tsx#ComparisonPage",
+    "kind": "owned-by",
+    "owner": "route:/vs/claude-code"
+  },
+  {
+    "target": "app/[locale]/vs/[slug]/page.tsx#Faq",
+    "kind": "owned-by",
+    "owner": "route:/vs/claude-code"
+  },
+  {
+    "target": "app/[locale]/vs/[slug]/page.tsx#FinalCta",
+    "kind": "owned-by",
+    "owner": "route:/vs/claude-code"
+  },
+  {
+    "target": "app/[locale]/vs/[slug]/page.tsx#Hero",
+    "kind": "owned-by",
+    "owner": "route:/vs/claude-code"
+  },
+  {
+    "target": "app/[locale]/vs/[slug]/page.tsx#HowToChoose",
+    "kind": "owned-by",
+    "owner": "route:/vs/claude-code"
+  },
+  {
+    "target": "app/[locale]/vs/[slug]/page.tsx#Migration",
+    "kind": "owned-by",
+    "owner": "route:/vs/claude-code"
+  },
+  {
+    "target": "app/[locale]/vs/[slug]/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/vs/claude-code"
+  },
+  {
+    "target": "app/[locale]/vs/[slug]/page.tsx#Pricing",
+    "kind": "owned-by",
+    "owner": "route:/vs/claude-code"
+  },
+  {
+    "target": "app/[locale]/vs/[slug]/page.tsx#ScoreDots",
+    "kind": "owned-by",
+    "owner": "route:/vs/claude-code"
+  },
+  {
+    "target": "app/[locale]/vs/[slug]/page.tsx#SkipLink",
+    "kind": "owned-by",
+    "owner": "route:/vs/claude-code"
+  },
+  {
+    "target": "app/[locale]/vs/[slug]/page.tsx#Verdict",
+    "kind": "owned-by",
+    "owner": "route:/vs/claude-code"
+  },
+  {
+    "target": "app/[locale]/vs/[slug]/page.tsx#WhereCompetitorWins",
+    "kind": "owned-by",
+    "owner": "route:/vs/claude-code"
+  },
+  {
+    "target": "app/[locale]/vs/[slug]/page.tsx#WhereDuetWins",
+    "kind": "owned-by",
+    "owner": "route:/vs/claude-code"
+  },
+  {
+    "target": "app/[locale]/vs/page.tsx#Breadcrumbs",
+    "kind": "owned-by",
+    "owner": "route:/es/vs"
+  },
+  {
+    "target": "app/[locale]/vs/page.tsx#ComparisonGrid",
+    "kind": "owned-by",
+    "owner": "route:/es/vs"
+  },
+  {
+    "target": "app/[locale]/vs/page.tsx#ComparisonHubBreadcrumbJsonLd",
+    "kind": "owned-by",
+    "owner": "route:/es/vs"
+  },
+  {
+    "target": "app/[locale]/vs/page.tsx#ComparisonHubItemListJsonLd",
+    "kind": "owned-by",
+    "owner": "route:/es/vs"
+  },
+  {
+    "target": "app/[locale]/vs/page.tsx#HubFinalCta",
+    "kind": "owned-by",
+    "owner": "route:/es/vs"
+  },
+  {
+    "target": "app/[locale]/vs/page.tsx#HubHero",
+    "kind": "owned-by",
+    "owner": "route:/es/vs"
+  },
+  {
+    "target": "app/[locale]/vs/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/es/vs"
+  },
+  {
+    "target": "app/[locale]/vs/page.tsx#PublishedCard",
+    "kind": "owned-by",
+    "owner": "route:/es/vs"
+  },
+  {
+    "target": "app/[locale]/vs/page.tsx#VsHubPage",
+    "kind": "owned-by",
+    "owner": "route:/es/vs"
+  },
+  {
+    "target": "app/install/page.tsx#Door",
+    "kind": "owned-by",
+    "owner": "route:/install"
+  },
+  {
+    "target": "app/install/page.tsx#Page",
+    "kind": "owned-by",
+    "owner": "route:/install"
+  },
+  {
+    "target": "app/install/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/install"
+  },
+  {
+    "target": "app/layout.tsx#RootLayout",
+    "kind": "owned-by",
+    "owner": "route:/"
+  },
+  {
+    "target": "app/playground/[id]/page.tsx#Page",
+    "kind": "owned-by",
+    "owner": "route:/playground/lander-nav"
+  },
+  {
+    "target": "app/playground/[id]/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/playground/lander-nav"
+  },
+  {
+    "target": "app/playground/[id]/playground-entry-content.tsx#PlaygroundEntryContent",
+    "kind": "owned-by",
+    "owner": "route:/playground/lander-nav"
+  },
+  {
+    "target": "app/playground/components/playground-shell.tsx#PlaygroundShell",
+    "kind": "owned-by",
+    "owner": "route:/playground/lander-nav"
+  },
+  {
+    "target": "app/playground/layout.tsx#PlaygroundLayout",
+    "kind": "owned-by",
+    "owner": "route:/playground"
+  },
+  {
+    "target": "app/playground/page.tsx#Page",
+    "kind": "owned-by",
+    "owner": "route:/playground"
+  },
+  {
+    "target": "app/playground/page.tsx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/playground"
+  },
+  {
+    "target": "components/analytics/ad-click-capture.tsx#AdClickCapture",
+    "kind": "owned-by",
+    "owner": "route:/"
+  },
+  {
+    "target": "components/blog/answer-box.tsx#AnswerBox",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/article-with-cta.tsx#ArticleWithCTA",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/blog-layout.tsx#BlogLayout",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/callout.tsx#Callout",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/category-filter.tsx#CategoryFilter",
+    "kind": "owned-by",
+    "owner": "route:/blog"
+  },
+  {
+    "target": "components/blog/code-highlight.tsx#CodeHighlight",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/duet-cta.tsx#DuetCTA",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/email-capture-form.tsx#EmailCaptureForm",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/floating-email-capture.tsx#FloatingEmailCapture",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/guide-layout.tsx#GuideLayout",
+    "kind": "owned-by",
+    "owner": "route:/guides/claude-code-for-founders"
+  },
+  {
+    "target": "components/blog/guide-toc.tsx#GuideTOC",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/inline-cta-injector.tsx#InlineCTAInjector",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/mdx-components.tsx#InlineCode",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/mdx-components.tsx#LinkedInPostPreview",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/mdx-components.tsx#PreComponent",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/mdx-components.tsx#ProductLink",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/post-card.tsx#PostCard",
+    "kind": "owned-by",
+    "owner": "route:/blog"
+  },
+  {
+    "target": "components/blog/related-section.tsx#RelatedSection",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/resources-cta.tsx#ResourcesCTA",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/social-share.tsx#SocialShare",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/themed-image.tsx#ThemedImage",
+    "kind": "owned-by",
+    "owner": "route:/blog"
+  },
+  {
+    "target": "components/blog/toc-sidebar.tsx#TocSidebar",
+    "kind": "owned-by",
+    "owner": "route:/guides/claude-code-for-founders"
+  },
+  {
+    "target": "components/blog/trailing-cta.tsx#CloudSkySvg",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/trailing-cta.tsx#TrailingCta",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/video.tsx#Video",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/blog/youtube-embed.tsx#YouTubeEmbed",
+    "kind": "owned-by",
+    "owner": "route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "components/common/app-store-badges.tsx#AppStoreBadges",
+    "kind": "owned-by",
+    "owner": "fixture:lander-footer"
+  },
+  {
+    "target": "components/i18n/locale-switcher.tsx#LocaleSwitcher",
+    "kind": "owned-by",
+    "owner": "fixture:lander-footer"
+  },
+  {
+    "target": "components/install-code-block.tsx#InstallCodeBlock",
+    "kind": "fixture",
+    "fixture": "lander-install-code"
+  },
+  {
+    "target": "components/landing/ambient-background.tsx#AmbientBackground",
+    "kind": "owned-by",
+    "owner": "route:/"
+  },
+  {
+    "target": "components/landing/atoms.tsx#CountUp",
+    "kind": "owned-by",
+    "owner": "fixture:lander-atoms"
+  },
+  {
+    "target": "components/landing/atoms.tsx#Eyebrow",
+    "kind": "owned-by",
+    "owner": "fixture:lander-atoms"
+  },
+  {
+    "target": "components/landing/atoms.tsx#LiveDot",
+    "kind": "owned-by",
+    "owner": "fixture:lander-atoms"
+  },
+  {
+    "target": "components/landing/campaign/campaign-landing.tsx#CampaignHero",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/campaign/campaign-landing.tsx#CampaignLanding",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/campaign/campaign-landing.tsx#ProblemBorrowed",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/campaign/campaign-landing.tsx#ProofBorrowed",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/campaign/campaign-render-map.tsx#renderCampaignLander",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/feature-demos/shared/demo-container.tsx#DemoContainer",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/for/landing-compose-mock.tsx#Dial",
+    "kind": "owned-by",
+    "owner": "route:/for/med-spas"
+  },
+  {
+    "target": "components/landing/for/landing-compose-mock.tsx#LandingComposeMock",
+    "kind": "owned-by",
+    "owner": "route:/for/med-spas"
+  },
+  {
+    "target": "components/landing/grain-veil.tsx#GrainVeil",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/hero-agents/agent-sprite.tsx#AgentFace",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/agent-sprite.tsx#AgentSprite",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/agent-world.tsx#AgentWorld",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/agent-world.tsx#DotGrid",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/index.tsx#HeroAgentViz",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/output-panel.tsx#DashboardSkeleton",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/output-panel.tsx#DocumentContent",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/output-panel.tsx#EmailContent",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/output-panel.tsx#getOutputIcon",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/output-panel.tsx#OutputBox",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/output-panel.tsx#OutputBoxContent",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/output-panel.tsx#OutputPanel",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/output-panel.tsx#ShimmerBar",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/output-panel.tsx#SocialPostContent",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/output-panel.tsx#StatusIndicator",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/session-event-panel.tsx#EventAvatar",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/session-event-panel.tsx#SessionEventPanel",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/session-event-panel.tsx#TypingDots",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-agents/workstream-indicator.tsx#WorkstreamIndicator",
+    "kind": "owned-by",
+    "owner": "fixture:lander-agent-team"
+  },
+  {
+    "target": "components/landing/hero-video.tsx#HeroVideo",
+    "kind": "owned-by",
+    "owner": "route:/"
+  },
+  {
+    "target": "components/landing/ink-mark.tsx#InkMark",
+    "kind": "owned-by",
+    "owner": "fixture:lander-atoms"
+  },
+  {
+    "target": "components/landing/landers/agent-cloud-landing.tsx#AgentCloudLanding",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/agent-cloud-landing.tsx#Hero",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/agent-cloud-sections.tsx#CompoundVignette",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/agent-cloud-sections.tsx#FilesVignette",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/agent-cloud-sections.tsx#MemoryTimelineVignette",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/agent-cloud-sections.tsx#ProblemSection",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/agent-cloud-sections.tsx#ResetSessionLoop",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/agent-cloud-sections.tsx#RunVignette",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/agent-cloud-sections.tsx#ValuePropsSection",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/agent-cloud-sections.tsx#WakeUpDemo",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/agent-cloud-sections.tsx#WakeUpSection",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/file-sharing-landing.tsx#FileSharingLanding",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/file-sharing-landing.tsx#Hero",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/file-sharing-sections.tsx#AccessControlDemo",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/file-sharing-sections.tsx#AccessControlSection",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/file-sharing-sections.tsx#AccessRow",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/file-sharing-sections.tsx#FamiliarDriveVignette",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/file-sharing-sections.tsx#FanSeatNode",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/file-sharing-sections.tsx#LiveSyncVignette",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/file-sharing-sections.tsx#LockKnock",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/file-sharing-sections.tsx#ProblemSection",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/file-sharing-sections.tsx#ReadWriteVignette",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/file-sharing-sections.tsx#ShareCascadeSection",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/file-sharing-sections.tsx#ShareFanVignette",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/file-sharing-sections.tsx#ValuePropsSection",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/hero-and-close.tsx#FinalCta",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/hero-and-close.tsx#FundraiseChip",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/hero-and-close.tsx#LanderHero",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/home-landing.tsx#HomeLanding",
+    "kind": "owned-by",
+    "owner": "route:/"
+  },
+  {
+    "target": "components/landing/landers/platform-landing.tsx#PlatformLanding",
+    "kind": "owned-by",
+    "owner": "route:/l/agent-cloud"
+  },
+  {
+    "target": "components/landing/landers/platform-sections.tsx#ChipRow",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/platform-sections.tsx#IntegrationsSection",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/platform-sections.tsx#PlatformHero",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/platform-sections.tsx#PrimitivesSection",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/platform-sections.tsx#RotatingWord",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/section-primitives.tsx#CascadeRail",
+    "kind": "owned-by",
+    "owner": "fixture:lander-atoms"
+  },
+  {
+    "target": "components/landing/landers/section-primitives.tsx#MeshGradient",
+    "kind": "owned-by",
+    "owner": "fixture:lander-atoms"
+  },
+  {
+    "target": "components/landing/landers/section-primitives.tsx#SectionHeader",
+    "kind": "owned-by",
+    "owner": "fixture:lander-atoms"
+  },
+  {
+    "target": "components/landing/landers/sections.tsx#DriftCursor",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/sections.tsx#EvaporatingMotes",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/sections.tsx#FaqsSection",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/sections.tsx#ForCompaniesSection",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/sections.tsx#HostVignette",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/sections.tsx#LiveCollabSection",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/sections.tsx#LiveDoc",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/sections.tsx#MemoryAgentChip",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/sections.tsx#MemoryDriveNode",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/sections.tsx#MemoryVignette",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/sections.tsx#MountVignette",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/sections.tsx#PillarsSection",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/sections.tsx#PipelineVignette",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/sections.tsx#ProblemSection",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/sections.tsx#RouterVignette",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/sections.tsx#ValuePropsSection",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/setup-section.tsx#SetupSection",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/share-section.tsx#ShareSection",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/train-bloom.tsx#TrainBloom",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/train-bloom.tsx#TrainBloomImpl",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/train-facets.tsx#CountUp",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/train-facets.tsx#DataScene",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/train-facets.tsx#FacetPanel",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/train-facets.tsx#FilesScene",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/train-facets.tsx#MemoryScene",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/train-facets.tsx#ToneScene",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/train-facets.tsx#ToolsScene",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/train-facets.tsx#WorkflowsScene",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/train-section.tsx#TrainDemo",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/train-section.tsx#TrainGlobe",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/train-section.tsx#TrainSection",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landers/train-section.tsx#TrainSwitcher",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landing-chrome.tsx#LandingChrome",
+    "kind": "owned-by",
+    "owner": "route:/"
+  },
+  {
+    "target": "components/landing/landing-cta.tsx#PrimaryButton",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landing-cta.tsx#PrimaryCta",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landing-cta.tsx#SecondaryButton",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landing-cta.tsx#SecondaryCta",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/landing-final-cta.tsx#LandingFinalCta",
+    "kind": "owned-by",
+    "owner": "route:/blog"
+  },
+  {
+    "target": "components/landing/landing-footer.tsx#DuetMark",
+    "kind": "owned-by",
+    "owner": "fixture:lander-footer"
+  },
+  {
+    "target": "components/landing/landing-footer.tsx#FooterColumn",
+    "kind": "owned-by",
+    "owner": "fixture:lander-footer"
+  },
+  {
+    "target": "components/landing/landing-footer.tsx#LandingFooter",
+    "kind": "owned-by",
+    "owner": "fixture:lander-footer"
+  },
+  {
+    "target": "components/landing/landing-footer.tsx#LinkedInBadge",
+    "kind": "owned-by",
+    "owner": "fixture:lander-footer"
+  },
+  {
+    "target": "components/landing/landing-footer.tsx#XBadge",
+    "kind": "owned-by",
+    "owner": "fixture:lander-footer"
+  },
+  {
+    "target": "components/landing/landing-nav-frost.tsx#LandingNavFrost",
+    "kind": "owned-by",
+    "owner": "fixture:lander-footer"
+  },
+  {
+    "target": "components/landing/landing-nav.tsx#LandingNav",
+    "kind": "owned-by",
+    "owner": "fixture:lander-footer"
+  },
+  {
+    "target": "components/landing/landing-nav.tsx#ThemeToggle",
+    "kind": "owned-by",
+    "owner": "fixture:lander-footer"
+  },
+  {
+    "target": "components/landing/landing-nav.tsx#UseCasesDropdown",
+    "kind": "owned-by",
+    "owner": "fixture:lander-footer"
+  },
+  {
+    "target": "components/landing/magnetic-button.tsx#MagneticButton",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/organization-json-ld.tsx#OrganizationJsonLd",
+    "kind": "owned-by",
+    "owner": "route:/"
+  },
+  {
+    "target": "components/landing/pricing/pricing-faq.tsx#PricingFaq",
+    "kind": "owned-by",
+    "owner": "route:/es/pricing"
+  },
+  {
+    "target": "components/landing/pricing/pricing-tiers.tsx#PricingTiers",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/pricing/pricing-tiers.tsx#SharedInclusions",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/pricing/pricing-tiers.tsx#TierCard",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/section-reveal.tsx#RevealItem",
+    "kind": "owned-by",
+    "owner": "fixture:lander-atoms"
+  },
+  {
+    "target": "components/landing/section-reveal.tsx#SectionReveal",
+    "kind": "owned-by",
+    "owner": "fixture:lander-atoms"
+  },
+  {
+    "target": "components/landing/shader-on-view.tsx#ShaderOnView",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/shader-on-view.tsx#ShaderOnViewInner",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/subtle-backdrop.tsx#SubtleBackdrop",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/landing/trusted-by.tsx#LaneGroup",
+    "kind": "owned-by",
+    "owner": "fixture:lander-atoms"
+  },
+  {
+    "target": "components/landing/trusted-by.tsx#LogoCell",
+    "kind": "owned-by",
+    "owner": "fixture:lander-atoms"
+  },
+  {
+    "target": "components/landing/trusted-by.tsx#TrustedBy",
+    "kind": "owned-by",
+    "owner": "fixture:lander-atoms"
+  },
+  {
+    "target": "components/landing/use-cases/use-cases-hub-grid.tsx#PersonaCard",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "components/landing/use-cases/use-cases-hub-grid.tsx#UseCasesHubGrid",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "components/landing/use-cases/use-cases-json-ld.tsx#UseCasesJsonLd",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "components/landing/use-cases/use-cases-persona-page.tsx#UseCasesPersonaPage",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases/agencies"
+  },
+  {
+    "target": "components/landing/use-cases/use-cases-shared-cta.tsx#UseCasesSharedCta",
+    "kind": "owned-by",
+    "owner": "route:/es/use-cases"
+  },
+  {
+    "target": "components/locale-auto-detect.tsx#LocaleAutoDetect",
+    "kind": "owned-by",
+    "owner": "route:/"
+  },
+  {
+    "target": "components/playground/agent-team-playground.tsx#AgentTeamPlayground",
+    "kind": "fixture",
+    "fixture": "lander-agent-team"
+  },
+  {
+    "target": "components/playground/atoms-playground.tsx#AtomsPlayground",
+    "kind": "fixture",
+    "fixture": "lander-atoms"
+  },
+  {
+    "target": "components/playground/atoms-playground.tsx#Specimen",
+    "kind": "owned-by",
+    "owner": "fixture:lander-atoms"
+  },
+  {
+    "target": "components/playground/chrome-playgrounds.tsx#FooterPlayground",
+    "kind": "fixture",
+    "fixture": "lander-footer"
+  },
+  {
+    "target": "components/playground/chrome-playgrounds.tsx#NavPlayground",
+    "kind": "fixture",
+    "fixture": "lander-nav"
+  },
+  {
+    "target": "components/playground/section-playgrounds.tsx#CollabSectionPlayground",
+    "kind": "fixture",
+    "fixture": "lander-collab"
+  },
+  {
+    "target": "components/playground/section-playgrounds.tsx#CompaniesSectionPlayground",
+    "kind": "fixture",
+    "fixture": "lander-companies"
+  },
+  {
+    "target": "components/playground/section-playgrounds.tsx#FaqSectionPlayground",
+    "kind": "fixture",
+    "fixture": "lander-faq"
+  },
+  {
+    "target": "components/playground/section-playgrounds.tsx#FinalCtaPlayground",
+    "kind": "fixture",
+    "fixture": "lander-final-cta"
+  },
+  {
+    "target": "components/playground/section-playgrounds.tsx#HomeIntegrationsPlayground",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/playground/section-playgrounds.tsx#HomeSetupPlayground",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/playground/section-playgrounds.tsx#HomeSharePlayground",
+    "kind": "owned-by",
+    "owner": "fixture:lander-collab"
+  },
+  {
+    "target": "components/playground/section-playgrounds.tsx#IntegrationsPlayground",
+    "kind": "fixture",
+    "fixture": "lander-integrations"
+  },
+  {
+    "target": "components/playground/section-playgrounds.tsx#PricingTiersPlayground",
+    "kind": "fixture",
+    "fixture": "lander-pricing-tiers"
+  },
+  {
+    "target": "components/playground/section-playgrounds.tsx#PrimitivesPlayground",
+    "kind": "fixture",
+    "fixture": "lander-primitives"
+  },
+  {
+    "target": "components/playground/section-playgrounds.tsx#ProblemSilosPlayground",
+    "kind": "fixture",
+    "fixture": "lander-problem-silos"
+  },
+  {
+    "target": "components/playground/section-playgrounds.tsx#SharePlayground",
+    "kind": "fixture",
+    "fixture": "lander-share"
+  },
+  {
+    "target": "components/playground/section-playgrounds.tsx#TrainSectionPlayground",
+    "kind": "fixture",
+    "fixture": "lander-train"
+  },
+  {
+    "target": "components/playground/section-playgrounds.tsx#ValuePropsPlayground",
+    "kind": "fixture",
+    "fixture": "lander-value-props"
+  },
+  {
+    "target": "components/static-site-providers.tsx#StaticSiteProviders",
+    "kind": "owned-by",
+    "owner": "route:/"
+  }
+]

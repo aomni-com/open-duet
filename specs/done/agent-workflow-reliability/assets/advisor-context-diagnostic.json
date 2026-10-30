@@ -1,0 +1,20 @@
+{
+  "runtimeRevision": "0cd51fb9130ff6a9d095b8dc6e70288bfcce7c40",
+  "image": "sha256:d891540b4c93f3a053ceb5d802fdf4cadcddea066ed248fa245229768c662d7b",
+  "originalEvalSha256": "b0dcd09d507f6d9dec9ee74e041dc9dc5d6919fdf78794b70e904363c3ecfcfa",
+  "overlayEvalSha256": "f2ac0124a7bad3a9a9ca56c95938dc9fd1e2b0963021f53833aff6d2723d8a83",
+  "modelOverride": null,
+  "originalTestTimeoutMs": 180000,
+  "attemptLimit": 1,
+  "exitCode": 0,
+  "passes": 1,
+  "assertions": 5,
+  "elapsedSeconds": 17.55,
+  "contextMarkerPresence": {
+    "archived": true,
+    "recent": true
+  },
+  "adviceReturnedBothMarkers": true,
+  "evidenceDirectory": "/tmp/workflow-advisor-context-diagnostic",
+  "limitation": "A single passing diagnostic shows marker retention and use in this sample, not the cause of the earlier failure or a reliability rate. Original prompt and assertions unchanged; only context/result logging added."
+}

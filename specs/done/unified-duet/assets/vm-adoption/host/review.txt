@@ -1,0 +1,1 @@
+Independent Codex review: no actionable regressions in the host migration controller, tests and transfer fixture. Reviewer ran 22 cases; its sandbox blocked five HTTP-listener cases. Root ran the actual joined suite without that restriction: 34 passed, 88 assertions.

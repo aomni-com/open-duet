@@ -1,0 +1,140 @@
+import { EndpointReference } from '../../components/endpoint-reference'
+
+export const metadata = {
+  title: 'Agents',
+  description: 'Register folders that shape the sessions started inside them.',
+  alternates: { canonical: '/agents/' },
+}
+
+<p className="eyebrow">Resource guide</p>
+
+# An agent is a folder that shapes its sessions
+
+Agent registration marks a workspace folder as an agent with a stable slug. An optional `name` is
+the human-facing label; when it is unset, clients display the registered folder name. An optional
+`icon` is a safe path relative to that folder, such as `icon.png` or `assets/icon.png`—not an image
+URL or embedded bytes. The folder's contents are the agent's behavior: an `AGENTS.md` file is its
+system prompt, an `.agents/skills` directory holds its own skills, and an `agent.json` file may configure
+an onboarding experience, whether the agent is trainable, and a `suggestedFirstMessage` — text the
+agent's empty default chat opens with, shown as a message from the agent; a client may send it with
+the user's first message, and creation then records it as the agent's first message in the session's
+history, quoted to the agent so the user's reply lands in context. Any session whose working directory
+resolves to this folder (or a descendant) adopts that prompt, those skills, and a memory store isolated to the agent.
+Identity belongs to the registration, not to the files: never write a slug, id, or path into
+`agent.json`.
+
+{/* schema: RegisterAgentRequestSchema */}
+
+```json
+{
+  "path": "agents/investor-update",
+  "slug": "investor-update",
+  "name": "Investor Update",
+  "icon": "icon.png"
+}
+```
+
+## Sessions resolve to the nearest agent
+
+A session belongs to the agent that is the nearest registered ancestor of its working directory; a
+session started at the drive root belongs to the default agent and behaves exactly as before agents
+existed. The session records which agent it resolved to, so clients can attribute a session to its
+agent without re-deriving it. That attribution is a snapshot taken when the session is created:
+renaming or deleting an agent later never rewrites the history of sessions it already ran.
+
+Each registered agent also has its own server-resolved `default` session alias. Its first message
+starts the session at the agent anchor, so ordinary cwd attribution binds it to that agent; it never
+shares identity with the separate drive-root default. As with the root alias, reads are lazy and
+permanent session deletion clears the binding.
+
+## The default agent has a name too
+
+The drive root is an agent like any other, and it can be renamed — but it has no registration to
+carry the name, so the name lives on the workspace and the rename is addressed at the reserved slug
+`root` rather than a registration's own. `root` is reserved in every namespace for exactly this
+reason: no workspace, app, publish, or agent may claim it, so the address can never be ambiguous.
+Everything else about the default agent reads the same as a registered one.
+
+## Reconcile, do not duplicate
+
+List existing agents before creating one from automation. Metadata updates change `name` and `icon`
+on the existing slug and never touch the folder's path identity. Registering a path that is already
+an agent updates only the fields the request carries: an omitted `name` or `icon` keeps the stored
+one rather than clearing it, so a re-registration cannot silently undo a rename. There is no way to
+clear a name back to the slug — send the name you want. Deleting an agent removes the registration
+but deliberately leaves the agent's isolated memory and logs in place, so a re-registration at the
+same path can resume its history.
+Disable an agent when it should stay registered but stop shaping new sessions. Disablement removes
+the agent from future launch resolution without stopping sessions that are already running;
+re-enabling it restores launch resolution. Use deletion only when the registration itself should
+disappear.
+
+## Shared agents arrive as replicas
+
+Sharing an agent's folder materializes a replica agent in the recipient's workspace, tagged with its
+origin, running on the recipient's own computer. A replica starts with fresh, empty observational
+memory. The agent's curated `.agents/memories` files are ordinary shared content and travel with
+the folder, while its private observational memory and logs never do. Treat a replica as read-through
+configuration that converges to the origin, not something to edit in place, and expect origin edits
+to fan out to it automatically.
+
+## Onboarding gates an agent until its workspace completes it
+
+An agent that needs setup before it is useful declares `onboarding` in `agent.json`. Until the
+workspace marks that agent onboarded, clients collapse it to a single onboarding action; the agent's
+sessions and apps stay out of reach, while training and management do not. Two kinds exist.
+`{"kind":"chat"}` runs a conversation whose system prompt is assembled from two layers: the agent's
+optional `ONBOARDING.md`, then a Duet-owned block that instructs the agent to mark itself onboarded
+once the interview is complete — but never on its first turn and never before the user has replied at
+least once, so a thin or missing `ONBOARDING.md` cannot produce an agent that unlocks itself before
+the user has said anything. `ONBOARDING.md` is optional like `AGENTS.md`; what never happens is a
+fall back to `AGENTS.md`, which would run the agent's ordinary persona while the user believes they
+are being onboarded. `{"kind":"app","app":"<path>"}` opens one of the agent's own apps,
+addressed by a path relative to the agent folder — never an app slug, because a replica's slug may be
+suffixed to avoid a collision while its path is preserved. Such an app is hidden once onboarding
+completes unless it sets `hideAfterOnboarded` to `false`, and it stays reachable by direct link
+either way.
+
+An app onboarding cannot connect an integration. Every provider's authorization page refuses to
+render in an iframe, and an onboarding app runs inside one, so the page can only open a separate
+browser tab — which returns to the app's own address rather than into the product, stranding the
+user on a bare copy of the app. Connections belong to a chat onboarding, whose script hands the
+user an authorize URL built with a `redirectTo` path inside the product. Reserve app onboarding
+for settings, inputs, and uploads a page genuinely handles better than a conversation.
+
+Whichever kind runs, it ends by calling the onboarded endpoint itself; that call is what reveals the
+full agent, and nothing else performs it. A chat onboarding does not write that instruction itself —
+Duet appends it as a system-prompt block after `ONBOARDING.md`, already resolved to that agent — so
+`ONBOARDING.md` is purely the interview. Stating precisely what counts as done is what keeps an agent
+from completing before the user has supplied anything. An onboarding app has no session and no agent
+slug, so it completes through its own route addressed by nothing but its credential — Duet resolves
+which agent's folder the app lives in — and it must declare the `agents` scope to hold it. Onboarding conversations are ordinary resumable sessions that no list or search
+returns, and reopening the action returns to the same one rather than starting another.
+
+Completion is per workspace and never travels across a share: each recipient of a shared agent
+onboards their own replica, and neither side's completion affects the other. Adding onboarding to an
+agent that is already installed elsewhere therefore re-locks it for every workspace that has not
+completed it. `"trainable": false` is the companion setting, removing the training surface for agents
+that have no use for it; it changes no memory behavior, and the default agent is always trainable.
+
+{/* schema: SetAgentOnboardedRequestSchema */}
+
+```json
+{
+  "onboarded": true
+}
+```
+
+## Keep policy on the server
+
+The `agents` scope permits access to this resource but does not replace workspace roles. Viewers can
+list and inspect agents; editors can register, rename, disable, re-enable, and delete them. Configure
+agent behavior by writing the folder's `AGENTS.md`, `.agents/skills`, and `agent.json` through the
+files API—those are ordinary workspace content—rather than through this resource, which owns only
+the registration.
+
+Deleting an agent also removes its folder and registered descendants, including nested agents
+and apps. It is not a file-preserving unregister operation. Move any content you want to keep
+outside the agent folder before deleting it.
+
+<EndpointReference category="agents" />

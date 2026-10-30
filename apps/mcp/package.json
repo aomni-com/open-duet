@@ -1,0 +1,31 @@
+{
+  "name": "mcp",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit -p tsconfig.check.json",
+    "lint": "oxlint",
+    "probe:file-resources": "bun scripts/file-resource-probe.ts",
+    "test": "bun test src"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@repo/agent": "*",
+    "@repo/contract": "*",
+    "ai": "^7",
+    "hono": "^4.10.8",
+    "undici": "^7.29.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@repo/test-harness": "*",
+    "@repo/typescript-config": "*",
+    "@types/bun": "catalog:",
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
+  }
+}

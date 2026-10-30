@@ -1,0 +1,171 @@
+{
+  "kind": "screenshot-parity-diff",
+  "generatedAt": "2026-07-17T17:57:33.040Z",
+  "note": "Lower parityDistance means the candidate is closer to the reference for this fixed pair. This is a distance metric, not an acceptance gate.",
+  "pairCount": 2,
+  "worstPair": "share-mobile",
+  "results": [
+    {
+      "id": "share-mobile",
+      "current": "specs/done/resend-transactional-email-templates/assets/reference/chat-app-generic-invite-mobile.png",
+      "candidate": "apps/web/tests/visual/__screenshots__/mobile/playground.spec.ts/email-share-invite.png",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "parityDistance": 0.1662,
+      "grayscale": {
+        "mae": 11.86135,
+        "rmse": 39.55261,
+        "diffRatio16": 0.09777,
+        "diffRatio32": 0.07642,
+        "diffRatio64": 0.06608,
+        "pixelmatchRatio": 0.08591
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.97425,
+        "terrainLikeRatioCandidate": 0.9723,
+        "avgLuminanceCurrent": 246.792,
+        "avgLuminanceCandidate": 245.43364,
+        "avgLuminanceDelta": -1.35836,
+        "edgeEnergyCurrent": 0.05384,
+        "edgeEnergyCandidate": 0.07704,
+        "edgeEnergyRatio": 1.43085,
+        "edgeDiffRatio32": 0.16178
+      },
+      "artifacts": {
+        "sideBySide": "comparison/share-mobile-side-by-side.png",
+        "currentGray": "comparison/share-mobile-current-gray.png",
+        "candidateGray": "comparison/share-mobile-candidate-gray.png",
+        "absDiff": "comparison/share-mobile-absdiff.png",
+        "pixelmatch": "comparison/share-mobile-pixelmatch.png",
+        "currentEdges": "comparison/share-mobile-current-edges.png",
+        "candidateEdges": "comparison/share-mobile-candidate-edges.png",
+        "edgeDiff": "comparison/share-mobile-edge-diff.png"
+      },
+      "worldCrop": {
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 625
+        },
+        "parityDistance": 0.19727,
+        "grayscale": {
+          "mae": 16.01756,
+          "rmse": 45.96279,
+          "diffRatio16": 0.132,
+          "diffRatio32": 0.1032,
+          "diffRatio64": 0.08923,
+          "pixelmatchRatio": 0.11601
+        },
+        "contentProxies": {
+          "blackRatioCurrent": 0,
+          "blackRatioCandidate": 0,
+          "terrainLikeRatioCurrent": 0.96523,
+          "terrainLikeRatioCandidate": 0.9626,
+          "avgLuminanceCurrent": 244.79101,
+          "avgLuminanceCandidate": 242.95668,
+          "avgLuminanceDelta": -1.83433,
+          "edgeEnergyCurrent": 0.07271,
+          "edgeEnergyCandidate": 0.10404,
+          "edgeEnergyRatio": 1.43085,
+          "edgeDiffRatio32": 0.21847
+        },
+        "artifacts": {
+          "sideBySide": "comparison/share-mobile-world-crop-side-by-side.png",
+          "currentGray": "comparison/share-mobile-world-crop-current-gray.png",
+          "candidateGray": "comparison/share-mobile-world-crop-candidate-gray.png",
+          "absDiff": "comparison/share-mobile-world-crop-absdiff.png",
+          "pixelmatch": "comparison/share-mobile-world-crop-pixelmatch.png",
+          "currentEdges": "comparison/share-mobile-world-crop-current-edges.png",
+          "candidateEdges": "comparison/share-mobile-world-crop-candidate-edges.png",
+          "edgeDiff": "comparison/share-mobile-world-crop-edge-diff.png"
+        }
+      }
+    },
+    {
+      "id": "share-desktop",
+      "current": "specs/done/resend-transactional-email-templates/assets/reference/chat-app-generic-invite-desktop.png",
+      "candidate": "apps/web/tests/visual/__screenshots__/desktop/playground.spec.ts/email-share-invite.png",
+      "dimensions": {
+        "width": 1440,
+        "height": 900
+      },
+      "parityDistance": 0.0996,
+      "grayscale": {
+        "mae": 3.6209,
+        "rmse": 22.13838,
+        "diffRatio16": 0.02831,
+        "diffRatio32": 0.02261,
+        "diffRatio64": 0.01989,
+        "pixelmatchRatio": 0.02454
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.99334,
+        "terrainLikeRatioCandidate": 0.99273,
+        "avgLuminanceCurrent": 251.01619,
+        "avgLuminanceCandidate": 250.69164,
+        "avgLuminanceDelta": -0.32454,
+        "edgeEnergyCurrent": 0.01452,
+        "edgeEnergyCandidate": 0.0205,
+        "edgeEnergyRatio": 1.41182,
+        "edgeDiffRatio32": 0.04367
+      },
+      "artifacts": {
+        "sideBySide": "comparison/share-desktop-side-by-side.png",
+        "currentGray": "comparison/share-desktop-current-gray.png",
+        "candidateGray": "comparison/share-desktop-candidate-gray.png",
+        "absDiff": "comparison/share-desktop-absdiff.png",
+        "pixelmatch": "comparison/share-desktop-pixelmatch.png",
+        "currentEdges": "comparison/share-desktop-current-edges.png",
+        "candidateEdges": "comparison/share-desktop-candidate-edges.png",
+        "edgeDiff": "comparison/share-desktop-edge-diff.png"
+      },
+      "worldCrop": {
+        "bounds": {
+          "x": 389,
+          "y": 18,
+          "width": 662,
+          "height": 522
+        },
+        "parityDistance": 0.16146,
+        "grayscale": {
+          "mae": 13.40656,
+          "rmse": 42.8174,
+          "diffRatio16": 0.10399,
+          "diffRatio32": 0.08455,
+          "diffRatio64": 0.07438,
+          "pixelmatchRatio": 0.0899
+        },
+        "contentProxies": {
+          "blackRatioCurrent": 0,
+          "blackRatioCandidate": 0,
+          "terrainLikeRatioCurrent": 0.97501,
+          "terrainLikeRatioCandidate": 0.97275,
+          "avgLuminanceCurrent": 246.92797,
+          "avgLuminanceCandidate": 245.88405,
+          "avgLuminanceDelta": -1.04393,
+          "edgeEnergyCurrent": 0.05445,
+          "edgeEnergyCandidate": 0.0751,
+          "edgeEnergyRatio": 1.37931,
+          "edgeDiffRatio32": 0.15921
+        },
+        "artifacts": {
+          "sideBySide": "comparison/share-desktop-world-crop-side-by-side.png",
+          "currentGray": "comparison/share-desktop-world-crop-current-gray.png",
+          "candidateGray": "comparison/share-desktop-world-crop-candidate-gray.png",
+          "absDiff": "comparison/share-desktop-world-crop-absdiff.png",
+          "pixelmatch": "comparison/share-desktop-world-crop-pixelmatch.png",
+          "currentEdges": "comparison/share-desktop-world-crop-current-edges.png",
+          "candidateEdges": "comparison/share-desktop-world-crop-candidate-edges.png",
+          "edgeDiff": "comparison/share-desktop-world-crop-edge-diff.png"
+        }
+      }
+    }
+  ]
+}

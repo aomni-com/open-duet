@@ -1,0 +1,368 @@
+[
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/admin/login-as",
+    "status": 200,
+    "durationMs": 993
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/whoami",
+    "status": 200,
+    "durationMs": 528
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/vm/runtime-release/manifest",
+    "status": 200,
+    "durationMs": 233
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/vm/runtime-release/manifest",
+    "status": 200,
+    "durationMs": 4464
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/health",
+    "status": 200,
+    "durationMs": 475
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/vm/runtime-release/manifest",
+    "status": 200,
+    "durationMs": 153
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/health",
+    "status": 200,
+    "durationMs": 370
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/api/version",
+    "status": 200,
+    "durationMs": 242
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/deployment.json",
+    "status": 200,
+    "durationMs": 370
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/deployment",
+    "status": 200,
+    "durationMs": 430
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/workspaces",
+    "status": 202,
+    "durationMs": 915
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/ws/unified-duet-staging-e2e-synthetic/invites",
+    "status": 201,
+    "durationMs": 1117
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/ws/unified-duet-staging-e2e-synthetic/members",
+    "status": 200,
+    "durationMs": 667
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/device/code",
+    "status": 200,
+    "durationMs": 606
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/device/token",
+    "status": 200,
+    "durationMs": 643
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/whoami",
+    "status": 200,
+    "durationMs": 402
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/device/token",
+    "status": 200,
+    "durationMs": 588
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/whoami",
+    "status": 200,
+    "durationMs": 425
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/ws/unified-duet-staging-e2e-synthetic/files",
+    "status": 200,
+    "durationMs": 524
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/ws/unified-4038b6/files",
+    "status": 200,
+    "durationMs": 828
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/chat/completions",
+    "status": 403,
+    "durationMs": 1514
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/chat/completions",
+    "status": 403,
+    "durationMs": 448
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/chat/completions",
+    "status": 200,
+    "durationMs": 1275
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/chat/completions",
+    "status": 200,
+    "durationMs": 1576
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/user/sync-machines",
+    "status": 200,
+    "durationMs": 753
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/user/sync-machines",
+    "status": 200,
+    "durationMs": 712
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/user/api-keys",
+    "status": 201,
+    "durationMs": 649
+  },
+  {
+    "method": "PATCH",
+    "target": "https://service.example.invalid/v1/ws/unified-4038b6/members/n97dkak53bqv3ft58znwtby7ch8fmgbj",
+    "status": 200,
+    "durationMs": 914
+  },
+  {
+    "method": "PUT",
+    "target": "https://service.example.invalid/v1/ws/unified-4038b6/files/viewer-denied.txt",
+    "status": 403,
+    "durationMs": 334
+  },
+  {
+    "method": "PATCH",
+    "target": "https://service.example.invalid/v1/ws/unified-4038b6/members/n97dkak53bqv3ft58znwtby7ch8fmgbj",
+    "status": 200,
+    "durationMs": 888
+  },
+  {
+    "method": "DELETE",
+    "target": "https://service.example.invalid/v1/ws/unified-duet-staging-e2e-synthetic/members/n97dkak53bqv3ft58znwtby7ch8fmgbj",
+    "status": 200,
+    "durationMs": 1066
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/whoami",
+    "status": 200,
+    "durationMs": 356
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/ws/unified-duet-staging-e2e-synthetic/files",
+    "status": 403,
+    "durationMs": 349
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/chat/completions",
+    "status": 403,
+    "durationMs": 378
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/ws/unified-duet-staging-e2e-synthetic/mirror-devices",
+    "status": 403,
+    "durationMs": 383
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/ws/unified-4038b6/mirror-devices",
+    "status": 200,
+    "durationMs": 725
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/ws/unified-duet-staging-e2e-synthetic/mirror-devices",
+    "status": 403,
+    "durationMs": 363
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/ws/unified-4038b6/mirror-devices",
+    "status": 200,
+    "durationMs": 710
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/ws/unified-duet-staging-e2e-synthetic/mirror-devices",
+    "status": 200,
+    "durationMs": 438
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/ws/unified-duet-staging-e2e-synthetic/mirror-devices",
+    "status": 200,
+    "durationMs": 528
+  },
+  {
+    "method": "PUT",
+    "target": "https://service.example.invalid/v1/ws/unified-4038b6/files/removal-observer.txt",
+    "status": 200,
+    "durationMs": 556
+  },
+  {
+    "method": "DELETE",
+    "target": "https://service.example.invalid/v1/user/sync-machines/ph7ejhkff11rndpp2ehy2azwc18fnp9j",
+    "status": 200,
+    "durationMs": 680
+  },
+  {
+    "method": "DELETE",
+    "target": "https://service.example.invalid/v1/user/sync-machines/ph7ejhkff11rndpp2ehy2azwc18fnp9j",
+    "status": 200,
+    "durationMs": 679
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/ws/unified-4038b6/mirror-devices",
+    "status": 404,
+    "durationMs": 604
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/ws/unified-4038b6/mirror-devices",
+    "status": 200,
+    "durationMs": 502
+  },
+  {
+    "method": "PUT",
+    "target": "https://service.example.invalid/v1/ws/unified-4038b6/files/survivor.txt",
+    "status": 200,
+    "durationMs": 378
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/user/sync-machines",
+    "status": 200,
+    "durationMs": 610
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/user/api-keys",
+    "status": 200,
+    "durationMs": 617
+  },
+  {
+    "method": "DELETE",
+    "target": "https://service.example.invalid/v1/user/api-keys/jh78g7qydm895k9q5hccwpgaan8fnvjv",
+    "status": 200,
+    "durationMs": 635
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/whoami",
+    "status": 401,
+    "durationMs": 379
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/ws/unified-4038b6/mirror-devices",
+    "status": 401,
+    "durationMs": 356
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/chat/completions",
+    "status": 401,
+    "durationMs": 415
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/whoami",
+    "status": 200,
+    "durationMs": 473
+  },
+  {
+    "method": "PUT",
+    "target": "https://service.example.invalid/v1/ws/unified-duet-staging-e2e-synthetic/files/unified-4038b6.ts",
+    "status": 200,
+    "durationMs": 522
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/ws/unified-duet-staging-e2e-synthetic/files/unified-duet-receipt.json",
+    "status": 200,
+    "durationMs": 612
+  },
+  {
+    "method": "DELETE",
+    "target": "https://service.example.invalid/v1/ws/unified-4038b6/members/n97dkak53bqv3ft58znwtby7ch8fmgbj",
+    "status": 200,
+    "durationMs": 1036
+  },
+  {
+    "method": "GET",
+    "target": "https://service.example.invalid/v1/whoami",
+    "status": 200,
+    "durationMs": 382
+  },
+  {
+    "method": "POST",
+    "target": "https://service.example.invalid/v1/chat/completions",
+    "status": 403,
+    "durationMs": 427
+  },
+  {
+    "method": "DELETE",
+    "target": "https://service.example.invalid/v1/user/api-keys/jh7e9nb1s336bsmqcxnqjkdccn8fmqx6",
+    "status": 200,
+    "durationMs": 653
+  },
+  {
+    "method": "DELETE",
+    "target": "https://service.example.invalid/v1/user/sync-machines/ph70vf4ttfm1jf4abme7nf4q8s8fnnfe",
+    "status": 200,
+    "durationMs": 582
+  },
+  {
+    "method": "DELETE",
+    "target": "https://service.example.invalid/v1/user/sync-machines/ph7ejhkff11rndpp2ehy2azwc18fnp9j",
+    "status": 200,
+    "durationMs": 631
+  }
+]

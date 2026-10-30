@@ -1,0 +1,30 @@
+{
+  "journey": "session-lineage-api",
+  "runId": "staging-e2e-synthetic",
+  "target": "https://service.example.invalid",
+  "date": "2026-08-28",
+  "result": "pass",
+  "lineage": {
+    "topLevelCount": 2,
+    "directChildCount": 2,
+    "grandchildCount": 1,
+    "limitOnePages": 2,
+    "buckets": ["done", "scheduled"]
+  },
+  "archive": {
+    "selectedChildOnly": true
+  },
+  "deletion": {
+    "status": 204,
+    "body": "",
+    "subtreePublicStatuses": [404, 404, 404, 404],
+    "finalCanonicalRows": 0,
+    "finalDeletionWorkRows": 0,
+    "finalDependentRows": 0,
+    "unrelatedControlSurvived": true
+  },
+  "cleanup": {
+    "status": "pass",
+    "orphans": 0
+  }
+}

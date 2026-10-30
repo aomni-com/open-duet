@@ -1,0 +1,51 @@
+{
+  "status": "complete",
+  "provenance": {
+    "fixtureId": "staging-e2e-synthetic",
+    "vmName": "duet-test-staging-e2e-synthetic",
+    "execution": "provider-vm",
+    "controlPlane": "controlled-loopback"
+  },
+  "observation": {
+    "status": "pass",
+    "provenance": {
+      "environment": "staging",
+      "disposable": true,
+      "fixtureId": "staging-e2e-synthetic",
+      "vmName": "duet-test-staging-e2e-synthetic",
+      "execution": "provider-vm",
+      "controlPlane": "controlled-loopback",
+      "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+      "status": "pass"
+    },
+    "drills": [
+      {
+        "environment": "staging",
+        "disposable": true,
+        "fixtureId": "staging-e2e-synthetic",
+        "vmName": "duet-test-staging-e2e-synthetic",
+        "execution": "provider-vm",
+        "controlPlane": "controlled-loopback",
+        "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+        "status": "pass",
+        "kind": "interrupted-adoption",
+        "observations": {
+          "interruptedPhase": "started",
+          "recoveredVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+          "stateBeforeSha256": "1440bb37a9ca583b3cc978dc33f85ac5139dcd8bfb05572cf3b4e94d5d98fead",
+          "stateAfterSha256": "1440bb37a9ca583b3cc978dc33f85ac5139dcd8bfb05572cf3b4e94d5d98fead",
+          "credentialBeforeSha256": "1eebad1dc3b2d21ad489e621e86610d813f9fdef778564526dcfe379b4bb8c30",
+          "credentialAfterSha256": "1eebad1dc3b2d21ad489e621e86610d813f9fdef778564526dcfe379b4bb8c30"
+        }
+      }
+    ],
+    "bootIdBefore": "360654f7-3b9e-4b30-9974-c9763976275d",
+    "bootIdAfter": "360654f7-3b9e-4b30-9974-c9763976275d",
+    "preservedStateSha256": "1440bb37a9ca583b3cc978dc33f85ac5139dcd8bfb05572cf3b4e94d5d98fead",
+    "preservedCredentialSha256": "1eebad1dc3b2d21ad489e621e86610d813f9fdef778564526dcfe379b4bb8c30",
+    "nativeMemoryVerified": true
+  },
+  "cleanup": {
+    "verifiedAbsent": true
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "stream",
+  "globalPassThroughEnv": ["*"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "check-types": { "dependsOn": ["^check-types"] },
+    "lint": { "dependsOn": ["^lint"] },
+    "test": { "dependsOn": ["^build"], "env": ["DUET_TEST_NONCE"] },
+    "visual": { "cache": false, "persistent": false, "dependsOn": [] },
+    "visual:approve": { "cache": false, "persistent": false, "dependsOn": [] },
+    "visual:approve:force": { "cache": false, "persistent": false, "dependsOn": [] },
+    "dev": { "cache": false, "persistent": true }
+  }
+}

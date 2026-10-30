@@ -1,0 +1,412 @@
+---
+title: 'Cómo ejecutar Claude Code en la nube (persistente 24/7)'
+description: 'Ejecuta Claude Code en un servidor en la nube persistente. Mantén sesiones vivas durante días en web, móvil y escritorio, sin laptop. Configuración en 5 minutos.'
+date: '2026-03-01'
+updatedAt: '2026-05-07'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/2.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'guides'
+tags: ['claude-code', 'cloud', 'setup', 'ai-coding']
+type: 'article'
+image: '/blog/how-to-run-claude-code-in-the-cloud/cover.png'
+relatedPosts:
+  - slug: 'claude-code-pricing'
+    context: 'Claude Code Pro vs Max vs costos de API: desglose completo de precios y escenarios mensuales reales'
+  - slug: 'codex-vs-claude-code'
+    context: 'Codex vs Claude Code: comparación de funciones, benchmarks y qué agente usar'
+  - slug: 'claude-code-vs-cursor-vs-codex'
+    context: 'Compara las herramientas de programación con AI locales y cuándo usar alternativas alojadas en la nube'
+  - slug: 'how-to-set-up-a-24-7-ai-agent'
+    context: 'Configura agentes de AI persistentes que corren de forma continua sin supervisión'
+  - slug: 'how-to-build-and-deploy-a-web-app-using-only-ai'
+    context: 'Usa agentes de AI alojados en la nube para lanzar aplicaciones completas'
+  - slug: 'openclaw-vs-managed-ai-agent-platforms'
+    context: 'Cuándo autoalojar frente a usar un servicio gestionado'
+  - slug: 'how-to-use-ai-to-run-startup-operations-with-a-3-person-team'
+    context: 'Aprovecha los agentes en la nube persistentes para workflows operativos'
+  - slug: 'how-to-scrape-analyze-and-monitor-any-website'
+    context: 'Ejecuta trabajos de scraping de larga duración en agentes alojados en la nube'
+cta:
+  title: 'Claude Code en la nube, con un clic.'
+  subtitle: 'Duet entrega Claude Code en un sandbox persistente que puedes retomar desde web, móvil o escritorio. Sin VPS que aprovisionar, sin tmux que cuidar.'
+  buttonText: 'Ejecuta Claude Code en la nube'
+  href: '/sign-in?from=blog-cc-cloud'
+locale: es-419
+translationKey: 'how-to-run-claude-code-in-the-cloud'
+---
+
+# Cómo ejecutar Claude Code en la nube sin instalar nada
+
+Puedes ejecutar Claude Code en un servidor Linux alojado en la nube en lugar de instalarlo localmente. Esto te da sesiones de codificación persistentes que corren durante horas o días sin agotar la batería de tu laptop, acceso desde cualquier dispositivo y la capacidad de compartir el mismo agente de AI con todo tu equipo. Claude Code alojado en la nube elimina la configuración de Node.js, mantiene las sesiones vivas cuando cierras tu laptop y funciona exactamente como el CLI pero en un entorno remoto. Para el manual del operador de dirigir una empresa de esta manera, consulta [Duet AI para fundadores: el modo fundador como sistema operativo](/guides/duet-ai-for-founders).
+
+## Por qué importa tu entorno de Claude Code en la nube
+
+Un entorno de Claude Code en la nube es un servidor Linux remoto que ejecuta el CLI de Claude Code de forma continua. En lugar de correr el agente en tu laptop y perder el contexto cada vez que cierras la tapa, un entorno alojado de Claude Code mantiene la sesión viva en un servidor al que te conectas desde cualquier lugar. El entorno en la nube persiste tu estado de git, la memoria del agente y las integraciones MCP entre sesiones, así que el agente retoma exactamente donde lo dejó.
+
+Los equipos adoptan una configuración de Claude Code en la nube por tres razones: persistencia (las sesiones sobreviven al cierre del navegador y al reinicio de la laptop), acceso (cualquier dispositivo, cualquier ubicación) y colaboración (varios miembros del equipo pueden trabajar con el mismo agente mediante archivos e historial de sesiones compartidos). Si estás evaluando si mover tu workflow de Claude Code fuera de tu máquina local, el resto de esta guía recorre exactamente cómo configurarlo.
+
+## Por qué ejecutar Claude Code localmente tiene limitaciones
+
+El CLI estándar de Claude Code corre en tu máquina local y se detiene cuando cierras tu laptop o se agota la batería. Cada sesión está atada a la ventana de tu terminal. Cuando tu computadora entra en suspensión, el agente deja de funcionar.
+
+Estas son las limitaciones centrales:
+
+- **Agotamiento de la batería:** las sesiones largas de codificación consumen mucha energía
+- **Interrupción de sesión:** cerrar tu laptop mata al agente a mitad de la tarea
+- **Acceso desde un solo dispositivo:** no puedes cambiar entre tu laptop, tablet o teléfono
+- **Sin acceso de equipo:** otros miembros del equipo no pueden ver ni interactuar con el trabajo del agente
+- **Restricciones de recursos locales:** los repos grandes y las operaciones concurrentes ralentizan tu máquina
+- **Sin persistencia:** la memoria y el contexto del agente se reinician cuando reinicias
+
+Si ejecutas sesiones de refactoring de varias horas o quieres que tu agente siga trabajando durante la noche, la ejecución local no funciona. Necesitas un servidor persistente.
+
+## Qué significa realmente Claude Code alojado en la nube
+
+Claude Code alojado en la nube es el mismo CLI corriendo en un servidor Linux remoto en lugar de en tu laptop. El servidor se mantiene encendido 24/7, conserva el estado de la sesión, y varios usuarios pueden conectarse a la misma instancia.
+
+La configuración técnica:
+
+| Componente             | Claude Code local             | Claude Code alojado en la nube             |
+| ---------------------- | ----------------------------- | ------------------------------------------ |
+| Entorno de ejecución   | Tu laptop macOS/Windows       | Servidor Linux (Ubuntu 22.04+)             |
+| Persistencia de sesión | Termina al cerrar la terminal | Corre hasta que la detienes explícitamente |
+| Método de acceso       | Terminal en tu máquina        | Interfaz web o SSH                         |
+| Límites de recursos    | CPU/RAM de tu laptop          | Specs del servidor (configurables)         |
+| Colaboración en equipo | No es posible                 | Varios usuarios pueden conectarse          |
+| Costo                  | Solo uso de API               | Uso de API + hosting del servidor          |
+
+El servidor en la nube tiene Node.js preinstalado, el CLI de Claude Code configurado y una UI web para la interacción. Tus repos de GitHub se clonan en el servidor, y el agente hace commits/PRs desde ahí. Si estás comparando Claude Code con otros agentes de CLI, consulta [Codex vs Claude Code: funciones, precios y benchmarks comparados](/blog/codex-vs-claude-code).
+
+## Configuración de Claude Code en la nube en 5 minutos
+
+Si quieres una instancia alojada de Claude Code corriendo ahora mismo, el camino más rápido es una plataforma gestionada:
+
+1. Crea una cuenta en [Duet](/) (o tu host en la nube preferido)
+2. Conecta tu cuenta de GitHub y agrega tu API key de Anthropic
+3. Inicia una sesión con tu primera tarea
+
+Eso es todo. La plataforma aprovisiona un servidor Linux persistente con Claude Code preinstalado, tus repos clonados y las integraciones MCP listas. Sin instalar Node.js, sin SSH, sin tmux. Tu configuración de Claude Code en la nube queda activa y el agente sigue trabajando incluso después de que cierres el navegador.
+
+Para opciones autoalojadas (AWS, DigitalOcean) o un recorrido más profundo de cada paso, sigue leyendo.
+
+## Paso a paso: configurar Claude Code alojado en la nube
+
+Así puedes poner a Claude Code a correr en la nube sin tocar tu terminal local.
+
+### Opción 1: usar una plataforma gestionada
+
+La forma más rápida es usar una plataforma que preconfigure todo. [Duet](/) ofrece Claude Code alojado en la nube como parte de su producto central.
+
+**Flujo de registro:**
+
+1. Ve a duet.so y crea una cuenta
+2. Conecta tu cuenta de GitHub (la plataforma necesita acceso al repo)
+3. Agrega tu API key de Anthropic en la configuración
+4. Inicia una sesión nueva y asigna la tarea
+
+La plataforma aprovisiona un sandbox Linux persistente con Claude Code preinstalado. El agente tiene acceso a tus repos y puede abrir PRs directamente.
+
+**Lo que obtienes:**
+
+- CLI de Claude Code preconfigurado en un servidor remoto
+- Interfaz basada en web (no se necesita terminal)
+- Sesiones persistentes que sobreviven al cierre del navegador
+- Sistema de memoria integrado a través de las conversaciones
+- Acceso de equipo (varias personas pueden interactuar con el mismo agente)
+- Soporte de integración MCP para Linear, GitHub, Notion y más de 500 herramientas
+
+El servidor persiste indefinidamente. Puedes iniciar una tarea, cerrar tu navegador y volver horas después para ver el progreso del agente.
+
+### Opción 2: autoalojado en AWS/DigitalOcean
+
+Si quieres gestionar la infraestructura tú mismo, levanta un servidor Linux e instala Claude Code manualmente.
+
+**Requisitos previos:**
+
+- Ubuntu 22.04 o posterior
+- 4GB+ de RAM recomendado
+- Node.js 18+
+- Git instalado
+
+**Pasos de instalación:**
+
+1. Lanza una instancia EC2 o un droplet de DigitalOcean (Ubuntu 22.04)
+2. Conéctate por SSH al servidor
+3. Instala Node.js: `curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - && sudo apt-get install -y nodejs`
+4. Instala el CLI de Claude Code: `npm install -g @anthropic-ai/claude-code`
+5. Establece tu API key de Anthropic: `export ANTHROPIC_API_KEY=your_key_here`
+6. Clona tu repo: `git clone https://github.com/your-org/your-repo.git`
+7. Inicia Claude Code: `cd your-repo && claude-code`
+
+Para mantener las sesiones persistentes, ejecuta Claude Code en una sesión de `tmux` o `screen`:
+
+```bash
+tmux new -s coding
+claude-code
+# Detach with Ctrl+B, then D
+# Reattach later with: tmux attach -t coding
+```
+
+La desventaja: tú gestionas el servidor, la seguridad, las actualizaciones y el tooling. Sin UI web a menos que la construyas.
+
+## Conectar tu repo de GitHub a la instancia en la nube
+
+Una vez que tu servidor en la nube está corriendo, necesitas darle acceso a GitHub.
+
+**Para plataformas gestionadas:**
+
+La plataforma maneja el OAuth de GitHub durante el registro. Autorizas el acceso al repo una vez, y el agente puede clonar/hacer commits/PRs en tu nombre.
+
+**Para servidores autoalojados:**
+
+Genera un personal access token de GitHub con scope `repo`:
+
+1. Ve a GitHub Settings → Developer settings → Personal access tokens
+2. Crea un token con permisos `repo` y `workflow`
+3. En tu servidor, configura Git para usar el token:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+git config --global credential.helper store
+echo "https://YOUR_TOKEN@github.com" > ~/.git-credentials
+```
+
+Ahora, cuando Claude Code ejecuta `git push`, se autentica automáticamente.
+
+**Clonación del repo:**
+
+Si tu repo es privado, asegúrate de que el token tenga acceso. Clona con HTTPS (no SSH a menos que hayas configurado claves):
+
+```bash
+git clone https://github.com/your-org/your-repo.git
+```
+
+El agente ahora puede leer archivos, crear ramas, hacer commit de cambios y abrir pull requests.
+
+## Iniciar tu primera sesión de codificación en la nube
+
+Con el servidor configurado y GitHub conectado, puedes iniciar una tarea de codificación.
+
+**En una plataforma gestionada:**
+
+Abre la UI web, inicia una sesión en el workspace de tu proyecto y asigna la tarea:
+
+```
+@agent refactor the user authentication module to use JWT tokens instead of session cookies
+```
+
+El agente hará lo siguiente:
+
+1. Leer el código de autenticación actual
+2. Crear una nueva rama de git
+3. Implementar los cambios de JWT
+4. Ejecutar las pruebas (si están configuradas)
+5. Abrir un PR contra tu rama principal
+
+La sesión persiste incluso si cierras el navegador. Puedes volver a revisar más tarde, y el agente seguirá trabajando o habrá terminado.
+
+**En un servidor autoalojado:**
+
+Conéctate por SSH a tu servidor, adjúntate a tu sesión de tmux y ejecuta:
+
+```bash
+claude-code "refactor the user authentication module to use JWT tokens instead of session cookies"
+```
+
+Claude Code ejecutará la tarea y se mantendrá corriendo en la sesión de tmux. Despégate y vuelve a revisar más tarde.
+
+## Configurar integraciones MCP en tu instancia en la nube
+
+El Model Context Protocol (MCP) permite que Claude Code se integre con herramientas externas como Linear, GitHub, Notion y Slack. Configurar MCP en una instancia en la nube funciona igual que localmente, pero lo configuras en el servidor.
+
+**Lo que ofrece MCP:**
+
+- Leer issues de Linear y actualizar su estado
+- Obtener PRs de GitHub y revisar comentarios
+- Consultar bases de datos de Notion
+- Buscar mensajes de Slack
+- Acceder a más de 500 integraciones mediante conectores gestionados
+
+Para profundizar en la extensión del agente con comandos personalizados, archivos SKILL.md y cuándo usar MCP frente a las herramientas integradas, consulta [Claude Code Skills: la guía completa](/guides/claude-code-skills-complete-guide).
+
+**Configuración en servidores autoalojados:**
+
+Crea un archivo de configuración MCP en `~/.claude/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "linear": {
+      "command": "npx",
+      "args": ["-y", "@linear/mcp-server"],
+      "env": {
+        "LINEAR_API_KEY": "your_linear_api_key"
+      }
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@github/mcp-server"],
+      "env": {
+        "GITHUB_TOKEN": "your_github_token"
+      }
+    }
+  }
+}
+```
+
+Reinicia Claude Code, y el agente tendrá acceso a esas integraciones.
+
+**En plataformas gestionadas:**
+
+Plataformas como Duet vienen con MCP preconfigurado. Conectas las integraciones a través de la UI web:
+
+1. Ve a Settings → Integrations
+2. Haz clic en "Connect Linear" (o GitHub, Notion, etc.)
+3. Autoriza vía OAuth
+4. El agente tiene acceso de inmediato
+
+En la sesión, puedes decir:
+
+```
+@agent check Linear for all P0 bugs assigned to me, then open a PR fixing the authentication issue
+```
+
+El agente consulta Linear vía MCP, identifica el issue, hace los cambios de código y abre el PR, todo en una sola sesión alojada en la nube.
+
+## Ejecutar sesiones de varias horas sin interrupción
+
+Claude Code alojado en la nube destaca en las tareas de larga duración que serían poco prácticas en una laptop.
+
+**Casos de uso de ejemplo:**
+
+- **Refactoring de un codebase grande:** el agente pasa 6 horas renombrando un módulo central a través de 200 archivos
+- **Actualizaciones de dependencias:** el agente actualiza React 17 → 18, corrige los cambios incompatibles, ejecuta la suite completa de pruebas
+- **Migración de base de datos:** el agente escribe scripts de migración, los prueba, actualiza todos los modelos del ORM
+- **Auditoría de seguridad:** el agente escanea en busca de vulnerabilidades, las parcha y abre PRs individuales para cada corrección
+
+En una máquina local, estas tareas agotarían tu batería o te obligarían a mantener tu laptop abierta y enchufada. En un servidor en la nube, inicias la tarea y te vas.
+
+**Cómo monitorear sesiones largas:**
+
+En las plataformas gestionadas, la UI web muestra el progreso en tiempo real. Verás:
+
+- El archivo que se está editando en este momento
+- Las ramas de git creadas
+- Los PRs abiertos
+- Los errores encontrados
+
+En servidores autoalojados, revisa la sesión de tmux:
+
+```bash
+tmux attach -t coding
+```
+
+Verás la salida de la terminal de Claude Code mostrando su tarea actual.
+
+**Manejar errores a mitad de la sesión:**
+
+Si el agente choca con un error (prueba que falla, límite de tasa de API, conflicto de merge), las sesiones en la nube te permiten intervenir sin perder el contexto. En una plataforma gestionada, respondes en el chat:
+
+```
+The test is failing because the mock data is outdated. Update the fixture in tests/mocks/user.json
+```
+
+El agente continúa desde donde lo dejó. En un servidor autoalojado, puedes conectarte por SSH, corregir el problema manualmente y reanudar:
+
+```bash
+# Attach to tmux
+tmux attach -t coding
+# Agent is waiting on a failed test
+# Exit Claude Code (Ctrl+C)
+# Fix the mock data
+vim tests/mocks/user.json
+# Restart Claude Code
+claude-code "continue the refactoring"
+```
+
+El entorno persistente significa que no pierdes el estado de git, los cambios de archivos ni el contexto del agente.
+
+## Colaboración en equipo en una instancia compartida en la nube
+
+Una gran ventaja de Claude Code alojado en la nube es el acceso de equipo. Varias personas pueden interactuar con el mismo agente en la misma sesión.
+
+**Cómo funciona en las plataformas gestionadas:**
+
+Cada proyecto o repo tiene un workspace dedicado. Todos en tu equipo pueden iniciar o revisar sesiones ahí, y el agente mantiene el contexto mediante archivos compartidos y un historial de sesiones duradero.
+
+Ejemplo de workflow:
+
+1. **Sarah (diseñadora):** "@agent implementa el nuevo layout del dashboard desde Figma"
+2. **Agente:** crea una rama, construye los componentes de la UI, abre el PR #247
+3. **Tom (ingeniero de backend):** "@agent el endpoint de la API para los datos del dashboard está devolviendo 404"
+4. **Agente:** depura el backend, encuentra la ruta faltante, abre el PR #248
+5. **Sarah:** "@agent haz merge del PR #247 y despliega a staging"
+6. **Agente:** hace merge del PR y dispara el despliegue
+
+El agente recuerda todo el historial de la conversación. Tom no necesita volver a explicar lo que pidió Sarah. El servidor en la nube mantiene el estado a través de los miembros del equipo.
+
+**En servidores autoalojados:**
+
+La colaboración en equipo requiere tooling personalizado. Podrías:
+
+- Configurar una sesión de tmux compartida (varios usuarios se conectan por SSH y se adjuntan)
+- Construir una UI web sobre el CLI de Claude Code
+- Usar multiplexación SSH con repos de git compartidos
+
+El enfoque de la plataforma gestionada es mucho más fácil para la mayoría de los equipos.
+
+## Comparación de costos: local vs. nube
+
+Así se desglosa la economía.
+
+| Factor de costo         | Claude Code local                      | Alojado en la nube (gestionado)        | Alojado en la nube (autoalojado)       |
+| ----------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| API de Anthropic        | 15 USD por millón de tokens de entrada | 15 USD por millón de tokens de entrada | 15 USD por millón de tokens de entrada |
+| Hosting del servidor    | $0                                     | Incluido en la tarifa de la plataforma | 20-100 USD/mes (AWS/DO)                |
+| Tiempo de configuración | 30 minutos                             | 5 minutos                              | 2-4 horas                              |
+| Mantenimiento           | Ninguno                                | Ninguno                                | Continuo (seguridad, actualizaciones)  |
+| Acceso de equipo        | No disponible                          | Incluido                               | Requiere tooling personalizado         |
+
+Para desarrolladores individuales que ejecutan sesiones ocasionales, lo local es más barato. Para equipos que ejecutan agentes persistentes o sesiones de varias horas, lo alojado en la nube es más práctico.
+
+Una startup típica con 5 ingenieros podría gastar:
+
+- **Costos de API:** 200-500 USD/mes (dependiendo del uso)
+- **Plataforma gestionada:** 50-200 USD/usuario/mes (si usa Duet o similar)
+- **Servidor autoalojado:** 50 USD/mes (un solo droplet de DigitalOcean)
+
+El costo de la plataforma gestionada incluye el servidor, la UI web, las integraciones MCP y la colaboración en equipo. El autoalojamiento es más barato pero requiere tiempo de ingeniería para mantenerlo. Para un desglose completo de los niveles de plan de Claude Code más allá de los costos de API, consulta [Precios de Claude Code: Pro vs Max vs API explicados](/blog/claude-code-pricing).
+
+## FAQ
+
+**¿Puedo ejecutar Claude Code en la nube sin tarjeta de crédito?**
+
+La mayoría de las plataformas gestionadas requieren información de pago por adelantado porque aprovisionan recursos de servidor. Las opciones autoalojadas requieren que le pagues a AWS o DigitalOcean directamente por el servidor. No hay opción de capa gratuita para hosting persistente en la nube ya que el servidor corre 24/7, pero puedes empezar con una instancia pequeña (5-10 USD/mes) y escalar si es necesario.
+
+**¿Claude Code alojado en la nube admite integraciones MCP como Linear y GitHub?**
+
+Sí, las integraciones MCP funcionan en las instancias en la nube exactamente como localmente. En servidores autoalojados, configuras los servidores MCP en `~/.claude/mcp.json` con tus API keys. En las plataformas gestionadas, conectas las integraciones mediante OAuth en la UI web. El agente puede consultar issues de Linear, obtener PRs de GitHub, leer páginas de Notion y usar más de 500 herramientas mediante integraciones MCP gestionadas.
+
+**¿Cómo aseguro una instancia de Claude Code alojada en la nube?**
+
+Para servidores autoalojados, sigue las prácticas estándar de seguridad de Linux: desactiva el login SSH de root, usa claves SSH en lugar de contraseñas, habilita el firewall UFW, mantén los paquetes actualizados y restringe los puertos de entrada únicamente a SSH (22) y el puerto de tu UI web si aplica. Para las plataformas gestionadas, el proveedor se encarga de la seguridad: gestiona el endurecimiento del servidor, el cifrado de API keys y el control de acceso.
+
+**¿Puedo cambiar entre Claude Code local y alojado en la nube para el mismo repo?**
+
+Sí, pero necesitas mantener el estado de git sincronizado. Si empiezas a trabajar localmente y quieres continuar en la nube, primero haz push de tu rama a GitHub. Luego, en la instancia en la nube, haz pull de la rama y reanuda. Lo contrario también funciona: haz pull de los cambios de la nube localmente. Solo evita trabajar en la misma rama en ambos entornos simultáneamente para prevenir conflictos de merge.
+
+**¿Qué pasa si mi servidor en la nube se cae a mitad de la sesión?**
+
+En las plataformas gestionadas, el proveedor monitorea la salud del servidor y reinicia automáticamente. Puedes perder unos minutos de salida del agente, pero los commits de git están a salvo (se hicieron push a GitHub). En servidores autoalojados, configura reinicios automáticos vía systemd o supervisor. Ejecuta siempre Claude Code en una sesión de tmux para que puedas volver a adjuntarte después de una caída y ver el último estado antes de la falla.
+
+**¿Cómo doy acceso a los miembros del equipo a una instancia de Claude Code alojada en la nube?**
+
+En las plataformas gestionadas, invita a los miembros del equipo a través de la UI web: obtienen acceso al mismo workspace del proyecto, sus archivos y el historial de sesiones. En servidores autoalojados, necesitarías crear cuentas SSH para cada miembro del equipo o construir una interfaz web compartida. El enfoque de la plataforma gestionada es mucho más simple para equipos de más de 2 o 3 personas.
+
+**¿Puedo ejecutar varios agentes de Claude Code simultáneamente en un servidor en la nube?**
+
+Sí, cada agente corre en su propio proceso. En servidores autoalojados, inicia sesiones de tmux separadas para distintos repos o tareas. En las plataformas gestionadas, cada workspace de proyecto obtiene su propia instancia de agente automáticamente. Los límites de recursos dependen de las specs de tu servidor: 4GB de RAM pueden manejar 2 a 3 agentes concurrentes, 8GB pueden manejar 5 a 7. Monitorea el uso de CPU y memoria para evitar ralentizaciones.

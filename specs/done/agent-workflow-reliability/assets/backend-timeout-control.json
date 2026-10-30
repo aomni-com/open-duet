@@ -1,0 +1,23 @@
+{
+  "purpose": "One focused post-cleanup control; not a repeat or replacement of the candidate full gate",
+  "source": "ea8999a8eec844bb5bd4f8c1c07745785083d410",
+  "installedAgentVersion": "0.3.29",
+  "testSha256": "ecf887012c9f7f2e9f9fbf3c2461ad75c5352c2b80f5a2a03ab2fd351dba9df2",
+  "command": "bun test src/ephemeral-users.test.ts -t 'a signup from the configured test inbox is born disposable without asking' --timeout 60000",
+  "attemptLimit": 1,
+  "disk": "Filesystem      Size    Used   Avail Capacity iused ifree %iused  Mounted on\n/dev/disk3s5   926Gi   882Gi    18Gi    98%    6.9M  191M    3%   /System/Volumes/Data\n",
+  "result": {
+    "exitCode": 0,
+    "passed": 1,
+    "failed": 0,
+    "assertions": 6,
+    "elapsedSeconds": 112.18
+  },
+  "log": "/tmp/workflow-timeout-after-cleanup/output.log",
+  "limitations": [
+    "Single focused control using installed agent0.3.29, not candidate0.3.30 qualification.",
+    "Fresh fixture and changed disk conditions prevent attribution of the earlier timeout to disk alone.",
+    "Original failed/incomplete full-suite evidence remains unchanged."
+  ],
+  "testMatchesFullTrialSource": true
+}

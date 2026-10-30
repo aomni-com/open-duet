@@ -1,0 +1,101 @@
+{
+  "scope": "slice06 existing test-harness runtime consumption; no new unified live journey or rollout",
+  "baseRootRevision": "74590ab95",
+  "temporaryContract": "latest root shared contract WIP copied for tests/types; all copied files restored/removed before commit",
+  "sourceSha256": {
+    "packages/test-harness/src/apps-live.ts": "51e43fd73a8bf15f59fa5bad2a9d4ac39da7d25cfed06106849e3d3d841085d0",
+    "packages/test-harness/src/fixtures/model-refresh/probe.ts": "a3a1788840e37317793fd48735369c15ff753c5e031f72a468c05369b60a4483",
+    "packages/test-harness/src/model-refresh-probe.test.ts": "805e92adca63b39a82e5517bf5ce1f863a2cfdb49dd1e733d26d6faccfbad6bd",
+    "packages/test-harness/src/staging-e2e-synthetic": "49d0ab83ce1d773ce83d1af416f486b11741f5522de79952cb0c296ad4cddf83",
+    "packages/test-harness/src/staging-e2e-synthetic": "fc801ce18dfeacc492c853080e18d3f58a653089bb9132bd9e344684596a7608",
+    "packages/test-harness/src/staging-e2e-synthetic": "2ac30cf02a8ebfd0bc44e8e05ef72d955a8e3a93334e96dadd75021fbf35c74d",
+    "packages/test-harness/src/staging-e2e-synthetic": "0450b6446e3a7e795184576345c82302020628d321e897552737dd23d6a4852e",
+    "packages/test-harness/src/staging-e2e-synthetic": "1501f8b40ff31e74dee2650411ecbf9c8eaf793c2a4e959d640d373243dd2f66",
+    "packages/test-harness/src/staging-e2e-synthetic": "40d754f8e3b8d58d753df595089196d842568dff98d2f79904eecbcc66d15d02",
+    "packages/test-harness/src/staging-e2e-synthetic": "882d31553bd959408fdbd790b670e957ebc0a5c8025db0dbb23d1769ff994ff2",
+    "packages/test-harness/src/staging-e2e-synthetic": "d1e4cec69391268f29b14e38b7f76811be022042f4e7719863658deecf513788",
+    "packages/test-harness/src/staging-e2e-synthetic": "c53b71220cde1e9c9ff860ea855713e2eaa82de5d6ad665c5d10eb624717de9b",
+    "packages/test-harness/src/staging-e2e-synthetic": "677d9f123c19ab3ee717ebb9086aabf27c4be813f40aecdfc26c670e30768952",
+    "packages/test-harness/src/staging-e2e-synthetic": "5f985431decf4fa76f71e02ae2b1b4dbee1dfa9dcbd9336d46b578f8d3fe925f",
+    "packages/test-harness/src/staging-e2e-synthetic": "8389b015aade65d746a8c7d34e553e2970218567278dca28f58e5b944077d451",
+    "packages/test-harness/src/staging-e2e-synthetic": "ffd23d622c414596ae7dd27b851bb4618f126f19ed9460225b9f209e2a11f514",
+    "packages/test-harness/src/staging-e2e-synthetic": "8d72261c39bcbaf2fb26344d42399e52e0d98ef314d3d19cddcfb3060e233678",
+    "packages/test-harness/src/staging-e2e-synthetic": "bedcdacfd788b602cd34d49d4692dbdd7c2b91e9c7eaf143ef5b9ff589c811bd",
+    "packages/test-harness/src/staging-e2e-synthetic": "e475ba5f28107eecb9c993184760fd18ca1fc28e90797d187798ad486d7b88f9",
+    "packages/test-harness/src/staging-e2e-synthetic": "eeac78e1f02cde693031b51685423943ff695a3fb68b1c7ebdfeee67f36bc369",
+    "packages/test-harness/src/staging-e2e-synthetic": "e633f3db27d068416e9c04bd96d8e3a63d6b583ef37e2c5f9dd8e2bb0c33b9a1",
+    "packages/test-harness/src/staging-e2e-synthetic": "85342f80dd6ed72bddaf98f80a34a49decabe1dcfb292e7c7ded99c98e01ffa6",
+    "packages/test-harness/src/staging-e2e-synthetic": "dc72d3839d0248a76dfaccd13b73d094382a182783e48b0ffe7857817e66e95f",
+    "packages/test-harness/src/staging-e2e-synthetic": "29338833f016d30d9db3341cdcbc3b3d4778a80f77a453185124535a1ad662df",
+    "packages/test-harness/src/staging-e2e-synthetic": "be218337e01dbeb5635254186d92d7f56f20e9b7a5f025d9c427f981fe374d96",
+    "packages/test-harness/src/staging-e2e-synthetic": "2c6b9103783479600399e69d48c65015ae1120c934cdf880f02c1794425c3fd1",
+    "packages/test-harness/src/test-fixtures/runtime-manifest.ts": "97a3753042b85ecaed38e8308db63446b58ae9d476a62f93a4b611a61d0abafa",
+    "packages/test-harness/src/test-fixtures/runtime-manifest.json": "d1d166a1a758bf2c07a4792388076631d9336de18aa8618ebcf77ef444a45b9b"
+  },
+  "lockSha256": "3fab016bfcb0bdca49440b9bae8c05fea97dee939244ec31a32c18795b45c3cc",
+  "gates": {
+    "frozenDependencies": "own bun install --frozen-lockfile --ignore-scripts green",
+    "focusedTests": "31 pass,0 fail,83 assertions across6 files; no real Convex/live calls",
+    "rebootCertification": "1 pass,0 fail,controlledHTTP stale identity and uncertified process cannot satisfy readiness",
+    "types": "test-harness checker green with latest copied shared contract",
+    "lint": "all changed source green; added fixture/helper final lint green",
+    "semanticSweep": "no source gateway-release URL, agentVersion/duetfsVersion readiness, updates.agent, or source catalog.js import; historical backend gatewayVersion remains only at explicit transition input edges"
+  },
+  "redEvidence": {
+    "runtimeReadiness": "old two-component readiness never recognizes the complete runtime identity",
+    "canonicalIdentity": "removing aggregate check allowed bad metadata to reach forbidden health query",
+    "newManifestURL": "reverting helper to old URL failed controlled HTTP route assertion",
+    "asyncPredicate": "old synchronous poll treated false promise as true and returned stale row",
+    "physicalCliHash": "removing hash guard executed fake CLI; restored guard stops with empty command receipt"
+  },
+  "review": {
+    "tool": "configured codex review completed",
+    "findings": [
+      {
+        "severity": "P1",
+        "finding": "older base gateway sends old versions shape",
+        "ownership": "root gateway sender/transition-client lane; joined source gate required"
+      },
+      {
+        "severity": "P1",
+        "finding": "older base desired-state reads old package update targets",
+        "ownership": "root runtime composition lane, already reported integrated as2eb7a721b; joined source gate required"
+      },
+      {
+        "severity": "P2",
+        "finding": "older base health does not expose runtimeVersion",
+        "ownership": "root health producer lane; fixtures are controlled consumer evidence, not joined producer proof"
+      }
+    ]
+  },
+  "remaining": {
+    "slice10": "remove runtimeIdentityFromTransitionDiagnostic and legacy backend/browser diagnostic input names after actual storage/fleet migration",
+    "bootstrapImage": "PATH must select constructed compiled duet; model-refresh physical hash will reject legacy npm rail",
+    "rootDocs": "test-harness README pinned-package/gateway-version principles need root joined-doc update; no global README modified",
+    "rootAcceptance": "new unified live journey belongs10; joined native artifact gate and old-API bootstrap/recovery/fleet census required before promotion"
+  },
+  "limitations": [
+    "no paid/provider/live writes, full suite, browser launch, or deployment",
+    "source-controlled HTTP and fake executable gates do not replace joined live runtime proof",
+    "model-refresh product work is unchanged but was not executed",
+    "script verify-release-deployment remains unchanged because shared verification target maps its existing backend connection input"
+  ],
+  "evidenceSha256": {
+    "types.log": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92",
+    "codex-review.log.gz": "9e50a265d91ac8e7810256022aceb1d25f2d6d9a433d88ba8f1a18c4c10267dc",
+    "readiness-red.log.gz": "ff0650a14b072e2c1e212d28c6060ba887f9ef9ecd76ac5590f3d99d3b26c693",
+    "hash-red.log.gz": "ca155f88ab555367c5cbaa2183e7619792ad76ef6dbad00a06334f9cb5bd365d",
+    "lint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "predicate-red.log.gz": "df87b51cab893bca94ca08ca24134383380b1e18bf41b8d5165feb7107cc180f",
+    "http-red.log.gz": "227eebf7ea2c6734ccc05e6d5e90a30d629521ddba2d3f7b56f3d0147eb020e6",
+    "temporary-contract-inputs.json": "dd6ade30eb69cffcd76ab40241539eca05c3157aa5e7d90bbf8811956cf067c1",
+    "choices.md": "9b88e59f8739e9b4a0171877e06fea4d344f1b26ebe7d499668912d5c571e485",
+    "deployment-red.log.gz": "d6fb685a2ea57fac45b267d76946938566debf7441944d77ebc3423052618041",
+    "certification.log.gz": "d00c214682f89ce55528d5aa9a0aafc90d6d886ad9e1222147da1af6ced3ddad",
+    "README.md": "512a95835080a51fd541405f8ed1ae994a66178a15bfe2eb1512a570a84e9fab",
+    "cli-hash-green.log.gz": "df23ad9cd88355ded9d02206146b81e8e5a6028485ff89d53a61664b74e7ddca",
+    "lint-final.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cli-hash-red.log.gz": "ec184fb3e7d8a3ae77c5e5a234e04510fb856493ba55cf4060c445695bea94e3",
+    "focused-tests.log.gz": "c37a2ea51488f575de8f30b0c0dcbe6adbe8a1b8797b442047bf118ab8fa11ae"
+  }
+}

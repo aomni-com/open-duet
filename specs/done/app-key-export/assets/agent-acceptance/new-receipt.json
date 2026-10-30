@@ -1,0 +1,31 @@
+{
+  "profile": "new",
+  "passed": true,
+  "checks": {
+    "discoveredInventory": true,
+    "identityPreserved": true,
+    "servicesDeclared": true,
+    "exportedThroughWorkspaceAuthority": true,
+    "configuredBeforeDeploy": true,
+    "intendedHostEnvironment": true,
+    "deployedSourceExecuted": true,
+    "staticTrackingPage": true,
+    "noTranscriptDisclosure": true,
+    "noPersistedCredentials": true,
+    "boundedIssuance": true,
+    "fullCapacityHandled": true,
+    "activeCredentialPreserved": true
+  },
+  "receiptCount": 16,
+  "safeDeployment": {
+    "at": 1791238995379,
+    "operation": "host.deploy",
+    "projectId": "project-eval",
+    "environment": "production",
+    "credentialId": "export-1",
+    "origin": "http://192.0.2.1:53172",
+    "entry": "api/chat.js",
+    "configurationComplete": true
+  },
+  "leakedFiles": []
+}

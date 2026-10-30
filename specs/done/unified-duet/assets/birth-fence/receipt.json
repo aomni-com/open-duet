@@ -1,0 +1,51 @@
+{
+  "baseline": "52c825d27696705ed197ea45edfb9373f0da603a",
+  "productionSourceSha256": {
+    "packages/backend/convex/config.ts": "d055d8b2b8d79ca087b09da842c8eded7c1d8d7c280e6a2724ed794a2d6236ef",
+    "packages/backend/convex/domains/workspaces/lifecycle.ts": "c194c096e917233ccb6320836e9b0180a52e390f6c83f8103a2bf46bc581c6b1",
+    "packages/backend/convex/domains/workspaces/provisioningCore.ts": "502e27d9dc7861883ad719f36a1dceb30c93fd74c0ee8d259d9c206c7bde5342",
+    "packages/backend/convex/domains/workspaces/vmConvergence.ts": "b0653b80fbd4b4d7c0feedef986eec0956bcb2548e4abda60ac8fb595b879d00",
+    "packages/backend/convex/domains/workspaces/vmSchedule.ts": "25b3e78a162171361f839c3726bfabc22af1d9706676d9368f549caa6f3bc3b5",
+    "packages/backend/convex/domains/workspaces/vmDiskSchedule.ts": "38ea68545f405a08c4d948395ab0e181d486132283be494380b9a9d527c00405",
+    "packages/backend/convex/domains/workspaces/vmSizeModel.ts": "8adaf702c2de8c00994fda5baf4c8f3a5b396ce9d8951cfec7c53f5d799c1233",
+    "packages/backend/convex/domains/workspaces/vmDiskPolicy.ts": "07a330767404154c4087dde901119f8cffe03d640f55aa5b77d8f8562a485add"
+  },
+  "productionPatchSha256": "a420d97feeed10c5b5017c5f00ca6a13e57e851fe284fb18634cf0508951e36d",
+  "backports": [
+    {
+      "baseline": "1d0ee5edefd1e55c49a857c74b5e87171ed1f078",
+      "applyCheckExit": 0,
+      "patchedFilesMatchTestedSource": true
+    },
+    {
+      "baseline": "dbb28fe14a026c143f2134b88586a13f2e0ebdef",
+      "applyCheckExit": 0,
+      "patchedFilesMatchTestedSource": true
+    }
+  ],
+  "gates": {
+    "focusedTests": {
+      "passed": 95,
+      "assertions": 349
+    },
+    "backendCheckTypes": 0,
+    "backendLint": 0,
+    "independentFinalReview": "clean after refreshing the non-behavioral gate totals"
+  },
+  "liveMutations": false,
+  "temporarySurfaces": [
+    "DUET_VM_LIFECYCLE_PAUSED",
+    "domains/workspaces/vmConvergence:resumeFencedWorkspaceVm",
+    "domains/workspaces/vmDiskPolicy:resumeFencedWorkspaceVmDisks"
+  ],
+  "newTables": [],
+  "newColumns": [],
+  "newRecurringWorkers": [],
+  "cpuDrainProof": "cpu-drain.json",
+  "readOnlyLiveCpuCensuses": [
+    "cpu-census-staging.json",
+    "cpu-census-production.json"
+  ],
+  "productionPatchFile": "production.patch.gz",
+  "productionPatchSha256Encoding": "sha256 of decompressed exact patch bytes"
+}

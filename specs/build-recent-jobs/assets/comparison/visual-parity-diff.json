@@ -1,0 +1,92 @@
+{
+  "kind": "screenshot-parity-diff",
+  "generatedAt": "2026-10-01T06:00:44.563Z",
+  "note": "Lower parityDistance means the candidate is closer to the reference for this fixed pair. This is a distance metric, not an acceptance gate.",
+  "pairCount": 2,
+  "worstPair": "mobile",
+  "results": [
+    {
+      "id": "mobile",
+      "current": "../before/mobile.png",
+      "candidate": "../after/mobile.png",
+      "dimensions": {
+        "width": 780,
+        "height": 100
+      },
+      "parityDistance": 0.10828,
+      "grayscale": {
+        "mae": 2.18862,
+        "rmse": 16.05288,
+        "diffRatio16": 0.0214,
+        "diffRatio32": 0.0201,
+        "diffRatio64": 0.01668,
+        "pixelmatchRatio": 0.02103
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.99571,
+        "terrainLikeRatioCandidate": 0.99017,
+        "avgLuminanceCurrent": 247.35875,
+        "avgLuminanceCandidate": 246.29052,
+        "avgLuminanceDelta": -1.06823,
+        "edgeEnergyCurrent": 0.03822,
+        "edgeEnergyCandidate": 0.0567,
+        "edgeEnergyRatio": 1.48333,
+        "edgeDiffRatio32": 0.04264
+      },
+      "artifacts": {
+        "sideBySide": "mobile-side-by-side.png",
+        "currentGray": "mobile-current-gray.png",
+        "candidateGray": "mobile-candidate-gray.png",
+        "absDiff": "mobile-absdiff.png",
+        "pixelmatch": "mobile-pixelmatch.png",
+        "currentEdges": "mobile-current-edges.png",
+        "candidateEdges": "mobile-candidate-edges.png",
+        "edgeDiff": "mobile-edge-diff.png"
+      }
+    },
+    {
+      "id": "desktop",
+      "current": "../before/desktop.png",
+      "candidate": "../after/desktop.png",
+      "dimensions": {
+        "width": 572,
+        "height": 45
+      },
+      "parityDistance": 0.07424,
+      "grayscale": {
+        "mae": 0.79677,
+        "rmse": 8.70518,
+        "diffRatio16": 0.0101,
+        "diffRatio32": 0.00831,
+        "diffRatio64": 0.00602,
+        "pixelmatchRatio": 0.00971
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.9904,
+        "terrainLikeRatioCandidate": 0.98695,
+        "avgLuminanceCurrent": 246.77991,
+        "avgLuminanceCandidate": 245.98314,
+        "avgLuminanceDelta": -0.79677,
+        "edgeEnergyCurrent": 0.05489,
+        "edgeEnergyCandidate": 0.07346,
+        "edgeEnergyRatio": 1.33813,
+        "edgeDiffRatio32": 0.02347
+      },
+      "artifacts": {
+        "sideBySide": "desktop-side-by-side.png",
+        "currentGray": "desktop-current-gray.png",
+        "candidateGray": "desktop-candidate-gray.png",
+        "absDiff": "desktop-absdiff.png",
+        "pixelmatch": "desktop-pixelmatch.png",
+        "currentEdges": "desktop-current-edges.png",
+        "candidateEdges": "desktop-candidate-edges.png",
+        "edgeDiff": "desktop-edge-diff.png"
+      }
+    }
+  ],
+  "pathBase": "Paths are relative to this JSON file."
+}

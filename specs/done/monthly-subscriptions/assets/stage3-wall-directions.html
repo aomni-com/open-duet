@@ -1,0 +1,884 @@
+<title>Duet subscribe wall — 4 directions</title>
+<style>
+  :root {
+    --bg: #f5f6f5;
+    --panel: #ffffff;
+    --ink: #1c2321;
+    --muted: #5c6663;
+    --line: #dde2e0;
+    --accent: #0f8a7a;
+    --accent-ink: #ffffff;
+    --chip-on: #0f8a7a;
+    --chip-on-ink: #ffffff;
+    --warn: #b4552d;
+    --mock-frame: #e8ebea;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141817;
+      --panel: #1d2321;
+      --ink: #e6ebe9;
+      --muted: #93a09b;
+      --line: #2c3532;
+      --accent: #2fb3a0;
+      --accent-ink: #0b1210;
+      --chip-on: #2fb3a0;
+      --chip-on-ink: #0b1210;
+      --warn: #e0805a;
+      --mock-frame: #10403a22;
+    }
+  }
+  :root[data-theme='dark'] {
+    --bg: #141817;
+    --panel: #1d2321;
+    --ink: #e6ebe9;
+    --muted: #93a09b;
+    --line: #2c3532;
+    --accent: #2fb3a0;
+    --accent-ink: #0b1210;
+    --chip-on: #2fb3a0;
+    --chip-on-ink: #0b1210;
+    --warn: #e0805a;
+    --mock-frame: #10403a22;
+  }
+  :root[data-theme='light'] {
+    --bg: #f5f6f5;
+    --panel: #ffffff;
+    --ink: #1c2321;
+    --muted: #5c6663;
+    --line: #dde2e0;
+    --accent: #0f8a7a;
+    --accent-ink: #ffffff;
+    --chip-on: #0f8a7a;
+    --chip-on-ink: #ffffff;
+    --warn: #b4552d;
+    --mock-frame: #e8ebea;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font:
+      15px/1.55 system-ui,
+      -apple-system,
+      'Segoe UI',
+      sans-serif;
+    margin: 0;
+    padding: 2.5rem 1.25rem 6rem;
+  }
+  main {
+    max-width: 62rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+  }
+  .eyebrow {
+    font:
+      600 11px/1 ui-monospace,
+      'SF Mono',
+      Menlo,
+      monospace;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    font-size: 1.7rem;
+    margin: 0.3rem 0 0.4rem;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  h2 {
+    font-size: 1.05rem;
+    margin: 0;
+  }
+  .lede {
+    color: var(--muted);
+    max-width: 46rem;
+    margin: 0;
+  }
+  .kbd {
+    font:
+      12px ui-monospace,
+      'SF Mono',
+      Menlo,
+      monospace;
+    background: var(--mock-frame);
+    padding: 0.1em 0.45em;
+    border-radius: 4px;
+  }
+
+  .direction {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .direction > header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.9rem;
+    align-items: baseline;
+    padding: 1rem 1.25rem 0.75rem;
+  }
+  .direction > header .num {
+    font:
+      700 12px ui-monospace,
+      'SF Mono',
+      Menlo,
+      monospace;
+    color: var(--accent);
+  }
+  .direction > header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.86rem;
+    flex-basis: 100%;
+  }
+  .mock {
+    margin: 0 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: auto;
+    background: var(--mock-frame);
+  }
+  .mock-inner {
+    min-width: 520px;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem 1.25rem;
+  }
+  .chip {
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 0.32rem 0.8rem;
+    font-size: 0.82rem;
+    cursor: pointer;
+  }
+  .chip:hover {
+    border-color: var(--accent);
+  }
+  .chip:focus-visible,
+  .probe input:focus-visible + span {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .chip[aria-pressed='true'] {
+    background: var(--chip-on);
+    color: var(--chip-on-ink);
+    border-color: var(--chip-on);
+  }
+  .chip.skip[aria-pressed='true'] {
+    background: var(--warn);
+    border-color: var(--warn);
+    color: #fff;
+  }
+
+  .probes {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.25rem;
+    display: grid;
+    gap: 1.1rem;
+  }
+  .probe {
+    display: grid;
+    gap: 0.45rem;
+  }
+  .probe b {
+    font-size: 0.92rem;
+  }
+  .probe label {
+    display: inline-flex;
+    gap: 0.45rem;
+    align-items: baseline;
+    margin-right: 1.1rem;
+    font-size: 0.88rem;
+    cursor: pointer;
+  }
+  .probe .why {
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  .reply {
+    background: var(--panel);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    padding: 1.25rem;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .reply textarea {
+    width: 100%;
+    min-height: 9rem;
+    resize: vertical;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--ink);
+    font:
+      13px/1.6 ui-monospace,
+      'SF Mono',
+      Menlo,
+      monospace;
+    padding: 0.8rem;
+  }
+  .reply .row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+  .copy-btn {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: 0;
+    border-radius: 8px;
+    padding: 0.55rem 1.1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  .copy-note {
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  /* ---------- Mock 1: hard gate ---------- */
+  .m1 {
+    background: #fcfcfb;
+    color: #16181c;
+    padding: 2.2rem 2.4rem;
+    font-family: system-ui, sans-serif;
+  }
+  .m1 .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font:
+      600 11px/1 ui-monospace,
+      Menlo,
+      monospace;
+    letter-spacing: 0.12em;
+    color: #a03d1e;
+  }
+  .m1 .status i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #c9502a;
+    display: inline-block;
+  }
+  .m1 h3 {
+    font-size: 1.65rem;
+    margin: 0.7rem 0 0.3rem;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  .m1 .sub {
+    color: #5a6068;
+    margin: 0 0 1.4rem;
+    font-size: 0.95rem;
+  }
+  .m1 table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.92rem;
+  }
+  .m1 td {
+    border-top: 1px solid #e3e5e2;
+    padding: 0.7rem 0.4rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .m1 td:last-child {
+    text-align: right;
+    color: #5a6068;
+  }
+  .m1 .pick {
+    accent-color: #16181c;
+    margin-right: 0.6rem;
+  }
+  .m1 .cta {
+    margin-top: 1.4rem;
+    background: #16181c;
+    color: #fff;
+    border: 0;
+    padding: 0.7rem 1.6rem;
+    font-weight: 600;
+    border-radius: 6px;
+    font-size: 0.95rem;
+  }
+  .m1 .fine {
+    color: #8a9097;
+    font-size: 0.78rem;
+    margin-top: 0.9rem;
+  }
+
+  /* ---------- Mock 2: meter ---------- */
+  .m2 {
+    background: #101512;
+    color: #d9e5de;
+    padding: 2rem 2.2rem;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+  .m2 .path {
+    color: #5d6f66;
+    font-size: 0.8rem;
+  }
+  .m2 h3 {
+    font:
+      700 1.3rem/1.3 system-ui,
+      sans-serif;
+    color: #f2f7f4;
+    margin: 0.6rem 0 1.1rem;
+  }
+  .m2 .meter {
+    height: 10px;
+    border-radius: 5px;
+    background: #1d2620;
+    overflow: hidden;
+    margin: 0.4rem 0 0.3rem;
+  }
+  .m2 .meter i {
+    display: block;
+    height: 100%;
+    width: 3%;
+    background: #d96a3b;
+  }
+  .m2 .scale {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #5d6f66;
+  }
+  .m2 .built {
+    margin: 1.3rem 0;
+    padding: 0.9rem 1rem;
+    border: 1px dashed #2a3630;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    line-height: 1.9;
+  }
+  .m2 .built b {
+    color: #8fd9c3;
+    font-weight: 600;
+  }
+  .m2 .tiers {
+    display: flex;
+    gap: 0.7rem;
+  }
+  .m2 .tier {
+    flex: 1;
+    border: 1px solid #2a3630;
+    border-radius: 8px;
+    padding: 0.8rem 0.9rem;
+    font-size: 0.82rem;
+  }
+  .m2 .tier.rec {
+    border-color: #8fd9c3;
+    box-shadow: 0 0 0 1px #8fd9c3;
+  }
+  .m2 .tier .p {
+    font:
+      700 1.15rem system-ui,
+      sans-serif;
+    color: #f2f7f4;
+  }
+  .m2 .tier .b {
+    color: #8fd9c3;
+  }
+  .m2 .cta {
+    margin-top: 1.2rem;
+    background: #8fd9c3;
+    color: #101512;
+    border: 0;
+    padding: 0.65rem 1.4rem;
+    font-weight: 700;
+    border-radius: 6px;
+    font-family: system-ui, sans-serif;
+  }
+
+  /* ---------- Mock 3: asleep ---------- */
+  .m3 {
+    position: relative;
+    background: #eceef2;
+    padding: 0;
+  }
+  .m3 .ws {
+    filter: blur(1.5px) saturate(0.6);
+    opacity: 0.55;
+    padding: 1rem 1.2rem;
+    display: flex;
+    gap: 1rem;
+    min-height: 300px;
+  }
+  .m3 .side {
+    width: 130px;
+    font-size: 0.78rem;
+    color: #4a5160;
+    line-height: 2.1;
+  }
+  .m3 .files {
+    flex: 1;
+    font:
+      0.82rem/2.2 ui-monospace,
+      Menlo,
+      monospace;
+    color: #3c4350;
+  }
+  .m3 .scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, #2a2f4add, #171a2cee);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .m3 .card {
+    background: #fbfbfd;
+    border-radius: 14px;
+    padding: 1.7rem 2rem;
+    width: 21rem;
+    text-align: center;
+    box-shadow: 0 18px 50px #0007;
+  }
+  .m3 .moon {
+    font-size: 1.6rem;
+  }
+  .m3 h3 {
+    font-size: 1.2rem;
+    margin: 0.5rem 0 0.35rem;
+    color: #1d2230;
+  }
+  .m3 p {
+    color: #5c6374;
+    font-size: 0.86rem;
+    margin: 0 0 1.1rem;
+  }
+  .m3 .cta {
+    background: #3d4bd6;
+    color: #fff;
+    border: 0;
+    border-radius: 8px;
+    padding: 0.65rem 1.3rem;
+    font-weight: 600;
+    width: 100%;
+  }
+  .m3 .alt {
+    display: block;
+    margin-top: 0.7rem;
+    color: #6a7183;
+    font-size: 0.78rem;
+  }
+
+  /* ---------- Mock 4: founder note ---------- */
+  .m4 {
+    background: #fffdf9;
+    color: #232019;
+    padding: 2.4rem 3rem;
+    font-family: Georgia, 'Iowan Old Style', serif;
+  }
+  .m4 p {
+    max-width: 34rem;
+    margin: 0 0 1rem;
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+  .m4 .sig {
+    font-style: italic;
+    color: #6b6455;
+  }
+  .m4 .plan {
+    border: 1px solid #ddd5c4;
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    max-width: 34rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: system-ui, sans-serif;
+    font-size: 0.9rem;
+    margin: 1.2rem 0;
+  }
+  .m4 .cta {
+    background: #232019;
+    color: #fffdf9;
+    border: 0;
+    border-radius: 6px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    font-family: system-ui, sans-serif;
+  }
+  .m4 .others {
+    font-size: 0.8rem;
+    color: #6b6455;
+    font-family: system-ui, sans-serif;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .chip {
+      transition:
+        background 0.12s,
+        border-color 0.12s;
+    }
+  }
+</style>
+
+<main>
+  <header>
+    <div class="eyebrow">specs/monthly-subscriptions · stage 3 · unknown knowns</div>
+    <h1>The subscribe wall — four directions</h1>
+    <p class="lede">
+      With D8, this screen appears the instant the $5 / 7-day trial ends or a subscription lapses —
+      it <em>is</em> the conversion moment. Same real data in all four (workspace
+      <span class="kbd">walter</span>, day 4, credits gone), only the direction changes. Tap
+      <b>steal</b> on any facet you want kept (mix across directions freely), <b>skip</b> to reject
+      a direction outright, answer the five probes, then copy the assembled reply.
+    </p>
+  </header>
+
+  <section class="direction" data-dir="1 — Hard gate">
+    <header>
+      <span class="num">DIRECTION 1</span>
+      <h2>Hard gate, plain talk</h2>
+      <p>
+        Full-route takeover. No metaphor, no softening — a factual state change and a decision
+        table. Banking-grade neutrality; the product's silence does the selling.
+      </p>
+    </header>
+    <div class="mock">
+      <div class="mock-inner m1">
+        <span class="status"><i></i>TRIAL ENDED</span>
+        <h3>walter is paused.</h3>
+        <p class="sub">
+          Your $5 trial credit is spent. Pick a plan to resume — everything is exactly as you left
+          it.
+        </p>
+        <table>
+          <tr>
+            <td><input class="pick" type="radio" name="m1p" checked />Starter — $20/mo</td>
+            <td>$20 credits monthly</td>
+          </tr>
+          <tr>
+            <td><input class="pick" type="radio" name="m1p" />Pro — $50/mo</td>
+            <td>$60 credits monthly</td>
+          </tr>
+          <tr>
+            <td><input class="pick" type="radio" name="m1p" />Max — $200/mo</td>
+            <td>$250 credits monthly</td>
+          </tr>
+        </table>
+        <button class="cta">Subscribe and resume</button>
+        <p class="fine">
+          Credits reset monthly and don't roll over. Overage draws from your paid reserve. Cancel
+          anytime; workspaces pause at period end.
+        </p>
+      </div>
+    </div>
+    <div class="chips" data-dir="1 — Hard gate">
+      <button class="chip" data-facet="overall layout">steal: overall layout</button>
+      <button class="chip" data-facet="factual tone ('walter is paused')">
+        steal: factual tone
+      </button>
+      <button class="chip" data-facet="tier radio-table (not cards)">steal: tier table</button>
+      <button class="chip" data-facet="fine-print rules line">steal: fine-print line</button>
+      <button class="chip skip" data-skip="true">skip this direction</button>
+    </div>
+  </section>
+
+  <section class="direction" data-dir="2 — Meter ran out">
+    <header>
+      <span class="num">DIRECTION 2</span>
+      <h2>Meter ran out</h2>
+      <p>
+        Terminal-flavored, data-forward. Leads with the drained meter and what the trial actually
+        produced — momentum framing, recommended tier highlighted.
+      </p>
+    </header>
+    <div class="mock">
+      <div class="mock-inner m2">
+        <div class="path">walter · trial · day 4/7</div>
+        <h3>Credit meter at zero.</h3>
+        <div class="meter"><i></i></div>
+        <div class="scale"><span>$0.13 left</span><span>$5.00</span></div>
+        <div class="built">
+          In 4 days this workspace ran <b>212 generations</b>, built <b>lead-triage</b> (app,
+          published), and organized <b>1,847 files</b> in q3-outreach/. It's paused mid-run.
+        </div>
+        <div class="tiers">
+          <div class="tier">
+            <div class="p">$20</div>
+            Starter<br />$20 credits/mo
+          </div>
+          <div class="tier rec">
+            <div class="p">$50</div>
+            Pro <span class="b">+$10 bonus</span><br />$60 credits/mo
+          </div>
+          <div class="tier">
+            <div class="p">$200</div>
+            Max <span class="b">+$50 bonus</span><br />$250 credits/mo
+          </div>
+        </div>
+        <button class="cta">Resume walter →</button>
+      </div>
+    </div>
+    <div class="chips" data-dir="2 — Meter ran out">
+      <button class="chip" data-facet="drained-meter visual">steal: drained meter</button>
+      <button class="chip" data-facet="'what you built' momentum recap">steal: built-recap</button>
+      <button class="chip" data-facet="tier cards with bonus badges + recommended highlight">
+        steal: tier cards + bonus badges
+      </button>
+      <button class="chip" data-facet="terminal/mono visual language">steal: terminal look</button>
+      <button class="chip skip" data-skip="true">skip this direction</button>
+    </div>
+  </section>
+
+  <section class="direction" data-dir="3 — Workspace asleep">
+    <header>
+      <span class="num">DIRECTION 3</span>
+      <h2>Workspace asleep</h2>
+      <p>
+        Modal over the dimmed, blurred workspace — your work is visibly <em>right there</em>, one
+        step away. Soft metaphor, reassurance-first, single primary action.
+      </p>
+    </header>
+    <div class="mock">
+      <div class="mock-inner m3">
+        <div class="ws">
+          <div class="side">Files<br />Apps<br />Train<br />Shares<br />Settings</div>
+          <div class="files">
+            q3-outreach/<br />insurance-leads.csv<br />lead-triage.app<br />notes/call-transcripts/<br />summer-campaign.md
+          </div>
+        </div>
+        <div class="scrim">
+          <div class="card">
+            <div class="moon">☾</div>
+            <h3>walter is asleep</h3>
+            <p>
+              Your trial wrapped up. Files, apps, and agent memory are all saved — subscribe to wake
+              it.
+            </p>
+            <button class="cta">Wake walter — Starter $20/mo</button>
+            <span class="alt">or choose Pro $50 · Max $200 · compare plans</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chips" data-dir="3 — Workspace asleep">
+      <button class="chip" data-facet="modal over dimmed workspace (work visible behind)">
+        steal: dimmed-workspace placement
+      </button>
+      <button class="chip" data-facet="asleep/wake metaphor">steal: asleep/wake metaphor</button>
+      <button class="chip" data-facet="'everything is saved' reassurance line">
+        steal: reassurance line
+      </button>
+      <button class="chip" data-facet="single primary CTA, other tiers demoted to a text link">
+        steal: single-CTA hierarchy
+      </button>
+      <button class="chip skip" data-skip="true">skip this direction</button>
+    </div>
+  </section>
+
+  <section class="direction" data-dir="4 — Founder note">
+    <header>
+      <span class="num">DIRECTION 4</span>
+      <h2>Founder note</h2>
+      <p>
+        A letter, not a paywall. Serif, personal, one recommended plan. Trades polish for trust —
+        plausible while Duet is visibly a one-person product.
+      </p>
+    </header>
+    <div class="mock">
+      <div class="mock-inner m4">
+        <p>
+          Hey — your trial just ended. Duet runs a real dedicated VM for your workspace, which is
+          why I can't keep it running free past the trial.
+        </p>
+        <p>
+          Everything in <b>walter</b> is safe and exactly where you left it. Starter gets you going
+          for $20/month, with $20 of AI credits included every month.
+        </p>
+        <div class="plan">
+          <span><b>Starter</b> — $20/mo · $20 credits monthly</span
+          ><button class="cta">Subscribe</button>
+        </div>
+        <p class="others">
+          Need more headroom? Pro $50/mo ($60 credits) · Max $200/mo ($250 credits)
+        </p>
+        <p class="sig">— Example User, builder of Duet</p>
+      </div>
+    </div>
+    <div class="chips" data-dir="4 — Founder note">
+      <button class="chip" data-facet="letter format + serif voice">steal: letter format</button>
+      <button class="chip" data-facet="'real VM, that's why it can't be free' honesty line">
+        steal: real-VM honesty line
+      </button>
+      <button class="chip" data-facet="one recommended plan, others as footnote">
+        steal: one-plan-forward
+      </button>
+      <button class="chip" data-facet="signed by Example User">steal: signature</button>
+      <button class="chip skip" data-skip="true">skip this direction</button>
+    </div>
+  </section>
+
+  <section class="probes">
+    <div class="eyebrow">Context probes — the things you'd otherwise mention too late</div>
+    <div class="probe">
+      <b>1 · Where does the wall live?</b>
+      <label
+        ><input type="radio" name="q1" value="modal over the dimmed workspace (route stays)" /><span
+          >Modal over dimmed workspace</span
+        ></label
+      >
+      <label
+        ><input
+          type="radio"
+          name="q1"
+          value="full-route takeover (workspace not rendered at all)"
+        /><span>Full-route takeover</span></label
+      >
+      <label
+        ><input
+          type="radio"
+          name="q1"
+          value="warning banner during trial, hard wall only at exhaustion"
+        /><span>Banner first, wall at zero</span></label
+      >
+      <span class="why"
+        >D8 pauses the VM either way — this is only about what the browser shows.</span
+      >
+    </div>
+    <div class="probe">
+      <b>2 · What do a paused workspace's <i>published apps</i> serve?</b>
+      <label
+        ><input type="radio" name="q2" value="branded 'paused' page on edge apps" /><span
+          >Branded "app paused" page</span
+        ></label
+      >
+      <label
+        ><input type="radio" name="q2" value="generic unavailable/404 on edge apps" /><span
+          >Generic unavailable</span
+        ></label
+      >
+      <label
+        ><input type="radio" name="q2" value="published apps keep serving while paused" /><span
+          >Keep serving (apps exempt from pause)</span
+        ></label
+      >
+      <span class="why"
+        >Visitors of a lapsed user's app are innocent bystanders — what should they see?</span
+      >
+    </div>
+    <div class="probe">
+      <b>3 · Credit visibility while active</b>
+      <label
+        ><input type="radio" name="q3" value="persistent meter in the workspace chrome" /><span
+          >Always-visible meter</span
+        ></label
+      >
+      <label
+        ><input type="radio" name="q3" value="meter only in settings/billing" /><span
+          >Settings only</span
+        ></label
+      >
+      <label
+        ><input type="radio" name="q3" value="settings + warning toast under 20%" /><span
+          >Settings + low-credit toast</span
+        ></label
+      >
+    </div>
+    <div class="probe">
+      <b>4 · Default-selected plan on the wall</b>
+      <label
+        ><input type="radio" name="q4" value="Starter preselected" /><span>Starter</span></label
+      >
+      <label
+        ><input type="radio" name="q4" value="Pro preselected as 'recommended'" /><span
+          >Pro ("recommended")</span
+        ></label
+      >
+      <label><input type="radio" name="q4" value="no preselection" /><span>None</span></label>
+    </div>
+    <div class="probe">
+      <b>5 · Copy voice across billing surfaces</b>
+      <label
+        ><input type="radio" name="q5" value="neutral SaaS voice" /><span>Neutral SaaS</span></label
+      >
+      <label
+        ><input type="radio" name="q5" value="warm founder voice" /><span>Warm founder</span></label
+      >
+      <label
+        ><input type="radio" name="q5" value="terse dev-tool voice" /><span
+          >Terse dev-tool</span
+        ></label
+      >
+    </div>
+  </section>
+
+  <section class="reply">
+    <div class="eyebrow">Your assembled reply</div>
+    <textarea id="out" readonly>
+Tap chips and answer probes above — your reply builds itself here.</textarea
+    >
+    <div class="row">
+      <button class="copy-btn" id="copy">Copy reply</button>
+      <span class="copy-note" id="note">Paste it back to Claude as your next message.</span>
+    </div>
+  </section>
+</main>
+
+<script>
+  const out = document.getElementById('out')
+  function build() {
+    const lines = []
+    document.querySelectorAll('.chips').forEach(g => {
+      const dir = g.dataset.dir
+      const steals = [...g.querySelectorAll('.chip[aria-pressed="true"]:not(.skip)')].map(
+        c => c.dataset.facet,
+      )
+      const skipped = g.querySelector('.chip.skip[aria-pressed="true"]')
+      if (skipped) lines.push(`Direction ${dir}: skip.`)
+      else if (steals.length) lines.push(`Direction ${dir}: steal ${steals.join('; ')}.`)
+    })
+    document.querySelectorAll('.probe').forEach((p, i) => {
+      const sel = p.querySelector('input:checked')
+      if (sel) lines.push(`Probe ${i + 1}: ${sel.value}.`)
+    })
+    out.value = lines.length
+      ? lines.join('\n')
+      : 'Tap chips and answer probes above — your reply builds itself here.'
+  }
+  document.querySelectorAll('.chip').forEach(c => {
+    c.setAttribute('aria-pressed', 'false')
+    c.addEventListener('click', () => {
+      const on = c.getAttribute('aria-pressed') === 'true'
+      if (c.classList.contains('skip') && !on)
+        c.closest('.chips')
+          .querySelectorAll('.chip:not(.skip)')
+          .forEach(x => x.setAttribute('aria-pressed', 'false'))
+      if (!c.classList.contains('skip') && !on)
+        c.closest('.chips').querySelector('.chip.skip').setAttribute('aria-pressed', 'false')
+      c.setAttribute('aria-pressed', on ? 'false' : 'true')
+      build()
+    })
+  })
+  document.querySelectorAll('.probe input').forEach(i => i.addEventListener('change', build))
+  document.getElementById('copy').addEventListener('click', async () => {
+    out.select()
+    try {
+      await navigator.clipboard.writeText(out.value)
+      document.getElementById('note').textContent = 'Copied.'
+    } catch {
+      document.execCommand('copy')
+      document.getElementById('note').textContent = 'Copied.'
+    }
+  })
+</script>

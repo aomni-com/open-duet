@@ -1,0 +1,10 @@
+{
+  "triggers": [],
+  "tags": [
+    "marketing"
+  ],
+  "onboarding": {
+    "kind": "chat"
+  },
+  "suggestedFirstMessage": "Hi — I’m your Social Media Manager. I run your calendar from sourced hook to platform-ready copy and short video, and nothing goes live without your exact approval. What are we posting about this week?"
+}

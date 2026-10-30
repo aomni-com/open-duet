@@ -1,0 +1,99 @@
+{
+  "purpose": "Prepublication isolated integration of exact built agent package; not publication or staging proof",
+  "agent": {
+    "source": "0cd51fb9130ff6a9d095b8dc6e70288bfcce7c40",
+    "image": "sha256:d891540b4c93f3a053ceb5d802fdf4cadcddea066ed248fa245229768c662d7b",
+    "version": "0.3.30",
+    "tarball": "/tmp/workflow-package-0cd51fb/duetso-agent-0.3.30.tgz",
+    "tarballSha256": "ac62f4214bc961cccf265945648cca33a52bbc7c069a5e7dcbf280b7ad980b42",
+    "fixtureRevision": 2,
+    "fixtureArchiveSha256": "b77b40a888f6fd5e581124d2f1bf6fa4e9c0e5b3a3d7cb37b10db183b93011a5",
+    "fixtureManifestMatches": true
+  },
+  "duet": {
+    "rootBaseAtTrial": "eb3cf995a874174fa991e0d7e0633c4cb828c7b7",
+    "trialHead": "eb3cf995a874174fa991e0d7e0633c4cb828c7b7",
+    "branch": "codex/workflow-package-trial",
+    "worktree": "/Users/synthetic-user/.codex/worktrees/workflow-staging/duet",
+    "uncommittedInputs": "Copied root pending routing helper/config tests, then two test typing fixes; catalog/lock/generated routing are trial-only",
+    "typingPatch": "/tmp/workflow-package-0cd51fb/gateway-test-type-fixes.patch",
+    "typingPatchSha256": "1e50974b7fd702a98f9b2defd66af03080d368738acdaba0ccf5b3269fdf618c",
+    "fileSha256": {
+      "packages/gateway/src/agent-sessions/ledger.test.ts": "ba807043e62c88864cc7f6871df71542e43efb122d6271f043d3340960119565",
+      "packages/gateway/src/runner/routing-agent.test-helper.ts": "e418438b1db6ed3f2a7c12311e4e703c41dce66dd58e5adf07a4032593a8fb97",
+      "packages/gateway/src/runner/routing-config.test.ts": "59cf01ab735c7a5632cee7a5ec8fa52613d46a53afaadcfe1fc37ae5cd91164b",
+      "packages/gateway/src/runner/pinned-routing-table.json": "0815804e882b5f129f24139256aea8da37fb7db0618bac649a00291f47f28d41",
+      "package.json": "64ea293e728ada8339dcb997817e4acddfa706102cee2c829aa9fbe90a584cdb",
+      "bun.lock": "14de3933086f1ded8b04bd22dac8ae00f4139da0cbddc4d7d5e94eba1e72fd16"
+    }
+  },
+  "checks": [
+    {
+      "command": "docker run --rm -v /tmp/workflow-package-0cd51fb:/package sha256:d891540b4c93f3a053ceb5d802fdf4cadcddea066ed248fa245229768c662d7b sh -c 'export PATH=/work/node_modules/.bin:$PATH; bun pm pack --destination /package'",
+      "result": "passed, prepack build executed",
+      "log": "/tmp/workflow-package-0cd51fb/pack-path.log"
+    },
+    {
+      "command": "python3 /tmp/workflow-patch-diagnosis/registry-trial.py",
+      "result": "passed; child bun install used temporary scoped registry metadata facade and original tarball bytes",
+      "log": "/tmp/workflow-patch-diagnosis/duet-registry-trial.log",
+      "identity": "/tmp/workflow-patch-diagnosis/registry-trial-identity.json"
+    },
+    {
+      "cwd": "packages/gateway",
+      "command": "bun run routing:export && bun run routing:check",
+      "result": "passed",
+      "log": "exec output; no standalone file"
+    },
+    {
+      "cwd": "packages/gateway",
+      "command": "bun test src/runner/routing-config.test.ts --timeout 60000",
+      "result": "7 passed, 1 failed, 1 unhandled error; 82 assertions",
+      "log": "/tmp/workflow-package-0cd51fb/gateway-routing-tests.log",
+      "failure": "Existing test.each provider failure=true case exceeded its original 30000ms limit; dangling child killed and code143 surfaced. Not rerun."
+    },
+    {
+      "cwd": "packages/gateway",
+      "command": "bun run check-types",
+      "result": "initial failed: ledger fixture discriminants widened and helper status possibly undefined",
+      "log": "/tmp/workflow-package-0cd51fb/gateway-types.log"
+    },
+    {
+      "cwd": "packages/gateway",
+      "command": "bun run check-types",
+      "result": "passed after focused typing patch",
+      "log": "/tmp/workflow-package-0cd51fb/gateway-types-fixed-narrow.log"
+    },
+    {
+      "cwd": "packages/test-harness",
+      "command": "bun run check-types",
+      "result": "passed",
+      "log": "/tmp/workflow-package-0cd51fb/harness-types.log"
+    },
+    {
+      "cwd": "packages/contract",
+      "command": "bun test src/model-tiers/index.test.ts",
+      "result": "23 passed, 0 failed, 88 assertions",
+      "log": "/tmp/workflow-package-0cd51fb/contract-model-tiers.log"
+    },
+    {
+      "cwd": "packages/gateway",
+      "command": "bun test src/agent-sessions/ledger.test.ts src/runner/routing-config.test.ts -t 'execution receipts|managed .* disables advisors' --timeout 60000",
+      "result": "4 passed, 0 failed, 38 assertions; receipt roundtrip plus fresh/resumed advisor-off for all three tiers",
+      "log": "/tmp/workflow-package-0cd51fb/gateway-fixed-tests.log"
+    }
+  ],
+  "limitations": [
+    "No publication, deployment, live staging, or full-root test suite.",
+    "File/HTTP tarball dependency installs failed Bun patch lookup; registry-style installation succeeded without changing package bytes.",
+    "Initial pack prepare PATH failure retained; adding container dependency binaries to PATH resolved it.",
+    "Accidental root turbo typecheck was promptly terminated; gateway-only typecheck result above is authoritative.",
+    "A passing mocked provider routing test is not paid-provider generation proof."
+  ],
+  "cleanup": {
+    "localServerStopped": true,
+    "bunfigRestored": true,
+    "rootUntouchedByTrial": true,
+    "trialEditsPreserved": true
+  }
+}

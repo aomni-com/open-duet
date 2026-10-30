@@ -1,0 +1,67 @@
+{
+  "scope": "Repo-owned public publisher readiness and stock staging cleanup; no live publication or secret changes",
+  "baseRevision": "a7688e48294ea843a2b68c38e945ea93479f1610",
+  "readiness": {
+    "contract": "API revision and backend revision equal the explicit full GITHUB_SHA, backend schema matches source",
+    "defaultOrigin": "https://service.example.invalid",
+    "deadlineMs": 600000,
+    "pollIntervalMs": 5000,
+    "requestTimeoutMs": 10000,
+    "identityProjection": "ApiDeploymentSchema.pick({revision:true,backend:true})",
+    "override": "Explicit loopback127.0.0.1 HTTP fixture only; no bypass flag",
+    "existingVersionAndDryRun": "unchanged; no readiness request"
+  },
+  "anonymousProductionRead": {
+    "status": 200,
+    "apiRevision": "dbb28fe14a026c143f2134b88586a13f2e0ebdef",
+    "backend": {
+      "revision": "dbb28fe14a026c143f2134b88586a13f2e0ebdef",
+      "schema": 1
+    },
+    "credentialsSent": false,
+    "schemaParsed": true
+  },
+  "owningGate": {
+    "command": "bash scripts/agent-tests.sh duet test/public-cli-release.test.ts test/stage-syncthing-packages.test.ts test/public-pack.test.ts",
+    "tests": 17,
+    "assertions": 89,
+    "exitCode": 0,
+    "seconds": 62.24,
+    "node": "24.14.0",
+    "npm": "11.9.0",
+    "bun": "1.3.14",
+    "platform": "linux/amd64"
+  },
+  "negativeControls": [
+    "Omitting readiness published to local fixture and made stale API test red",
+    "Missing release revision control failed with explicit diagnostic before PUT",
+    "Obsolete stock --publish flag acquired a binary before rename/guard, now fails before acquisition"
+  ],
+  "inputs": {
+    "packages/duet/scripts/release-public-cli.ts": "f6ad76cf2174804e02eb4361993c39e61b6ac8d65045d560b9fe0e57f2903a02",
+    "packages/duet/scripts/stage-syncthing-packages.ts": "f2ed7b99e25ea534a1b72783fef7b9f87df6968569934e066d64321494fc8e1f",
+    "packages/duet/test/public-cli-release.test.ts": "5dfae772ac9d183b36b505c61ee90cf03139d8d0230008c4b45af2ec4cb99c4c",
+    "packages/duet/test/stage-syncthing-packages.test.ts": "c79ee9082c1cbf0fb46a25aaeb81edaf6fc6362b1e461efdaf4226a3fa9ca26b",
+    "scripts/agent-tests.sh": "282fe1c7cbecc1afe6be282b54d03b3adc19b17e85781a0e1f41e3a96a335a9f",
+    "scripts/agent-tests.Dockerfile": "64ce0769671054f9de48963616e4e9031dc7926902a7cf9ce58380eea76f4801",
+    "packages/contract/src/deployment/index.ts": "3d57b7d911e8d59cc97e438e6d6be9ac33672230ec3f9bd56355d6bf080cab55",
+    "packages/contract/src/http/index.ts": "83f231efbd18c23e71a382622c881241d11805d7be924aabd689135bc1895883"
+  },
+  "limitations": [
+    "Full native gate preceded narrow identity projection; final maintained15-case publisher gate follows projection",
+    "No actual registry release, old-writer retirement, credentials migration or duetfs registry deprecation"
+  ],
+  "reviews": {
+    "firstFinalReview": "Codex completed with no actionable regressions; sandbox could not execute Docker tests, actual container evidence independent",
+    "finalProjectionReview": "Exact default codex review --uncommitted completed exit0 with no actionable regressions. Reviewer could run stock-staging but sandbox denied Docker; actual owning-rail gate independently passed.",
+    "typecheckExitCode": 0,
+    "lintExitCode": 0
+  },
+  "finalPublisherGate": {
+    "tests": 15,
+    "assertions": 64,
+    "seconds": 36.06,
+    "exitCode": 0,
+    "command": "bash scripts/agent-tests.sh duet test/public-cli-release.test.ts"
+  }
+}

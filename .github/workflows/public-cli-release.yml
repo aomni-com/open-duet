@@ -1,0 +1,46 @@
+name: Publish public Duet CLI
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-duet-cli-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.3.14'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: https://registry.npmjs.org
+      - name: Verify external packaging and publication behavior
+        run: bash scripts/agent-tests.sh duet test/public-pack.test.ts test/public-cli-release.test.ts
+      - name: Install the frozen public CLI closure
+        run: bun install --frozen-lockfile --filter @repo/agent --filter @duetso/agent
+      - name: Stage the public package
+        run: |
+          bun run --cwd packages/agent build
+          bun packages/duet/scripts/build-public-package.ts --auto-version
+      - name: Publish the next immutable CLI patch version
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: bun packages/duet/scripts/release-public-cli.ts --publish
+      - name: Retain publication receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-cli-release-${{ github.run_id }}
+          path: packages/duet/dist/public-release/receipt.json
+          if-no-files-found: warn
+          retention-days: 30

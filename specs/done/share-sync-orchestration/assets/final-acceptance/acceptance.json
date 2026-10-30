@@ -1,0 +1,60 @@
+{
+  "runId": "staging-e2e-synthetic",
+  "date": "2026-07-17",
+  "provenance": {
+    "producer": "packages/test-harness/src/staging-e2e-synthetic",
+    "featureOwners": [
+      "packages/test-harness/src/staging-e2e-synthetic",
+      "packages/test-harness/src/staging-e2e-synthetic"
+    ],
+    "sourceArtifact": "tmp/staging-e2e-synthetic/staging-e2e-synthetic/timeline.json",
+    "projection": "Human-reviewed, sanitized projection of the raw composed-run timeline; no credentials or disposable resource identifiers are retained."
+  },
+  "identityMode": "tagged-fallback",
+  "deployed": {
+    "apiCommit": "7532d60e3f4accae507d2ac26b583b3bb826f9e9",
+    "webCommit": "b36e704ea1ee4433ac18c47b1feccd19f587c12a"
+  },
+  "requiredLegs": {
+    "share-request-email": "pass",
+    "share-deep-link": "pass",
+    "share-accept": "pass",
+    "share-file-arrival": "pass",
+    "share-move": "pass",
+    "share-transient-miss": "pass",
+    "share-explicit-unlink": "pass",
+    "share-delete-auto-unlink": "pass",
+    "share-revoke": "pass",
+    "share-byte-arrival": "pass",
+    "share-cleanup": "pass",
+    "artifacts": "pass"
+  },
+  "coverage": {
+    "bidirectionalBytes": true,
+    "readModeRepair": true,
+    "sameFilesystemMove": true,
+    "crossFilesystemMove": true,
+    "nestedMovePolicy": true,
+    "recipientDeleteAutoUnlink": true,
+    "originDeleteAutoUnlink": true,
+    "revokeObservedBothMountRegistriesPruned": true
+  },
+  "timingsMs": {
+    "initialByteArrival": 8460,
+    "reverseByteArrival": 3708,
+    "relocation": 30897
+  },
+  "cleanup": {
+    "status": "pass",
+    "orphanCount": 0
+  },
+  "composedRunner": {
+    "status": "fail",
+    "unrelatedFailure": "ZlibError while fetching the Firecrawl Composio integration after all required share legs had passed."
+  },
+  "postAcceptanceReview": {
+    "commit": "b49ef6b7",
+    "scope": "Terminal realization cleanup, lazy obsolete-row pruning, live-row management priority, and explicit workspace-hint authorization.",
+    "verification": "38 focused API/backend tests passed with 132 assertions; API/backend type checks, linters, and repository formatter passed."
+  }
+}

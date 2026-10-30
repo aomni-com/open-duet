@@ -1,0 +1,54 @@
+{
+  "formatVersion": 1,
+  "version": "0.0.0+fedeb17ada3f6dd7e8032582a6a90c4f1060fff7f0c5c43f84643c2095792c9b",
+  "artifacts": [
+    {
+      "name": "duet",
+      "sha256": "684746f8af3ded60d9e106ca2e1bbb66c830a2261dcbee5ef466b36d4198dcda",
+      "byteLength": 118032512,
+      "mode": 493
+    },
+    {
+      "name": "helper.js",
+      "sha256": "6c4addd2d6d65edc3c296bac5b56d6f57f19ff9543c07b17c2729ccc5eede9df",
+      "byteLength": 908839,
+      "mode": 420
+    },
+    {
+      "name": "index.js",
+      "sha256": "cf6e320136d80c1d2e7eac4736b2004a6d5949a11cb3ba642c4c00a611aa566f",
+      "byteLength": 2241241,
+      "mode": 420
+    },
+    {
+      "name": "initdb.wasm",
+      "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+      "byteLength": 169969,
+      "mode": 420
+    },
+    {
+      "name": "pglite.data",
+      "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+      "byteLength": 5289109,
+      "mode": 420
+    },
+    {
+      "name": "pglite.wasm",
+      "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+      "byteLength": 8739902,
+      "mode": 420
+    },
+    {
+      "name": "photon_rs_bg.wasm",
+      "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+      "byteLength": 1881634,
+      "mode": 420
+    },
+    {
+      "name": "vector.tar.gz",
+      "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+      "byteLength": 46108,
+      "mode": 420
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+bun test v1.3.14 (0d9b296a)
+
+spa/routes/internal-admin.test.tsx:
+(pass) offers email-based user creation only on the allowed admin surface [10.16ms]
+(pass) queued VM backup notice distinguishes acceptance from completion [1.49ms]
+(pass) fleet renders one runtime convergence and the reported releases for each VM [1.56ms]
+(pass) converged runtime count keeps the full reported identity in its VM row [0.65ms]
+
+ 4 pass
+ 0 fail
+ 13 expect() calls
+Ran 4 tests across 1 file. [218.00ms]

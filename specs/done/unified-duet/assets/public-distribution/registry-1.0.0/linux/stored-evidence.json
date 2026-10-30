@@ -1,0 +1,62 @@
+{
+  "install-config-rejected.txt.gz": {
+    "originalSha256": "46b049ce4414864c7c00684208edcbf4559d509d1aeabb878bd2878d816bf405",
+    "storedSha256": "18614194368229df8bbaed864f6eac7225c6a45a4b8c6b6a6d295f14181fcc33",
+    "originalBytes": 165,
+    "compressed": true
+  },
+  "install.txt.gz": {
+    "originalSha256": "095c0914e233ba8721fc52345817c12cf4975ea786f0848c2e9b860febcc0f0b",
+    "storedSha256": "7c9fb0f7126e1b853febbbf718f51a31662ea28564299a466c9d6efded7b56ed",
+    "originalBytes": 237,
+    "compressed": true
+  },
+  "installed-closure.json": {
+    "originalSha256": "c9f65e7a9f5d6b1754168552216240ce1c29bdd76c34818ff83e97fcf69b3695",
+    "storedSha256": "c9f65e7a9f5d6b1754168552216240ce1c29bdd76c34818ff83e97fcf69b3695",
+    "originalBytes": 6637,
+    "compressed": false
+  },
+  "linux/journey.json.gz": {
+    "originalSha256": "4b7488f00facf5891d8ff335ed93bec7373334a1d54bf94aeb513cbe078d3128",
+    "storedSha256": "975062f9aa3bc9a49f93831e378206fc240232fa3976b3d58b7deb75c3080182",
+    "originalBytes": 12604,
+    "compressed": true
+  },
+  "linux/oauth.ndjson.gz": {
+    "originalSha256": "ddb91fcec03998c064aa6b781a7736f9a638edc6bda2875d5effebf1b2a291cc",
+    "storedSha256": "ee87b677f2a279768cdeaebffabe1ae6e5c9dc235619859fd712ac2e9f2d9714",
+    "originalBytes": 1455,
+    "compressed": true
+  },
+  "linux/oauth.txt.gz": {
+    "originalSha256": "3247d5d0f78713625dc785811bc0e8bd93cc3021643ce18852ab10c37f29d2da",
+    "storedSha256": "67009303ae2ebd44eee97f7b5e9e25788e457203f045d90718193e86ed314df8",
+    "originalBytes": 299,
+    "compressed": true
+  },
+  "linux/runtime.json.gz": {
+    "originalSha256": "e2cd6891a7fcb9f2174534d5d2654469b13e7da879e563a99e9f77f1f309b04f",
+    "storedSha256": "c30cb6f2870ce819eaf8f2afb7a2be00591a7ad0f88aeb0b7e425aade96872cc",
+    "originalBytes": 805751,
+    "compressed": true
+  },
+  "linux/tui.ansi.gz": {
+    "originalSha256": "8def87c937323b5a5621f536b121620faccbebacf2b8c72f8135b61cd1ace4e0",
+    "storedSha256": "433a74aaec8882fd31c5079415033954b589698061662da9df769a47c42f8612",
+    "originalBytes": 32948,
+    "compressed": true
+  },
+  "linux/tui.stderr.gz": {
+    "originalSha256": "c8f8384f4851336ddaaa421c1c26e256531fa82f451f6ed3bec2038ee3c03edb",
+    "storedSha256": "efeb2f880ffcffc4830b3342626cfe3b4736363ed3bd331703a9b6d664a959c8",
+    "originalBytes": 49,
+    "compressed": true
+  },
+  "smoke.txt.gz": {
+    "originalSha256": "6d4d2d1f3fcdbef536dedceb7fed6649e2d835a975d93d06dc3c7bb638a53615",
+    "storedSha256": "db77f1d3f9581c59876a14bcf39355fdacb365b097a29377b1fd5e1d5053952f",
+    "originalBytes": 343,
+    "compressed": true
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "fixtureName": "duet-strict-predecessor-cef66-physical-official",
+  "cleanupVerifiedAbsent": true,
+  "missingCorruptSidecarBranch": "not executed: retained probe branch requires legacy duet-linux-x64 filename",
+  "exitCode": 0,
+  "containerId": "b5904327ca510c1b4f95b687c580f37ade6e6b61dd64c9bc3c76afc061576cb5"
+}

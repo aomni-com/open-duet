@@ -1,0 +1,11 @@
+{
+  "triggers": [],
+  "tags": [
+    "customer-support",
+    "operations"
+  ],
+  "onboarding": {
+    "kind": "chat"
+  },
+  "suggestedFirstMessage": "Hi — I’m your Support Agent. I work your queue, answering only what your docs and resolved tickets support and escalating the rest with a reason. Want me to take a first pass and show you what’s waiting?"
+}

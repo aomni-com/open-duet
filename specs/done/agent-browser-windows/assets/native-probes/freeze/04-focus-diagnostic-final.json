@@ -1,0 +1,84 @@
+{
+  "active": {
+    "rendererCpuCores": 0.9774811739569598,
+    "rendererRssBytes": 1043435520,
+    "totalChromeCpuCores": 1.1399780443078609,
+    "totalChromeRssBytes": 1965404160
+  },
+  "boundaries": {
+    "dialog": "Native dialog event observed and dismissed before freeze: True; an open modal is outside this gate's safety promise.",
+    "download": "Download completed before freeze: True; in-flight browser-service transfer behavior is outside the page lifecycle promise.",
+    "media": "AudioContext state before freeze was running; audio/service processes are outside the page-renderer CPU promise.",
+    "popup": "Popup observed as a separate page target and explicitly frozen: True.",
+    "serviceWorker": "Service worker was a separate target and remained discoverable without being frozen: True."
+  },
+  "chromeVersion": "Google Chrome 151.0.7922.137",
+  "diagnostics": {
+    "backgroundPage": {
+      "lifecycleEvents": [],
+      "timerDeltaDuringFreeze": 10,
+      "visibilityAfter": "visible",
+      "visibilityBefore": "visible"
+    },
+    "focusedPage": {
+      "lifecycleEvents": [],
+      "timerDeltaDuringFreeze": 10,
+      "visibilityAfter": "visible",
+      "visibilityBefore": "visible"
+    },
+    "minimizedBackground": {
+      "chromeWindowStatesAfterRestore": ["normal", "normal", "minimized"],
+      "chromeWindowStatesWhileMinimized": ["minimized", "minimized", "minimized"],
+      "lifecycleEvents": [],
+      "minimizedAndFrozen": {
+        "rendererCpuCores": 1.0124749068219094,
+        "rendererRssBytes": 810201088,
+        "totalChromeCpuCores": 1.027474535071123,
+        "totalChromeRssBytes": 1727508480
+      },
+      "minimizedOnly": {
+        "rendererCpuCores": 1.009974735734479,
+        "rendererRssBytes": 810070016,
+        "totalChromeCpuCores": 1.0274742979873042,
+        "totalChromeRssBytes": 1728204800
+      },
+      "restoreResumedTimers": true,
+      "stateSurvivedRestore": true,
+      "timerDeltaMinimizedAndFrozen": 115,
+      "timerDeltaMinimizedOnly": 112,
+      "visibilityAfterRestore": ["visible", "visible", "visible"],
+      "visibilityWhileMinimized": ["visible", "visible", "visible"]
+    }
+  },
+  "frozen": {
+    "rendererCpuCores": 1.0124597838318112,
+    "rendererRssBytes": 810332160,
+    "totalChromeCpuCores": 1.0299590887375463,
+    "totalChromeRssBytes": 1729257472
+  },
+  "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:71285a0068a6ed54ca33dd48791d0fe5ad2c3ccf69738ed5b25c9f9bd5c327dd",
+  "schemaVersion": 1,
+  "state": {
+    "driveMutationObserved": true,
+    "markerAfterThaw": "duet-freeze-state-survives",
+    "markerBeforeFreeze": "duet-freeze-state-survives",
+    "navigationCountAfterThaw": 1,
+    "navigationCountBeforeFreeze": 1,
+    "targetDiscoverableAfterThaw": true,
+    "thawLatencyMs": 209.61080400000043,
+    "timerCountAfterResume": 271,
+    "timerCountBeforeFreeze": 222,
+    "timerCountImmediatelyAfterThaw": 263
+  },
+  "thawed": {
+    "rendererCpuCores": 1.0174555567781882,
+    "rendererRssBytes": 779227136,
+    "totalChromeCpuCores": 1.0374546832013467,
+    "totalChromeRssBytes": 1698185216
+  },
+  "workload": {
+    "pageCount": 4,
+    "sampleDurationMs": 4000,
+    "timerIntervalMs": 50
+  }
+}

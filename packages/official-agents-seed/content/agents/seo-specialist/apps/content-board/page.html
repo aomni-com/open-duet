@@ -1,0 +1,1166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Content board</title>
+    <script>
+      const requestedTheme = new URLSearchParams(location.search).get('theme')
+      if (requestedTheme === 'light' || requestedTheme === 'dark') {
+        document.documentElement.dataset.theme = requestedTheme
+      }
+    </script>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --canvas: #f2f0e9;
+        --surface: rgba(255, 255, 255, 0.78);
+        --solid: #fffefa;
+        --ink: #17201f;
+        --muted: #68716e;
+        --line: rgba(23, 32, 31, 0.13);
+        --teal: #087f71;
+        --teal-soft: #d8f3ec;
+        --amber: #d97a16;
+        --amber-soft: #fff0d6;
+        --blue: #3457d5;
+        --blue-soft: #e4e8ff;
+        --shadow: 0 22px 70px rgba(43, 53, 49, 0.1);
+      }
+
+      :root[data-theme='dark'] {
+        --canvas: #111716;
+        --surface: rgba(27, 35, 33, 0.86);
+        --solid: #1c2422;
+        --ink: #eff5f2;
+        --muted: #a5b0ac;
+        --line: rgba(239, 245, 242, 0.13);
+        --teal: #62dbc6;
+        --teal-soft: #193d37;
+        --amber: #ffb457;
+        --amber-soft: #49331d;
+        --blue: #9bacff;
+        --blue-soft: #29325b;
+        --shadow: 0 22px 70px rgba(0, 0, 0, 0.32);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) {
+          --canvas: #111716;
+          --surface: rgba(27, 35, 33, 0.86);
+          --solid: #1c2422;
+          --ink: #eff5f2;
+          --muted: #a5b0ac;
+          --line: rgba(239, 245, 242, 0.13);
+          --teal: #62dbc6;
+          --teal-soft: #193d37;
+          --amber: #ffb457;
+          --amber-soft: #49331d;
+          --blue: #9bacff;
+          --blue-soft: #29325b;
+          --shadow: 0 22px 70px rgba(0, 0, 0, 0.32);
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 0;
+        min-height: 100vh;
+        margin: 0;
+        overflow-x: hidden;
+        background:
+          radial-gradient(
+            circle at 12% 3%,
+            color-mix(in srgb, var(--teal) 14%, transparent),
+            transparent 26rem
+          ),
+          radial-gradient(
+            circle at 94% 90%,
+            color-mix(in srgb, var(--amber) 11%, transparent),
+            transparent 30rem
+          ),
+          var(--canvas);
+        color: var(--ink);
+        font:
+          15px/1.5 Inter,
+          ui-sans-serif,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+      }
+
+      button {
+        color: inherit;
+        font: inherit;
+      }
+
+      .shell {
+        width: min(100% - 2rem, 76rem);
+        margin: 0 auto;
+        padding: 1.3rem 0 3rem;
+      }
+
+      header {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem 0 1.7rem;
+      }
+
+      .eyebrow {
+        margin: 0 0 0.35rem;
+        color: var(--teal);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font:
+          500 clamp(2.2rem, 4vw, 4.25rem) / 0.98 ui-serif,
+          Georgia,
+          serif;
+        letter-spacing: -0.05em;
+      }
+
+      .live {
+        display: inline-flex;
+        flex: 0 0 auto;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      .live::before {
+        width: 0.52rem;
+        height: 0.52rem;
+        border-radius: 50%;
+        background: var(--muted);
+        content: '';
+      }
+
+      .live[data-live='true']::before {
+        background: var(--teal);
+        box-shadow: 0 0 0 0.24rem color-mix(in srgb, var(--teal) 18%, transparent);
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 1.35rem;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(18px);
+      }
+
+      .status {
+        margin: 0 0 1rem;
+        padding: 0.6rem 0.95rem;
+        border-radius: 0.9rem;
+        background: var(--blue-soft);
+        color: var(--blue);
+        font-size: 0.8rem;
+        font-weight: 650;
+      }
+
+      .status:empty {
+        display: none;
+      }
+
+      .status[data-tone='error'] {
+        background: var(--amber-soft);
+        color: var(--amber);
+      }
+
+      .empty {
+        padding: 3rem 1.5rem;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      .empty strong {
+        color: var(--ink);
+      }
+
+      .board {
+        overflow: hidden;
+      }
+
+      .board + .board {
+        margin-top: 1rem;
+      }
+
+      .board-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 0.95rem 1.15rem;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .board-head strong {
+        font-size: 0.82rem;
+        letter-spacing: 0.02em;
+      }
+
+      .board-note {
+        color: var(--muted);
+        font-size: 0.74rem;
+      }
+
+      .lane {
+        display: grid;
+        grid-template-columns: 11rem minmax(0, 1fr);
+        align-items: start;
+        gap: 0.85rem 1.1rem;
+        padding: 0.75rem 1.15rem;
+      }
+
+      .lane + .lane {
+        border-top: 1px solid var(--line);
+      }
+
+      .lane:last-child {
+        padding-bottom: 0.95rem;
+      }
+
+      .lane[data-filled='true'] {
+        padding-top: 0.9rem;
+        padding-bottom: 0.9rem;
+        background: linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--teal-soft) 42%, transparent),
+          transparent 22rem
+        );
+      }
+
+      .lane-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.6rem;
+        min-height: 1.9rem;
+      }
+
+      .lane-name {
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .lane[data-filled='true'] .lane-name {
+        color: var(--ink);
+      }
+
+      .lane-count {
+        min-width: 1.6rem;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--muted) 14%, transparent);
+        color: var(--muted);
+        padding: 0.1rem 0.45rem;
+        font-size: 0.72rem;
+        font-weight: 800;
+        font-variant-numeric: tabular-nums;
+        text-align: center;
+      }
+
+      .lane[data-filled='true'] .lane-count {
+        background: var(--teal-soft);
+        color: var(--teal);
+      }
+
+      .lane-cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        min-width: 0;
+      }
+
+      .lane-idle {
+        align-self: center;
+        margin: 0;
+        color: color-mix(in srgb, var(--muted) 60%, transparent);
+        font-size: 0.8rem;
+      }
+
+      .card {
+        flex: 1 1 17rem;
+        max-width: 22rem;
+        min-width: 0;
+        padding: 0.85rem 0.9rem;
+        border: 1px solid var(--line);
+        border-radius: 1.05rem;
+        background: var(--solid);
+      }
+
+      .card h2 {
+        margin: 0;
+        overflow-wrap: anywhere;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        line-height: 1.3;
+      }
+
+      .slug {
+        display: block;
+        margin-top: 0.2rem;
+        overflow-wrap: anywhere;
+        color: var(--muted);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.72rem;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        margin-top: 0.65rem;
+      }
+
+      .chip {
+        border-radius: 999px;
+        padding: 0.2rem 0.55rem;
+        background: color-mix(in srgb, var(--muted) 13%, transparent);
+        color: var(--muted);
+        font-size: 0.66rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .chip.keyword {
+        font-weight: 700;
+        letter-spacing: normal;
+        text-transform: none;
+      }
+
+      .chip[data-verdict='new'] {
+        background: var(--teal-soft);
+        color: var(--teal);
+      }
+
+      .chip[data-verdict='refresh'] {
+        background: var(--blue-soft);
+        color: var(--blue);
+      }
+
+      .chip[data-verdict='reject'],
+      .chip[data-verdict='fold-in'] {
+        background: var(--amber-soft);
+        color: var(--amber);
+      }
+
+      .artifacts {
+        margin: 0.65rem 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .artifacts li {
+        border-top: 1px solid var(--line);
+      }
+
+      .artifact-link {
+        display: grid;
+        grid-template-columns: minmax(4rem, auto) 1fr;
+        gap: 0.5rem;
+        width: 100%;
+        min-height: 2.5rem;
+        border: 0;
+        border-radius: 0.4rem;
+        background: transparent;
+        color: inherit;
+        padding: 0.42rem 0;
+        text-align: left;
+        cursor: pointer;
+      }
+
+      .artifact-link:hover {
+        color: var(--teal);
+      }
+
+      .artifact-link:focus-visible,
+      .reader-close:focus-visible {
+        outline: 2px solid var(--teal);
+        outline-offset: 2px;
+      }
+
+      .artifact-stage {
+        color: var(--muted);
+        font-size: 0.74rem;
+        font-weight: 700;
+      }
+
+      .artifact-title {
+        min-width: 0;
+        overflow-wrap: anywhere;
+        font-size: 0.74rem;
+        font-weight: 700;
+      }
+
+      .no-artifacts {
+        margin: 0.65rem 0 0;
+        color: var(--muted);
+        font-size: 0.74rem;
+      }
+
+      .card-actions {
+        margin-top: 0.8rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .card-actions-label {
+        margin: 0 0 0.5rem;
+        color: var(--ink);
+        font-size: 0.74rem;
+        font-weight: 760;
+      }
+
+      .advance-button,
+      .feedback-submit {
+        min-height: 2.5rem;
+        border: 0;
+        border-radius: 0.72rem;
+        background: var(--teal);
+        color: var(--solid);
+        padding: 0.55rem 0.75rem;
+        font-size: 0.74rem;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .advance-button {
+        width: 100%;
+      }
+
+      .feedback-form {
+        display: grid;
+        gap: 0.5rem;
+        margin-top: 0.55rem;
+      }
+
+      .feedback-input {
+        width: 100%;
+        min-height: 5.4rem;
+        resize: vertical;
+        border: 1px solid var(--line);
+        border-radius: 0.72rem;
+        background: var(--canvas);
+        color: var(--ink);
+        padding: 0.65rem 0.7rem;
+        font: inherit;
+        font-size: 0.78rem;
+      }
+
+      .feedback-input::placeholder {
+        color: var(--muted);
+      }
+
+      .feedback-input:focus-visible,
+      .advance-button:focus-visible,
+      .feedback-submit:focus-visible {
+        outline: 2px solid var(--teal);
+        outline-offset: 2px;
+      }
+
+      .advance-button:disabled,
+      .feedback-submit:disabled,
+      .feedback-input:disabled {
+        cursor: wait;
+        opacity: 0.62;
+      }
+
+      .feedback-note {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.68rem;
+      }
+
+      .reader[hidden] {
+        display: none;
+      }
+
+      .reader {
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        overflow-y: auto;
+        background: color-mix(in srgb, var(--canvas) 92%, transparent);
+        backdrop-filter: blur(8px);
+        padding: clamp(0.7rem, 4vw, 2rem);
+      }
+
+      .reader-panel {
+        width: min(100%, 58rem);
+        min-height: calc(100vh - clamp(1.4rem, 8vw, 4rem));
+        margin: 0 auto;
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .reader-head {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.8rem 1rem;
+        border-bottom: 1px solid var(--line);
+        border-radius: 1rem 1rem 0 0;
+        background: var(--surface);
+      }
+
+      .reader-meta {
+        min-width: 0;
+      }
+
+      .reader-kicker {
+        display: block;
+        color: var(--muted);
+        font-size: 0.68rem;
+        font-weight: 760;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .reader-title {
+        display: block;
+        overflow: hidden;
+        color: var(--ink);
+        font-size: 0.86rem;
+        font-weight: 700;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .reader-close {
+        flex: 0 0 auto;
+        min-width: 2.6rem;
+        min-height: 2.6rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--muted) 13%, transparent);
+        color: var(--ink);
+        font-size: 1.15rem;
+        cursor: pointer;
+      }
+
+      .reader-state {
+        margin: 0;
+        padding: 2rem clamp(1rem, 5vw, 4rem);
+        color: var(--muted);
+      }
+
+      .markdown {
+        width: min(100%, 74ch);
+        margin: 0 auto;
+        padding: clamp(1.5rem, 5vw, 4rem) clamp(1rem, 5vw, 3.5rem);
+        overflow-wrap: anywhere;
+      }
+
+      .markdown h1,
+      .markdown h2,
+      .markdown h3 {
+        line-height: 1.16;
+        letter-spacing: -0.025em;
+      }
+
+      .markdown h1 {
+        margin: 0 0 1.4rem;
+        font-size: clamp(1.9rem, 5vw, 3rem);
+      }
+
+      .markdown h2 {
+        margin: 2.4rem 0 0.8rem;
+        padding-top: 0.4rem;
+        border-top: 1px solid var(--line);
+        font-size: clamp(1.35rem, 3vw, 1.7rem);
+      }
+
+      .markdown h3 {
+        margin: 1.8rem 0 0.6rem;
+        font-size: 1.14rem;
+      }
+
+      .markdown p,
+      .markdown ul,
+      .markdown ol,
+      .markdown table,
+      .markdown blockquote {
+        margin: 0 0 1rem;
+      }
+
+      .markdown ul,
+      .markdown ol {
+        padding-left: 1.4rem;
+      }
+
+      .markdown li + li {
+        margin-top: 0.35rem;
+      }
+
+      .markdown strong {
+        font-weight: 760;
+      }
+
+      .markdown code {
+        border: 1px solid var(--line);
+        border-radius: 0.35rem;
+        background: color-mix(in srgb, var(--muted) 13%, transparent);
+        padding: 0.1rem 0.3rem;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.86em;
+      }
+
+      .markdown blockquote {
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--line);
+        border-radius: 0.65rem;
+        background: color-mix(in srgb, var(--muted) 13%, transparent);
+        color: var(--muted);
+      }
+
+      .table-wrap {
+        width: 100%;
+        margin: 1.2rem 0;
+        overflow-x: auto;
+      }
+
+      .markdown table {
+        width: 100%;
+        max-width: 100%;
+        border-collapse: collapse;
+        font-size: 0.86rem;
+      }
+
+      .markdown th,
+      .markdown td {
+        padding: 0.65rem 0.7rem;
+        border: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .markdown th {
+        background: color-mix(in srgb, var(--muted) 13%, transparent);
+        font-weight: 760;
+      }
+
+      body[data-reader-open='true'] {
+        overflow: hidden;
+      }
+
+      @media (max-width: 760px) {
+        .shell {
+          width: min(100% - 1.1rem, 76rem);
+          padding-top: 0.7rem;
+        }
+
+        header {
+          align-items: start;
+          padding-bottom: 1rem;
+        }
+
+        h1 {
+          font-size: clamp(2rem, 12vw, 3rem);
+        }
+
+        .board-head {
+          align-items: start;
+          gap: 0.3rem;
+          padding: 0.85rem 0.9rem;
+        }
+
+        .lane {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 0.6rem;
+          padding: 0.75rem 0.9rem;
+        }
+
+        .lane-idle {
+          display: none;
+        }
+
+        .card {
+          max-width: none;
+        }
+
+        .reader {
+          padding: 0;
+        }
+
+        .reader-panel {
+          min-height: 100vh;
+          border: 0;
+          border-radius: 0;
+        }
+
+        .reader-head {
+          border-radius: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <div>
+          <p class="eyebrow">Search content</p>
+          <h1>Content board</h1>
+        </div>
+        <span id="connection" class="live" data-live="false">connecting</span>
+      </header>
+
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+
+      <div id="empty" class="panel empty" hidden>
+        No cards yet. Every article starts in <strong>opportunity</strong> and only leaves it with a
+        verdict.
+      </div>
+
+      <section id="chain" class="panel board" aria-label="The chain" hidden>
+        <div class="board-head">
+          <strong>The chain</strong>
+          <span class="board-note">A card enters at opportunity and needs a verdict to move on.</span>
+        </div>
+        <div id="lanes"></div>
+      </section>
+
+      <section id="exits" class="panel board" aria-label="Out of the chain" hidden>
+        <div class="board-head">
+          <strong>Out of the chain</strong>
+          <span class="board-note">Nothing left to write, or nothing that can be written yet.</span>
+        </div>
+        <div id="terminal-lanes"></div>
+      </section>
+    </main>
+
+    <section id="reader" class="reader" hidden aria-label="Artifact reader">
+      <div class="reader-panel">
+        <div class="reader-head">
+          <div class="reader-meta">
+            <span id="reader-kicker" class="reader-kicker">Artifact</span>
+            <span id="reader-title" class="reader-title"></span>
+          </div>
+          <button id="reader-close" class="reader-close" type="button" aria-label="Close artifact">×</button>
+        </div>
+        <p id="reader-state" class="reader-state" role="status" aria-live="polite"></p>
+        <article id="reader-content" class="markdown"></article>
+      </div>
+    </section>
+
+    <script type="module">
+      const chain = document.querySelector('#chain')
+      const exits = document.querySelector('#exits')
+      const lanes = document.querySelector('#lanes')
+      const terminalLanes = document.querySelector('#terminal-lanes')
+      const empty = document.querySelector('#empty')
+      const status = document.querySelector('#status')
+      const connection = document.querySelector('#connection')
+      const reader = document.querySelector('#reader')
+      const readerKicker = document.querySelector('#reader-kicker')
+      const readerTitle = document.querySelector('#reader-title')
+      const readerState = document.querySelector('#reader-state')
+      const readerContent = document.querySelector('#reader-content')
+      const readerClose = document.querySelector('#reader-close')
+      let lastArtifactButton = null
+
+      function report(message, tone = 'info') {
+        status.textContent = message
+        status.dataset.tone = tone
+      }
+
+      async function getJson(url) {
+        const response = await fetch(url)
+        const body = await response.json().catch(() => ({}))
+        if (!response.ok) throw new Error(body.message ?? 'The board could not load.')
+        return body
+      }
+
+      async function load() {
+        try {
+          render(await getJson('/api/board'))
+          if (status.dataset.tone === 'error') report('')
+        } catch (error) {
+          report(error.message, 'error')
+        }
+      }
+
+      function render({ stages, terminals, cards }) {
+        const populated = cards.length !== 0
+        empty.hidden = populated
+        chain.hidden = !populated
+        exits.hidden = !populated
+        if (!populated) {
+          lanes.replaceChildren()
+          terminalLanes.replaceChildren()
+          return
+        }
+        lanes.replaceChildren(...stages.map(stage => renderLane(stage, cards, false)))
+        terminalLanes.replaceChildren(...terminals.map(stage => renderLane(stage, cards, true)))
+      }
+
+      function renderLane(stage, cards, terminal) {
+        const inStage = cards.filter(card => card.stage === stage)
+        const lane = document.createElement('section')
+        lane.className = 'lane'
+        lane.dataset.terminal = String(terminal)
+        lane.dataset.filled = String(inStage.length !== 0)
+        lane.setAttribute('aria-label', `${stage} — ${inStage.length} cards`)
+
+        const head = document.createElement('div')
+        head.className = 'lane-head'
+        const name = document.createElement('span')
+        name.className = 'lane-name'
+        name.textContent = stage
+        const count = document.createElement('span')
+        count.className = 'lane-count'
+        count.textContent = inStage.length
+        head.append(name, count)
+
+        if (inStage.length === 0) {
+          const idle = document.createElement('p')
+          idle.className = 'lane-idle'
+          idle.textContent = '—'
+          idle.setAttribute('aria-hidden', 'true')
+          lane.append(head, idle)
+          return lane
+        }
+
+        const stack = document.createElement('div')
+        stack.className = 'lane-cards'
+        stack.append(...inStage.map(renderCard))
+        lane.append(head, stack)
+        return lane
+      }
+
+      function renderCard(card) {
+        const article = document.createElement('article')
+        article.className = 'card'
+
+        const title = document.createElement('h2')
+        title.textContent = card.title
+        const slug = document.createElement('span')
+        slug.className = 'slug'
+        slug.textContent = card.slug
+        article.append(title, slug)
+
+        const chips = document.createElement('div')
+        chips.className = 'chips'
+        const verdict = document.createElement('span')
+        verdict.className = 'chip'
+        verdict.dataset.verdict = card.verdict ?? 'none'
+        verdict.textContent = card.verdict ?? 'no verdict'
+        chips.append(verdict)
+        if (card.primaryKeyword) {
+          const keyword = document.createElement('span')
+          keyword.className = 'chip keyword'
+          keyword.textContent = card.primaryKeyword
+          chips.append(keyword)
+        }
+        article.append(chips)
+
+        if (card.artifacts.length === 0) {
+          const none = document.createElement('p')
+          none.className = 'no-artifacts'
+          none.textContent = 'No artifacts recorded.'
+          article.append(none)
+        } else {
+          const list = document.createElement('ul')
+          list.className = 'artifacts'
+          list.append(
+            ...card.artifacts.map(artifact => {
+              const item = document.createElement('li')
+              const button = document.createElement('button')
+              button.className = 'artifact-link'
+              button.type = 'button'
+              button.title = artifact.summary ?? `Open ${artifact.file}`
+
+              const stage = document.createElement('span')
+              stage.className = 'artifact-stage'
+              stage.textContent = artifact.stage
+              const name = document.createElement('span')
+              name.className = 'artifact-title'
+              name.textContent = artifact.summary ?? artifact.file.split('/').pop() ?? artifact.file
+              button.append(stage, name)
+              button.addEventListener('click', () => openArtifact(card, artifact, button))
+              item.append(button)
+              return item
+            }),
+          )
+          article.append(list)
+        }
+
+        if (card.stage === 'review') article.append(renderActions(card))
+        return article
+      }
+
+      function renderActions(card) {
+        const actions = document.createElement('section')
+        actions.className = 'card-actions'
+        actions.setAttribute('aria-label', `Review ${card.title}`)
+
+        const label = document.createElement('p')
+        label.className = 'card-actions-label'
+        label.textContent = 'This draft is waiting for you.'
+
+        const advance = document.createElement('button')
+        advance.className = 'advance-button'
+        advance.type = 'button'
+        advance.textContent = 'Approve and continue'
+        advance.addEventListener('click', async () => {
+          setBusy(actions, true)
+          try {
+            await postJson(`/api/cards/${encodeURIComponent(card.slug)}/advance`, {})
+            report('Approval sent. The article is moving to publish preparation.')
+            await load()
+          } catch (error) {
+            report(error.message, 'error')
+          } finally {
+            setBusy(actions, false)
+          }
+        })
+
+        const form = document.createElement('form')
+        form.className = 'feedback-form'
+        const input = document.createElement('textarea')
+        input.className = 'feedback-input'
+        input.name = 'message'
+        input.maxLength = 4000
+        input.required = true
+        input.placeholder = 'Ask for a change or answer the agent…'
+        input.setAttribute('aria-label', `Feedback for ${card.title}`)
+        const submit = document.createElement('button')
+        submit.className = 'feedback-submit'
+        submit.type = 'submit'
+        submit.textContent = 'Send feedback'
+        const note = document.createElement('p')
+        note.className = 'feedback-note'
+        note.textContent = 'Your note goes straight to the SEO Specialist’s conversation.'
+        form.append(input, submit, note)
+        form.addEventListener('submit', async event => {
+          event.preventDefault()
+          setBusy(actions, true)
+          try {
+            await postJson(`/api/cards/${encodeURIComponent(card.slug)}/feedback`, { message: input.value })
+            input.value = ''
+            report('Feedback sent to the SEO Specialist.')
+          } catch (error) {
+            report(error.message, 'error')
+          } finally {
+            setBusy(actions, false)
+          }
+        })
+
+        actions.append(label, advance, form)
+        return actions
+      }
+
+      function setBusy(container, busy) {
+        container.querySelectorAll('button, textarea').forEach(control => {
+          control.disabled = busy
+        })
+      }
+
+      async function postJson(url, body) {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(body),
+        })
+        const result = await response.json().catch(() => ({}))
+        if (!response.ok) throw new Error(result.message ?? 'That action could not be completed.')
+        return result
+      }
+
+      async function openArtifact(card, artifact, button) {
+        lastArtifactButton = button
+        reader.hidden = false
+        document.body.dataset.readerOpen = 'true'
+        readerKicker.textContent = `${artifact.stage} · ${card.title}`
+        readerTitle.textContent = artifact.file
+        readerState.hidden = false
+        readerState.textContent = 'Loading artifact…'
+        readerContent.replaceChildren()
+        readerClose.focus()
+
+        try {
+          const response = await fetch(`/api/artifact?path=${encodeURIComponent(artifact.file)}`)
+          const text = await response.text()
+          if (!response.ok) {
+            let message = 'The artifact could not be opened.'
+            try {
+              message = JSON.parse(text).message ?? message
+            } catch {}
+            throw new Error(message)
+          }
+          readerContent.innerHTML = renderMarkdown(text)
+          readerState.hidden = true
+          wrapTables(readerContent)
+        } catch (error) {
+          readerState.hidden = false
+          readerState.textContent = error.message
+        }
+      }
+
+      function closeReader() {
+        reader.hidden = true
+        document.body.dataset.readerOpen = 'false'
+        readerContent.replaceChildren()
+        lastArtifactButton?.focus()
+      }
+
+      function renderMarkdown(markdown) {
+        const lines = markdown.replace(/\r\n?/g, '\n').split('\n')
+        const out = []
+        let paragraph = []
+        let listType = null
+        let listItems = []
+        let quote = []
+
+        const flushParagraph = () => {
+          if (paragraph.length) out.push(`<p>${inline(paragraph.join(' '))}</p>`)
+          paragraph = []
+        }
+        const flushList = () => {
+          if (listType) out.push(`<${listType}>${listItems.map(item => `<li>${inline(item)}</li>`).join('')}</${listType}>`)
+          listType = null
+          listItems = []
+        }
+        const flushQuote = () => {
+          if (quote.length) out.push(`<blockquote>${inline(quote.join(' '))}</blockquote>`)
+          quote = []
+        }
+        const flushAll = () => {
+          flushParagraph()
+          flushList()
+          flushQuote()
+        }
+
+        for (let index = 0; index < lines.length; index += 1) {
+          const line = lines[index]
+          const tableDivider = lines[index + 1]
+          if (line.includes('|') && /^\s*\|?\s*:?-{3,}/.test(tableDivider ?? '')) {
+            flushAll()
+            const header = cells(line)
+            index += 1
+            const body = []
+            while (index + 1 < lines.length && lines[index + 1].includes('|') && lines[index + 1].trim() !== '') {
+              index += 1
+              body.push(cells(lines[index]))
+            }
+            out.push(`<table><thead><tr>${header.map(cell => `<th>${inline(cell)}</th>`).join('')}</tr></thead><tbody>${body.map(row => `<tr>${row.map(cell => `<td>${inline(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table>`)
+            continue
+          }
+
+          const heading = /^(#{1,3})\s+(.+)$/.exec(line)
+          if (heading) {
+            flushAll()
+            const level = heading[1].length
+            out.push(`<h${level}>${inline(heading[2])}</h${level}>`)
+            continue
+          }
+
+          const unordered = /^\s*[-*]\s+(.+)$/.exec(line)
+          const ordered = /^\s*\d+[.)]\s+(.+)$/.exec(line)
+          if (unordered || ordered) {
+            flushParagraph()
+            flushQuote()
+            const nextType = unordered ? 'ul' : 'ol'
+            if (listType && listType !== nextType) flushList()
+            listType = nextType
+            listItems.push((unordered ?? ordered)[1])
+            continue
+          }
+
+          const quoted = /^\s*>\s?(.*)$/.exec(line)
+          if (quoted) {
+            flushParagraph()
+            flushList()
+            quote.push(quoted[1])
+            continue
+          }
+
+          if (line.trim() === '') {
+            flushAll()
+          } else if (/^\s*([-*_])(?:\s*\1){2,}\s*$/.test(line)) {
+            flushAll()
+            out.push('<hr>')
+          } else {
+            flushList()
+            flushQuote()
+            paragraph.push(line.trim())
+          }
+        }
+        flushAll()
+        return out.join('')
+      }
+
+      function cells(line) {
+        return line.trim().replace(/^\||\|$/g, '').split('|').map(cell => cell.trim())
+      }
+
+      function inline(value) {
+        const escaped = value
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+          .replaceAll('"', '&quot;')
+          .replaceAll("'", '&#039;')
+        return escaped
+          .replace(/`([^`]+)`/g, '<code>$1</code>')
+          .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+          .replace(/__([^_]+)__/g, '<strong>$1</strong>')
+          .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+          .replace(/\[([^\]]+)]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>')
+      }
+
+      function wrapTables(root) {
+        for (const table of root.querySelectorAll('table')) {
+          const wrapper = document.createElement('div')
+          wrapper.className = 'table-wrap'
+          table.before(wrapper)
+          wrapper.append(table)
+        }
+      }
+
+      readerClose.addEventListener('click', closeReader)
+      reader.addEventListener('click', event => {
+        if (event.target === reader) closeReader()
+      })
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && !reader.hidden) closeReader()
+      })
+
+      await load()
+      const events = new EventSource('/events')
+      events.onopen = () => {
+        connection.dataset.live = 'true'
+        connection.textContent = 'live'
+        load()
+      }
+      events.onerror = () => {
+        connection.dataset.live = 'false'
+        connection.textContent = 'reconnecting'
+      }
+      events.onmessage = load
+    </script>
+  </body>
+</html>

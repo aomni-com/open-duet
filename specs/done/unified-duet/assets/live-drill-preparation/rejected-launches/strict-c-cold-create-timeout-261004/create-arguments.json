@@ -1,0 +1,19 @@
+{
+  "name": "duet-test-staging-e2e-synthetic",
+  "image": "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+  "tags": [
+    "duet-test",
+    "duet-ephemeral",
+    "duet-fixture-staging",
+    "duet-run-staging-e2e-synthetic"
+  ],
+  "pool": "pool-duet",
+  "cpu": 2,
+  "memory": "4GB",
+  "env": [
+    "DUET_API_URL=http://192.0.2.1:3100",
+    "DUET_MODEL_GATEWAY_URL=http://192.0.2.1:3100",
+    "DUET_IMAGE_VERSION=ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+    "DUET_WORKSPACE_HINT=fixture-workspace"
+  ]
+}

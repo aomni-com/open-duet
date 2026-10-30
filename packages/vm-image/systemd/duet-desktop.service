@@ -1,0 +1,16 @@
+[Unit]
+Description=Duet on-demand KasmVNC desktop
+PartOf=duet-desktop.target
+After=network.target
+
+[Service]
+Type=forking
+User=exedev
+Group=exedev
+Environment=HOME=/home/exedev
+ExecStartPre=/opt/duet/bin/ensure-kasm-credentials.sh
+ExecStart=/usr/bin/kasmvncserver :1
+PIDFile=/home/exedev/.vnc/%H:1.pid
+ExecStop=/usr/bin/kasmvncserver -kill :1
+TimeoutStartSec=30
+TimeoutStopSec=30

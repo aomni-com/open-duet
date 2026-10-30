@@ -1,0 +1,30 @@
+{
+  "provenance": "strict image and frozen native inventory",
+  "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869",
+  "osBootId": "1e69d572-5026-473f-a72c-cf208b76d9af",
+  "units": [
+    {
+      "unit": "duet-syncthing.service",
+      "definitionSha256": "f99c0c0cbb563f20a48fdf612a225c7e7d16244dec3d97152c47c35c43c18a9b",
+      "main": {
+        "pid": 318,
+        "started": "119"
+      }
+    },
+    {
+      "unit": "duet-desktop.service",
+      "definitionSha256": "b991058ec420d9428bc7876df2be062cda390d0bd4b2010635d9c7111cd2e427",
+      "main": null
+    },
+    {
+      "unit": "duet-desktop-browser.service",
+      "definitionSha256": "c71029abacff02f58b72845ecb701e591a49381ac8ac08e08d312208682418f4",
+      "main": null
+    }
+  ],
+  "workspaceBunSha256": "9fd36f87e4b90b07632b987a2e4ec81ca15a62c81bf983190cea6d715be2ad74",
+  "imageGatewayUnitSha256": "84677a224fe0385b335a36dc8cb4e9609424a75f49ed138ab671a4f9c8e3b867",
+  "imageGatewayIndexSha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+  "imageGatewayHelperSha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+  "imageGatewayBootstrapSha256": "e857f023ab6801ace9d898e61132c51c56a3d94d72d35b83822b5594f080c6d0"
+}

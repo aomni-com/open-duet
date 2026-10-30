@@ -1,0 +1,23 @@
+{
+  "at": "2026-09-28T04:39:17.917Z",
+  "target": "production",
+  "expected": "e5b29f63ee91afe45667f45b3448cbfe8305315a",
+  "api": {
+    "revision": "e5b29f63ee91afe45667f45b3448cbfe8305315a",
+    "backend": {
+      "revision": "e5b29f63ee91afe45667f45b3448cbfe8305315a",
+      "schema": 1
+    },
+    "gateway": {
+      "version": "0.0.0+ec2b3d8e8e09"
+    }
+  },
+  "web": {
+    "revision": "e5b29f63ee91afe45667f45b3448cbfe8305315a",
+    "cacheSchema": 13
+  },
+  "docs": {
+    "revision": "e5b29f63ee91afe45667f45b3448cbfe8305315a"
+  },
+  "matched": true
+}

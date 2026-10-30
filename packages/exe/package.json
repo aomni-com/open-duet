@@ -1,0 +1,50 @@
+{
+  "name": "@repo/exe",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "bench": "bun run --env-file=../../.env.local scripts/benchmark-lifecycle.ts",
+    "check-types": "tsc --noEmit",
+    "demo": "bun run --env-file=../../.env.local scripts/lifecycle-demo.ts",
+    "format": "oxfmt --write \"**/*.{ts,md}\"",
+    "lint": "oxlint",
+    "probe:attribution-helper": "bun run --env-file=../../.env.local scripts/probe-attribution-helper.ts",
+    "probe:browser-extension": "bun run --env-file=../../.env.local scripts/probe-browser-extension.ts",
+    "probe:cp": "bun run --env-file=../../.env.local scripts/probe-cp-semantics.ts",
+    "probe:disk-resize": "bun run --env-file=../../.env.local scripts/probe-disk-resize.ts",
+    "probe:desktop-stack": "bun run --env-file=../../.env.local scripts/probe-desktop-stack.ts",
+    "probe:cdp-proxy": "bun run --env-file=../../.env.local scripts/probe-cdp-proxy.ts",
+    "probe:chrome-freeze": "bun run --env-file=../../.env.local scripts/probe-chrome-freeze.ts",
+    "probe:chrome-tab-suspension": "bun run --env-file=../../.env.local scripts/probe-chrome-tab-suspension.ts",
+    "probe:fan-open-perm": "bun run --env-file=../../.env.local scripts/probe-fan-open-perm.ts",
+    "probe:fanotify-links": "bun run --env-file=../../.env.local scripts/probe-fanotify-links.ts",
+    "probe:image": "bun run --env-file=../../.env.local scripts/probe-image-systemd.ts",
+    "probe:proc-connector": "bun run --env-file=../../.env.local scripts/probe-proc-connector.ts",
+    "probe:rail-share-sync": "dotenvx run -q -f ../../.env.staging -- bun scripts/probe-rail-share-sync.ts",
+    "probe:session-cgroup": "bun run --env-file=../../.env.local scripts/probe-session-cgroup.ts",
+    "probe:shared-chrome": "bun run --env-file=../../.env.local scripts/probe-shared-chrome.ts",
+    "probe:tier-disk": "dotenvx run -q -f ../../.env.staging -- bun scripts/probe-tier-disk.ts",
+    "probe:tunnel": "bun run --env-file=../../.env.local scripts/probe-ws-tunnel.ts",
+    "probe:vm-caps": "bun run --env-file=../../.env.local scripts/probe-vm-caps.ts",
+    "test": "bun test src",
+    "token": "ssh exe.dev ssh-key generate-api-key --exp=30d",
+    "whoami": "ssh exe.dev whoami"
+  },
+  "dependencies": {
+    "@repo/contract": "*",
+    "@repo/sync-tunnel": "*",
+    "convex": "^1.42.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.0",
+    "@repo/typescript-config": "*",
+    "@repo/vm-image": "*",
+    "@types/bun": "catalog:",
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
+  }
+}

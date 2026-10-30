@@ -1,0 +1,9 @@
+{
+  "extends": "@repo/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "types": ["bun", "node"],
+    "allowImportingTsExtensions": true
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.mdx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}

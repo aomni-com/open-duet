@@ -1,0 +1,21 @@
+{
+  "initialStatus": "paused",
+  "initialVmStatus": "archived",
+  "scope": "existing designated production release workspace",
+  "models": [
+    {
+      "requestedModel": "openai/gpt-6-luna",
+      "tier": null,
+      "status": 402,
+      "errorCode": "subscription_required"
+    }
+  ],
+  "resumed": true,
+  "exitCode": 1,
+  "remoteFailureKind": "other",
+  "ok": false,
+  "error": "Bounded remote model probe failed; remote stderr withheld",
+  "restoredVmStatus": "archived",
+  "restoredStatus": "paused",
+  "exemptionRestored": true
+}

@@ -1,0 +1,16 @@
+{
+  "archiveSha256": "ba9c4e2f63ede2138bc8539b0a4df69bea1ba72f4088992e1b16d4a668d2b5b2",
+  "driverSha256": "3c52a496636197a895976d3489c776e1738ca9289598f632edd346a9655baa8f",
+  "migrationPayloadUnchanged": true,
+  "execution": "provider-vm",
+  "controlPlane": "controlled-loopback",
+  "imageRef": "ghcr.io/aomni-com/duet-vm-image@sha256:8ad8f9528bf575b22ee2d8d26ac1bd15238d969492c2c8df4d569e8b7aa27187",
+  "startupBusyChild": "native memory warmup, PID 538",
+  "startupIdleObserved": true,
+  "interruption": "identity-pinned systemd supervisor SIGKILL while target started under initial admission hold after at least two target syncs",
+  "platformSettlementsVerified": true,
+  "selectedStateCredentialsWorkspaceBunNonGatewayServicesUnchanged": true,
+  "osBootUnchanged": true,
+  "nativeMemoryVerified": true,
+  "cleanupVerifiedAbsent": true
+}

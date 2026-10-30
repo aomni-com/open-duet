@@ -1,0 +1,31 @@
+{
+  "checkedAt": "2026-09-28T03:15:05.411Z",
+  "status": "pass",
+  "workspaceId": "ns7fxm0zpta7413wjw5gmqjnt18f961k",
+  "support": [
+    {
+      "id": "md73gr424rrkkz7ptdeqszg9z58f8zdf",
+      "model": "google/gemini-embedding-2",
+      "tier": "openai-max",
+      "status": "settled",
+      "upstreamCostMicroUsd": 33,
+      "billedCostMicroUsd": 33
+    },
+    {
+      "id": "md742yaymke8d8n540pfscfv758f9hsj",
+      "model": "openai/gpt-6-luna",
+      "tier": "openai-max",
+      "status": "settled",
+      "upstreamCostMicroUsd": 739,
+      "billedCostMicroUsd": 739
+    },
+    {
+      "id": "md7ayaebgzqrwt9kbber0k1axn8f94kx",
+      "model": "google/gemini-embedding-2",
+      "tier": "openai-max",
+      "status": "settled",
+      "upstreamCostMicroUsd": 34,
+      "billedCostMicroUsd": 34
+    }
+  ]
+}

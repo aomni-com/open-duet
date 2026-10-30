@@ -1,0 +1,12 @@
+{
+  "triggers": [],
+  "tags": [
+    "marketing",
+    "sales"
+  ],
+  "onboarding": {
+    "kind": "app",
+    "app": "apps/setup-brand"
+  },
+  "suggestedFirstMessage": "Hi — I’m your Brand Designer. I have your colours, type, and logo, so everything I make will look like the same company made it. What should I make first — an ad, a one-pager, or a set of social graphics?"
+}

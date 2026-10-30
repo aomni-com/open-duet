@@ -1,0 +1,284 @@
+{
+  "scope": "Only gateway/router test fixtures plus obsolete gateway-only build grammar test deletion",
+  "baseRevision": "8ea376cd7cf2211e5980b02d893a781d24025e74",
+  "borrowedRootRevision": "2eb7a721b53ea814ad600fed631dca6842ebb241",
+  "productionInputs": [
+    {
+      "path": "packages/contract/src/deployment/index.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "df952ffa2cdbe69bc303628c81089ea05af36a397186b306ff7ed52aa69d7ac8"
+    },
+    {
+      "path": "packages/contract/src/gateway/index.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "39ddb6511520ebb4bc832e9c582eff1e9ef960255fb84d9f01219e30ba0f58ad"
+    },
+    {
+      "path": "packages/contract/src/vm/index.test.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "5830814232e1bc7a22b3cef3471d5a73d1fbd92864038fb07035fa9491e697e7"
+    },
+    {
+      "path": "packages/contract/src/vm/index.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "4f6c6d022e4c901031543ba01f0bab0edc442830ba294249fd38b0c231400fa4"
+    },
+    {
+      "path": "packages/contract/src/vm/runtime-release.test.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "114ecab48bf497ec62518cbbb8a8e7ed46676d0b4fdc4b529f6e3f393387d4d8"
+    },
+    {
+      "path": "packages/gateway/package.json",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "0aa94a6fef288f03ca21024704f89badf5cd2f3eb69726c4c648767b7101cfb4"
+    },
+    {
+      "path": "packages/gateway/src/agents/memory-warmup.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "25b42c3122ec8f722e07a4ac1c7815abb4f5a81ca753a25aa86386ac5b12e5e5"
+    },
+    {
+      "path": "packages/gateway/src/boot-health.test.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "40cf7b39e7651624ddd1461dd19bff33196e9a37ecc880007d8a46df7d3735dd"
+    },
+    {
+      "path": "packages/gateway/src/boot-health.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "a7aea1b073e1f80408e9c4f8b3c816275ae15e2dffe459979b40cc27d683b810"
+    },
+    {
+      "path": "packages/gateway/src/cli-update.test.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "deleted": true
+    },
+    {
+      "path": "packages/gateway/src/cli-update.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "deleted": true
+    },
+    {
+      "path": "packages/gateway/src/connected-providers/connect-session.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "f689d07a92fe86b21c8c7f953ee1765d5cf0f6188294337d520f9c743626765a"
+    },
+    {
+      "path": "packages/gateway/src/desired-state.test.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "30a75b71a1f3bbd74800b8eec4172614c9afe0bca8c2d55a8400ea26f5bcd735"
+    },
+    {
+      "path": "packages/gateway/src/desired-state.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "4c46b77117725eb8561ec29fea0fd4b72c520902113a57cdbcf5a7a5d34009d5"
+    },
+    {
+      "path": "packages/gateway/src/duet-cli.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "1d6b28f1923f1ec5c39e4967f00f62f47648608f92d3ea96c0991de8a510cd92"
+    },
+    {
+      "path": "packages/gateway/src/gateway-bootstrap.test.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "deleted": true
+    },
+    {
+      "path": "packages/gateway/src/gateway-bootstrap.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "deleted": true
+    },
+    {
+      "path": "packages/gateway/src/gateway-release.test.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "deleted": true
+    },
+    {
+      "path": "packages/gateway/src/gateway-release.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "deleted": true
+    },
+    {
+      "path": "packages/gateway/src/gateway-update.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "deleted": true
+    },
+    {
+      "path": "packages/gateway/src/memory-reflect.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "27161259e4a1cad607282e7e9faae43b82953b3342331c2065ec5d85d58aa7ac"
+    },
+    {
+      "path": "packages/gateway/src/runner/npm-rail.test.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "deleted": true
+    },
+    {
+      "path": "packages/gateway/src/runner/npm-rail.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "deleted": true
+    },
+    {
+      "path": "packages/gateway/src/runner/process-runner.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "32a2aa16fdfb49d3967a2599dcc3d60542b4aa42429e68e14922d8d7f873f9a6"
+    },
+    {
+      "path": "packages/gateway/src/runtime-bootstrap.test.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "6e0e2a9300972589f4d3bea813d339cec174d394650d44bbbdcaf7c03c36621b"
+    },
+    {
+      "path": "packages/gateway/src/runtime-bootstrap.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "a3c9711fd3d3d9fc454ab630a20801c434f0badaa7bce19fa9015496a8e1de17"
+    },
+    {
+      "path": "packages/gateway/src/runtime-release.test.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "14506ab81c3aa8a4a7e8193799924dd85a030412db6ce39069197f7de7801a0a"
+    },
+    {
+      "path": "packages/gateway/src/runtime-release.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "2d58c3e64e964f2b8380c7532344d5cf407d3744dcbe8c039f1c0bfbc68d8cec"
+    },
+    {
+      "path": "packages/gateway/src/runtime-update.test.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "3de76d76d1c7d2e7a3ff7406e4eeb0d72039d3eb34ef368139b9dd15f00ff675"
+    },
+    {
+      "path": "packages/gateway/src/runtime-update.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "564e1435661b14695b0ef95a4da1fbda43a60978763a68408fa50d80e95e777b"
+    },
+    {
+      "path": "packages/gateway/src/runtime/env.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "e5b679c55d9f00f72c1193dbf6e2c8d2d118006a50679c85bc7e02b3d33c6557"
+    },
+    {
+      "path": "packages/gateway/src/runtime/http.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "edf3ad77ad11d57fe78d1a019770e2c2628dac511e87c979c2e8a6e29e14819e"
+    },
+    {
+      "path": "packages/gateway/src/runtime/paths.test.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "3974fee79a3d82d6c55ec76ed6657a4b3f9a2242d0ccd1f949aa8d18b3c864f6"
+    },
+    {
+      "path": "packages/gateway/src/runtime/paths.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "a0685b1bd53ee50d42fb4f7123aa586ebc84abba3535949be4bb732416cbec89"
+    },
+    {
+      "path": "packages/gateway/src/testing/legacy-vm-wire.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "1ce0716373da3b7ceb21d50ca0b578322164b55d1a06ac9ff00800b2bf4df10b"
+    },
+    {
+      "path": "packages/gateway/src/testing/runtime-release-fixture.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "72a3a9355c3fcfd0003bb36b68970593d26e0e8e8b865eb462133ca3704b2042"
+    },
+    {
+      "path": "packages/gateway/src/train-runner.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "6210056c73d6d999c6edf8b92b5bda0a458b7f82443904b033884156f98b4405"
+    },
+    {
+      "path": "packages/gateway/src/train/duet-cli-runner.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "f7cd7517ee3f37802112bc14447f579315500520cc2373fb9a85e9dc6a801868"
+    },
+    {
+      "path": "packages/gateway/src/train/pipeline.test.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "5508c5a19bed51756ed3b40cb4af612064873c75ea1dbfe7cc163057999c1566"
+    },
+    {
+      "path": "packages/gateway/src/vm/phone-home.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "41d1dd1ad9f9543d8a99f44482409285631d92b700f7b8667766798244cb49c9"
+    },
+    {
+      "path": "packages/gateway/src/vm/sync-client.test.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "299e8000f9115d64f39440df574de77072febf44cbe9eb68394aebe8652f05f0"
+    },
+    {
+      "path": "packages/gateway/src/vm/sync-client.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "2685f2b513ef0ab05c91b41108d9bd1803a399328fb41765f9bbe2986152fe91"
+    },
+    {
+      "path": "packages/gateway/src/vm/transition-wire.test.ts",
+      "source": "/Users/synthetic-user/.codex/worktrees/232f/duet",
+      "sha256": "85046ecb357de05940bd1cfd224fd055031ef7b3a06b7047dd9b39272a2fdae2"
+    }
+  ],
+  "ownedOutputs": {
+    "packages/gateway/src/gateway.test.ts": "39fb7996b83346e7b9da7181bdc2b9409f14638db8bbecd650f9652f2c237df0",
+    "packages/gateway/src/runner/routing-release.test.ts": "178b92c91dff77481dc660d4f8a46e44686e17aa237ef40d86bbfadd9a72c5f6",
+    "packages/gateway/src/gateway-release-build.test.ts": "deleted"
+  },
+  "removedNpmOnlyCases": [
+    "sync triggers pinned agent update in the background and reports it next sync",
+    "agent update retries after registry failure without failing sync",
+    "announced agent and duetfs versions reconcile independently when one registry install fails",
+    "agent update stays deferred while an agent runner is active",
+    "broken agent and train binaries self-heal to the desired pin before spawning",
+    "runner startup never falls back to an unversioned agent install"
+  ],
+  "migratedCaseNames": [
+    "desired state store tolerates paused updates and gateway version is package-stamped",
+    "running gateway version prefers env then sibling current-release manifest then package",
+    "gateway self-update discards sha mismatches and retries on the next sync",
+    "gateway self-update installs a protocol-matched helper alongside the bundle",
+    "gateway self-update aborts and applies nothing when the helper hash mismatches",
+    "gateway self-update defers while train is in flight and syncs still succeed",
+    "gateway self-update never forces activation while an agent runner is live",
+    "a pause received while a CLI is downloading prevents activation"
+  ],
+  "ordinaryCasesRetained": 159,
+  "gate": {
+    "command": "bun test src/gateway.test.ts src/runner/routing-release.test.ts",
+    "exitCode": 0,
+    "tests": 168,
+    "assertions": 886,
+    "seconds": 13.91
+  },
+  "types": {
+    "command": "bun run check-types",
+    "compiler": "declared root TypeScript7 after complete bun install --frozen-lockfile",
+    "exitCode": 0,
+    "noCompilerConfigurationEdits": true
+  },
+  "proofs": [
+    "Outgoing register runtimeVersion and transition gatewayVersion alias agree; sync runtime/gateway alias agree, image remains separately reported",
+    "Full8 descriptor persists across restart; no separate agent/duetfs desire",
+    "Corrupt helper and Photon exact-length bytes fail before activation, next sync installs complete matched8 with executable mode and previous retention",
+    "Held CLI download does not block sync or activate partial cohort",
+    "Rollout pause during download prevents activation",
+    "Train and live agent defer activation; expired deferral deadline never forces live work; idle later converges",
+    "Health remains the running cohort after mutable current changes",
+    "Actual bundled routing change survives offline update rejection and changes nested-cwd resumed model requests only after whole cohort activates"
+  ],
+  "obsoleteBuildGrammar": "Deleted per root owner; shared/API constructor gates own full8 manifest and actual joined build owns emitted gateway/helper/bootstrap bytes",
+  "noSkipsAdded": true,
+  "noTestTimeoutIncreases": true,
+  "limitations": [
+    "These canonical fixture payloads prove manager integration; compiled/native payload closure and VM/image transport are separate maintained gates"
+  ],
+  "review": "Default configured Codex CLI, explicitly scoped to the three owned test paths: both actionable findings fixed and falsified; final review clean with22 focused checks passing and ordinary capability coverage retained.",
+  "reviewCorrections": {
+    "detachedDeadline": "Wait authenticated health runtimeUpdateInFlight=false while keeping turn live; held download additionally proves diagnostictrue",
+    "cancelRecovery": "A successful Train admission/completion after pause proves work is reopened",
+    "negativeControls": {
+      "forceDeadlineAndRemoveBusyGuard": "red: actual current switched before live turn finished",
+      "omitCancellationAdmissionRelease": "red: next Train returned503"
+    }
+  }
+}

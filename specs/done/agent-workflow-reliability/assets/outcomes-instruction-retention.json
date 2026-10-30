@@ -1,0 +1,236 @@
+{
+  "actorRevision": "ea997a348d6998da5cfc94296e7dc8e9308eaecc",
+  "evaluatorSourceRevision": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+  "judge": "gpt-6-astra",
+  "fixtureRevision": 2,
+  "fixtureSha256": "b77b40a888f6fd5e581124d2f1bf6fa4e9c0e5b3a3d7cb37b10db183b93011a5",
+  "tiers": {
+    "balanced": {
+      "scenarios": {
+        "correction-release": {
+          "started": 5,
+          "consecutiveAccepted": 5,
+          "gate": "passed"
+        },
+        "populated-search": {
+          "started": 3,
+          "consecutiveAccepted": 3,
+          "gate": "passed"
+        },
+        "unavailable-provider": {
+          "started": 5,
+          "consecutiveAccepted": 1,
+          "gate": "exhausted"
+        }
+      },
+      "attempts": [
+        {
+          "scenario": "correction-release",
+          "attempt": 1,
+          "originalStatus": "rejected",
+          "originalEvaluatorSource": "ea997a348d6998da5cfc94296e7dc8e9308eaecc",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/correction-release-1",
+          "qualifiedStatus": "accepted",
+          "adjudication": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/correction-release-1/correction-release-balanced-1790657052227-d0e4dd57/adjudications/7ec20900ad3b1fdb54456e8db21c94051322c057-worker-evidence/rejudgment.json"
+        },
+        {
+          "scenario": "correction-release",
+          "attempt": 2,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "ea997a348d6998da5cfc94296e7dc8e9308eaecc",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/correction-release-2",
+          "qualifiedStatus": "accepted",
+          "adjudication": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/correction-release-2/correction-release-balanced-1790657118929-10a3b3c0/adjudications/7ec20900ad3b1fdb54456e8db21c94051322c057-worker-evidence/rejudgment.json"
+        },
+        {
+          "scenario": "correction-release",
+          "attempt": 3,
+          "originalStatus": "rejected",
+          "originalEvaluatorSource": "ea997a348d6998da5cfc94296e7dc8e9308eaecc",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/correction-release-3",
+          "qualifiedStatus": "accepted",
+          "adjudication": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/correction-release-3/correction-release-balanced-1790657182827-2b950aa4/adjudications/7ec20900ad3b1fdb54456e8db21c94051322c057-worker-evidence/rejudgment.json"
+        },
+        {
+          "scenario": "correction-release",
+          "attempt": 4,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "ea997a348d6998da5cfc94296e7dc8e9308eaecc",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/correction-release-4",
+          "qualifiedStatus": "accepted",
+          "adjudication": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/correction-release-4/correction-release-balanced-1790657256152-86b7d834/adjudications/7ec20900ad3b1fdb54456e8db21c94051322c057-worker-evidence/rejudgment.json"
+        },
+        {
+          "scenario": "correction-release",
+          "attempt": 5,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "ea997a348d6998da5cfc94296e7dc8e9308eaecc",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/correction-release-5",
+          "qualifiedStatus": "accepted",
+          "adjudication": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/correction-release-5/correction-release-balanced-1790657317940-75272eb6/adjudications/7ec20900ad3b1fdb54456e8db21c94051322c057-worker-evidence/rejudgment.json"
+        },
+        {
+          "scenario": "populated-search",
+          "attempt": 1,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/populated-search-1",
+          "qualifiedStatus": "accepted"
+        },
+        {
+          "scenario": "populated-search",
+          "attempt": 2,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/populated-search-2",
+          "qualifiedStatus": "accepted"
+        },
+        {
+          "scenario": "populated-search",
+          "attempt": 3,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/populated-search-3",
+          "qualifiedStatus": "accepted"
+        },
+        {
+          "scenario": "unavailable-provider",
+          "attempt": 1,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/unavailable-provider-1",
+          "qualifiedStatus": "accepted"
+        },
+        {
+          "scenario": "unavailable-provider",
+          "attempt": 2,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/unavailable-provider-2",
+          "qualifiedStatus": "accepted"
+        },
+        {
+          "scenario": "unavailable-provider",
+          "attempt": 3,
+          "originalStatus": "rejected",
+          "originalEvaluatorSource": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/unavailable-provider-3",
+          "qualifiedStatus": "rejected"
+        },
+        {
+          "scenario": "unavailable-provider",
+          "attempt": 4,
+          "originalStatus": "rejected",
+          "originalEvaluatorSource": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/unavailable-provider-4",
+          "qualifiedStatus": "rejected"
+        },
+        {
+          "scenario": "unavailable-provider",
+          "attempt": 5,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/balanced/unavailable-provider-5",
+          "qualifiedStatus": "accepted"
+        }
+      ]
+    },
+    "frontier": {
+      "scenarios": {
+        "correction-release": {
+          "started": 3,
+          "consecutiveAccepted": 3,
+          "gate": "passed"
+        },
+        "populated-search": {
+          "started": 3,
+          "consecutiveAccepted": 3,
+          "gate": "passed"
+        },
+        "unavailable-provider": {
+          "started": 3,
+          "consecutiveAccepted": 3,
+          "gate": "passed"
+        }
+      },
+      "attempts": [
+        {
+          "scenario": "correction-release",
+          "attempt": 1,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "ea997a348d6998da5cfc94296e7dc8e9308eaecc",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/frontier/correction-release-1",
+          "qualifiedStatus": "accepted",
+          "adjudication": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/frontier/correction-release-1/correction-release-frontier-1790657062931-884f489b/adjudications/7ec20900ad3b1fdb54456e8db21c94051322c057-worker-evidence/rejudgment.json"
+        },
+        {
+          "scenario": "correction-release",
+          "attempt": 2,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "ea997a348d6998da5cfc94296e7dc8e9308eaecc",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/frontier/correction-release-2",
+          "qualifiedStatus": "accepted",
+          "adjudication": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/frontier/correction-release-2/correction-release-frontier-1790657191271-ea73d5ea/adjudications/7ec20900ad3b1fdb54456e8db21c94051322c057-worker-evidence/rejudgment.json"
+        },
+        {
+          "scenario": "correction-release",
+          "attempt": 3,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "ea997a348d6998da5cfc94296e7dc8e9308eaecc",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/frontier/correction-release-3",
+          "qualifiedStatus": "accepted",
+          "adjudication": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/frontier/correction-release-3/correction-release-frontier-1790657316173-1d986493/adjudications/7ec20900ad3b1fdb54456e8db21c94051322c057-worker-evidence/rejudgment.json"
+        },
+        {
+          "scenario": "populated-search",
+          "attempt": 1,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/frontier/populated-search-1",
+          "qualifiedStatus": "accepted"
+        },
+        {
+          "scenario": "populated-search",
+          "attempt": 2,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/frontier/populated-search-2",
+          "qualifiedStatus": "accepted"
+        },
+        {
+          "scenario": "populated-search",
+          "attempt": 3,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/frontier/populated-search-3",
+          "qualifiedStatus": "accepted"
+        },
+        {
+          "scenario": "unavailable-provider",
+          "attempt": 1,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/frontier/unavailable-provider-1",
+          "qualifiedStatus": "accepted"
+        },
+        {
+          "scenario": "unavailable-provider",
+          "attempt": 2,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/frontier/unavailable-provider-2",
+          "qualifiedStatus": "accepted"
+        },
+        {
+          "scenario": "unavailable-provider",
+          "attempt": 3,
+          "originalStatus": "accepted",
+          "originalEvaluatorSource": "7ec20900ad3b1fdb54456e8db21c94051322c057",
+          "evidenceDirectory": "/tmp/workflow-candidate-evidence/ea997a348d6998da5cfc94296e7dc8e9308eaecc/frontier/unavailable-provider-3",
+          "qualifiedStatus": "accepted"
+        }
+      ]
+    }
+  },
+  "disposition": "Candidate gate failed: Balanced unavailable-provider exhausted five starts without three consecutive accepted reports. No new actor attempts or publication authorized by these results. Economy existing acceptance retained."
+}

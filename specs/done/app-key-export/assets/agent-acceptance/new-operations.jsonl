@@ -1,0 +1,16 @@
+{"at":1791238846007,"operation":"whoami","runtimeOrigin":false,"appSlug":null,"authenticated":true}
+{"at":1791238846008,"operation":"apps.list","slugs":[]}
+{"at":1791238930839,"operation":"whoami","runtimeOrigin":false,"appSlug":null,"authenticated":true}
+{"at":1791238930840,"operation":"apps.list","slugs":[]}
+{"at":1791238930841,"operation":"apps.register","appId":"app-1","slug":"ai-app","reused":false,"path":"agents/builder/apps/ai-app","command":"static-web-server -p $PORT -d . --cache-control-headers false","apiScopes":["services"],"icon":"icon.png"}
+{"at":1791238951915,"operation":"credentials.export","appId":"app-1","expiration":"never","liveBefore":0,"callerKind":"system_vm"}
+{"at":1791238951915,"operation":"credentials.issued","appId":"app-1","credentialId":"export-1","prefix":"duet_sk_EVAL_export-1"}
+{"at":1791238951938,"operation":"host.env.add","projectId":"project-eval","environment":"production","name":"DUET_APP_API_KEY","viaStdin":true,"appKeyValid":true,"matchesReturnedOrigin":null}
+{"at":1791238951954,"operation":"host.env.add","projectId":"project-eval","environment":"production","name":"DUET_API_URL","viaStdin":true,"appKeyValid":true,"matchesReturnedOrigin":true}
+{"at":1791238951971,"operation":"host.env.add","projectId":"project-eval","environment":"production","name":"DUET_GATEWAY_BASE_URL","viaStdin":true,"appKeyValid":true,"matchesReturnedOrigin":true}
+{"at":1791238952095,"operation":"host.deploy","projectId":"project-eval","environment":"production","credentialId":"export-1","origin":"http://192.0.2.1:53043","entry":"api/chat.js","configurationComplete":true}
+{"at":1791238982193,"operation":"gateway.request","appId":"app-1","appSlug":"ai-app","credentialId":"export-1","path":"/v1/chat/completions","tier":"services","workspaceSelectorPresent":false,"servicesDeclared":true,"model":"openai/gpt-6-luna","messagesPresent":true}
+{"at":1791238995379,"operation":"host.deploy","projectId":"project-eval","environment":"production","credentialId":"export-1","origin":"http://192.0.2.1:53172","entry":"api/chat.js","configurationComplete":true}
+{"at":1791239015630,"operation":"whoami","runtimeOrigin":true,"appSlug":"ai-app","authenticated":true}
+{"at":1791239015631,"operation":"gateway.request","appId":"app-1","appSlug":"ai-app","credentialId":"export-1","path":"/v1/chat/completions","tier":"services","workspaceSelectorPresent":false,"servicesDeclared":true,"model":"openai/gpt-6-luna","messagesPresent":true}
+{"at":1791239015632,"operation":"apps.get","appId":"app-1","slug":"ai-app"}

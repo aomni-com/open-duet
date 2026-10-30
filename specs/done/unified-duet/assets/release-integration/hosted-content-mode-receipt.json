@@ -1,0 +1,36 @@
+{
+  "contract": "Hosted API verifies content; manifest modes describe installation, not hosting filesystem permissions",
+  "observedDeployment": "dpl_7aPM1JdLHxWkxvVpVgFuGtGr4ikj",
+  "sourceEvidence": {
+    "path": "/tmp/unified-duet-staging-diagnostic-errors-after.jsonl",
+    "sha256": "d8cbf0fcd76735c3c84734afd2f803e52753b4386b4dc47c3ed0d58cdb770d92",
+    "releaseDir": "/var/task/runtime-release",
+    "dataArtifacts": 7,
+    "expectedMode": 420,
+    "observedMode": 493,
+    "allObservedLengthsMatch": true
+  },
+  "correction": {
+    "api": "Strict manifest identity, regular files, exact length and SHA; target modes retained in returned manifest",
+    "packaging": "Explicit source-mode check before upload",
+    "gatewayAndImage": "Existing installed-mode checks unchanged"
+  },
+  "redGreen": {
+    "normalizedColdMount": "null/503 before; exact manifest and duet/helper bytes200 after",
+    "wrongBuildMode": "accepted after hosted-check removal; explicitly refused after packaging-owner check"
+  },
+  "gates": {
+    "apiTests": 12,
+    "apiAssertions": 126,
+    "gatewayModeTests": 3,
+    "gatewayAssertions": 27,
+    "imageModeTests": 1,
+    "imageAssertions": 20,
+    "apiTypeScript": "7.0.1-rc passed",
+    "focusedLintAndFormat": "passed",
+    "independentReview": "no actionable regressions"
+  },
+  "liveWrites": false,
+  "liveArtifactDigestsVerified": false,
+  "requiredDeployedAcceptance": "API/backend source revisions agree; runtime version equals actual served manifest; scan each served artifact digest/length against that manifest before resuming VM updates"
+}

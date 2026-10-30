@@ -1,0 +1,153 @@
+{
+  "date": "2026-10-05",
+  "rootTypes": {
+    "tasks": 24,
+    "status": "pass"
+  },
+  "rootLint": {
+    "tasks": 24,
+    "status": "pass",
+    "existingWarnings": true
+  },
+  "rootTestRun": {
+    "exitCode": 143,
+    "tasksSuccessful": 23,
+    "tasksTotal": 26,
+    "failedOwners": [
+      "@duetso/agent",
+      "@repo/agent",
+      "@repo/backend"
+    ],
+    "packageSummaries": {
+      "@repo/fake-oauth-issuer": {
+        "pass": 16,
+        "fail": 0
+      },
+      "@repo/web-locale": {
+        "pass": 37,
+        "fail": 0
+      },
+      "@repo/email": {
+        "pass": 9,
+        "fail": 0
+      },
+      "@repo/contract": {
+        "pass": 751,
+        "fail": 0
+      },
+      "docs": {
+        "pass": 5,
+        "fail": 0
+      },
+      "@repo/importers": {
+        "pass": 6,
+        "fail": 0
+      },
+      "@repo/seed-drive": {
+        "pass": 22,
+        "fail": 0
+      },
+      "@repo/sync-tunnel": {
+        "pass": 16,
+        "fail": 0
+      },
+      "@repo/skills-registry": {
+        "pass": 46,
+        "fail": 0
+      },
+      "@repo/vm-image": {
+        "pass": 25,
+        "fail": 0
+      },
+      "edge": {
+        "pass": 50,
+        "fail": 0
+      },
+      "lander": {
+        "pass": 133,
+        "fail": 0
+      },
+      "@repo/exe": {
+        "pass": 52,
+        "fail": 0
+      },
+      "@repo/gateway": {
+        "pass": 1380,
+        "fail": 0
+      },
+      "@repo/official-agents-seed": {
+        "pass": 94,
+        "fail": 0
+      },
+      "web": {
+        "pass": 1940,
+        "fail": 0
+      },
+      "@repo/test-harness": {
+        "pass": 367,
+        "fail": 0
+      },
+      "mcp": {
+        "pass": 49,
+        "fail": 0
+      },
+      "@repo/backend": {
+        "pass": 1646,
+        "fail": 1
+      },
+      "model-gateway": {
+        "pass": 101,
+        "fail": 0
+      },
+      "api": {
+        "pass": 843,
+        "fail": 0
+      }
+    }
+  },
+  "repairVerification": {
+    "agent": {
+      "status": "pass",
+      "tests": 986,
+      "files": 115,
+      "assertions": 3370,
+      "environment": "pinned host-native Linux container"
+    },
+    "duet": {
+      "status": "pass",
+      "tests": 617,
+      "files": 67,
+      "assertions": 2136,
+      "environment": "pinned host-native Linux container"
+    },
+    "backend": {
+      "status": "pass",
+      "test": "app-key identity attributes every billing branch and its charged usage rollups",
+      "tests": 1,
+      "assertions": 9,
+      "types": "pass",
+      "unchangedOtherTestsRetained": 1646
+    }
+  },
+  "remainingChecks": {
+    "sharedUiCoverage": 204,
+    "docsCoverage": 32,
+    "ownerUnion": "pass",
+    "assetOwnership": {
+      "status": "pass",
+      "paths": 321
+    },
+    "docsVisual": {
+      "status": "pass",
+      "screenshots": 4
+    },
+    "runnerRegressions": {
+      "status": "pass",
+      "tests": 2
+    },
+    "publicPackaging": "dry-run validated"
+  },
+  "aggregateStatus": "pass-with-affected-reruns",
+  "originalRootRunWasGreen": false,
+  "defaultOptInSkipsPreserved": true
+}

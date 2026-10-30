@@ -1,0 +1,681 @@
+---
+title: 'Claude Code for Teams: The Complete Setup Guide for 2026'
+metaTitle: 'Claude Code for Teams: Complete Setup Guide (2026)'
+description: 'The deployment runbook for rolling out Claude Code across a team — plan structure, shared CLAUDE.md, Skills, MCP, Subagents, onboarding, and measuring ROI. Plus the five rollout mistakes to avoid.'
+date: '2026-05-18'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/3.png'
+category: 'guides'
+tags:
+  [
+    'claude-code',
+    'teams',
+    'team-setup',
+    'CLAUDE.md',
+    'skills',
+    'mcp',
+    'onboarding',
+    'agent-orchestration',
+  ]
+type: 'guide'
+image: '/guides/claude-code-for-teams/cover.png'
+relatedPosts:
+  - slug: 'claude-code-pricing'
+    context: 'Full plan-by-plan pricing breakdown referenced throughout this guide for cost comparisons.'
+  - slug: 'claude-code-skills-complete-guide'
+    context: 'Deep dive on Skills — the most important shared primitive for team Claude Code adoption.'
+  - slug: 'beyond-claude-code-building-a-shared-skill-library'
+    context: 'Patterns for sharing and scaling a skill library across developers and repos.'
+howTo:
+  name: 'How to Set Up Claude Code for a Team'
+  description: 'A step-by-step deployment runbook for rolling out Claude Code across a team, from plan selection to shared configuration to onboarding.'
+  steps:
+    - name: 'Choose a plan structure'
+      text: 'Pick the right billing and access model for your team size and usage pattern — stacked subscriptions, Team Premium, Enterprise, or a managed platform.'
+    - name: 'Set up shared CLAUDE.md, Skills, MCP, and Subagents'
+      text: 'Move from per-developer configuration to shared team infrastructure. Commit CLAUDE.md, share skills via .claude/skills/, configure project-scope MCP servers.'
+    - name: 'Onboard new hires'
+      text: 'Use a 30-minute first-day checklist and a 1-hour workflow tour to get new developers productive with Claude Code in their first week.'
+    - name: 'Measure adoption and ROI'
+      text: 'Track five metrics — active rate, skill activations, PR cycle time, spend per dev, and new-hire ramp — to prove Claude Code is working.'
+cta:
+  title: 'Claude Code for your whole team, without the setup tax.'
+  subtitle: 'Duet gives your team pooled usage, shared workspace files, managed integrations, and one predictable invoice. Stop configuring, start shipping.'
+  buttonText: 'See Duet for teams'
+  href: '/pricing?from=guide-cc-teams'
+---
+
+<AnswerBox
+  title="Quick Summary"
+  summary="Claude Code is built for individuals. Making it work for a team requires deliberate setup: choosing the right plan structure, sharing CLAUDE.md and Skills via git, configuring MCP servers with scoped credentials, onboarding new hires in 30 minutes, and measuring five metrics quarterly. This guide is the deployment runbook — covering plan selection, shared configuration, onboarding checklists, ROI measurement, and the five rollout mistakes that quietly kill team adoption."
+  queries={[
+    'How to set up Claude Code for a team?',
+    'How much does Claude Code cost for a team?',
+    'How to share CLAUDE.md across a team?',
+    'Claude Code team plan vs individual subscriptions?',
+  ]}
+/>
+
+<GuideTOC
+  items={[
+    {
+      number: 1,
+      title: 'Why Teams Adopt Differently',
+      href: '#why-teams-adopt-claude-code-differently-from-individuals',
+    },
+    {
+      number: 2,
+      title: 'Choose a Plan Structure',
+      href: '#choose-a-claude-code-plan-structure-for-your-team',
+    },
+    { number: 3, title: 'Shared Setup', href: '#set-up-shared-claudemd-skills-mcp-and-subagents' },
+    { number: 4, title: 'Onboarding New Hires', href: '#onboarding-new-hires' },
+    { number: 5, title: 'Measuring ROI', href: '#measuring-claude-code-adoption-and-roi' },
+    { number: 6, title: 'Rollout Mistakes', href: '#common-claude-code-rollout-mistakes-to-avoid' },
+    { number: 7, title: 'FAQ', href: '#frequently-asked-questions' },
+  ]}
+/>
+
+---
+
+Claude Code is built around a single developer.
+
+The docs assume you. The defaults assume you. The pricing pages assume you.
+
+But the moment Claude Code stops being one engineer's secret weapon and starts being something a team relies on — five developers, ten, fifty — every assumption shifts, and a lot of teams discover the gap the hard way.
+
+The hard way looks like every developer maintaining their own **CLAUDE.md**. Skills get copy-pasted across Slack messages. One person installs a sketchy MCP server with broad credentials and nobody notices. New hires spend their first week piecing together someone else's setup from screenshots. Your $200/month Max subscriptions don't pool, so one developer hits limits at 2pm Friday while another's quota sits idle. AP wants one invoice; you've got eight separate Anthropic charges from eight different cards.
+
+None of this is anyone's fault. It's the natural state of a tool designed for individuals being used by a team. The fix is setting up **Claude Code for teams** as a shared primitive from day one.
+
+This guide is the deployment runbook. We'll cover how to choose the right plan structure (and when [individual subscriptions stop making sense](/blog/claude-code-pricing)), how to share CLAUDE.md, Skills, MCP servers, and Subagents across the team, the day-one onboarding checklist for new hires, how to measure whether Claude Code is actually working, and the common rollout mistakes that quietly kill team adoption.
+
+Whether you're a 3-person startup, a 30-person engineering org, or an agency rotating across client codebases, the playbook is the same. Read it once, set it up well, and you'll spend the next year shipping with Claude Code instead of configuring it.
+
+## Why teams adopt Claude Code differently from individuals
+
+The shift from solo Claude Code to team Claude Code lies in changing what you're optimizing for. A solo developer optimizes for personal velocity. A team optimizes for consistency, governance, and compounding shared knowledge.
+
+The same primitives work in both modes, but you wire them up completely differently.
+
+Most teams discover this the hard way, three months in, when the same questions keep coming up: _Why is your PR review so much more thorough than mine? Where do I find the migration script you used? Why does Claude give me different code style than what's in the codebase?_
+
+Those aren't Claude Code problems. They're configuration-fragmentation problems. Here's what changes once you cross the line from one developer to a team.
+
+### Individual mode: Claude Code as a personal tool
+
+When one developer uses Claude Code:
+
+- **CLAUDE.md** is whatever helps _them_ navigate the codebase
+- Skills are personal preferences ("how I write commits," "my review checklist")
+- MCP servers are installed locally, with whatever credentials are handy
+- Plan choice is a personal cost decision (Pro vs Max, paid out of pocket or expensed)
+- Hooks reflect individual workflow ("auto-format my code," "warn me before pushing")
+
+This works. The only person depending on this configuration is the developer who set it up, and they fix it as they go.
+
+### Team mode: Claude Code as shared infrastructure
+
+When a team uses Claude Code:
+
+- **CLAUDE.md** defines how _anyone_ on the team should navigate the codebase
+- Skills encode team standards ("how _we_ write commits," "_our_ review checklist")
+- MCP servers need shared configuration, scoped credentials, and audit trails
+- Plan choice is a procurement decision with budget approval and a single invoice
+- Hooks enforce team-wide policies ("no secret commits," "always run tests," "audit-log every Claude session")
+
+The same building blocks. Completely different configuration model. A skill that's perfect for one developer might be wrong for the team. A Max plan that's great for one heavy user is wasteful when half your team uses Claude Code twice a week.
+
+### The five problems team adoption surfaces
+
+If you've started rolling Claude Code out to your team, you've probably already hit some of these. If you haven't yet, you will:
+
+1. **Configuration fragmentation.** Every developer has a different CLAUDE.md, different installed skills, different MCP servers. Outputs vary wildly because inputs vary wildly.
+2. **Knowledge siloing.** Senior engineers' best workflows live in their personal skills folder. New hires reinvent the wheel.
+3. **Credential sprawl.** Every developer has their own GitHub token, Postgres credential, and Anthropic API key — often over-scoped, often committed to dotfiles repos.
+4. **Cost unpredictability.** Some devs are on Pro, some on Max, some have an `ANTHROPIC_API_KEY` set that silently bypasses their subscription. Finance can't forecast.
+5. **No usage visibility.** You don't know which skills are firing, which MCP servers are being used, or whether Claude Code is actually saving time.
+
+These aren't theoretical. They're the same five problems every team has reported in the post-launch period of Claude Code, and they all share one root cause: tooling designed for one person, deployed to many.
+
+### The decision framework
+
+Before any of the technical setup, the team needs to answer four questions:
+
+1. **Who's responsible?** Pick one engineer who owns Claude Code configuration the way a platform engineer owns CI. Without an owner, drift is guaranteed.
+2. **What's shared vs personal?** Decide which configuration travels with the team and which stays per-developer. (Hint: most should be shared.)
+3. **What's the governance model?** Who approves new Skills, MCP servers, and plugins? How are credentials managed?
+4. **What does success look like?** If you can't measure it, you can't optimize it. Decide upfront what "Claude Code working for the team" means in concrete terms.
+
+The next four sections walk through each piece of the actual setup. But none of them work if you skip the four questions above. **Treat Claude Code adoption like any platform rollout — own it, govern it, measure it.** That's the only meaningful difference between teams that succeed with it and teams that don't.
+
+## Choose a Claude Code plan structure for your team
+
+The right plan structure for a team isn't about picking the cheapest tier — it's about matching billing predictability and usage pooling to how your team actually works. Get this wrong and you'll either overpay for unused capacity, hit rate limits during crunch weeks, or both.
+
+This is the first decision because every other piece of team setup depends on it. The plans you pick determine billing, who has access to what models, and whether usage pools across developers or stays siloed per seat.
+
+If you haven't yet, read [our Claude Code pricing breakdown](/blog/claude-code-pricing) — it has the full plan-by-plan comparison and real cost scenarios. This section focuses on the _team_ angle.
+
+### Four subscription options
+
+**Stack individual Pro/Max subscriptions**
+
+Every developer pays for their own Claude Pro or Max plan. AP either expenses each one or hands out company cards.
+
+**Pros:** Simplest to start. Each dev picks the tier that fits their usage. No minimum seat requirement.
+**Cons:** No central admin or billing. Usage doesn't pool. Reimbursement headache. No visibility.
+**Fit:** Teams of 1-3, or while you're piloting Claude Code before committing.
+
+**Anthropic Team plan (Premium seats)**
+
+Centralized billing, $100/seat/month for Claude Code access (Premium tier), 5-seat minimum.
+
+**Pros:** Single invoice. Centralized admin. Easier procurement.
+**Cons:** 5-seat minimum. Each seat has its own limits, no pooling. Light users overpay; heavy users still hit per-seat walls.
+**Fit:** Teams of 5+ where everyone uses Claude Code roughly equally.
+
+**Anthropic Enterprise**
+
+Custom pricing, 500K context window, SSO, HIPAA, audit logs.
+
+**Pros:** Compliance and procurement story is clean. Largest context window. Custom terms.
+**Cons:** Sales cycle. Minimum spend often higher than $1K/month. Overkill if you don't need compliance.
+**Fit:** Healthcare, finance, regulated industries.
+
+**Managed platform (Duet)**
+
+Monthly plans with included credits, one designated owner as payer, a paid reserve for overage, and a shared workspace with durable sessions, Files, Train, and managed Integrations.
+
+**Pros:** Usage pools. Shared workspace. Clear billing owner. Built-in visibility.
+**Cons:** Adds a managed layer between you and Anthropic's primitives.
+**Fit:** Teams of 3-20 with uneven usage; agencies; teams where rate-limit-roulette is taxing shipping.
+
+### The decision matrix
+
+| Scenario                                    | Best option                          |
+| ------------------------------------------- | ------------------------------------ |
+| Piloting with 1-3 devs                      | Stacked individual Max subscriptions |
+| 5+ devs, even usage, central billing needed | Anthropic Team Premium               |
+| Regulated industry, SSO/HIPAA required      | Anthropic Enterprise                 |
+| Uneven usage, want pooling + one invoice    | Managed platform (Duet)              |
+| Agency rotating across client codebases     | Managed platform (Duet)              |
+| Budget predictability is the top priority   | Managed platform (Duet)              |
+
+### The hidden plan trap to fix on day one
+
+Before you commit to any plan, scan every developer's environment for:
+
+```bash
+echo $ANTHROPIC_API_KEY
+```
+
+If anything prints, that developer's Claude Code is silently bypassing their subscription and charging the API directly. We've seen teams pay $200/month for Max plans that did nothing because every developer had a leftover API key in their shell profile from when they were experimenting with the Anthropic SDK.
+
+### Cost benchmarks for common team sizes
+
+| Team size     | Stacked Max 5x | Anthropic Team Premium     | Managed platform |
+| ------------- | -------------- | -------------------------- | ---------------- |
+| 3 developers  | $300/mo        | Not available (5-seat min) | $150-300/mo      |
+| 5 developers  | $500/mo        | $500/mo                    | $250-500/mo      |
+| 10 developers | $1,000/mo      | $1,000/mo                  | $500-800/mo      |
+| 20 developers | $2,000/mo      | $2,000/mo                  | $800-1,500/mo    |
+
+As soon as usage gets uneven across developers, pooled pricing wins on both predictability and absolute cost.
+
+### What to do if you're piloting
+
+If you're not ready to commit to a structure yet:
+
+1. Start with **3-5 individual Max 5x subscriptions** for your most active users.
+2. Run for 30 days.
+3. Track who hits limits, how often, and which developers barely use it.
+4. Use that data to pick the right structure for the rest of the team.
+
+A 30-day pilot will tell you more about your real usage pattern than any spreadsheet projection. Don't lock in pricing until you've measured.
+
+### When to revisit the decision
+
+Plan structure isn't a one-time choice. Revisit it every quarter, or any time one of these triggers fires:
+
+- **Team grows past 5 / 10 / 20.** Each threshold opens new options.
+- **Usage pattern changes.** Product launch, agency client onboarding, seasonal crunch.
+- **Finance asks for predictability.** Flat-fee structures win when budgeting matters more than flexibility.
+- **Compliance shows up.** PHI, PII, SOC 2 — Enterprise becomes the only option.
+
+## Set up shared CLAUDE.md, Skills, MCP, and Subagents
+
+**The single biggest leverage point in team Claude Code adoption is moving from "every developer configures their own setup" to "the team configures one setup that everyone inherits."** Every workflow improvement made by any developer benefits everyone — that's the compounding loop that separates teams that pull ahead with Claude Code from teams that plateau.
+
+### Share CLAUDE.md (start here)
+
+CLAUDE.md is the always-on context file Claude reads at the start of every session in a repo. The easiest thing to share: just commit it.
+
+```
+your-repo/
+├── CLAUDE.md          # <-- committed to git
+├── src/
+└── package.json
+```
+
+**What goes in a team CLAUDE.md:**
+
+- A 2-3 sentence description of what this codebase is
+- Build, test, lint, and run commands
+- Code style and naming conventions
+- Architectural patterns the team has agreed on
+- Known gotchas
+- Pointers to deeper docs
+
+**What does NOT go in CLAUDE.md:**
+
+- Personal preferences (those go in `~/.claude/CLAUDE.md` or skills)
+- Cross-repo company conventions (use a shared skill plugin instead)
+- Anything that changes weekly
+
+**Length discipline:** Keep CLAUDE.md under ~300 lines. Every line loads on every session.
+
+### Share Skills (the highest-leverage shared primitive)
+
+Skills are where team knowledge compounds. They encode the _procedures_ that used to live in senior engineers' heads, and once written down once, every developer benefits.
+
+**Three ways to share Claude Code skills:**
+
+**For repo-specific skills: commit them to `.claude/skills/`**
+
+```
+your-repo/
+├── .claude/
+│   └── skills/
+│       ├── pr-review-checklist/
+│       ├── migration-runner/
+│       └── feature-spec-writer/
+└── src/
+```
+
+**For cross-repo company skills: ship them as a plugin**
+
+```
+your-org-plugin/
+├── .claude-plugin/plugin.json
+└── skills/
+    ├── company-voice/
+    ├── incident-postmortem/
+    └── code-style/
+```
+
+**For teams hitting skill-sprawl: use a managed platform**
+
+When you have 20+ skills across multiple repos, you are spending real time on maintenance. A persistent workspace such as [Duet](/) can keep reusable instructions and scripts in shared files, but teams still need an explicit review and versioning process for those assets.
+
+**The starter library most teams converge on** (covered in detail in [the Skills guide](/guides/claude-code-skills-complete-guide)):
+
+1. **pr-review-checklist** — your team's review standards
+2. **commit-message** — your house format for commits
+3. **incident-postmortem** — template and tone for retros
+4. **feature-spec** — how to write a one-page feature spec
+5. **migration-safety** — pre-flight checks for schema changes
+6. **code-style** — your unwritten conventions, written down
+7. **customer-comms** — voice and templates for customer-facing writing
+
+### Share MCP servers
+
+MCP servers give Claude access to external systems. Sharing them across a team is more sensitive than sharing skills because they run with credentials.
+
+**The scope rule:**
+
+| Scope    | Config location       | Credential model           | Use case                                      |
+| -------- | --------------------- | -------------------------- | --------------------------------------------- |
+| Personal | `~/.claude/`          | Per-developer, local       | Note-taking, personal tools                   |
+| Project  | `.mcp.json` in repo   | Per-developer via env vars | Shared team servers (GitHub, DB, Sentry)      |
+| User     | `~/.claude/.mcp.json` | Per-developer, local       | Cross-repo servers the developer always wants |
+
+**Project-scope MCP setup workflow:**
+
+1. The Claude Code owner adds the server with `--scope project`. Config commits to `.mcp.json` in the repo.
+2. Each developer provides their own credential via env var. **Never commit credentials.**
+3. Document required env vars in the repo's README so new hires know what to set.
+
+**Example shared `.mcp.json`:**
+
+```json
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-github"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-postgres"],
+      "env": {
+        "DATABASE_URL": "${DATABASE_URL}"
+      }
+    }
+  }
+}
+```
+
+**Credential hygiene checklist:**
+
+- Use **read-only credentials** wherever possible
+- Use **fine-grained tokens** with the minimum scopes
+- Use **per-developer credentials** — never share one token across the team
+- **Rotate** when developers leave
+
+**Servers worth sharing across the team:** GitHub, your primary database (read-only), Sentry/PostHog, Slack or Linear, Context7 for framework docs.
+
+**Servers to keep personal:** Personal note-taking (Notion, Obsidian), anything with broad credential access, experimental servers.
+
+### Share Subagents
+
+Subagents are independent specialists that run with their own context and tools.
+
+```
+your-repo/
+├── .claude/
+│   └── agents/
+│       ├── pr-reviewer.md
+│       ├── security-auditor.md
+│       └── doc-writer.md
+└── src/
+```
+
+**The subagent worth writing first:** A `pr-reviewer` subagent on Sonnet with read-only file access, applying your team's code-review-checklist skill. It enforces consistency on the most variable team activity.
+
+**Subagent best practices for teams:**
+
+- **Restrict tools by default.** A reviewer subagent should not have `Edit` or `Write`.
+- **Pick the right model.** Lookup-heavy subagents on Haiku, reasoning-heavy on Sonnet, complex architecture on Opus.
+- **Use isolation when relevant.** Security-review subagent in an isolated worktree.
+
+### The all-in-one option: distribute everything as a plugin
+
+Plugins bundle skills, subagents, MCP configs, and hooks into one installable unit:
+
+```
+your-team-plugin/
+├── .claude-plugin/plugin.json
+├── skills/
+├── agents/
+├── .mcp.json
+└── README.md
+```
+
+One install command, version-controlled, easy to update everyone at once.
+
+### Rollout order that actually works
+
+1. **Week 1:** Share CLAUDE.md.
+2. **Week 2-3:** Share two or three high-value skills.
+3. **Week 4:** Add shared MCP servers.
+4. **Month 2+:** Add subagents and bundle into a plugin.
+
+Trying to ship a complete team setup on day one usually means none of it lands. Layered rollout is how you get adoption.
+
+### Who owns the shared library
+
+Two governance basics keep all of the above from drifting:
+
+- **CODEOWNERS.** Add `.claude/` directories and `.mcp.json` to your CODEOWNERS file so changes go through PR review like any other code.
+- **One owner.** The Claude Code owner from Step 1 is also the one who merges changes to the shared library. Without an accountable owner, drift is guaranteed.
+
+That's the governance you need. If you grow into compliance requirements, audit logs, or formal change management, Anthropic Enterprise or a managed platform handles those for you.
+
+## Onboarding new hires
+
+The fastest predictor of whether Claude Code will stick at your company is how quickly a new hire becomes productive with it.
+
+A new engineer who's productive on Claude Code in their first week sees it as a force multiplier and uses it forever. A new engineer who spends their first week wrestling with their setup decides it's "not worth it" and writes code the old way.
+
+### The pre-arrival setup
+
+Before the new hire's first day (handled by IT or the manager):
+
+- Add them to the team's Anthropic plan or managed-platform workspace
+- Add their GitHub username to the team's plugin repo
+- Add them to CODEOWNERS reviewer groups they should be part of
+- Provision per-developer credentials for shared MCP servers
+
+This takes 15 minutes and saves the new hire half a day of "waiting for access."
+
+### The 30-minute first-day setup
+
+1. Install Claude Code (CLI, IDE extension, or both)
+2. Sign in with the team's auth (SSO if you have it)
+3. **Run `echo $ANTHROPIC_API_KEY`. If anything prints, unset it.** This is the single most common cost trap.
+4. Install the team plugin (or clone the team's skills/agents repo)
+5. Set the env vars for shared MCP servers
+6. Run `claude` in the team's main repo. Confirm CLAUDE.md loads, skills appear, MCP servers connect.
+7. Run a smoke-test prompt: ask Claude to summarize the codebase.
+
+If any step fails, the new hire pings the Claude Code owner. The owner fixes the docs so the next hire doesn't hit the same issue.
+
+### The first-week workflow tour
+
+A 1-hour walkthrough on day 1 or 2, run by the Claude Code owner or any senior engineer:
+
+1. **Show them the team's Skills.** Demonstrate one in action.
+2. **Show them the team's Subagents.** Especially the PR-reviewer.
+3. **Show them the team's MCP servers.** One query against the database, one against GitHub.
+4. **Show them what NOT to do.** Hooks that block dangerous commands. Past incidents.
+5. **Point them at this guide.** And the [Skills guide](/guides/claude-code-skills-complete-guide) and [Pricing post](/blog/claude-code-pricing).
+
+### The first-month milestones
+
+- **Week 1:** They've shipped one PR using Claude Code
+- **Week 2:** They've used at least three different team skills
+- **Week 3:** They've proposed a tweak to an existing skill or written one of their own
+- **Month 1:** Claude Code is a default part of their workflow
+
+The third milestone is the most important — it signals they've crossed from "user of the team's setup" to "contributor to it." That's where the compounding starts.
+
+### Common onboarding failures
+
+1. **Stale docs.** _Fix:_ every new hire updates the doc as they go.
+2. **Unwritten institutional knowledge.** _Fix:_ if it isn't in the checklist, it doesn't exist.
+3. **Permission gaps.** _Fix:_ IT/manager provisions everything before day 1.
+4. **No buddy.** _Fix:_ assign an onboarding buddy for the first week.
+5. **No expected workflow.** _Fix:_ be opinionated. Pick one default and document it.
+
+## Measuring Claude Code adoption and ROI
+
+If you can't measure whether Claude Code is working for your team, you can't justify the spend, can't optimize the setup, and can't tell whether the next hire should onboard onto it.
+
+Most teams skip measurement entirely and just trust the vibe. The vibe is wrong about half the time.
+
+### What to measure
+
+Teams roll out Claude Code for three reasons:
+
+- **Velocity:** "We want to ship faster." Measure throughput.
+- **Quality:** "We want fewer bugs, more consistency." Measure defect and review metrics.
+- **Cost:** "Prove it's worth it." Measure spend per developer and per outcome.
+
+### Top 5 metrics to target
+
+**1. Weekly active developer rate**
+
+What percent of your engineers use Claude Code in a given week? If adoption is below 70%, no other metric matters.
+
+**Target:** 80%+ weekly active rate within 60 days.
+
+**2. Skill activation rate**
+
+Which team skills are actually firing? A skill that never activates is a skill whose description is wrong.
+
+**Target:** Every team skill should activate at least once per week.
+
+**3. PR cycle time delta**
+
+The single best velocity metric for engineering teams.
+
+**Target:** PR cycle time should drop 20-40% within 90 days.
+
+**4. Spend per active developer**
+
+Total Claude Code spend / weekly-active developers.
+
+**Healthy ranges:**
+
+- Solo Max 5x stack: $80-100/active dev
+- Anthropic Team Premium: $80-100/active dev
+- Managed platform: $40-80/active dev
+
+**5. New-hire time-to-first-PR**
+
+How long until a new hire ships their first PR?
+
+**Target:** New-hire time-to-first-PR should drop 30-50% with good Claude Code onboarding.
+
+### What NOT to measure
+
+- **Lines of code generated by Claude.** Quantity, not quality.
+- **Tokens consumed.** Usage isn't outcome.
+- **Prompts sent.** Same problem.
+- **Developer satisfaction survey scores.** Surveys lag reality.
+
+### 90-day review template
+
+1. What's the active developer rate?
+2. Which 3 skills are firing the most?
+3. Which 3 skills are firing the least?
+4. What's PR cycle time vs 90 days ago?
+5. What's spend per active developer?
+6. What new skills should we add?
+7. What's blocking adoption for the developers who aren't using it?
+
+Run quarterly. The first review is where you'll find 80% of the gaps.
+
+### Communicating ROI up
+
+When your VP or CFO asks "is Claude Code worth what we're paying":
+
+> "We pay X/month. Our PR cycle time dropped Y%, new-hire ramp dropped Z weeks, and the team is at W% weekly active. That's ~N/month in engineering time saved. Net ROI: Mx."
+
+Three numbers, one spend number, one ROI calculation. That's the slide.
+
+### What "working" actually looks like
+
+- 80%+ weekly active rate
+- Every team skill firing at least weekly
+- PR cycle time down 20-40% from baseline
+- New-hire time-to-first-PR down 30-50%
+- Spend per active developer in line with benchmarks
+- A growing skill library, with most contributions coming from people other than the original Claude Code owner
+
+That last one is the leading indicator that Claude Code has become _team infrastructure_ instead of _one person's project_.
+
+## Common Claude Code rollout mistakes to avoid
+
+Most teams that struggle with Claude Code aren't struggling with the tool — they're making the same five rollout mistakes we've seen on repeat across hundreds of team deployments.
+
+### Skipping the plan audit
+
+The `ANTHROPIC_API_KEY` environment variable trap. Developers set it once when experimenting with the Anthropic SDK, forget about it, then sign up for a Pro or Max plan. Claude Code silently uses the API key, the subscription does nothing, the team gets a surprise $400 API bill on top of $200/month they're already paying.
+
+_Fix:_ Day-one check. `echo $ANTHROPIC_API_KEY` and unset.
+
+### Letting configuration drift
+
+Everyone running their own CLAUDE.md, their own skills, their own MCP servers. Six months in, the team's outputs look like they came from six different companies.
+
+_Fix:_ Commit CLAUDE.md to the repo on day one. Move at least three high-value skills into `.claude/skills/` within the first month.
+
+### Trying to share everything at once
+
+Teams who try to ship CLAUDE.md, skills, MCP servers, subagents, hooks, and a plugin in the first week usually ship none of it.
+
+_Fix:_ Layered rollout. CLAUDE.md week 1. Skills weeks 2-3. MCP week 4. Subagents and plugins month 2.
+
+### No accountable owner
+
+When everyone owns the shared library, nobody does. Skills go stale. MCP servers break. CLAUDE.md drifts out of date.
+
+_Fix:_ One named owner. 1-2 hours a week of their time.
+
+### Measuring nothing
+
+The team rolls out Claude Code, doesn't measure adoption or impact, and a quarter later can't answer "is this working?" Finance pushes back. Adoption stalls. The rollout dies of indifference.
+
+_Fix:_ Set up the five metrics from Step 4 before you roll out, not after.
+
+---
+
+Claude Code is built for one developer.
+
+Making it work for a team is a deliberate setup — not because the tool is hard, but because the defaults assume you're alone.
+
+The teams that pull ahead with Claude Code in 2026 share a pattern. They pick a plan structure deliberately. They share CLAUDE.md, Skills, MCP servers, and Subagents from day one. They have one owner. They onboard new hires in 30 minutes, not three days. They measure adoption with five metrics instead of zero. None of that is rocket science. Most of it is just choosing not to do the ad-hoc thing.
+
+If you take three things from this guide:
+
+1. **Pick the plan structure that matches your usage pattern, not your team size.** Stacked Max subscriptions are fine for 1-3 even-usage devs. Pooled pricing wins for uneven or growing teams.
+2. **Share configuration from day one.** CLAUDE.md, then skills, then MCP, then subagents. Layered, not all at once.
+3. **Measure five things.** Active rate, skill activations, PR cycle time, spend per active dev, new-hire ramp. Quarterly review.
+
+That's the playbook. Run it once, well, and the next year of shipping happens on top of Claude Code instead of around it.
+
+## Stop paying for Claude Code that your team isn't using
+
+If you're piloting Claude Code with 1-3 developers, stack individual subscriptions and follow this guide as you grow. You don't need a managed platform yet — you need conventions.
+
+But if you're past pilot — a team of 5+, uneven usage, an agency with bursty workloads, or a finance team that wants one predictable invoice — the operational tax of doing this manually starts compounding.
+
+[**Duet**](/pricing) gives your team a shared workspace with pooled usage, durable sessions, shared files and training sources, managed integrations, and the visibility you need to evaluate the work.
+
+[**See Duet for teams →**](/pricing)
+
+## Frequently Asked Questions
+
+### How much does Claude Code cost for a team of 5?
+
+Stacked individual Max 5x subscriptions are $500/month for 5 developers. Anthropic Team Premium is also $500/month (5 seats x $100), with central billing but no usage pooling. [Duet](/pricing) offers Starter, Pro, and Max monthly plans with shared included credits and reserve overage, so compare the current plan catalog with your team's workload.
+
+### How to share CLAUDE.md across a team?
+
+Commit CLAUDE.md to the repo root. Every developer running Claude Code in that repo loads it automatically. Treat changes the same as code changes — through PR review. Add `.claude/` directories and CLAUDE.md to your CODEOWNERS file so the team's Claude Code owner reviews modifications.
+
+### Can Claude Code Team plans share usage across developers?
+
+No. Anthropic Team Premium plans give each seat its own usage limit — they don't pool. One developer can be at their cap while another's quota sits idle. This is one of the main reasons teams with uneven usage move to managed platforms, which do pool usage across the team.
+
+### What's the best way to onboard a new developer to Claude Code?
+
+Three steps: (1) Pre-provision their plan seat, GitHub access, and MCP credentials before their first day. (2) Give them a 30-minute first-day checklist for installation, env-var setup, and a smoke-test prompt. (3) Run a 1-hour walkthrough of the team's Skills, Subagents, and MCP servers in their first week. New hires should ship their first Claude Code PR by end of week 1.
+
+### How to share Claude Code Skills across a team?
+
+Three ways, depending on scope. **Repo-specific skills:** commit them to `.claude/skills/` in the repo. **Cross-repo company skills:** ship them as a plugin in a shared git repo or registry. **Shared workspace playbooks:** keep reviewed instruction files in workspace Files with your own versioning and review process. Start with the first and add coordination only when the library needs it.
+
+### How to share MCP servers across a team safely?
+
+Use project scope (`--scope project`) so the config commits to `.mcp.json` in the repo. Reference credentials via env vars — never commit literal secrets. Provision per-developer credentials (each dev gets their own GitHub token, database user) so offboarding is one-credential rotation. Use least-privilege scopes (read-only DB user, fine-grained tokens) wherever possible.
+
+### What's the most common Claude Code onboarding mistake teams make?
+
+Forgetting to unset `ANTHROPIC_API_KEY`. If a new hire has that environment variable set from prior experimentation with the Anthropic SDK, Claude Code silently uses the API key and bypasses the team's subscription — the team pays for both. Add `echo $ANTHROPIC_API_KEY` to the day-1 checklist; unset if anything prints.
+
+### How to measure if Claude Code is working for my team?
+
+Track five metrics: (1) weekly active developer rate (target 80%+), (2) skill activation rate (every team skill firing at least weekly), (3) PR cycle time delta vs pre-rollout (target 20-40% drop), (4) spend per active developer, (5) new-hire time-to-first-PR (target 30-50% faster). Run a 90-day review using these. Skip vanity metrics like tokens consumed or lines of code generated.
+
+### When should my team graduate from individual subscriptions to a managed platform?
+
+The usual triggers: team grows past 5 developers with uneven usage, finance wants one predictable invoice instead of stacked subscriptions, you're spending real time maintaining shared skills/MCP across multiple developers, you can't tell who's using what, or you've had one Claude Code-related security or cost surprise. If any two are true, you're past the cost-of-doing-it-manually threshold.
+
+### Can you run Claude Code with SSO and audit logs?
+
+Yes, but only on Anthropic Enterprise or managed platforms like Duet. Pro, Max, and Team Premium plans don't include SSO or audit logging. If compliance, procurement, or a security team is involved in your rollout, plan for Enterprise pricing or a managed-platform alternative from the start.
+
+### Does Claude Code work the same across Claude Code, Claude.ai, and the API for a team?
+
+Skills, CLAUDE.md, and the Agent Skills spec work across all three surfaces, so shared skills are portable. MCP servers and subagents are Claude Code-specific. Most teams standardize on Claude Code (CLI + IDE extensions) for engineering work.
+
+### How long does it take a team to fully roll out Claude Code?
+
+It usually takes 3 months. **Week 1:** Plan structure, CLAUDE.md committed, first developers onboarded. **Weeks 2-4:** First three shared skills written, project-scope MCP configured. **Month 2:** Subagents added, library bundled as a plugin. **Month 3:** First 90-day measurement review. By month 3, Claude Code should feel like infrastructure, not a pilot.

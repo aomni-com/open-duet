@@ -1,0 +1,406 @@
+{
+  "journey": "model-refresh-fresh29",
+  "runId": "staging-e2e-synthetic",
+  "artifactDirectory": "/Users/synthetic-user/dev/duet/artifacts/staging-e2e-synthetic/staging-e2e-synthetic",
+  "evidence": {
+    "expectedRevision": "0cbb71854fc90c86c0e70395fdbf5ee12fa76ab2",
+    "preflight": {
+      "backendSchema": 1,
+      "cacheSchema": 13,
+      "gatewayVersion": "0.0.0+ec2b3d8e8e09"
+    },
+    "workspace": {
+      "id": "ns7e12t05jcj4ag2gadpm1wtyh8f86k7",
+      "slug": "model-refresh-fresh29-staging-e2e-synthetic",
+      "vmName": "workspace-redacted"
+    },
+    "aliases": {
+      "sessionId": "j973hrnz41316chech41xeeesd8f9wm3",
+      "workspaceDefault": "openai-max",
+      "preservedHistoryRows": 13,
+      "anchorPath": "agents/alias-probe-b2327c",
+      "runtime": {
+        "gatewayVersion": "0.0.0+ec2b3d8e8e09",
+        "announcedSha256": "ec2b3d8e8e095c100ac8fbe70bc608269cb6fd1d0366410e53ae18e8e3a2590b",
+        "agentVersion": "0.3.29",
+        "announcedAgentVersion": "0.3.29",
+        "cwd": "agents/alias-probe-b2327c",
+        "configPath": "agents/alias-probe-b2327c/.duet/models.json",
+        "routing": {
+          "defaultTier": "frontier",
+          "tiers": {
+            "frontier": {
+              "routes": {
+                "visual": {
+                  "description": "Frontend, 3D, or anything visual: UI implementation and debugging, styling, graphics, image inspection, and work where visual fidelity matters.",
+                  "target": {
+                    "modelName": "kimi",
+                    "thinkingLevel": "medium"
+                  }
+                },
+                "plan": {
+                  "description": "Architecture, investigation, research, and high-stakes planning where the primary work is reasoning about what to build or do, not implementing it.",
+                  "target": {
+                    "modelName": "opus",
+                    "thinkingLevel": "medium"
+                  }
+                },
+                "implement": {
+                  "description": "Backend, systems, data, CLI, and other implementation or debugging work, including tests and code changes.",
+                  "target": {
+                    "modelName": "sol",
+                    "thinkingLevel": "medium"
+                  }
+                },
+                "writing": {
+                  "description": "Creative writing and prose where voice, narrative, or wording is the primary output rather than analysis or software work.",
+                  "target": {
+                    "modelName": "opus",
+                    "thinkingLevel": "medium"
+                  }
+                },
+                "general": {
+                  "description": "General questions, explanations, summaries, and requests that do not fit a more specific route.",
+                  "target": {
+                    "modelName": "sol",
+                    "thinkingLevel": "medium"
+                  }
+                }
+              },
+              "advisor": {
+                "enabled": true,
+                "target": {
+                  "modelName": "fable",
+                  "thinkingLevel": "medium"
+                },
+                "minStepsBetween": 5
+              }
+            },
+            "balanced": {
+              "routes": {
+                "visual": {
+                  "description": "Frontend, 3D, or anything visual: UI implementation and debugging, styling, graphics, image inspection, and work where visual fidelity matters.",
+                  "target": {
+                    "modelName": "kimi",
+                    "thinkingLevel": "medium"
+                  }
+                },
+                "plan": {
+                  "description": "Architecture, investigation, research, and high-stakes planning where the primary work is reasoning about what to build or do, not implementing it.",
+                  "target": {
+                    "modelName": "sol",
+                    "thinkingLevel": "medium"
+                  }
+                },
+                "implement": {
+                  "description": "Backend, systems, data, CLI, and other implementation or debugging work, including tests and code changes.",
+                  "target": {
+                    "modelName": "sol",
+                    "thinkingLevel": "medium"
+                  }
+                },
+                "writing": {
+                  "description": "Creative writing and prose where voice, narrative, or wording is the primary output rather than analysis or software work.",
+                  "target": {
+                    "modelName": "sonnet",
+                    "thinkingLevel": "medium"
+                  }
+                },
+                "general": {
+                  "description": "General questions, explanations, summaries, and requests that do not fit a more specific route.",
+                  "target": {
+                    "modelName": "sol",
+                    "thinkingLevel": "medium"
+                  }
+                }
+              },
+              "advisor": {
+                "enabled": true,
+                "target": {
+                  "modelName": "fable",
+                  "thinkingLevel": "medium"
+                },
+                "minStepsBetween": 5
+              }
+            },
+            "economy": {
+              "routes": {
+                "implement": {
+                  "description": "Backend, systems, data, CLI, and other implementation or debugging work, including tests and code changes.",
+                  "target": {
+                    "modelName": "deepseek",
+                    "thinkingLevel": "medium"
+                  }
+                },
+                "writing": {
+                  "description": "Creative writing and prose where voice, narrative, or wording is the primary output rather than analysis or software work.",
+                  "target": {
+                    "modelName": "luna",
+                    "thinkingLevel": "low"
+                  }
+                },
+                "general": {
+                  "description": "General questions, explanations, summaries, and requests that do not fit a more specific route.",
+                  "target": {
+                    "modelName": "deepseek",
+                    "thinkingLevel": "low"
+                  }
+                }
+              },
+              "advisor": {
+                "enabled": false,
+                "target": {
+                  "modelName": "sol",
+                  "thinkingLevel": "medium"
+                },
+                "minStepsBetween": 5
+              }
+            },
+            "openai-frontier": {
+              "routes": {
+                "general": {
+                  "description": "All work on OpenAI frontier.",
+                  "target": {
+                    "modelName": "astra",
+                    "thinkingLevel": "medium"
+                  }
+                }
+              },
+              "advisor": {
+                "enabled": false,
+                "target": {
+                  "modelName": "astra",
+                  "thinkingLevel": "medium"
+                },
+                "minStepsBetween": 5
+              }
+            },
+            "openai-max": {
+              "routes": {
+                "general": {
+                  "description": "All work on OpenAI max.",
+                  "target": {
+                    "modelName": "sol",
+                    "thinkingLevel": "medium"
+                  }
+                }
+              },
+              "advisor": {
+                "enabled": false,
+                "target": {
+                  "modelName": "sol",
+                  "thinkingLevel": "medium"
+                },
+                "minStepsBetween": 5
+              }
+            },
+            "anthropic-frontier": {
+              "routes": {
+                "general": {
+                  "description": "All work on Anthropic frontier.",
+                  "target": {
+                    "modelName": "fable",
+                    "thinkingLevel": "medium"
+                  }
+                }
+              },
+              "advisor": {
+                "enabled": false,
+                "target": {
+                  "modelName": "fable",
+                  "thinkingLevel": "medium"
+                },
+                "minStepsBetween": 5
+              }
+            },
+            "anthropic-max": {
+              "routes": {
+                "general": {
+                  "description": "All work on Anthropic max.",
+                  "target": {
+                    "modelName": "opus",
+                    "thinkingLevel": "medium"
+                  }
+                }
+              },
+              "advisor": {
+                "enabled": false,
+                "target": {
+                  "modelName": "opus",
+                  "thinkingLevel": "medium"
+                },
+                "minStepsBetween": 5
+              }
+            }
+          },
+          "classifier": {
+            "target": {
+              "modelName": "typesafe-ai/jev"
+            },
+            "everySteps": 5,
+            "guidance": "Prefer continuity when the task has not materially changed, but switch routes when the work changes domains."
+          }
+        }
+      },
+      "turns": [
+        {
+          "alias": "openai-max",
+          "execution": [
+            {
+              "id": "md7d2p1dcy99bkv9gh1drbv68h8f9k4c",
+              "upstreamGenerationId": "gen_01M3K042SXQ6ZG8AWCCTZD8X0A",
+              "model": "openai/gpt-6-sol",
+              "tier": "openai-max",
+              "usage": {
+                "uncachedInputTokens": 19480,
+                "cachedInputTokens": 0,
+                "outputTokens": 7
+              },
+              "billedCostMicroUsd": 195010,
+              "debitMicroUsd": -195010
+            }
+          ],
+          "support": [
+            {
+              "id": "md78xnbed0txve9ywfhm6b7ycx8f849a",
+              "model": "openai/gpt-6-luna",
+              "tier": "openai-max",
+              "status": "reconciling"
+            }
+          ]
+        },
+        {
+          "alias": "anthropic-max",
+          "execution": [
+            {
+              "id": "md77be5pf78thzz51pksvcynhd8f8mmb",
+              "upstreamGenerationId": "gen_01M3K04SNXT99MEDFC05JCFVTW",
+              "model": "anthropic/claude-opus-5.5",
+              "tier": "anthropic-max",
+              "usage": {
+                "uncachedInputTokens": 34551,
+                "cachedInputTokens": 0,
+                "outputTokens": 10
+              },
+              "billedCostMicroUsd": 345810,
+              "debitMicroUsd": -345810
+            }
+          ],
+          "support": [
+            {
+              "id": "md74p6zben7pkn9cxg8tphte0n8f9xq0",
+              "model": "openai/gpt-6-luna",
+              "tier": "anthropic-max",
+              "status": "reconciling"
+            }
+          ]
+        },
+        {
+          "alias": "anthropic-max",
+          "execution": [
+            {
+              "id": "md71wcer9n0f0ee7jznx29wbj98f8w79",
+              "upstreamGenerationId": "gen_01M3K05FG43WA86RS6G24KZK9V",
+              "model": "anthropic/claude-opus-5.5",
+              "tier": "anthropic-max",
+              "usage": {
+                "uncachedInputTokens": 173,
+                "cachedInputTokens": 34547,
+                "outputTokens": 10
+              },
+              "billedCostMicroUsd": 36577,
+              "debitMicroUsd": -36577
+            }
+          ],
+          "support": [
+            {
+              "id": "md76w1nrnvvdd4yp19bycvzzxn8f9sjs",
+              "model": "openai/gpt-6-luna",
+              "tier": "anthropic-max",
+              "status": "reconciling"
+            }
+          ]
+        }
+      ],
+      "restoredRouter": "economy"
+    },
+    "installedMemory": {
+      "agentVersion": "0.3.29",
+      "memorySelection": "luna",
+      "memoryModel": "openai/gpt-6-luna"
+    },
+    "internalLuna": [
+      {
+        "id": "md78xnbed0txve9ywfhm6b7ycx8f849a",
+        "model": "openai/gpt-6-luna",
+        "tier": "openai-max",
+        "status": "settled",
+        "upstreamCostMicroUsd": 663,
+        "billedCostMicroUsd": 663
+      },
+      {
+        "id": "md74p6zben7pkn9cxg8tphte0n8f9xq0",
+        "model": "openai/gpt-6-luna",
+        "tier": "anthropic-max",
+        "status": "settled",
+        "upstreamCostMicroUsd": 153,
+        "billedCostMicroUsd": 153
+      },
+      {
+        "id": "md76w1nrnvvdd4yp19bycvzzxn8f9sjs",
+        "model": "openai/gpt-6-luna",
+        "tier": "anthropic-max",
+        "status": "settled",
+        "upstreamCostMicroUsd": 183,
+        "billedCostMicroUsd": 183
+      }
+    ],
+    "memoryAttributionBoundary": "Installed catalog proves configured memory target; live generation rows prove internal Luna6 execution but do not identify memory versus title purpose."
+  },
+  "vmNames": [
+    "workspace-redacted"
+  ],
+  "cleanup": {
+    "runId": "staging-e2e-synthetic",
+    "status": "pass",
+    "resources": [
+      {
+        "kind": "user",
+        "id": "n9782awbj29ym3ft2jx3rt25yx8f8dcj",
+        "label": "staging-e2e-synthetic:owner:user@example.invalid",
+        "recordedAt": 1790565231550,
+        "status": "deleted"
+      },
+      {
+        "kind": "workspace",
+        "id": "ns7e12t05jcj4ag2gadpm1wtyh8f86k7",
+        "label": "staging-e2e-synthetic:workspace:model-refresh-fresh29-staging-e2e-synthetic",
+        "recordedAt": 1790565231918,
+        "status": "deleted"
+      },
+      {
+        "kind": "mail-message",
+        "id": "<user@example.invalid>",
+        "label": "staging-e2e-synthetic:mail-message:<user@example.invalid>",
+        "recordedAt": 1790565251273,
+        "status": "deleted"
+      },
+      {
+        "kind": "agent",
+        "id": "r57fz8zevv6r4d8a9116raab758f9wqk",
+        "label": "staging-e2e-synthetic:agent:alias-probe-b2327c",
+        "recordedAt": 1790565282553,
+        "status": "deleted"
+      },
+      {
+        "kind": "session",
+        "id": "j973hrnz41316chech41xeeesd8f9wm3",
+        "label": "staging-e2e-synthetic:aliases:j973hrnz41316chech41xeeesd8f9wm3",
+        "recordedAt": 1790565288746,
+        "status": "deleted"
+      }
+    ],
+    "orphans": []
+  },
+  "vmAbsenceVerified": true
+}

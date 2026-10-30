@@ -1,0 +1,28 @@
+{
+  "baseSource": "de1ec3d621aef37f3306ff4b826c24c77f1982c1",
+  "deferredHelperSha256": "0e0b880610e5a95f53ea15b10b6eea5ff87f8ccff1a506e5b9dc74966ba48428",
+  "correctedHelperSha256": "f15806e27bc53a0242f02500ea1c5235536e6bc9b288f2462783acbd1b6c714a",
+  "sourceSha256": "815f0a5f5ad3d0fa78bfa248a3d05f4f612e4d5c70bff5275ec8fd1bd23dec19",
+  "testSha256": "d3e7e4109f306082baaa63b44320d798853887ba5a0a66d0c6b9d081671f442e",
+  "denyingPid": 1275915,
+  "denyingPredicate": "PATH entry0 references the bundled rg-only candidate directory; canonical-bin-only exception was too narrow",
+  "producer": "packages/agent/src/turn-runner/bundled-ripgrep.ts withBundledRipgrep",
+  "imageFallbackOwner": "packages/vm-image/Dockerfile stock ripgrep",
+  "actualReadOnlyPredicate": {
+    "pid": 1275915,
+    "startedTicks": "69452188",
+    "patchedHelperSha256": "f15806e27bc53a0242f02500ea1c5235536e6bc9b288f2462783acbd1b6c714a",
+    "realStateMutated": false,
+    "bundledRgVersion": "ripgrep 15.0.0 (rev 3a612f88b8)",
+    "stockRgVersion": "ripgrep 14.1.0",
+    "fallback": true
+  },
+  "gate": {
+    "tests": 13,
+    "assertions": 56,
+    "failures": 0,
+    "typecheck": true,
+    "lint": true
+  },
+  "scope": "No live helper launch/signals/service mutation/ledger copy; reads authored metadata in owned scratch, removed afterward. No new fixture/dependency/runtime bytes."
+}

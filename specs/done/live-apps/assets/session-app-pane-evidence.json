@@ -1,0 +1,21 @@
+{
+  "journey": "session-app-pane",
+  "status": "pass",
+  "harnessRevision": "70c3bb06",
+  "appSlug": "hello",
+  "appAnchorPath": "welcome/hello-app",
+  "cwdBefore": "welcome",
+  "cwdAfter": "welcome/hello-app",
+  "garbageStatus": 422,
+  "sourceUnchanged": true,
+  "narrated": true,
+  "domLatencyMs": 790,
+  "domLatencyClock": "response-201",
+  "paneUrlUnchanged": true,
+  "iframeDocumentUnchanged": true,
+  "screenshotPaths": ["session-app-pane-desktop.png", "session-app-pane-mobile-chip.png"],
+  "cleanup": {
+    "status": "pass",
+    "orphans": []
+  }
+}

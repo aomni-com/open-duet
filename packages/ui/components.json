@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "../tailwind-config/tailwind.config.ts",
+    "css": "../tailwind-config/globals.css",
+    "baseColor": "zinc",
+    "cssVariables": true
+  },
+  "iconLibrary": "lucide",
+  "aliases": {
+    "components": "@repo/ui/components/shadcn",
+    "utils": "@repo/ui/lib/utils",
+    "hooks": "@repo/ui/hooks",
+    "lib": "@repo/ui/lib",
+    "ui": "@repo/ui/components/shadcn",
+    "magicui": "@repo/ui/components/magicui"
+  },
+  "registries": {
+    "@acme": "https://acme.com/r/{name}.json",
+    "@aceternity": "https://ui.aceternity.com/registry/{name}.json"
+  }
+}

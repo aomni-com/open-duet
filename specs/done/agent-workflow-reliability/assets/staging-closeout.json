@@ -1,0 +1,122 @@
+{
+  "candidate": "27dbea555c360fb0f44239637a7faba9b4414546",
+  "agentVersion": "0.3.30",
+  "agentSource": "b9bd2df",
+  "runtimeParity": "src, package.json, bun.lock and README identical to published 0583f6d; evaluator-only repair retained",
+  "focusedRemovalChecks": {
+    "gatewayLedger": {
+      "pass": 48,
+      "assertions": 139
+    },
+    "contractChanged": {
+      "pass": 415,
+      "assertions": 2447
+    },
+    "agentDocker": {
+      "pass": 19,
+      "assertions": 80
+    }
+  },
+  "deployment": {
+    "apiRevision": "27dbea555c360fb0f44239637a7faba9b4414546",
+    "backendRevision": "27dbea555c360fb0f44239637a7faba9b4414546",
+    "gatewayVersion": "0.0.0+b7e7da3fc547",
+    "webFirstBuild": "failed resolving pi-ai/compat; clean Linux frozen installation succeeds",
+    "webRebuildId": "dpl_HkrzqJuXVLg1GCSTU3ez3bZpEj6a",
+    "webRebuildResult": "READY; same source, no code change",
+    "githubStatuses": "all seven succeeded"
+  },
+  "journeys": [
+    {
+      "name": "agent-correction-completion",
+      "runId": "staging-e2e-synthetic",
+      "result": "failed before actor execution: stale host package-local agent0.3.1 shadowed root0.3.30",
+      "cleanup": "pass; all resources deleted; no orphans",
+      "remediation": "moved stale nested install outside repository; rerun started"
+    },
+    {
+      "name": "agent-correction-completion",
+      "runId": "staging-e2e-synthetic",
+      "result": "preflight timeout before model work: gateway matched, installed agent0.3.25",
+      "cause": "harness allowed180s but normal npm rollout window is30min",
+      "cleanup": "pass",
+      "remediation": "bounded harness timing correction underway"
+    },
+    {
+      "name": "agent-populated-search",
+      "runId": "staging-e2e-synthetic",
+      "result": "provider app DNS label66chars exceeds63; failed before actor task",
+      "runtime": "verified agent0.3.30 and announced gateway",
+      "cleanup": "pass",
+      "remediation": "shorter provider app slug underway"
+    },
+    {
+      "name": "agent-correction-completion",
+      "runId": "staging-e2e-synthetic",
+      "result": "installed0.3.30/gateway verified; provider hostname DNS failure before actor, run started before hostnamefix",
+      "cleanup": "pass; noorphans"
+    },
+    {
+      "name": "agent-populated-search",
+      "runId": "staging-e2e-synthetic",
+      "result": "pass",
+      "agentVersion": "0.3.30",
+      "gatewayVersion": "0.0.0+b7e7da3fc547",
+      "model": "anthropic/claude-sonnet-5.5",
+      "tier": "balanced",
+      "elapsedActorMs": 66686,
+      "search": {
+        "failures": []
+      },
+      "probeCount": 16,
+      "advisorCalls": 0,
+      "cleanup": "pass",
+      "orphans": [],
+      "artifacts": "artifacts/staging-workflow-search/staging-e2e-synthetic"
+    },
+    {
+      "name": "agent-correction-completion",
+      "runId": "staging-e2e-synthetic",
+      "result": "pass",
+      "agentVersion": "0.3.30",
+      "gatewayVersion": "0.0.0+b7e7da3fc547",
+      "model": "anthropic/claude-sonnet-5.5",
+      "tier": "balanced",
+      "elapsedActorMs": 139246,
+      "release": {
+        "failures": []
+      },
+      "search": {
+        "failures": []
+      },
+      "cleanup": "pass",
+      "orphans": [],
+      "artifacts": "artifacts/staging-workflow-correction/staging-e2e-synthetic"
+    }
+  ],
+  "status": "both focused staging journeys passed; ordinary broad local gate remains incomplete as recorded",
+  "harnessTimingFix": {
+    "commit": "c344492e2",
+    "reason": "30minrollout+5mincontrolplane poll+5mininstall bounded40minwait",
+    "tests": "12 pass,22assertions; red35min/green37min recovery and40min stall cutoff"
+  },
+  "activeRuns": [],
+  "fixtureHostnameFix": {
+    "commit": "dc6053a27",
+    "proof": "actual generated provider label66 before; at most60 after, including40-character workspace slug",
+    "checks": "types,lint,format pass"
+  },
+  "cleanupImages": {
+    "removed": [
+      "workflow-matrix:7ec20900ad3b1fdb54456e8db21c94051322c057",
+      "workflow-matrix:ea997a348d6998da5cfc94296e7dc8e9308eaecc",
+      "workflow-instructions:ea997a3"
+    ],
+    "verified": "no running or stopped containers used these images; qualified0.3.30 image retained"
+  },
+  "closeoutReview": {
+    "behaviorAndPointers": "independent read-only audit clean",
+    "stagingEvidence": "independent audit matched both pass artifacts and cleanup; corrected stale artifact locator",
+    "runtimeChangesAfterLiveProof": false
+  }
+}

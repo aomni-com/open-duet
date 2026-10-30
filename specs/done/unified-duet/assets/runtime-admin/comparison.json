@@ -1,0 +1,437 @@
+[
+  {
+    "image": "internal-admin-backup-failed-desktop.png",
+    "beforeSize": [
+      1440,
+      1939
+    ],
+    "afterSize": [
+      1440,
+      1955
+    ],
+    "diffRatio32": 0.03338311558076901,
+    "mae": 3.8351863790040683,
+    "beforeSha256": "58eaed8cd0941c7447f124ab26dd49f6e42f62f4ff67dd9066c9d5253d895b65",
+    "afterSha256": "51c4c339c2b5ead44b9cc424176838c5be577fff45171bc7cac2de9dc96a482f"
+  },
+  {
+    "image": "internal-admin-backup-pending-desktop.png",
+    "beforeSize": [
+      1440,
+      1939
+    ],
+    "afterSize": [
+      1440,
+      1955
+    ],
+    "diffRatio32": 0.03295155005443814,
+    "mae": 3.812270428628732,
+    "beforeSha256": "2e95041b5841506e2f315cf4e0d4e9f7be998f8ecc7f764dee2eb2f20e147a68",
+    "afterSha256": "42db8ff2c27733a5f798d5f6fbba76043dcd09f41a609e16b51c69195fb61481"
+  },
+  {
+    "image": "internal-admin-command-desktop.png",
+    "beforeSize": [
+      1440,
+      1965
+    ],
+    "afterSize": [
+      1440,
+      1974
+    ],
+    "diffRatio32": 0.02888182075204976,
+    "mae": 3.162831849024597,
+    "beforeSha256": "10548e89c95c978758a3a32873132a874d51819343daf4cb1590a8d1a0619984",
+    "afterSha256": "352db48fdb2049214cb58bde09ba71f8371855e128df6edd1d71a80bce9eac86"
+  },
+  {
+    "image": "internal-admin-create-user-desktop.png",
+    "beforeSize": [
+      1440,
+      973
+    ],
+    "afterSize": [
+      1440,
+      973
+    ],
+    "diffRatio32": 0.00226033458947128,
+    "mae": 0.221034600890716,
+    "beforeSha256": "d5f1b6f722cf396b338f0da057ee0bda73751026b587be55365b4a07a1574610",
+    "afterSha256": "eca138d6d9b12864cb7928e00f0c4c0bac0e269165e3f039714c72fd07033bd6"
+  },
+  {
+    "image": "internal-admin-error-desktop.png",
+    "beforeSize": [
+      1440,
+      991
+    ],
+    "afterSize": [
+      1440,
+      991
+    ],
+    "diffRatio32": 0.0018345666554546473,
+    "mae": 0.18103066487274358,
+    "beforeSha256": "f49954470a429f4a6cd199321cfed603a448702aa6280db3bd6fa98321792c1a",
+    "afterSha256": "c9151197eade5e0165773f5b47dec9727a7aea4a67321130d20d4417ec95d549"
+  },
+  {
+    "image": "internal-admin-file-desktop.png",
+    "beforeSize": [
+      1440,
+      1958
+    ],
+    "afterSize": [
+      1440,
+      1974
+    ],
+    "diffRatio32": 0.030773677789127228,
+    "mae": 3.555509093746453,
+    "beforeSha256": "bc33c5bc458d2c3a0327c48c53ca0302fc27495a2389f981adb47ff8aadf2082",
+    "afterSha256": "e7138b6b87cc9aae775f292889cea591271a3a8e6d26bb91a8d7621929cb9c1a"
+  },
+  {
+    "image": "internal-admin-fleet-desktop.png",
+    "beforeSize": [
+      1440,
+      900
+    ],
+    "afterSize": [
+      1440,
+      900
+    ],
+    "diffRatio32": 0.02769135802469136,
+    "mae": 2.7406875,
+    "beforeSha256": "bd83fe014b522680c52ccfe07723d4ce04c871fdca2bd967255ec1e81468f270",
+    "afterSha256": "62be4e10f8ceb7ac6e1dca343599baee290666cd0e29ee0edd27dfab72f12cc8"
+  },
+  {
+    "image": "internal-admin-loading-desktop.png",
+    "beforeSize": [
+      1440,
+      975
+    ],
+    "afterSize": [
+      1440,
+      975
+    ],
+    "diffRatio32": 0.0018646723646723647,
+    "mae": 0.1840014245014245,
+    "beforeSha256": "899fec9126907ff9b23d2b24a5d1c1ed8d88cf95005fc6f3bc5e56da8138b4ff",
+    "afterSha256": "c48b6b665e67585be683def90e0c8be452444b435237f88e6944d5caa1918d41"
+  },
+  {
+    "image": "internal-admin-logs-desktop.png",
+    "beforeSize": [
+      1440,
+      1958
+    ],
+    "afterSize": [
+      1440,
+      1974
+    ],
+    "diffRatio32": 0.030773677789127228,
+    "mae": 3.555510157757349,
+    "beforeSha256": "c4dcd0b3000a8ebf3322ba9ff35f9cadceecc94fd76e8c52ef41985259080c1c",
+    "afterSha256": "7d94faed4c60ee142942f999fc4d1dbb3a27d798fe614aa3c936e5bb20fc32fe"
+  },
+  {
+    "image": "internal-admin-search-desktop.png",
+    "beforeSize": [
+      1440,
+      900
+    ],
+    "afterSize": [
+      1440,
+      900
+    ],
+    "diffRatio32": 0.002443672839506173,
+    "mae": 0.23896296296296296,
+    "beforeSha256": "8a4dd0e1aa6f9c5ff5300da142c03f4c09636fccf18bdc48f31929e0ed1b6ad0",
+    "afterSha256": "953132977e214743f9be9c7bcd6fb2e58d3d03d4d3bc4b57464bd08d6db70a03"
+  },
+  {
+    "image": "internal-admin-vm-desktop.png",
+    "beforeSize": [
+      1440,
+      1810
+    ],
+    "afterSize": [
+      1440,
+      1826
+    ],
+    "diffRatio32": 0.03329112952731737,
+    "mae": 3.8462507673419277,
+    "beforeSha256": "50c0f4ad868f05c0bdf6b4052b8579e605b695d9971859632adb272373fa7674",
+    "afterSha256": "1ac149aad5ea246a8ba9937f6dab0afa5f5296589b35c3079f4698129a00442b"
+  },
+  {
+    "image": "internal-admin-desktop.png",
+    "beforeSize": [
+      1440,
+      900
+    ],
+    "afterSize": [
+      1440,
+      900
+    ],
+    "diffRatio32": 0.002443672839506173,
+    "mae": 0.23896296296296296,
+    "beforeSha256": "8a4dd0e1aa6f9c5ff5300da142c03f4c09636fccf18bdc48f31929e0ed1b6ad0",
+    "afterSha256": "953132977e214743f9be9c7bcd6fb2e58d3d03d4d3bc4b57464bd08d6db70a03"
+  },
+  {
+    "image": "spa-shell-account-menu-desktop.png",
+    "beforeSize": [
+      1440,
+      900
+    ],
+    "afterSize": [
+      1440,
+      900
+    ],
+    "diffRatio32": 0.002020061728395062,
+    "mae": 0.1993348765432099,
+    "beforeSha256": "87f382ed98955f761802dc948d55464be7486f16e59bc4895e19cd5f3416645c",
+    "afterSha256": "8b4f7af1104a86b5850031dcaa410205cf03b9e4befc92115e931e49b712d79f"
+  },
+  {
+    "image": "spa-shell-internal-admin-desktop.png",
+    "beforeSize": [
+      1440,
+      900
+    ],
+    "afterSize": [
+      1440,
+      900
+    ],
+    "diffRatio32": 0.002020061728395062,
+    "mae": 0.1993348765432099,
+    "beforeSha256": "295684ef9afa7535cd392f027a3ba54ffbff545b3d33098695fd222b81b61799",
+    "afterSha256": "3ba2ed9bf1ecd23456e611f9474e75160c8aaad1409ede3dc608278848ee665b"
+  },
+  {
+    "image": "spa-shell-workspace-switcher-desktop.png",
+    "beforeSize": [
+      1440,
+      900
+    ],
+    "afterSize": [
+      1440,
+      900
+    ],
+    "diffRatio32": 0.002020061728395062,
+    "mae": 0.1993348765432099,
+    "beforeSha256": "e114a47b53fcaa32c131d0c1ac356b70b87dc7c01ea3084b8f0f0de908be06f8",
+    "afterSha256": "cb9fa335df3642271e2f54d85373119bd3f2919b49b7ae5d328bcc4d02d0c042"
+  },
+  {
+    "image": "internal-admin-backup-failed-mobile.png",
+    "beforeSize": [
+      390,
+      3767
+    ],
+    "afterSize": [
+      390,
+      3799
+    ],
+    "diffRatio32": 0.0986665577586735,
+    "mae": 13.595391149864206,
+    "beforeSha256": "943808fe65fd45deb4eff85ff996b16241ebce36932e6c5de2b61b87c921f644",
+    "afterSha256": "5894b2abf7097239f01028fe4e14d9e34d40ee4c7e155f302366c30084c30a4e"
+  },
+  {
+    "image": "internal-admin-backup-pending-mobile.png",
+    "beforeSize": [
+      390,
+      3767
+    ],
+    "afterSize": [
+      390,
+      3799
+    ],
+    "diffRatio32": 0.09776602479018194,
+    "mae": 13.515160673323667,
+    "beforeSha256": "3d373c24c87474f05da88eff828027b3bc3b741658c0c7eba051d4383eb0060e",
+    "afterSha256": "6af3ee23b1941c6b77142cf857c264ea914b9aaacb406eadcb7cd87fc764cc55"
+  },
+  {
+    "image": "internal-admin-command-mobile.png",
+    "beforeSize": [
+      390,
+      3848
+    ],
+    "afterSize": [
+      390,
+      3880
+    ],
+    "diffRatio32": 0.0951629884322192,
+    "mae": 13.163208993016685,
+    "beforeSha256": "36c9ca550b7adccf27fdcefe3f20b90a38286e3e93d0cfd263d646d85656ca2b",
+    "afterSha256": "a55ddeaba60be4f0698fd28d9c173b4cad4746c919af9bca1620e40d932798bc"
+  },
+  {
+    "image": "internal-admin-create-user-mobile.png",
+    "beforeSize": [
+      390,
+      1439
+    ],
+    "afterSize": [
+      390,
+      1423
+    ],
+    "diffRatio32": 0.09722147143088816,
+    "mae": 13.261758293241076,
+    "beforeSha256": "8ce2d3186ce70d8e12ebc89290c0c4f996b73737ccf99a5551c633f882c36fed",
+    "afterSha256": "6fd5ed5007102f76c67d95a61e83da7c7039f851f897d0315270c34eeb7e266f"
+  },
+  {
+    "image": "internal-admin-error-mobile.png",
+    "beforeSize": [
+      390,
+      1391
+    ],
+    "afterSize": [
+      390,
+      1391
+    ],
+    "diffRatio32": 0.0048517023355269225,
+    "mae": 0.46593485594204503,
+    "beforeSha256": "261ad92b8aeec80fae30175b74c438177b5550cfcf93b758d8272dfa14558c35",
+    "afterSha256": "cfa2119d6a65daa34ed5572caa7239d4763001b391109d4f52a044bf8b5f200b"
+  },
+  {
+    "image": "internal-admin-file-mobile.png",
+    "beforeSize": [
+      390,
+      3678
+    ],
+    "afterSize": [
+      390,
+      3710
+    ],
+    "diffRatio32": 0.08939780538475481,
+    "mae": 12.12166380836854,
+    "beforeSha256": "a9ba564b36e8d581df5eebcf57c5bf24898bbed17540860c5b97bb5aecbcdb19",
+    "afterSha256": "f3abbec0b21ce8e25f98c71aeb575b81dc7987ede07e471e4ccb01f8b0645c92"
+  },
+  {
+    "image": "internal-admin-fleet-mobile.png",
+    "beforeSize": [
+      390,
+      1171
+    ],
+    "afterSize": [
+      390,
+      1117
+    ],
+    "diffRatio32": 0.04002249615499392,
+    "mae": 4.340947593140968,
+    "beforeSha256": "e4a5c70c9bff24bcb6930f781389ec31ee276e8dc61092a5fb640f823d3175b3",
+    "afterSha256": "d1393191097f87714b6b698cce20d6ab6a9a7da78c5d4e754868763a496fe666"
+  },
+  {
+    "image": "internal-admin-loading-mobile.png",
+    "beforeSize": [
+      390,
+      1357
+    ],
+    "afterSize": [
+      390,
+      1357
+    ],
+    "diffRatio32": 0.004973263042533492,
+    "mae": 0.4776089790828184,
+    "beforeSha256": "d1a2d488ccc77f9cb562e703f03f0bb4341b4c2073bab11bca57d0e81531870d",
+    "afterSha256": "7b7b18688d32ba4667851e1a5d008943015242c3e62b090aacbf28c641b6b0d7"
+  },
+  {
+    "image": "internal-admin-logs-mobile.png",
+    "beforeSize": [
+      390,
+      3820
+    ],
+    "afterSize": [
+      390,
+      3852
+    ],
+    "diffRatio32": 0.09286280037588938,
+    "mae": 12.909346892200295,
+    "beforeSha256": "819e87245cc2cab5ff5c6b2d6184b675085c64c5350f36ae51a95dcc8ebd1b2a",
+    "afterSha256": "f77fc468f6a6e616085cdc02cfd102f09084ffa2144f4648116642528b752bec"
+  },
+  {
+    "image": "internal-admin-search-mobile.png",
+    "beforeSize": [
+      390,
+      1343
+    ],
+    "afterSize": [
+      390,
+      1327
+    ],
+    "diffRatio32": 0.09579154831603964,
+    "mae": 13.179268834656929,
+    "beforeSha256": "62daf3258844146eadef95162887d0cb4f39d5335d4e90a5d3b83f9aca5fde40",
+    "afterSha256": "19c2a140e88c0c689b590fe76fa73dbf9057737456c91c8621b04e202a0ac2ad"
+  },
+  {
+    "image": "internal-admin-vm-mobile.png",
+    "beforeSize": [
+      390,
+      3638
+    ],
+    "afterSize": [
+      390,
+      3670
+    ],
+    "diffRatio32": 0.09751201702823473,
+    "mae": 13.555311455998647,
+    "beforeSha256": "2e3d78aee745983ecb966a964bd6f4b9f6324db6fdabf9cebfc47b02ecec30ed",
+    "afterSha256": "f9e9582357c3247933855655b6b648c3931cd84bb785422aef0572709bdbde2b"
+  },
+  {
+    "image": "internal-admin-mobile.png",
+    "beforeSize": [
+      390,
+      1343
+    ],
+    "afterSize": [
+      390,
+      1327
+    ],
+    "diffRatio32": 0.09579154831603964,
+    "mae": 13.179268834656929,
+    "beforeSha256": "62daf3258844146eadef95162887d0cb4f39d5335d4e90a5d3b83f9aca5fde40",
+    "afterSha256": "19c2a140e88c0c689b590fe76fa73dbf9057737456c91c8621b04e202a0ac2ad"
+  },
+  {
+    "image": "spa-shell-account-menu-mobile.png",
+    "beforeSize": [
+      390,
+      844
+    ],
+    "afterSize": [
+      390,
+      844
+    ],
+    "diffRatio32": 0.007996111313646859,
+    "mae": 0.7679092234779439,
+    "beforeSha256": "4d424cfd2f32724663f6f80c181f55a1b259231972846f9a778d8b9ea9c439b2",
+    "afterSha256": "4133f3554f1a0729363482839c05870ecb82fa64552ff9c5d79ea430cb3c385c"
+  },
+  {
+    "image": "spa-shell-internal-admin-mobile.png",
+    "beforeSize": [
+      390,
+      844
+    ],
+    "afterSize": [
+      390,
+      844
+    ],
+    "diffRatio32": 0.007996111313646859,
+    "mae": 0.7679092234779439,
+    "beforeSha256": "018f2889597bf6f994eb9b0214e8a073be5c84cd2dfcb8c34d5254bfc165f2dc",
+    "afterSha256": "a4ee10300bb807ded95113b9eed9db4317ae6e612e87c0e839e7d5e76e66fbad"
+  }
+]

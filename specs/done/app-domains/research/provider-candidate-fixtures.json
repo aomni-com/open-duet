@@ -1,0 +1,784 @@
+{
+  "target": {
+    "teamId": "team-placeholder",
+    "projectId": "project-placeholder",
+    "gitBranch": "staging"
+  },
+  "token": "token-placeholder",
+  "cases": [
+    {
+      "id": "add-ready",
+      "operation": "add",
+      "domain": "example.com",
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "example.com",
+            "verified": true
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "name": "example.com",
+            "apexName": "example.com",
+            "verified": true,
+            "projectId": "project-placeholder",
+            "gitBranch": "staging"
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "misconfigured": false
+          }
+        }
+      ],
+      "referenceCaseId": "add-ready",
+      "deltas": [
+        "captured-staging-branch",
+        "inspect-missing-target-metadata",
+        "independent-ownership-and-routing-arrays"
+      ]
+    },
+    {
+      "id": "read-subdomain-txt-cname",
+      "operation": "read",
+      "domain": "tools.example.com",
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "verified": false,
+            "verification": [
+              {
+                "type": "TXT",
+                "domain": "_vercel.tools.example.com",
+                "value": "ownership-placeholder",
+                "reason": "pending-ownership"
+              }
+            ]
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "apexName": "example.com",
+            "verified": false,
+            "projectId": "project-placeholder",
+            "gitBranch": "staging",
+            "verification": [
+              {
+                "type": "TXT",
+                "domain": "_vercel.tools.example.com",
+                "value": "ownership-placeholder",
+                "reason": "pending-ownership"
+              }
+            ]
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "misconfigured": true,
+            "recommendedCNAME": [
+              {
+                "rank": 2,
+                "value": "other.vercel-dns.example."
+              },
+              {
+                "rank": 1,
+                "value": "preferred.vercel-dns.example."
+              }
+            ],
+            "recommendedIPv4": [
+              {
+                "rank": 2,
+                "value": [
+                  "192.0.2.20"
+                ]
+              },
+              {
+                "rank": 1,
+                "value": [
+                  "192.0.2.10",
+                  "192.0.2.11"
+                ]
+              }
+            ],
+            "conflicts": [
+              {
+                "name": "tools.example.com",
+                "type": "CNAME",
+                "value": "old.example"
+              }
+            ]
+          }
+        }
+      ],
+      "referenceCaseId": "read-subdomain-txt-cname",
+      "deltas": [
+        "inspect-missing-target-metadata",
+        "independent-ownership-and-routing-arrays"
+      ]
+    },
+    {
+      "id": "add-apex-txt-a",
+      "operation": "add",
+      "domain": "example.com",
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "example.com",
+            "verified": false,
+            "verification": [
+              {
+                "type": "TXT",
+                "domain": "_vercel.example.com",
+                "value": "ownership-placeholder"
+              }
+            ]
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "name": "example.com",
+            "apexName": "example.com",
+            "verified": false,
+            "projectId": "project-placeholder",
+            "gitBranch": "staging",
+            "verification": [
+              {
+                "type": "TXT",
+                "domain": "_vercel.example.com",
+                "value": "ownership-placeholder"
+              }
+            ]
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "misconfigured": true,
+            "recommendedCNAME": [
+              {
+                "rank": 2,
+                "value": "other.vercel-dns.example."
+              },
+              {
+                "rank": 1,
+                "value": "preferred.vercel-dns.example."
+              }
+            ],
+            "recommendedIPv4": [
+              {
+                "rank": 2,
+                "value": [
+                  "192.0.2.20"
+                ]
+              },
+              {
+                "rank": 1,
+                "value": [
+                  "192.0.2.10",
+                  "192.0.2.11"
+                ]
+              }
+            ],
+            "conflicts": []
+          }
+        }
+      ],
+      "referenceCaseId": "add-apex-txt-a",
+      "deltas": [
+        "captured-staging-branch",
+        "inspect-missing-target-metadata",
+        "independent-ownership-and-routing-arrays"
+      ]
+    },
+    {
+      "id": "read-ownership-pending-routing-ready",
+      "operation": "read",
+      "domain": "tools.example.com",
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "verified": false,
+            "verification": [
+              {
+                "type": "TXT",
+                "domain": "_vercel.tools.example.com",
+                "value": "ownership-placeholder",
+                "reason": "pending-ownership"
+              }
+            ]
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "apexName": "example.com",
+            "verified": false,
+            "projectId": "project-placeholder",
+            "gitBranch": "staging",
+            "verification": [
+              {
+                "type": "TXT",
+                "domain": "_vercel.tools.example.com",
+                "value": "ownership-placeholder",
+                "reason": "pending-ownership"
+              }
+            ]
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "misconfigured": false
+          }
+        }
+      ],
+      "referenceCaseId": "read-ownership-pending-routing-ready",
+      "deltas": [
+        "inspect-missing-target-metadata",
+        "independent-ownership-and-routing-arrays"
+      ]
+    },
+    {
+      "id": "read-ownership-ready-routing-pending",
+      "operation": "read",
+      "domain": "tools.example.com",
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "verified": true
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "apexName": "example.com",
+            "verified": true,
+            "projectId": "project-placeholder",
+            "gitBranch": "staging"
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "misconfigured": true,
+            "recommendedCNAME": [
+              {
+                "rank": 2,
+                "value": "other.vercel-dns.example."
+              },
+              {
+                "rank": 1,
+                "value": "preferred.vercel-dns.example."
+              }
+            ],
+            "recommendedIPv4": [
+              {
+                "rank": 2,
+                "value": [
+                  "192.0.2.20"
+                ]
+              },
+              {
+                "rank": 1,
+                "value": [
+                  "192.0.2.10",
+                  "192.0.2.11"
+                ]
+              }
+            ],
+            "conflicts": [
+              {
+                "name": "tools.example.com",
+                "type": "CNAME",
+                "value": "old.example"
+              }
+            ]
+          }
+        }
+      ],
+      "referenceCaseId": "read-ownership-ready-routing-pending",
+      "deltas": [
+        "inspect-missing-target-metadata",
+        "independent-ownership-and-routing-arrays"
+      ]
+    },
+    {
+      "id": "verify-ready",
+      "operation": "verify",
+      "domain": "tools.example.com",
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "verified": true
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "apexName": "example.com",
+            "verified": true,
+            "projectId": "project-placeholder",
+            "gitBranch": "staging"
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "misconfigured": false,
+            "conflicts": []
+          }
+        }
+      ],
+      "referenceCaseId": "verify-ready",
+      "deltas": [
+        "inspect-missing-target-metadata",
+        "independent-ownership-and-routing-arrays"
+      ]
+    },
+    {
+      "id": "verify-both-pending",
+      "operation": "verify",
+      "domain": "tools.example.com",
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "verified": false,
+            "verification": [
+              {
+                "type": "TXT",
+                "domain": "_vercel.tools.example.com",
+                "value": "ownership-placeholder",
+                "reason": "pending-ownership"
+              }
+            ]
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "apexName": "example.com",
+            "verified": false,
+            "projectId": "project-placeholder",
+            "gitBranch": "staging",
+            "verification": [
+              {
+                "type": "TXT",
+                "domain": "_vercel.tools.example.com",
+                "value": "ownership-placeholder",
+                "reason": "pending-ownership"
+              }
+            ]
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "misconfigured": true,
+            "recommendedCNAME": [
+              {
+                "rank": 2,
+                "value": "other.vercel-dns.example."
+              },
+              {
+                "rank": 1,
+                "value": "preferred.vercel-dns.example."
+              }
+            ],
+            "recommendedIPv4": [
+              {
+                "rank": 2,
+                "value": [
+                  "192.0.2.20"
+                ]
+              },
+              {
+                "rank": 1,
+                "value": [
+                  "192.0.2.10",
+                  "192.0.2.11"
+                ]
+              }
+            ],
+            "conflicts": [
+              {
+                "name": "tools.example.com",
+                "type": "CNAME",
+                "value": "old.example"
+              }
+            ]
+          }
+        }
+      ],
+      "referenceCaseId": "verify-both-pending",
+      "deltas": [
+        "inspect-missing-target-metadata",
+        "independent-ownership-and-routing-arrays"
+      ]
+    },
+    {
+      "id": "read-multilabel-apex-heuristic",
+      "operation": "read",
+      "domain": "example.co.uk",
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "example.co.uk",
+            "verified": true
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "name": "example.co.uk",
+            "apexName": "example.co.uk",
+            "verified": true,
+            "projectId": "project-placeholder",
+            "gitBranch": "staging"
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "misconfigured": true,
+            "recommendedCNAME": [
+              {
+                "rank": 2,
+                "value": "other.vercel-dns.example."
+              },
+              {
+                "rank": 1,
+                "value": "preferred.vercel-dns.example."
+              }
+            ],
+            "recommendedIPv4": [
+              {
+                "rank": 2,
+                "value": [
+                  "192.0.2.20"
+                ]
+              },
+              {
+                "rank": 1,
+                "value": [
+                  "192.0.2.10",
+                  "192.0.2.11"
+                ]
+              }
+            ],
+            "conflicts": [],
+            "apexName": "example.co.uk"
+          }
+        }
+      ],
+      "referenceCaseId": "read-multilabel-apex-heuristic",
+      "deltas": [
+        "inspect-missing-target-metadata",
+        "provider-apex-name-corrects-multilabel-apex",
+        "independent-ownership-and-routing-arrays"
+      ]
+    },
+    {
+      "id": "read-subdomain-a-fallback",
+      "operation": "read",
+      "domain": "tools.example.com",
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "verified": true
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "apexName": "example.com",
+            "verified": true,
+            "projectId": "project-placeholder",
+            "gitBranch": "staging"
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "misconfigured": true,
+            "recommendedIPv4": [
+              {
+                "rank": 1,
+                "value": [
+                  "192.0.2.10"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "referenceCaseId": "read-subdomain-a-fallback",
+      "deltas": [
+        "inspect-missing-target-metadata",
+        "independent-ownership-and-routing-arrays"
+      ]
+    },
+    {
+      "id": "read-no-recommendations",
+      "operation": "read",
+      "domain": "tools.example.com",
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "verified": false
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "apexName": "example.com",
+            "verified": false,
+            "projectId": "project-placeholder",
+            "gitBranch": "staging"
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "misconfigured": true
+          }
+        }
+      ],
+      "referenceCaseId": "read-no-recommendations",
+      "deltas": [
+        "inspect-missing-target-metadata",
+        "independent-ownership-and-routing-arrays"
+      ]
+    },
+    {
+      "id": "read-missing",
+      "operation": "read",
+      "domain": "tools.example.com",
+      "responses": [
+        {
+          "status": 404,
+          "body": {
+            "error": {
+              "code": "not_found"
+            }
+          }
+        }
+      ],
+      "referenceCaseId": "read-missing",
+      "deltas": []
+    },
+    {
+      "id": "remove-missing",
+      "operation": "remove",
+      "domain": "tools.example.com",
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "apexName": "example.com",
+            "verified": true,
+            "projectId": "project-placeholder",
+            "gitBranch": "staging"
+          }
+        },
+        {
+          "status": 404,
+          "body": {
+            "error": {
+              "code": "not_found"
+            }
+          }
+        }
+      ],
+      "referenceCaseId": "remove-missing",
+      "deltas": [
+        "inspect-current-assignment-before-delete"
+      ]
+    },
+    {
+      "id": "remove-present",
+      "operation": "remove",
+      "domain": "tools.example.com",
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "apexName": "example.com",
+            "verified": true,
+            "projectId": "project-placeholder",
+            "gitBranch": "staging"
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "error": {
+              "code": "not_found"
+            }
+          }
+        }
+      ],
+      "referenceCaseId": "remove-present",
+      "deltas": [
+        "inspect-current-assignment-before-delete"
+      ]
+    },
+    {
+      "id": "add-conflict",
+      "operation": "add",
+      "domain": "tools.example.com",
+      "responses": [
+        {
+          "status": 409,
+          "body": {
+            "error": {
+              "code": "domain_taken",
+              "message": "Already assigned"
+            }
+          }
+        }
+      ],
+      "referenceCaseId": "add-conflict",
+      "deltas": [
+        "captured-staging-branch",
+        "typed-bounded-error"
+      ]
+    },
+    {
+      "id": "read-rate-limit",
+      "operation": "read",
+      "domain": "tools.example.com",
+      "responses": [
+        {
+          "status": 429,
+          "body": "rate limit"
+        }
+      ],
+      "referenceCaseId": "read-rate-limit",
+      "deltas": [
+        "typed-bounded-error"
+      ]
+    },
+    {
+      "id": "read-provider-failure",
+      "operation": "read",
+      "domain": "tools.example.com",
+      "responses": [
+        {
+          "status": 503,
+          "body": "temporarily unavailable"
+        }
+      ],
+      "referenceCaseId": "read-provider-failure",
+      "deltas": [
+        "typed-bounded-error"
+      ]
+    },
+    {
+      "id": "verify-provider-failure",
+      "operation": "verify",
+      "domain": "tools.example.com",
+      "responses": [
+        {
+          "status": 500,
+          "body": "verify unavailable"
+        }
+      ],
+      "referenceCaseId": "verify-provider-failure",
+      "deltas": [
+        "typed-bounded-error"
+      ]
+    },
+    {
+      "id": "remove-provider-failure",
+      "operation": "remove",
+      "domain": "tools.example.com",
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "apexName": "example.com",
+            "verified": true,
+            "projectId": "project-placeholder",
+            "gitBranch": "staging"
+          }
+        },
+        {
+          "status": 502,
+          "body": "delete unavailable"
+        }
+      ],
+      "referenceCaseId": "remove-provider-failure",
+      "deltas": [
+        "inspect-current-assignment-before-delete",
+        "typed-bounded-error"
+      ]
+    },
+    {
+      "id": "config-provider-failure",
+      "operation": "add",
+      "domain": "tools.example.com",
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "verified": true
+          }
+        },
+        {
+          "status": 200,
+          "body": {
+            "name": "tools.example.com",
+            "apexName": "example.com",
+            "verified": true,
+            "projectId": "project-placeholder",
+            "gitBranch": "staging"
+          }
+        },
+        {
+          "status": 503,
+          "body": "config unavailable"
+        }
+      ],
+      "referenceCaseId": "config-provider-failure",
+      "deltas": [
+        "captured-staging-branch",
+        "inspect-missing-target-metadata",
+        "typed-bounded-error"
+      ]
+    }
+  ]
+}

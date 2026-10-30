@@ -1,0 +1,97 @@
+{
+  "startedAt": 1790560073351,
+  "balanceBeforeMicroUsd": 25573008,
+  "manifest": {
+    "version": "0.0.0+d307daaf0c0d",
+    "agentVersion": "0.3.28"
+  },
+  "healthBefore": {
+    "agentVersion": "0.3.27",
+    "gatewayVersion": "0.0.0+d307daaf0c0d"
+  },
+  "savedTier": "openai-max",
+  "historyBefore": [
+    {
+      "seq": 1,
+      "sha256": "843f072c76e961cb25bfa5162ab5117eef7a23605daabddf1575e4fda30dda89"
+    },
+    {
+      "seq": 2,
+      "sha256": "e3af9ad1da851fa10949180ce1dc80501ab9d6dea5b63d84aba476fa176bf656"
+    },
+    {
+      "seq": 3,
+      "sha256": "e431e5d137b7871dcf3187aee7a3143c8607490b96b460a3964e6c0d38cdc3f0"
+    },
+    {
+      "seq": 4,
+      "sha256": "16bc55c29427fd185536e97989877eb9a0b9df2cef2067602ea8e249dab43993"
+    },
+    {
+      "seq": 5,
+      "sha256": "3b7d8096b40fb6f7598ae7e1f0cf5f380e8b3ef300a93c3f84431b956fea384c"
+    },
+    {
+      "seq": 6,
+      "sha256": "9bdc0ae99311e3a3e6ad41692e0b1dd5a97d6c89faef6b944ef422cbeb60ccf2"
+    },
+    {
+      "seq": 7,
+      "sha256": "af30659bd898b1a6e7de35b01b7bb9612df5e15a7e44f5a8634795e4cf800441"
+    },
+    {
+      "seq": 8,
+      "sha256": "910a5ac84314241fc6b3598101dcd141e00ab1bc4b96ea2b55e08f6a563e2317"
+    },
+    {
+      "seq": 9,
+      "sha256": "2d0140114c9ca9f173e27f4696fd87dab74bcf3ee68cb0d27a870884b770722d"
+    }
+  ],
+  "healthAfter": {
+    "agentVersion": "0.3.28",
+    "gatewayVersion": "0.0.0+d307daaf0c0d"
+  },
+  "preservedHistoryRows": 9,
+  "historyRows": 13,
+  "cursor": 13,
+  "billing": {
+    "execution": [
+      {
+        "id": "md7f2h3bf3nxtrcztyv9m5phyx8f86qz",
+        "upstreamGenerationId": "gen_01M3JV534HZJWB0HFAGAKPZA08",
+        "model": "openai/gpt-6-sol",
+        "tier": "openai-max",
+        "usage": {
+          "uncachedInputTokens": 22058,
+          "cachedInputTokens": 0,
+          "outputTokens": 7
+        },
+        "billedCostMicroUsd": 220790,
+        "debitMicroUsd": -220790
+      }
+    ],
+    "support": [
+      {
+        "id": "md75cgrqft748b3sd6wrq69ynh8f82jc",
+        "model": "google/gemini-embedding-2",
+        "tier": "openai-max",
+        "status": "settled"
+      },
+      {
+        "id": "md76wz0a3gztq1znv1mpb2sy4s8f8g52",
+        "model": "openai/gpt-6-luna",
+        "tier": "openai-max",
+        "status": "reconciling"
+      },
+      {
+        "id": "md73nvb5hxp6pdr3z19h5nr8658f9kp5",
+        "model": "google/gemini-embedding-2",
+        "tier": "openai-max",
+        "status": "reconciling"
+      }
+    ]
+  },
+  "balanceAfterMicroUsd": 25352185,
+  "status": "pass"
+}

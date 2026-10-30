@@ -1,0 +1,179 @@
+import { v } from 'convex/values'
+
+import { type Doc, type Id } from '@repo/backend/convex/_generated/dataModel'
+import { internalMutation, internalQuery } from '@repo/backend/convex/_generated/server'
+
+export const getDomainByName = internalQuery({
+  args: { domain: v.string() },
+  handler: async (ctx, args) => {
+    return ctx.db
+      .query('customDomains')
+      .withIndex('by_domain', q => q.eq('domain', args.domain))
+      .unique()
+  },
+})
+
+export const getById = internalQuery({
+  args: { domainId: v.id('customDomains') },
+  handler: async (ctx, args) => {
+    return ctx.db.get(args.domainId)
+  },
+})
+
+export const resolveByDomain = internalQuery({
+  args: { domain: v.string() },
+  handler: async (
+    ctx,
+    args,
+  ): Promise<{
+    orgSlug: string
+    appSlug: string
+    organizationId: Id<'organizations'>
+    status: Doc<'customDomains'>['status']
+  } | null> => {
+    const row = await ctx.db
+      .query('customDomains')
+      .withIndex('by_domain', q => q.eq('domain', args.domain))
+      .unique()
+    if (!row) return null
+
+    const org = await ctx.db.get(row.organizationId)
+    if (!org) return null
+
+    return {
+      orgSlug: org.slug,
+      appSlug: row.appSlug,
+      organizationId: row.organizationId,
+      status: row.status,
+    }
+  },
+})
+
+export const listForOrganization = internalQuery({
+  args: { organizationId: v.id('organizations') },
+  handler: async (ctx, args) => {
+    return await ctx.db
+      .query('customDomains')
+      .withIndex('by_organization', q => q.eq('organizationId', args.organizationId))
+      .collect()
+  },
+})
+
+export const listForApp = internalQuery({
+  args: {
+    organizationId: v.id('organizations'),
+    appSlug: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const rows = await ctx.db
+      .query('customDomains')
+      .withIndex('by_organization', q => q.eq('organizationId', args.organizationId))
+      .collect()
+    return rows.filter(r => r.appSlug === args.appSlug)
+  },
+})
+
+export const listByStatus = internalQuery({
+  args: {
+    status: v.union(
+      v.literal('pending'),
+      v.literal('verifying'),
+      v.literal('active'),
+      v.literal('failed'),
+    ),
+    limit: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    const q = ctx.db
+      .query('customDomains')
+      .withIndex('by_status', index => index.eq('status', args.status))
+    return args.limit ? await q.take(args.limit) : await q.collect()
+  },
+})
+
+export const createDomain = internalMutation({
+  args: {
+    organizationId: v.id('organizations'),
+    appSlug: v.string(),
+    domain: v.string(),
+    createdBy: v.optional(v.id('users')),
+  },
+  handler: async (ctx, args) => {
+    const existing = await ctx.db
+      .query('customDomains')
+      .withIndex('by_domain', q => q.eq('domain', args.domain))
+      .unique()
+    if (existing) {
+      throw new Error(`Domain ${args.domain} is already registered`)
+    }
+
+    return ctx.db.insert('customDomains', {
+      organizationId: args.organizationId,
+      appSlug: args.appSlug,
+      domain: args.domain,
+      status: 'pending',
+      createdBy: args.createdBy,
+      createdAt: Date.now(),
+    })
+  },
+})
+
+export const updateDomain = internalMutation({
+  args: {
+    domainId: v.id('customDomains'),
+    status: v.optional(
+      v.union(
+        v.literal('pending'),
+        v.literal('verifying'),
+        v.literal('active'),
+        v.literal('failed'),
+      ),
+    ),
+    vercelDomainId: v.optional(v.string()),
+    verification: v.optional(
+      v.array(
+        v.object({
+          type: v.string(),
+          domain: v.string(),
+          value: v.string(),
+          reason: v.optional(v.string()),
+        }),
+      ),
+    ),
+    conflicts: v.optional(
+      v.array(
+        v.object({
+          name: v.string(),
+          type: v.string(),
+          value: v.string(),
+        }),
+      ),
+    ),
+    lastError: v.optional(v.string()),
+    lastCheckedAt: v.optional(v.number()),
+    verifiedAt: v.optional(v.number()),
+    clearVerification: v.optional(v.boolean()),
+    clearConflicts: v.optional(v.boolean()),
+    clearError: v.optional(v.boolean()),
+  },
+  handler: async (ctx, args) => {
+    const { domainId, clearVerification, clearConflicts, clearError, ...rest } = args
+    const patch: Partial<Doc<'customDomains'>> = {}
+    for (const [key, value] of Object.entries(rest)) {
+      if (value !== undefined) {
+        ;(patch as Record<string, unknown>)[key] = value
+      }
+    }
+    if (clearVerification) patch.verification = undefined
+    if (clearConflicts) patch.conflicts = undefined
+    if (clearError) patch.lastError = undefined
+    await ctx.db.patch(domainId, patch)
+  },
+})
+
+export const deleteDomain = internalMutation({
+  args: { domainId: v.id('customDomains') },
+  handler: async (ctx, args) => {
+    await ctx.db.delete(args.domainId)
+  },
+})

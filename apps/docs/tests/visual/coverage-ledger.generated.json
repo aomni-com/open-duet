@@ -1,0 +1,167 @@
+[
+  {
+    "target": "app/agents/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/agents"
+  },
+  {
+    "target": "app/api-keys/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/api-keys"
+  },
+  {
+    "target": "app/apps/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/apps"
+  },
+  {
+    "target": "app/billing/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/billing"
+  },
+  {
+    "target": "app/desktop/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/desktop"
+  },
+  {
+    "target": "app/device-flow/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/device-flow"
+  },
+  {
+    "target": "app/errors/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/errors"
+  },
+  {
+    "target": "app/events/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/events"
+  },
+  {
+    "target": "app/file-activity/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/file-activity"
+  },
+  {
+    "target": "app/files/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/files"
+  },
+  {
+    "target": "app/getting-started/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/getting-started"
+  },
+  {
+    "target": "app/integrations/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/integrations"
+  },
+  {
+    "target": "app/layout.tsx#RootLayout",
+    "kind": "owned-by",
+    "owner": "route:/"
+  },
+  {
+    "target": "app/mirror-devices/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/mirror-devices"
+  },
+  {
+    "target": "app/not-found.tsx#NotFound",
+    "kind": "owned-by",
+    "owner": "route:/404"
+  },
+  {
+    "target": "app/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/"
+  },
+  {
+    "target": "app/pagination/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/pagination"
+  },
+  {
+    "target": "app/reference/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/reference"
+  },
+  {
+    "target": "app/reliability/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/reliability"
+  },
+  {
+    "target": "app/services/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/services"
+  },
+  {
+    "target": "app/sessions/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/sessions"
+  },
+  {
+    "target": "app/shares-publishes/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/shares-publishes"
+  },
+  {
+    "target": "app/sync/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/sync"
+  },
+  {
+    "target": "app/train/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/train"
+  },
+  {
+    "target": "app/workspaces/page.mdx#page-module",
+    "kind": "owned-by",
+    "owner": "route:/workspaces"
+  },
+  {
+    "target": "components/code-block.tsx#CodeBlock",
+    "kind": "owned-by",
+    "owner": "route:/"
+  },
+  {
+    "target": "components/desktop-example-source.tsx#DesktopExampleSource",
+    "kind": "owned-by",
+    "owner": "route:/desktop"
+  },
+  {
+    "target": "components/docs-shell.tsx#DocsNav",
+    "kind": "owned-by",
+    "owner": "route:/"
+  },
+  {
+    "target": "components/docs-shell.tsx#DocsShell",
+    "kind": "owned-by",
+    "owner": "route:/"
+  },
+  {
+    "target": "components/endpoint-reference.tsx#breakablePath",
+    "kind": "owned-by",
+    "owner": "route:/agents"
+  },
+  {
+    "target": "components/endpoint-reference.tsx#EndpointGroup",
+    "kind": "owned-by",
+    "owner": "route:/agents"
+  },
+  {
+    "target": "components/endpoint-reference.tsx#EndpointReference",
+    "kind": "owned-by",
+    "owner": "route:/agents"
+  },
+  {
+    "target": "components/endpoint-reference.tsx#SchemaDetails",
+    "kind": "owned-by",
+    "owner": "route:/agents"
+  }
+]

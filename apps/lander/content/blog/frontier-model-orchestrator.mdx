@@ -1,0 +1,189 @@
+---
+title: 'Orchestrator-Worker LLMs vs. Model Routing: Which One Actually Cuts Your AI Costs?'
+metaTitle: 'Orchestrator-Worker LLM vs. Model Routing: Cost Guide'
+description: 'Orchestrator-worker patterns boost quality, not cost. Model routing cuts spend. Anthropic and RouteLLM data on which lever to pull, and when.'
+date: '2026-07-18'
+updatedAt: '2026-07-18'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/10.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'ai'
+tags:
+  [
+    'orchestrator worker llm',
+    'multi model routing',
+    'llm cost reduction',
+    'llm orchestration',
+    'ai models',
+  ]
+type: 'article'
+image: '/blog/frontier-model-orchestrator/cover.png'
+relatedPosts:
+  - 'how-to-choose-the-right-ai-model-for-your-business'
+  - 'how-we-benchmark-ai-models-on-real-work'
+  - 'grok-4-5-vs-claude-opus-4-8'
+cta:
+  title: 'Configure model tiers, not router projects.'
+  subtitle: 'Duet gives you three quality tiers and routes each task to the right model inside the one you pick — billed at a flat rate per tier, not per seat.'
+  buttonText: 'See Duet pricing'
+  href: '/pricing'
+---
+
+> **The orchestrator-worker pattern uses a capable "frontier" model to decompose a complex task, delegate subtasks to cheaper worker models, and synthesize the results. It is a quality/capability pattern — not, by itself, a cost-saving one. The cost savings come from a separate mechanism, model routing: sending easy requests to a cheap model and hard ones to a strong model.**
+
+Most people hear "orchestrator" and assume cheaper. It doesn't. Here's what each mechanism actually does, what it costs, and which one to reach for.
+
+## What is the orchestrator-worker pattern?
+
+The orchestrator-worker pattern is one frontier model breaking a complex task into pieces, handing each to a worker model, and stitching the results into one answer. [Anthropic's "Building effective agents" defines the orchestrator-worker pattern](https://www.anthropic.com/engineering/building-effective-agents) as the canonical version of this architecture.
+
+A central LLM — the orchestrator — dynamically decomposes the task, writes a self-contained brief for each subtask, dispatches it to worker LLMs, then synthesizes their outputs. Anthropic's production version is what it calls a "multi-agent system": one lead model plus subagents, same architecture, different name.
+
+That's narrower than the broader term LLM orchestration usually covers. This article is specifically about who does which work and what that costs — not the wider stack of evals, memory, and guardrails "orchestration" sometimes gets stretched to mean.
+
+## Is an orchestrator the same thing as a model router?
+
+No. Orchestrator-worker is a quality lever; model routing is a cost lever. An orchestrator answers "how do I do work one agent can't handle alone?" by fanning one task out to many models. A router answers "which single model should answer this request?" by picking exactly one. Fan-out versus single-pick is the whole distinction.
+
+![Side-by-side diagram. Left: the orchestrator-worker pattern — a frontier model decomposes one complex task into subtasks handled by several worker models, then synthesizes the results; it raises quality but uses about 15× more tokens than a single chat. Right: model routing — each request is sent to exactly one of a strong or cheap model based on difficulty; it holds a chosen quality floor while cutting cost 1.4 to 3.7 times.](/blog/frontier-model-orchestrator/diagram-two-mechanisms.png)
+
+| Dimension         | Orchestrator-worker                                                                                          | Model routing                                                                         |
+| ----------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| Question answered | How do I do work one agent can't?                                                                            | Which model should answer this one request?                                           |
+| Mechanism         | Decompose → delegate → synthesize                                                                            | Classify → send to exactly one model                                                  |
+| Models per task   | Many (fan-out)                                                                                               | One per request                                                                       |
+| Effect on quality | Raises the ceiling — +90.2% outperformance vs. a single-agent baseline on Anthropic's internal research eval | Holds a chosen floor — 87–95% of strong-model quality (RouteLLM, benchmark-dependent) |
+| Effect on tokens  | Increases — roughly 15× a single chat turn                                                                   | Decreases — 1.41×–3.66× cheaper at that quality floor (RouteLLM)                      |
+| Effect on latency | Cuts wall-clock time via parallel work — up to 90% faster on complex research                                | Adds a small classification step; otherwise unchanged                                 |
+| Best fit          | Ambiguous, parallelizable, high-value tasks                                                                  | Heterogeneous traffic with a measurable easy/hard split                               |
+| Primary evidence  | Anthropic, multi-agent research system                                                                       | RouteLLM (arXiv:2406.18665)                                                           |
+
+They compose — an orchestrator's own workers can each be routed to a cheap model for their bounded subtask. But composition doesn't merge the claims: two separate levers, not two names for the same thing.
+
+## Does orchestrator-worker reduce LLM cost?
+
+Usually not — it typically costs more. Orchestration is priced in tokens, and decomposition multiplies them: Anthropic's own numbers put agents at roughly 4× the tokens of a single chat turn, multi-agent systems at roughly 15×. Every worker gets its own full context window, the lead plans and re-reads results, and synthesis bills on top.
+
+Orchestration is the price of a capability a single agent can't reach — not a savings mechanism. If someone pitches "add an orchestrator to cut your bill," that's the exact conflation this article exists to correct.
+
+## What did Anthropic actually measure?
+
+A multi-agent system with Claude Opus 4 as the lead and Claude Sonnet 4 subagents [outperformed single-agent Claude Opus 4 by 90.2% on Anthropic's internal research eval](https://www.anthropic.com/engineering/multi-agent-research-system) — using roughly 15× the tokens of a single chat turn to get there.
+
+That gain wasn't clever delegation so much as tokens: three factors explained 95% of the performance variance on Anthropic's BrowseComp evaluation, with token usage alone explaining 80% of it. Multi-agent architecture is, mechanically, a way to spend past one context window's limit.
+
+Anthropic names where the pattern is a poor fit — and where the 90.2% figure doesn't transfer:
+
+- **Most coding tasks** — fewer subtasks that can genuinely run in parallel.
+- **Work needing shared context across agents**, or heavy dependencies between them.
+- **Anything requiring real-time delegation** — agents aren't yet reliably good at it.
+
+## How much can model routing actually save?
+
+[RouteLLM achieved 3.66× cost savings at 95% of GPT-4 quality on MT-Bench](https://arxiv.org/html/2406.18665v4) — under 2024 pricing (GPT-4-1106 at $24.70 per million tokens vs. Mixtral 8x7B at $0.24). Use the ratio, not the dollar figures; prices have moved since.
+
+![Scatter chart of RouteLLM results: cost versus quality retained relative to an all-GPT-4 baseline. MT-Bench sits at 3.66× cheaper and 95% quality, GSM8K at 1.49× and 87%, MMLU at 1.41× and 92%, with a dashed all-GPT-4 reference point at 1× and 100%. Savings are benchmark-dependent, not a universal multiplier.](/blog/frontier-model-orchestrator/chart-routellm-tradeoff.png)
+
+| Benchmark                  | Cost cut vs. all-GPT-4 | Quality retained |
+| -------------------------- | ---------------------: | ---------------: |
+| MT-Bench (open-ended chat) |                  3.66× |              95% |
+| GSM8K (math)               |                  1.49× |              87% |
+| MMLU (knowledge)           |                  1.41× |              92% |
+
+Savings are benchmark-dependent, not a fixed multiplier — the easier your workload looks to a small model, the steeper your curve. RouteLLM's best router (matrix factorization, trained on 65K Chatbot Arena comparisons) generalized to Claude 3 and Llama 3.1 pairs it never trained on: "how hard is this query" is learnable structure, not model trivia.
+
+That's what multi model routing means: one small classifier deciding, per request, whether a cheap or strong model answers — never a group of models on one task together. For a narrower look at [routing within the Claude model family](/guides/claude-opus-vs-sonnet-model-routing) — Haiku, Sonnet, and Opus against each other — see our related guide; it's conceptual, not a description of any product's automation.
+
+## How do you decide which tasks go to which model tier?
+
+Go multi-agent only if all four conditions hold. Otherwise, tier your tasks and route down wherever a cheap model already clears your bar.
+
+Reach for orchestrator-worker only when:
+
+1. Subtasks can't be listed in advance (otherwise, just fix-parallelize them).
+2. The work is breadth-first — workers run in parallel, not sequentially.
+3. A correct answer is worth comfortably more than ~15× chat tokens.
+4. Each worker gets a self-contained brief, with no shared-context dependency.
+
+Miss one, and Anthropic and OpenAI agree on the fallback: stay with a single well-prompted agent.
+
+![Decision flowchart. Go multi-agent only if all four hold: subtasks can't be enumerated in advance, the work is parallelizable, the answer's value exceeds about 15× chat tokens, and each worker can get a self-contained brief. Otherwise stay single-agent. Below: a three-tier mapping — frontier for ambiguous judgment, mid for bounded reasoning, cheap for extraction and formatting — with routing down allowed only when measured cheap-tier success meets the quality floor.](/blog/frontier-model-orchestrator/diagram-decision-framework.png)
+
+| Tier                          | Task shape                                    | Example                                            |
+| ----------------------------- | --------------------------------------------- | -------------------------------------------------- |
+| Frontier / orchestrator-class | Ambiguous decomposition, high-stakes judgment | Research strategy, "should we approve this"        |
+| Mid / balanced                | Bounded reasoning, clear success criteria     | Drafting from a brief, single-file code diffs      |
+| Cheap / fast                  | Extraction, classification, formatting        | "Pull the dates from this email," reformat to JSON |
+
+OpenAI's guidance is blunt: prototype every task with your most capable model to set a baseline, then swap in smaller models and keep whichever pass your evals.
+
+This mapping is most of the real work behind [choosing the right AI model for your business](/blog/how-to-choose-the-right-ai-model-for-your-business). Measure each tier the way we describe in [how we benchmark models on real work](/blog/how-we-benchmark-ai-models-on-real-work): task success, total cost including retries, and escalation rate, on 30–50 representative tasks.
+
+## What does the math actually look like?
+
+Run the numbers on published prices, not vibes. This is arithmetic, not a benchmark — using Anthropic's live API rates as of July 2026.
+
+![Bar chart of Anthropic API input prices: Opus 4.8 $5, Sonnet 5 $2, Haiku 4.5 $1 per million tokens — a 5× spread. A blended example at 20/30/50 tier mix costs $2.10 per million versus $5.00 all-Opus, a 2.4× reduction, labeled as arithmetic on published prices, not a benchmark. A paired glyph shows orchestration doing the opposite: one chat's tokens C become about 15C in a multi-agent run.](/blog/frontier-model-orchestrator/diagram-token-math.png)
+
+| Model                                 |     Input |     Output |
+| ------------------------------------- | --------: | ---------: |
+| Opus 4.8                              | $5 / MTok | $25 / MTok |
+| Sonnet 5 (intro, through Aug 31 2026) | $2 / MTok | $10 / MTok |
+| Haiku 4.5                             | $1 / MTok |  $5 / MTok |
+
+Opus 4.8 to Haiku 4.5 is a 5× spread on one vendor's price list. RouteLLM's 2024 experiment used a roughly 100× cross-vendor spread (GPT-4-1106 vs. Mixtral 8x7B) — part of why its savings looked so large. Smaller spread, shallower savings curve, same routing accuracy.
+
+Blend your traffic across tiers and savings show up directly. At a 20/30/50 split across Opus, Sonnet, and Haiku input prices: `0.2×$5 + 0.3×$2 + 0.5×$1 = $2.10 per million tokens`, against $5.00 all-Opus — a 2.4× reduction before retries. That's arithmetic on prices published in July 2026, not a measured benchmark; your traffic mix will move the number.
+
+Keep the other side of the ledger in view: run that same task as a multi-agent system instead, and Anthropic's data says budget about 15× the tokens, not a fraction. Routing and orchestration pull your bill in opposite directions.
+
+## When is a premium seat still the right call?
+
+It depends on who's using it. A flat-rate seat can look cheaper for one heavy user. For a whole team, a monthly plan with included credits and a paid reserve for overage is usually the cheaper shape, because the overage is priced rather than bought a seat at a time.
+
+| Who's using it             | Premium seat (flat rate)                                            | Raw API (pay per token)                                         | Tiered workspace (routed by role)                                          |
+| -------------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| One heavy interactive user | Wins — metered usage would likely exceed the seat price             | Depends on volume; can spike past seat cost fast                | Depends on mix — overkill if the work is frontier-grade all day anyway     |
+| Heterogeneous team         | Loses by default — most seats sit idle or underused most of the day | Depends on mix — no floor on a runaway single request           | Wins — frontier only where judgment is scarce, cheap tiers absorb the rest |
+| Production workload        | Loses by default — seats don't scale with request volume            | Depends on mix — needs its own routing discipline to stay cheap | Wins — cost tracks usage per model, matched to task tier                   |
+
+None of that makes a $200-class seat a bad deal for one person running interactive work all day. It's the wrong _default_ for a team with a mix of trivial and hard work, where you'd otherwise pay the frontier rate for every role.
+
+## How do you actually build this without a router project?
+
+You don't build a router. You configure tiers once, in the same place you already define the work.
+
+Cross-vendor choices work the same way: [route between two frontier models without lock-in](/blog/grok-4-5-vs-claude-opus-4-8) for the orchestrator role, or [pick the model and thinking depth per agent](/blog/claude-opus-4-7-gpt-5-4-extended-thinking-duet) for one step — neither needs new infrastructure.
+
+In practice, most teams don't want to write a router — they want the choice already sitting in their tools. That's the honest version of what Duet does today: model tiers (frontier, balanced, fast) are a first-class part of the workspace config, not a separate infrastructure project.
+
+Assign the orchestrator role to a frontier model, pin the bounded worker steps to a balanced or fast tier, and every model shares the same files, memory, and work history — you're not re-explaining context every time you change which model handles a step.
+
+What Duet doesn't do is auto-classify every request by difficulty and route it for you; there's no learned router sitting in front of the harness. The tiering is a decision you make once, in config, not a judgment call the system makes per query.
+
+Usage is billed at a flat rate per quality tier rather than per seat, so the tier you choose and the bill you get are the same artifact. See [Duet's pricing page](/pricing) for current rates.
+
+## Frequently asked questions
+
+**Is orchestrator-worker the same as multi-agent systems?**
+Yes. "Multi-agent system" is Anthropic's term for a production version of the orchestrator-worker pattern — a lead model plus subagents. Same architecture, two names.
+
+**Does adding more agents always improve output quality?**
+No. Anthropic saw early agents spawn 50 subagents for a simple query, and [a 2026 Lancaster University study of a 26-model orchestrator](https://arxiv.org/html/2512.01099v2) found over-decomposition raised resource cost from 65 J to 224 J — roughly 3.4× — on one task, while accuracy collapsed to 20.1% versus 92.3% for the correct single-task run; popularity-biased selection also picked the same dominated model every time for image captioning. More models, and letting a model pick its own teammates, are liabilities unless the task is genuinely parallel and measured.
+
+**What's the real cost difference between orchestration and routing?**
+Orchestration costs about 15× a single chat turn's tokens — the lead's plan, every worker's context, and synthesis all bill separately. Routing goes the other way: one model per request, so cost drops — RouteLLM measured 3.66× lower cost at 95% of GPT-4 quality on MT-Bench, under 2024 pricing.
+
+**Can you use orchestration and routing together?**
+Yes — they compose. A frontier model acts as orchestrator while each worker's own call is routed to a cheap or mid-tier model for its bounded subtask. One mechanism structures the task; the other picks which model answers a given call.
+
+**Do I need the $200/month plan to use a frontier model as an orchestrator?**
+Not necessarily. A premium seat wins for one heavy user whose metered usage would cost more. For a mixed-workload team, a frontier orchestrator plus cheaper-tier workers, billed by usage, is usually the better-structured spend — just the wrong default for a heterogeneous team.
+
+**When should I not bother with an orchestrator-worker setup?**
+When subtasks can't be enumerated in advance, the work isn't genuinely parallelizable, you can't give each worker a self-contained brief, or a more complete answer isn't clearly worth ~15× the tokens. Anthropic and OpenAI both recommend maximizing one well-prompted agent first.
+
+**How much can model routing actually save on my workload?**
+It depends on task distribution, not a fixed number — RouteLLM ranged from 1.41× at 92% quality on MMLU to 3.66× at 95% of GPT-4 quality on MT-Bench, under 2024 pricing. Run evals on 30–50 representative tasks and measure cost per successful outcome, including retries.

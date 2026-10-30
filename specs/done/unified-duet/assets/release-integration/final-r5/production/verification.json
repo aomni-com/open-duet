@@ -1,0 +1,245 @@
+{
+  "status": "production R5 and authorized managed-app readiness verified",
+  "observedAt": "2026-10-05T03:57:18.599621+00:00",
+  "mainRevision": "da3779eb8e153a57c6f7e7f4d28ff7c75afd336a",
+  "runtimeVersion": "0.0.0+1f6cae5ff4257948977b076170e652555fd019511c47fb327685f1c6335094ed",
+  "previousVersion": "0.0.0+8d97a2fa2f3bb4ab69a2e8e494cd9d50cdd02002c3667b174c8cb242db4ed7ec",
+  "attachments": 14,
+  "unattached": 0,
+  "backendTotalVmLessRows": 812,
+  "actualBootCertified": 14,
+  "finalHealthCertifiedNoUpdateInFlight": 14,
+  "physicalCurrentArtifactsVerified": 112,
+  "physicalPreviousArtifactsVerified": 112,
+  "changedArtifacts": [
+    "duet"
+  ],
+  "osBootsPreservedFromR2": 14,
+  "independentProcessesPreserved": 31,
+  "independentProcessHosts": 5,
+  "managedAppConfigsUnchangedFromR2": 78,
+  "managedAppTCPAccepting": 78,
+  "freshRequiredReadyReconcileInvoked": true,
+  "boundaries": [
+    "Production census/backend identity query; read-only SSH physical inventories, boot and process metadata; authorized existing AppSupervisor reconciliation after all R5 boot certifications",
+    "All app config hashes unchanged against production R2 and before/after reconciliation; no app config writes or forced gateway/VM restarts",
+    "All 31 original independent process identities and service identities observed unchanged after reconciliation; no customer independent service control, signals or provisioning",
+    "Required-ready supervisor200 plus TCP78 proves process readiness and socket reachability; no application business-flow assertion",
+    "Rollback R4 has actual historical boot certification on the same14 preserved OS boots; R5 only duet artifact changes",
+    "Anonymous served-manifest401 was expected; authenticated manifest read only within existing VM process, without credential export",
+    "Initial optional post-reconcile concurrent SSH observations hit banner-exchange transport timeouts; preserved failed logs; serial retry passed without another reconciliation or service action"
+  ],
+  "physicalRows": [
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    },
+    {
+      "vmName": "workspace-redacted",
+      "bootPreserved": true,
+      "currentArtifacts": 8,
+      "previousArtifacts": 8,
+      "changedArtifacts": [
+        "duet"
+      ],
+      "actualR4PreviouslyCertified": true
+    }
+  ],
+  "evidenceSha256": {
+    "apps-after.json": "b6facaa377578b3eab6b8e854e68640ef0dd6b344123c415a68ecc06560b2176",
+    "apps-after.log": "e1df63c912b5599317aa284735b531b27be3417105fa65974657a8253075706c",
+    "apps.json": "85b2164145861b1e73955cd087f2b8d571630e4b53c1f5e64b688eaee6e63904",
+    "apps.log": "af0c0b498a6820b2e925ed8426220a599c3a6dc29f8a31e9900c9633e2584b0f",
+    "background/workspace-redacted.json": "4929f0964b7587f76d9745c41ab64131ddd9b20b809a82a45190f7f46648d411",
+    "background/workspace-redacted.json": "204258081535439d95956e6ecd4dc50a9a159437db8022c650ae4f45f20de7b9",
+    "background/workspace-redacted.json": "b0d6d22092fc2a00f1f0253f7635ce39551897c7a8a47c185f9f5fc1650533bc",
+    "background/workspace-redacted.json": "5c64c552ea5c10857956e9aef0bff05e04e4918dcd77022c7feeedb56be065b1",
+    "background/workspace-redacted.json": "e6bd49aba14e6dd49f3f1c92b47c97c3b265411ef4f3bb0bd64309b457d9503d",
+    "background/summary.json": "bf7e8153dee1b8d2c009f8837e3460bb967eaad798016e4f249992f439bcba56",
+    "background.log": "e874b8206708d9c0c6791301c2328817edcb43c668ca25597e94eec604e122de",
+    "background.py": "445aa33502842483b10df2062e48633dfa97134aaab756b9a418f2b9cec86cc1",
+    "census.json": "e03a072e961c4d193eb47a2e6565559610bf46eb4ad2861efdcaf0eb626b97b3",
+    "deployment.json": "fc853b36510a23e4e071e4e873afcc6e7bc82a4b45565300778aa20467aeadda",
+    "post-reconcile/background/workspace-redacted.txt": "ffbd80e21248dd87b3b1d86cc08c25fb462fed48d3db483fc4b9eb9ae49740e7",
+    "post-reconcile/background/workspace-redacted.txt": "a5e5d3ee99f75ec2bfa99cae7cb7daa2059e1c87a6b3c6deeec1f816ed56b3c7",
+    "post-reconcile/background/workspace-redacted.txt": "4d366deb3c2b8b5e5972fbd50931db060c99ffa4ebe93d22be97497e0165a305",
+    "post-reconcile/background/workspace-redacted.txt": "2738632e89f6465c3805f4ae09b44c7a80c4e556ffef67f9bd2f8d82d25e5c77",
+    "post-reconcile/background.log": "88a0515411f9b2fea3ee04cc1200d8e32a8212e05847d4270771b57416119f22",
+    "post-reconcile/background.py": "445aa33502842483b10df2062e48633dfa97134aaab756b9a418f2b9cec86cc1",
+    "post-reconcile/census.json": "e03a072e961c4d193eb47a2e6565559610bf46eb4ad2861efdcaf0eb626b97b3",
+    "post-reconcile/readiness.log": "2b8d5abf199cc620229d7e899422f616c2edb972298722eb9552a444e6b40a52",
+    "post-reconcile/readiness.py": "06f7880e2b9de54d66f4ae60e17d474401e61f3b7fcfc3a192467078de016627",
+    "post-reconcile-retry/background/workspace-redacted.json": "370790ca4bfa25b761f6daf7c7947ffd8acc36c79001aedd497323045605b130",
+    "post-reconcile-retry/background/workspace-redacted.json": "f318193b954d9bc6e61f220ef56f8f5232fb177c14d8011d862a8853fea792b7",
+    "post-reconcile-retry/background/workspace-redacted.json": "3ae111635281109d44689be02e21d54b397c6598eb40a734d08c3821efc1644c",
+    "post-reconcile-retry/background/workspace-redacted.json": "25e0662eea0bcee912c3475da063c89e8a8e4ac03f720aa09565cd20e95954f1",
+    "post-reconcile-retry/background/workspace-redacted.json": "2a181164449b3ce4d43b8e4c56f77e6d256fedee1e9e842110ad3a9c519beb04",
+    "post-reconcile-retry/background/summary.json": "59d74d76048a0847f71109e720368a6945b2c47f59c9ac80dcadc8426fa6b2e1",
+    "post-reconcile-retry/background.log": "e2d79e9f5bff3037cd415c5fb89a7b1f6def9540a19b84cdd6366ad87b3b0e1e",
+    "post-reconcile-retry/background.py": "1fd1ed3f74df0549fb39e0746a140b9f76c8fce5caa437dd5692599462072506",
+    "post-reconcile-retry/census.json": "e03a072e961c4d193eb47a2e6565559610bf46eb4ad2861efdcaf0eb626b97b3",
+    "post-reconcile-retry/readiness.json": "5dad9e28005d823ae66ba77b50ac7c1df1b0d040bf27b7bfb4fcf481f7ac3103",
+    "post-reconcile-retry/readiness.log": "1e9eb3f07937c2064596c197d107d41d93860e3c2f8ab92277c08744805fab70",
+    "post-reconcile-retry/readiness.py": "d765fbe858b172c600b7ab572b7a63725ccc4f77e6aa7c36d3c2e8d2d69fe9e0",
+    "post-reconcile-retry/served-runtime.json": "03f2f51d6952e0a6c018dbed3bc19b5dac980ad6baa438596b06a7ec51c9a806",
+    "producers/unified-duet-background-preservation-audit.py": "e80099179657f5120bd20a4251952696398d3b440da3dcdf6a332b32ed01a701",
+    "producers/unified-duet-final-fleet-census.ts": "6716442e55e291cad7f6c2bb5f8ce118c84dacc746fb3bb996682f876834b014",
+    "producers/unified-duet-main-managed-app-sanity.ts": "054b63686666be1282fe6ae9c86286003c0cf9e9ca1fac25c2aa6892664b04e8",
+    "producers/unified-duet-observe-main-fleet.py": "3083e75ec103e7e472720a3ef567df16645bf44f57ff7f34beee9a9e1f10fdb2",
+    "producers/unified-duet-read-main-runtime.py": "898189cfa5144a79509b74bbc29e7af5686cad1f2e893aaa81f8a74567ce250c",
+    "readiness.json": "88cd4812e8c000e72844f83706fa129b7b2acecdd7859a865da4dd2e0e64e48c",
+    "readiness.log": "1e9eb3f07937c2064596c197d107d41d93860e3c2f8ab92277c08744805fab70",
+    "readiness.py": "06f7880e2b9de54d66f4ae60e17d474401e61f3b7fcfc3a192467078de016627",
+    "runtime/workspace-redacted.json": "927fc50600e52e1b7bb3ecafdff72ef56f1326e324ff3aa1585ac044a67baf3b",
+    "runtime/workspace-redacted.json": "49ba765d010982b93bcf4e22f0ebeba6d5dc61dc15c56635eae4a1383e1515e9",
+    "runtime/workspace-redacted.json": "0fc3e9efeaaad8bf7e051ba78f18c4e3539b9c91e170d357e069cb51c0b90335",
+    "runtime/workspace-redacted.json": "29e1d263a95d79d7b2d9074b82f46131f648455c4cc9004f504c287977c79c3f",
+    "runtime/workspace-redacted.json": "9f1c892f77af42d7ec80c0009abe2f6a06e874f720cd12548b5d05d36170cdc4",
+    "runtime/workspace-redacted.json": "0c1623178bec74282e9ace7b04c39633f387a1df006338335472f494729f8f58",
+    "runtime/workspace-redacted.json": "c281b4cec39210719baa274827d40a01195b70ef4b7276172a079e35f0c615b0",
+    "runtime/workspace-redacted.json": "7a2a16064bb7d356896d45ecda2ad3828fd4fdae1f514bb728f094d2faaea3ee",
+    "runtime/workspace-redacted.json": "84d02ae5433c98faa617e50d0cdf3163632ed2cb537f86b566d4b72c861315b3",
+    "runtime/workspace-redacted.json": "1462e0ceaf56266a878df8e25bb179db306730d2fc7ae22a92c2c0ff033e1993",
+    "runtime/workspace-redacted.json": "e9fd1e6b7b306d4815a7e3998c3c1ad8c3375883cb15e2a0c88bd61291f0d46c",
+    "runtime/workspace-redacted.json": "2cd10d99055a5ac2b9d7a5bbb667f26b057a07cb050cc86922d266be89132dbd",
+    "runtime/workspace-redacted.json": "433d6d0418327b11d3ea21c7f9e6d5461d9d284dc4a7da625642af7bf056a122",
+    "runtime/workspace-redacted.json": "9811cfeaa7001965d2b3e6c2bdc60a6257e2889e7b75f932bae5878beee800ce",
+    "runtime/summary.json": "b019043325e455723d0e20199acd5b0e8b768a5d2524f7116dfbbf66412aa626",
+    "runtime.log": "680328d77090b4bd7e919dc9fb9718fabbe645ed777054f84eeb4f7e18e46702",
+    "served-runtime.json": "03f2f51d6952e0a6c018dbed3bc19b5dac980ad6baa438596b06a7ec51c9a806",
+    "verification-readonly.json": "da292e13e79c05f6b6cc462b1ce4a2484cd80f05be89eef49b5bc7bc700b8503",
+    "verify-after.py": "8e02ef24479add2379c249224ecf9bdd9c1976eb9359f5b412f999c5292c2462",
+    "verify.py": "cdcca03033741a4775e5fdfd54beed487306adfefd94093df2cb9f2225978579"
+  },
+  "managedAppFreshRequiredReadyPassed": 78,
+  "freshRequiredReadyHostsPassed": 14,
+  "postReconcileManagedAppTCPAccepting": 78,
+  "postReconcileIndependentProcessesPreserved": 31,
+  "postReconcileHealthCertifiedNoUpdateInFlight": 14
+}

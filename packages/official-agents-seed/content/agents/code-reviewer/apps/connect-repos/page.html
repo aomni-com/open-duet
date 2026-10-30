@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Review scope</title>
+    <script>
+      const requestedTheme = new URLSearchParams(location.search).get('theme')
+      if (requestedTheme === 'light' || requestedTheme === 'dark') {
+        document.documentElement.dataset.theme = requestedTheme
+      }
+    </script>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --canvas: #f4f1ec;
+        --surface: #fffdf9;
+        --ink: #1c1a24;
+        --muted: #6b6878;
+        --line: rgba(28, 26, 36, 0.14);
+        --accent: #4f46b8;
+        --accent-soft: #e7e5fb;
+        --good: #12805c;
+        --good-soft: #d9f3e7;
+        --warn: #b25e09;
+        --warn-soft: #fdeed8;
+        --shadow: 0 18px 50px rgba(37, 33, 66, 0.09);
+      }
+      :root[data-theme='dark'] {
+        --canvas: #131219;
+        --surface: #1d1c26;
+        --ink: #efedf6;
+        --muted: #a3a0b3;
+        --line: rgba(239, 237, 246, 0.14);
+        --accent: #a5a0f2;
+        --accent-soft: #2c2a4a;
+        --good: #55d6a4;
+        --good-soft: #17382c;
+        --warn: #f0a558;
+        --warn-soft: #40301a;
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) {
+          --canvas: #131219;
+          --surface: #1d1c26;
+          --ink: #efedf6;
+          --muted: #a3a0b3;
+          --line: rgba(239, 237, 246, 0.14);
+          --accent: #a5a0f2;
+          --accent-soft: #2c2a4a;
+          --good: #55d6a4;
+          --good-soft: #17382c;
+          --warn: #f0a558;
+          --warn-soft: #40301a;
+          --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        min-height: 100vh;
+        margin: 0;
+        overflow-x: hidden;
+        background: var(--canvas);
+        color: var(--ink);
+        font: 16px/1.55 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+      button { color: inherit; font: inherit; }
+      .shell { width: min(100% - 2rem, 42rem); margin: 0 auto; padding: 1.6rem 0 4rem; }
+      header { padding: .6rem 0 1.4rem; }
+      h1 { margin: 0 0 .45rem; font: 600 clamp(1.7rem, 5vw, 2.3rem)/1.1 ui-serif, Georgia, serif; letter-spacing: -.03em; }
+      .lede { margin: 0; color: var(--muted); }
+      .banner { display: none; margin: 0 0 1rem; padding: .85rem 1rem; border-radius: .9rem; background: var(--warn-soft); color: var(--warn); font-weight: 600; }
+      .banner.show { display: block; }
+      .done-banner { display: none; align-items: center; gap: .6rem; margin: 0 0 1rem; padding: .95rem 1.1rem; border-radius: .9rem; background: var(--good-soft); color: var(--good); font-weight: 650; }
+      .done-banner.show { display: flex; }
+      .card { margin-bottom: 1rem; border: 1px solid var(--line); border-radius: 1.15rem; background: var(--surface); box-shadow: var(--shadow); }
+      .card-head { padding: 1.05rem 1.15rem .35rem; }
+      .step { color: var(--accent); font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+      h2 { margin: .2rem 0 .2rem; font-size: 1.15rem; }
+      .hint { margin: 0; color: var(--muted); font-size: .88rem; }
+      .card-body { padding: .7rem .7rem 1rem; }
+      .provider, .choice { display: flex; align-items: center; gap: .85rem; min-height: 3.4rem; padding: .55rem .45rem; border-radius: .85rem; }
+      .provider + .provider, .choice + .choice { border-top: 1px solid var(--line); border-radius: 0; }
+      .provider-name { flex: 1; min-width: 0; font-weight: 640; }
+      .provider-note { display: block; color: var(--muted); font-size: .8rem; font-weight: 450; }
+      .pill { flex: 0 0 auto; padding: .28rem .7rem; border-radius: 999px; font-size: .78rem; font-weight: 700; }
+      .pill.on { background: var(--good-soft); color: var(--good); }
+      .pill.waiting { background: var(--warn-soft); color: var(--warn); }
+      .connect-button { flex: 0 0 auto; min-height: 2.6rem; padding: .45rem 1rem; border: 1px solid var(--line); border-radius: .8rem; background: var(--accent); color: #fff; font-weight: 650; cursor: pointer; }
+      :root[data-theme='dark'] .connect-button { color: #161520; }
+      @media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .connect-button { color: #161520; } }
+      .choice { cursor: pointer; }
+      .choice input { width: 1.35rem; height: 1.35rem; margin: 0; accent-color: var(--accent); }
+      .choice-label { flex: 1; min-width: 0; font-weight: 600; }
+      .choice-detail { display: block; color: var(--muted); font-size: .8rem; font-weight: 450; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .tag { display: inline-block; margin-left: .45rem; padding: .1rem .45rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: .62rem; font-weight: 800; text-transform: uppercase; vertical-align: .1em; }
+      .count { margin-left: auto; color: var(--muted); font-size: .8rem; }
+      .empty { padding: 1.1rem .45rem; color: var(--muted); }
+      .save-row { display: flex; align-items: center; gap: .8rem; padding: .35rem 1.15rem 1.15rem; }
+      .save-button { min-height: 2.8rem; padding: .55rem 1.3rem; border: 0; border-radius: .85rem; background: var(--accent); color: #fff; font-weight: 700; cursor: pointer; }
+      :root[data-theme='dark'] .save-button { color: #161520; }
+      @media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .save-button { color: #161520; } }
+      :root .save-button:disabled { cursor: default; opacity: 1; border-color: var(--line); background: color-mix(in srgb, var(--ink) 7%, transparent); color: var(--muted); }
+      .save-note { color: var(--muted); font-size: .85rem; }
+      footer { color: var(--muted); font-size: .85rem; }
+      @media (max-width: 30rem) {
+        .provider { align-items: stretch; flex-direction: column; }
+        .provider .connect-button, .provider .pill { align-self: flex-start; }
+        .save-row { flex-wrap: wrap; }
+        .save-row .save-button { width: 100%; }
+        .save-row .save-note { width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <h1>The projects your code reviewer watches</h1>
+        <p class="lede">
+          Your code reviewer reads changes before they ship. This page is where you see whether
+          GitHub is authorized and pick the projects it should watch.
+        </p>
+      </header>
+
+      <div id="error" class="banner"></div>
+      <div id="done" class="done-banner"></div>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="step">Step 1</span>
+          <h2>Where your code lives</h2>
+          <p class="hint">Authorizing happens in chat — ask your agent and it will walk you through it. Then check again here.</p>
+        </div>
+        <div class="card-body">
+          <div class="provider">
+            <span class="provider-name">GitHub<span id="connection-hint" class="provider-note"></span></span>
+            <span id="connection-pill" class="pill waiting">Checking…</span>
+            <button id="check" class="connect-button" type="button">Check again</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="step">Step 2</span>
+          <h2>Pick the projects to review</h2>
+          <p class="hint">Tick every project your agent should keep an eye on. Come back here whenever you want to change that.</p>
+        </div>
+        <div id="repos" class="card-body"><div class="empty">Once GitHub is authorized, your projects appear here.</div></div>
+        <div class="save-row">
+          <button id="finish" class="save-button" type="button" disabled>Save my choices</button>
+          <span id="finish-reason" class="save-note"></span>
+          <span id="count" class="count"></span>
+        </div>
+      </section>
+
+      <footer>Your agent only reads your code to review it. It never pushes, never changes a branch, and never opens anything on your behalf.</footer>
+    </main>
+
+    <script type="module">
+      const pill = document.querySelector('#connection-pill')
+      const hint = document.querySelector('#connection-hint')
+      const checkButton = document.querySelector('#check')
+      const reposNode = document.querySelector('#repos')
+      const countNode = document.querySelector('#count')
+      const finishButton = document.querySelector('#finish')
+      const reasonNode = document.querySelector('#finish-reason')
+      const doneNode = document.querySelector('#done')
+      const errorNode = document.querySelector('#error')
+      let state
+
+      async function call(path, options) {
+        const response = await fetch(path, options)
+        const body = await response.json().catch(() => ({}))
+        if (!response.ok) throw new Error(body.error || `Something went wrong (${response.status}).`)
+        return body
+      }
+
+      function showError(message) {
+        errorNode.textContent = message
+        errorNode.classList.add('show')
+      }
+
+      async function refresh() {
+        try {
+          state = await call('/api/setup')
+          errorNode.classList.remove('show')
+          render()
+        } catch (error) {
+          showError(error.message)
+        }
+      }
+
+      function render() {
+        const connected = state.connection.status === 'connected'
+        pill.className = `pill ${connected ? 'on' : 'waiting'}`
+        pill.textContent = connected
+          ? `Connected${state.connection.account ? ` as ${state.connection.account}` : ''}`
+          : 'Not connected yet'
+        hint.textContent = connected
+          ? ''
+          : state.connection.reason || 'Ask your agent in chat and it will walk you through it.'
+        checkButton.hidden = connected
+
+        countNode.textContent = state.repos.length === 0
+          ? ''
+          : `${state.selection.repoIds.length} of ${state.repos.length} picked`
+        const selected = new Set(state.selection.repoIds)
+        if (state.repos.length === 0) {
+          reposNode.replaceChildren(el('div', 'empty', connected
+            ? 'No projects were found on that account yet.'
+            : 'Once GitHub is authorized, your projects appear here.'))
+        } else {
+          reposNode.replaceChildren(...state.repos.map(repo => {
+            const label = el('label', 'choice')
+            const box = document.createElement('input')
+            box.type = 'checkbox'
+            box.checked = selected.has(repo.id)
+            box.addEventListener('change', () => updateSelection(repo.id, box.checked))
+            const text = el('span', 'choice-label')
+            text.append(repo.id)
+            text.append(el('span', 'tag', repo.private ? 'private' : 'public'))
+            if (repo.description) text.append(el('span', 'choice-detail', repo.description))
+            label.append(box, text)
+            return label
+          }))
+        }
+
+        const complete = state.setup.complete
+        finishButton.disabled = complete || !connected || state.selection.repoIds.length === 0
+        // A disabled button with no reason beside it is a dead end: say which
+        // of the two steps is still outstanding.
+        reasonNode.textContent = complete
+          ? ''
+          : !connected
+            ? 'Authorize GitHub first.'
+            : state.selection.repoIds.length === 0
+              ? 'Tick at least one project to finish.'
+              : ''
+        doneNode.classList.toggle('show', complete)
+        if (complete) {
+          const n = state.selection.repoIds.length
+          doneNode.textContent = `All set. Your agent is watching ${n} ${n === 1 ? 'project' : 'projects'} and will review every new change there.`
+        }
+      }
+
+      async function updateSelection(repoId, ticked) {
+        const repoIds = new Set(state.selection.repoIds)
+        if (ticked) repoIds.add(repoId)
+        else repoIds.delete(repoId)
+        try {
+          state = await call('/api/selection', {
+            method: 'PUT',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ repoIds: [...repoIds] }),
+          })
+          render()
+        } catch (error) {
+          showError(error.message)
+        }
+      }
+
+      checkButton.addEventListener('click', async () => {
+        checkButton.disabled = true
+        checkButton.textContent = 'Checking…'
+        try {
+          state = await call('/api/connection/check', { method: 'POST' })
+          errorNode.classList.remove('show')
+          render()
+        } catch (error) {
+          showError(error.message)
+        } finally {
+          checkButton.disabled = false
+          checkButton.textContent = 'Check again'
+        }
+      })
+
+      finishButton.addEventListener('click', async () => {
+        try {
+          state = await call('/api/complete', { method: 'POST' })
+          errorNode.classList.remove('show')
+          render()
+        } catch (error) {
+          showError(error.message)
+        }
+      })
+
+      function el(tag, className, text) {
+        const node = document.createElement(tag)
+        if (className) node.className = className
+        if (text !== undefined) node.textContent = text
+        return node
+      }
+
+      new EventSource('/events').onmessage = () => refresh()
+      refresh()
+    </script>
+  </body>
+</html>

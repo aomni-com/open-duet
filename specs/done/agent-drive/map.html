@@ -1,0 +1,1041 @@
+<title>Agent Drive — the map</title>
+<style>
+  :root {
+    --bg: #faf8f3;
+    --panel: #ffffff;
+    --ink: #201d17;
+    --muted: #6e675c;
+    --line: #e5e0d5;
+    --accent: #b0771a;
+    --accent-soft: #f3e7cf;
+    --term-bg: #16140f;
+    --term-ink: #e8e2d4;
+    --ok: #2e6e52;
+    --open: #a34040;
+    --edge: #8a6d1f;
+    --ok-bg: #e4efe8;
+    --open-bg: #f6e4e4;
+    --edge-bg: #f3ecd2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14130f;
+      --panel: #1c1a15;
+      --ink: #eae4d6;
+      --muted: #9a917f;
+      --line: #2e2b23;
+      --accent: #e3a93e;
+      --accent-soft: #33290f;
+      --term-bg: #0e0d0a;
+      --term-ink: #e4decf;
+      --ok: #6fbf97;
+      --open: #d98080;
+      --edge: #d9bc6a;
+      --ok-bg: #1d2b23;
+      --open-bg: #33201d;
+      --edge-bg: #2e2917;
+    }
+  }
+  :root[data-theme='light'] {
+    --bg: #faf8f3;
+    --panel: #ffffff;
+    --ink: #201d17;
+    --muted: #6e675c;
+    --line: #e5e0d5;
+    --accent: #b0771a;
+    --accent-soft: #f3e7cf;
+    --term-bg: #16140f;
+    --term-ink: #e8e2d4;
+    --ok: #2e6e52;
+    --open: #a34040;
+    --edge: #8a6d1f;
+    --ok-bg: #e4efe8;
+    --open-bg: #f6e4e4;
+    --edge-bg: #f3ecd2;
+  }
+  :root[data-theme='dark'] {
+    --bg: #14130f;
+    --panel: #1c1a15;
+    --ink: #eae4d6;
+    --muted: #9a917f;
+    --line: #2e2b23;
+    --accent: #e3a93e;
+    --accent-soft: #33290f;
+    --term-bg: #0e0d0a;
+    --term-ink: #e4decf;
+    --ok: #6fbf97;
+    --open: #d98080;
+    --edge: #d9bc6a;
+    --ok-bg: #1d2b23;
+    --open-bg: #33201d;
+    --edge-bg: #2e2917;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font:
+      16px/1.6 'Avenir Next',
+      'Segoe UI',
+      system-ui,
+      sans-serif;
+    margin: 0;
+    padding: 0 20px 80px;
+  }
+  main {
+    max-width: 920px;
+    margin: 0 auto;
+  }
+  header.hero {
+    padding: 52px 0 20px;
+    border-bottom: 2px solid var(--accent);
+    margin-bottom: 8px;
+  }
+  .eyebrow {
+    font:
+      600 12px/1 ui-monospace,
+      'SF Mono',
+      Menlo,
+      monospace;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .led {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--accent);
+    animation: blink 2.4s steps(1) infinite;
+  }
+  @keyframes blink {
+    0%,
+    60%,
+    100% {
+      opacity: 1;
+    }
+    70%,
+    80% {
+      opacity: 0.25;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .led {
+      animation: none;
+    }
+  }
+  h1 {
+    font-size: 32px;
+    line-height: 1.15;
+    margin: 14px 0 8px;
+    text-wrap: balance;
+    font-weight: 600;
+  }
+  .lede {
+    color: var(--muted);
+    max-width: 68ch;
+    margin: 0;
+  }
+  h2 {
+    font-size: 22px;
+    margin: 40px 0 4px;
+    font-weight: 600;
+  }
+  h2 .qtag {
+    font:
+      600 11px/1 ui-monospace,
+      monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 6px;
+  }
+  h3 {
+    font-size: 16px;
+    margin: 22px 0 8px;
+    font-weight: 600;
+  }
+  section > p.secnote {
+    color: var(--muted);
+    max-width: 70ch;
+    margin: 4px 0 16px;
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 12px 0;
+  }
+  ul {
+    margin: 8px 0;
+    padding-left: 22px;
+  }
+  li {
+    margin: 5px 0;
+  }
+  li::marker {
+    color: var(--accent);
+  }
+  code {
+    font:
+      0.87em ui-monospace,
+      'SF Mono',
+      Menlo,
+      monospace;
+    background: var(--accent-soft);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+  .cite {
+    font:
+      0.8em ui-monospace,
+      monospace;
+    color: var(--muted);
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    font-size: 14.5px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 8px 14px 8px 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    font:
+      600 11px/1.4 ui-monospace,
+      monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .tablewrap {
+    overflow-x: auto;
+  }
+  .pill {
+    display: inline-block;
+    font:
+      600 11px/1 ui-monospace,
+      monospace;
+    letter-spacing: 0.06em;
+    padding: 4px 9px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .pill.ok {
+    color: var(--ok);
+    background: var(--ok-bg);
+  }
+  .pill.open {
+    color: var(--open);
+    background: var(--open-bg);
+  }
+  .pill.edge {
+    color: var(--edge);
+    background: var(--edge-bg);
+  }
+  .mine {
+    border-left: 3px solid var(--edge);
+  }
+  .mine.decided {
+    border-left-color: var(--ok);
+  }
+  .mine.openmine {
+    border-left-color: var(--open);
+  }
+  .mine .mhead {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .mine .mhead strong {
+    font-size: 15.5px;
+  }
+  .mine p {
+    margin: 6px 0;
+    font-size: 14.5px;
+    color: var(--muted);
+    max-width: 75ch;
+  }
+  .mine p b {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  pre {
+    background: var(--term-bg);
+    color: var(--term-ink);
+    border-radius: 8px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 10px 0;
+    font:
+      13px/1.55 ui-monospace,
+      'SF Mono',
+      Menlo,
+      monospace;
+    white-space: pre-wrap;
+  }
+  .plan-item {
+    display: flex;
+    gap: 12px;
+    margin: 10px 0;
+  }
+  .plan-item .pn {
+    font:
+      600 13px/1.6 ui-monospace,
+      monospace;
+    color: var(--accent);
+    min-width: 26px;
+  }
+  .plan-item .pt {
+    font-size: 14.5px;
+  }
+  .plan-item .pt strong {
+    display: block;
+    font-size: 15px;
+  }
+  .plan-item .pt span {
+    color: var(--muted);
+  }
+  details {
+    margin: 10px 0;
+  }
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  button.copy {
+    font:
+      600 14px/1 'Avenir Next',
+      system-ui,
+      sans-serif;
+    background: var(--accent);
+    color: #fff8ea;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 18px;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  @media (prefers-color-scheme: dark) {
+    button.copy {
+      color: #1a1508;
+    }
+  }
+  :root[data-theme='dark'] button.copy {
+    color: #1a1508;
+  }
+  :root[data-theme='light'] button.copy {
+    color: #fff8ea;
+  }
+  button.copy:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+  .copied {
+    color: var(--ok);
+    font-weight: 600;
+    font-size: 14px;
+    margin-left: 10px;
+    display: none;
+  }
+  .copied.show {
+    display: inline;
+  }
+</style>
+
+<main>
+  <header class="hero">
+    <div class="eyebrow">
+      <span class="led"></span> DUET · AGENT DRIVE · QUADRANT MAP · 2026-07-06
+    </div>
+    <h1>Agent Drive — the completed map</h1>
+    <p class="lede">
+      Duet v2: the shared drive any agent works in. Rebuilt from scratch in <code>~/dev/duet</code>,
+      API-first, on exe.dev VMs. This map is the deliverable of the unknowns walk — every decision,
+      sharp edge, and open item lives here, not in chat scrollback.
+    </p>
+  </header>
+
+  <!-- ============ Q1 ============ -->
+  <section>
+    <h2><span class="qtag">Quadrant 1 · Known knowns</span>The settled ground</h2>
+
+    <div class="card">
+      <h3 style="margin-top: 2px">The thesis (extracted in Stage 3, governs everything)</h3>
+      <p class="secnote" style="margin-bottom: 0">
+        <b style="color: var(--ink)">Ride the existing agent ecosystem; don't compete with it.</b>
+        Claude Code / Codex / OpenClaw are subsidized and familiar — v1 failed by demanding users
+        learn a new webapp <em>and</em> a new harness. v2's spine is CLI + MCP + memory for the
+        agents users already run. Duet's own harness and web app are second-order layers on the same
+        API.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top: 2px">Product decisions</h3>
+      <ul>
+        <li>
+          <b>Workspace</b> = first-class resource = one exe.dev VM; its disk is the drive and the
+          <b>source of truth</b>. Users create many; full membership (owner / editor / viewer) at
+          launch; no "personal vs team" type — first workspace is just auto-created.
+        </li>
+        <li>
+          <b>Files API</b>: variant A, path-as-URL (<code>GET/PUT /v1/ws/{ws}/files/{path}</code>).
+        </li>
+        <li>
+          <b>Memories</b>: separate routes from files; VM-side SQLite owned by
+          <code>@duetso/agent</code> (<code>duet memory</code> / <code>duet train</code>); API is a
+          front door through the in-VM gateway. No Convex personal-memory. Train = async job (<code
+            >POST /train</code
+          >
+          → jobId).
+        </li>
+        <li>
+          <b>Agent sessions</b>: full turn protocol (create session / message / SSE events / answer
+          / interrupt; terminal states complete·ask·interrupted·sleep). Convex relays long-running
+          state; SSE is a view, not a lifeline.
+        </li>
+        <li>
+          <b>Folder shares</b>: Syncthing between workspace VMs; read or read-write; recipient picks
+          mount point; smart markdown merge is a later layer on top.
+        </li>
+        <li>
+          <b>Apps</b>: in-VM gateway multiplexes the VM's one public port; URLs
+          <code>service.example.invalid</code> (we don't own duet.app); publish-file → unique URL;
+          custom domains via <b>our</b> edge proxy, not exe's domain feature.
+        </li>
+        <li>
+          <b>Integrations</b>: Composio + model gateway (proxy to Vercel AI Gateway,
+          image/video/audio too, billing passthrough) exposed to external harnesses via API.
+        </li>
+        <li>
+          <b>MCP</b>: hosted remote (<code>service.example.invalid</code>); tools: list/read/write files, memory
+          add/search, share_folder, expose_app, publish_file, run_agent, use_integration,
+          generate_media.
+        </li>
+        <li>
+          <b>CLI</b>: new, named <b><code>duetfs</code></b> — bare npm name free (register early),
+          brew clear, zero collisions or model priors, and self-describing so agents can guess
+          semantics (<code>duetfs push</code>). <code>workspace:/path</code> addressing. The
+          <code>duet</code> CLI stays the agent's. (Runners-up checked:
+          <code>dux</code> viable-scoped-only; <code>dx</code>/<code>dia</code>/<code>dfs</code>
+          rejected on collisions/priors.)
+        </li>
+        <li>
+          <b>Onboarding</b>: agent-led self-install (agent visits service.example.invalid, installs, pairs via
+          device-code) or human signup; memory bootstrap by scraping company URL + importing local
+          agent session data. <b>Done-demo</b>: after setup, Claude Code answers business questions
+          and produces on-brand content.
+        </li>
+        <li>
+          <b>Free tier</b>: retire (archive + <code>rm</code>) VMs after 7 days inactivity —
+          poweroff proven useless (auto-restarts). Recreate ≈ 12s on return.
+        </li>
+        <li>
+          <b>Landing page</b>: first page of new <code>apps/web</code>; current LP content +
+          CLI/MCP, agent-friendly framing.
+        </li>
+        <li>
+          <b>Backups</b>: <code>cp</code>-clone snapshots (exe lobby command). <b>Secrets</b>:
+          stored in Convex, injected as VM env.
+        </li>
+        <li>
+          <b>Backend reuse (Example User, 2026-07-06)</b>: dig deep into chat-app's Convex backend + schema
+          and reuse aggressively — <b>fully copy where sound</b>, refactor where better. Named
+          targets: <b>credits &amp; transaction ledger</b> (<span class="cite"
+            >convex/domains/credits · creditTransactions · docs/billing-and-credits.md</span
+          >) and <b>daily/monthly credit-usage reporting</b> (<span class="cite"
+            >creditDailyUsage · monthlyUsage</span
+          >). All new code written to <b>/write-tests principles</b> (behavior-pinning tests, not
+          implementation details).
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top: 2px">Stack &amp; architecture</h3>
+      <ul>
+        <li>
+          Bun + Turborepo (scaffolded); Convex DB; WorkOS auth; Stripe prepaid credits; Vercel
+          hosting — v1's stack carries over.
+        </li>
+        <li>
+          <b>Edge proxy stays in the Vercel ecosystem</b> (Example User; WS arriving in fluid compute
+          beta). Duration limits are accepted product constraints; keep proxy logic portable in case
+          of exit.
+        </li>
+        <li>
+          <b>In-VM gateway</b> (Hono, v1 pattern) baked into a custom Docker image, runs as a
+          <b>systemd boot service</b>, phones home to register. All in-VM ops over HTTPS; SSH (<code
+            >duet-prod</code
+          >
+          key in Convex secrets) is break-glass only. exe control plane via HTTPS
+          <code>/exec</code> token.
+        </li>
+        <li>
+          API auth: scoped per-user keys (<code>duet_sk_…</code>,
+          <code>ws:{slug}:{capability}</code> grammar) — not v1's overloaded gateway token.
+        </li>
+        <li>
+          <code>@duetso/agent</code> evolves in lockstep; required changes get specified explicitly.
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top: 2px">Territory facts (measured / verified 2026-07-05)</h3>
+      <ul>
+        <li>
+          <b>exe.dev timings</b> (SSH benchmark ×3): create→usable ≈ <b>12s</b>; restart→usable ≈
+          <b>10s</b>; SSH exec overhead ~2.4s; delete ~3.4s. Control plane ~1s per op.
+        </li>
+        <li>
+          <b>No stop primitive</b>: lifecycle is new/restart/rm only; <code>sudo poweroff</code> →
+          auto-restart ~60s later (boot_id proof). Lobby <code>ls</code> reported
+          <code>running</code> while the VM was down →
+          <b>liveness must come from our gateway heartbeats</b>.
+        </li>
+        <li>
+          exe: one public HTTPS port per VM (<code>service.example.invalid</code>, private by default); ports
+          3000–9999 authed-users-only; <b>no raw TCP ingress, no public IP</b>;
+          <code>/exec</code> is lobby-only (30s, 64KB, no stdin); accounts region-pinned (ours:
+          NYC); pooled CPU/RAM pricing, no free tier; disks grow-only; exeuntu ~4GB; useful extras:
+          <code>cp</code> (clone), <code>stat</code> (metrics), <code>resize</code>,
+          <code>tag</code>. In-VM user <code>exedev</code>, passwordless sudo.
+        </li>
+        <li>
+          v1 blueprints mapped: edge proxy
+          <span class="cite">apps/sandbox-gateway/app/[[...path]]/route.ts</span>, in-VM gateway
+          <span class="cite">packages/agent-gateway</span>, runner protocol
+          <span class="cite">@duetso/agent · duet --rpc · NDJSON</span>, train pipeline
+          <span class="cite">convex/domains/train/actions.ts</span>, API-key auth
+          <span class="cite">convex/domains/publicApi/auth.ts</span>.
+        </li>
+        <li>
+          This repo: blank slate + working <code>packages/exe-sandbox</code> client (SSH-quoting bug
+          fixed, <b>uncommitted</b>). SSH key <code>~/.ssh/exe-duet</code> registered on
+          user@example.invalid.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Q2 ============ -->
+  <section>
+    <h2><span class="qtag">Quadrant 2 · Known unknowns</span>The decision ledger</h2>
+    <p class="secnote">Every named question, its answer, and who closed it.</p>
+    <div class="tablewrap">
+      <table>
+        <tr>
+          <th>Question</th>
+          <th>Answer</th>
+          <th>Closed by</th>
+        </tr>
+        <tr>
+          <td>Workspace topology</td>
+          <td>First-class resources; 1 ws = 1 VM; many per user</td>
+          <td><span class="pill ok">Example User</span></td>
+        </tr>
+        <tr>
+          <td>Multi-user workspaces</td>
+          <td>Full membership (owner/editor/viewer) at launch</td>
+          <td><span class="pill ok">Example User</span></td>
+        </tr>
+        <tr>
+          <td>Files API grammar</td>
+          <td>Variant A — path-as-URL</td>
+          <td><span class="pill ok">Example User</span></td>
+        </tr>
+        <tr>
+          <td>Memory system</td>
+          <td>VM SQLite only, via agent CLI; separate API routes</td>
+          <td><span class="pill ok">Example User</span></td>
+        </tr>
+        <tr>
+          <td>Agent run API</td>
+          <td>Full turn protocol incl. interrupt; backend relays</td>
+          <td><span class="pill ok">Example User</span></td>
+        </tr>
+        <tr>
+          <td>Sync engine</td>
+          <td>Syncthing, control-plane-orchestrated</td>
+          <td><span class="pill ok">Example User</span></td>
+        </tr>
+        <tr>
+          <td>API auth</td>
+          <td>Scoped per-user keys</td>
+          <td><span class="pill ok">Example User</span></td>
+        </tr>
+        <tr>
+          <td>MCP shape</td>
+          <td>Hosted remote MCP</td>
+          <td><span class="pill ok">Example User</span></td>
+        </tr>
+        <tr>
+          <td>CLI identity / name</td>
+          <td>New CLI; <code>duetfs</code> (bare npm free — register early)</td>
+          <td><span class="pill ok">Example User + registry checks</span></td>
+        </tr>
+        <tr>
+          <td>Edge proxy platform</td>
+          <td>Vercel ecosystem; WS beta accepted</td>
+          <td><span class="pill ok">Example User</span></td>
+        </tr>
+        <tr>
+          <td>Model gateway</td>
+          <td>Vercel AI Gateway proxy, billing passthrough</td>
+          <td><span class="pill ok">Example User</span></td>
+        </tr>
+        <tr>
+          <td>Custom domains</td>
+          <td>Own gateway proxy; domains on service.example.invalid</td>
+          <td><span class="pill ok">Example User</span></td>
+        </tr>
+        <tr>
+          <td>Free-tier cost</td>
+          <td>Retire VMs after 7d idle (archive+rm; poweroff disproven)</td>
+          <td><span class="pill ok">Example User + experiment</span></td>
+        </tr>
+        <tr>
+          <td>Backup</td>
+          <td><code>cp</code> snapshots</td>
+          <td><span class="pill ok">Example User</span></td>
+        </tr>
+        <tr>
+          <td>Prod VM provisioning w/o laptop</td>
+          <td>Custom image + phone-home; HTTPS token; SSH break-glass</td>
+          <td><span class="pill ok">TERRITORY</span></td>
+        </tr>
+        <tr>
+          <td>True boot/restart times</td>
+          <td>~12s / ~10s (measured)</td>
+          <td><span class="pill ok">EXPERIMENT</span></td>
+        </tr>
+        <tr>
+          <td>exe.dev platform terms</td>
+          <td>
+            Stop/wake or no-auto-restart flag · reseller/pool pricing · multi-region · raw-TCP
+            confirmation
+          </td>
+          <td><span class="pill open">OPEN — Example User talks to exe.dev</span></td>
+        </tr>
+        <tr>
+          <td>VM-to-VM Syncthing path</td>
+          <td>Direct (exe internal net) vs our relay — VMs can't listen publicly</td>
+          <td><span class="pill open">OPEN — build spike #1</span></td>
+        </tr>
+        <tr>
+          <td>Agent-native auth best practices</td>
+          <td>Device-code flow assumed; survey the field</td>
+          <td><span class="pill open">OPEN — research at spec time</span></td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ Q3 ============ -->
+  <section>
+    <h2><span class="qtag">Quadrant 3 · Unknown knowns</span>What got extracted</h2>
+    <div class="card">
+      <ul>
+        <li>
+          <b>The ecosystem thesis</b> (above) — reshaped build order: agent-facing surface first,
+          harness + web app later.
+        </li>
+        <li>
+          <b>First consumer</b>: external devs wiring Claude Code. Reshaped onboarding into a
+          feature: <b>session import</b> — read Claude Code/Codex/OpenClaw local session data to
+          seed first memories.
+        </li>
+        <li>
+          <b>Agent-led self-install</b>: the website must be agent-operable (agent-readable install
+          path, auth completable without a human clicking OAuth).
+        </li>
+        <li>
+          <b>The 60-second demo</b> = definition of done for v1 (install → bootstrap → agent knows
+          the business → on-brand output).
+        </li>
+        <li>
+          <b>Taste</b>: simplest-most-proven-most-maintainable bias (Syncthing pick); stay-in-Vercel
+          bias; path-as-URL grammar; v1 URL scheme kept; short unix-y CLI name; suggestions invited
+          to be overridden when a better way exists.
+        </li>
+        <li>
+          <b>v1 scar tissue</b>: too big a leap (new app + new harness); subsidized competitors →
+          don't build a parallel ecosystem.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Q4 ============ -->
+  <section>
+    <h2><span class="qtag">Quadrant 4 · Unknown unknowns</span>The landmine cards</h2>
+    <p class="secnote">
+      Sweep coverage: exe.dev platform behavior (live experiments + full docs), and the v1 code
+      paths v2 ports — both gateways, e2b client, publicApi auth, custom domains (Codex sweep,
+      claims spot-verified).
+    </p>
+
+    <div class="card mine openmine">
+      <div class="mhead">
+        <span class="pill open">LIVE V1 ISSUE</span
+        ><strong>Unauthenticated gateway control routes</strong>
+      </div>
+      <p>
+        <b>Evidence:</b> <code>/session/*</code> mutation routes (public config, domains, cron)
+        mount with no auth; only global middleware is <code>cors()</code>
+        <span class="cite">agent-gateway/src/app.ts:86,104</span> — on e2b these are publicly
+        addressable, guarded only by unguessable hostname.
+      </p>
+      <p>
+        <b>v2 rule:</b> every gateway route authenticates its caller; no capability-URL security.
+        <b>Also:</b> consider patching v1 independently.
+      </p>
+    </div>
+
+    <div class="card mine decided">
+      <div class="mhead">
+        <span class="pill ok">DECIDED</span><strong>Edge WS/SSE limits</strong>
+      </div>
+      <p>
+        <b>Evidence:</b> v1 edge is a plain fetch proxy — no Upgrade tunneling, SSE cut at 300s
+        (<code>maxDuration=400</code>) <span class="cite">sandbox-gateway route.ts:6,36,241</span>.
+      </p>
+      <p>
+        <b>Decision:</b> stay Vercel (WS in fluid-compute beta); explicit upgrade/streaming
+        handling, documented reconnect semantics, portable proxy logic.
+      </p>
+    </div>
+
+    <div class="card mine">
+      <div class="mhead">
+        <span class="pill edge">SHARP EDGE</span><strong>Syncthing × live SQLite</strong>
+      </div>
+      <p>
+        Syncing a hot SQLite file corrupts it. <b>Rule:</b> shares only under a designated drive
+        root; memory DB and <code>.duet/</code> state live outside any shareable subtree.
+      </p>
+    </div>
+
+    <div class="card mine">
+      <div class="mhead">
+        <span class="pill edge">SHARP EDGE</span
+        ><strong>"Read-only" shares aren't, natively</strong>
+      </div>
+      <p>
+        Syncthing receive-only still accepts local writes (reverts later). <b>Rule:</b> enforce
+        read-only via FS permissions on receivers; Syncthing mode is transport, not guarantee.
+        Example User: acceptable if this proves brittle — not a deal-breaker.
+      </p>
+    </div>
+
+    <div class="card mine openmine">
+      <div class="mhead">
+        <span class="pill open">OPEN — SPIKE #1</span><strong>VM-to-VM sync connectivity</strong>
+      </div>
+      <p>
+        exe VMs cannot listen publicly (no public IP, no raw TCP ingress) — sync is direct only if
+        exe's internal VM-to-VM network allows peer dialing; else we run our own Syncthing relay
+        (works, adds infra). Two-VM spike decides.
+      </p>
+    </div>
+
+    <div class="card mine">
+      <div class="mhead">
+        <span class="pill edge">SHARP EDGE</span
+        ><strong>Pooled CPU/RAM → noisy neighbors &amp; abuse are ours</strong>
+      </div>
+      <p>
+        We buy the pool; a miner burns everyone's capacity; free public URLs attract phishing.
+        <b>Rule:</b> per-VM caps at create, cgroup caps in-VM (v1's
+        <span class="cite">runner-cpu-cap</span> pattern — easier on a full VM),
+        <code>stat</code> metering, abuse policy before free tier opens.
+      </p>
+    </div>
+
+    <div class="card mine">
+      <div class="mhead">
+        <span class="pill edge">SHARP EDGE</span
+        ><strong>Long-lived fleet needs upgrades day one</strong>
+      </div>
+      <p>
+        e2b rebuilt the template per sandbox; exe VMs live months. Gateway self-update (or
+        backend-pushed), versioned components in API responses, memory-schema migrations owned by
+        <code>@duetso/agent</code>.
+      </p>
+    </div>
+
+    <div class="card mine decided">
+      <div class="mhead">
+        <span class="pill ok">DECIDED</span><strong>Agents delete drives</strong>
+      </div>
+      <p>
+        Disk = only truth; agent <code>rm -rf</code> is a when. <b>Decision:</b>
+        <code>cp</code>-clone snapshots. Confirm <code>cp</code> semantics on a running VM
+        (crash-consistency) before relying on it.
+      </p>
+    </div>
+
+    <div class="card mine">
+      <div class="mhead">
+        <span class="pill edge">SHARP EDGE</span
+        ><strong>Session import is a secrets minefield</strong>
+      </div>
+      <p>
+        Transcripts contain pasted keys; formats drift. <b>Rules:</b> opt-in per source;
+        secret-scrub before write; land as <code>source: import</code>, bulk-reviewable/deletable;
+        parsers quarantined best-effort. Secrets generally: Convex-stored, env-injected — never in
+        memories/files.
+      </p>
+    </div>
+
+    <div class="card mine">
+      <div class="mhead">
+        <span class="pill edge">SHARP EDGE</span
+        ><strong>Self-install auth = prompt-injection surface</strong>
+      </div>
+      <p>
+        Device-code pairing with a non-bypassable human approval step; research adjacent best
+        practices (RFC 8628 device flow, MCP OAuth, GitHub CLI pattern) at spec time.
+      </p>
+    </div>
+
+    <div class="card mine decided">
+      <div class="mhead">
+        <span class="pill ok">DECIDED</span><strong>Slug grammar &amp; domains</strong>
+      </div>
+      <p>
+        App URLs on <b>service.example.invalid</b> (duet.app not owned). Port v1's existing slug protections;
+        reserve <code>www/api/mcp/…</code>; single-hyphen slugs so <code>--</code> stays
+        unambiguous.
+      </p>
+    </div>
+
+    <div class="card mine decided">
+      <div class="mhead">
+        <span class="pill ok">DECIDED / RULES</span
+        ><strong>Porting-assumption cards (Codex sweep)</strong>
+      </div>
+      <p>
+        One public gateway URL + private internal ports (v1 bakes e2b per-port URLs into
+        backend/resolve/viewers
+        <span class="cite">e2b client.ts:105 · sandboxes/actions.ts:413</span>) · no wake-on-request
+        lifecycle; heartbeat liveness (<span class="cite">client.ts:404 · route.ts:38</span>) ·
+        gateway builds its own streaming Range/206 download endpoint (envd gone; v1 buffered whole
+        files, no Range
+        <span class="cite">public-app-service.ts:397 · files/[storageId]/route.ts:16</span>) · one
+        token story enforced uniformly (v1: 24h file expiry vs eternal DB token
+        <span class="cite">credentials.ts:70 · publicApi/auth.ts:31</span>) · systemd boot service
+        replaces nohup watchdog (<span class="cite">setup.ts:237,269</span>) · image contract
+        explicit (user <code>exedev</code>, paths — v1 hard-codes <code>/home/synthetic-user/code>) · don't
+        port v1's half-built provider abstraction; greenfield interface.
+      </p>
+    </div>
+
+    <div class="card mine openmine">
+      <div class="mhead">
+        <span class="pill open">ACTION AT SPEC TIME</span
+        ><strong>Defensive-logic inventory of chat-app</strong>
+      </div>
+      <p>
+        Example User's directive: audit v1 well and preserve defensive logic worth preserving (slug
+        validation, cpu caps, orphan sweeps, credential redaction, retry/backoff, sync-engine
+        hardening…). Expanded 2026-07-06: also a <b>backend/schema reuse inventory</b> — what copies
+        wholesale (credits/transactions, usage reports), what refactors, what dies. Run as dedicated
+        Codex passes feeding the spec.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ CONFIRM ============ -->
+  <section>
+    <h2><span class="qtag">Before coding</span>Small facts the builder must confirm</h2>
+    <div class="card">
+      <ul>
+        <li>
+          exe custom-image mechanics: registry auth, image size limits, setup-script hooks, whether
+          <code>new --image</code> accepts private registries we run.
+        </li>
+        <li>
+          <code>cp</code> on a <em>running</em> VM: crash-consistent? downtime? cost of clone
+          storage.
+        </li>
+        <li>VM name constraints (charset/length) — they become workspace slug rules.</li>
+        <li>exe VM-to-VM network mechanics (spike #1) + egress filtering (undocumented).</li>
+        <li>Vercel fluid-compute WS beta: duration/idle limits actually shipped.</li>
+        <li>WorkOS support for device-code-style flows (or build pairing ourselves).</li>
+        <li>
+          Syncthing REST API surface needed for orchestration (device add, folder share, ignore
+          patterns, conflict listing).
+        </li>
+        <li>
+          <code>@duetso/agent</code> change list: memory search API shape, non-interactive
+          memory/train invocation contract, versioning.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ PLAN ============ -->
+  <section>
+    <h2><span class="qtag">Rides along</span>Tweakable build plan</h2>
+    <p class="secnote">
+      Sorted by likelihood-of-tweaking — judgment calls first, mechanical work collapsed at the
+      bottom.
+    </p>
+    <div class="card">
+      <div class="plan-item">
+        <div class="pn">J1</div>
+        <div class="pt">
+          <strong>Spikes before spec freeze (½–1 day each)</strong
+          ><span
+            >Two-VM Syncthing connectivity · custom image boot with systemd gateway hello-world ·
+            <code>cp</code> snapshot semantics. Each can reshape the sharing/provisioning/backup
+            designs — do them first.</span
+          >
+        </div>
+      </div>
+      <div class="plan-item">
+        <div class="pn">J1b</div>
+        <div class="pt">
+          <strong>Test environment before features (Example User, 2026-07-06)</strong
+          ><span
+            >Simulate every environment the product runs in: CLI in docker containers (fresh-machine
+            installs), gateway + agent in real exe VMs when docker can't fake it, API against a real
+            Convex dev deployment, MCP via a real client harness. v1 precedent: docker-based gateway
+            tests (<span class="cite">scheduler-guard.docker.test.ts</span>) and the ui-playground
+            visual suite (skill copied over). Every slice lands with tests runnable in this harness,
+            per /write-tests.</span
+          >
+        </div>
+      </div>
+      <div class="plan-item">
+        <div class="pn">J2</div>
+        <div class="pt">
+          <strong>API host shape</strong
+          ><span
+            >Proposal: dedicated <code>apps/api</code> (Hono on Vercel) serving
+            <code>service.example.invalid/v1</code>, Convex as DB/state/crons, gateway in-VM. Alternative:
+            Convex HTTP routes only (fewer moving parts, weaker REST ergonomics). Tweak here changes
+            everything downstream.</span
+          >
+        </div>
+      </div>
+      <div class="plan-item">
+        <div class="pn">J3</div>
+        <div class="pt">
+          <strong>Provisioning flow</strong
+          ><span
+            >create (HTTPS /exec) → VM boots our image → gateway phones home with provisioning token
+            → workspace active. Alternative: golden-VM <code>cp</code> instead of image
+            builds.</span
+          >
+        </div>
+      </div>
+      <div class="plan-item">
+        <div class="pn">J4</div>
+        <div class="pt">
+          <strong>Share orchestration</strong
+          ><span
+            >Convex share records drive Syncthing config via gateway; conflict surfacing in API. The
+            read-only enforcement mechanism (FS perms) is the tweakable bit.</span
+          >
+        </div>
+      </div>
+      <div class="plan-item">
+        <div class="pn">J5</div>
+        <div class="pt">
+          <strong>@duetso/agent contract changes</strong
+          ><span
+            >Exact list TBD at spec: structured memory search output, non-interactive train, version
+            reporting.</span
+          >
+        </div>
+      </div>
+      <div class="plan-item">
+        <div class="pn">—</div>
+        <div class="pt">
+          <strong>Slice order (mechanical once J1–J5 hold)</strong
+          ><span
+            >0 commit exe-sandbox fix → 1 control plane (workspaces CRUD, provisioning, heartbeats)
+            → 2 auth + scoped keys → 3 files API + Range downloads → 4 memories API → 5 duetfs CLI
+            core → 6 hosted MCP → 7 shares/sync → 8 agent sessions → 9 apps/publish/edge proxy → 10
+            train + URL bootstrap → 11 session import → 12 self-install + landing page → 13
+            integrations/model gateway → 14 billing (port chat-app credits/transactions +
+            daily/monthly usage reports, copy-first).</span
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROMPT ============ -->
+  <section>
+    <h2><span class="qtag">Next move</span>Copyable kickoff prompt</h2>
+    <pre id="kickoff">
+/write-spec agent-drive — Duet v2 per the quadrant map (scratchpad/agent-drive-map.html; ask me to re-share if missing).
+
+Start with:
+1. Materialize the map into specs/agent-drive/ (thesis, decisions ledger, landmine rules as invariants).
+2. Run the three J1 spikes (two-VM Syncthing, custom image + systemd gateway, cp snapshot semantics) and the chat-app inventory passes (Codex): defensive logic worth preserving + backend/schema reuse — credits &amp; transaction ledger and daily/monthly usage reports copy over wholesale where sound, refactored where better.
+2b. Set up the test environment before feature slices (J1b): docker-simulated CLI environments, real exe VMs where docker can't fake it, Convex dev deployment, MCP client harness — every slice's tests run in it.
+3. Research agent-native registration/auth best practices (RFC 8628, MCP OAuth, GitHub CLI) for the self-install flow.
+4. Slice per the map's build plan; every slice independently verifiable; commit the exe-sandbox quoting fix as slice 0.
+
+Standing rules: subagent work via /codex; all tests follow /write-tests; every gateway route authenticated; shares only under the drive root; no wake-on-request assumptions; secrets in Convex env-injection only; CLI name is duetfs (register the free npm name early).</pre
+    >
+    <button class="copy" id="copybtn">Copy kickoff prompt</button
+    ><span class="copied" id="copied">Copied</span>
+  </section>
+</main>
+
+<script>
+  document.getElementById('copybtn').addEventListener('click', function () {
+    var text = document.getElementById('kickoff').textContent
+    function done() {
+      var c = document.getElementById('copied')
+      c.classList.add('show')
+      setTimeout(function () {
+        c.classList.remove('show')
+      }, 2500)
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () {
+        fb(text)
+        done()
+      })
+    } else {
+      fb(text)
+      done()
+    }
+    function fb(t) {
+      var ta = document.createElement('textarea')
+      ta.value = t
+      document.body.appendChild(ta)
+      ta.select()
+      try {
+        document.execCommand('copy')
+      } catch (e) {}
+      document.body.removeChild(ta)
+    }
+  })
+</script>

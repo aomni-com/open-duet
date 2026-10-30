@@ -1,0 +1,154 @@
+{
+  "agentVersion": "0.3.24",
+  "transport": "controlled",
+  "results": [
+    {
+      "selection": "openai-frontier",
+      "status": {
+        "tier": "openai-frontier",
+        "route": "general",
+        "modelName": "gpt-6-astra",
+        "thinkingLevel": "medium",
+        "assistantSteps": 21,
+        "stepsUntilClassification": 0,
+        "pinned": false,
+        "advisorEnabled": false,
+        "advisorGate": {
+          "allowed": true,
+          "stepsUntilAllowed": 0
+        },
+        "facts": {
+          "hasImages": true
+        }
+      },
+      "classifierCalls": 0,
+      "requests": [
+        {
+          "model": "openai/gpt-6-astra",
+          "header": {
+            "x-duet-tier": "openai-frontier"
+          }
+        }
+      ],
+      "terminal": "complete",
+      "errors": [],
+      "sampleUsage": {
+        "uncachedInputTokens": 1000000,
+        "cachedInputTokens": 1000000,
+        "outputTokens": 1000000
+      },
+      "sampleChargeMicroUsd": 73200000
+    },
+    {
+      "selection": "openai-max",
+      "status": {
+        "tier": "openai-max",
+        "route": "general",
+        "modelName": "gpt-5.6-sol",
+        "thinkingLevel": "medium",
+        "assistantSteps": 21,
+        "stepsUntilClassification": 0,
+        "pinned": false,
+        "advisorEnabled": false,
+        "advisorGate": {
+          "allowed": true,
+          "stepsUntilAllowed": 0
+        },
+        "facts": {
+          "hasImages": true
+        }
+      },
+      "classifierCalls": 0,
+      "requests": [
+        {
+          "model": "openai/gpt-5.6-sol",
+          "header": {
+            "x-duet-tier": "openai-max"
+          }
+        }
+      ],
+      "terminal": "complete",
+      "errors": [],
+      "sampleUsage": {
+        "uncachedInputTokens": 1000000,
+        "cachedInputTokens": 1000000,
+        "outputTokens": 1000000
+      },
+      "sampleChargeMicroUsd": 41000000
+    },
+    {
+      "selection": "anthropic-frontier",
+      "status": {
+        "tier": "anthropic-frontier",
+        "route": "general",
+        "modelName": "fable-5.1",
+        "thinkingLevel": "medium",
+        "assistantSteps": 21,
+        "stepsUntilClassification": 0,
+        "pinned": false,
+        "advisorEnabled": false,
+        "advisorGate": {
+          "allowed": true,
+          "stepsUntilAllowed": 0
+        },
+        "facts": {
+          "hasImages": true
+        }
+      },
+      "classifierCalls": 0,
+      "requests": [
+        {
+          "model": "anthropic/claude-fable-5.1",
+          "header": {
+            "x-duet-tier": "anthropic-frontier"
+          }
+        }
+      ],
+      "terminal": "complete",
+      "errors": [],
+      "sampleUsage": {
+        "uncachedInputTokens": 1000000,
+        "cachedInputTokens": 1000000,
+        "outputTokens": 1000000
+      },
+      "sampleChargeMicroUsd": 73200000
+    },
+    {
+      "selection": "anthropic-max",
+      "status": {
+        "tier": "anthropic-max",
+        "route": "general",
+        "modelName": "opus-5",
+        "thinkingLevel": "medium",
+        "assistantSteps": 21,
+        "stepsUntilClassification": 0,
+        "pinned": false,
+        "advisorEnabled": false,
+        "advisorGate": {
+          "allowed": true,
+          "stepsUntilAllowed": 0
+        },
+        "facts": {
+          "hasImages": true
+        }
+      },
+      "classifierCalls": 0,
+      "requests": [
+        {
+          "model": "anthropic/claude-opus-5",
+          "header": {
+            "x-duet-tier": "anthropic-max"
+          }
+        }
+      ],
+      "terminal": "complete",
+      "errors": [],
+      "sampleUsage": {
+        "uncachedInputTokens": 1000000,
+        "cachedInputTokens": 1000000,
+        "outputTokens": 1000000
+      },
+      "sampleChargeMicroUsd": 41000000
+    }
+  ]
+}

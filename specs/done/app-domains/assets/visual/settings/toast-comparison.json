@@ -1,0 +1,38 @@
+[
+  {
+    "viewport": "desktop",
+    "before": [
+      1440,
+      836
+    ],
+    "after": [
+      1440,
+      900
+    ],
+    "byteIdentical": false,
+    "toastCrop": [
+      1028,
+      819,
+      1436,
+      899
+    ]
+  },
+  {
+    "viewport": "mobile",
+    "before": [
+      390,
+      1197
+    ],
+    "after": [
+      390,
+      1197
+    ],
+    "byteIdentical": true,
+    "toastCrop": [
+      4,
+      1036,
+      386,
+      1116
+    ]
+  }
+]

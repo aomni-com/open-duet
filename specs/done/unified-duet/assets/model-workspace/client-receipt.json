@@ -1,0 +1,62 @@
+{
+  "status": "Controlled client propagation verified; CLI configuration integration and live slice-03 acceptance pending",
+  "date": "2026-10-03",
+  "baseCommit": "335a2d33da36245179a2f12c92c06b6c9043e678",
+  "runtime": "Bun 1.3.14",
+  "lockSha256": "0a9741ee09e13d737a4e513d1a5a518970071e03cd30a7b12c6391a28e558a75",
+  "installation": "Own worktree bun install --frozen-lockfile; dependency lock and patches unchanged",
+  "boundary": {
+    "input": "Host supplies DUET_WORKSPACE once before local model resolution",
+    "owner": "packages/agent/src/model-resolution/gateway-headers.ts",
+    "wire": "x-duet-workspace accompanies x-duet-tier only on Duet gateway requests",
+    "absence": "Missing selection remains absent; no membership or workspace fallback is chosen",
+    "lifetime": "One process owns one selected workspace; Pi resolved models and AI SDK clients capture headers at construction, embedding/catalog fetches read them per request"
+  },
+  "evidence": {
+    "test": "packages/agent/test/model-workspace.test.ts",
+    "network": "Controlled HTTP loopback responses only; external transport fetches redirected before network dispatch",
+    "sameCredentialTargets": ["harbor", "orchard"],
+    "actualRequests": ["Pi chat", "embedding", "direct catalog", "AI SDK catalog", "AI SDK chat", "AI SDK image", "AI SDK video"],
+    "excludedTransportCaptures": ["Vercel AI SDK fallback", "Vercel Pi route", "OpenAI Codex", "GitHub Copilot", "direct Anthropic"],
+    "responseAssertions": "Successful text, embedding vectors, catalog capability, image/video media types; controlled provider refusals also assert transmitted headers",
+    "limits": "This client fixture does not authorize workspaces, charge ledger rows, or execute saved CLI configuration. Backend/HTTP evidence is recorded separately in README.md. No paid providers, deployment, or live staging run."
+  },
+  "redGreen": [
+    "Pi chat capture failed with null workspace before shared header propagation; restored implementation passed",
+    "Direct catalog capture failed with null workspace before propagation; shared embedding/catalog selection passed after fix",
+    "AI SDK wire capture failed all eight workspace headers with the workspace reader deliberately removed; restored implementation passed",
+    "Vercel SDK fallback capture exposed both Duet headers; transport-specific omission passed after fix",
+    "Tier-only core and gateway fixtures failed under inherited DUET_WORKSPACE; explicit bound-VM fixture isolation passed"
+  ],
+  "gates": [
+    {
+      "cwd": "packages/agent",
+      "command": "DUET_WORKSPACE=fixture-workspace bun test test/model-workspace.test.ts test/model-dispatch.test.ts test/duet-gateway-base-url.test.ts test/tier-header.test.ts test/memory-embedding.test.ts",
+      "passed": 57,
+      "failed": 0,
+      "assertions": 210
+    },
+    {
+      "cwd": "packages/gateway",
+      "command": "DUET_WORKSPACE=fixture-workspace bun test src/runner/routing-config.test.ts src/runner/routing-release.test.ts",
+      "passed": 8,
+      "failed": 0,
+      "assertions": 103
+    },
+    {
+      "command": "bun run check-types",
+      "cwd": ["packages/agent", "packages/duet", "packages/gateway"],
+      "exitCode": 0
+    },
+    {
+      "command": "Focused oxlint and git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "review": {
+    "shape": "One header owner; no CLI/config/contract dependency, alias, additional context framework, or new dependency",
+    "diff": "Renamed all internal callers and isolated existing tier-only fixtures from host workspace input",
+    "docs": "Core README owns process-selection principle; choices ledger and this bounded receipt disclose lifetime and scope",
+    "codexCli": "Unavailable: configured gpt-6.1-sol rejected by account; independent coordinating review requested before integration"
+  }
+}

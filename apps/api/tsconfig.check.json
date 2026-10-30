@@ -1,0 +1,9 @@
+{
+  // check-types config. tsconfig.json drops the DOM lib to satisfy Vercel's
+  // @vercel/node build type-check (see tsconfig.json); this re-adds DOM so the
+  // test files, which use DOM Web-API types (Response ctor overloads, etc.),
+  // still type-check.
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "lib": ["ESNext", "DOM", "DOM.Iterable"], "jsx": "react-jsx" },
+  "include": ["src", "../../packages/gateway/src/backups/assets.d.ts"]
+}

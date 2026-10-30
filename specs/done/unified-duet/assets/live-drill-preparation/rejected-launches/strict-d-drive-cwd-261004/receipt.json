@@ -1,0 +1,17 @@
+{
+  "status": "failed-managed-input-no-strict-drill-pass",
+  "packetSha256": "7236f3902fdac172c219dcfcb013440dd47d6d4330ef426f2da84161e6a09b38",
+  "cleanupVerifiedAbsent": true,
+  "observedFailure": "Actual gateway managed native session refused",
+  "localRequestCounterexample": [
+    {
+      "path": [
+        "launch",
+        "cwd"
+      ],
+      "message": "cwd must stay inside the drive"
+    }
+  ],
+  "attribution": "Actual response status/body were not retained; the exact request independently fails the shared gateway input schema on its absolute cwd. Correct the fixture to use a drive-relative root and retain response metadata before retry.",
+  "publishedImage": "ghcr.io/aomni-com/duet-vm-image@sha256:d86476b81c0a520123e69ca5e49e6f6321c009f5fbd68c5faf7e53c4ec8f7869"
+}

@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Voice setup</title>
+    <script>
+      const requestedTheme = new URLSearchParams(location.search).get('theme')
+      if (requestedTheme === 'light' || requestedTheme === 'dark') {
+        document.documentElement.dataset.theme = requestedTheme
+      }
+    </script>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --canvas: #f4f1ec;
+        --surface: #fffdf9;
+        --ink: #1c1a24;
+        --muted: #6b6878;
+        --line: rgba(28, 26, 36, 0.14);
+        --accent: #4f46b8;
+        --accent-soft: #e7e5fb;
+        --good: #12805c;
+        --good-soft: #d9f3e7;
+        --warn: #b25e09;
+        --warn-soft: #fdeed8;
+        --shadow: 0 18px 50px rgba(37, 33, 66, 0.09);
+      }
+      :root[data-theme='dark'] {
+        --canvas: #131219;
+        --surface: #1d1c26;
+        --ink: #efedf6;
+        --muted: #a3a0b3;
+        --line: rgba(239, 237, 246, 0.14);
+        --accent: #a5a0f2;
+        --accent-soft: #2c2a4a;
+        --good: #55d6a4;
+        --good-soft: #17382c;
+        --warn: #f0a558;
+        --warn-soft: #40301a;
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) {
+          --canvas: #131219;
+          --surface: #1d1c26;
+          --ink: #efedf6;
+          --muted: #a3a0b3;
+          --line: rgba(239, 237, 246, 0.14);
+          --accent: #a5a0f2;
+          --accent-soft: #2c2a4a;
+          --good: #55d6a4;
+          --good-soft: #17382c;
+          --warn: #f0a558;
+          --warn-soft: #40301a;
+          --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        min-height: 100vh;
+        margin: 0;
+        overflow-x: hidden;
+        background: var(--canvas);
+        color: var(--ink);
+        font: 16px/1.55 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+      button { color: inherit; font: inherit; }
+      .shell { width: min(100% - 2rem, 42rem); margin: 0 auto; padding: 1.6rem 0 4rem; }
+      header { padding: .6rem 0 1.4rem; }
+      h1 { margin: 0 0 .45rem; font: 600 clamp(1.7rem, 5vw, 2.3rem)/1.1 ui-serif, Georgia, serif; letter-spacing: -.03em; }
+      .lede { margin: 0; color: var(--muted); }
+      .banner { display: none; margin: 0 0 1rem; padding: .85rem 1rem; border-radius: .9rem; background: var(--warn-soft); color: var(--warn); font-weight: 600; }
+      .banner.show { display: block; }
+      .done-banner { display: none; align-items: center; gap: .6rem; margin: 0 0 1rem; padding: .95rem 1.1rem; border-radius: .9rem; background: var(--good-soft); color: var(--good); font-weight: 650; }
+      .done-banner.show { display: flex; }
+      .card { margin-bottom: 1rem; border: 1px solid var(--line); border-radius: 1.15rem; background: var(--surface); box-shadow: var(--shadow); }
+      .card-head { padding: 1.05rem 1.15rem .35rem; }
+      .step { color: var(--accent); font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+      h2 { margin: .2rem 0 .2rem; font-size: 1.15rem; }
+      .hint { margin: 0; color: var(--muted); font-size: .88rem; }
+      .card-body { padding: .7rem .7rem 1rem; }
+      .provider, .choice { display: flex; align-items: center; gap: .85rem; min-height: 3.4rem; padding: .55rem .45rem; border-radius: .85rem; }
+      .provider + .provider, .choice + .choice { border-top: 1px solid var(--line); border-radius: 0; }
+      .provider-name { flex: 1; min-width: 0; font-weight: 640; }
+      .provider-note { display: block; color: var(--muted); font-size: .8rem; font-weight: 450; }
+      .pill { flex: 0 0 auto; padding: .28rem .7rem; border-radius: 999px; font-size: .78rem; font-weight: 700; }
+      .pill.on { background: var(--good-soft); color: var(--good); }
+      /* The neutral third state. A bare `.pill` carries padding and radius but
+         no colour, so "not connected" read as naked text beside two siblings
+         that are chips. Neutral rather than warn: nothing is in flight. */
+      .pill.off { background: var(--line); color: var(--muted); }
+      .pill.waiting { background: var(--warn-soft); color: var(--warn); }
+      .choice { cursor: pointer; }
+      .choice input { width: 1.35rem; height: 1.35rem; margin: 0; accent-color: var(--accent); }
+      .choice-label { flex: 1; min-width: 0; font-weight: 600; overflow-wrap: anywhere; }
+      .choice-detail { display: block; color: var(--muted); font-size: .8rem; font-weight: 450; }
+      .empty { padding: 1.1rem .45rem; color: var(--muted); }
+      .save-row { display: flex; align-items: center; gap: .8rem; padding: .35rem 1.15rem 1.15rem; }
+      .save-button { min-height: 2.8rem; padding: .55rem 1.3rem; border: 0; border-radius: .85rem; background: var(--accent); color: #fff; font-weight: 700; cursor: pointer; }
+      :root[data-theme='dark'] .save-button { color: #101711; }
+      @media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .save-button { color: #101711; } }
+      :root .save-button:disabled { cursor: default; opacity: 1; border-color: var(--line); background: color-mix(in srgb, var(--ink) 7%, transparent); color: var(--muted); }
+      .save-note { color: var(--muted); font-size: .85rem; }
+      footer { color: var(--muted); font-size: .85rem; }
+      @media (max-width: 30rem) {
+        .provider { align-items: stretch; flex-direction: column; }
+        .provider .pill { align-self: flex-start; }
+        .save-row { flex-wrap: wrap; }
+        .save-row .save-button { width: 100%; }
+        .save-row .save-note { width: 100%; }
+      }
+      .field-row { display: flex; flex-direction: column; gap: .7rem; padding: .35rem 1.15rem .55rem; }
+      .drop { display: grid; place-items: center; gap: .3rem; padding: 1.4rem 1rem; border: 1.5px dashed var(--line); border-radius: .95rem; background: var(--canvas); color: var(--muted); cursor: pointer; text-align: center; }
+      .drop.over { border-color: var(--accent); color: var(--accent); }
+      .drop strong { color: var(--ink); font-size: .95rem; }
+      .paste { min-height: 6.5rem; padding: .7rem .9rem; border: 1px solid var(--line); border-radius: .85rem; background: var(--canvas); color: var(--ink); font: inherit; resize: vertical; }
+      .paste:focus-visible, .drop:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+      .sample { display: flex; align-items: baseline; gap: .7rem; padding: .5rem .6rem; }
+      .sample + .sample { border-top: 1px solid var(--line); }
+      .sample-name { flex: 0 0 auto; font-weight: 640; overflow-wrap: anywhere; }
+      .sample-words { flex: 0 0 auto; color: var(--muted); font-size: .8rem; }
+      .sample-excerpt { flex: 1; min-width: 0; color: var(--muted); font-size: .84rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .licence { display: flex; gap: .5rem; padding: .3rem .6rem .6rem; }
+      .licence button { flex: 1; padding: .6rem .5rem; border: 1px solid var(--line); border-radius: .85rem; background: var(--surface); cursor: pointer; }
+      .licence button[aria-pressed='true'] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+      .licence-name { display: block; font-weight: 650; }
+      .licence-rule { display: block; margin-top: .15rem; color: var(--muted); font-size: .76rem; font-weight: 450; }
+      .found { display: grid; gap: .55rem; padding: .3rem .6rem .2rem; }
+      .found-row { display: flex; align-items: flex-start; gap: .8rem; }
+      .found-label { flex: 0 0 8.4rem; color: var(--muted); font-size: .8rem; font-weight: 650; letter-spacing: .04em; text-transform: uppercase; }
+      .found-value { min-width: 0; font-weight: 600; overflow-wrap: anywhere; }
+      .prose { color: var(--muted); font-size: .86rem; font-weight: 450; white-space: pre-wrap; }
+      @media (max-width: 30rem) {
+        .licence { flex-direction: column; }
+        .sample { align-items: stretch; flex-direction: column; gap: .2rem; }
+        .sample-excerpt { white-space: normal; }
+        /* Stacked rows size flex-basis on the HEIGHT, so the label's fixed
+           width would become fixed empty space above every value. */
+        .found-row { align-items: flex-start; flex-direction: column; gap: .35rem; }
+        .found-row .found-label { flex: 0 0 auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <h1>Teach your writer your voice</h1>
+        <p class="lede">
+          Your writer's one rule is that what it writes still sounds like you. Give it two or
+          three things you have already written and it records what to preserve — the fragments,
+          the swings in sentence length, the words you reach for on purpose.
+        </p>
+      </header>
+
+      <div id="problem" class="banner"></div>
+      <div id="done" class="done-banner">All set. Your writer knows your voice and is ready for a brief or a draft.</div>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="step">Step 1</span>
+          <h2>Something you have written</h2>
+          <p class="hint">Finished pieces read best — a post, an essay, a long email. Nothing you had edited by someone else.</p>
+        </div>
+        <div class="field-row">
+          <div id="drop" class="drop" role="button" tabindex="0">
+            <strong>Attach files</strong>
+            <span>or drop them here — .md, .txt</span>
+          </div>
+          <input id="files" type="file" multiple accept=".md,.markdown,.txt,text/plain,text/markdown" hidden />
+          <textarea id="paste" class="paste" placeholder="…or paste a piece here"></textarea>
+        </div>
+        <div id="samples" class="card-body"><div class="empty">Nothing added yet.</div></div>
+        <div class="save-row">
+          <button id="read" class="save-button" type="button">Read my writing</button>
+          <span id="read-note" class="save-note"></span>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="step">Step 2</span>
+          <h2>How far may an edit go?</h2>
+          <p class="hint">The one thing reading your work cannot tell it. You can change this any time.</p>
+        </div>
+        <div id="licence" class="licence"></div>
+        <div id="voice" class="card-body"></div>
+        <div class="save-row">
+          <button id="save" class="save-button" type="button" disabled>Use this voice</button>
+          <span id="save-note" class="save-note">Add some writing to finish.</span>
+        </div>
+      </section>
+
+      <footer>Your samples stay in this workspace. Your writer reads them to write in your voice, never to imitate anyone else's.</footer>
+    </main>
+
+    <script>
+      const LICENCES = [
+        { id: 'light', name: 'Light', rule: 'Copyedit only. No restructuring.' },
+        { id: 'balanced', name: 'Balanced', rule: 'Structure, then line. Hands back a rewrite.' },
+        { id: 'firm', name: 'Firm', rule: 'Restructure freely when the argument needs it.' },
+      ]
+      const problemNode = document.getElementById('problem')
+      const doneNode = document.getElementById('done')
+      const samplesNode = document.getElementById('samples')
+      const licenceNode = document.getElementById('licence')
+      const voiceNode = document.getElementById('voice')
+      const dropNode = document.getElementById('drop')
+      const filesInput = document.getElementById('files')
+      const pasteInput = document.getElementById('paste')
+      const readButton = document.getElementById('read')
+      const readNote = document.getElementById('read-note')
+      const saveButton = document.getElementById('save')
+      const saveNote = document.getElementById('save-note')
+      let current = { ready: true, profile: null, complete: false }
+      let pending = []
+
+      function el(tag, className, text) {
+        const node = document.createElement(tag)
+        if (className) node.className = className
+        if (text !== undefined) node.textContent = text
+        return node
+      }
+
+      function parseSections(markdown) {
+        if (!markdown) return []
+        return markdown
+          .split(/^##\s+/m)
+          .map(block => block.trim())
+          .filter(Boolean)
+          .map(block => {
+            const newline = block.indexOf('\n')
+            const title = (newline === -1 ? block : block.slice(0, newline)).trim()
+            const body = newline === -1 ? '' : block.slice(newline + 1).trim()
+            return { title, body: body.replace(/^[-*]\s+/gm, '• ') }
+          })
+          .filter(section => section.body !== '')
+      }
+
+      function render() {
+        problemNode.classList.toggle('show', !current.ready)
+        if (!current.ready) problemNode.textContent = current.message || 'This page could not reach your workspace.'
+        doneNode.classList.toggle('show', current.complete)
+
+        const profile = current.profile
+        const rows = (profile ? profile.samples : []).map(sample => {
+          const row = el('div', 'sample')
+          row.append(
+            el('span', 'sample-name', sample.name),
+            el('span', 'sample-words', sample.words + ' words'),
+            el('span', 'sample-excerpt', sample.excerpt),
+          )
+          return row
+        })
+        for (const name of pending) {
+          const row = el('div', 'sample')
+          row.append(el('span', 'sample-name', name), el('span', 'sample-words', 'not read yet'))
+          rows.push(row)
+        }
+        samplesNode.replaceChildren(
+          ...(rows.length === 0 ? [el('div', 'empty', 'Nothing added yet.')] : rows),
+        )
+
+        const licence = (profile && profile.licence) || 'balanced'
+        licenceNode.replaceChildren(
+          ...LICENCES.map(option => {
+            const button = el('button', undefined)
+            button.type = 'button'
+            button.setAttribute('aria-pressed', String(option.id === licence))
+            button.append(el('span', 'licence-name', option.name), el('span', 'licence-rule', option.rule))
+            button.addEventListener('click', () => void setLicence(option.id))
+            return button
+          }),
+        )
+
+        const sections = parseSections(profile && profile.voice)
+        if (sections.length === 0) {
+          voiceNode.replaceChildren()
+        } else {
+          const grid = el('div', 'found')
+          for (const section of sections) {
+            const row = el('div', 'found-row')
+            row.append(el('span', 'found-label', section.title), el('span', 'found-value prose', section.body))
+            grid.append(row)
+          }
+          voiceNode.replaceChildren(grid)
+        }
+
+        saveButton.disabled = profile === null || current.complete
+        saveNote.textContent = current.complete
+          ? 'Saved.'
+          : profile === null
+            ? 'Add some writing to finish.'
+            : ''
+      }
+
+      async function load() {
+        const response = await fetch('/api/status')
+        if (!response.ok) return
+        current = await response.json()
+        render()
+      }
+
+      function fail(message) {
+        problemNode.textContent = message
+        problemNode.classList.add('show')
+      }
+
+      async function send(path, init) {
+        problemNode.classList.remove('show')
+        const response = await fetch(path, init)
+        if (!response.ok) {
+          const payload = await response.json().catch(() => ({}))
+          fail(payload.error || 'Something went wrong. Try again in a minute.')
+          return null
+        }
+        return await response.json()
+      }
+
+      function addFiles(list) {
+        for (const file of list) pending.push(file.name)
+        filesInput.files = list
+        render()
+      }
+
+      dropNode.addEventListener('click', () => filesInput.click())
+      dropNode.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault()
+          filesInput.click()
+        }
+      })
+      dropNode.addEventListener('dragover', event => {
+        event.preventDefault()
+        dropNode.classList.add('over')
+      })
+      dropNode.addEventListener('dragleave', () => dropNode.classList.remove('over'))
+      dropNode.addEventListener('drop', event => {
+        event.preventDefault()
+        dropNode.classList.remove('over')
+        addFiles(event.dataTransfer.files)
+      })
+      filesInput.addEventListener('change', () => {
+        pending = []
+        addFiles(filesInput.files)
+      })
+
+      readButton.addEventListener('click', async () => {
+        const form = new FormData()
+        for (const file of filesInput.files) form.append('sample', file)
+        if (pasteInput.value.trim()) form.append('sample', pasteInput.value)
+        if (![...form.keys()].length) {
+          fail('Attach a file or paste some writing.')
+          return
+        }
+        readButton.disabled = true
+        readNote.textContent = 'Reading…'
+        const next = await send('/api/samples', { method: 'POST', body: form })
+        readButton.disabled = false
+        readNote.textContent = ''
+        if (next !== null) {
+          pending = []
+          current = next
+          render()
+        }
+      })
+
+      async function setLicence(licence) {
+        const next = await send('/api/licence', {
+          method: 'PUT',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ licence }),
+        })
+        if (next !== null) {
+          current = next
+          render()
+        }
+      }
+
+      saveButton.addEventListener('click', async () => {
+        saveButton.disabled = true
+        saveNote.textContent = 'Reading your voice…'
+        const next = await send('/api/confirm', { method: 'POST' })
+        if (next === null) {
+          saveButton.disabled = false
+          saveNote.textContent = ''
+          return
+        }
+        current = next
+        render()
+      })
+
+      new EventSource('/events').addEventListener('message', () => void load())
+      void load()
+    </script>
+  </body>
+</html>

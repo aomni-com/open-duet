@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Duet low-credit gate directions</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: #f8fafc;
+        background: #090b10;
+      }
+      button {
+        font: inherit;
+      }
+      .shell {
+        min-height: 100vh;
+        padding: 24px;
+        background:
+          radial-gradient(circle at 18% 15%, rgba(55, 86, 136, 0.27), transparent 34%),
+          radial-gradient(circle at 80% 85%, rgba(120, 70, 180, 0.18), transparent 38%), #090b10;
+      }
+      .top {
+        max-width: 1260px;
+        margin: 0 auto 18px;
+        display: flex;
+        gap: 16px;
+        align-items: end;
+        justify-content: space-between;
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(24px, 3vw, 38px);
+        letter-spacing: -0.035em;
+      }
+      .lede {
+        margin: 7px 0 0;
+        max-width: 720px;
+        color: #9ca3af;
+        line-height: 1.5;
+      }
+      .state-picker,
+      .direction-picker {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .pill {
+        border: 1px solid #343946;
+        background: rgba(20, 23, 31, 0.8);
+        color: #cbd5e1;
+        border-radius: 999px;
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+      .pill.active {
+        color: white;
+        border-color: #7773e8;
+        background: #39356f;
+      }
+      .canvas {
+        position: relative;
+        max-width: 1260px;
+        min-height: 680px;
+        margin: auto;
+        overflow: hidden;
+        border: 1px solid #252a34;
+        border-radius: 24px;
+        background: #0e1117;
+        box-shadow: 0 30px 100px rgba(0, 0, 0, 0.45);
+      }
+      .fake-app {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        grid-template-columns: 235px 1fr;
+        opacity: 0.46;
+      }
+      .rail {
+        border-right: 1px solid #2a2e38;
+        padding: 22px 16px;
+      }
+      .brand {
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+      .nav {
+        margin-top: 32px;
+        display: grid;
+        gap: 12px;
+        color: #aeb4bf;
+        font-size: 14px;
+      }
+      .main {
+        padding: 22px;
+      }
+      .quality {
+        height: 44px;
+        border-radius: 11px;
+        background: linear-gradient(90deg, #31465c, #565273, #25617f);
+      }
+      .thread {
+        height: 440px;
+      }
+      .composer {
+        height: 105px;
+        border: 1px solid #3a3e47;
+        background: #17191e;
+        border-radius: 16px;
+        padding: 18px;
+        color: #c4c8d0;
+      }
+      .scrim {
+        position: absolute;
+        inset: 0;
+        background: rgba(5, 7, 12, 0.69);
+        backdrop-filter: blur(6px);
+        display: grid;
+        place-items: center;
+        padding: 18px;
+      }
+      .gate {
+        width: min(92vw, 830px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: linear-gradient(145deg, rgba(28, 30, 39, 0.99), rgba(16, 18, 25, 0.99));
+        box-shadow: 0 34px 100px rgba(0, 0, 0, 0.6);
+      }
+      .compact {
+        max-width: 560px;
+        border-radius: 22px;
+        padding: 28px;
+      }
+      .showcase {
+        border-radius: 30px;
+        padding: 34px;
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 30px;
+      }
+      .urgent {
+        max-width: 650px;
+        border-radius: 20px;
+        padding: 0;
+        overflow: hidden;
+        border-color: rgba(251, 191, 36, 0.32);
+      }
+      .urgent .stripe {
+        height: 7px;
+        background: linear-gradient(90deg, #f59e0b, #f97316);
+      }
+      .urgent .inside {
+        padding: 30px;
+      }
+      .eyebrow {
+        color: #f4bd63;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-weight: 750;
+      }
+      h2 {
+        margin: 10px 0 8px;
+        font-size: clamp(25px, 3.2vw, 40px);
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+      }
+      .body {
+        color: #aeb5c2;
+        line-height: 1.55;
+        margin: 0;
+      }
+      .balance {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 7px;
+        margin-top: 18px;
+        padding: 10px 13px;
+        border: 1px solid #3e4654;
+        background: rgba(8, 10, 15, 0.5);
+        border-radius: 12px;
+      }
+      .balance strong {
+        color: #f5c46c;
+        font-size: 21px;
+      }
+      .options {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 22px;
+      }
+      .option {
+        min-height: 92px;
+        text-align: left;
+        color: white;
+        background: rgba(255, 255, 255, 0.035);
+        border: 1px solid #343946;
+        border-radius: 15px;
+        padding: 14px;
+        cursor: pointer;
+      }
+      .option.selected {
+        border-color: #8b86ff;
+        box-shadow: 0 0 0 3px rgba(114, 105, 255, 0.15);
+        background: rgba(103, 92, 255, 0.09);
+      }
+      .option strong,
+      .option span {
+        display: block;
+      }
+      .option span {
+        margin-top: 6px;
+        color: #929aa8;
+        font-size: 12px;
+      }
+      .cta {
+        width: 100%;
+        min-height: 48px;
+        border: 0;
+        border-radius: 14px;
+        margin-top: 14px;
+        color: #090b10;
+        background: white;
+        font-weight: 750;
+        cursor: pointer;
+      }
+      .waiting {
+        margin-top: 22px;
+        border: 1px solid #313744;
+        border-radius: 16px;
+        padding: 18px;
+        background: rgba(255, 255, 255, 0.025);
+        color: #cbd5e1;
+      }
+      .waiting b {
+        display: block;
+        margin-bottom: 6px;
+        color: white;
+      }
+      .benefits {
+        display: grid;
+        gap: 11px;
+        align-content: center;
+      }
+      .benefit {
+        border-left: 2px solid #6864d8;
+        padding: 4px 0 4px 13px;
+        color: #c4cad5;
+        font-size: 14px;
+      }
+      .footer {
+        max-width: 1260px;
+        margin: 16px auto 0;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 16px;
+        align-items: center;
+      }
+      .reaction {
+        border: 1px solid #292e38;
+        background: #10131a;
+        border-radius: 16px;
+        padding: 15px;
+        color: #cbd5e1;
+        line-height: 1.5;
+      }
+      .choose {
+        border: 0;
+        border-radius: 12px;
+        padding: 12px 16px;
+        background: #7773e8;
+        color: white;
+        font-weight: 750;
+        cursor: pointer;
+      }
+      .caption {
+        margin-top: 8px;
+        color: #848c99;
+        font-size: 12px;
+      }
+      @media (max-width: 760px) {
+        .shell {
+          padding: 12px;
+        }
+        .top {
+          display: block;
+        }
+        .state-picker {
+          margin-top: 14px;
+        }
+        .fake-app {
+          grid-template-columns: 1fr;
+        }
+        .rail {
+          display: none;
+        }
+        .main {
+          padding: 12px;
+        }
+        .showcase {
+          grid-template-columns: 1fr;
+          padding: 24px;
+          gap: 18px;
+        }
+        .options {
+          grid-template-columns: 1fr;
+        }
+        .option {
+          min-height: 70px;
+        }
+        .footer {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <div class="top">
+        <div>
+          <h1>Low-credit recovery gate</h1>
+          <p class="lede">
+            Same behavior, three visual attitudes. Switch the viewer state to confirm each direction
+            still works for trials, subscribers, and members.
+          </p>
+        </div>
+        <div class="state-picker" aria-label="Viewer state">
+          <button class="pill active" data-state="trial">Trial</button>
+          <button class="pill" data-state="subscriber">Subscriber</button>
+          <button class="pill" data-state="member">Member</button>
+        </div>
+      </div>
+      <div class="direction-picker" style="max-width: 1260px; margin: 0 auto 12px">
+        <button class="pill" data-direction="A">A · Calm recovery</button>
+        <button class="pill" data-direction="B">B · Plan showcase</button>
+        <button class="pill active" data-direction="C">C · Urgent stop</button>
+      </div>
+      <div class="canvas">
+        <div class="fake-app">
+          <aside class="rail">
+            <div class="brand">duet</div>
+            <div class="nav">
+              <span>Home</span><span>Agents</span><span>Drive</span><span>Train</span>
+            </div>
+          </aside>
+          <main class="main">
+            <div class="quality"></div>
+            <div class="thread"></div>
+            <div class="composer">install the gstack skill into this agent</div>
+          </main>
+        </div>
+        <div class="scrim">
+          <section id="gate" class="gate compact" role="dialog" aria-modal="true"></section>
+        </div>
+      </div>
+      <div class="footer">
+        <div>
+          <div id="reaction" class="reaction">
+            C treats low balance as an operational stop: strongest urgency and clearest boundary,
+            but least warm for conversion.
+          </div>
+          <div class="caption">Choose a direction, or reply with pieces to steal/skip.</div>
+        </div>
+        <button id="choose" class="choose">Choose C</button>
+      </div>
+    </div>
+    <script>
+      let state = 'trial',
+        direction = 'C'
+      const descriptions = {
+        A: 'A feels like a firm but respectful interruption: one job, little promotional copy, fastest path back.',
+        B: 'B makes the subscription decision feel substantial: larger plan presentation and more reassurance, but more visual weight.',
+        C: 'C treats low balance as an operational stop: strongest urgency and clearest boundary, but least warm for conversion.',
+      }
+      const copy = {
+        trial: {
+          eyebrow: 'Your trial is almost done',
+          title: 'Keep your workspace running',
+          body: 'You have $2.00 in AI credits left. Choose a plan now so your work continues without interruption.',
+        },
+        subscriber: {
+          eyebrow: 'Credits are running low',
+          title: 'Top up to keep going',
+          body: 'Your monthly credits and paid reserve are down to $2.00. Add to your paid reserve before AI work pauses.',
+        },
+        member: {
+          eyebrow: 'Workspace credits are running low',
+          title: 'The workspace owner needs to add credits',
+          body: 'This workspace has $2.00 in AI credits left. You can continue once the owner restores its balance.',
+        },
+      }
+      function options() {
+        if (state === 'member')
+          return '<div class="waiting"><b>Waiting for the workspace owner</b>This page checks billing automatically. It will reopen as soon as credits are available.</div>'
+        const vals =
+          state === 'trial'
+            ? [
+                ['Starter', '$20 / month'],
+                ['Pro', '$50 / month · recommended'],
+                ['Max', '$200 / month'],
+              ]
+            : [
+                ['$20', 'Paid reserve'],
+                ['$50', 'Paid reserve'],
+                ['$100', 'Paid reserve'],
+              ]
+        return (
+          '<div class="options">' +
+          vals
+            .map(
+              (v, i) =>
+                `<button class="option ${i === 1 ? 'selected' : ''}"><strong>${v[0]}</strong><span>${v[1]}</span></button>`,
+            )
+            .join('') +
+          '</div><button class="cta">' +
+          (state === 'trial' ? 'Subscribe and continue' : 'Add credits') +
+          '</button>'
+        )
+      }
+      function render() {
+        const c = copy[state],
+          gate = document.querySelector('#gate')
+        gate.className =
+          'gate ' + (direction === 'A' ? 'compact' : direction === 'B' ? 'showcase' : 'urgent')
+        const core = `<div><div class="eyebrow">${c.eyebrow}</div><h2>${c.title}</h2><p class="body">${c.body}</p><div class="balance"><strong>$2.00</strong><span>remaining</span></div>${options()}</div>`
+        gate.innerHTML =
+          direction === 'B'
+            ? core +
+              '<div class="benefits"><div class="benefit">Keep every conversation and file exactly where it is.</div><div class="benefit">Monthly credits renew with your plan.</div><div class="benefit">Paid reserve handles work beyond the monthly amount.</div></div>'
+            : direction === 'C'
+              ? '<div class="stripe"></div><div class="inside">' + core + '</div>'
+              : core
+        document.querySelector('#reaction').textContent = descriptions[direction]
+        document.querySelector('#choose').textContent = 'Choose ' + direction
+        document
+          .querySelectorAll('[data-state]')
+          .forEach(b => b.classList.toggle('active', b.dataset.state === state))
+        document
+          .querySelectorAll('[data-direction]')
+          .forEach(b => b.classList.toggle('active', b.dataset.direction === direction))
+      }
+      document.querySelectorAll('[data-state]').forEach(
+        b =>
+          (b.onclick = () => {
+            state = b.dataset.state
+            render()
+          }),
+      )
+      document.querySelectorAll('[data-direction]').forEach(
+        b =>
+          (b.onclick = () => {
+            direction = b.dataset.direction
+            render()
+          }),
+      )
+      document.querySelector('#choose').onclick = () =>
+        navigator.clipboard?.writeText(
+          `Choose ${direction}. State checked: ${state}. Steal: ____. Skip: ____.`,
+        )
+      render()
+    </script>
+  </body>
+</html>

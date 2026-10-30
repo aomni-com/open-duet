@@ -1,0 +1,172 @@
+{
+  "target": "Readable custom-domain recheck guidance in the unchanged docs layout; natural page growth preserves the full endpoint reference and footer.",
+  "comparison": "Same pinned Docker capture settings and optimized static page; metrics compare the shared-height overlap, without hiding newly grown content.",
+  "results": [
+    {
+      "viewport": "desktop",
+      "before": [
+        1440,
+        8914
+      ],
+      "after": [
+        1440,
+        9040
+      ],
+      "heightGrowth": 126,
+      "changedOverlapPixels": 1450105,
+      "changedOverlapRatio": 0.11297031199361803,
+      "rgbMeanAbsoluteDifference": 4.928350301024605,
+      "changedBounds": [
+        329,
+        2806,
+        1354,
+        8874
+      ],
+      "nativeCrop": [
+        300,
+        2350,
+        1380,
+        3400
+      ],
+      "beforeSha256": "9aa08c6c0c9f8753c45b9e44fb0d9dc201bd190ee31d030c144c9f392ee94587",
+      "afterSha256": "89f3356680571eed9fd97fa7ac5547dbdca74f11d9c9698f21fe8d8c11f90b01",
+      "identicalTopRows": 2806,
+      "shiftAlignedOverlapChangedPixels": 13393,
+      "shiftAlignedFinalMismatchRow": 8258,
+      "identicalShiftedBottomRows": 655
+    },
+    {
+      "viewport": "mobile",
+      "before": [
+        390,
+        13766
+      ],
+      "after": [
+        390,
+        14002
+      ],
+      "heightGrowth": 236,
+      "changedOverlapPixels": 859167,
+      "changedOverlapRatio": 0.1600314040165849,
+      "rgbMeanAbsoluteDifference": 9.725367156291172,
+      "changedBounds": [
+        17,
+        4554,
+        372,
+        13766
+      ],
+      "nativeCrop": [
+        0,
+        3800,
+        390,
+        5900
+      ],
+      "beforeSha256": "e8d61aa04b0e839930d8725ccbf1bc5ab9e823d34529ae085e1cac9313b2d80b",
+      "afterSha256": "e751392f8b89b03f88172cb1e0aa4648a7ca085e34b2bca12ec09f58c5e8b65f",
+      "identicalTopRows": 4554,
+      "shiftAlignedOverlapChangedPixels": 53337,
+      "shiftAlignedFinalMismatchRow": 13468,
+      "identicalShiftedBottomRows": 297
+    }
+  ],
+  "unchangedRegionCrops": [
+    {
+      "viewport": "desktop",
+      "label": "callout",
+      "currentBounds": [
+        320,
+        3680,
+        1365,
+        3960
+      ],
+      "beforeVerticalOffset": 126,
+      "pixelIdentical": true,
+      "changedPixels": 0,
+      "totalPixels": 292600
+    },
+    {
+      "viewport": "desktop",
+      "label": "endpoint-card",
+      "currentBounds": [
+        320,
+        3940,
+        1365,
+        4330
+      ],
+      "beforeVerticalOffset": 126,
+      "pixelIdentical": false,
+      "changedPixels": 1900,
+      "totalPixels": 407550
+    },
+    {
+      "viewport": "desktop",
+      "label": "footer",
+      "currentBounds": [
+        0,
+        8690,
+        1440,
+        9040
+      ],
+      "beforeVerticalOffset": 126,
+      "pixelIdentical": true,
+      "changedPixels": 0,
+      "totalPixels": 504000
+    },
+    {
+      "viewport": "mobile",
+      "label": "callout",
+      "currentBounds": [
+        0,
+        6160,
+        390,
+        6500
+      ],
+      "beforeVerticalOffset": 236,
+      "pixelIdentical": true,
+      "changedPixels": 0,
+      "totalPixels": 132600
+    },
+    {
+      "viewport": "mobile",
+      "label": "endpoint-card",
+      "currentBounds": [
+        0,
+        6470,
+        390,
+        7120
+      ],
+      "beforeVerticalOffset": 236,
+      "pixelIdentical": false,
+      "changedPixels": 3148,
+      "totalPixels": 253500
+    },
+    {
+      "viewport": "mobile",
+      "label": "codeblock",
+      "currentBounds": [
+        0,
+        700,
+        390,
+        1380
+      ],
+      "beforeVerticalOffset": 0,
+      "pixelIdentical": true,
+      "changedPixels": 0,
+      "totalPixels": 265200
+    },
+    {
+      "viewport": "mobile",
+      "label": "footer",
+      "currentBounds": [
+        0,
+        13720,
+        390,
+        14002
+      ],
+      "beforeVerticalOffset": 236,
+      "pixelIdentical": true,
+      "changedPixels": 0,
+      "totalPixels": 109980
+    }
+  ]
+}

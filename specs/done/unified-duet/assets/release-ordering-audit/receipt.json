@@ -1,0 +1,98 @@
+{
+  "status": "read-only-release-ordering-audit",
+  "auditedRootRevision": "9d1c66a2bff0eff538dbfa43ff8b5a9009eafd9f",
+  "auditedAdditiveRevision": "78c79989bf94bbac78bb3c2badd16dc9074394a6",
+  "executeCurrentFrozenAdditiveRevision": true,
+  "laterUploadExclusion": {
+    "rootRevision": "62ab80a60",
+    "receipt": "../release-integration/deployment-upload-exclusion.json",
+    "deploymentPerformed": false,
+    "operationalFilesIncluded": 0,
+    "requiresInclusionInFrozenAdditiveSource": true
+  },
+  "liveWrites": false,
+  "cliVersion": "54.21.1",
+  "nodeVersion": "24.14.0",
+  "readOnlyProject": {
+    "scope": "aomni",
+    "name": "duet-api",
+    "projectId": "prj_XNhS93vciHGDEc8dZBHg2q4Kzo5o",
+    "orgId": "team_I18zdvAznXXwqq1PcIampT1t",
+    "rootDirectory": "apps/api",
+    "productionConvexDeployKeyPresent": true,
+    "secretValuesRead": false
+  },
+  "primarySources": [
+    {
+      "path": "/Users/synthetic-user/.nvm/versions/node/v24.14.0/lib/node_modules/vercel/dist/commands/deploy/index.js",
+      "sha256": "390de7a283e40153d14ecb3fe8c8537f2a8e601d267dda102089d0eb4f474ea8",
+      "owner": "CLI build.env / runtime env argument paths and submission",
+      "evidenceLines": "1561-1574 parse separate inputs; 1597-1620 submit env and build.env separately"
+    },
+    {
+      "path": "/Users/synthetic-user/.nvm/versions/node/v24.14.0/lib/node_modules/vercel/dist/chunks/chunk-I4NRKN2Z.js",
+      "sha256": "6060d35e98ce7e7eb5dc2b07b73e70f36d00464aca33ff190c3010a78a463587",
+      "owner": "env parsing, source git metadata, project destination and upload ignore owner"
+    },
+    {
+      "path": "/Users/synthetic-user/.nvm/versions/node/v24.14.0/lib/node_modules/vercel/dist/chunks/chunk-ADTCIFMD.js",
+      "sha256": "dac4aced3bbe9290b00073181c4efe21b9a300537a17885614d8298c9a4e8a54",
+      "owner": "remote deployment request env/build.env",
+      "evidenceLines": "2280-2306 preserve env and build in requestBody passed to processDeployment"
+    },
+    {
+      "path": "/Users/synthetic-user/.codex/worktrees/232f/duet/scripts/run-vercel-deploy-rail.mjs",
+      "sha256": "8f26654261fa8b52f7f40d32bc3bd47052494220c7b839ae3d14020e5bf9c4a1",
+      "owner": "baked Convex release revision and ordinary rail"
+    },
+    {
+      "path": "/Users/synthetic-user/.codex/worktrees/232f/duet/apps/api/src/index.ts",
+      "sha256": "2da3fa188b9a7a96de61b86072500870b2a33862c74a770f31499506654d06bd",
+      "owner": "runtime API release probe"
+    },
+    {
+      "path": "/Users/synthetic-user/.codex/worktrees/232f/duet/apps/api/scripts/build-runtime-release.mjs",
+      "sha256": "0fb95d904c220316aa846b99893043fa49ca9a248961c177788f6be2accbdc29",
+      "owner": "content-addressed runtime inventory"
+    },
+    {
+      "path": "/Users/synthetic-user/.codex/worktrees/232f/duet/packages/gateway/src/runtime-release.ts",
+      "sha256": "2d58c3e64e964f2b8380c7532344d5cf407d3744dcbe8c039f1c0bfbc68d8cec",
+      "owner": "verified complete current/previous retention"
+    },
+    {
+      "path": "/Users/synthetic-user/.codex/worktrees/232f/duet/packages/gateway/src/update-gate.ts",
+      "sha256": "9df025a2fd01d4743a7e71425b97e84deba1e899d3d238570cf8b10c5351d985",
+      "owner": "equal runtime version no-op"
+    },
+    {
+      "path": "/Users/synthetic-user/.codex/worktrees/232f/duet/.vercelignore",
+      "sha256": "164353256c20837e9bf02ba57d7952ef7ea2b5830a81f5d0da44bd9d66a7dab6",
+      "owner": "upload exclusions"
+    },
+    {
+      "path": "/Users/synthetic-user/.codex/worktrees/232f/duet/.github/workflows/public-cli-release.yml",
+      "sha256": "c964c5c4ae8fc68238823899964ab44f0903e925f3cd6343d6380552b1f9be1e",
+      "owner": "main-push npm workflow trigger"
+    }
+  ],
+  "localGate": {
+    "existingRetentionTests": 2,
+    "assertions": 6,
+    "runtimeManagerSourceMatchesAuditedRoot": true
+  },
+  "notProved": [
+    "Actual remote additive build success",
+    "Actual production function SHA / backend SHA agreement",
+    "Actual R1/R2 served inventory difference",
+    "Actual live VM R1/R2 certification and held release retirement"
+  ],
+  "requiredPredicates": [
+    "Clean reviewed source checkout at current frozen additive SHA",
+    "No ignored held runtime/evidence artifacts in uploader file closure",
+    "API revision equals backend revision equals uploaded source SHA",
+    "R1 certified before subsequent activation",
+    "Distinct actual R2 runtime version; current R2 / previous R1 verified",
+    "Migration completion and refreshed complete database censuses before strict schema"
+  ]
+}

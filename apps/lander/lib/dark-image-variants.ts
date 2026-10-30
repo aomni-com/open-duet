@@ -1,0 +1,15 @@
+export const DARK_IMAGE_SOURCES = new Set([
+  '/blog/ai-agent-workspace-vs-control-surfaces/cover.png',
+  '/blog/ai-agents-legacy-applications/cover.png',
+  '/blog/ai-automation-agency-guide/ai-automation-agency-guide-cover.png',
+  '/blog/claude-code-mobile-iphone-android/cover.png',
+  '/blog/claude-code-skills-marketplace/cover.png',
+  '/blog/cut-enterprise-llm-spend/cover.png',
+  '/blog/does-chatgpt-claude-train-on-your-data/cover.png',
+  '/blog/duet-vs-open-claw-vs-hermes/cover.png',
+  '/blog/enterprise-ai-stack/cover.png',
+  '/blog/frontier-model-orchestrator/cover.png',
+  '/blog/gemini-3-pro-vs-claude-opus-4-8/cover.png',
+  '/blog/grok-4-5-vs-claude-opus-4-8/cover.png',
+  '/blog/kimi-k3-open-source-ai-models/cover.png',
+])

@@ -1,0 +1,177 @@
+[
+  {
+    "leg": 1,
+    "at": 1784480764875,
+    "overview": {
+      "autoTopupEnabled": false,
+      "autoTopupThresholdMicroUsd": 5000000,
+      "autoTopupAmountMicroUsd": 20000000,
+      "monthlySpendMicroUsd": 0,
+      "balanceMicroUsd": 5000000,
+      "consecutiveTopupFailures": 0,
+      "paidCreditBalanceMicroUsd": 5000000,
+      "monthlyCreditBalanceMicroUsd": 0,
+      "subscription": null,
+      "trial": {
+        "status": "available"
+      },
+      "lowCreditWarning": null,
+      "hasPaymentMethod": false,
+      "workspaces": [
+        {
+          "id": "ns75p7h0fksnpw8yk0s1ex1xxh8attcy",
+          "slug": "subscription-staging-e2e-synthetic",
+          "name": "Subscription staging-e2e-synthetic's Workspace"
+        }
+      ]
+    }
+  },
+  {
+    "leg": 4,
+    "at": 1784480835289,
+    "overview": {
+      "autoTopupEnabled": false,
+      "autoTopupThresholdMicroUsd": 5000000,
+      "autoTopupAmountMicroUsd": 20000000,
+      "monthlySpendMicroUsd": 5008352,
+      "monthlySpendPeriodKey": "2026-07",
+      "balanceMicroUsd": 19991648,
+      "consecutiveTopupFailures": 0,
+      "firstPaidAt": 1784480832248,
+      "paidCreditBalanceMicroUsd": -8352,
+      "monthlyCreditBalanceMicroUsd": 20000000,
+      "subscription": {
+        "plan": "starter",
+        "status": "active",
+        "isActive": true,
+        "currentPeriodStart": 1784480741000,
+        "currentPeriodEnd": 1787159141000,
+        "creditsExpireAt": 1787159141000,
+        "cancelAtPeriodEnd": false
+      },
+      "trial": {
+        "status": "ended"
+      },
+      "lowCreditWarning": null,
+      "hasPaymentMethod": true,
+      "workspaces": [
+        {
+          "id": "ns75p7h0fksnpw8yk0s1ex1xxh8attcy",
+          "slug": "subscription-staging-e2e-synthetic",
+          "name": "Subscription staging-e2e-synthetic's Workspace"
+        }
+      ]
+    }
+  },
+  {
+    "leg": 7,
+    "at": 1784480886749,
+    "overview": {
+      "autoTopupEnabled": false,
+      "autoTopupThresholdMicroUsd": 5000000,
+      "autoTopupAmountMicroUsd": 20000000,
+      "monthlySpendMicroUsd": 25022669,
+      "monthlySpendPeriodKey": "2026-07",
+      "balanceMicroUsd": 79977331,
+      "consecutiveTopupFailures": 0,
+      "firstPaidAt": 1784480832248,
+      "paidCreditBalanceMicroUsd": 19977331,
+      "monthlyCreditBalanceMicroUsd": 60000000,
+      "subscription": {
+        "plan": "pro",
+        "status": "active",
+        "isActive": true,
+        "currentPeriodStart": 1784480741000,
+        "currentPeriodEnd": 1787159141000,
+        "creditsExpireAt": 1787159141000,
+        "cancelAtPeriodEnd": false
+      },
+      "trial": {
+        "status": "ended"
+      },
+      "lowCreditWarning": null,
+      "hasPaymentMethod": true,
+      "workspaces": [
+        {
+          "id": "ns75p7h0fksnpw8yk0s1ex1xxh8attcy",
+          "slug": "subscription-staging-e2e-synthetic",
+          "name": "Subscription staging-e2e-synthetic's Workspace"
+        }
+      ]
+    }
+  },
+  {
+    "leg": 10,
+    "at": 1784480904080,
+    "overview": {
+      "autoTopupEnabled": false,
+      "autoTopupThresholdMicroUsd": 5000000,
+      "autoTopupAmountMicroUsd": 20000000,
+      "monthlySpendMicroUsd": 25025388,
+      "monthlySpendPeriodKey": "2026-07",
+      "balanceMicroUsd": 19977331,
+      "consecutiveTopupFailures": 0,
+      "firstPaidAt": 1784480832248,
+      "paidCreditBalanceMicroUsd": 19977331,
+      "monthlyCreditBalanceMicroUsd": 0,
+      "subscription": {
+        "plan": "pro",
+        "status": "canceled",
+        "isActive": false,
+        "currentPeriodStart": 1784480741000,
+        "currentPeriodEnd": 1787159141000,
+        "creditsExpireAt": 1784480903280,
+        "cancelAtPeriodEnd": false
+      },
+      "trial": {
+        "status": "ended"
+      },
+      "lowCreditWarning": null,
+      "hasPaymentMethod": true,
+      "workspaces": [
+        {
+          "id": "ns75p7h0fksnpw8yk0s1ex1xxh8attcy",
+          "slug": "subscription-staging-e2e-synthetic",
+          "name": "Subscription staging-e2e-synthetic's Workspace"
+        }
+      ]
+    }
+  },
+  {
+    "leg": 11,
+    "at": 1784480929317,
+    "overview": {
+      "autoTopupEnabled": false,
+      "autoTopupThresholdMicroUsd": 5000000,
+      "autoTopupAmountMicroUsd": 20000000,
+      "monthlySpendMicroUsd": 25031728,
+      "monthlySpendPeriodKey": "2026-07",
+      "balanceMicroUsd": 39970991,
+      "consecutiveTopupFailures": 0,
+      "firstPaidAt": 1784480832248,
+      "paidCreditBalanceMicroUsd": 19970991,
+      "monthlyCreditBalanceMicroUsd": 20000000,
+      "subscription": {
+        "plan": "starter",
+        "status": "active",
+        "isActive": true,
+        "currentPeriodStart": 1787159201000,
+        "currentPeriodEnd": 1789837601000,
+        "creditsExpireAt": 1789837601000,
+        "cancelAtPeriodEnd": false
+      },
+      "trial": {
+        "status": "ended"
+      },
+      "lowCreditWarning": null,
+      "hasPaymentMethod": true,
+      "workspaces": [
+        {
+          "id": "ns75p7h0fksnpw8yk0s1ex1xxh8attcy",
+          "slug": "subscription-staging-e2e-synthetic",
+          "name": "Subscription staging-e2e-synthetic's Workspace"
+        }
+      ]
+    }
+  }
+]

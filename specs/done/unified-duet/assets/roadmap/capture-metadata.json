@@ -1,0 +1,32 @@
+{
+  "expanded-before.jpg": {
+    "format": "JPEG",
+    "width": 648,
+    "height": 2219,
+    "sha256": "f1a72346ce8ba07d58d675d1e4b911b3b51fa2238707e4a369c23f7cc3f8eb54"
+  },
+  "overview.jpg": {
+    "format": "JPEG",
+    "width": 1280,
+    "height": 1305,
+    "sha256": "ed0583ebd98bbb0ca968060308a6aedfecb530c003eb11481990e8c3583d5c15"
+  },
+  "overview-before.jpg": {
+    "format": "JPEG",
+    "width": 1280,
+    "height": 1305,
+    "sha256": "ec325f8d7a12b1f2a7c714025af03c4572f0fd613e4427b6fc7647939364706b"
+  },
+  "expanded-narrow.jpg": {
+    "format": "JPEG",
+    "width": 648,
+    "height": 2857,
+    "sha256": "23fafb238ae2b84508102a4bd01c81f0b165faada9b5ec56cf3a44209d14ade3"
+  },
+  "expanded.jpg": {
+    "format": "JPEG",
+    "width": 1280,
+    "height": 1615,
+    "sha256": "8ad47e5e61c4566083044822151bf718668555587380d8cd9129f688e2261788"
+  }
+}

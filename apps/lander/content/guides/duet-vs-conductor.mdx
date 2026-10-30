@@ -1,0 +1,128 @@
+---
+title: 'Duet vs Conductor: Which AI Agent Platform is Better?'
+description: 'An honest comparison of Duet and Conductor. Local Mac execution vs cloud dev environments. See which AI agent runner is right for your team.'
+date: '2026-02-23'
+updatedAt: '2026-05-08'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/7.png'
+category: 'guides'
+tags: ['comparison', 'conductor', 'agent-orchestration', 'alternatives']
+type: 'guide'
+image: '/guides/duet-vs-conductor/cover.png'
+cta:
+  title: 'Cloud agents your team can share.'
+  subtitle: 'Duet runs your AI agents 24/7 in shared cloud sandboxes with persistent context. Not just on one Mac, not just for one person.'
+  buttonText: 'Try Duet free'
+  href: '/sign-in?from=guide-duet-vs-conductor'
+---
+
+# Duet vs. Conductor: Choosing the Best AI Agent Platform
+
+Conductor (by Melty Labs) is a macOS app that lets you run multiple Claude Code or Codex agents in parallel on your local machine. Duet is a managed cloud platform where AI agents run 24/7 with team context. Both aim to make AI agents more useful for real work — but they take very different approaches.
+
+---
+
+## What is Conductor?
+
+Conductor is a **macOS desktop application** that runs multiple AI coding agents simultaneously on your Mac. Built by a YC-backed 4-person team, it treats Claude Code and Codex instances like a team of junior engineers — dispatch them in parallel, review diffs, merge the best results.
+
+**Key characteristics:**
+
+- Parallel execution of Claude Code and Codex agents
+- Automated git worktree management per agent
+- Visual dashboard for monitoring agent progress
+- Diff-first code review workflow
+- Free software — you pay only for your existing AI subscriptions (Claude API, Claude Max, etc.)
+- macOS only (Apple Silicon required)
+
+## What is Duet?
+
+Duet is a **cloud dev environment** that gives every user and team a private cloud server with a persistent, always-on AI agent. Your agent has its own server with persistent memory, 500+ integrations out of the box, built-in app hosting, and scheduling — with a shared workspace where people assign work in durable sessions and inspect the resulting events and artifacts.
+
+---
+
+## Head-to-Head Comparison
+
+|                         | Duet                                           | Conductor                                         |
+| ----------------------- | ---------------------------------------------- | ------------------------------------------------- |
+| **Where it runs**       | Managed cloud (24/7)                           | Your Mac (local, stops when machine sleeps)       |
+| **Scope**               | Full-stack: coding, email, research, ops, GTM  | Coding only (parallel agent dispatch)             |
+| **User model**          | Team (shared workspace, sessions, org context) | Single user on a single Mac                       |
+| **Agent models**        | Claude Opus, Sonnet, GPT-5, multi-model        | Claude Code and Codex only                        |
+| **Persistence**         | Always-on agent with persistent memory         | Git commits only — no session memory              |
+| **Collaboration**       | Team-wide shared context                       | None                                              |
+| **Integrations**        | 500+ out of the box (managed connectors + MCP) | None                                              |
+| **Scheduling**          | Built-in cron, event triggers                  | None                                              |
+| **Platform**            | Web + mobile (cross-platform)                  | macOS only (Apple Silicon)                        |
+| **Enterprise features** | Team billing, org management, permissions      | None                                              |
+| **Orchestration**       | Workflow orchestration with dependencies       | Parallel execution only (no agent chaining)       |
+| **Pricing**             | Monthly plans with credits and reserve overage | Free (BYOK for AI APIs)                           |
+| **Maturity**            | Production product                             | Early stage (v0.36, 4-person team, $500K funding) |
+
+---
+
+## Where Conductor Excels
+
+**Parallel coding speed.** Conductor's core feature — running 3-5+ Claude Code agents on separate tasks simultaneously — is excellent for developers who want to parallelize coding work. Dispatch multiple features, review diffs, merge winners.
+
+**Zero additional cost.** Conductor itself is free. You use your existing Claude or OpenAI credentials. No new subscription needed.
+
+**Local execution.** Everything runs on your machine. If you're concerned about sending data to a cloud platform, Conductor keeps it local.
+
+**Beautiful UI.** For an early-stage product, Conductor has a polished visual dashboard for monitoring multiple agents. The diff-first review workflow is well-designed.
+
+## Where Duet Excels
+
+**Always-on cloud agent.** Conductor stops when your Mac sleeps. Duet runs 24/7 on a cloud server — no laptop required. Your agent monitors connected systems, runs scheduled tasks, and responds to events around the clock.
+
+**500+ integrations out of the box.** Conductor has zero integrations — it's a local agent runner with no connection to external services. Duet ships with 500+ managed integrations and MCP tools, so your agent can work with Linear, Slack, Gmail, Google Calendar, and hundreds more without any setup.
+
+**Beyond code.** Conductor only dispatches coding agents. Duet's agent handles email, research, operations, GTM, scheduling, content creation — the full operational stack.
+
+**Team collaboration.** Conductor is a single-user tool with zero collaboration features. Duet is built for teams — shared sessions, files, apps, organizational context, and multiple members working with the same persistent agent.
+
+**Persistent memory.** Conductor has no concept of memory beyond git commits. Duet's agent accumulates organizational knowledge over time — decisions, preferences, context, relationships — and gets better the longer you use it.
+
+**True orchestration.** Conductor does parallel execution, not orchestration. It can't chain agent outputs, define task dependencies, or create multi-step workflows. Duet supports scheduled and event-driven work that uses reusable instructions from Files, durable context from Train, and connected services from Integrations.
+
+**Cross-platform.** Conductor requires a Mac with Apple Silicon. Duet works on any device with a browser — desktop, mobile, any OS.
+
+**Production stability.** Conductor is at v0.36 with a 4-person team and $500K in funding. Early-stage software with expected rough edges. Duet is a production platform.
+
+---
+
+## They Could Be Complementary
+
+These tools aren't necessarily competitors. A developer on a team using Duet could also use Conductor locally to speed up their individual coding sessions. Conductor parallelizes coding tasks on your machine; Duet orchestrates AI agents across your team in the cloud.
+
+The question is whether you need a local coding parallelizer or a team agent platform. Most teams need the latter.
+
+---
+
+## Who Should Use What?
+
+**Choose Conductor if:**
+
+- You're a solo developer on a Mac who wants to parallelize Claude Code sessions
+- Your work is 100% coding and you just want to go faster
+- You don't need team collaboration, scheduling, or non-code capabilities
+- You want zero additional cost (free tool, use existing API keys)
+
+**Choose Duet if:**
+
+- You're a team that needs shared AI context and collaborative workflows
+- You want an always-on agent that works when your laptop is closed
+- You need AI for more than coding — email, research, ops, GTM, integrations
+- You want a production-grade platform, not an early-stage desktop app
+- You need cross-platform access from any device
+
+---
+
+## The Bottom Line
+
+Conductor is a clever local tool for parallelizing coding agents. It does one thing well — run multiple Claude Code sessions side by side. But it's a single-user, macOS-only, code-only, early-stage product with no persistence, no team features, and no orchestration beyond "run things in parallel."
+
+Duet is a full team agent platform. If you need more than parallel coding sessions — and most teams do — Duet is where you should start.
+
+**Ready to try Duet?** <ProductLink path="/sign-in">Deploy your agent in one click →</ProductLink>

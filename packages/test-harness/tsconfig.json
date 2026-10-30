@@ -1,0 +1,14 @@
+{
+  "extends": "@repo/typescript-config/base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["node", "bun"],
+    "allowImportingTsExtensions": true,
+    // @repo/test-harness is HTTP-mocking test infrastructure (fake-vag serves
+    // Response objects, demo probes drive fetch), so it opts into DOM Web-API
+    // types explicitly — base is Node-neutral and no longer provides them.
+    "lib": ["ESNext", "DOM", "DOM.Iterable"]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

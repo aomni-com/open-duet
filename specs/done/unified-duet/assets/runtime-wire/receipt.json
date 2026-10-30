@@ -1,0 +1,133 @@
+{
+  "scope": "Joined runtime wire, physical execution, desired state and admission; local source pass only",
+  "baseRevision": "0964a6cf18c9c0faa98d7fe6291ee11f219091f8",
+  "uncommittedSourceHashes": {
+    "packages/contract/src/deployment/index.ts": "df952ffa2cdbe69bc303628c81089ea05af36a397186b306ff7ed52aa69d7ac8",
+    "packages/contract/src/gateway/index.ts": "39ddb6511520ebb4bc832e9c582eff1e9ef960255fb84d9f01219e30ba0f58ad",
+    "packages/contract/src/vm/index.test.ts": "5830814232e1bc7a22b3cef3471d5a73d1fbd92864038fb07035fa9491e697e7",
+    "packages/contract/src/vm/index.ts": "4f6c6d022e4c901031543ba01f0bab0edc442830ba294249fd38b0c231400fa4",
+    "packages/contract/src/vm/runtime-release.test.ts": "114ecab48bf497ec62518cbbb8a8e7ed46676d0b4fdc4b529f6e3f393387d4d8",
+    "packages/gateway/README.md": "afb2e71972e41d3f2ed5b073b9ca81183cf589d19acdbca209a2535a75e047f2",
+    "packages/gateway/package.json": "9a55c1f869b4f44bbdefb90c3ca2a170f947b3882dbe017cbcc3e62ba0e2af61",
+    "packages/gateway/src/agents/memory-warmup.ts": "25b42c3122ec8f722e07a4ac1c7815abb4f5a81ca753a25aa86386ac5b12e5e5",
+    "packages/gateway/src/backups/routes.test.ts": "7d5d67bc4914edfb7d31d13791bcb12f97830dc93642c38c6d3a3291e181700d",
+    "packages/gateway/src/backups/worker.ts": "47ff1d421d032d13fcd67ff74fc2bf58e2bd2f2f545ac4d53a1d4f074d08d764",
+    "packages/gateway/src/connected-providers/connect-session.ts": "52fc9828d42ae645b0f75b9e80e513b6cbc531ecf4673e577e1ca95292c6f053",
+    "packages/gateway/src/desired-state.test.ts": "5d3ba1f320415d6b52f135577c71821caef9bf1d34716a59c5ec2f06d591697d",
+    "packages/gateway/src/desired-state.ts": "86345320b249aba0b9e6504aa0e6f3dd4a14b7435bc1cdac0e23490fc17d28eb",
+    "packages/gateway/src/duet-cli.ts": "71a30b597c70dd1acdaafad97578923029ea2d0f3ffa2f7b8588661f6d7bed7b",
+    "packages/gateway/src/memory-reflect.ts": "27161259e4a1cad607282e7e9faae43b82953b3342331c2065ec5d85d58aa7ac",
+    "packages/gateway/src/runner/process-runner.ts": "32a2aa16fdfb49d3967a2599dcc3d60542b4aa42429e68e14922d8d7f873f9a6",
+    "packages/gateway/src/runtime-update.ts": "8c376f1544977444242e0c606791a24f32fa7688897349abdfc29327518f7483",
+    "packages/gateway/src/runtime/env.ts": "e5b679c55d9f00f72c1193dbf6e2c8d2d118006a50679c85bc7e02b3d33c6557",
+    "packages/gateway/src/runtime/http.ts": "2137df926ee4fba36a11cf172783e9b74baeb1fd71ee461c31b0a9d339266035",
+    "packages/gateway/src/runtime/paths.test.ts": "e2b7e87d5b21a6e7a7f8a26b81d84777e602d5250b7b1b3ac92914382f40cb20",
+    "packages/gateway/src/runtime/paths.ts": "a0685b1bd53ee50d42fb4f7123aa586ebc84abba3535949be4bb732416cbec89",
+    "packages/gateway/src/testing/legacy-vm-wire.ts": "1ce0716373da3b7ceb21d50ca0b578322164b55d1a06ac9ff00800b2bf4df10b",
+    "packages/gateway/src/train-runner.ts": "6210056c73d6d999c6edf8b92b5bda0a458b7f82443904b033884156f98b4405",
+    "packages/gateway/src/train/duet-cli-runner.ts": "f7cd7517ee3f37802112bc14447f579315500520cc2373fb9a85e9dc6a801868",
+    "packages/gateway/src/train/pipeline.test.ts": "5508c5a19bed51756ed3b40cb4af612064873c75ea1dbfe7cc163057999c1566",
+    "packages/gateway/src/vm/phone-home.ts": "41d1dd1ad9f9543d8a99f44482409285631d92b700f7b8667766798244cb49c9",
+    "packages/gateway/src/vm/sync-client.test.ts": "299e8000f9115d64f39440df574de77072febf44cbe9eb68394aebe8652f05f0",
+    "packages/gateway/src/vm/sync-client.ts": "2685f2b513ef0ab05c91b41108d9bd1803a399328fb41765f9bbe2986152fe91",
+    "packages/gateway/src/vm/transition-wire.test.ts": "85046ecb357de05940bd1cfd224fd055031ef7b3a06b7047dd9b39272a2fdae2"
+  },
+  "exactRuntime": {
+    "formatVersion": 1,
+    "version": "0.0.0+28d5f58b652c8c49a07c422c2005cbec57a795165cb9ea925dbd839265c98e24",
+    "artifacts": [
+      {
+        "name": "duet",
+        "sha256": "aced8a69e0777db92ec1ab27b6ae1a3a59ad41d99a1c74647119b5b88c15fcae",
+        "byteLength": 118032512,
+        "mode": 493
+      },
+      {
+        "name": "helper.js",
+        "sha256": "9f3b812d632ed4d48c6fe3387c8bec50993902a2891fbb8190d9ef6974db4f47",
+        "byteLength": 908578,
+        "mode": 420
+      },
+      {
+        "name": "index.js",
+        "sha256": "e98f3d2ad8456adfaef847c1205a39adc3b68cef8b4efc09c5d6120d445163de",
+        "byteLength": 2225264,
+        "mode": 420
+      },
+      {
+        "name": "initdb.wasm",
+        "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+        "byteLength": 169969,
+        "mode": 420
+      },
+      {
+        "name": "pglite.data",
+        "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+        "byteLength": 5289109,
+        "mode": 420
+      },
+      {
+        "name": "pglite.wasm",
+        "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+        "byteLength": 8739902,
+        "mode": 420
+      },
+      {
+        "name": "photon_rs_bg.wasm",
+        "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+        "byteLength": 1881634,
+        "mode": 420
+      },
+      {
+        "name": "vector.tar.gz",
+        "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+        "byteLength": 46108,
+        "mode": 420
+      }
+    ]
+  },
+  "frozenPayload": "/tmp/unified-duet-root06-reviewed-built/runtime-release",
+  "gates": {
+    "contract": "35 pass/101 assertions; owning full typecheck green",
+    "gatewayHttpRouting": "168 pass/886 assertions before late backup guard; affected backup/updater tests rerun below",
+    "gatewaySubprocess": "92 pass/272 assertions; provider PATH regression red then 15 pass/39 assertions green",
+    "managerWireTrain": "77 pass/358 assertions; relevant late-fix subset26 pass/122 assertions",
+    "backupAdmission": "real gateway start202 red; guard409 green;15 pass/68 assertions inclworker recovery",
+    "harness": "96 pass/281 assertions across six files; app-domain5 pass/11 assertions; full types green",
+    "api": "38 pass/194 assertions across constructor/transport/packaging/poll files; full types green",
+    "actualVercelFunction": "Node24.14.0 serves all8 exact files/modes/lengths/hashes and denies unauthenticated manifest",
+    "actualLinuxCLI": "same frozen28d release, physical and current/duet RPC/image/rg/durablememory/pgvector/TUI; each PGlite sidecar missing/corrupt fails; Photon missing/corrupt fails; no network/checkout/installtree"
+  },
+  "review": {
+    "shape": "single desired runtime; removed obsolete component parameter/npm owners; one physical-path owner and shared existing maintenance flag",
+    "independentFull": "found missing backup admission and stale app-domain fixtures; both reproduced and fixed",
+    "independentCorrection": "no actionable findings;28 focused tests passed",
+    "docs": "root/API/gateway/harness release vocabulary and links updated"
+  },
+  "transitionRemovalOwner": "slice10 removes equal gateway aliases, frozen old parser fixture and diagnostic mappings after every old VM can cross the API cutover",
+  "limits": [
+    "No live API/backend deployment or image publication",
+    "No VM mutation, registry publication or secret transfer",
+    "Image fresh boot and first old-layout adoption belong separate slices",
+    "Root full suite and dedicated staging journey remain final closeout gates"
+  ],
+  "captureHashes": {
+    "backup-admission-green.txt.gz": "6f2ba54c9244aa2d21fae70ad93511bf62e2d43fc1532f8536b9423657801a0b",
+    "backup-admission-red.txt.gz": "0e5dd153b00c0541d4642a598aa8b6fbc0f0c165261a1fc002a00d5378fa579c",
+    "build-vercel.txt.gz": "3101b17b253b04ddab5f59bf5b52e1b7f95858d61edf15cc7d2422157724785d",
+    "joined-fix-tests.txt.gz": "8bb38db29ffe3b6a03e14bc7fd18eba3ebbb723e86b03122e43019c965506822",
+    "manifest.json": "75e189d1aea06ee69a68aaca640a9752852afdb8e55f786720f7c05b261a007d",
+    "native-physical.json.gz": "f935d844d25254530e35410a56a0b27f793517987eab6265063f1ef19f5ea2bd",
+    "native-proof.txt.gz": "082709d4a8688954cb293b2e87e9003fe58c17bc0401261f5c0b6539afeda1db",
+    "native-symlink.json.gz": "81caef8331c8d6c54f872c49c49fe961972a9709f9bed7a02b94ee4c459c669d",
+    "native-tui.ansi.gz": "b14b6e28fa174d768ec75cc777b66fb7c884a7bfa5a6b68729fffc5ff19c4dec",
+    "node-transport.txt.gz": "01c0755f98e795c684a02e91c8718655c43e29d01d33839cd460c7f4836dec43",
+    "photon-corrupt-red.txt.gz": "b7bfa01d8dfd7e7d977b8d7935816747f3287320d12265331985bb68d3e053ee",
+    "photon-missing-red.txt.gz": "b7bfa01d8dfd7e7d977b8d7935816747f3287320d12265331985bb68d3e053ee",
+    "provider-path-green.txt.gz": "5990fbb3bea7b6fd35f8a508929a02eebc9b680e7d1477b09fc1d3dd923f84f6",
+    "provider-path-red.txt.gz": "968b22e60a323e59c44f7aa68dde090c57007ab4d216a990cb12515423c20790",
+    "register-alias-red.txt.gz": "e5a07441bfd2a921b20766103df42db5cc1306cb4109ca774140eaf6da547599",
+    "sync-alias-red.txt.gz": "45e6cf6b86f7ce8782ac478914fa9c9db4bf5ed7c33f40c19861b39304e8a368",
+    "transition-green.txt.gz": "af6b5f7045e3a2319e087226ca2d8b435e0e9995fa3e8c87d5e3965bf60b8321"
+  }
+}

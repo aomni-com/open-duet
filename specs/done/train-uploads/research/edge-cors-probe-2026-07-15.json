@@ -1,0 +1,111 @@
+{
+  "probedAt": "2026-07-15T12:43:47.422Z",
+  "vm": "workspace-redacted",
+  "transcript": [
+    {
+      "name": "healthz WITH edge token",
+      "request": {
+        "method": "GET",
+        "url": "https://service.example.invalid:3000/healthz",
+        "headers": {
+          "x-exedev-authorization": "<redacted>"
+        }
+      },
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "content-length": "2",
+        "content-type": "text/plain;charset=utf-8",
+        "date": "Wed, 15 Jul 2026 12:43:46 GMT",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-trace-id": "e52beec066e034b4045255446fcf7b80"
+      },
+      "body": "ok"
+    },
+    {
+      "name": "healthz NO credentials",
+      "request": {
+        "method": "GET",
+        "url": "https://service.example.invalid:3000/healthz",
+        "headers": {}
+      },
+      "status": 307,
+      "statusText": "Temporary Redirect",
+      "headers": {
+        "content-length": "189",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 15 Jul 2026 12:43:46 GMT",
+        "location": "https://service.example.invalid:3000/__exe.dev/login?exedev_host=service.example.invalid%3A3000&redirect=%2Fhealthz",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-trace-id": "e52beec066e034b4045255446fcf7b80"
+      },
+      "body": "<a href=\"https://service.example.invalid:3000/__exe.dev/login?exedev_host=service.example.invalid%3A3000&amp;redirect=%2Fhealthz\">Temporary Redirect</a>.\n\n"
+    },
+    {
+      "name": "preflight OPTIONS NO credentials (the real browser shape)",
+      "request": {
+        "method": "OPTIONS",
+        "url": "https://service.example.invalid:3000/v1/train/uploads/probe.bin",
+        "headers": {
+          "origin": "https://service.example.invalid",
+          "access-control-request-method": "PUT",
+          "access-control-request-headers": "authorization,x-exedev-authorization,content-type"
+        }
+      },
+      "status": 307,
+      "statusText": "Temporary Redirect",
+      "headers": {
+        "content-length": "0",
+        "date": "Wed, 15 Jul 2026 12:43:46 GMT",
+        "location": "https://service.example.invalid:3000/__exe.dev/login?exedev_host=service.example.invalid%3A3000&redirect=%2Fv1%2Ftrain%2Fuploads%2Fprobe.bin",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-trace-id": "e52beec066e034b4045255446fcf7b80"
+      },
+      "body": ""
+    },
+    {
+      "name": "preflight OPTIONS WITH edge token",
+      "request": {
+        "method": "OPTIONS",
+        "url": "https://service.example.invalid:3000/v1/train/uploads/probe.bin",
+        "headers": {
+          "origin": "https://service.example.invalid",
+          "access-control-request-method": "PUT",
+          "access-control-request-headers": "authorization,content-type",
+          "x-exedev-authorization": "<redacted>"
+        }
+      },
+      "status": 401,
+      "statusText": "Unauthorized",
+      "headers": {
+        "content-length": "24",
+        "content-type": "application/json",
+        "date": "Wed, 15 Jul 2026 12:43:46 GMT",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-trace-id": "e52beec066e034b4045255446fcf7b80"
+      },
+      "body": "{\"error\":\"unauthorized\"}"
+    },
+    {
+      "name": "gateway route WITH edge token, no VM bearer",
+      "request": {
+        "method": "GET",
+        "url": "https://service.example.invalid:3000/v1/train/uploads",
+        "headers": {
+          "origin": "https://service.example.invalid",
+          "x-exedev-authorization": "<redacted>"
+        }
+      },
+      "status": 401,
+      "statusText": "Unauthorized",
+      "headers": {
+        "content-length": "24",
+        "content-type": "application/json",
+        "date": "Wed, 15 Jul 2026 12:43:47 GMT",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-trace-id": "e52beec066e034b4045255446fcf7b80"
+      },
+      "body": "{\"error\":\"unauthorized\"}"
+    }
+  ]
+}

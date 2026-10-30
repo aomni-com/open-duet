@@ -1,0 +1,122 @@
+{
+  "status": "complete",
+  "generations": [
+    {
+      "role": "image:google",
+      "model": "google/gemini-3.1-flash-image",
+      "exitCode": 0,
+      "bytes": 1063912,
+      "validMedia": true,
+      "sha256": "59e8142995ab530d098603848b4e99cfe99a265d2807219fbd2ee8489ae34c5b"
+    },
+    {
+      "role": "video:google",
+      "model": "google/veo-3.1-generate-001",
+      "exitCode": 0,
+      "bytes": 289711,
+      "validMedia": true,
+      "sha256": "72c130f13dfb33ed0d8267db74e9b7678ed54b46bee1e030718c82eb6927f50b"
+    },
+    {
+      "role": "video:grok",
+      "model": "spacexai/grok-imagine-video-1.5",
+      "exitCode": 0,
+      "bytes": 235365,
+      "validMedia": true,
+      "sha256": "66daa5a924e12fec82d98a1b0aaf21494265ee4bed2415724a2372e70b4a03f5"
+    },
+    {
+      "role": "video:seedance",
+      "model": "bytedance/seedance-2.5",
+      "exitCode": 0,
+      "bytes": 2267419,
+      "validMedia": true,
+      "sha256": "f88ec0945ef8eff4080fc9cc3defbf338210c2ec451ecfd3460c012d59a229d9"
+    }
+  ],
+  "nondefault": [
+    {
+      "model": "spacexai/grok-4.7",
+      "responseModel": "spacexai/grok-4.7",
+      "result": "42"
+    },
+    {
+      "model": "zai/glm-5.3",
+      "responseModel": "zai/glm-5.3",
+      "result": "42"
+    }
+  ],
+  "commands": [
+    {
+      "command": "--version",
+      "startedAt": 1790559988757,
+      "timeoutMs": 30000,
+      "status": "completed",
+      "elapsedMs": 18,
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "command": "model",
+      "model": "google/gemini-3.1-flash-image",
+      "startedAt": 1790559988905,
+      "timeoutMs": 300000,
+      "status": "completed",
+      "elapsedMs": 12114,
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "command": "model",
+      "model": "google/veo-3.1-generate-001",
+      "startedAt": 1790560001026,
+      "timeoutMs": 300000,
+      "status": "completed",
+      "elapsedMs": 33646,
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "command": "model",
+      "model": "spacexai/grok-imagine-video-1.5",
+      "startedAt": 1790560034675,
+      "timeoutMs": 300000,
+      "status": "completed",
+      "elapsedMs": 29106,
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "command": "model",
+      "model": "bytedance/seedance-2.5",
+      "startedAt": 1790560063783,
+      "timeoutMs": 600000,
+      "status": "completed",
+      "elapsedMs": 174943,
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "command": "train",
+      "model": "luna",
+      "startedAt": 1790560238736,
+      "timeoutMs": 300000,
+      "status": "completed",
+      "elapsedMs": 6839,
+      "exitCode": 0,
+      "signal": null
+    }
+  ],
+  "agentVersion": "0.3.28",
+  "memoryModel": "openai/gpt-6-luna",
+  "roles": {
+    "image:google": "google/gemini-3.1-flash-image",
+    "video:google": "google/veo-3.1-generate-001",
+    "video:grok": "spacexai/grok-imagine-video-1.5",
+    "video:pro": "bytedance/seedance-2.5",
+    "video:seedance": "bytedance/seedance-2.5",
+    "video": "bytedance/seedance-2.0-fast"
+  },
+  "skillHash": "49f48248d9553552b6266581d0d120fc527a814524373051d30b03024e52c867",
+  "trainExitCode": 0
+}

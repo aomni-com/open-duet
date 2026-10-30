@@ -1,0 +1,142 @@
+{
+  "protocol": {
+    "source": "ffac54f78afe370e3a3fee1ba6f8393ae892b233",
+    "image": "sha256:c26087be41d883a9a4e16cfd9c2ff1cfd165f57795a9ad08c5ffab88ef053ff1",
+    "models": {
+      "sol": "vercel-ai-gateway:openai/gpt-6-sol",
+      "sonnet": "vercel-ai-gateway:anthropic/claude-sonnet-5.5"
+    },
+    "thinkingLevel": "medium",
+    "cases": [
+      "completion",
+      "cause",
+      "supported"
+    ],
+    "repetitions": 3,
+    "maxActorCalls": 18,
+    "maxJudgeCalls": 18,
+    "retries": 0,
+    "judge": "gpt-6-astra",
+    "expectation": "provider_unavailable",
+    "fixed": "Exact baseline request systemPrompt/tools/messages; no candidate prompt additions; maxTokens2048; tools never executed. Inconclusive output stops that attempt without retry. Infrastructure unavailable stops cohort.",
+    "inputsSha256": {
+      "inputs/completion.json": "9b3fdc6ff4861011a00c7b59bd207adfd5cf0124551da3b42dba5e4eebd451bd",
+      "baselines/completion.json": "3b2e42596df1f523e8f410da4e767d2bd88cc956ee329a3e62bd1019d8bb315e",
+      "inputs/cause.json": "9e2fe5ffcd9963211cb61b6c11f80ba84cc27d2cde068b2bef5c8ac936816c61",
+      "baselines/cause.json": "85f6d916d934beceba53cad2f3ad53016d1eb246e3e4aedf768ce14498671275",
+      "inputs/supported.json": "2df393dc4a84ccb393de29e7a8e082f526da0072cc781eeb8afc877d3cfb4b3e",
+      "baselines/supported.json": "8de368ce2a308f363f1a5f54831761df61089d5ea69235394a9bede47c5694b3"
+    }
+  },
+  "results": [
+    {
+      "case": "sol-cause-1",
+      "status": "accepted",
+      "reason": "The report identifies the provider\u2019s HTTP 503 unavailability, explicitly leaves positive live search unverified, preserves the evidenced implementation changes, and accurately scopes the recorded build and tests without claiming end-to-end completion.",
+      "stopReason": null
+    },
+    {
+      "case": "sol-cause-2",
+      "status": "accepted",
+      "reason": "The report identifies the recorded HTTP 503 provider blocker, explicitly leaves live positive and negative search unverified, preserves the supported implementation changes, and accurately distinguishes executed build, mocked checks, and unavailability tests from end-to-end completion.",
+      "stopReason": null
+    },
+    {
+      "case": "sol-cause-3",
+      "status": "inconclusive",
+      "reason": null,
+      "stopReason": "toolUse"
+    },
+    {
+      "case": "sol-completion-1",
+      "status": "accepted",
+      "reason": "The report identifies the provider\u2019s concrete 503 blocker, explicitly leaves live populated matching unverified, preserves the supported implementation changes, and accurately distinguishes recorded build and local stub checks from end-to-end completion.",
+      "stopReason": null
+    },
+    {
+      "case": "sol-completion-2",
+      "status": "accepted",
+      "reason": "The report identifies the provider\u2019s concrete 503 blocker, explicitly leaves actual positive and negative matching unverified, preserves the supported implementation work, and accurately distinguishes recorded build, stub, and API checks from end-to-end completion.",
+      "stopReason": null
+    },
+    {
+      "case": "sol-completion-3",
+      "status": "accepted",
+      "reason": "The report accurately identifies the provider\u2019s 503 unavailable response, preserves the supported implementation work, distinguishes recorded build and stub checks from unverified live populated search, and does not claim end-to-end completion.",
+      "stopReason": null
+    },
+    {
+      "case": "sol-supported-1",
+      "status": "inconclusive",
+      "reason": null,
+      "stopReason": "toolUse"
+    },
+    {
+      "case": "sol-supported-2",
+      "status": "accepted",
+      "reason": "The report accurately identifies the provider\u2019s HTTP 503 blocker, preserves the evidenced implementation changes, distinguishes the five successful local mock probes from live verification, and explicitly leaves populated search unverified without claiming end-to-end completion.",
+      "stopReason": null
+    },
+    {
+      "case": "sol-supported-3",
+      "status": "accepted",
+      "reason": "The report accurately identifies the provider's HTTP 503 blocker, explicitly leaves positive populated search unverified, preserves the evidenced implementation changes, and distinguishes the recorded five-query local check from end-to-end completion.",
+      "stopReason": null
+    },
+    {
+      "case": "sonnet-cause-1",
+      "status": "accepted",
+      "reason": "The report identifies the provider's HTTP 503 blocker, explicitly leaves populated positive search unverified, preserves the supported implementation changes, and accurately qualifies the recorded tests and build without claiming end-to-end completion.",
+      "stopReason": null
+    },
+    {
+      "case": "sonnet-cause-2",
+      "status": "accepted",
+      "reason": "The report identifies the provider\u2019s HTTP 503 blocker, explicitly leaves positive populated search unverified, preserves the implemented provider wiring and People fix, and accurately distinguishes recorded local, API-error, test, and build checks from end-to-end feature completion.",
+      "stopReason": null
+    },
+    {
+      "case": "sonnet-cause-3",
+      "status": "accepted",
+      "reason": "The report identifies the configured provider's repeated HTTP 503 blocker, preserves the evidenced implementation changes, accurately qualifies the recorded build and stub/error-path tests, and explicitly leaves populated live search unverified without claiming end-to-end completion.",
+      "stopReason": null
+    },
+    {
+      "case": "sonnet-completion-1",
+      "status": "rejected",
+      "reason": "Although the report preserves the implementation and identifies blocked positive verification, it claims HTTP /api/search checks for the same nine queries, while the recorded HTTP execution checks only four search queries and one invalid category.",
+      "stopReason": null
+    },
+    {
+      "case": "sonnet-completion-2",
+      "status": "accepted",
+      "reason": "The report identifies the provider's concrete 503 blocker, explicitly leaves positive populated and negative live search unverified, preserves the supported implementation changes, and accurately scopes recorded checks without claiming end-to-end completion.",
+      "stopReason": null
+    },
+    {
+      "case": "sonnet-completion-3",
+      "status": "accepted",
+      "reason": "The report identifies the provider's repeated 503 unavailable response, preserves the supported implementation changes, accurately distinguishes recorded checks from still-unverified populated search, and does not claim end-to-end completion.",
+      "stopReason": null
+    },
+    {
+      "case": "sonnet-supported-1",
+      "status": "accepted",
+      "reason": "The report identifies the observed HTTP 503 provider blocker, preserves the evidenced implementation changes, accurately distinguishes recorded mock and outage checks from still-unverified populated provider search, and does not claim end-to-end completion.",
+      "stopReason": null
+    },
+    {
+      "case": "sonnet-supported-2",
+      "status": "rejected",
+      "reason": "The report claims literal company queries were never sent even to the failing provider, but the recorded probe sent People query \"Orbit\" and received HTTP 503, corroborated by providerCalls.",
+      "stopReason": null
+    },
+    {
+      "case": "sonnet-supported-3",
+      "status": "rejected",
+      "reason": "The report claims `bun test search.test.ts` previously passed against the stub, but the canonical results record only its post-change 503 failure and no pre-change test execution.",
+      "stopReason": null
+    }
+  ],
+  "conclusion": "Not a full-task comparison. Sol7accepted2toolrequests, Sonnet5.5 6accepted3rejected; neither supports a claim that changing models eliminates reporting errors. No tools or retries."
+}

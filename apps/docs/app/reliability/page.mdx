@@ -1,0 +1,38 @@
+export const metadata = {
+  title: 'Idempotency and rate limits',
+  description: 'Retry Duet operations without multiplying side effects.',
+  alternates: { canonical: '/reliability/' },
+}
+
+<p className="eyebrow">Protocol</p>
+
+# Retry from evidence, not hope
+
+A timeout proves that the client did not receive a response; it does not prove that the server did
+not perform the work. Replay a write only when its endpoint metadata declares idempotent semantics
+or the workflow gives you a stable resource identity to reconcile first.
+
+## Separate transport from operation retries
+
+It is usually safe to retry a failed connection before any request bytes are sent. Once a write may
+have reached the server, inspect or list the target resource before creating another. Keep retry
+budgets small enough that a broken dependency becomes visible.
+
+```ts
+const delayMs = Math.min(30_000, 500 * 2 ** attempt)
+const jitterMs = Math.floor(Math.random() * 250)
+await new Promise(resolve => setTimeout(resolve, delayMs + jitterMs))
+```
+
+## Honor the server's clock
+
+Every successfully authenticated API request consumes one general principal-wide budget: 600
+requests in a fixed 60-second window. Opening a long poll or stream counts once; events delivered
+over that connection do not become more requests. Human API keys, OAuth tokens and installed-app
+keys are isolated by stable credential identity. Browser sessions and impersonated
+visits share the stable user's budget. VM-internal and pre-authentication routes use their own
+gates instead.
+
+Existing endpoint-specific limits remain additional, stricter ceilings. For any `429`, use
+`Retry-After` or `retryAfterSeconds` rather than guessing the window. Queue work by principal and
+operation so one noisy integration does not turn backpressure into a credential-rotation problem.

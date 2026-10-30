@@ -1,0 +1,66 @@
+{/* DOCS-FIRST DRAFT (slice 20), revision 2 — created by the unprimed
+    review (resolution: qualify sibling-page single-workspace claims).
+    Full revised text of apps/docs/app/workspaces/page.mdx adding the
+    "ordinary credential" qualifier and one cross-link to /api-keys,
+    matching the overview page's wording. Findings + resolutions recorded
+    in specs/file-attribution/slices/20-sync-credential.md. Lands with the
+    slice-20 implementation in the same diff. */}
+
+import { EndpointReference } from '../../components/endpoint-reference'
+
+export const metadata = {
+  title: 'Workspace selection',
+  description: 'Align Duet credentials, scopes, and resource addresses.',
+  alternates: { canonical: '/workspaces/' },
+}
+
+<p className="eyebrow">Identity</p>
+
+# Select the workspace once
+
+A Duet integration should resolve its target workspace before it starts work. An ordinary
+credential belongs to one workspace: the slug in the key scope and the slug in a
+workspace-addressed operation must agree, and callers cannot use one workspace's grant to reach
+another. The one user-wide kind, the [sync device](/api-keys), is documented with keys and scopes.
+
+## Keep human choice visible
+
+When a user belongs to several workspaces, display the selected workspace and persist its stable
+identity with the integration configuration. Do not guess from the most recently visited browser
+page or fall back to the first membership.
+
+## Slugs are addresses
+
+Slugs make workspace routes and scopes readable, but they are still protocol identifiers. Validate
+them with the shared contract grammar, encode dynamic path segments, and plan for a rename to break
+old public URLs rather than hiding the break behind an ambiguous redirect.
+
+## Do not mix scopes
+
+A credential request may include several capabilities for one workspace. A request spanning two
+workspace slugs is rejected; authorize each workspace independently so revocation and auditing stay
+local.
+
+## Invite workspace members
+
+Workspace owners may change member roles, but the durable workspace domain preserves two
+invariants: every workspace retains an owner, and the designated payer remains an owner until
+billing is reassigned. Consumers should surface the conflict rather than trying to sequence a
+client-side workaround.
+
+Audit events are returned newest-first with opaque cursors. Treat a cursor as a continuation token,
+not as a timestamp or stable event identifier.
+
+Only owners can create, list, or revoke invitations. Invitations are bound to one canonical email,
+expire after seven days, and grant either editor or viewer access.
+
+## Lifecycle and path repair
+
+Workspace creation returns while provisioning continues. Reprovisioning is an owner-only recovery
+operation, not a retry strategy for ordinary request failures. Renaming requires an explicit
+acknowledgement because workspace-scoped URLs change.
+
+Apps, publishes, and share roots retain path anchors. List anchors to diagnose a moved path; repair
+only an anchor in the `broken` state, using the capability that owns its kind.
+
+<EndpointReference category="identity" />

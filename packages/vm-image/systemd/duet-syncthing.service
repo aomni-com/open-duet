@@ -1,0 +1,22 @@
+[Unit]
+Description=Duet local Syncthing
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=exedev
+Group=exedev
+# Pin the version (MAP-SYNC V1): the binary is SHA-pinned in the image and must
+# never self-replace.
+Environment=STNOUPGRADE=1
+# Harden the config BEFORE the first listen (MAP-SYNC V2/L20): loopback-only
+# listener + discovery/relays/NAT/reporting/auto-upgrade off, identity generated
+# on a fresh home. The gateway boot-reconciles the same set via REST.
+ExecStartPre=/opt/duet/bin/syncthing-harden.sh /home/exedev/.duet/syncthing
+ExecStart=/usr/bin/syncthing serve --no-browser --no-restart --home=/home/exedev/.duet/syncthing
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

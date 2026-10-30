@@ -1,0 +1,192 @@
+import type { ShareListResponse } from '@repo/contract'
+
+const NOW = Date.UTC(2026, 6, 16, 9)
+
+type ShareItem = ShareListResponse['items'][number]
+type IncomingFixture = Omit<Extract<ShareItem, { direction: 'incoming' }>, 'direction'>
+type OutgoingFixture = Omit<Extract<ShareItem, { direction: 'outgoing' }>, 'direction'>
+
+const GROUPED_SHARE_MANAGEMENT_FIXTURE: {
+  incoming: IncomingFixture[]
+  outgoing: OutgoingFixture[]
+} = {
+  incoming: [
+    {
+      id: 'share_incoming_ready',
+      anchorId: 'anchor_origin_launch',
+      originWorkspaceId: 'workspace_research',
+      fromWorkspaceId: 'workspace_research',
+      toEmail: 'owner@duet.so',
+      toUserId: 'user_owner',
+      toWorkspaceId: 'workspace_acme',
+      mode: 'write',
+      ignorePatterns: [],
+      state: 'active',
+      createdByUserId: 'user_grace',
+      createdAt: NOW - 86_400_000,
+      expiresAt: NOW + 86_400_000,
+      acceptedAt: NOW - 82_000_000,
+      mountPath: 'Shared/Launch plan',
+      sharerName: 'Grace Hopper',
+      sourceWorkspaceName: 'Research Studio',
+      syncStatus: {
+        origin: {
+          state: 'ready',
+          matchesCurrentGeneration: true,
+          updatedAt: NOW - 5_000,
+        },
+        recipient: {
+          state: 'ready',
+          matchesCurrentGeneration: true,
+          updatedAt: NOW - 4_000,
+        },
+      },
+    },
+    {
+      id: 'share_incoming_syncing',
+      anchorId: 'anchor_origin_brand',
+      originWorkspaceId: 'workspace_design',
+      fromWorkspaceId: 'workspace_design',
+      toEmail: 'owner@duet.so',
+      toUserId: 'user_owner',
+      toWorkspaceId: 'workspace_acme',
+      mode: 'read',
+      ignorePatterns: [],
+      state: 'active',
+      createdByUserId: 'user_maya',
+      createdAt: NOW - 43_200_000,
+      expiresAt: NOW + 129_600_000,
+      acceptedAt: NOW - 40_000_000,
+      mountPath: 'Shared/Brand library',
+      sharerName: 'Maya Chen',
+      sourceWorkspaceName: 'Design System',
+      syncStatus: {
+        origin: {
+          state: 'ready',
+          matchesCurrentGeneration: true,
+          updatedAt: NOW - 8_000,
+        },
+        recipient: {
+          state: 'applying',
+          matchesCurrentGeneration: false,
+          updatedAt: NOW - 3_000,
+        },
+      },
+    },
+    {
+      id: 'share_incoming_unlinked',
+      anchorId: 'anchor_origin_archive',
+      originWorkspaceId: 'workspace_archive',
+      fromWorkspaceId: 'workspace_archive',
+      toEmail: 'owner@duet.so',
+      toUserId: 'user_owner',
+      toWorkspaceId: 'workspace_acme',
+      mode: 'read',
+      ignorePatterns: [],
+      state: 'unlinked',
+      createdByUserId: 'user_alan',
+      createdAt: NOW - 172_800_000,
+      expiresAt: NOW - 86_400_000,
+      acceptedAt: NOW - 168_000_000,
+      unlinkedAt: NOW - 21_600_000,
+      mountPath: 'Shared/Archive',
+      sharerName: 'Alan Turing',
+      sourceWorkspaceName: 'Archive Lab',
+    },
+  ],
+  outgoing: [
+    {
+      id: 'share_outgoing_ready',
+      anchorId: 'anchor_qbr',
+      originWorkspaceId: 'workspace_acme',
+      fromWorkspaceId: 'workspace_acme',
+      toEmail: 'finance@example.com',
+      toUserId: 'user_finance',
+      toWorkspaceId: 'workspace_finance',
+      mode: 'write',
+      ignorePatterns: [],
+      state: 'active',
+      createdByUserId: 'user_owner',
+      createdAt: NOW - 90_000_000,
+      expiresAt: NOW + 86_400_000,
+      acceptedAt: NOW - 88_000_000,
+      tokenPrefix: 'duet_share_qbr',
+      sourcePath: 'Projects/QBR',
+      syncStatus: {
+        origin: {
+          state: 'ready',
+          matchesCurrentGeneration: true,
+          updatedAt: NOW - 7_000,
+        },
+        recipient: {
+          state: 'ready',
+          matchesCurrentGeneration: true,
+          updatedAt: NOW - 6_000,
+        },
+      },
+    },
+    {
+      id: 'share_outgoing_pending',
+      anchorId: 'anchor_forecast',
+      originWorkspaceId: 'workspace_acme',
+      fromWorkspaceId: 'workspace_acme',
+      toEmail: 'planning@example.com',
+      mode: 'read',
+      ignorePatterns: [],
+      state: 'pending',
+      createdByUserId: 'user_owner',
+      createdAt: NOW - 3_600_000,
+      expiresAt: NOW + 601_200_000,
+      tokenPrefix: 'duet_share_forecast',
+      sourcePath: 'Projects/Forecast',
+    },
+    {
+      id: 'share_outgoing_expired',
+      anchorId: 'anchor_expired',
+      originWorkspaceId: 'workspace_acme',
+      fromWorkspaceId: 'workspace_acme',
+      toEmail: 'former@example.com',
+      mode: 'read',
+      ignorePatterns: [],
+      state: 'expired',
+      createdByUserId: 'user_owner',
+      createdAt: NOW - 691_200_000,
+      expiresAt: NOW - 86_400_000,
+      tokenPrefix: 'duet_share_expired',
+      sourcePath: 'Projects/Expired brief',
+    },
+    {
+      id: 'share_outgoing_revoked',
+      anchorId: 'anchor_revoked',
+      originWorkspaceId: 'workspace_acme',
+      fromWorkspaceId: 'workspace_acme',
+      toEmail: 'vendor@example.com',
+      toUserId: 'user_vendor',
+      toWorkspaceId: 'workspace_vendor',
+      mode: 'read',
+      ignorePatterns: [],
+      state: 'revoked',
+      createdByUserId: 'user_owner',
+      createdAt: NOW - 259_200_000,
+      expiresAt: NOW - 172_800_000,
+      acceptedAt: NOW - 255_000_000,
+      revokedAt: NOW - 86_400_000,
+      tokenPrefix: 'duet_share_revoked',
+      sourcePath: 'Projects/Vendor handoff',
+    },
+  ],
+}
+
+export const SHARE_MANAGEMENT_FIXTURE: ShareListResponse = {
+  items: [
+    ...GROUPED_SHARE_MANAGEMENT_FIXTURE.incoming.map(share => ({
+      ...share,
+      direction: 'incoming' as const,
+    })),
+    ...GROUPED_SHARE_MANAGEMENT_FIXTURE.outgoing.map(share => ({
+      ...share,
+      direction: 'outgoing' as const,
+    })),
+  ],
+  nextCursor: null,
+}

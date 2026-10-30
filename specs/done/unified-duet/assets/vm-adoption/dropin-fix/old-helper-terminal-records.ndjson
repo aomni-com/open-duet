@@ -1,0 +1,2 @@
+{"status":"failed","phase":"restored","targetVersion":"0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2","restored":true,"reason":"Native memory CLI probe failed","previousGatewayVersion":"0.0.0+01212abf6ba1","bootIdBefore":"59374403-d3ed-40f9-8ef3-3da51970f6ca","bootIdAfter":"59374403-d3ed-40f9-8ef3-3da51970f6ca"}
+{"unit":"duet-runtime-adoption.service","runId":"f0a8ca19-c9ae-4c8b-b9d2-b869cf2d148d","targetVersion":"0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2","settled":true}

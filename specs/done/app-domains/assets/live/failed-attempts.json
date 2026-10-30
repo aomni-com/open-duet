@@ -1,0 +1,225 @@
+[
+  {
+    "error": "fixture app visibility expected HTTP 200, got 404\n\n404 !== 200\n",
+    "runId": "staging-e2e-synthetic",
+    "cleanup": {
+      "status": "pass",
+      "orphans": [],
+      "resources": [
+        {
+          "kind": "user",
+          "status": "deleted"
+        },
+        {
+          "kind": "workspace",
+          "status": "deleted"
+        },
+        {
+          "kind": "mail-message",
+          "status": "deleted"
+        },
+        {
+          "kind": "file",
+          "status": "deleted"
+        },
+        {
+          "kind": "app",
+          "status": "deleted"
+        },
+        {
+          "kind": "app-domain",
+          "status": "deleted"
+        }
+      ]
+    },
+    "vmNames": [
+      "workspace-redacted"
+    ]
+  },
+  {
+    "error": "App origin lost original host/path/query",
+    "runId": "staging-e2e-synthetic",
+    "cleanup": {
+      "status": "pass",
+      "orphans": [],
+      "resources": [
+        {
+          "kind": "user",
+          "status": "deleted"
+        },
+        {
+          "kind": "workspace",
+          "status": "deleted"
+        },
+        {
+          "kind": "mail-message",
+          "status": "deleted"
+        },
+        {
+          "kind": "file",
+          "status": "deleted"
+        },
+        {
+          "kind": "app",
+          "status": "deleted"
+        },
+        {
+          "kind": "app-domain",
+          "status": "deleted"
+        }
+      ]
+    },
+    "vmNames": [
+      "workspace-redacted"
+    ]
+  },
+  {
+    "error": "App origin lost original host/path/query: host=service.example.invalid expected=aomni.co; path=/ expected=/; queryMatches=false",
+    "runId": "staging-e2e-synthetic",
+    "cleanup": {
+      "status": "pass",
+      "orphans": [],
+      "resources": [
+        {
+          "kind": "user",
+          "status": "deleted"
+        },
+        {
+          "kind": "workspace",
+          "status": "deleted"
+        },
+        {
+          "kind": "mail-message",
+          "status": "deleted"
+        },
+        {
+          "kind": "file",
+          "status": "deleted"
+        },
+        {
+          "kind": "app",
+          "status": "deleted"
+        },
+        {
+          "kind": "app-domain",
+          "status": "deleted"
+        }
+      ]
+    },
+    "vmNames": [
+      "workspace-redacted"
+    ]
+  },
+  {
+    "error": "Expected values to be strictly equal:\n\n403 !== 302\n",
+    "runId": "staging-e2e-synthetic",
+    "cleanup": {
+      "status": "pass",
+      "orphans": [],
+      "resources": [
+        {
+          "kind": "user",
+          "status": "deleted"
+        },
+        {
+          "kind": "workspace",
+          "status": "deleted"
+        },
+        {
+          "kind": "mail-message",
+          "status": "deleted"
+        },
+        {
+          "kind": "file",
+          "status": "deleted"
+        },
+        {
+          "kind": "app",
+          "status": "deleted"
+        },
+        {
+          "kind": "app-domain",
+          "status": "deleted"
+        }
+      ]
+    },
+    "vmNames": [
+      "workspace-redacted"
+    ]
+  },
+  {
+    "error": "guest document at domain-probe--app-domains-staging-e2e-synthetic did not enter private return\n\n403 !== 302\n",
+    "runId": "staging-e2e-synthetic",
+    "cleanup": {
+      "status": "pass",
+      "orphans": [],
+      "resources": [
+        {
+          "kind": "user",
+          "status": "deleted"
+        },
+        {
+          "kind": "workspace",
+          "status": "deleted"
+        },
+        {
+          "kind": "mail-message",
+          "status": "deleted"
+        },
+        {
+          "kind": "file",
+          "status": "deleted"
+        },
+        {
+          "kind": "app",
+          "status": "deleted"
+        },
+        {
+          "kind": "app-domain",
+          "status": "deleted"
+        }
+      ]
+    },
+    "vmNames": [
+      "workspace-redacted"
+    ]
+  },
+  {
+    "error": "Private document refusal: {\"host\":\"domain-probe--app-domains-staging-e2e-synthetic\",\"status\":403,\"contentType\":\"application/json\",\"robots\":\"noindex, nofollow\",\"error\":\"forbidden\",\"denied\":true,\"guestPrivate\":true}",
+    "runId": "staging-e2e-synthetic",
+    "cleanup": {
+      "status": "fail",
+      "orphans": [],
+      "resources": [
+        {
+          "kind": "user",
+          "status": "deleted"
+        },
+        {
+          "kind": "workspace",
+          "status": "deleted"
+        },
+        {
+          "kind": "mail-message",
+          "status": "deleted"
+        },
+        {
+          "kind": "file",
+          "status": "deleted"
+        },
+        {
+          "kind": "app",
+          "status": "deleted"
+        },
+        {
+          "kind": "app-domain",
+          "status": "deleted",
+          "error": "Vercel domain request failed (404)"
+        }
+      ]
+    },
+    "vmNames": [
+      "workspace-redacted"
+    ]
+  }
+]

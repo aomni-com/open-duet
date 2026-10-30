@@ -1,0 +1,205 @@
+{
+  "status": "passed local external candidate acceptance; live publication/cutover remain open",
+  "sourceBase": "0964a6cf1",
+  "source": {
+    "packages/duet/src/cli.ts": "9aba5bb976c3e31db216386f985360b3eb153add172fa73ebe8845b0d0c42dc1",
+    "packages/duet/src/cli-entry.ts": "feef5b8cf21d327a7828bb8b0cbc064a1bc92786752ddc19fcb678715615bc7b",
+    "packages/duet/scripts/build-public-package.ts": "d1206b1395fb4031b9351d60dd771e2dffa9c44133b38f1a866e71eae24365aa",
+    "packages/duet/README.md": "8f72a7a78c9fb7f4dd5e8c87e49871cd77571fb7d045896478dd623b3b42d9dd",
+    "packages/duet/package.json": "9ee9daf310a6830f7bd077187c39445d2dcc48b566a42d2a42893eeb131d3d50",
+    "packages/contract/src/vm/index.ts": "4f6c6d022e4c901031543ba01f0bab0edc442830ba294249fd38b0c231400fa4",
+    "packages/contract/src/gateway/index.ts": "39ddb6511520ebb4bc832e9c582eff1e9ef960255fb84d9f01219e30ba0f58ad",
+    "packages/contract/src/deployment/index.ts": "df952ffa2cdbe69bc303628c81089ea05af36a397186b306ff7ed52aa69d7ac8",
+    "bun.lock": "3fab016bfcb0bdca49440b9bae8c05fea97dee939244ec31a32c18795b45c3cc",
+    "patches/@user@example.invalid": "0bf942aa04e9a499f19771bc27e28467f33419dee89323598d96e116889adaac",
+    "specs/unified-duet/assets/public-distribution/final-candidate/probe.ts": "766168dd946b72901be6ee609777864fb8fac6d5ae4e82b252bb1982ddc486db",
+    "specs/unified-duet/assets/packaging/probe.ts": "ffde098160ad6d1f6c1bc29ad50f4c53acf74593d92d7ce558839c0a4075a061",
+    "packages/duet/test/fixtures/public-oauth-preload.ts": "0a0b4a74ebeec7193892dd163c9d5ab32e5d53e35b20a746c039f0f170f6cdd0",
+    "specs/unified-duet/assets/public-distribution/probe-mac-tui.py": "421a1affb65f1b1d7a8a92119ae89316044b26b0c7f16f456aa9fdf87040c7b0"
+  },
+  "borrowedSource": "Three contract production files copied from root working tree before staging; excluded from focused commit. Final source changes require a new publication candidate.",
+  "artifact": {
+    "path": "/tmp/unified-duet-public-final/duetso-agent-1.0.0.tgz",
+    "sha256": "806121b3a22f827678d6ab237860c86950ddb646b35c04e6abed1e65b502264f",
+    "id": "@duetso/agent@1.0.0",
+    "name": "@duetso/agent",
+    "version": "1.0.0",
+    "size": 2525142,
+    "unpackedSize": 13270695,
+    "shasum": "89f7b080fe882d22e45ba4dbb00b8b4da6e5aefc",
+    "integrity": "sha512-9hdXDJJ8cvfb3D1mx5WIaPpro70osmaXI8QWOMEbC8bXPfpLsC5Zlo9QQ6KL/owpdWyH3xc9092oPRqqEr854A==",
+    "filename": "duetso-agent-1.0.0.tgz",
+    "files": [
+      {
+        "path": "LICENSE",
+        "size": 10702,
+        "mode": 420
+      },
+      {
+        "path": "NOTICE-syncthing.md",
+        "size": 1613,
+        "mode": 420
+      },
+      {
+        "path": "README.md",
+        "size": 1969,
+        "mode": 420
+      },
+      {
+        "path": "THIRD-PARTY-NOTICES.txt",
+        "size": 170927,
+        "mode": 420
+      },
+      {
+        "path": "dist/cli-entry.js",
+        "size": 13084613,
+        "mode": 493
+      },
+      {
+        "path": "package.json",
+        "size": 871,
+        "mode": 420
+      }
+    ],
+    "entryCount": 6,
+    "bundled": []
+  },
+  "bundleSha256": "4a50241a50f6b88758ba5b924515ac6de969a32e7c1c774a5fbd93b08b6380e0",
+  "manifest": {
+    "name": "@duetso/agent",
+    "version": "1.0.0",
+    "description": "Duet CLI for local agents, workspaces and file sync",
+    "type": "module",
+    "license": "Apache-2.0",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/aomni-com/duet.git"
+    },
+    "engines": {
+      "node": ">=22",
+      "bun": "1.3.14"
+    },
+    "bin": {
+      "duet": "dist/cli-entry.js"
+    },
+    "files": [
+      "dist",
+      "LICENSE",
+      "README.md",
+      "THIRD-PARTY-NOTICES.txt",
+      "NOTICE-syncthing.md"
+    ],
+    "publishConfig": {
+      "access": "public"
+    },
+    "dependencies": {
+      "@opentui/core": "0.2.5",
+      "@electric-sql/pglite": "0.4.5",
+      "@silvia-odwyer/photon-node": "0.3.4",
+      "@vscode/ripgrep": "1.18.0"
+    },
+    "optionalDependencies": {
+      "@duetso/syncthing-darwin-arm64": "2.1.2",
+      "@duetso/syncthing-darwin-x64": "2.1.2",
+      "@mariozechner/clipboard": "0.3.9"
+    }
+  },
+  "platforms": {
+    "arm64": {
+      "process": {
+        "bun": "1.3.14",
+        "arch": "arm64",
+        "platform": "darwin"
+      },
+      "syncthing": {
+        "arch": "arm64",
+        "sha256": "0325655f864024e0eecd78df07bdedbad46cefc91f480503ff615b6211081869",
+        "deviceId": "4BLWX7J-C26DOJI-NSXTFBK-7AGDG7G-5HYJQQZ-5VLXR7C-YB3PH6X-LKXXWQP",
+        "certificateSha256": "b717f92b8ced03e91891d7831d6cfe81de646b0254917d910f3f3320c9a67b02"
+      },
+      "checks": [
+        "one approved user login",
+        "saved key authenticates whoami and binary file roundtrip",
+        "explicit default workspace",
+        "cold sync status",
+        "durable pgvector memory reopen and semantic recall",
+        "RPC follow-up, Photon image resize and actual ripgrep",
+        "native TUI initialization",
+        "frozen Pi OAuth originator fixture"
+      ],
+      "syncLimit": "launchctl edge fixture; actual stock Syncthing generation on Mac, no OS service or live file convergence"
+    },
+    "x64": {
+      "process": {
+        "bun": "1.3.14",
+        "arch": "x64",
+        "platform": "darwin"
+      },
+      "syncthing": {
+        "arch": "x64",
+        "sha256": "24cd4219041087bf67a2773fe0aa8ad976b8e579b4768c31df365a58058f1743",
+        "deviceId": "T3HSA2J-ROLRSCN-BGT6QNJ-53LUDYS-NS2VTX3-IDGBSUT-CCN4VTY-NT4FSAQ",
+        "certificateSha256": "d610b5d7f790f9b8cb1cc391e4163609d19856d7ffa72e99bf3d066f6c75b2d6"
+      },
+      "checks": [
+        "one approved user login",
+        "saved key authenticates whoami and binary file roundtrip",
+        "explicit default workspace",
+        "cold sync status",
+        "durable pgvector memory reopen and semantic recall",
+        "RPC follow-up, Photon image resize and actual ripgrep",
+        "native TUI initialization",
+        "frozen Pi OAuth originator fixture"
+      ],
+      "syncLimit": "launchctl edge fixture; actual stock Syncthing generation on Mac, no OS service or live file convergence"
+    },
+    "linux": {
+      "process": {
+        "bun": "1.3.14",
+        "arch": "x64",
+        "platform": "linux"
+      },
+      "syncthing": null,
+      "checks": [
+        "one approved user login",
+        "saved key authenticates whoami and binary file roundtrip",
+        "explicit default workspace",
+        "cold sync status",
+        "durable pgvector memory reopen and semantic recall",
+        "RPC follow-up, Photon image resize and actual ripgrep",
+        "native TUI initialization",
+        "frozen Pi OAuth originator fixture"
+      ],
+      "syncLimit": "launchctl edge fixture; actual stock Syncthing generation on Mac, no OS service or live file convergence"
+    }
+  },
+  "linuxImage": "sha256:9074d8e019c4b0a8e9ab64647a1b826067dbcb2d8351a8aa879d80e7c946711b",
+  "localGate": {
+    "tests": 17,
+    "assertions": 91,
+    "failures": 0
+  },
+  "negativeControls": [
+    "Original composed-CLI predecessor tarball b94bb118 rejects --api-url at login; public journey fails.",
+    "Missing clipboard owner fails actual external no-install resolution in public-pack test; restored pinned optional owner passes."
+  ],
+  "compiledRuntimeDiagnostic": {
+    "manifestVersion": "0.0.0+fedeb17ada3f6dd7e8032582a6a90c4f1060fff7f0c5c43f84643c2095792c9b",
+    "status": "offline Linux DISPLAY=:fixture native TUI passes without Bun registry resolution/cache",
+    "scope": "existing frozen compiled payload only; public stager edits do not change compile source"
+  },
+  "registryBefore": {
+    "major": "anonymous npm view returns E404 for @duetso/agent@1.0.0",
+    "duetfs": "0.1.0, no deprecation field"
+  },
+  "limits": [
+    "No npm write, secret transfer, GitHub remote change, registry-confirmed publication, deprecation or VM mutation.",
+    "Mac x64 executes real x64 Bun and native assets via Rosetta on arm64 host, not a physical Intel Mac.",
+    "Launchctl is modeled to avoid touching user launch services; actual certificate generation and registration run through the installed CLI.",
+    "Dedicated live staging and final strict-source publication remain required."
+  ],
+  "review": {
+    "codex": "No actionable regressions; built public package. Docker socket unavailable in reviewer sandbox.",
+    "owner": "Shape/diff/docs reviewed; actual Docker gates, three clean npm installs, source isolation and cleanup verified."
+  }
+}

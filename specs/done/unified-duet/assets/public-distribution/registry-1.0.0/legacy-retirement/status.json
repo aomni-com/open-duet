@@ -1,0 +1,22 @@
+{
+  "status": "pending-package-owner-authority",
+  "originalRunId": 37261419884,
+  "originalRunConclusion": "failure",
+  "error": "npm HTTP403; token cannot modify duetfs",
+  "selectors": [
+    "duetfs@0.0.1",
+    "duetfs@0.1.0"
+  ],
+  "publicDeprecationsChanged": false,
+  "oldReleaseWorkflow": {
+    "id": 271933189,
+    "state": "disabled_manually"
+  },
+  "temporaryWorkflow": {
+    "id": 375054463,
+    "state": "active"
+  },
+  "temporaryBranch": "codex/retire-duetfs-1.0.0",
+  "oldSecretCopy": "retained until both exact deprecations verify",
+  "newSecretCopy": "preserved"
+}

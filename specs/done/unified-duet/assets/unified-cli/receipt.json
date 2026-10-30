@@ -1,0 +1,77 @@
+{
+  "phase": "05 local composition; publication and VM rollout remain open",
+  "baseRevision": "33192cd8d",
+  "identity": {
+    "npm": "@duetso/agent",
+    "command": "duet",
+    "publicVersion": "1.0.0"
+  },
+  "gates": {
+    "joinedFocusedDocker": {
+      "exitCode": 0,
+      "pass": 216,
+      "skippedExternal": 2,
+      "assertions": 696
+    },
+    "owningDockerBeforeFixtureRepair": {
+      "exitCode": 1,
+      "pass": 569,
+      "fail": 15
+    },
+    "owningDockerAfterFixtureRepair": {
+      "exitCode": 0,
+      "pass": 585,
+      "fail": 0,
+      "skippedExternal": 2,
+      "assertions": 2012,
+      "snapshots": 3
+    },
+    "externalPackedFileAndImport": {
+      "exitCode": 0,
+      "pass": 2,
+      "assertions": 2
+    },
+    "composedNativePublicPack": {
+      "exitCode": 0,
+      "pass": 1,
+      "assertions": 22
+    },
+    "builtSyncLifecycle": {
+      "exitCode": 0,
+      "pass": 1,
+      "assertions": 41
+    },
+    "vmImageSource": {
+      "exitCode": 0,
+      "pass": 29,
+      "assertions": 331
+    },
+    "types": {
+      "agent": 0,
+      "duet": 0,
+      "testHarness": 0,
+      "vmImage": 0
+    },
+    "frozenExternalDependencyClosure": {
+      "exitCode": 0,
+      "receipt": "closure.json"
+    }
+  },
+  "negativeControls": [
+    "missing built agent dispatch fails continuation; restored passes",
+    "local resumed-session failure exits1; fake installer failure exits23",
+    "custom provider env update preserves existing project Duet key",
+    "renderer shim pollution fails PGlite; restored fixture lifecycle passes"
+  ],
+  "review": {
+    "independentCodex": "completed; deleted image-manifest reader and stale demo timeline fixed",
+    "joinedSyncReviewer": "local exit-code and custom env credential regressions fixed"
+  },
+  "limits": [
+    "No live backend or VM rollout",
+    "No npm publication/deprecation",
+    "Rosetta native receipt covers frozen tooling tarball; composed native gate here is Linux",
+    "Image source no longer installs duetfs; full managed runtime image belongs to06/08",
+    "Root full suite and dedicated live staging journey remain final gates"
+  ]
+}

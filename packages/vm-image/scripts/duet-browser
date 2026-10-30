@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+
+exec /opt/duet/gateway-runtime/bin/bun /opt/duet/current/index.js --desktop-browser-cli "$@"

@@ -1,0 +1,261 @@
+{
+  "environment": "staging",
+  "sourceRevision": "dbd37f6d1377571375af892f3a4e8f882fde6126",
+  "observedAt": "2026-10-05T03:23:10.993524+00:00",
+  "origins": [
+    {
+      "origin": "https://service.example.invalid",
+      "deployment": {
+        "revision": "dbd37f6d1377571375af892f3a4e8f882fde6126",
+        "backend": {
+          "revision": "dbd37f6d1377571375af892f3a4e8f882fde6126",
+          "schema": 1
+        },
+        "runtime": {
+          "version": "0.0.0+1f6cae5ff4257948977b076170e652555fd019511c47fb327685f1c6335094ed"
+        }
+      },
+      "manifest": {
+        "formatVersion": 1,
+        "version": "0.0.0+1f6cae5ff4257948977b076170e652555fd019511c47fb327685f1c6335094ed",
+        "artifacts": [
+          {
+            "name": "duet",
+            "sha256": "7b13116d2b118e40a76987ae03a3022375af580328eae5d6b68ad668d78f744b",
+            "byteLength": 117078144,
+            "mode": 493
+          },
+          {
+            "name": "helper.js",
+            "sha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+            "byteLength": 908569,
+            "mode": 420
+          },
+          {
+            "name": "index.js",
+            "sha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+            "byteLength": 2226400,
+            "mode": 420
+          },
+          {
+            "name": "initdb.wasm",
+            "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+            "byteLength": 169969,
+            "mode": 420
+          },
+          {
+            "name": "pglite.data",
+            "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+            "byteLength": 5289109,
+            "mode": 420
+          },
+          {
+            "name": "pglite.wasm",
+            "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+            "byteLength": 8739902,
+            "mode": 420
+          },
+          {
+            "name": "photon_rs_bg.wasm",
+            "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+            "byteLength": 1881634,
+            "mode": 420
+          },
+          {
+            "name": "vector.tar.gz",
+            "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+            "byteLength": 46108,
+            "mode": 420
+          }
+        ]
+      },
+      "verifiedServedArtifacts": [
+        {
+          "name": "duet",
+          "sha256": "7b13116d2b118e40a76987ae03a3022375af580328eae5d6b68ad668d78f744b",
+          "byteLength": 117078144,
+          "targetMode": 493,
+          "seconds": 8.852
+        },
+        {
+          "name": "helper.js",
+          "sha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+          "byteLength": 908569,
+          "targetMode": 420,
+          "seconds": 0.436
+        },
+        {
+          "name": "index.js",
+          "sha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+          "byteLength": 2226400,
+          "targetMode": 420,
+          "seconds": 1.183
+        },
+        {
+          "name": "initdb.wasm",
+          "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+          "byteLength": 169969,
+          "targetMode": 420,
+          "seconds": 0.25
+        },
+        {
+          "name": "pglite.data",
+          "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+          "byteLength": 5289109,
+          "targetMode": 420,
+          "seconds": 0.739
+        },
+        {
+          "name": "pglite.wasm",
+          "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+          "byteLength": 8739902,
+          "targetMode": 420,
+          "seconds": 0.819
+        },
+        {
+          "name": "photon_rs_bg.wasm",
+          "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+          "byteLength": 1881634,
+          "targetMode": 420,
+          "seconds": 0.974
+        },
+        {
+          "name": "vector.tar.gz",
+          "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+          "byteLength": 46108,
+          "targetMode": 420,
+          "seconds": 0.228
+        }
+      ]
+    },
+    {
+      "origin": "https://service.example.invalid",
+      "deployment": {
+        "revision": "dbd37f6d1377571375af892f3a4e8f882fde6126",
+        "backend": {
+          "revision": "dbd37f6d1377571375af892f3a4e8f882fde6126",
+          "schema": 1
+        },
+        "runtime": {
+          "version": "0.0.0+1f6cae5ff4257948977b076170e652555fd019511c47fb327685f1c6335094ed"
+        }
+      },
+      "manifest": {
+        "formatVersion": 1,
+        "version": "0.0.0+1f6cae5ff4257948977b076170e652555fd019511c47fb327685f1c6335094ed",
+        "artifacts": [
+          {
+            "name": "duet",
+            "sha256": "7b13116d2b118e40a76987ae03a3022375af580328eae5d6b68ad668d78f744b",
+            "byteLength": 117078144,
+            "mode": 493
+          },
+          {
+            "name": "helper.js",
+            "sha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+            "byteLength": 908569,
+            "mode": 420
+          },
+          {
+            "name": "index.js",
+            "sha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+            "byteLength": 2226400,
+            "mode": 420
+          },
+          {
+            "name": "initdb.wasm",
+            "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+            "byteLength": 169969,
+            "mode": 420
+          },
+          {
+            "name": "pglite.data",
+            "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+            "byteLength": 5289109,
+            "mode": 420
+          },
+          {
+            "name": "pglite.wasm",
+            "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+            "byteLength": 8739902,
+            "mode": 420
+          },
+          {
+            "name": "photon_rs_bg.wasm",
+            "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+            "byteLength": 1881634,
+            "mode": 420
+          },
+          {
+            "name": "vector.tar.gz",
+            "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+            "byteLength": 46108,
+            "mode": 420
+          }
+        ]
+      },
+      "verifiedServedArtifacts": [
+        {
+          "name": "duet",
+          "sha256": "7b13116d2b118e40a76987ae03a3022375af580328eae5d6b68ad668d78f744b",
+          "byteLength": 117078144,
+          "targetMode": 493,
+          "seconds": 8.932
+        },
+        {
+          "name": "helper.js",
+          "sha256": "bb8a7dcee38d81a730fa60e9ac0048609317a22d25a8c7ffb1fd202472615af6",
+          "byteLength": 908569,
+          "targetMode": 420,
+          "seconds": 0.427
+        },
+        {
+          "name": "index.js",
+          "sha256": "df83714efc5c68e7893b3bb3d5b9dbd650e8ebced8e4f9c76401ab26f272034f",
+          "byteLength": 2226400,
+          "targetMode": 420,
+          "seconds": 0.324
+        },
+        {
+          "name": "initdb.wasm",
+          "sha256": "13ed8475e33d092d03e2378d6b78d52da0c4d497b1df2c2a62d33fe32ceb67e2",
+          "byteLength": 169969,
+          "targetMode": 420,
+          "seconds": 0.355
+        },
+        {
+          "name": "pglite.data",
+          "sha256": "4507d476e23421aab8201ee9d58059c53736db40e1bfe5d14bb86124e59a116d",
+          "byteLength": 5289109,
+          "targetMode": 420,
+          "seconds": 0.557
+        },
+        {
+          "name": "pglite.wasm",
+          "sha256": "551cf9bcfb34e4b0ea118b8e658b5e3e85b20d620a6f365239ce02f32ffc20e9",
+          "byteLength": 8739902,
+          "targetMode": 420,
+          "seconds": 0.849
+        },
+        {
+          "name": "photon_rs_bg.wasm",
+          "sha256": "10468181565c56004c867f3a4af96f89a0ef5a63a72f2b5fb12c1f1992a3615c",
+          "byteLength": 1881634,
+          "targetMode": 420,
+          "seconds": 0.494
+        },
+        {
+          "name": "vector.tar.gz",
+          "sha256": "70199ab9aa62a3170bb08da81eedc34a55a63489b7c29b448e92da9dc876de4a",
+          "byteLength": 46108,
+          "targetMode": 420,
+          "seconds": 0.342
+        }
+      ]
+    }
+  ],
+  "runtimeVersion": "0.0.0+1f6cae5ff4257948977b076170e652555fd019511c47fb327685f1c6335094ed",
+  "runtimeOrWorkspaceWrites": false,
+  "operatorReceipt": "/tmp/unified-duet-final-staging-served-runtime.json",
+  "credentialsEmitted": false
+}

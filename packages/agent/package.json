@@ -1,0 +1,68 @@
+{
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "name": "@repo/agent",
+  "version": "0.3.36",
+  "private": true,
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./src/index.ts"
+    },
+    "./protocol": {
+      "types": "./dist/src/protocol.d.ts",
+      "import": "./src/protocol.ts"
+    },
+    "./memory-store": {
+      "types": "./dist/src/memory/store/index.d.ts",
+      "import": "./dist/src/memory-store.js"
+    },
+    "./package.json": "./package.json",
+    "./workflow-fixtures": {
+      "types": "./dist/evals/fixtures/workflow-reliability/oracle.d.ts",
+      "import": "./evals/fixtures/workflow-reliability/oracle.ts"
+    },
+    "./workflow-fixtures/archive": "./dist/eval-fixtures/workflow-reliability.json",
+    "./workflow-fixtures/manifest": "./dist/eval-fixtures/manifest.json",
+    "./*": {
+      "types": "./dist/src/*.d.ts",
+      "import": "./src/*.ts"
+    }
+  },
+  "dependencies": {
+    "@earendil-works/pi-agent-core": "0.85.1",
+    "@earendil-works/pi-ai": "0.85.1",
+    "@earendil-works/pi-coding-agent": "0.85.1",
+    "@electric-sql/pglite": "0.4.5",
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "@vscode/ripgrep": "1.18.0",
+    "ai": "7.0.105",
+    "ajv": "8.20.0",
+    "dedent": "1.7.2",
+    "dotenv": "17.4.2",
+    "eventemitter3": "5.0.4",
+    "jstoxml": "7.1.0",
+    "ms": "2.1.3",
+    "nanoid": "5.1.11",
+    "typebox": "1.3.7"
+  },
+  "devDependencies": {
+    "@types/bun": "1.3.13",
+    "@types/ms": "2.1.0",
+    "@types/node": "22.19.18",
+    "e2b": "2.35.0",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && bun build src/memory/store/index.ts --target=node --format=esm --outfile dist/src/memory-store.js && bun scripts/build-workflow-fixtures.ts",
+    "check-types": "tsc --noEmit && tsc -p tsconfig.build.json --emitDeclarationOnly",
+    "lint": "oxlint src/",
+    "test": "bash ../../scripts/agent-tests.sh agent",
+    "eval": "bash ../../scripts/agent-tests.sh agent --eval",
+    "test:swebench": "bash benchmarks/swebench/test.sh"
+  }
+}

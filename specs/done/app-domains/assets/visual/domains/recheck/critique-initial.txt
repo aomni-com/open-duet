@@ -1,0 +1,52 @@
+# Visual critique: domain recheck screenshots
+
+I looked at all 12 images. The `-2x` files are higher-resolution versions of the same frames, not zoomed crops, so "both" below means the 1x and 2x images agree. I found no hard clipping or overflow. The most serious problems are an unclear state in the failed dialog and a domain name that breaks mid-word on mobile.
+
+## High
+
+1. **The failed state contradicts itself** (both, desktop and mobile; high confidence). The failed dialog shows an in-progress state and a failure at the same time:
+   - The status says "Rechecking…" and the text below says "Duet is checking this domain again."
+   - A red box says "Domain verification could not be completed… Check your DNS records and recheck."
+   - The error tells the user to recheck, but the recheck button is disabled and still spinning.
+
+   Nothing says whether the error is from the *previous* check or the current one. A heading like "Last check failed", or dropping one of the two states, would fix it. The error also mentions "your DNS records," but no DNS records appear in the dialog, so the user can't act on it from here.
+
+2. **The long domain breaks mid-word on mobile** (both, `mobile-closed-manager`; high confidence). It wraps as `…preview.exa` / `mple.com`, splitting "example". It should break after a `.` or `-` instead, for example with `<wbr>` or `overflow-wrap: anywhere` plus break hints. Desktop shows the full name on one line.
+
+## Medium
+
+3. **Warning states look the same as normal states** (both; high confidence). "Needs attention" and "Cleanup needs a retry" use the same small grey circle-i icon and dark text as "Connected" and "Waiting for DNS". There's no colour or weight difference, so rows needing action don't stand out when scanning. The icons are about 12px and hard to tell apart at 1x.
+
+4. **One button on mobile looks pressed** (both, `mobile-closed-manager`; medium confidence). Team workspace's "Manage domain" has a grey fill that no other button has, and the desktop version has no highlight.
+   - It looks like leftover hover or tap state, or focus returned to the wrong row, since the dialog was for portal.example.com.
+   - If it is focus, it shows no clear focus ring.
+
+5. **The dialog and the list disagree about portal.example.com** (full; medium-low confidence, since these may be separate test setups). The dialog shows portal.example.com as "Rechecking…". The closed-manager list shows Customer portal as "Waiting for DNS", and Launch intelligence is the row that's "Rechecking…". If these frames are meant to be one sequence, this is a bug.
+
+6. **The ellipsis looks centred** (2x; medium confidence). In "Rechecking⋯" the dots sit at mid-height rather than on the baseline. It looks like U+22EF, or a fallback font drawing U+2026 centred. It's noticeable next to the text around it.
+
+7. **Tap targets on mobile are small** (full; medium confidence). "Manage domain" is about 32px tall at 1x, and "Open app" is a borderless text link. Both are under the usual ~44px minimum for touch.
+
+8. **Mobile navigation pushes content down** (full; medium confidence). The settings tabs wrap to three rows and take about 260px before the page title. The active "App domains" tab is a white pill with a faint shadow on a pale blue-grey background, which is weak contrast for showing where you are. The desktop sidebar's active item has the same issue.
+
+## Low
+
+9. **"Rechecking…" appears twice** (both). It shows in the status line and again on the disabled button. The disabled button text is light grey, which is fine for a disabled control but adds visual noise.
+
+10. **The mobile dialog mixes alignments** (full). The title and subtitle are centred, but the body is left-aligned. On desktop everything is left-aligned.
+
+11. **"Remove domain" doesn't look destructive** (both). It stays enabled during a recheck and has the same neutral outline as the other button. That may be intended, but it's worth a deliberate decision.
+
+12. **Link icons are inconsistent** (full). "Open app" uses a right arrow, while "Open domain" in the dialog uses an external-link icon, even though both appear to open a site.
+
+13. **The small heading may fail contrast** (full; low-medium confidence). "WORKSPACE ADMINISTRATION" is light blue, small, and letter-spaced. It looks close to 3:1 against the background, which would fail WCAG AA for small text.
+
+14. **The app name blends into the subtitle** (full). In "Use your own address for Customer portal." nothing marks "Customer portal" as a name, so the sentence reads oddly.
+
+## Checked and fine
+
+- No text is clipped or overflows in any dialog.
+- The close button is visible and reachable in every dialog.
+- The error box text wraps cleanly on mobile.
+- On desktop, the action buttons line up across all rows.
+- The card padding is consistent, and there are no rendering glitches at 2x.

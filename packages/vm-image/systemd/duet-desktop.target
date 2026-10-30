@@ -1,0 +1,5 @@
+[Unit]
+Description=Duet on-demand desktop stack
+Requires=duet-desktop.service
+Wants=duet-desktop-browser.service
+After=duet-desktop.service duet-desktop-browser.service

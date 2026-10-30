@@ -1,0 +1,662 @@
+<title>Map — train records busy-state fix</title>
+<style>
+  :root {
+    --bg: hsl(150 20% 99%);
+    --card: hsl(150 14% 97%);
+    --fg: hsl(154 12% 12%);
+    --border: hsl(155 8% 88%);
+    --muted: hsl(160 10% 94%);
+    --muted-fg: hsl(160 3% 38%);
+    --brand: hsl(214 65% 56%);
+    --brand-soft: hsl(214 65% 56% / 0.09);
+    --brand-border: hsl(214 65% 56% / 0.25);
+    --amber: hsl(38 80% 40%);
+    --amber-soft: hsl(38 80% 50% / 0.1);
+    --green: hsl(152 55% 34%);
+    --green-soft: hsl(152 55% 40% / 0.1);
+    --red: hsl(352 90% 41%);
+    --code-bg: hsl(154 12% 12%);
+    --code-fg: hsl(150 10% 88%);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: hsl(150 5% 7%);
+      --card: hsl(150 4% 9%);
+      --fg: hsl(150 6% 93%);
+      --border: hsl(150 4% 18%);
+      --muted: hsl(150 3% 13%);
+      --muted-fg: hsl(158 5% 69%);
+      --brand: hsl(214 70% 62%);
+      --brand-soft: hsl(214 70% 62% / 0.13);
+      --brand-border: hsl(214 70% 62% / 0.35);
+      --amber: hsl(38 85% 62%);
+      --amber-soft: hsl(38 85% 62% / 0.12);
+      --green: hsl(152 45% 60%);
+      --green-soft: hsl(152 45% 60% / 0.12);
+      --red: hsl(359 85% 70%);
+      --code-bg: hsl(150 6% 12%);
+      --code-fg: hsl(150 10% 85%);
+    }
+  }
+  :root[data-theme='light'] {
+    --bg: hsl(150 20% 99%);
+    --card: hsl(150 14% 97%);
+    --fg: hsl(154 12% 12%);
+    --border: hsl(155 8% 88%);
+    --muted: hsl(160 10% 94%);
+    --muted-fg: hsl(160 3% 38%);
+    --brand: hsl(214 65% 56%);
+    --brand-soft: hsl(214 65% 56% / 0.09);
+    --brand-border: hsl(214 65% 56% / 0.25);
+    --amber: hsl(38 80% 40%);
+    --amber-soft: hsl(38 80% 50% / 0.1);
+    --green: hsl(152 55% 34%);
+    --green-soft: hsl(152 55% 40% / 0.1);
+    --red: hsl(352 90% 41%);
+    --code-bg: hsl(154 12% 12%);
+    --code-fg: hsl(150 10% 88%);
+  }
+  :root[data-theme='dark'] {
+    --bg: hsl(150 5% 7%);
+    --card: hsl(150 4% 9%);
+    --fg: hsl(150 6% 93%);
+    --border: hsl(150 4% 18%);
+    --muted: hsl(150 3% 13%);
+    --muted-fg: hsl(158 5% 69%);
+    --brand: hsl(214 70% 62%);
+    --brand-soft: hsl(214 70% 62% / 0.13);
+    --brand-border: hsl(214 70% 62% / 0.35);
+    --amber: hsl(38 85% 62%);
+    --amber-soft: hsl(38 85% 62% / 0.12);
+    --green: hsl(152 45% 60%);
+    --green-soft: hsl(152 45% 60% / 0.12);
+    --red: hsl(359 85% 70%);
+    --code-bg: hsl(150 6% 12%);
+    --code-fg: hsl(150 10% 85%);
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font:
+      14.5px/1.55 ui-sans-serif,
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      sans-serif;
+  }
+  main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 40px 20px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+  h1 {
+    font-size: 23px;
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  h2 {
+    font-size: 16px;
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h2 .q {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brand);
+    background: var(--brand-soft);
+    border: 1px solid var(--brand-border);
+    border-radius: 999px;
+    padding: 3px 10px;
+  }
+  .sub {
+    color: var(--muted-fg);
+    font-size: 13.5px;
+    margin: 0;
+    max-width: 68ch;
+  }
+  section {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--card);
+    padding: 22px 24px;
+  }
+  section > p.lede {
+    color: var(--muted-fg);
+    font-size: 13px;
+    margin: 4px 0 14px;
+    max-width: 70ch;
+  }
+  code,
+  .mono {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 0.92em;
+  }
+  code {
+    background: var(--muted);
+    border-radius: 5px;
+    padding: 1px 5px;
+  }
+  ul {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  li {
+    max-width: 76ch;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 13px;
+  }
+  .tablewrap {
+    overflow-x: auto;
+  }
+  th {
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-fg);
+    font-weight: 650;
+    padding: 6px 10px 6px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 8px 10px 8px 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td {
+    border-bottom: 0;
+  }
+  .pill {
+    display: inline-block;
+    border-radius: 999px;
+    padding: 2px 9px;
+    font-size: 11px;
+    font-weight: 650;
+    white-space: nowrap;
+  }
+  .pill-user {
+    background: var(--brand-soft);
+    color: var(--brand);
+    border: 1px solid var(--brand-border);
+  }
+  .pill-terr {
+    background: var(--green-soft);
+    color: var(--green);
+  }
+  .pill-open {
+    background: var(--amber-soft);
+    color: var(--amber);
+  }
+  .pill-edge {
+    background: var(--muted);
+    color: var(--muted-fg);
+  }
+  .card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .mine {
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--muted-fg);
+    border-radius: 10px;
+    padding: 12px 16px;
+    background: var(--bg);
+  }
+  .mine.closed {
+    border-left-color: var(--green);
+  }
+  .mine.open {
+    border-left-color: var(--amber);
+  }
+  .mine h3 {
+    font-size: 13.5px;
+    margin: 0 0 4px;
+  }
+  .mine p {
+    font-size: 12.5px;
+    color: var(--muted-fg);
+    margin: 2px 0;
+    max-width: 76ch;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font:
+      12.5px/1.65 ui-monospace,
+      'SF Mono',
+      Menlo,
+      monospace;
+    overflow-x: auto;
+    margin: 10px 0 0;
+  }
+  .plan-item {
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+  }
+  .plan-item:last-child {
+    border-bottom: 0;
+  }
+  .plan-item .t {
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+  .plan-item .alt {
+    font-size: 12.5px;
+    color: var(--muted-fg);
+  }
+  details summary {
+    cursor: pointer;
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+  details[open] summary {
+    margin-bottom: 8px;
+  }
+  .copybtn {
+    margin-top: 12px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--brand);
+    color: #fff;
+    font-weight: 650;
+    font-size: 13.5px;
+    padding: 9px 18px;
+    cursor: pointer;
+  }
+  .copybtn:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+</style>
+
+<main>
+  <header>
+    <p
+      class="sub"
+      style="
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--brand);
+        margin-bottom: 8px;
+      "
+    >
+      Quadrant walk · 2026-07-15 · complete
+    </p>
+    <h1>Train records during training — retryable busy state</h1>
+    <p class="sub">
+      Refreshing the train page mid-training 502s the memory library. This map records everything
+      the walk settled: the diagnosis, ten closed decisions, the extracted taste, and the landmines
+      — plus the tweakable plan and a paste-ready build prompt.
+    </p>
+  </header>
+
+  <section>
+    <h2><span class="q">Q1 · Known knowns</span>The settled ground</h2>
+    <ul>
+      <li>
+        <strong>Diagnosis (evidence-closed):</strong> the trainer holds the PGlite memory DB's
+        exclusive open-lock; <code>duet train list --wait 5</code> exits <strong>75</strong> after
+        5s; the gateway maps any non-zero exit to 502 <code>train_command_failed</code> (<span
+          class="mono"
+          >packages/gateway/src/train-runner.ts:147</span
+        >); the api proxies verbatim (<span class="mono">apps/api/src/routes/train.ts:89</span>).
+        Confirmed in the VM's <span class="mono">~/.duet/logs/gateway.log</span>: 502s with ~7s
+        duration during the job, 200 the moment it finished.
+      </li>
+      <li>
+        <strong>Exit 75 is already a contract on both sides:</strong> duet-agent's
+        <span class="mono">failMemoryLockTimeout</span> (<span class="mono"
+          >cli/memory-db.ts:29</span
+        >) and this repo's <code>MEMORY_CLI_CONTRACT.exitCodes.lockTimeout</code> (<span
+          class="mono"
+          >contract/src/memory/index.ts:85</span
+        >). <strong>No duet-agent changes needed.</strong>
+      </li>
+      <li>
+        <strong>The target pattern already ships:</strong> memory routes map exit 75 → 503
+        <code>memory_lock_timeout</code> (<span class="mono">gateway/src/routes/memory.ts:132</span
+        >) — and that behavior is already public via <code>/v1/ws/:slug/memories*</code> (<span
+          class="mono"
+          >api/src/routes/workspaces.ts:326,337</span
+        >).
+      </li>
+      <li>
+        <strong>The 5s was a placeholder:</strong> introduced in agent-drive slice 06 (<span
+          class="mono"
+          >f063819</span
+        >) against a mocked CLI, before PGlite lock semantics existed. Never tuned; today's incident
+        is the first contention data.
+      </li>
+      <li>
+        <strong>Web:</strong> react-query is <code>retry: false</code> globally (<span class="mono"
+          >spa/root.tsx:58</span
+        >); <span class="mono">apiError()</span> surfaces the body's <code>error</code> as
+        <code>DuetApiError.code</code>; the page already refetches records on job completion (<span
+          class="mono"
+          >train.tsx:77-85</span
+        >).
+      </li>
+      <li>
+        <strong>Every train command runs behind the pin rail:</strong>
+        <span class="mono">ensurePinnedRunnerBinary</span> (<span class="mono"
+          >gateway/src/runtime/http.ts:438</span
+        >) guarantees the pinned <code>duet</code> version before spawning.
+      </li>
+      <li>
+        <strong>Rollout:</strong> gateway release rail (self-announcing) + Vercel web deploy. No VM
+        image rebuild, no npm publish, no api change.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="q">Q2 · Known unknowns</span>Decision ledger — all closed</h2>
+    <div class="tablewrap">
+      <table>
+        <tr>
+          <th>#</th>
+          <th>Question</th>
+          <th>Decision</th>
+          <th>Closed by</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Busy-state UX</td>
+          <td>Softer info banner; stale records stay visible</td>
+          <td><span class="pill pill-user">user</span></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Error seam</td>
+          <td>
+            Full unification: one shared CLI-failure classifier, contract-owned exit codes; both
+            memory + train emit 503 <code>memory_lock_timeout</code> on exit 75
+          </td>
+          <td><span class="pill pill-user">user</span></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Banner copy</td>
+          <td>
+            Two copies — "Training in progress — memories refresh when it finishes" when jobs show a
+            live job; else "Memory is busy — refreshing shortly"
+          </td>
+          <td><span class="pill pill-user">user</span></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Recovery</td>
+          <td>
+            Gentle ~3s poll while busy + job-completion invalidation; no Retry-After header.
+            <strong>Example User 2026-07-15, final:</strong> keep polling even though train-uploads makes
+            hour-long jobs possible — most jobs run &lt; 2 min and users navigate away from longer
+            ones (an interim no-poll-while-running amendment was reverted)
+          </td>
+          <td><span class="pill pill-user">user</span></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Gateway short-circuit on <code>activeTrainRuns</code></td>
+          <td>No — always attempt the CLI; it's the ground truth</td>
+          <td><span class="pill pill-terr">territory</span></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Detail / edit / delete during training</td>
+          <td>Same 503; keep existing generic copy (draft already preserved)</td>
+          <td><span class="pill pill-terr">decided + informed</span></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Deploy skew</td>
+          <td>Both directions degrade to today's destructive banner; no coordination</td>
+          <td><span class="pill pill-terr">territory</span></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>503 body</td>
+          <td>
+            Keep <code>message</code> (CLI stderr) — matches memory routes; UI never renders it
+          </td>
+          <td><span class="pill pill-user">user</span></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Lock-wait budgets</td>
+          <td>
+            <strong>Trainer import → 30s</strong> (new
+            <code>DEFAULT_TRAIN_IMPORT_LOCK_WAIT_MS</code>); all request-shaped routes stay 5s.
+            Principle: requests fail fast with a retryable signal; jobs wait long
+          </td>
+          <td><span class="pill pill-user">user</span></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><code>train_capability_unavailable</code></td>
+          <td>
+            Delete — it's backward compat for unpinned CLIs, structurally dead under the pin rail;
+            drop the 501 mapping, <code>recordsUpgradeRequired</code> string, and the vestigial
+            <code>capabilityVersion: 1</code> field
+          </td>
+          <td><span class="pill pill-user">user ("no backward compat")</span></td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="q">Q3 · Unknown knowns</span>What the mock + probes extracted</h2>
+    <ul>
+      <li>
+        Both banner copies stolen as rendered (subtle spinner, brand-soft tint, stale list below);
+        destructive banner confirmed staying for genuine failures.
+      </li>
+      <li>
+        <strong>Consumers beyond the train page exist</strong> — the public memories API already
+        speaks 503 <code>memory_lock_timeout</code>, so unification narrows the public vocabulary
+        rather than widening it. duet-agent never calls these HTTP routes (in-process PGlite).
+      </li>
+      <li>
+        es-419 translation: shrugged — machine translation acceptable for the two new strings.
+      </li>
+      <li>
+        Prod timing + long-training probes: unticked — staging-first as usual; no extra design for
+        minutes-long banners.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="q">Q4 · Unknown unknowns</span>Landmine cards</h2>
+    <div class="card-list">
+      <div class="mine closed">
+        <h3>
+          Trainer shares the 5s wait — training start can fail the same way
+          <span class="pill pill-terr">closed → decision #9</span>
+        </h3>
+        <p>
+          Evidence: <span class="mono">runtime/http.ts:434</span> feeds the same
+          <code>waitMs</code> into the pipeline;
+          <span class="mono">train/duet-cli-runner.ts:12</span> forwards it to
+          <code>duet train</code>. Bumped to 30s.
+        </p>
+      </div>
+      <div class="mine">
+        <h3>react-query retry-vs-poll trap <span class="pill pill-edge">sharp edge</span></h3>
+        <p>
+          Implementing the poll via <code>retry</code> would keep the query out of error state and
+          the banner would never render. Must be a <code>refetchInterval</code> callback on
+          <code>query.state.error</code>; a test pins that v5 polls errored queries.
+        </p>
+      </div>
+      <div class="mine">
+        <h3>
+          Unified classifier must not regress <code>not_found</code>
+          <span class="pill pill-edge">sharp edge</span>
+        </h3>
+        <p>
+          Exit-code classification first (75 → busy); stderr matching stays for
+          <code>not_found</code> → 404. The capability branch is deleted per decision #10. Memory
+          routes' 502 body (<code>exitCode</code>, <code>message</code>) preserved.
+        </p>
+      </div>
+      <div class="mine">
+        <h3>
+          Five test assertions encode the old 502 <span class="pill pill-edge">sharp edge</span>
+        </h3>
+        <p>
+          <span class="mono">gateway.test.ts:3436/3696/3778/3821/4012</span> + the fake CLI in
+          <span class="mono">records.test.ts</span> needs an exit-75 mode.
+          <span class="mono">gateway.test.ts:3495</span> is the pattern to extend.
+        </p>
+      </div>
+      <div class="mine">
+        <h3>
+          capabilityVersion removal has a skew window <span class="pill pill-edge">sharp edge</span>
+        </h3>
+        <p>
+          Old web validates <code>z.literal(1)</code>; a new gateway that stops sending it breaks
+          records listing until the web deploy lands (minutes). Accepted under no-backward-compat.
+        </p>
+      </div>
+      <div class="mine open">
+        <h3>
+          Agent's in-VM memory writes block during training <span class="pill pill-open">OPEN</span>
+        </h3>
+        <p>
+          During a training, duet-agent's own writes wait on the same lock with its 30s in-process
+          budget. duet-agent-side concern; unblocks when that repo takes a pass. Not touched here.
+        </p>
+      </div>
+      <div class="mine closed">
+        <h3>
+          FOLDED INTO specs/train-uploads as slices 00a/00b (2026-07-15)
+          <span class="pill pill-terr">superseded by the spec</span>
+        </h3>
+        <p>
+          <strong>This map's build now lives in the spec</strong> — Example User's call: one training spec.
+          Slice <span class="mono">00a-records-busy-vocabulary</span> (gateway + contract) and
+          <span class="mono">00b-records-busy-banner</span> (web) are the first track of the ladder,
+          independent of 01–11; the spec's MAP.md addendum carries this ledger verbatim (A1–A7). The
+          spec's original parallel vocabulary (<code>train_records_unavailable</code>, slices 06/09)
+          was reconciled away — slices 06/09 now inherit 00a/00b. Decision #9's thread-through is a
+          named short-lived seam that dies with the legacy pipeline in slice 06.
+        </p>
+      </div>
+    </div>
+    <p class="lede" style="margin-top: 14px">
+      <strong>Builder must confirm before coding:</strong> ① v5 <code>refetchInterval</code> fires
+      on errored queries (pin with a test); ② the api proxy passes 503 + JSON body through untouched
+      (add an assertion); ③ both locale files gain both strings.
+    </p>
+  </section>
+
+  <section>
+    <h2>Tweakable plan</h2>
+    <p class="lede">
+      Sorted by likelihood you'd tweak it — judgment calls first, mechanical work collapsed below.
+    </p>
+    <div class="plan-item">
+      <div class="t">1 · Banner strings (en)</div>
+      <div class="alt">
+        "Training in progress — memories refresh when it finishes." / "Memory is busy — refreshing
+        shortly." Tweak freely; es-419 machine-translated to match.
+      </div>
+    </div>
+    <div class="plan-item">
+      <div class="t">2 · Poll interval: 3s</div>
+      <div class="alt">
+        Each attempt also burns up to 5s of server-side wait, so effective cadence ~3–8s.
+        Alternatives: 2s (snappier, more load) / 5s (lazier).
+      </div>
+    </div>
+    <div class="plan-item">
+      <div class="t">3 · <code>DEFAULT_TRAIN_IMPORT_LOCK_WAIT_MS = 30_000</code></div>
+      <div class="alt">
+        Sized to duet-agent's own lock budget. Alternative: 60s if long agent write-bursts show up
+        in staging.
+      </div>
+    </div>
+    <div class="plan-item">
+      <div class="t">4 · capabilityVersion removal rides along</div>
+      <div class="alt">
+        Alternative: leave the dead field and only drop the 501 branch — shrinks the diff, keeps a
+        vestige.
+      </div>
+    </div>
+    <details>
+      <summary>5 · Mechanical (trusted)</summary>
+      <ul>
+        <li>
+          Extract shared CLI-failure classifier beside <code>MEMORY_CLI_CONTRACT</code>; adopt in
+          <span class="mono">routes/memory.ts</span> + <span class="mono">train/records.ts</span>;
+          exit 75 → 503 <code>memory_lock_timeout</code> everywhere.
+        </li>
+        <li>
+          Delete <code>train_capability_unavailable</code> + <code>recordsUpgradeRequired</code> +
+          capability string-match.
+        </li>
+        <li>
+          Thread the 30s import wait through <span class="mono">createTrainRoutes</span> → pipeline
+          only.
+        </li>
+        <li>
+          Web: <code>memory_lock_timeout</code> branch in the records card → info banner (two copies
+          keyed on live-job data), refetchInterval poll, stale list kept.
+        </li>
+        <li>
+          Tests first (write-tests red/green): exit-75 fake-CLI mode, classifier unit tests, proxy
+          passthrough, banner + poll behavior; update the five 502 assertions; playground fixtures.
+        </li>
+        <li>
+          ui-playground visual gate for the two banner states; ship staging via the normal rails.
+        </li>
+      </ul>
+    </details>
+  </section>
+
+  <section>
+    <h2>Kick off the build</h2>
+    <p class="lede">Your next message, pre-drafted:</p>
+    <pre id="prompt">
+Build the train-records busy-state fix per the map (artifact: train-busy-map).
+Scope: gateway + web + contract only. TDD via write-tests; ui-playground for
+the banner states; codex review before commit. Decisions #1–#10 and the sharp
+edges are binding; confirm the three builder-checks before coding. Ship to
+staging and verify live on /w/test/computer/train with a real training run.</pre
+    >
+    <button class="copybtn" id="copy" type="button">Copy prompt</button>
+  </section>
+</main>
+
+<script>
+  document.getElementById('copy').addEventListener('click', async () => {
+    await navigator.clipboard.writeText(document.getElementById('prompt').textContent.trim())
+    const b = document.getElementById('copy')
+    b.textContent = 'Copied'
+    setTimeout(() => (b.textContent = 'Copy prompt'), 1500)
+  })
+</script>

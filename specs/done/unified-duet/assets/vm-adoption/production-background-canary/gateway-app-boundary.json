@@ -1,0 +1,39 @@
+{
+  "status": "boundary clarified; managed-app restart accepted with recovery sanity check",
+  "managedAppProcessesInGatewayGroup": 39,
+  "rows": [
+    {
+      "vmName": "workspace-redacted",
+      "gatewayMainPID": 1351947,
+      "managedAppProcessCount": 9,
+      "gatewayGroup": "/system.slice/duet-gateway.service"
+    },
+    {
+      "vmName": "workspace-redacted",
+      "gatewayMainPID": 486322,
+      "managedAppProcessCount": 1,
+      "gatewayGroup": "/system.slice/duet-gateway.service"
+    },
+    {
+      "vmName": "workspace-redacted",
+      "gatewayMainPID": 1021181,
+      "managedAppProcessCount": 17,
+      "gatewayGroup": "/system.slice/duet-gateway.service"
+    },
+    {
+      "vmName": "workspace-redacted",
+      "gatewayMainPID": 2945438,
+      "managedAppProcessCount": 7,
+      "gatewayGroup": "/system.slice/duet-gateway.service"
+    },
+    {
+      "vmName": "workspace-redacted",
+      "gatewayMainPID": 1344955,
+      "managedAppProcessCount": 5,
+      "gatewayGroup": "/system.slice/duet-gateway.service"
+    }
+  ],
+  "observedBoundary": "Default systemd control-group stop includes these processes. They are separate from the31 preserved background processes outside the gateway group.",
+  "noFurtherGatewayStopsExecuted": true,
+  "userDecision": "Gateway-managed app servers may restart with the gateway. Independent background services remain running. Sanity-check managed app recovery."
+}

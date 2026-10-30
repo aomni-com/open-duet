@@ -1,0 +1,30 @@
+bun test v1.3.14 (0d9b296a)
+
+benchmarks/swebench/test/swebench-e2b.test.ts:
+(pass) SWE-bench E2B execution > allows a controller budget top-up without lowering the frozen campaign ceiling [0.11ms]
+(pass) SWE-bench E2B execution > derives an immutable path-safe template name from the full git SHA [0.05ms]
+(pass) SWE-bench E2B execution > forwards only supported provider credentials [0.05ms]
+(pass) SWE-bench E2B execution > builds stable environment provenance without a sandbox identity [0.05ms]
+(pass) SWE-bench E2B execution > reserves the global model budget across independent E2B shards and retries [0.41ms]
+(pass) SWE-bench E2B execution > reserves only unfinished arms in one E2B shard [0.05ms]
+(pass) SWE-bench E2B execution > reconciles completed shard spend before admitting more model work [11.38ms]
+(pass) SWE-bench E2B execution > charges unavoidable request overshoot before deciding whether to admit more work [0.12ms]
+(pass) SWE-bench E2B execution > leaves work unstarted when its reservation cannot fit the admission budget [0.05ms]
+(pass) SWE-bench E2B execution > stops admitting shards after a worker failure [0.06ms]
+(pass) SWE-bench E2B execution > defaults E2B workers to the campaign instance subset [0.27ms]
+(pass) SWE-bench E2B execution > runs every campaign trial as an independent E2B shard [0.10ms]
+(pass) SWE-bench E2B execution > integrates concurrent trial shards without racing on provenance [3.32ms]
+(pass) SWE-bench E2B execution > integrates completed retry attempts returned by a resumed worker [1.70ms]
+(pass) SWE-bench E2B execution > rejects worker artifacts from conflicting campaign provenance [1.89ms]
+(pass) SWE-bench E2B execution > retries sandbox creation only after cleaning an unconnected attempt [0.13ms]
+(pass) SWE-bench E2B execution > retries idempotent no-model controller requests without cleanup side effects [0.08ms]
+(pass) capacity proof refuses a binary without its required image sidecar hash [0.24ms]
+
+benchmarks/swebench/test/swebench-packaging.test.ts:
+(pass) SWE-bench Duet packaging > carries declared dependency patches into the isolated Linux build [18.51ms]
+(pass) SWE-bench Duet packaging > loads the exact prebuilt worker artifact without rebuilding it [1.15ms]
+
+ 20 pass
+ 0 fail
+ 45 expect() calls
+Ran 20 tests across 2 files. [131.00ms]

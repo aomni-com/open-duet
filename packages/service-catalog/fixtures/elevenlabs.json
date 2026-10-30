@@ -1,0 +1,4 @@
+[
+  {"route":"/v1/text-to-speech/voice-1","request":{"method":"POST","json":{"text":"Hi"}},"response":{"status":200,"headers":{"character-cost":"2"}}},
+  {"route":"/v1/music","request":{"method":"POST","json":{"music_length_ms":10000}},"response":{"status":200}}
+]

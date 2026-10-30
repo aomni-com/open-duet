@@ -1,0 +1,126 @@
+{
+  "webRevision": "96304fab216610bbb06c98192467d8441a5fa2d8",
+  "surface": "deployed production component playground",
+  "results": [
+    {
+      "width": 1440,
+      "label": "OpenAI frontier",
+      "speed": 2,
+      "intelligence": 5,
+      "cost": 5,
+      "menu": true,
+      "selected": true,
+      "labelFits": true
+    },
+    {
+      "width": 1440,
+      "label": "OpenAI max",
+      "speed": 3,
+      "intelligence": 4,
+      "cost": 4,
+      "menu": true,
+      "selected": true,
+      "labelFits": true
+    },
+    {
+      "width": 1440,
+      "label": "Anthropic frontier",
+      "speed": 2,
+      "intelligence": 5,
+      "cost": 5,
+      "menu": true,
+      "selected": true,
+      "labelFits": true
+    },
+    {
+      "width": 1440,
+      "label": "Anthropic max",
+      "speed": 3,
+      "intelligence": 4,
+      "cost": 4,
+      "menu": true,
+      "selected": true,
+      "labelFits": true
+    },
+    {
+      "width": 390,
+      "label": "OpenAI frontier",
+      "speed": 2,
+      "intelligence": 5,
+      "cost": 5,
+      "menu": true,
+      "selected": true,
+      "labelFits": true
+    },
+    {
+      "width": 390,
+      "label": "OpenAI max",
+      "speed": 3,
+      "intelligence": 4,
+      "cost": 4,
+      "menu": true,
+      "selected": true,
+      "labelFits": true
+    },
+    {
+      "width": 390,
+      "label": "Anthropic frontier",
+      "speed": 2,
+      "intelligence": 5,
+      "cost": 5,
+      "menu": true,
+      "selected": true,
+      "labelFits": true
+    },
+    {
+      "width": 390,
+      "label": "Anthropic max",
+      "speed": 3,
+      "intelligence": 4,
+      "cost": 4,
+      "menu": true,
+      "selected": true,
+      "labelFits": true
+    },
+    {
+      "width": 320,
+      "label": "OpenAI frontier",
+      "speed": 2,
+      "intelligence": 5,
+      "cost": 5,
+      "menu": true,
+      "selected": true,
+      "labelFits": true
+    },
+    {
+      "width": 320,
+      "label": "OpenAI max",
+      "speed": 3,
+      "intelligence": 4,
+      "cost": 4,
+      "menu": true,
+      "selected": true,
+      "labelFits": true
+    },
+    {
+      "width": 320,
+      "label": "Anthropic frontier",
+      "speed": 2,
+      "intelligence": 5,
+      "cost": 5,
+      "menu": true,
+      "selected": true,
+      "labelFits": true
+    },
+    {
+      "width": 320,
+      "label": "Anthropic max",
+      "speed": 3,
+      "intelligence": 4,
+      "cost": 4,
+      "menu": true,
+      "selected": true,
+      "labelFits": true
+    }
+  ]
+}

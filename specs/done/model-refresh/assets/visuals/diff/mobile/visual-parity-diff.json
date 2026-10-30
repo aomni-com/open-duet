@@ -1,0 +1,143 @@
+{
+  "kind": "screenshot-parity-diff",
+  "generatedAt": "2026-09-27T23:42:51.720Z",
+  "note": "Lower parityDistance means the candidate is closer to the reference for this fixed pair. This is a distance metric, not an acceptance gate.",
+  "pairCount": 4,
+  "worstPair": "compose-bar-provider-models",
+  "results": [
+    {
+      "id": "compose-bar-provider-models",
+      "current": "../../before/mobile/compose-bar-provider-models.png",
+      "candidate": "../../candidate/mobile/compose-bar-provider-models.png",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "parityDistance": 0.0006,
+      "grayscale": {
+        "mae": 0.04175,
+        "rmse": 1.92119,
+        "diffRatio16": 0.0006,
+        "diffRatio32": 0.00044,
+        "diffRatio64": 0.00025,
+        "pixelmatchRatio": 0.00053
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0.00386,
+        "blackRatioCandidate": 0.00386,
+        "terrainLikeRatioCurrent": 0.73992,
+        "terrainLikeRatioCandidate": 0.73989,
+        "avgLuminanceCurrent": 201.11468,
+        "avgLuminanceCandidate": 201.11494,
+        "avgLuminanceDelta": 0.00026,
+        "edgeEnergyCurrent": 0.06312,
+        "edgeEnergyCandidate": 0.06311,
+        "edgeEnergyRatio": 0.99978,
+        "edgeDiffRatio32": 0.00106
+      },
+      "artifacts": {
+        "sideBySide": "compose-bar-provider-models-side-by-side.png",
+        "pixelmatch": "compose-bar-provider-models-pixelmatch.png"
+      }
+    },
+    {
+      "id": "settings-provider-models",
+      "current": "../../before/mobile/settings-provider-models.png",
+      "candidate": "../../candidate/mobile/settings-provider-models.png",
+      "dimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "parityDistance": 0.0006,
+      "grayscale": {
+        "mae": 0.04175,
+        "rmse": 1.92119,
+        "diffRatio16": 0.0006,
+        "diffRatio32": 0.00044,
+        "diffRatio64": 0.00025,
+        "pixelmatchRatio": 0.00053
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0.00485,
+        "blackRatioCandidate": 0.00485,
+        "terrainLikeRatioCurrent": 0.6674,
+        "terrainLikeRatioCandidate": 0.66736,
+        "avgLuminanceCurrent": 185.02611,
+        "avgLuminanceCandidate": 185.02637,
+        "avgLuminanceDelta": 0.00026,
+        "edgeEnergyCurrent": 0.05746,
+        "edgeEnergyCandidate": 0.05745,
+        "edgeEnergyRatio": 0.99976,
+        "edgeDiffRatio32": 0.00106
+      },
+      "artifacts": {
+        "sideBySide": "settings-provider-models-side-by-side.png",
+        "pixelmatch": "settings-provider-models-pixelmatch.png"
+      }
+    },
+    {
+      "id": "compose-bar-provider-selected",
+      "current": "../../before/mobile/compose-bar-provider-selected.png",
+      "candidate": "../../candidate/mobile/compose-bar-provider-selected.png",
+      "dimensions": {
+        "width": 322,
+        "height": 28
+      },
+      "parityDistance": 0,
+      "grayscale": {
+        "mae": 0,
+        "rmse": 0,
+        "diffRatio16": 0,
+        "diffRatio32": 0,
+        "diffRatio64": 0,
+        "pixelmatchRatio": 0
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.03738,
+        "terrainLikeRatioCandidate": 0.03738,
+        "avgLuminanceCurrent": 142.65717,
+        "avgLuminanceCandidate": 142.65717,
+        "avgLuminanceDelta": 0,
+        "edgeEnergyCurrent": 0.14429,
+        "edgeEnergyCandidate": 0.14429,
+        "edgeEnergyRatio": 1,
+        "edgeDiffRatio32": 0
+      },
+      "artifacts": {}
+    },
+    {
+      "id": "settings-provider-selected",
+      "current": "../../before/mobile/settings-provider-selected.png",
+      "candidate": "../../candidate/mobile/settings-provider-selected.png",
+      "dimensions": {
+        "width": 316,
+        "height": 36
+      },
+      "parityDistance": 0,
+      "grayscale": {
+        "mae": 0,
+        "rmse": 0,
+        "diffRatio16": 0,
+        "diffRatio32": 0,
+        "diffRatio64": 0,
+        "pixelmatchRatio": 0
+      },
+      "contentProxies": {
+        "blackRatioCurrent": 0,
+        "blackRatioCandidate": 0,
+        "terrainLikeRatioCurrent": 0.96405,
+        "terrainLikeRatioCandidate": 0.96405,
+        "avgLuminanceCurrent": 241.47053,
+        "avgLuminanceCandidate": 241.47053,
+        "avgLuminanceDelta": 0,
+        "edgeEnergyCurrent": 0.20977,
+        "edgeEnergyCandidate": 0.20977,
+        "edgeEnergyRatio": 1,
+        "edgeDiffRatio32": 0
+      },
+      "artifacts": {}
+    }
+  ]
+}

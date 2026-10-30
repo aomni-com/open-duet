@@ -1,0 +1,502 @@
+---
+title: 'Cómo configurar OpenClaw para tu equipo'
+description: 'Configura OpenClaw para tu equipo: hosting en la nube, autenticación, permisos y tiempo de actividad. Compara más de $10K en trabajo propio con los planes mensuales de Duet.'
+date: '2026-03-13'
+updatedAt: '2026-05-08'
+author:
+  name: 'David'
+  role: 'Founder'
+  link: '/'
+category: 'guides'
+tags:
+  [
+    'openclaw',
+    'team-setup',
+    'ai-agents',
+    'coworking',
+    'collaboration',
+    'self-hosted-ai',
+    'ai-agent-platform',
+  ]
+type: 'guide'
+image: '/guides/how-to-set-up-openclaw-for-your-team/cover.png'
+locale: es-419
+translationKey: 'how-to-set-up-openclaw-for-your-team'
+relatedPosts:
+  - slug: 'duet-vs-openclaw'
+    context: 'Cloud IDE vs Personal AI'
+  - 'beyond-claude-code-building-a-shared-skill-library'
+  - 'duet-vs-claude-code'
+  - 'openclaw-vs-managed-ai-agent-platforms'
+  - 'how-to-host-openclaw-in-the-cloud'
+  - 'how-to-set-up-a-24-7-ai-agent'
+  - slug: 'agent-skills-101-tools-vs-mcp-vs-skills'
+    context: 'Tools vs MCP vs Skills'
+  - 'claude-code-for-founders'
+  - 'how-to-use-ai-to-run-startup-operations-with-a-3-person-team'
+  - 'how-to-build-and-deploy-a-web-app-using-only-ai'
+  - 'claude-code-vs-cursor-vs-codex'
+cta:
+  title: '$10K de DevOps, ahorrados.'
+  subtitle: 'Duet ejecuta agentes de equipo estilo OpenClaw en la nube gestionada, con autenticación, permisos y tiempo de actividad resueltos. Los planes empiezan en $20 al mes.'
+  buttonText: 'Prueba Duet gratis'
+  href: '/sign-in?from=guide-openclaw-team'
+---
+
+# Cómo configurar OpenClaw para tu equipo (y por qué la mayoría de los equipos se rinde)
+
+<Callout emoji="💡">
+Resumen rápido
+
+Esta guía recorre la configuración de OpenClaw para tu equipo. Desde la configuración inicial y la conexión de las plataformas de mensajería hasta la asignación de skills y la gestión de permisos para varios usuarios.
+
+</Callout>
+
+<Callout emoji="❓">
+Preguntas que responde esta página
+
+- Cómo configurar OpenClaw para un equipo
+- Guía de configuración de OpenClaw para equipos
+- Cómo configurar OpenClaw para varios usuarios
+- Mejores prácticas para el despliegue de OpenClaw en equipo
+- ¿Qué es OpenClaw y cómo funciona para equipos?
+
+</Callout>
+
+Configurar OpenClaw para un equipo requiere de 24 a 44 horas de trabajo de ingeniería entre hosting en la nube, autenticación multiusuario, gestión de estado compartido, permisos basados en roles y monitoreo de tiempo de actividad. El costo total del primer año para un equipo de cinco es de $10,000 o más cuando consideras la mano de obra de configuración y el mantenimiento continuo. Plataformas gestionadas como Duet ofrecen las mismas capacidades con un registro de 3 minutos y cero trabajo de infraestructura.
+
+OpenClaw es una de las plataformas de agentes de AI de código abierto más potentes disponibles. Con más de 175,000 estrellas en GitHub y más de 10,700 skills de la comunidad, les da a los desarrolladores en solitario un nivel de autonomía de AI que rivaliza con las plataformas comerciales. Los equipos, sin embargo, enfrentan una realidad distinta.
+
+Esta guía recorre lo que de verdad implica configurar OpenClaw para un uso de equipo multiusuario y siempre activo. Cada paso, cada detalle complicado y cada hora de tiempo de ingeniería está documentado. Luego cubrimos la alternativa: [Duet](/), que entrega todo esto listo para usar.
+
+{/* GRAPHIC IDEA: Hero illustration with a split screen. Left side shows a stressed developer surrounded by terminal windows, Docker configs, SSH keys, and error logs. Right side shows a team reviewing a completed Duet session and its artifacts. Caption: "Same outcome, different weekend." */}
+
+---
+
+## Por qué configurar OpenClaw para un equipo es más difícil de lo que parece
+
+OpenClaw fue diseñado como un agente de AI personal. Es una aplicación de un solo usuario que corre en tu laptop y se conecta a tus apps de mensajería. Esa arquitectura es una ventaja para los usuarios avanzados en solitario que quieren control total.
+
+Para los equipos, es un muro.
+
+Esto es para lo que te apuntas cuando intentas hacer que OpenClaw funcione para más de una persona:
+
+Desafío | Qué implica | Tiempo estimado
+
+**Hosting en la nube** | Aprovisionar VPS, Docker, systemd, SSL | 2 a 4 horas
+
+**Autenticación multiusuario** | Construir o integrar OAuth/SSO, gestión de sesiones | 8 a 16 horas
+
+**Estado compartido** | Configurar historial de conversación compartido, sincronización de workspace | 4 a 8 horas
+
+**Permisos y RBAC** | Acceso basado en roles, alcance de API keys, registros de auditoría | 8 a 12 horas
+
+**Tiempo de actividad y monitoreo** | Health checks, reinicio automático, alertas | 2 a 4 horas
+
+**Mantenimiento continuo** | Actualizaciones de dependencias, parches de seguridad, respaldos | 2 a 4 hrs/mes
+
+**Inversión total de la primera semana: de 24 a 44 horas de tiempo de ingeniería.**
+
+A $100 la hora, eso es de $2,400 a $4,400 antes de que alguien de tu equipo envíe un solo mensaje al agente.
+
+{/* GRAPHIC IDEA: Horizontal timeline infographic showing the setup journey. Day 1: "Provision server." Day 2: "Configure Docker + OpenClaw." Day 3 and 4: "Build auth layer." Day 5: "Wrestle with shared state." Day 6: "Set up monitoring." Day 7: "Debug why it all broke overnight." Each step has a small icon and estimated hours. Final callout at the end: "Duet: 3 minutes." */}
+
+---
+
+## Paso 1: Hosting en la nube para OpenClaw - VPS, Docker y configuración del servidor
+
+OpenClaw corre localmente por defecto. Cuando tu laptop entra en suspensión, se detiene. Para un equipo, necesitas un servidor que se mantenga encendido las 24 horas.
+
+### Qué necesitas
+
+- Un VPS con 4 GB o más de RAM y 2 o más núcleos de CPU (un Hetzner CAX11 a $5/mes es lo mínimo)
+- Docker instalado y configurado
+- Un nombre de dominio con certificados SSL
+- Reglas de firewall (UFW o iptables)
+
+### Requisitos del servidor según el tamaño del equipo
+
+Tamaño del equipo | Instancia recomendada | Costo mensual | RAM | Núcleos de CPU
+
+1 a 2 | Hetzner CAX11 | $5 | 4 GB | 2
+
+3 a 5 | DigitalOcean Regular | $24 | 4 GB | 2
+
+6 a 10 | AWS t3.large | $60 | 8 GB | 2
+
+10+ | Dedicado o HA | $120+ | 16 GB | 4+
+
+### La configuración
+
+```plaintext
+# Provision Ubuntu 22.04 server, then:
+ssh root@YOUR_SERVER_IP
+apt update && apt upgrade -y
+
+# Install Docker
+curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
+systemctl enable docker
+
+# Create workspace
+mkdir -p /opt/openclaw && cd /opt/openclaw
+
+# Configure environment
+cat > .env << 'EOF'
+ANTHROPIC_API_KEY=your_key_here
+OPENAI_API_KEY=your_key_here
+WORKSPACE_DIR=/workspace
+PORT=3000
+EOF
+chmod 600 .env
+
+# Run OpenClaw
+docker run -d \
+  --name openclaw \
+  --restart unless-stopped \
+  -p 3000:3000 \
+  -v /opt/openclaw/workspace:/workspace \
+  --env-file /opt/openclaw/.env \
+  openclaw/openclaw:latest
+```
+
+### Qué puede salir mal
+
+- **Las descargas de la imagen de Docker fallan** por límites de tasa en las cuentas gratuitas de Docker Hub
+- **Conflictos de puerto** si otros servicios usan el 3000
+- **Presión de memoria** que provoca cierres por OOM en instancias subdimensionadas
+- **Configuración incorrecta de SSL** que deja tus API keys expuestas sobre HTTP simple
+  Para más detalle sobre este paso, consulta nuestro recorrido completo: [Cómo alojar OpenClaw en la nube](/blog/how-to-host-openclaw-in-the-cloud).
+
+{/* GRAPHIC IDEA: Architecture diagram showing the data flow from a user's laptop through the internet to a VPS running a Docker container with OpenClaw. Include volumes for workspace and .env file for secrets. Show the firewall between the internet and VPS. Annotate pain points with red callout bubbles: "Who manages SSL?", "What if Docker crashes at 3 AM?", "How do 5 people share this?" */}
+
+---
+
+## Paso 2: Autenticación multiusuario - la parte más difícil de OpenClaw en equipo
+
+Aquí es donde la mayoría de los equipos abandona el proyecto.
+
+OpenClaw no tiene un concepto integrado de "usuarios". Es un agente, un operador. Todos los que entran a tu servidor ven las mismas conversaciones, las mismas integraciones y las mismas API keys.
+
+### Qué necesitas construir
+
+1. **Un proxy inverso con autenticación** (Nginx + OAuth2 Proxy, Caddy con middleware de autenticación, o Authelia)
+1. **Un proveedor de identidad** (Google Workspace, Okta, Auth0 o Keycloak autoalojado)
+1. **Gestión de sesiones** para rastrear quién está conectado
+1. **Aislamiento por usuario** o workspaces compartidos con atribución
+
+### Ejemplo: OAuth2 Proxy + Google Workspace
+
+```plaintext
+# Install OAuth2 Proxy
+docker run -d \
+  --name oauth2-proxy \
+  -p 4180:4180 \
+  -e OAUTH2_PROXY_CLIENT_ID=your_google_client_id \
+  -e OAUTH2_PROXY_CLIENT_SECRET=your_google_client_secret \
+  -e OAUTH2_PROXY_COOKIE_SECRET=$(openssl rand -hex 16) \
+  -e OAUTH2_PROXY_PROVIDER=google \
+  -e OAUTH2_PROXY_EMAIL_DOMAINS=yourcompany.com \
+  -e OAUTH2_PROXY_UPSTREAM=http://openclaw:3000 \
+  quay.io/oauth2-proxy/oauth2-proxy:latest
+```
+
+Esto restringe el acceso detrás del login de Google, pero no resuelve el problema real: **todos siguen compartiendo la misma sesión del agente.** No hay un concepto de "Sarah preguntó esto" vs. "James preguntó aquello". Ningún límite de permisos. Ningún rastro de auditoría.
+
+{/* GRAPHIC IDEA: Flowchart showing auth complexity. Start with "User opens browser" leading to "Hits Nginx" leading to "Redirects to OAuth2 Proxy" leading to "Authenticates with Google/Okta" leading to "Session cookie set" leading to "Proxied to OpenClaw" leading to "...but OpenClaw doesn't know who you are." Final box is red with text: "Authentication is not Authorization. You built a locked door, but everyone inside shares the same room." */}
+
+### El problema real
+
+La autenticación te dice _quién_ está en la puerta. La autorización te dice _qué puede hacer dentro_. OpenClaw no tiene ninguna de las dos, y agregar autenticación a la fuerza en la capa del proxy solo resuelve el primer problema.
+
+Para un verdadero soporte multiusuario, tendrías que hacer fork de OpenClaw y modificar su núcleo para:
+
+- Rastrear la identidad del usuario por solicitud
+- Acotar las conversaciones por usuario o por equipo
+- Implementar permisos basados en roles (admin, miembro, observador)
+- Registrar todas las acciones del agente con atribución de usuario
+  Eso no es un proyecto de fin de semana. Eso es un producto.
+
+---
+
+## Paso 3: Estado de agente compartido e historial de conversación en todo tu equipo
+
+En una sola laptop, OpenClaw guarda las conversaciones localmente. Con varios usuarios, necesitas estado compartido.
+
+### Opciones (ninguna es buena)
+
+**Opción A: Sistema de archivos compartido.** Monta un volumen de red (NFS, EFS) para que todos los usuarios lean y escriban en el mismo workspace. Funciona hasta que dos personas disparan tareas del agente al mismo tiempo y chocan con condiciones de carrera.
+
+**Opción B: Backend de base de datos.** Reemplaza el almacenamiento local con PostgreSQL o Redis. Requiere modificar la capa de almacenamiento de OpenClaw. Existen forks de la comunidad, pero se rompen con las actualizaciones.
+
+**Opción C: Instancias separadas por usuario.** Ejecuta un contenedor de OpenClaw por cada miembro del equipo. Resuelve el aislamiento pero mata la colaboración. Además multiplica el costo de infraestructura por la cantidad de personas.
+
+{/* GRAPHIC IDEA: Three-panel comparison showing each option. Panel A: "Shared filesystem" with multiple users writing to one folder and a collision/explosion icon where two writes overlap. Panel B: "Database backend" with an OpenClaw container connected to PostgreSQL and a warning label "custom fork required." Panel C: "Instance per user" with five separate OpenClaw containers, each with its own user, and a dollar sign multiplying. None have a green checkmark. */}
+
+Para contexto sobre cómo las plataformas gestionadas manejan el estado compartido, consulta [Cómo usar AI para operar las operaciones de una startup con un equipo de 3 personas](/blog/how-to-use-ai-to-run-startup-operations-with-a-3-person-team).
+
+---
+
+## Paso 4: Permisos basados en roles y control de acceso para agentes de AI en equipo
+
+En un equipo, no todos deberían tener el mismo acceso.
+
+- **El fundador** podría querer que el agente despliegue código y gestione infraestructura
+- **Una persona de marketing** debería poder investigar a la competencia, pero no enviar a producción
+- **Un becario** debería observar y aprender, no ejecutar comandos de shell arbitrarios
+  OpenClaw no tiene un modelo de permisos. Todo usuario que llegue al agente puede:
+
+- Ejecutar comandos de shell en el servidor
+- Acceder a todas las integraciones conectadas
+- Leer todas las conversaciones del historial
+- Usar todas las API keys configuradas (y sus límites de gasto)
+  Construir RBAC dentro de OpenClaw significa interceptar cada acción del agente y verificarla contra una matriz de permisos. La mayoría de los equipos que lo intentan terminan escribiendo más código de autenticación que código de funcionalidad.
+
+{/* GRAPHIC IDEA: Permission matrix table graphic. Rows: Founder, Engineer, Marketer, Intern. Columns: Run shell commands, Deploy code, Access integrations, Read all conversations, Manage API keys. OpenClaw column: all checkmarks for everyone (no control). Duet column: configurable per role with locks and checkmarks. Visual contrast between "everything is open" vs. "granular control." */}
+
+---
+
+## Paso 5: Mantener tu instancia de OpenClaw de equipo corriendo 24/7
+
+Un agente de equipo que se cae a las 2 de la mañana y nadie lo nota hasta el standup es peor que no tener agente.
+
+### Qué necesitas
+
+- **Gestión de procesos**: systemd o la política `--restart` de Docker
+- **Health checks**: monitoreo de endpoints HTTP con UptimeRobot o Healthchecks.io
+- **Alertas**: notificaciones por Slack/email ante fallos
+- **Agregación de logs**: registro centralizado para que puedas depurar sin entrar por SSH al servidor
+- **Respaldos**: snapshots diarios automatizados del workspace y la configuración
+- **Estrategia de actualización**: ¿Cómo actualizas OpenClaw sin perder el estado?
+
+```plaintext
+# Basic health check cron
+*/5 * * * * curl -sf http://localhost:3000/health || \
+  (docker restart openclaw && \
+   curl -X POST https://hooks.slack.com/services/YOUR/WEBHOOK \
+   -d '{"text":"OpenClaw restarted automatically"}')
+```
+
+Esto te da tiempo de actividad básico. No te da actualizaciones sin tiempo de inactividad, escalado automático ni recuperación ante desastres. Para profundizar en la configuración siempre activa, consulta [Cómo configurar un agente de AI 24/7](/blog/how-to-set-up-a-24-7-ai-agent).
+
+{/* GRAPHIC IDEA: "Iceberg" illustration. Above water (visible): "OpenClaw is running." Below water (hidden ops work): SSL renewal, Docker updates, dependency patching, log rotation, disk cleanup, API key rotation, backup verification, security audits, cost monitoring. Label: "The 90% of team hosting you don't see until something breaks." */}
+
+---
+
+## El costo oculto de mantenimiento de autoalojar OpenClaw para equipos
+
+Incluso después de la configuración, autoalojar OpenClaw en equipo requiere trabajo continuo:
+
+Tarea | Frecuencia | Tiempo
+
+Parches de seguridad de Docker/SO | Semanal | 30 min
+
+Actualizaciones de versión de OpenClaw | Quincenal | 1 hora
+
+Rotación de API keys | Mensual | 30 min
+
+Verificación de respaldos | Mensual | 30 min
+
+Limpieza de disco y rotación de logs | Mensual | 30 min
+
+Depurar integraciones rotas | Según se necesite | 1 a 4 horas
+
+Resolver problemas de acceso de usuarios | Según se necesite | 30 min a 2 hrs
+
+**Estimación conservadora: de 4 a 8 horas al mes de trabajo de DevOps** que no tiene nada que ver con el trabajo para el que tu equipo de verdad contrató al agente de AI.
+
+A lo largo de un año, eso son de 48 a 96 horas de tiempo de ingeniería. A $100 la hora: **de $4,800 a $9,600 de costo oculto**, además de la cuenta del servidor de $5 a $20/mes.
+
+### Comparación de costos del primer año: OpenClaw vs. Duet
+
+Categoría de costo | OpenClaw (equipo de 5) | Duet (equipo de 5)
+
+Mano de obra de configuración | $3,000 (30 hrs) | $0
+
+Servidor/hosting | $240 ($20/mes) | Incluido
+
+Mano de obra de mantenimiento | $7,200 (6 hrs/mes) | $0
+
+Plan mensual | $0 | Desde $20/mes
+
+**Total del primer año** | **$10,440** | **Depende del plan y del uso adicional de la reserva**
+
+{/* GRAPHIC IDEA: Running cost calculator graphic. Two columns side by side. Left: "OpenClaw for Teams, Year 1 Cost." Setup: $3,000. Server: $240. Maintenance: $7,200. Total: $10,440. Right: "Duet." Setup: $0. Monthly plan: from $20. Maintenance: $0. Paid reserve covers overage. */}
+
+---
+
+## La alternativa gestionada: cómo Duet reemplaza los 5 pasos de configuración
+
+Todo lo descrito arriba (hosting en la nube, autenticación multiusuario, estado compartido, permisos, tiempo de actividad, monitoreo, actualizaciones) viene integrado en Duet desde el primer día.
+
+### Cómo se ve la configuración en Duet
+
+1. Ve a [duet.so](/)
+1. Regístrate con Google o email
+1. Invita a tu equipo
+1. Inicia una sesión con el agente
+   Eso es todo. Sin Docker. Sin VPS. Sin proxy de OAuth. Sin hacer fork de repos para agregar el rastreo de usuarios.
+
+{/* GRAPHIC IDEA: Side-by-side terminal screenshot comparison. Left: a wall of bash commands, docker configs, nginx files, and error output. Right: a clean Duet workspace with Sessions and Apps ready. Caption: "Same capability. 44 hours vs. 3 minutes." */}
+
+### Qué obtienes listo para usar
+
+Función | OpenClaw (hazlo tú mismo) | Duet
+
+**Hosting en la nube** | Lo construyes tú | Infraestructura gestionada
+
+**Multiusuario** | Se necesita una capa de autenticación a medida | Workspaces de equipo integrados
+
+**Contexto compartido** | Fork + migración de base de datos | Sesiones duraderas, archivos e historial compartido
+
+**Permisos** | Sin RBAC, acceso total para todos | Control de acceso basado en roles
+
+**Operación 24/7** | Tu responsabilidad | Runtime administrado en la nube
+
+**Integraciones** | Más de 10,700 skills (configuración manual) | Más de 10,000 (OAuth con un clic)
+
+**Seguridad** | Firewalls y gestión de claves por tu cuenta | VM dedicada por workspace y credenciales acotadas
+
+**Actualizaciones** | Descargas manuales de Docker | Releases administrados
+
+**Acceso móvil** | Ninguno (solo SSH) | Workspace web responsive
+
+**Registros de auditoría** | Constrúyelos tú | Integrados, con búsqueda
+
+**Tiempo de configuración** | 24 a 44 horas | 3 minutos
+
+{/* GRAPHIC IDEA: Feature checklist infographic. Two columns with feature names in the center, green checkmarks on Duet's side, red X or yellow warning icons on OpenClaw's side. Visual emphasis on the number of things that "just work" on Duet vs. require engineering on OpenClaw. */}
+
+Para entender cómo se compara Duet de forma más amplia, consulta [Duet vs OpenClaw](/guides/duet-vs-openclaw) y [OpenClaw vs plataformas de agentes de AI gestionadas](/blog/openclaw-vs-managed-ai-agent-platforms).
+
+---
+
+## Cómo usan equipos reales Duet en lugar de OpenClaw autoalojado
+
+Una vez que la pregunta de la infraestructura queda fuera de la mesa, los equipos se enfocan en lo que importa: sacar el trabajo adelante con AI.
+
+### Sesiones compartidas
+
+Tu equipo asigna trabajo al agente de AI en sesiones duraderas. Cuando el líder de marketing pide una investigación de competidores, los demás pueden seguir los eventos de la sesión e inspeccionar los archivos resultantes. Cuando un ingeniero pide una revisión de PR, el historial queda disponible en esa sesión para consultarlo después.
+
+{/* GRAPHIC IDEA: Screenshot-style mockup of a Duet session timeline. Show Sarah assigning a competitor-pricing analysis, Duet returning structured data, and James following up in the same durable session. Highlight: "Shared context. Durable work history." */}
+
+### Un agente que nunca duerme
+
+Programa tareas, dispara workflows y deja que el agente maneje el trabajo en segundo plano mientras tu laptop sigue cerrada. Resúmenes del standup matutino, extracciones de datos nocturnas, generación automatizada de reportes. Todo corriendo en la infraestructura en la nube de Duet sin ningún mantenimiento de servidor.
+
+{/* GRAPHIC IDEA: 24-hour clock visualization. Different segments of the day labeled with agent activities: "6 AM: Pull overnight metrics." "9 AM: Generate standup summary." "12 PM: Monitor competitor pricing." "3 PM: Draft weekly report." "11 PM: Run scheduled backups." Center text: "Your agent works the hours you don't." */}
+
+### Integraciones con un clic
+
+Conecta GitHub, Slack, Notion, Google Workspace, Linear y miles más con OAuth. Sin malabares con API keys. Sin archivos `.env`. Sin depurar integraciones rotas después de cada actualización.
+
+En Duet, Integraciones conecta servicios externos. Las instrucciones reutilizables van en Archivos, mientras que los datos y las fuentes duraderas van en Entrenar, para usar la misma guía y contexto en distintas Sesiones sin instalar elementos de un catálogo.
+
+{/* GRAPHIC IDEA: Integration grid with logos of popular tools (GitHub, Slack, Notion, Google Drive, Linear, Jira, Figma, HubSpot, Salesforce) arranged in a clean grid. Each has a green "Connected" badge. Below: "10,000+ integrations. Zero configuration files." */}
+
+---
+
+## Autoalojar OpenClaw vs. usar Duet: cómo decidir para tu equipo
+
+### Autoaloja OpenClaw si:
+
+- Eres un **desarrollador en solitario** que quiere control total
+- Necesitas ejecutar modelos **on-premises** por razones regulatorias
+- Disfrutas el trabajo de infraestructura y lo tomas como un ejercicio de aprendizaje
+- Tu presupuesto es menor a $50/mes y tu tiempo es gratis
+
+### Usa Duet si:
+
+- Eres un **equipo de 2 o más** que necesita AI compartida
+- Quieres tu agente **siempre activo**, no solo cuando tu laptop está abierta
+- Prefieres dedicar las horas de ingeniería al producto, no al DevOps
+- Necesitas **permisos, registros de auditoría y cumplimiento** sin construirlos
+- Quieres **acceso móvil** a tu agente
+  {/* GRAPHIC IDEA: Decision tree flowchart. Start: "How many people need access?" If "Just me," then "Do you enjoy server admin?" If yes: "OpenClaw." If no: "Duet." If "2+ people": "Duet." Clean, simple, three paths. */}
+
+---
+
+## Cómo migrar tu equipo de OpenClaw a Duet
+
+¿Ya ejecutas OpenClaw y estás listo para dejar de mantener infraestructura? La migración es sencilla.
+
+1. **Exporta tu workspace**: `tar -czf backup.tar.gz ~/.openclaw/workspace`
+1. **Regístrate en Duet** en [duet.so](/)
+1. **Reconecta las integraciones** mediante OAuth (un clic cada una)
+1. **Mueve las instrucciones reutilizables a Archivos** y agrega datos o fuentes duraderas mediante Entrenar
+1. **Invita a tu equipo** y empieza a colaborar en Sesiones
+   Tu historial de conversación queda en el archivo de OpenClaw. El trabajo nuevo ocurre en las Sesiones de Duet con visibilidad para el equipo desde el primer día.
+
+{/* GRAPHIC IDEA: Migration flow diagram. Three steps in a left-to-right layout: "OpenClaw (local)" then "Export workspace" then "Duet (cloud)" with team member avatars joining the Duet side. Simple, clean, visual. */}
+
+---
+
+## Preguntas frecuentes
+
+### ¿OpenClaw es gratis para equipos?
+
+El software es gratis. La infraestructura, el tiempo de ingeniería y el mantenimiento continuo no lo son. Para un equipo de 5, espera $10,000 o más en costos del primer año cuando consideras la mano de obra de configuración y mantenimiento. La plataforma en sí no cuesta nada, pero el hosting en la nube va de $5 a $60/mes y el tiempo de ingeniería para la configuración multiusuario suma de 24 a 44 horas.
+
+### ¿Puedo usar las skills de OpenClaw en Duet?
+
+Las skills de OpenClaw no se instalan directamente en Duet. Puedes adaptar sus instrucciones reutilizables en Archivos, guardar datos y fuentes duraderas en Entrenar, reconectar servicios compatibles mediante Integraciones y ejecutar el workflow resultante en Sesiones. Si el trabajo produce una herramienta web, Duet puede mantenerla disponible en Apps.
+
+### ¿Cuánto cuesta Duet para un equipo?
+
+Duet ofrece planes mensuales Starter, Pro y Max con créditos incluidos. El pagador designado administra métodos, recargas de la reserva pagada, límites e historial; compara los planes actuales con la infraestructura y el tiempo de ingeniería necesarios para operar OpenClaw por tu cuenta.
+
+### ¿Mis datos están seguros en Duet?
+
+Duet ejecuta los agentes en sandboxes aislados, con almacenamiento de credenciales cifrado y aislamiento de red. Tus API keys se guardan en una bóveda cifrada, no en archivos `.env` en texto plano en un VPS. Cada workspace está aislado de otras organizaciones.
+
+### ¿Y si necesito hosting on-premises?
+
+Si los requisitos regulatorios exigen infraestructura on-premises, OpenClaw es la opción correcta. Duet está alojado en la nube. Para la mayoría de los equipos, el modelo de seguridad de Duet (sandboxes aislados, almacenamiento cifrado, prácticas SOC 2) cumple o supera lo que proporciona un despliegue de OpenClaw autogestionado.
+
+### ¿Cuánto toma configurar OpenClaw para un equipo?
+
+Espera de 24 a 44 horas de tiempo de ingeniería para la configuración inicial, repartidas entre hosting en la nube (2 a 4 horas), autenticación (8 a 16 horas), estado compartido (4 a 8 horas), permisos (8 a 12 horas) y monitoreo (2 a 4 horas). Después de eso, presupuesta de 4 a 8 horas al mes para el mantenimiento continuo.
+
+### ¿Pueden varias personas usar la misma instancia de OpenClaw al mismo tiempo?
+
+La configuración por defecto de OpenClaw es de un solo usuario. Varias personas que acceden a la misma instancia comparten todas las conversaciones, integraciones y API keys sin ningún aislamiento. No hay una forma integrada de rastrear quién preguntó qué ni de restringir lo que cada usuario puede hacer. Para el uso en equipo, necesitas construir capas de autenticación y autorización a medida por encima.
+
+### ¿Cuál es la mejor plataforma de agentes de AI para equipos en 2026?
+
+Para los equipos que quieren agentes de AI compartidos con colaboración integrada, las plataformas gestionadas como Duet son la opción más práctica. Proporcionan workspaces multiusuario, permisos basados en roles, tiempo de actividad 24/7 e integraciones preconfiguradas sin ningún trabajo de infraestructura. OpenClaw sigue siendo la mejor opción para usuarios técnicos en solitario que quieren máximo control y personalización.
+
+---
+
+## El veredicto: configuración de OpenClaw en equipo vs. Duet para equipos en 2026
+
+OpenClaw es una herramienta excepcional para usuarios avanzados individuales. Pero hacerla funcionar para un equipo significa construir una plataforma sobre otra plataforma: autenticación, permisos, estado compartido, monitoreo, tiempo de actividad y seguridad. Eso son de 24 a 44 horas de configuración y de 4 a 8 horas al mes de mantenimiento.
+
+Duet entrega todo eso desde el primer día. Tu equipo se registra, invita a sus miembros y empieza a trabajar con un agente de AI compartido en minutos. Sin servidores. Sin Docker. Sin capas de autenticación a medida. Sin alertas del localizador a las 3 de la mañana porque al contenedor se le acabó la memoria.
+
+La pregunta no es si OpenClaw _puede_ funcionar para equipos. Es si construir esa infraestructura es el mejor uso del tiempo de tu equipo.
+
+[Empieza con Duet](/)
+
+### ¿Qué es OpenClaw y qué hace?
+
+OpenClaw es una plataforma de agentes de AI de código abierto que corre localmente en tu máquina. Conecta modelos de AI (como Claude) a tus archivos, herramientas y workflows, lo que te permite construir y ejecutar agentes de AI persistentes sin enviar datos a una nube de terceros. Está diseñada para desarrolladores y equipos que quieren control total sobre su infraestructura de agentes de AI.
+
+### ¿Cómo se instala OpenClaw para un equipo?
+
+OpenClaw se instala con npm en la máquina de cada miembro del equipo. Después de la instalación, lo configuras con la API key de tu proveedor de AI preferido y armas un workspace compartido o workspaces individuales por usuario. Las configuraciones de equipo suelen implicar compartir los archivos de configuración del agente y las bibliotecas de skills mediante un repositorio de git.
+
+### ¿Cuál es la diferencia entre OpenClaw y Duet para equipos?
+
+OpenClaw corre localmente en la máquina de cada persona: ideal para usuarios avanzados individuales que quieren privacidad y control. Duet es una plataforma alojada en la nube donde los agentes corren de forma persistente en workspaces de equipo compartidos. OpenClaw es gratis y autogestionado; Duet agrega funciones de colaboración, ejecución siempre activa e infraestructura gestionada.
+
+### ¿OpenClaw puede conectarse a herramientas y APIs externas?
+
+Sí. OpenClaw admite servidores MCP (Model Context Protocol), que permiten a los agentes conectarse a herramientas, bases de datos y APIs externas. También puedes escribir skills a medida: capacidades de agente reutilizables que amplían lo que OpenClaw puede hacer. Las integraciones comunes incluyen GitHub, Notion, Slack y APIs internas a medida.
+
+### ¿OpenClaw es adecuado para miembros del equipo no técnicos?
+
+OpenClaw está pensado principalmente para desarrolladores: la configuración requiere acceso a terminal y configuración básica. Los miembros del equipo no técnicos pueden usar los resultados del agente y los workflows compartidos, pero es poco probable que configuren o mantengan OpenClaw por sí mismos. Para equipos mixtos, una plataforma gestionada como Duet suele encajar mejor.
+
+### ¿Cómo se comparten las skills del agente en un equipo con OpenClaw?
+
+El enfoque estándar es guardar los archivos de skills en un repositorio de git compartido que todos los miembros del equipo clonan. Cuando se actualiza una skill, los miembros del equipo descargan la versión más reciente. La estructura de workspace de OpenClaw facilita el control de versiones y la distribución de las capacidades del agente.

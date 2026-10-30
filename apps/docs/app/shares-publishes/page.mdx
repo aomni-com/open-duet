@@ -1,0 +1,94 @@
+import { EndpointReference } from '../../components/endpoint-reference'
+
+export const metadata = {
+  title: 'Shares and publishes',
+  description: 'Choose private workspace collaboration or a public Duet URL.',
+  alternates: { canonical: '/shares-publishes/' },
+}
+
+<p className="eyebrow">Resource guide</p>
+
+# Sharing and publishing cross different boundaries
+
+A share sends an email-addressed request for read or write collaboration on a path. The recipient
+chooses the destination workspace and mount path when accepting. A publish exposes a file or folder
+at a public slug. Do not model one as a visibility setting for the other.
+
+A publish is a read-only public viewer, not hosting. Its URL opens an anonymous file/folder
+browser that shows **source**: text-like files — including HTML and SVG — are always presented as
+plain text and never rendered or executed, while images, audio, video, and PDF play in their
+native viewers. Publishing a folder publishes everything in it — dotfiles included — except an
+unremovable floor that is never served: `.env*` files, `.git`, `node_modules`, and Duet's own
+anchor marker. The viewer hides dotfiles by default with a show-hidden toggle. To serve a running
+site or app, use a workspace app instead. The viewer fetches bytes and listings through the reserved `?raw` and `?list` query
+selectors on the same URL, and a published folder can be downloaded whole through the reserved
+`?zip` selector — the same visible files the viewer shows, as one archive; everything else about
+the publish URL is the viewer page.
+
+Share creation and resharing require editor access. A reshare may preserve or narrow its parent's
+mode, never widen it. Creating either request sends the recipient a plaintext email with a
+seven-day deep link. Delivery is rate-limited per sharer, and a failed delivery revokes the pending
+request instead of leaving an unreachable share behind. Declining is private to the recipient;
+unlinking keeps received files and turns replica apps into ordinary local apps. Revocation removes
+replicas and cascades through every downstream reshare.
+
+Either participant may pause an active share. Pause is folder-global: both drives stop transferring
+without unlinking the folder or changing its peers, paths, or permissions, and queued edits flow
+after either participant resumes it. Setting the same pause state again is idempotent and returns
+the current perspective-specific share projection; pending and ended links cannot be paused.
+
+The workspace share list is perspective-specific. Incoming rows name the sharer and the local mount
+path. Outgoing rows name the source path and recipient email, but never reveal the recipient's
+private mount path. For active links, each row reports whether both workspace VMs have applied their
+current sync configuration. “Up to date” describes that configuration convergence; it is not a
+byte-for-byte file comparison. A paused link reports `paused` only after both drives have applied
+the paused configuration.
+
+Only one live offer may exist for the same folder and recipient. A repeated offer returns
+`409 already_shared`, so clients should direct the sharer to manage the existing share instead of
+retrying creation.
+
+{/* schema: CreateShareRequestSchema */}
+
+```json
+{
+  "path": "projects/field-notes",
+  "toEmail": "collaborator@example.com",
+  "mode": "read"
+}
+```
+
+## Keep secrets out of public output
+
+Publish paths are inspected for environment-like segments, but callers should also choose narrow
+source folders and review their contents. A public slug is a durable address; changing or deleting
+it is an intentional URL break.
+
+Creating, renaming, and deleting publishes require editor access. Listing is available to viewers.
+Pause generations are opaque snapshot identifiers capped at 512 UTF-8 bytes; authored publish
+content is never truncated to satisfy that control-plane bound.
+The server detects whether the source path is a file or folder; clients do not declare the kind.
+Pausing captures a durable snapshot before the paused state becomes public; every viewer, raw,
+listing, and zip request then reads that snapshot until resumed. A warmed public edge response may
+take up to 30 seconds to reflect either pause or resume.
+
+{/* schema: CreatePublishRequestSchema */}
+
+```json
+{
+  "path": "reports/q2.md",
+  "slug": "q2-review"
+}
+```
+
+{/* schema: SetPublishPausedRequestSchema */}
+
+```json
+{
+  "paused": true
+}
+```
+
+<EndpointReference category="shares" />
+
+<EndpointReference category="publishes" />

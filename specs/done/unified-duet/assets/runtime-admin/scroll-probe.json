@@ -1,0 +1,30 @@
+{
+  "atEnd": 40,
+  "finalLeft": 0,
+  "atRuntimeEnd": {
+    "left": 360,
+    "width": 314,
+    "scrollWidth": 921
+  },
+  "namesAtEnd": [
+    {
+      "name": "dan-test",
+      "visible": true
+    },
+    {
+      "name": "jamar",
+      "visible": true
+    },
+    {
+      "name": "acme",
+      "visible": true
+    },
+    {
+      "name": "newco",
+      "visible": true
+    }
+  ],
+  "headerAtRuntimeEnd": true,
+  "nativeCopyExact": true,
+  "copiedBytes": 70
+}

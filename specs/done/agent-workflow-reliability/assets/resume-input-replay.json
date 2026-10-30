@@ -1,0 +1,20 @@
+{
+  "baseline": "3bc0ea503c2fc1b945de3e0c79c4c967d42a38b4",
+  "candidate": "0cd51fb9130ff6a9d095b8dc6e70288bfcce7c40",
+  "testSha256": "c575ce1b792a4eef16e8b54bff9f5c1dff2ddd30ca9d00eeb381f07dae9f2278",
+  "mutation": "Only state_started history input gains rerun:true; source repo unchanged",
+  "finalTestSha256": "843c05f48a99e21d53387a6a6b2743dda17e40f9b57087a33cafc8ba3e97c3e8",
+  "integratedCommit": "b0473a4742996cea0156113f3aa0175088fa7ddd",
+  "baselineResult": "pass, identical final test, 4 assertions",
+  "candidateResult": "pass, identical final test, 4 assertions",
+  "negativeControl": "fails exact input assertion when state_started history input gains rerun:true",
+  "candidateFileResult": "34 tests passed, 149 assertions",
+  "checks": [
+    "typecheck",
+    "lint",
+    "format",
+    "independent code review"
+  ],
+  "evidenceDirectory": "/tmp/workflow-resume-input-check",
+  "limitation": "Scripted accepted calls prove runtime preserves input across interruption, JSON checkpoint, and fresh resume. Does not prove live-model obedience or clear the retained live failure."
+}

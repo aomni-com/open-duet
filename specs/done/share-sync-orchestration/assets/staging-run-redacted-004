@@ -1,0 +1,161 @@
+{
+  "runId": "staging-e2e-synthetic",
+  "startedAt": "2026-07-17T03:21:07.363Z",
+  "pollMs": 5000,
+  "workspaces": [
+    {
+      "slug": "staging-e2e-synthetic",
+      "vmName": "workspace-redacted",
+      "gatewayVersion": "0.0.0+079b0fb36109"
+    },
+    {
+      "slug": "rail-recipient-9d593f90",
+      "vmName": "workspace-redacted",
+      "gatewayVersion": "0.0.0+079b0fb36109"
+    }
+  ],
+  "legs": {
+    "accept": {
+      "shareId": "mx72fqq7nxt0r0nbskg77aa6ph8apyqc",
+      "generations": {
+        "origin": "ea803d0877f0368dbc9a4c9d53eb8c0f61627ee4a5e18da6c228e66097da7d60",
+        "recipient": "2e83a4cad3263920946ecf792706e8ee68e60eb270de72c38729f99a642d8b1f"
+      },
+      "readyMs": 10836,
+      "byteArrivalMs": 16742,
+      "roles": ["origin", "recipient"]
+    },
+    "floors": {
+      "duetAnchorExcluded": true,
+      "gitExcluded": true,
+      "recipientWriteRejected": true
+    },
+    "idle": {
+      "polls": 10,
+      "durationMs": 54306,
+      "reportsUnchanged": true,
+      "processesUnchanged": true,
+      "configUnchanged": true,
+      "mountsUnchanged": true,
+      "bridgePortsUnchanged": true
+    },
+    "restart": {
+      "oldGatewayPid": 414,
+      "newGatewayPid": 653,
+      "acceptRebuilt": true,
+      "bridgeRebuilt": true,
+      "byteArrivalMs": 2792
+    },
+    "relocation": {
+      "shareId": "mx725rbcfbw7tadvbd7spsb0498apqje",
+      "fromPath": "shared/9d593f90/relocate",
+      "toPath": "shared/9d593f90/relocated",
+      "recipientGenerationBefore": "c23cca205fb5f447b086783fb4d7af30356cb0616d79df0d67f9ad7790cca7fa",
+      "recipientGenerationAfter": "b1058cc3d53a9194e0e8d4a994dd1290f27cb859be2945083f653a06440bae5e",
+      "readyMs": 1800,
+      "originToRecipientMs": 2826,
+      "recipientToOriginMs": 2839,
+      "originFilesSurvived": true,
+      "recipientFilesSurvived": true,
+      "idleStable": true
+    },
+    "revoke": {
+      "originPruned": true,
+      "recipientPruned": true,
+      "filesRemain": true,
+      "acceptsPruned": true,
+      "bridgesPruned": true
+    },
+    "unlink": {
+      "shareId": "mx78nk6ec7an4y7cdtr4p5zeb18aqhnf",
+      "filesRemain": true,
+      "replicaBecameLocal": true,
+      "originPruned": true,
+      "recipientPruned": true
+    },
+    "containment": {
+      "gatewayWriteSucceeded": true,
+      "syncthingWriteSucceeded": true
+    }
+  },
+  "convergeReports": [
+    {
+      "_creationTime": 1784258499125.133,
+      "_id": "qh77tkt7pcvbqkbjrp12wzfn9d8apbd0",
+      "generation": "ea803d0877f0368dbc9a4c9d53eb8c0f61627ee4a5e18da6c228e66097da7d60",
+      "shareId": "mx72fqq7nxt0r0nbskg77aa6ph8apyqc",
+      "state": "ready",
+      "updatedAt": 1784258498986,
+      "workspaceId": "ns76f9rpd85925ed2xwrzyxytx8aqc83"
+    },
+    {
+      "_creationTime": 1784258498412.412,
+      "_id": "qh7ep2cwx38t59pvgp13hyxb0d8appeb",
+      "generation": "2e83a4cad3263920946ecf792706e8ee68e60eb270de72c38729f99a642d8b1f",
+      "shareId": "mx72fqq7nxt0r0nbskg77aa6ph8apyqc",
+      "state": "ready",
+      "updatedAt": 1784258498384,
+      "workspaceId": "ns79xeyjq7yxs683wan8e4xtp18aqr07"
+    },
+    {
+      "_creationTime": 1784258598825.9954,
+      "_id": "qh70awk6b46m10jq5vx2nhdp398apj48",
+      "generation": "7594d71a59f372274b4cd8dc60cd44a79eb4eaabfbaac6208c1714c037cdb365",
+      "shareId": "mx725rbcfbw7tadvbd7spsb0498apqje",
+      "state": "ready",
+      "updatedAt": 1784258598660,
+      "workspaceId": "ns76f9rpd85925ed2xwrzyxytx8aqc83"
+    },
+    {
+      "_creationTime": 1784258595843.7515,
+      "_id": "qh7bmsqp0a8ezpp4ba1xztgv8n8apg5j",
+      "generation": "c23cca205fb5f447b086783fb4d7af30356cb0616d79df0d67f9ad7790cca7fa",
+      "shareId": "mx725rbcfbw7tadvbd7spsb0498apqje",
+      "state": "ready",
+      "updatedAt": 1784258595707,
+      "workspaceId": "ns79xeyjq7yxs683wan8e4xtp18aqr07"
+    },
+    {
+      "_creationTime": 1784258595843.7515,
+      "_id": "qh7bmsqp0a8ezpp4ba1xztgv8n8apg5j",
+      "generation": "b1058cc3d53a9194e0e8d4a994dd1290f27cb859be2945083f653a06440bae5e",
+      "shareId": "mx725rbcfbw7tadvbd7spsb0498apqje",
+      "state": "ready",
+      "updatedAt": 1784258618366,
+      "workspaceId": "ns79xeyjq7yxs683wan8e4xtp18aqr07"
+    },
+    {
+      "_creationTime": 1784258682495.2036,
+      "_id": "qh7913b0rm7c7450m3ax0asqdn8apq1b",
+      "generation": "915568529e76837c0940d853e1812bed6bc3376390d70d217edb753253680025",
+      "shareId": "mx78nk6ec7an4y7cdtr4p5zeb18aqhnf",
+      "state": "ready",
+      "updatedAt": 1784258682342,
+      "workspaceId": "ns76f9rpd85925ed2xwrzyxytx8aqc83"
+    },
+    {
+      "_creationTime": 1784258679852.2188,
+      "_id": "qh7fv3dhh1y1se6e807sh9gmg18ap1yk",
+      "generation": "4d5b1ec611a8b626ad15f849a061266937e9e35453d5d4c58d46e1be61ced510",
+      "shareId": "mx78nk6ec7an4y7cdtr4p5zeb18aqhnf",
+      "state": "ready",
+      "updatedAt": 1784258679715,
+      "workspaceId": "ns79xeyjq7yxs683wan8e4xtp18aqr07"
+    }
+  ],
+  "unproven": [
+    "The public share realization report does not expose the converger internal changes counter; idle stability is proven by unchanged reports, PIDs, config, mount registry, and bridge ports."
+  ],
+  "completedAt": "2026-07-17T03:24:58.098Z",
+  "cleanup": {
+    "workspacesDeleted": ["rail-recipient-9d593f90", "staging-e2e-synthetic"],
+    "vmsRemoved": ["workspace-redacted", "workspace-redacted"],
+    "edgeKeysRemoved": [
+      "rail-share-staging-e2e-synthetic",
+      "rail-share-rail-recipient-9d593f90"
+    ],
+    "apiKeysRevoked": ["duet_sk_540674c2", "duet_sk_5fc3002d", "duet_sk_3fe9e16b"],
+    "identityRetired": true,
+    "errors": []
+  }
+}

@@ -1,0 +1,466 @@
+---
+title: 'Claude Code Memory: Complete Guide to Making Claude Remember Everything'
+metaTitle: 'Claude Code Memory: CLAUDE.md Setup Guide (2026)'
+description: 'Set up Claude Code memory with CLAUDE.md files. Persistent instructions, project conventions, and team-shared context across sessions.'
+date: '2026-06-03'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/3.png'
+category: 'guides'
+tags: ['claude-code', 'memory', 'claude-md', 'ai-coding', 'developer-tools', 'productivity']
+type: 'guide'
+image: '/guides/claude-code-memory/cover.png'
+relatedPosts:
+  - slug: 'claude-code-skills-complete-guide'
+    context: 'How to build and share reusable Claude Code skills alongside your memory setup.'
+  - slug: 'claude-code-playbook-building-a-skill-first-workflow-that-actually-sticks'
+    context: 'A skill-first workflow that pairs well with structured CLAUDE.md memory.'
+  - slug: 'claude-code-for-teams'
+    context: 'How to set up Claude Code for your team with pooled usage, shared skills, and predictable billing.'
+cta:
+  title: 'Memory that actually scales.'
+  subtitle: 'Duet extends Claude Code with semantic retrieval, cross-project knowledge, and team-wide memory. No context window trade-offs.'
+  buttonText: 'Try Duet'
+  href: '/sign-in?from=guide-claude-code-memory'
+howTo:
+  name: 'How to Set Up Claude Code Memory'
+  description: 'Step-by-step guide to configuring persistent memory in Claude Code using CLAUDE.md files.'
+  steps:
+    - name: 'Create your global memory file'
+      text: 'Create ~/.claude/CLAUDE.md with your personal coding preferences, style rules, and tool preferences.'
+    - name: 'Create your project memory file'
+      text: 'Add a CLAUDE.md to your project root with stack details, conventions, and architecture rules.'
+    - name: 'Use the # shortcut'
+      text: 'Type # followed by a rule during any session to save it to your project CLAUDE.md instantly.'
+    - name: 'Enable auto memory'
+      text: 'Run claude config set --project autoMemory true to let Claude save corrections automatically.'
+---
+
+<GuideTOC
+  items={[
+    { number: 1, title: 'What Is Claude Code Memory?', href: '#what-is-claude-code-memory' },
+    { number: 2, title: 'How Claude Code Memory Works', href: '#how-claude-code-memory-works' },
+    {
+      number: 3,
+      title: 'How to Set Up Claude Code Memory',
+      href: '#how-to-set-up-claude-code-memory',
+    },
+    {
+      number: 4,
+      title: 'Auto Memory vs Manual Memory',
+      href: '#claude-code-auto-memory-vs-manual-memory',
+    },
+    { number: 5, title: 'CLAUDE.md Examples to Steal', href: '#claudemd-examples-to-steal' },
+    { number: 6, title: 'How to Manage Memory', href: '#how-to-manage-claude-code-memory' },
+    { number: 7, title: 'Where Memory Falls Short', href: '#where-claude-code-memory-falls-short' },
+    { number: 8, title: 'DIY Workarounds', href: '#diy-workarounds-for-claude-code-memory-limits' },
+    { number: 9, title: 'Best Practices', href: '#claude-code-memory-best-practices' },
+    { number: 10, title: 'Troubleshooting', href: '#troubleshooting-claude-code-memory-issues' },
+    { number: 11, title: 'FAQ', href: '#frequently-asked-questions' },
+  ]}
+/>
+
+## What is Claude Code Memory?
+
+Claude Code Memory is the system that lets Claude Code store and recall information across sessions.
+
+Without it, every time you start a new conversation, Claude has no context about you, your project, or your preferences. With it, Claude reads your saved instructions the moment a session begins.
+
+At its core, Claude Code memory works through special markdown files called `CLAUDE.md`. These are plain text files that you place in specific locations in your project or home directory. When you start a Claude Code session, Claude automatically reads these files and treats their contents as instructions.
+
+Think of it like leaving a note for a colleague before they start a shift. Except the colleague reads that note every single time, without fail.
+
+There are two ways memory gets created:
+
+**Manual Memory** is when you explicitly tell Claude to remember something. You write instructions in a `CLAUDE.md` file, or use the `#` shortcut during a conversation to save a note. You control exactly what gets saved.
+
+**Auto Memory** is when Claude Code decides on its own that something is worth remembering. If you correct Claude's behavior during a session, say, "don't use semicolons in this project", Claude may automatically save that as a memory for future sessions. You can turn this on or off in settings.
+
+Both types end up in the same place: `CLAUDE.md` files that Claude reads at session start. The difference is just who writes them.
+
+## How Claude Code Memory Works
+
+Claude Code memory isn't one big file. It's a layered system with three tiers, each serving a different scope. Understanding this hierarchy is key to using memory effectively.
+
+### Global Memory
+
+Global memory lives at `~/.claude/CLAUDE.md`, a file in your home directory's `.claude` folder. Anything you put here applies to every project you work on with Claude Code, across all repositories.
+
+This is the place for personal preferences that don't change between projects:
+
+- Your preferred coding style (tabs vs spaces, naming conventions)
+- Your name and role, so Claude addresses you correctly
+- Tools you always want Claude to use or avoid
+- General rules like "always write tests" or "never use `any` in TypeScript"
+
+Global memory is loaded first, before anything else. It's your baseline.
+
+### Project Memory
+
+Project memory lives in two possible locations within your repository: `CLAUDE.md` in your project root, or `.claude/CLAUDE.md` inside the `.claude` directory.
+
+This is where project-specific context goes. Your tech stack, database conventions, folder structure, deployment process, key architectural decisions. Anything that a developer would need to know before contributing to this specific project.
+
+Project memory is the most important tier for teams. You can commit these files to git, which means every developer on the team shares the same context. Claude behaves consistently across everyone's sessions.
+
+### Session Memory
+
+Session memory is the conversation itself, everything you and Claude discuss during a single session. This includes your messages, Claude's responses, tool outputs, file reads, and any corrections you make along the way.
+
+Session memory is temporary. When you close the session, it's gone. Claude Code does use automatic summarization to handle long conversations, but once the session ends, nothing carries over unless it gets saved to a `CLAUDE.md` file (manually or through auto memory).
+
+### How Do Tiers Stack?
+
+When a session starts, Claude reads memory in order: global first, then project, then session context as you interact. If there's a conflict, say your global memory says "use tabs" but the project memory says "use spaces", the more specific tier wins. Project overrides global. Session overrides both.
+
+This means you can set broad defaults globally and override them per project without editing your global file every time you switch repos.
+
+## How to Set Up Claude Code Memory
+
+Setting up memory takes under five minutes. Here's how to go from zero to a working memory system.
+
+### Create your global memory file
+
+Open your terminal and create the global `CLAUDE.md`:
+
+```bash
+mkdir -p ~/.claude && touch ~/.claude/CLAUDE.md
+```
+
+Open the file in any text editor and add your personal defaults. Start simple:
+
+```markdown
+# Global preferences
+
+- I prefer TypeScript with strict mode
+- Use functional components in React, not class components
+- Always write unit tests for new functions
+- Explain your reasoning before writing code
+```
+
+Save the file. Every Claude Code session you start from now on will read these instructions automatically.
+
+### Create your project memory file
+
+Navigate to your project's root directory and create a project-level `CLAUDE.md`:
+
+```bash
+touch CLAUDE.md
+```
+
+Add context specific to this project:
+
+```markdown
+# Project: my-saas-app
+
+- Tech stack: Next.js 14, TypeScript, Prisma, Postgres
+- Styling: Tailwind CSS, no custom CSS files
+- Testing: Vitest for unit tests, Playwright for E2E
+- API routes go in src/app/api/
+- Database migrations: run npx prisma migrate dev
+- Never modify the auth module without explicit approval
+```
+
+This file lives in your repo. If you commit it to git, your entire team benefits from the same context.
+
+### Try the # shortcut
+
+The fastest way to save a memory during a conversation is the `#` shortcut. While chatting with Claude Code, just type:
+
+```
+# always use pnpm instead of npm in this project
+```
+
+Claude Code saves this to your project's `CLAUDE.md` automatically. No need to open the file and edit it manually. This is useful when you catch Claude doing something wrong mid-session and want to prevent it from happening again.
+
+### Enable auto memory
+
+Auto memory lets Claude Code save context on its own when it learns something important during a session. To enable it, run:
+
+```bash
+claude config set --project autoMemory true
+```
+
+With auto memory on, if you correct Claude ("don't use semicolons" or "this project uses yarn, not npm"), Claude may save that correction automatically for future sessions.
+
+That's it. Four steps and your Claude Code sessions now have persistent memory.
+
+<DuetCTA
+  title="Want memory that works across projects?"
+  subtitle="Duet extends Claude Code with semantic retrieval and cross-project knowledge sharing. No CLAUDE.md file bloat."
+  buttonText="Try Duet"
+  href="/sign-in?utm_source=guide&utm_medium=claude-code-memory&utm_campaign=setup"
+/>
+
+## Claude Code Auto Memory vs Manual Memory
+
+Claude Code gives you two ways to build memory. Understanding when to use each one helps you build a cleaner, more useful memory system.
+
+### Manual Memory
+
+You decide what to save. Manual memory is anything you write yourself: editing `CLAUDE.md` files directly in your text editor, using the `#` shortcut during a session to save a quick note, and using the `/memory` command to view and add memories.
+
+Manual memory gives you full control. You choose the wording, the structure, and what makes the cut. It's ideal for foundational instructions that you've thought through, your project architecture, coding standards, deployment workflows, or team conventions.
+
+The downside is that it requires effort. You have to notice when Claude needs a correction, stop your workflow, and write it down.
+
+### Auto Memory
+
+Claude decides what to save. When enabled, Claude pays attention to corrections you make during a session and saves them automatically. For example, if you say "use single quotes, not double quotes" during a conversation, Claude recognizes that as a preference worth remembering. It saves a note to your `CLAUDE.md` file so it doesn't repeat the mistake next session.
+
+Auto memory is great for catching things you wouldn't think to write down. The small preferences and one-off corrections that add up over time. It fills the gaps that manual memory misses.
+
+The downside is less control. Auto memory might save something you didn't intend to keep, or phrase it in a way that's too specific or too vague. It's worth reviewing what auto memory saves periodically.
+
+**Which should you use? Both.**
+
+Start with manual memory for the big stuff, project context, tech stack, key rules. Then turn on auto memory to catch the smaller preferences that emerge naturally as you work. Check your `CLAUDE.md` files occasionally to clean up anything auto memory saved that doesn't belong.
+
+Think of manual memory as writing the employee handbook. Auto memory is the sticky notes that accumulate on the desk.
+
+## CLAUDE.md Examples to Steal
+
+The hardest part of setting up Claude Code memory is knowing what to actually write. Here are three real-world `CLAUDE.md` examples for common project types. Copy whichever fits your stack and customize from there.
+
+### Example 1: Next.js SaaS Project
+
+```markdown
+# Project Context
+
+This is a Next.js 14 app with App Router, TypeScript, and Tailwind CSS.
+Database is Postgres via Prisma ORM. Auth is handled by NextAuth.
+
+# Code Conventions
+
+- Use server components by default. Only add "use client" when needed.
+- API routes go in src/app/api/[route]/route.ts
+- All database queries go through Prisma. No raw SQL.
+- Use Zod for request validation in API routes.
+- Component files use PascalCase. Utility files use camelCase.
+
+# Testing
+
+- Vitest for unit tests. Test files live next to source files as \*.test.ts
+- Playwright for E2E tests in the /e2e directory.
+- Run tests with: pnpm test
+
+# Things to Avoid
+
+- Never modify the auth configuration without asking first.
+- Don't install new dependencies without confirming.
+- Don't use any. Define proper types.
+```
+
+### Example 2: Python Data Pipeline
+
+```markdown
+# Project Context
+
+ETL pipeline built with Python 3.12, pandas, and SQLAlchemy.
+Data flows from S3 -> transform -> Postgres warehouse.
+
+# Code Conventions
+
+- Follow PEP 8 strictly. Use Black for formatting.
+- Type hints on all function signatures.
+- Docstrings on all public functions (Google style).
+- Use pathlib for file paths, not os.path.
+
+# Environment
+
+- Virtual env managed with Poetry. Run: poetry install
+- Environment variables loaded from .env via python-dotenv.
+- Never hardcode credentials. Always use env vars.
+
+# Deployment
+
+- Runs on Airflow. DAG definitions in /dags directory.
+- Staging DB: warehouse-staging. Production DB: warehouse-prod.
+- Never run against production without explicit approval.
+```
+
+### Example 3: Global Personal Preferences
+
+```markdown
+# About Me
+
+I'm a full-stack developer. I prefer clear, readable code over clever code.
+
+# Coding Style
+
+- Use descriptive variable names. No single-letter variables except loop counters.
+- Prefer early returns over deeply nested if statements.
+- Keep functions under 30 lines. If it's longer, break it up.
+- Write comments only when the why isn't obvious from the code.
+
+# Communication
+
+- Explain your approach briefly before writing code.
+- If you're unsure about a requirement, ask before assuming.
+- When suggesting changes, explain what problem they solve.
+
+# Tools
+
+- Use pnpm, not npm or yarn.
+- Prefer Vitest over Jest for new projects.
+- Use Biome for linting and formatting when available.
+```
+
+These examples work because they're specific, actionable, and short enough that Claude can read them without eating up too much of the context window. The most effective `CLAUDE.md` files stay under 500 lines. Anything longer and you're trading memory for context space.
+
+## How to Manage Claude Code Memory
+
+Once your Claude Code memory starts growing, especially with auto memory enabled, you'll need to manage it. Here's how to stay in control.
+
+**Viewing your current memories.** The fastest way to see what Claude Code remembers is the `/memory` command. Type it during any session and Claude will show you the contents of your active `CLAUDE.md` files, both global and project-level. You can also just open the files directly: global memory at `~/.claude/CLAUDE.md`, project memory at `CLAUDE.md` or `.claude/CLAUDE.md` in your repo.
+
+**Editing memories.** This is one of the best things about how Claude Code memory works: it's just a text file. There's no database, no hidden settings, no UI you need to navigate. Open the `CLAUDE.md` file, change whatever you want, save it. The next session picks up your changes immediately. You can also ask Claude to edit its own memory during a session. Say something like "update your memory to reflect that we've switched from Jest to Vitest" and Claude will modify the `CLAUDE.md` file for you.
+
+**Resetting memory.** Sometimes you want to start fresh. To reset project memory, simply delete or empty the file:
+
+```bash
+echo "" > CLAUDE.md
+```
+
+To reset global memory:
+
+```bash
+echo "" > ~/.claude/CLAUDE.md
+```
+
+There's no undo, so if you think you might want some of the old content back, make a backup first:
+
+```bash
+cp ~/.claude/CLAUDE.md ~/.claude/CLAUDE.md.bak
+```
+
+**Keeping memory clean over time.** A good habit is to review your `CLAUDE.md` files every couple of weeks. Look for entries that are outdated, duplicated, or overly specific. A lean memory file performs better than a bloated one. Fewer instructions means Claude spends less of its context window on memory and more on your actual task.
+
+## Where Claude Code Memory Falls Short
+
+Claude Code memory is useful, but it has real limitations. Understanding these helps you work around them instead of being surprised mid-session.
+
+### No Semantic Recall
+
+Claude Code memory is file-based. Claude reads the entire `CLAUDE.md` at session start and holds it in its context window. It doesn't search through memories by meaning or relevance. If your `CLAUDE.md` file is 200 lines long, Claude loads all 200 lines every session, even if only 5 are relevant to what you're working on today. There's no "smart retrieval", it's all or nothing.
+
+### No Cross-Project Memory
+
+What Claude learns in one project stays in that project's `CLAUDE.md`. If you have the same convention across ten repos, say, "always use pnpm", you either put it in global memory (which applies to everything, even projects that use npm) or duplicate it across all ten project files.
+
+### Context Window Trade-off
+
+Every line of Claude Code memory takes up space in the context window. A large `CLAUDE.md` file means less room for actual conversation, code, and tool outputs during your session. This is the fundamental tension with file-based memory: the more you remember, the less working space you have.
+
+### No Memory Between Team Members
+
+`CLAUDE.md` files are committed to git, which is good for sharing project conventions. But there's no way for one developer's session learnings to benefit another developer automatically. If you discover a useful pattern and want the team to know, you have to manually add it to the shared `CLAUDE.md`.
+
+### Inaccuracy in Auto Memory
+
+When Claude Code auto memory saves something, it's making a judgment call about what's worth remembering. Sometimes it saves things that are too specific or misinterprets a one-time instruction as a permanent preference. Without regular cleanup, auto memory can clutter your `CLAUDE.md` with noise.
+
+<DuetCTA
+  title="Outgrown CLAUDE.md files?"
+  subtitle="Duet adds semantic memory retrieval, cross-project knowledge sharing, and team-wide memory that doesn't eat your context window."
+  buttonText="See how Duet works"
+  href="/sign-in?utm_source=guide&utm_medium=claude-code-memory&utm_campaign=limitations"
+/>
+
+## DIY Workarounds for Claude Code Memory Limits
+
+Before reaching for third-party tools, there are a few things you can do within the native system to stretch Claude Code memory further.
+
+**Split your CLAUDE.md by concern.** Instead of one massive file, create focused memory files for different parts of your project. Put your main conventions in the root `CLAUDE.md` and use `.claude/CLAUDE.md` for more detailed, session-specific context. This doesn't reduce total memory usage, but it makes files easier to maintain.
+
+**Use conditional context injection.** Write a hook (using Claude Code's hook system) that reads different context files based on what you're working on. If you're editing files in `/api`, inject the API conventions. If you're in `/frontend`, inject the component guidelines. This way, Claude only loads relevant context instead of everything at once.
+
+**Build a memory rotation habit.** Set a recurring reminder to review and trim your `CLAUDE.md` files. Archive old entries into a separate file (like `CLAUDE-archive.md`) that isn't auto-loaded. This keeps your active memory lean while preserving historical context you can manually reference when needed.
+
+**Use git to track memory changes.** Since `CLAUDE.md` is a regular file, git tracks every change. Run `git log CLAUDE.md` to see how your project memory has evolved. This is especially useful when auto memory adds something unexpected. You can use `git diff` to spot what changed and revert if needed.
+
+## Claude Code Memory Best Practices
+
+Getting Claude Code memory to work is easy. Getting it to work well takes a bit of thought. Here are the practices that separate a messy `CLAUDE.md` from one that actually makes Claude faster and more accurate.
+
+### Be specific with prompts
+
+"Write good code" tells Claude nothing. "Use early returns instead of nested if/else blocks" gives it a clear rule to follow. Every memory entry should be actionable. If Claude can't change its behavior based on the instruction, the instruction is too vague.
+
+Structure your `CLAUDE.md` with headings. Use markdown headers to group related instructions. Put coding standards in one section, project architecture in another, and testing requirements in a third. This helps Claude find the relevant rule quickly instead of parsing a wall of text.
+
+### Keep memory files under 500 lines
+
+Claude reads your `CLAUDE.md` at the start of every session, and it counts against your context window. A 2,000-line file full of edge cases will eat into the space Claude needs for your actual code. Be concise. If a rule needs a paragraph of explanation, it might be too complex for memory.
+
+### Write rules, not explanations
+
+Your `CLAUDE.md` is an instruction manual, not a design document. Instead of explaining why your team chose Tailwind over styled-components, just write "use Tailwind CSS for all styling." Claude doesn't need the backstory.
+
+### Use negative rules sparingly
+
+"Never use `any`" or "don't use `var`" can be useful, but a file full of "don't do this" instructions is harder for Claude to follow than positive instructions. Prefer "use `const` and `let` for variable declarations" over "never use `var`."
+
+### Commit project CLAUDE.md to git
+
+This is a living document that your whole team benefits from. Track changes, review updates in PRs, and treat it like any other piece of project configuration. Your global `CLAUDE.md` stays on your machine since it contains personal preferences.
+
+Review auto-generated memories weekly. Claude's auto memory feature saves things it thinks are important, but it doesn't always get it right. Set a reminder to open your `CLAUDE.md` files and clean out entries that are outdated, redundant, or just wrong.
+
+## Troubleshooting Claude Code Memory Issues
+
+Claude Code memory is straightforward, but there are a few common issues that trip people up. Here's how to diagnose and fix them.
+
+**CLAUDE.md not found.** The filename is case-sensitive. It must be `CLAUDE.md` (all caps), not `claude.md` or `Claude.md`. Check with `ls -la CLAUDE.md` in your project root. Also make sure it's in the right location, either in the project root or inside a `.claude/` folder.
+
+**Memories seem to be ignored.** If Claude isn't following your instructions, your `CLAUDE.md` might be too long. When the file exceeds a few hundred lines, Claude may deprioritize instructions that appear later in the file. Move your most important rules to the top, and trim anything redundant.
+
+**Auto memory saves unwanted things.** Claude's auto memory can be overly eager. If it keeps saving things you don't want, you can disable it in settings or simply delete the unwanted entries from your `CLAUDE.md`. The `#` shortcut for manual memory gives you more control over what gets saved.
+
+**Memory works in one project but not another.** Each project has its own `CLAUDE.md`. If you switch between projects and notice different behavior, check that the new project has its own `CLAUDE.md` file. Your global file at `~/.claude/CLAUDE.md` applies everywhere, but project-specific rules only apply in that project's directory.
+
+**Memory seems to reset after updates.** Claude Code updates don't delete your `CLAUDE.md` files. They're just plain text files on your disk. But if you reinstall Claude Code from scratch or switch machines, your global `CLAUDE.md` won't follow unless you back it up. Consider storing it in a dotfiles repo or cloud sync folder.
+
+## Making Claude Code Memory Work for You
+
+Claude Code memory solves a real problem. Without it, every session starts from zero and you spend the first few minutes re-explaining your stack, your conventions, and your preferences. With a well-structured `CLAUDE.md`, Claude starts every session already knowing how you work.
+
+The key takeaways: set up both a global and project-level `CLAUDE.md`, write specific rules instead of vague guidelines, use the `#` shortcut to save things mid-session, and review your memory files regularly to keep them clean. Start with 10-20 rules that cover your most common frustrations, then build from there.
+
+That said, Claude Code memory has real limitations. It can't do semantic search, it doesn't share context across projects, and it eats into your context window. For teams and power users who need more, these gaps start to matter.
+
+<DuetCTA
+  title="Memory that actually scales."
+  subtitle="Duet extends Claude Code with semantic retrieval, cross-project knowledge sharing, and team-wide memory. No context window trade-offs."
+  buttonText="Try Duet"
+  href="/sign-in?utm_source=guide&utm_medium=claude-code-memory&utm_campaign=conclusion"
+/>
+
+## Frequently Asked Questions
+
+<Accordion>
+  <AccordionItem title="How does Claude Code memory work?">
+    Claude Code memory works through plain text files called CLAUDE.md. Claude reads these files at the start of every session and follows the instructions inside them. There are three tiers: a global file for personal preferences, a project file for repository-specific rules, and session memory that only lasts for the current conversation. You can write instructions manually or let Claude save them automatically.
+  </AccordionItem>
+  <AccordionItem title="What is CLAUDE.md?">
+    CLAUDE.md is a markdown file that stores instructions for Claude Code. It acts as persistent memory, telling Claude your coding preferences, project conventions, and workflow rules. The filename must be all caps (CLAUDE.md, not claude.md). You can place it in your home directory for global settings or in a project root for project-specific rules.
+  </AccordionItem>
+  <AccordionItem title="Does Claude Code remember between sessions?">
+    Not by default. Each Claude Code session starts fresh with no memory of previous conversations. But if you set up CLAUDE.md files, Claude reads them at session start, which effectively gives it memory across sessions. The key difference: Claude remembers your rules and preferences, but not the specific conversations or code changes from past sessions.
+  </AccordionItem>
+  <AccordionItem title="What is Claude Code auto memory?">
+    Auto memory is a feature that lets Claude automatically save important information to your CLAUDE.md files during a session. When Claude learns something significant, like your preferred test framework or naming convention, it writes it to CLAUDE.md so it remembers next time. You can enable it in Claude Code settings. It works best as a supplement to manual memory, not a replacement.
+  </AccordionItem>
+  <AccordionItem title="How do you reset Claude Code memory?">
+    To reset project memory, open the CLAUDE.md file in your project directory and delete its contents or the file itself. For global memory, do the same with ~/.claude/CLAUDE.md. You can also run echo "" > CLAUDE.md to clear a file without deleting it. There's no reset button in the UI since the memory is just plain text files you control directly.
+  </AccordionItem>
+  <AccordionItem title="Where are Claude Code memory files stored?">
+    Global memory lives at ~/.claude/CLAUDE.md (in your home directory). Project memory lives at CLAUDE.md or .claude/CLAUDE.md in your project root. Session memory exists only in the current conversation and isn't saved to disk. You can have all three active at once, and they stack together with project rules taking priority over global ones.
+  </AccordionItem>
+  <AccordionItem title="Can you use Claude Code memory to enforce coding style?">
+    Yes. Add your style rules to your project's CLAUDE.md file. For example: "use single quotes for strings," "prefer arrow functions over function declarations," or "always add JSDoc comments to exported functions." Claude will follow these rules in every session. This is one of the most common and effective uses of Claude Code memory.
+  </AccordionItem>
+  <AccordionItem title="Can a team share Claude Code memory?">
+    Yes, by committing your project's CLAUDE.md to git. Every team member who clones the repo gets the same Claude Code instructions. This is a powerful way to standardize how Claude works across your entire team, no separate configuration tool needed. Keep personal preferences in your global CLAUDE.md (which stays local) and shared conventions in the project CLAUDE.md.
+  </AccordionItem>
+</Accordion>

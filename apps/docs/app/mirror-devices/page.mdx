@@ -1,0 +1,142 @@
+import { EndpointReference } from '../../components/endpoint-reference'
+
+export const metadata = {
+  title: 'Mirror devices',
+  description: 'Register a device as a whole-drive mirror of a workspace.',
+  alternates: { canonical: '/mirror-devices/' },
+}
+
+<p className="eyebrow">Resource guide</p>
+
+# A mirror is a whole-drive replica of one workspace
+
+A sync machine joins a workspace as a mirror: the entire workspace drive is replicated
+and kept live in both directions. This is the transfer plane behind `duet sync`.
+
+Mirror operations use your ordinary user login and current workspace membership.
+Register a machine through `POST /v1/user/sync-machines` with its name and full
+Syncthing device ID. The returned `machineId` is non-secret: two Macs can share
+one login while retaining separate identities. Replacing a user key preserves them.
+
+## Register the calling device as a mirror
+
+Registration exchanges device sync identities. Your device announces its own sync identity; the
+response returns the workspace VM's identity so your side can add it as the sole peer. The request names the registered machine independently of your login.
+
+```bash
+curl -X POST -H "authorization: Bearer $DUET_API_KEY" \
+  -H "content-type: application/json" \
+  -d '{"machineId":"machine_9","syncthingDeviceId":"K5MNBGJ-QT4EVLE-... (your device sync ID)"}' \
+  "$DUET_API_URL/v1/ws/acme/mirror-devices"
+```
+
+{/* schema: MirrorRegisterRequestSchema */}
+
+```json
+{
+  "machineId": "machine_9",
+  "syncthingDeviceId": "K5MNBGJ-QT4EVLE-KPBQKY7-CPT4L2N-QU4WHNA-2XBTUXO-Q7XCLHS-6MZ4DAY"
+}
+```
+
+{/* schema: MirrorRegisteredSchema */}
+
+```json
+{
+  "machineId": "machine_9",
+  "folderId": "workspace-drive",
+  "vmSyncthingDeviceId": "R7ELVOD-P4WBW6H-... (the workspace VM's device sync ID)",
+  "tunnel": {
+    "url": "wss://acme-vm.exe.dev/v1/tunnel/accept/mirror-machine_9-a1b2c3",
+    "tunnelToken": "1767293700000.9f3ce12.4b8ac7",
+    "expiresAt": 1767293700000
+  }
+}
+```
+
+The full Syncthing device ID must match the registered machine. Edits arrive in
+[file activity](/file-activity) as `mirror:<machineId>` and resolve to the machine's
+user, including after removal. Registration is idempotent and returns a fresh
+tunnel grant. An existing mirror can refresh at the workspace's admission limit.
+
+## What a mirror syncs
+
+A mirror replicates the **whole drive** — one folder rooted at the workspace root, synchronized in
+both directions. Three things are always held back so machine-local state never crosses between
+machines:
+
+- `.git` directories — a repository under two active writers corrupts; history belongs on a git
+  remote, not in the mirror. Your working files still sync live; only the `.git` bookkeeping is
+  excluded.
+- `node_modules` — platform-specific and reinstallable; syncing it clobbers one machine's binaries
+  with another's architecture. Run your installer on each side.
+- `.duet` — Duet's own workspace state directory.
+
+Everything else replicates, including `.env` files and other dotfiles. A mirror is a personal
+replica of your own workspace, so its environment files travel with it — unlike a workspace
+[share](/shares-publishes), which withholds them by default. A mirror reaches every secret in the drive.
+
+## List the workspace's mirrors
+
+```bash
+curl -H "authorization: Bearer $DUET_API_KEY" \
+  "$DUET_API_URL/v1/ws/acme/mirror-devices"
+```
+
+{/* schema: MirrorDeviceListSchema */}
+
+```json
+{
+  "items": [
+    {
+      "machineId": "machine_9",
+      "deviceName": "MacBook Pro",
+      "syncthingDeviceId": "K5MNBGJ-QT4EVLE-KPBQKY7-CPT4L2N-QU4WHNA-2XBTUXO-Q7XCLHS-6MZ4DAY",
+      "registeredAt": 1767290000000
+    }
+  ],
+  "nextCursor": null
+}
+```
+
+Walk `nextCursor` until it is `null`; a short or empty page can still carry a continuation. The
+returned devices let you confirm a registration landed or spot a machine you no longer recognize.
+`machineId` is the non-secret identity used in file activity and machine settings.
+
+## Remove a device
+
+```bash
+curl -X DELETE -H "authorization: Bearer $DUET_API_KEY" \
+  "$DUET_API_URL/v1/ws/acme/mirror-devices/machine_9"
+```
+
+{/* schema: MirrorRemovedSchema */}
+
+```json
+{ "ok": true, "machineId": "machine_9" }
+```
+
+The path names a machine you own. Removal detaches its folder membership and
+invalidates future tunnel admissions for this workspace, leaving its other mirrors
+and your login intact. Repeating removal succeeds. To remove a lost machine from
+every workspace, use `DELETE /v1/user/sync-machines/{machineId}`.
+
+## Tunnel access, and re-minting it
+
+A mirror connects over a tunnel, exactly as workspace-to-workspace shares do: your device dials the
+`url` from the registration response and presents `tunnelToken`; the workspace VM bridges the
+connection. Tunnel tokens are deliberately short-lived, and every reconnect must
+present a fresh one — never cache a token across reconnects. Re-POST the registration route to mint
+a new grant; a reconnect costs one request. An idle tunnel holds no workspace open: a
+connected-but-quiet mirror never counts as workspace activity and never delays idle retirement.
+
+## Removal and membership changes
+
+Removing a machine detaches its workspace mirrors and refuses later registration
+with that machine ID. Explicitly registering the same machine again restores its
+identity so you can turn sync back on. Leaving a workspace detaches your machines only from that
+workspace; the same user login continues to reach remaining memberships.
+Revoking the user key refuses subsequent requests and tunnel remints through the
+ordinary authentication gate. Existing tunnel lifetimes remain bounded.
+
+<EndpointReference category="sync" />

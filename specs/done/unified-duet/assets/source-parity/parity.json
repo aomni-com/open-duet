@@ -1,0 +1,17 @@
+{
+  "equalContracts": [
+    "version",
+    "help",
+    "skills",
+    "provider",
+    "rpc",
+    "complete model/embedding request bodies",
+    "memory content"
+  ],
+  "normalizations": [
+    "scratch directory",
+    "elapsed time",
+    "sampled RSS"
+  ],
+  "memoryMetadata": "Generated IDs/timestamps/ranking are not compared; content and actual vector retrieval are asserted."
+}

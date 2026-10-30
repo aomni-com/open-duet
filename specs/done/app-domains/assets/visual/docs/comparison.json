@@ -1,0 +1,30 @@
+[
+  {
+    "viewport": "desktop",
+    "beforeDimensions": [
+      1440,
+      6058
+    ],
+    "afterDimensions": [
+      1440,
+      8914
+    ],
+    "changedPixels": 1616061,
+    "changedRatio": 0.12589910066561963,
+    "target": "Readable lifecycle and private-launch documentation with precise API references; natural page growth expected."
+  },
+  {
+    "viewport": "mobile",
+    "beforeDimensions": [
+      390,
+      9148
+    ],
+    "afterDimensions": [
+      390,
+      13766
+    ],
+    "changedPixels": 1134993,
+    "changedRatio": 0.21140770460107958,
+    "target": "Readable lifecycle and private-launch documentation with precise API references; natural page growth expected."
+  }
+]

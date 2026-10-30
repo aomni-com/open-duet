@@ -1,0 +1,16 @@
+{
+  "status": 200,
+  "errors": [],
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "documentWidth": 390,
+  "documentHeight": 4752,
+  "scrollY": 3908,
+  "finalCodeBottom": 779,
+  "finalCodeEndVisible": true,
+  "finalCodeText": "# Prepare a local MCP config without printing the bearer token.\nDUET_MCP_PUBLIC_URL=\"https://service.example.invalid\" node <<'NODE'\nconst fs = require(\"node:fs\");\nconst path = require(\"node:path\");\nconst duetDir = path.join(process.env.HOME, \".duet\");\nconst cfg = JSON.parse(\n  fs.readFileSync(\n    path.join(duetDir, \"config.json\"),\n    \"utf8\",\n  ),\n);\nif (typeof cfg.apiKey !== \"string\" || cfg.apiKey.length === 0) throw new Error(\"Sign in first.\");\nconst outPath = path.join(duetDir, \"mcp.json\");\nfs.writeFileSync(\n  outPath,\n  JSON.stringify(\n    {\n      name: \"duet\",\n      transport: \"streamable-http\",\n      url: process.env.DUET_MCP_PUBLIC_URL,\n      headers: { authorization: `Bearer ${cfg.apiKey}` },\n    },\n    null,\n    2,\n  ) + \"\\n\",\n  { mode: 0o600 },\n);\nfs.chmodSync(outPath, 0o600);\nconsole.log(`Wrote ${outPath}. Import it into your MCP client; bearer token not printed.`);\nNODE",
+  "footerPresent": false,
+  "pageEndReached": true
+}

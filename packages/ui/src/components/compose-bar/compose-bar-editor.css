@@ -1,0 +1,113 @@
+.ProseMirror[data-compose-bar-editor] {
+  max-height: inherit;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.ProseMirror[data-compose-bar-editor] p {
+  margin: 0;
+}
+
+.ProseMirror[data-compose-bar-editor] p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  color: oklch(var(--muted-foreground));
+  pointer-events: none;
+}
+
+/* A picked skill reads as one token, not as text the caret can land inside:
+   the node is an atom, so this only has to look like what it already is. */
+.ProseMirror[data-compose-bar-editor] span[data-compose-bar-mention] {
+  border-radius: 0.25rem;
+  background: hsl(var(--brand) / 0.12);
+  padding: 0.0625rem 0.3em;
+  color: hsl(var(--brand));
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.ProseMirror[data-compose-bar-editor] strong {
+  font-weight: 700;
+}
+
+.ProseMirror[data-compose-bar-editor] em {
+  font-style: italic;
+}
+
+.ProseMirror[data-compose-bar-editor] s {
+  text-decoration: line-through;
+}
+
+.ProseMirror[data-compose-bar-editor] a {
+  color: oklch(var(--primary));
+  text-decoration: underline;
+  text-decoration-color: oklch(var(--primary) / 0.4);
+  text-underline-offset: 3px;
+}
+
+.ProseMirror[data-compose-bar-editor] ul,
+.ProseMirror[data-compose-bar-editor] ol {
+  margin: 0.375rem 0;
+  padding-left: 1.25rem;
+}
+
+.ProseMirror[data-compose-bar-editor] ul {
+  list-style: disc;
+}
+
+.ProseMirror[data-compose-bar-editor] ol {
+  list-style: decimal;
+}
+
+.ProseMirror[data-compose-bar-editor] li > p {
+  display: inline;
+}
+
+.ProseMirror[data-compose-bar-editor] code {
+  border: 1px solid oklch(var(--border) / 0.65);
+  border-radius: 0.25rem;
+  background: oklch(var(--muted) / 0.65);
+  padding: 0.0625rem 0.3em;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+.ProseMirror[data-compose-bar-editor] pre {
+  margin: 0.625rem 0;
+  overflow-x: auto;
+  border: 1px solid oklch(var(--border) / 0.7);
+  border-radius: 0.5rem;
+  background: oklch(var(--muted) / 0.45);
+  padding: 0.625rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.ProseMirror[data-compose-bar-editor] pre code {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+}
+
+.ProseMirror[data-compose-bar-editor] blockquote {
+  margin: 0.625rem 0;
+  border: 1px solid oklch(var(--border) / 0.65);
+  border-radius: 0.5rem;
+  background: oklch(var(--muted) / 0.35);
+  padding: 0.625rem 1rem;
+  color: oklch(var(--foreground) / 0.85);
+}
+
+.ProseMirror[data-compose-bar-editor] blockquote > :first-child {
+  margin-top: 0;
+}
+
+.ProseMirror[data-compose-bar-editor] blockquote > :last-child {
+  margin-bottom: 0;
+}

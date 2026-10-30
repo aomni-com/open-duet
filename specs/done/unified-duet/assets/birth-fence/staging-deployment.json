@@ -1,0 +1,66 @@
+{
+  "environment": "staging",
+  "deployment": "chatty-llama-452",
+  "compatibleBaseline": "1d0ee5edefd1e55c49a857c74b5e87171ed1f078",
+  "compatibleRevision": "db2f70ae73399e186ada89ba82fc76ffcb80fd74",
+  "apiRevision": "1d0ee5edefd1e55c49a857c74b5e87171ed1f078",
+  "backendSchema": 1,
+  "sourcePatchSha256": "a420d97feeed10c5b5017c5f00ca6a13e57e851fe284fb18634cf0508951e36d",
+  "gates": {
+    "patchedSourcesMatchReviewedReceipt": true,
+    "backendTypes": 0,
+    "backendLint": 0,
+    "baselineLifecycleCases": 36,
+    "baselineLifecycleAssertions": 128,
+    "deployDryRun": 0,
+    "deployWithTypecheckEnabled": 0,
+    "deletedIndexes": 0
+  },
+  "toolchainPlacement": "Convex checks a package-local TypeScript path; the isolated checkout links its declared compiler to the exact frozen hoisted compiler. No source or compiler version changed.",
+  "liveChanges": {
+    "compatibleBackendDeployed": true,
+    "apiDeployed": false,
+    "runtimeUpdatesPaused": true,
+    "lifecycleFenceClosed": true,
+    "vmProviderRestartOrResize": false,
+    "vmReprovision": false
+  },
+  "controlBefore": {
+    "environment": "staging",
+    "backendRevision": "db2f70ae73399e186ada89ba82fc76ffcb80fd74",
+    "schema": 1,
+    "updates": null,
+    "lifecycleFence": null,
+    "observedAt": "2026-10-04T12:10:54.394Z"
+  },
+  "controlPause": {
+    "before": {
+      "environment": "staging",
+      "backendRevision": "db2f70ae73399e186ada89ba82fc76ffcb80fd74",
+      "schema": 1,
+      "updates": null,
+      "lifecycleFence": null,
+      "observedAt": "2026-10-04T12:11:34.942Z"
+    },
+    "after": {
+      "environment": "staging",
+      "backendRevision": "db2f70ae73399e186ada89ba82fc76ffcb80fd74",
+      "schema": 1,
+      "updates": {
+        "id": "q57e21rf0x0nr5f3tf51fh2z058fnf1r",
+        "paused": true,
+        "updatedAt": 1791115895014,
+        "reason": "unified-duet in-place alignment; workspace work continues"
+      },
+      "lifecycleFence": null,
+      "observedAt": "2026-10-04T12:11:35.667Z"
+    }
+  },
+  "fenceWriteAcknowledgement": "\u2714 Successfully set DUET_VM_LIFECYCLE_PAUSED (on dev deployment chatty-llama-452)",
+  "fencedPlan": "staging-fenced-plan.json",
+  "limits": [
+    "Closed-fence plan is a point-in-time drain observation; the host rechecks before each apply.",
+    "First canary alignment deferred/restored on a kernel-process environment read error; no adoption is claimed here.",
+    "Production has not been changed."
+  ]
+}

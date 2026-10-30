@@ -1,0 +1,28 @@
+bun test v1.3.14 (0d9b296a)
+
+benchmarks/swebench/test/swebench-provenance.test.ts:
+(pass) SWE-bench campaign provenance > is write-once for matching inputs and refuses a dirty launch [35.26ms]
+
+benchmarks/swebench/test/swebench-orchestrator.test.ts:
+(pass) SWE-bench campaign resume planning > orders every configured arm deterministically inside each instance block [8.04ms]
+(pass) SWE-bench campaign resume planning > a matching complete plan is idempotent and stale running work resumes [13.20ms]
+(pass) SWE-bench campaign resume planning > retries only infrastructure failures when requested and refuses spec drift [4.48ms]
+(pass) SWE-bench campaign resume planning > filters a full frozen plan to one remote instance block [1.23ms]
+(pass) SWE-bench campaign resume planning > filters a frozen plan to one remote instance-trial shard [1.99ms]
+(pass) SWE-bench campaign resume planning > admits an instance block only when every pending arm fits the budget [2.45ms]
+(pass) SWE-bench campaign resume planning > keeps a started rollout reserved when it throws after model work [104.91ms]
+(pass) SWE-bench campaign resume planning > refuses to mix a changed official image into a resumed campaign [8.36ms]
+(pass) SWE-bench campaign resume planning > reconciles request overshoot before admitting the next block [1.08ms]
+
+benchmarks/swebench/test/swebench-rollout.test.ts:
+(pass) SWE-bench rollout pipeline > installs the selected render, captures evidence, and always tears down [24.22ms]
+(pass) SWE-bench rollout pipeline > records startup failure and still stops the owned container [2.98ms]
+(pass) SWE-bench rollout pipeline > records an RPC process exit as infrastructure failure [6.32ms]
+(pass) SWE-bench rollout pipeline > exports the agent's complete patch including test paths [6.54ms]
+(pass) SWE-bench rollout pipeline > completes an empty patch so the scorer can count the model outcome [6.07ms]
+(pass) SWE-bench rollout pipeline > smoke proves a pure one-file patch in a fresh container [6.05ms]
+
+ 16 pass
+ 0 fail
+ 50 expect() calls
+Ran 16 tests across 3 files. [1114.00ms]

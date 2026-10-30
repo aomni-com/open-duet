@@ -1,0 +1,584 @@
+{
+  "aliases": {
+    "sessionId": "j973f02ebhyg6e18dxtxt2rexs8f8bcd",
+    "workspaceDefault": "openai-max",
+    "preservedHistoryRows": 13,
+    "anchorPath": "agents/alias-probe-737c71",
+    "runtime": {
+      "gatewayVersion": "0.0.0+d307daaf0c0d",
+      "announcedSha256": "d307daaf0c0de4bd0996ab9219782be1939e234a95bc072838786f57c1737c40",
+      "agentVersion": "0.3.28",
+      "announcedAgentVersion": "0.3.28",
+      "cwd": "agents/alias-probe-737c71",
+      "configPath": "agents/alias-probe-737c71/.duet/models.json",
+      "routing": {
+        "defaultTier": "frontier",
+        "tiers": {
+          "frontier": {
+            "routes": {
+              "visual": {
+                "description": "Frontend, 3D, or anything visual: UI implementation and debugging, styling, graphics, image inspection, and work where visual fidelity matters.",
+                "target": {
+                  "modelName": "kimi",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "plan": {
+                "description": "Architecture, investigation, research, and high-stakes planning where the primary work is reasoning about what to build or do, not implementing it.",
+                "target": {
+                  "modelName": "opus",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "implement": {
+                "description": "Backend, systems, data, CLI, and other implementation or debugging work, including tests and code changes.",
+                "target": {
+                  "modelName": "sol",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "writing": {
+                "description": "Creative writing and prose where voice, narrative, or wording is the primary output rather than analysis or software work.",
+                "target": {
+                  "modelName": "opus",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "general": {
+                "description": "General questions, explanations, summaries, and requests that do not fit a more specific route.",
+                "target": {
+                  "modelName": "sol",
+                  "thinkingLevel": "medium"
+                }
+              }
+            },
+            "advisor": {
+              "enabled": true,
+              "target": {
+                "modelName": "fable",
+                "thinkingLevel": "medium"
+              },
+              "minStepsBetween": 5
+            }
+          },
+          "balanced": {
+            "routes": {
+              "visual": {
+                "description": "Frontend, 3D, or anything visual: UI implementation and debugging, styling, graphics, image inspection, and work where visual fidelity matters.",
+                "target": {
+                  "modelName": "kimi",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "plan": {
+                "description": "Architecture, investigation, research, and high-stakes planning where the primary work is reasoning about what to build or do, not implementing it.",
+                "target": {
+                  "modelName": "sol",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "implement": {
+                "description": "Backend, systems, data, CLI, and other implementation or debugging work, including tests and code changes.",
+                "target": {
+                  "modelName": "sol",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "writing": {
+                "description": "Creative writing and prose where voice, narrative, or wording is the primary output rather than analysis or software work.",
+                "target": {
+                  "modelName": "sonnet",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "general": {
+                "description": "General questions, explanations, summaries, and requests that do not fit a more specific route.",
+                "target": {
+                  "modelName": "sol",
+                  "thinkingLevel": "medium"
+                }
+              }
+            },
+            "advisor": {
+              "enabled": true,
+              "target": {
+                "modelName": "fable",
+                "thinkingLevel": "medium"
+              },
+              "minStepsBetween": 5
+            }
+          },
+          "economy": {
+            "routes": {
+              "implement": {
+                "description": "Backend, systems, data, CLI, and other implementation or debugging work, including tests and code changes.",
+                "target": {
+                  "modelName": "deepseek",
+                  "thinkingLevel": "medium"
+                }
+              },
+              "writing": {
+                "description": "Creative writing and prose where voice, narrative, or wording is the primary output rather than analysis or software work.",
+                "target": {
+                  "modelName": "luna",
+                  "thinkingLevel": "low"
+                }
+              },
+              "general": {
+                "description": "General questions, explanations, summaries, and requests that do not fit a more specific route.",
+                "target": {
+                  "modelName": "deepseek",
+                  "thinkingLevel": "low"
+                }
+              }
+            },
+            "advisor": {
+              "enabled": false,
+              "target": {
+                "modelName": "sol",
+                "thinkingLevel": "medium"
+              },
+              "minStepsBetween": 5
+            }
+          },
+          "openai-frontier": {
+            "routes": {
+              "general": {
+                "description": "All work on OpenAI frontier.",
+                "target": {
+                  "modelName": "astra",
+                  "thinkingLevel": "medium"
+                }
+              }
+            },
+            "advisor": {
+              "enabled": false,
+              "target": {
+                "modelName": "astra",
+                "thinkingLevel": "medium"
+              },
+              "minStepsBetween": 5
+            }
+          },
+          "openai-max": {
+            "routes": {
+              "general": {
+                "description": "All work on OpenAI max.",
+                "target": {
+                  "modelName": "sol",
+                  "thinkingLevel": "medium"
+                }
+              }
+            },
+            "advisor": {
+              "enabled": false,
+              "target": {
+                "modelName": "sol",
+                "thinkingLevel": "medium"
+              },
+              "minStepsBetween": 5
+            }
+          },
+          "anthropic-frontier": {
+            "routes": {
+              "general": {
+                "description": "All work on Anthropic frontier.",
+                "target": {
+                  "modelName": "fable",
+                  "thinkingLevel": "medium"
+                }
+              }
+            },
+            "advisor": {
+              "enabled": false,
+              "target": {
+                "modelName": "fable",
+                "thinkingLevel": "medium"
+              },
+              "minStepsBetween": 5
+            }
+          },
+          "anthropic-max": {
+            "routes": {
+              "general": {
+                "description": "All work on Anthropic max.",
+                "target": {
+                  "modelName": "opus",
+                  "thinkingLevel": "medium"
+                }
+              }
+            },
+            "advisor": {
+              "enabled": false,
+              "target": {
+                "modelName": "opus",
+                "thinkingLevel": "medium"
+              },
+              "minStepsBetween": 5
+            }
+          }
+        },
+        "classifier": {
+          "target": {
+            "modelName": "typesafe-ai/jev"
+          },
+          "everySteps": 5,
+          "guidance": "Prefer continuity when the task has not materially changed, but switch routes when the work changes domains."
+        }
+      }
+    },
+    "turns": [
+      {
+        "alias": "openai-max",
+        "execution": [
+          {
+            "id": "md77ep8fbw7rhqzqztvyw3n6qd8f9wg9",
+            "upstreamGenerationId": "gen_01M3JTZ87DPVN9KJJB7ATWEHKG",
+            "model": "openai/gpt-6-sol",
+            "tier": "openai-max",
+            "usage": {
+              "uncachedInputTokens": 19474,
+              "cachedInputTokens": 0,
+              "outputTokens": 7
+            },
+            "billedCostMicroUsd": 194950,
+            "debitMicroUsd": -194950
+          }
+        ],
+        "support": [
+          {
+            "id": "md7axs1cvhtn0xfqkahcxr549n8f9pry",
+            "model": "openai/gpt-6-luna",
+            "tier": "openai-max",
+            "status": "reconciling"
+          }
+        ]
+      },
+      {
+        "alias": "anthropic-max",
+        "execution": [
+          {
+            "id": "md7b32eezgcerxfxnqcmxxwkr98f9kxa",
+            "upstreamGenerationId": "gen_01M3JTZZXKNH1QDBBD0AWN54TW",
+            "model": "anthropic/claude-opus-5.5",
+            "tier": "anthropic-max",
+            "usage": {
+              "uncachedInputTokens": 34521,
+              "cachedInputTokens": 0,
+              "outputTokens": 10
+            },
+            "billedCostMicroUsd": 345510,
+            "debitMicroUsd": -345510
+          }
+        ],
+        "support": [
+          {
+            "id": "md7br06f0p94wcfs0sm26xx7318f95ks",
+            "model": "openai/gpt-6-luna",
+            "tier": "anthropic-max",
+            "status": "settled"
+          }
+        ]
+      },
+      {
+        "alias": "anthropic-max",
+        "execution": [
+          {
+            "id": "md7dh6xzt187zc4s67d6persrd8f9q0s",
+            "upstreamGenerationId": "gen_01M3JV0Q7XM25QZA551YV5G65P",
+            "model": "anthropic/claude-opus-5.5",
+            "tier": "anthropic-max",
+            "usage": {
+              "uncachedInputTokens": 160,
+              "cachedInputTokens": 34517,
+              "outputTokens": 10
+            },
+            "billedCostMicroUsd": 36417,
+            "debitMicroUsd": -36417
+          }
+        ],
+        "support": [
+          {
+            "id": "md787v5a499zf47wb48vmt779n8f81k5",
+            "model": "openai/gpt-6-luna",
+            "tier": "anthropic-max",
+            "status": "reconciling"
+          }
+        ]
+      }
+    ],
+    "restoredRouter": "economy"
+  },
+  "agentVersion": "0.3.28",
+  "content": [
+    {
+      "listingId": "v17a5ts4e071ev9myeh2jqhqzs8cmy5r",
+      "path": "agents/writer/apps/setup-voice/duet.ts",
+      "sha256": "41d0100bae4ffc35097ee716fcf43b70df278cb39c2e0f51d48f68a1852108ab"
+    },
+    {
+      "listingId": "v170qdxf93r01qprxtg485y1nx8cbwyp",
+      "path": "agents/brand-designer/apps/setup-brand/duet.ts",
+      "sha256": "cc453e1593507a949398b8cbf9f621804ea3cf35e884c0e86105fb0b9ee09af6"
+    }
+  ],
+  "probe": {
+    "status": "complete",
+    "generations": [
+      {
+        "role": "image:google",
+        "model": "google/gemini-3.1-flash-image",
+        "exitCode": 0,
+        "bytes": 1063912,
+        "validMedia": true,
+        "sha256": "59e8142995ab530d098603848b4e99cfe99a265d2807219fbd2ee8489ae34c5b"
+      },
+      {
+        "role": "video:google",
+        "model": "google/veo-3.1-generate-001",
+        "exitCode": 0,
+        "bytes": 289711,
+        "validMedia": true,
+        "sha256": "72c130f13dfb33ed0d8267db74e9b7678ed54b46bee1e030718c82eb6927f50b"
+      },
+      {
+        "role": "video:grok",
+        "model": "spacexai/grok-imagine-video-1.5",
+        "exitCode": 0,
+        "bytes": 235365,
+        "validMedia": true,
+        "sha256": "66daa5a924e12fec82d98a1b0aaf21494265ee4bed2415724a2372e70b4a03f5"
+      },
+      {
+        "role": "video:seedance",
+        "model": "bytedance/seedance-2.5",
+        "exitCode": 0,
+        "bytes": 2267419,
+        "validMedia": true,
+        "sha256": "f88ec0945ef8eff4080fc9cc3defbf338210c2ec451ecfd3460c012d59a229d9"
+      }
+    ],
+    "nondefault": [
+      {
+        "model": "spacexai/grok-4.7",
+        "responseModel": "spacexai/grok-4.7",
+        "result": "42"
+      },
+      {
+        "model": "zai/glm-5.3",
+        "responseModel": "zai/glm-5.3",
+        "result": "42"
+      }
+    ],
+    "commands": [
+      {
+        "command": "--version",
+        "startedAt": 1790559988757,
+        "timeoutMs": 30000,
+        "status": "completed",
+        "elapsedMs": 18,
+        "exitCode": 0,
+        "signal": null
+      },
+      {
+        "command": "model",
+        "model": "google/gemini-3.1-flash-image",
+        "startedAt": 1790559988905,
+        "timeoutMs": 300000,
+        "status": "completed",
+        "elapsedMs": 12114,
+        "exitCode": 0,
+        "signal": null
+      },
+      {
+        "command": "model",
+        "model": "google/veo-3.1-generate-001",
+        "startedAt": 1790560001026,
+        "timeoutMs": 300000,
+        "status": "completed",
+        "elapsedMs": 33646,
+        "exitCode": 0,
+        "signal": null
+      },
+      {
+        "command": "model",
+        "model": "spacexai/grok-imagine-video-1.5",
+        "startedAt": 1790560034675,
+        "timeoutMs": 300000,
+        "status": "completed",
+        "elapsedMs": 29106,
+        "exitCode": 0,
+        "signal": null
+      },
+      {
+        "command": "model",
+        "model": "bytedance/seedance-2.5",
+        "startedAt": 1790560063783,
+        "timeoutMs": 600000,
+        "status": "completed",
+        "elapsedMs": 174943,
+        "exitCode": 0,
+        "signal": null
+      },
+      {
+        "command": "train",
+        "model": "luna",
+        "startedAt": 1790560238736,
+        "timeoutMs": 300000,
+        "status": "completed",
+        "elapsedMs": 6839,
+        "exitCode": 0,
+        "signal": null
+      }
+    ],
+    "agentVersion": "0.3.28",
+    "memoryModel": "openai/gpt-6-luna",
+    "roles": {
+      "image:google": "google/gemini-3.1-flash-image",
+      "video:google": "google/veo-3.1-generate-001",
+      "video:grok": "spacexai/grok-imagine-video-1.5",
+      "video:pro": "bytedance/seedance-2.5",
+      "video:seedance": "bytedance/seedance-2.5",
+      "video": "bytedance/seedance-2.0-fast"
+    },
+    "skillHash": "49f48248d9553552b6266581d0d120fc527a814524373051d30b03024e52c867",
+    "trainExitCode": 0
+  },
+  "generations": [
+    {
+      "id": "md74dq1x02bc26y0zpfkp9s9tx8f9h42",
+      "model": "typesafe-ai/jev",
+      "tier": "economy",
+      "status": "settled",
+      "upstreamCostMicroUsd": 45,
+      "billedCostMicroUsd": 45
+    },
+    {
+      "id": "md7dmyjexq1svx4zs88583jtzn8f8jna",
+      "model": "deepseek/deepseek-v4.1-flash",
+      "tier": "economy",
+      "status": "settled",
+      "upstreamCostMicroUsd": 7221,
+      "billedCostMicroUsd": 12012
+    },
+    {
+      "id": "md7cbvwcwh7ydr3z16tespa3xx8f98b4",
+      "model": "deepseek/deepseek-v4.1-flash",
+      "tier": "economy",
+      "status": "settled",
+      "upstreamCostMicroUsd": 532,
+      "billedCostMicroUsd": 4341
+    },
+    {
+      "id": "md7552vg1r06wjd43qqkwtnb1d8f8nbf",
+      "model": "google/gemini-3.1-flash-image",
+      "status": "settled",
+      "upstreamCostMicroUsd": 67006,
+      "billedCostMicroUsd": 67006
+    },
+    {
+      "id": "md7fqcsfhxa5ejx77dz0zwvfed8f9psc",
+      "model": "google/veo-3.1-generate-001",
+      "status": "settled",
+      "upstreamCostMicroUsd": 1600000,
+      "billedCostMicroUsd": 1600000
+    },
+    {
+      "id": "md70ve207b3zadb7qrzk4pg96x8f959e",
+      "model": "spacexai/grok-imagine-video-1.5",
+      "status": "settled",
+      "upstreamCostMicroUsd": 560000,
+      "billedCostMicroUsd": 560000
+    },
+    {
+      "id": "md76hsnh4dcm1t2b07we0nt4bd8f9wha",
+      "model": "bytedance/seedance-2.5",
+      "status": "settled",
+      "upstreamCostMicroUsd": 932890,
+      "billedCostMicroUsd": 932890
+    },
+    {
+      "id": "md7bytcgd7x2xj3v24gd84bhbd8f98z3",
+      "model": "openai/gpt-6-luna",
+      "status": "reconciling"
+    },
+    {
+      "id": "md75vbx0y5fwnh81343k8y9ak58f8m94",
+      "model": "openai/gpt-6-luna",
+      "status": "settled",
+      "upstreamCostMicroUsd": 78,
+      "billedCostMicroUsd": 78
+    },
+    {
+      "id": "md7ff615q62s17ks67t3s1g5wh8f97pe",
+      "model": "openai/gpt-6-luna",
+      "status": "settled",
+      "upstreamCostMicroUsd": 123,
+      "billedCostMicroUsd": 123
+    },
+    {
+      "id": "md77rc0bahz3yzx0wtm8gzgnj58f8nje",
+      "model": "openai/gpt-6-luna",
+      "status": "settled",
+      "upstreamCostMicroUsd": 68,
+      "billedCostMicroUsd": 68
+    },
+    {
+      "id": "md70sp8tmq3k8y6xsq0pydyvkx8f9ns6",
+      "model": "spacexai/grok-4.7",
+      "tier": "services",
+      "status": "settled",
+      "upstreamCostMicroUsd": 605,
+      "billedCostMicroUsd": 605
+    },
+    {
+      "id": "md7ad93mhr0hmve97y2sjn7rhx8f82n1",
+      "model": "zai/glm-5.3",
+      "tier": "services",
+      "status": "settled",
+      "upstreamCostMicroUsd": 73,
+      "billedCostMicroUsd": 73
+    },
+    {
+      "id": "md78xgkcwpdfj5x6vy1qgdprps8f9h4k",
+      "model": "deepseek/deepseek-v4.1-flash",
+      "tier": "economy",
+      "status": "settled",
+      "upstreamCostMicroUsd": 277,
+      "billedCostMicroUsd": 3809
+    },
+    {
+      "id": "md7d9148v4ny317z5bggtpe0d18f85hh",
+      "model": "openai/gpt-6-luna",
+      "tier": "economy",
+      "status": "reconciling"
+    },
+    {
+      "id": "md774axq6zgd1d9empme6s5f198f985a",
+      "model": "google/gemini-embedding-2",
+      "tier": "economy",
+      "status": "reconciling"
+    }
+  ],
+  "chatCosts": [
+    {
+      "id": "md77ep8fbw7rhqzqztvyw3n6qd8f9wg9",
+      "model": "openai/gpt-6-sol",
+      "upstreamCostMicroUsd": 48754,
+      "billedCostMicroUsd": 194950
+    },
+    {
+      "id": "md7b32eezgcerxfxnqcmxxwkr98f9kxa",
+      "model": "anthropic/claude-opus-5.5",
+      "upstreamCostMicroUsd": 172801,
+      "billedCostMicroUsd": 345510
+    },
+    {
+      "id": "md7dh6xzt187zc4s67d6persrd8f9q0s",
+      "model": "anthropic/claude-opus-5.5",
+      "upstreamCostMicroUsd": 7899,
+      "billedCostMicroUsd": 36417
+    }
+  ],
+  "preservedHistoryRows": 13
+}

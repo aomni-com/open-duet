@@ -1,0 +1,123 @@
+{
+  "source": {
+    "duetHead": "a8b2f8f402fe4b9bfbe34a4e4925b9602dd2081d",
+    "sourceTarSha256": "980c712bb62e807dc95d7ddb36633033cfea94f965a1535e52cbcdcedfa7b068",
+    "sourceTarBytes": 512010240,
+    "overlayFiles": {
+      "packages/gateway/src/runner/routing-agent.test-helper.ts": "e418438b1db6ed3f2a7c12311e4e703c41dce66dd58e5adf07a4032593a8fb97",
+      "packages/gateway/src/runner/routing-config.test.ts": "59cf01ab735c7a5632cee7a5ec8fa52613d46a53afaadcfe1fc37ae5cd91164b"
+    },
+    "agentSource": "0cd51fb9130ff6a9d095b8dc6e70288bfcce7c40",
+    "agentTarballSha256": "ac62f4214bc961cccf265945648cca33a52bbc7c069a5e7dcbf280b7ad980b42",
+    "purpose": "Same failed model-gateway cases on Linux; original assertions and timeouts retained"
+  },
+  "initialLinuxCheck": {
+    "exitCode": 1,
+    "testCasesReached": 0,
+    "reason": "Convex start_push rejected deployment because no supported Node version was installed",
+    "evidenceDirectory": "/tmp/workflow-duet-linux"
+  },
+  "startupDiagnostic": {
+    "exitCode": 1,
+    "testCasesReached": 0,
+    "instrumentation": {
+      "beforeSha256": "3d515de8534c381051a07a76ee441a5fb26e651159221044392796325ff4a0cf",
+      "afterSha256": "52ed0efc2793479755f6e90b2d5370f3642c906ec45e3c481c9ccc673a54271f",
+      "purpose": "Capture full CLI error after startup failure before stopping the process; original failure still rejects, no assertion/function deadline changed",
+      "flushDelayMs": 250
+    },
+    "evidenceDirectory": "/tmp/workflow-duet-linux-diagnostic",
+    "finding": "DeploymentNotConfiguredForNodeActions: install Node.js 20, 22, or 24"
+  },
+  "node22OnlyTrial": {
+    "exitCode": 137,
+    "reason": "Stop requested during dependency install after noticing Bun1.3.14 repository pin. During Docker stop grace, install completed and test process started; no case result was emitted before termination. This was an explicit stop, not an OOM result.",
+    "testVerdict": "none; interrupted during startup",
+    "oldImageTagRemoved": "workflow-duet-linux:node22"
+  },
+  "correctedEnvironment": {
+    "image": "sha256:41986277feba30943ea7189ba6071bd4e8ee2e0f38be04bd995697a1b44efb13",
+    "node": "22.23.3",
+    "bun": "1.3.14",
+    "toolSession": 23448,
+    "container": "workflow-duet-linux-pinned",
+    "evidenceDirectory": "/tmp/workflow-duet-linux-pinned",
+    "status": "terminated: startup failure, exit1; no selected test result",
+    "elapsedSeconds": 147.87
+  },
+  "limitations": [
+    "Original assertions and deadlines are unchanged.",
+    "Passing Linux model-gateway cases does not establish the cause of host timeouts.",
+    "The broader backend/API gate remains incomplete."
+  ],
+  "preparedImage": "sha256:3460191e38caefdb3af5e0c3ac5e07dd9896ac40e9c87d7b5ba997cdc9fe4090",
+  "preparedDiagnostic": {
+    "exitCode": 0,
+    "passes": 2,
+    "failures": 0,
+    "assertions": 104,
+    "elapsedSeconds": 55.37,
+    "evidenceDirectory": "/tmp/workflow-duet-linux-final-diagnostic",
+    "fixtureNodeVersion": "v22.23.3",
+    "limitation": "Includes log-only startup and environment probes; no startup errors occurred in this run. Does not identify the cause of the preceding supported-runtime startup failure."
+  },
+  "uninstrumentedContinuation": {
+    "evidenceDirectory": "/tmp/workflow-duet-linux-continuation",
+    "exitCode": 1,
+    "modelGateway": {
+      "passes": 96,
+      "failures": 0,
+      "assertions": 554,
+      "elapsedSeconds": 180.76
+    },
+    "backendAgentSessions": {
+      "testsReached": 19,
+      "failures": 1,
+      "failedCase": "SUBS-IMPL-07 subscription cancellation commits servicing before bounded terminalization converges",
+      "failureClass": "Convex maximum function duration 1s",
+      "elapsedSeconds": 64.79
+    },
+    "disposition": "Bailed on first failure; remaining backend/API checks in that manifest were not started.",
+    "resourceGuard": "Container statfs reports virtual capacity, so a separate host watcher enforced the 8GiB floor; no low-disk stop occurred."
+  },
+  "apiFollowup": {
+    "evidenceDirectory": "/tmp/workflow-duet-linux-api",
+    "exitCode": 1,
+    "passes": 16,
+    "failures": 2,
+    "assertions": 49,
+    "elapsedSeconds": 112.89,
+    "failedFiles": [
+      "src/routes/auth.test.ts",
+      "src/apps.test.ts"
+    ],
+    "failureClass": "Fixture deployment failed before test bodies: Unable to start push; underlying error not captured",
+    "limits": "Neither failure reached the 240-second startup timeout. Two concurrent fixtures yielded two failures despite bail=1. No demonstrated disk cause; host samples remained above 13.6GB."
+  },
+  "remainingBackendContinuation": {
+    "evidenceDirectory": "/tmp/workflow-duet-linux-remaining",
+    "exitCode": 1,
+    "agentVersion": "0.3.30",
+    "sourceHashesChecked": 33,
+    "passedFiles": [
+      {
+        "file": "src/anchors-rename-decision.test.ts",
+        "passes": 15,
+        "assertions": 17
+      },
+      {
+        "file": "src/apps-replication.test.ts",
+        "passes": 3,
+        "assertions": 7
+      }
+    ],
+    "failedFile": "src/auth-requests.test.ts",
+    "testsReached": 10,
+    "passesBeforeFailure": 9,
+    "failure": "a name supplied on a bind never renames the human who is already there: expected issued, received invalid_code",
+    "line": 260,
+    "elapsedSeconds": 232.54,
+    "remainingUnstartedFiles": 30,
+    "disposition": "Bailed at first assertion failure; no retries; host-space watcher ended with container. Original test limits and assertions unchanged; cause unresolved."
+  }
+}

@@ -1,0 +1,142 @@
+---
+title: 'How to Benchmark AI Models on Real Work (Not Leaderboards)'
+metaTitle: 'How to Benchmark AI Models on Real Work (Not Leaderboards)'
+description: "Leaderboards test models on invented prompts. Here's how to benchmark AI models on real work — completion, switch-away, tool reliability, and blind quality."
+date: '2026-07-02'
+updatedAt: '2026-07-02'
+readTime: '8 min read'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/10.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'ai'
+tags: ['llm evaluation', 'ai model comparison', 'llm benchmark', 'ai benchmarks', 'model routing']
+type: 'article'
+image: '/blog/how-we-benchmark-ai-models-on-real-work/cover.png'
+relatedPosts:
+  - 'how-to-choose-the-right-ai-model-for-your-business'
+  - 'claude-code-vs-cursor-vs-codex'
+  - 'codex-vs-claude-code'
+  - '6-best-ai-agent-builders-in-2026'
+cta:
+  title: 'Run your work on the model that actually does it.'
+  subtitle: 'Duet lets you route real work across many models — same memory, same files, one credit balance. Free first week.'
+  buttonText: 'Hire Duet'
+  href: '/sign-in?from=blog-benchmark-real-work'
+---
+
+Benchmarking an AI model on real work means measuring how models perform on tasks people actually needed done, not on invented test prompts or crowd votes. Rather than scoring models against a fixed exam, it observes real-world signals — whether the task got completed, whether the user switched models, and how reliably the model used its tools.
+
+Public leaderboards answer "which model scores highest on a fixed test?" Operators ask "which model will get _my_ work done?" For the buyer's-guide version, see [how to choose the right AI model for your business](/blog/how-to-choose-the-right-ai-model-for-your-business); this is the method underneath it.
+
+## What is an AI benchmark, and how do leaderboards actually work?
+
+An AI benchmark is a standardized exam given to every model — same questions, same grading — so scores line up side by side. IBM breaks it into three steps: setting up the dataset, testing every model on identical inputs, and scoring the results onto a leaderboard.
+
+Two dominant public methods exist. Standardized suites run models through a fixed battery of graded tests; [Artificial Analysis's benchmarking methodology](https://artificialanalysis.ai/methodology) is the rigorous example, with formal metrics and explicit formulas. Crowd-vote arenas work differently: two anonymous models answer a prompt, the user votes, and votes aggregate into a chess-style Elo rating — that's how [the LMArena leaderboard](https://lmarena.ai/) ranks models.
+
+Both are legitimate designs — but each only tests [what an LLM benchmark actually is](https://www.ibm.com/think/topics/llm-benchmarks) built to measure: performance on set questions, under set conditions, on test day.
+
+## Are AI benchmarks accurate?
+
+They're accurate at what they measure — performance on a fixed set of questions on test day — but that does not reliably predict real-world usefulness. IBM states plainly that benchmarks "can't predict how well a model will operate in the real world" and "may not be a fitting metric for edge scenarios, specialized areas or specific use cases."
+
+Two structural problems inflate scores. **Saturation:** when top models all cluster near the maximum, the test can no longer tell a great model from a good one — BIG-Bench saturated less than a year after release. **Contamination:** "the unintended overlap between training and test data" (arXiv:2502.14425) — the model may have trained on the answer key; one analysis of 31 models on math reasoning found widespread contamination.
+
+Confident AI admits the limit outright: "LLMs are probabilistic machines, which makes defining deterministic test cases inadequate."
+
+## Why don't AI leaderboards match your real-world results?
+
+Because a leaderboard is a target, and targets get gamed. Goodhart's Law — "when a measure becomes a target, it ceases to be a good measure" — applies to every public ranking: once labs optimize for a score, the score decouples from the capability it was meant to proxy.
+
+This has been measured, not just theorized. A 2025 study, [The Leaderboard Illusion](https://arxiv.org/abs/2504.20879) (arXiv:2504.20879), found access to arena data could yield relative performance gains of up to 112% on the arena's distribution — climbing by learning the test, not getting better. It also identified 27 private model variants tested by one provider before a major release, with only the best scores published. Its conclusion: these dynamics cause "overfitting to arena-specific dynamics rather than general model quality."
+
+The clearest illustration was the Llama-4 episode in April 2025, when the version topping the leaderboard was not the model released to the public. For a fair account of the controversy — including the pushback from arena defenders — see [Simon Willison's breakdown of the Chatbot Arena criticism](https://simonwillison.net/2025/Apr/30/criticism-of-the-chatbot-arena/). Willison also notes crowd votes reward surface features: "bulleted lists and answers of a very specific length tend to do better."
+
+Leaderboards aren't worthless — they measure preference on invented prompts, which is why your own experience, like [Codex vs Claude Code](/blog/codex-vs-claude-code) on your actual repo, often disagrees with the ranking.
+
+## How is benchmarking on real work different from testing on benchmarks?
+
+The difference is administered questions versus observed outcomes. A benchmark is given before deployment, in clean conditions, on fixed inputs. Real-work benchmarking watches what happens after deployment, on messy tasks people needed done. Benchmarks test; we observe.
+
+Said as a single contrast: crowd-vote leaderboards measure preference on invented prompts; standardized suites measure performance on fixed tests; real-work benchmarking measures outcomes on tasks people actually needed done.
+
+![Two-panel comparison: a grey sealed-lab exam feeding a graded score, versus a blue capped mascot watching real-work tiles flow to a checkmark, captioned "benchmarks test; we observe."](/blog/how-we-benchmark-ai-models-on-real-work/benchmarks-test-vs-duet-observes.png)
+
+The three methods differ on what they measure, where their data comes from, and how each one breaks:
+
+| Method                             | What it measures                     | Data source                       | Known failure mode                                       |
+| ---------------------------------- | ------------------------------------ | --------------------------------- | -------------------------------------------------------- |
+| Crowd-vote leaderboard (Elo/arena) | Human preference on invented prompts | Anonymous pairwise votes          | Gameable; rewards length/formatting; Goodhart pressure   |
+| Standardized suite                 | Performance on a fixed test set      | Ground-truth graded exams         | Saturation and contamination; clean-room conditions only |
+| Real-work observation              | Outcomes on tasks people needed done | Aggregated, anonymized real usage | Sample and task-mix skew; needs privacy guardrails       |
+
+Serious evaluation is already moving toward realism — the first of Cameron Wolfe's [design principles for a useful benchmark](https://cameronrwolfe.substack.com/p/llm-bench) is "realistic," citing CursorBench, which sources its data from real coding-agent sessions. Real work is the ultimate held-out set: it didn't exist until the user created it, so it can't be memorized.
+
+## What signals actually tell you a model did the job?
+
+Five signals, drawn from observed work rather than a test sheet. Each answers one question: did the model do the work?
+
+![Hub-and-spoke framework of five equal real-work signals — completion, switch-away, tool reliability, infra recovery, and blind quality — around a central hub asking "did the model actually do the work?"](/blog/how-we-benchmark-ai-models-on-real-work/five-real-work-signals.png)
+
+| What we measure                   | What it tells you                                           | Why synthetic benchmarks miss it                 |
+| --------------------------------- | ----------------------------------------------------------- | ------------------------------------------------ |
+| Completion                        | Did the job actually get finished?                          | Exams score answers, not finished jobs           |
+| Switch-away / implicit preference | Did the user quietly abandon the model mid-task?            | Sandbox votes are free; real switches cost time  |
+| Tool reliability                  | Did it call tools and integrations correctly?               | Static tests measure capability in isolation     |
+| Infra recovery / robustness       | Did it recover from rate limits, timeouts, errors?          | Lab suites run in clean conditions               |
+| Blind quality                     | How good is the output when the grader can't see the model? | Brand halo and self-preference bias open grading |
+
+- **Completion** is the share of real tasks that reached a successful finish rather than stalling or being abandoned — an outcome, not a proxy.
+- **Switch-away** is when a person abandons or swaps a model mid-task; it's a revealed preference under real stakes, because it cost them time.
+- **Tool reliability** is how consistently a model calls its tools and integrations correctly across runs — a model can write beautiful prose and still botch every tool call.
+- **Infra recovery** is whether a model handles real-world failure — rate limits, timeouts, transient errors — and still finishes.
+- **Blind quality** grades outputs on a fixed, anonymized prompt set without the grader knowing which model produced them, controlling for position, length, and self-preference bias.
+
+The switch-away signal has external backing. In April 2025 (via Simon Willison), Andrej Karpathy acknowledged overfitting pressure on the arena and proposed usage-based rankings — like OpenRouter's — as a candidate top-tier eval that is "very difficult to game," because users switching models are "directly voting for some combo of capability+cost." That's the honest vote: [routing work to the right model for the job](/guides/claude-opus-vs-sonnet-model-routing).
+
+## Why do we separate real interactive work from scheduled automation?
+
+Because they are different animals, and mixing them would corrupt the completion signal. An interactive session has a human at the keyboard and a clear finish. A scheduled or long-running automation may run for days, wait on an external event, or never emit a "task done" event.
+
+Counting those runs in "did the task get done" would distort it — making models look worse or better for reasons unrelated to quality — so they're separated out. That exclusion isn't a caveat; it's proof the method knows the difference between a person working live and a scheduled job, a distinction a lab-suite vendor has no real work to make.
+
+## Why do we distrust our own leaderboard?
+
+Because Goodhart applies to us too. Any measure — including a real-work one — can mislead, and pretending otherwise is the confidence leaderboards project right before they get gamed. "No single evaluation metric should be trusted in isolation."
+
+Named honestly, the risks are sample skew (some models get more usage), task-mix differences between users, and Goodhart pressure the moment any signal becomes a public target. The guardrails: session-type separation, blind grading, directional-not-absolute reporting, and no public per-model target to optimize toward yet.
+
+Privacy is part of that integrity. Measurement is aggregate-only and anonymized — patterns across many users, no individual raw prompts read or published — a deliberate contrast with arenas whose own notices warn conversations may be published. Reporting directionally, and calling it "coming soon," is the honest version of the claim, not an incomplete one.
+
+## How should you decide which AI model is best for you?
+
+There is no universal best model; the right choice is task-dependent. Judge candidates on the same real-work outcomes — completion, switch-away, tool reliability, robustness, blind quality — for _your_ kind of work, not on a single leaderboard rank. The model that drafts email well may be wrong for debugging code, which is why [comparing coding models head-to-head](/blog/claude-code-vs-cursor-vs-codex) and surveying [the best AI agent builders](/blog/6-best-ai-agent-builders-in-2026) beats trusting one crown.
+
+This is the problem Duet is unusually positioned to work on. Because Duet lets you run your work on many different models rather than selling any one of them, it sits on a neutral vantage point — it can watch real, anonymized work flow through all of them and ask the question tests can't: did the job actually get done? That's the "run" half of Duet's build-and-run approach — helping you operate on whichever model does _your_ work best, not crowning a favorite. Concretely, it judges models on the five real-work signals above, measured only in aggregate and anonymized, with no raw prompts read or published, and with scheduled automation separated from interactive sessions so it doesn't distort the picture. We're assembling these signals into a Duet Model Index, coming soon. Until then, the method is the takeaway: [judge models on the work you actually need done](/blog/how-to-choose-the-right-ai-model-for-your-business).
+
+Benchmarks test; we observe.
+
+## Frequently asked questions
+
+**What does it mean to benchmark an AI model on real work?**
+Benchmarking on real work means measuring how models perform on tasks people actually needed done — observing whether the task was completed, whether the user switched models, and how reliably the model used its tools — instead of scoring them on a fixed exam or crowd votes.
+
+**Are AI benchmarks accurate?**
+They're accurate at what they measure — a model's performance on a fixed set of test questions on test day — but that does not reliably predict real-world usefulness. IBM notes benchmarks "can't predict how well a model will operate in the real world," and scores can be inflated by saturation and training-data contamination.
+
+**Why don't AI leaderboards match my experience?**
+Leaderboards test models on prompts people invent to test, not on work they actually needed done, and once a score becomes a target it comes under Goodhart's Law pressure. A 2025 study, "The Leaderboard Illusion," documented private variant cherry-picking and gains of up to 112% just from learning the arena's dynamics.
+
+**What is the difference between LLM evaluation and benchmarking?**
+Benchmarking usually means running models through a fixed, standardized test suite; evaluation is the broader practice of judging whether a model is fit for a purpose, including post-production real-work signals. Benchmarks are one input to evaluation, not the whole of it.
+
+**What is the switch-away signal?**
+The switch-away signal is when a person abandons or swaps a model mid-task on real work — a revealed preference under real stakes, because it cost them time. Researcher Andrej Karpathy has argued that usage-based rankings built on this kind of real switching are "very difficult to game."
+
+**How should I choose which AI model is best for me?**
+There is no universal best model; the right choice is task-dependent. Judge candidates on outcomes for your kind of work — did the task get completed, did you stay with the model, did it call tools reliably — not on a single leaderboard rank.
+
+**Does real-work benchmarking use my private data?**
+A privacy-first approach measures aggregate, anonymized patterns across many users and never reads or publishes individual raw prompts. Long-running and scheduled automation is also separated out, because it doesn't emit the same completion signals as interactive work.

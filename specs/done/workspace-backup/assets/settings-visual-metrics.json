@@ -1,0 +1,14 @@
+{
+  "desktop": {
+    "width": 1440,
+    "height": 900,
+    "mismatchPixels": 1670,
+    "mismatchRatio": 0.0012885802469135802
+  },
+  "mobile": {
+    "width": 780,
+    "height": 1688,
+    "mismatchPixels": 299,
+    "mismatchRatio": 0.00022709320695102686
+  }
+}

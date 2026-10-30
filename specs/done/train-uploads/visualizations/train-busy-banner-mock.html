@@ -1,0 +1,619 @@
+<title>Train busy-state — stage 3 mock</title>
+<style>
+  :root {
+    --bg: hsl(150 20% 99%);
+    --card: hsl(150 14% 97%);
+    --card-fg: hsl(154 12% 12%);
+    --border: hsl(155 8% 88%);
+    --muted: hsl(160 10% 94%);
+    --muted-fg: hsl(160 3% 38%);
+    --brand: hsl(214 65% 56%);
+    --brand-soft: hsl(214 65% 56% / 0.09);
+    --brand-border: hsl(214 65% 56% / 0.25);
+    --destructive: hsl(352 90% 41%);
+    --destructive-soft: hsl(352 90% 41% / 0.06);
+    --destructive-border: hsl(352 90% 41% / 0.2);
+    --chip-on: hsl(214 65% 56%);
+    --code-bg: hsl(154 12% 12%);
+    --code-fg: hsl(150 10% 88%);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: hsl(150 5% 7%);
+      --card: hsl(150 4% 9%);
+      --card-fg: hsl(150 6% 93%);
+      --border: hsl(150 4% 18%);
+      --muted: hsl(150 3% 13%);
+      --muted-fg: hsl(158 5% 69%);
+      --brand: hsl(214 70% 62%);
+      --brand-soft: hsl(214 70% 62% / 0.13);
+      --brand-border: hsl(214 70% 62% / 0.35);
+      --destructive: hsl(359 85% 70%);
+      --destructive-soft: hsl(359 85% 70% / 0.09);
+      --destructive-border: hsl(359 85% 70% / 0.28);
+      --code-bg: hsl(150 6% 12%);
+      --code-fg: hsl(150 10% 85%);
+    }
+  }
+  :root[data-theme='light'] {
+    --bg: hsl(150 20% 99%);
+    --card: hsl(150 14% 97%);
+    --card-fg: hsl(154 12% 12%);
+    --border: hsl(155 8% 88%);
+    --muted: hsl(160 10% 94%);
+    --muted-fg: hsl(160 3% 38%);
+    --brand: hsl(214 65% 56%);
+    --brand-soft: hsl(214 65% 56% / 0.09);
+    --brand-border: hsl(214 65% 56% / 0.25);
+    --destructive: hsl(352 90% 41%);
+    --destructive-soft: hsl(352 90% 41% / 0.06);
+    --destructive-border: hsl(352 90% 41% / 0.2);
+    --code-bg: hsl(154 12% 12%);
+    --code-fg: hsl(150 10% 88%);
+  }
+  :root[data-theme='dark'] {
+    --bg: hsl(150 5% 7%);
+    --card: hsl(150 4% 9%);
+    --card-fg: hsl(150 6% 93%);
+    --border: hsl(150 4% 18%);
+    --muted: hsl(150 3% 13%);
+    --muted-fg: hsl(158 5% 69%);
+    --brand: hsl(214 70% 62%);
+    --brand-soft: hsl(214 70% 62% / 0.13);
+    --brand-border: hsl(214 70% 62% / 0.35);
+    --destructive: hsl(359 85% 70%);
+    --destructive-soft: hsl(359 85% 70% / 0.09);
+    --destructive-border: hsl(359 85% 70% / 0.28);
+    --code-bg: hsl(150 6% 12%);
+    --code-fg: hsl(150 10% 85%);
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--card-fg);
+    font:
+      15px/1.55 ui-sans-serif,
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      sans-serif;
+  }
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  h1 {
+    font-size: 22px;
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .sub {
+    color: var(--muted-fg);
+    font-size: 14px;
+    margin: 0;
+    max-width: 62ch;
+  }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand);
+    margin: 0 0 10px;
+  }
+  section h2 {
+    font-size: 15px;
+    margin: 0 0 2px;
+  }
+  section .note {
+    color: var(--muted-fg);
+    font-size: 13px;
+    margin: 0 0 14px;
+    max-width: 68ch;
+  }
+
+  .specimen {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--card);
+    padding: 20px;
+  }
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+  .card-head h3 {
+    font-size: 16px;
+    margin: 0;
+  }
+  .count {
+    background: var(--muted);
+    border-radius: 999px;
+    padding: 2px 10px;
+    font-size: 11.5px;
+    font-weight: 650;
+  }
+  .card-sub {
+    color: var(--muted-fg);
+    font-size: 13px;
+    margin: 0 0 14px;
+  }
+
+  .banner {
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 13.5px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  .banner .ico {
+    flex: none;
+    width: 17px;
+    height: 17px;
+    margin-top: 1px;
+  }
+  .banner-info {
+    background: var(--brand-soft);
+    border: 1px solid var(--brand-border);
+    color: var(--card-fg);
+  }
+  .banner-info .ico {
+    color: var(--brand);
+  }
+  .banner-destructive {
+    background: var(--destructive-soft);
+    border: 1px solid var(--destructive-border);
+    color: var(--destructive);
+  }
+  .retry-btn {
+    display: inline-block;
+    margin-top: 8px;
+    border: 1px solid var(--destructive-border);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 650;
+    color: var(--destructive);
+    background: transparent;
+  }
+  .spin {
+    display: inline-block;
+    animation: rot 1.6s linear infinite;
+  }
+  @keyframes rot {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .spin {
+      animation: none;
+    }
+  }
+
+  ul.records {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  ul.records li {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    border-radius: 12px;
+    padding: 10px 12px;
+  }
+  .rec-ico {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--brand-soft);
+    color: var(--brand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex: none;
+  }
+  .rec-name {
+    font-size: 13.5px;
+    font-weight: 550;
+  }
+  .rec-meta {
+    font-size: 12px;
+    color: var(--muted-fg);
+  }
+
+  .chips {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .chip {
+    border: 1px solid var(--border);
+    background: var(--muted);
+    border-radius: 999px;
+    padding: 5px 14px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--card-fg);
+  }
+  .chip[aria-pressed='true'] {
+    background: var(--chip-on);
+    border-color: var(--chip-on);
+    color: #fff;
+  }
+  .chip:focus-visible,
+  .retry-btn:focus-visible,
+  button:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font:
+      12.5px/1.6 ui-monospace,
+      'SF Mono',
+      Menlo,
+      monospace;
+    overflow-x: auto;
+    margin: 0;
+  }
+  pre .k {
+    color: hsl(214 80% 72%);
+  }
+  pre .s {
+    color: hsl(150 45% 68%);
+  }
+  pre .dim {
+    color: hsl(150 5% 55%);
+  }
+
+  .probe {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .probe:last-child {
+    border-bottom: 0;
+  }
+  .probe input {
+    margin-top: 3px;
+    accent-color: var(--brand);
+  }
+  .probe label {
+    font-size: 13.5px;
+  }
+  .probe .why {
+    color: var(--muted-fg);
+    font-size: 12.5px;
+    display: block;
+  }
+
+  .reply {
+    border: 1px solid var(--brand-border);
+    background: var(--brand-soft);
+    border-radius: 16px;
+    padding: 18px 20px;
+  }
+  .reply h2 {
+    margin-top: 0;
+  }
+  .reply textarea {
+    width: 100%;
+    min-height: 110px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--card);
+    color: var(--card-fg);
+    padding: 10px 12px;
+    font:
+      13px/1.5 ui-monospace,
+      Menlo,
+      monospace;
+    resize: vertical;
+  }
+  .reply button {
+    margin-top: 10px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--brand);
+    color: #fff;
+    font-weight: 650;
+    font-size: 13.5px;
+    padding: 9px 18px;
+    cursor: pointer;
+  }
+</style>
+
+<main>
+  <header>
+    <p class="eyebrow">Stage 3 · react, don't imagine</p>
+    <h1>Memory library — busy-state banner</h1>
+    <p class="sub">
+      The real card, real tokens, three states. A and B are the two new copies you chose in stage 2;
+      C is today's behavior kept for contrast. Tap steal / skip / tweak under each, tick the probes,
+      then copy the assembled reply.
+    </p>
+  </header>
+
+  <section>
+    <h2>A — training copy (job running)</h2>
+    <p class="note">
+      Shown when the 503 arrives <em>and</em> the jobs query reports a queued/running job. Stale
+      records stay visible below it.
+    </p>
+    <div class="specimen">
+      <div class="card-head">
+        <h3>Memory library</h3>
+        <span class="count">2</span>
+      </div>
+      <p class="card-sub">Inspect and correct the durable records produced by training.</p>
+      <div class="banner banner-info">
+        <svg class="ico spin" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path
+            d="M8 1.5a6.5 6.5 0 1 0 6.5 6.5"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+          />
+        </svg>
+        <span><strong>Training in progress</strong> — memories refresh when it finishes.</span>
+      </div>
+      <ul class="records">
+        <li>
+          <span class="rec-ico">◉</span
+          ><span
+            ><span class="rec-name">ai-gateway-top-apps</span><br /><span class="rec-meta"
+              >1 file · Jul 15, 2026</span
+            ></span
+          >
+        </li>
+        <li>
+          <span class="rec-ico">◉</span
+          ><span
+            ><span class="rec-name">pricing-docs-import</span><br /><span class="rec-meta"
+              >4 files · Jul 14, 2026</span
+            ></span
+          >
+        </li>
+      </ul>
+      <div class="chips" data-item="A · training copy">
+        <button class="chip" aria-pressed="false" data-vote="steal">steal</button>
+        <button class="chip" aria-pressed="false" data-vote="skip">skip</button>
+        <button class="chip" aria-pressed="false" data-vote="tweak copy">tweak copy</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>B — generic copy (no visible job)</h2>
+    <p class="note">
+      Same 503, but nothing queued or running — the lock holder is some other duet process (an agent
+      session writing memory). The quiet poll retries every ~3s either way.
+    </p>
+    <div class="specimen">
+      <div class="card-head">
+        <h3>Memory library</h3>
+        <span class="count">2</span>
+      </div>
+      <p class="card-sub">Inspect and correct the durable records produced by training.</p>
+      <div class="banner banner-info">
+        <svg class="ico spin" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path
+            d="M8 1.5a6.5 6.5 0 1 0 6.5 6.5"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+          />
+        </svg>
+        <span><strong>Memory is busy</strong> — refreshing shortly.</span>
+      </div>
+      <ul class="records">
+        <li>
+          <span class="rec-ico">◉</span
+          ><span
+            ><span class="rec-name">ai-gateway-top-apps</span><br /><span class="rec-meta"
+              >1 file · Jul 15, 2026</span
+            ></span
+          >
+        </li>
+        <li>
+          <span class="rec-ico">◉</span
+          ><span
+            ><span class="rec-name">pricing-docs-import</span><br /><span class="rec-meta"
+              >4 files · Jul 14, 2026</span
+            ></span
+          >
+        </li>
+      </ul>
+      <div class="chips" data-item="B · generic copy">
+        <button class="chip" aria-pressed="false" data-vote="steal">steal</button>
+        <button class="chip" aria-pressed="false" data-vote="skip">skip</button>
+        <button class="chip" aria-pressed="false" data-vote="tweak copy">tweak copy</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>C — today (kept for real failures)</h2>
+    <p class="note">
+      The destructive banner stays for genuine errors — non-busy failures, and old gateways that
+      still send 502. Nothing about this state changes.
+    </p>
+    <div class="specimen">
+      <div class="card-head">
+        <h3>Memory library</h3>
+        <span class="count">2</span>
+      </div>
+      <p class="card-sub">Inspect and correct the durable records produced by training.</p>
+      <div class="banner banner-destructive">
+        <span
+          >Trained memories could not be loaded.<br /><button class="retry-btn" type="button">
+            Retry
+          </button></span
+        >
+      </div>
+      <div class="chips" data-item="C · destructive stays for real failures">
+        <button class="chip" aria-pressed="false" data-vote="agree">agree</button>
+        <button class="chip" aria-pressed="false" data-vote="rethink">rethink</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>The wire shape</h2>
+    <p class="note">
+      What the gateway will return on exit 75, proxied verbatim to the browser — same shape the
+      memory routes emit today. Note
+      <span style="font-family: ui-monospace, Menlo, monospace">message</span> carries the CLI's
+      stderr (dataDir path + holder pid).
+    </p>
+    <pre>HTTP/1.1 <span class="k">503</span> Service Unavailable
+
+{
+  <span class="k">"error"</span>: <span class="s">"memory_lock_timeout"</span>,
+  <span class="k">"message"</span>: <span class="s">"Memory database at /home/synthetic-user/.duet/memory.db is still locked by
+     duet pid 4127 after 5s. Stop that process (or pass --wait) and retry."</span> <span class="dim">← include? UI never shows it</span>
+}</pre>
+    <div class="chips" data-item="503 body">
+      <button
+        class="chip"
+        aria-pressed="false"
+        data-vote="keep message field (matches memory routes)"
+      >
+        keep message
+      </button>
+      <button class="chip" aria-pressed="false" data-vote="drop message field (code only)">
+        drop message
+      </button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Context probes</h2>
+    <p class="note">
+      Tick any that are true — each one reshapes the map. Shrugging is a valid answer.
+    </p>
+    <div class="probe">
+      <input
+        type="checkbox"
+        id="p1"
+        data-probe="Other consumers than the web train page call these endpoints (agents / CLI / API users) — busy semantics must serve them too"
+      /><label for="p1"
+        >Something besides the train page consumes
+        <span style="font-family: ui-monospace, Menlo, monospace">/train/records</span> or
+        <span style="font-family: ui-monospace, Menlo, monospace">/memory/*</span
+        ><span class="why"
+          >If agents or API customers hit these, a 503 + code is a contract others must handle, not
+          just our UI.</span
+        ></label
+      >
+    </div>
+    <div class="probe">
+      <input
+        type="checkbox"
+        id="p2"
+        data-probe="Trainings will routinely run minutes-long, so the banner is a long-lived state worth more design attention"
+      /><label for="p2"
+        >Real trainings will run minutes, not the 23s we measured<span class="why"
+          >A banner that lives for 10 minutes may deserve progress wiring or tighter coupling to the
+          jobs card.</span
+        ></label
+      >
+    </div>
+    <div class="probe">
+      <input
+        type="checkbox"
+        id="p3"
+        data-probe="This should ship to prod promptly after staging, not sit on staging"
+      /><label for="p3"
+        >This should ride to prod soon after staging verification<span class="why"
+          >Memory notes say prod deploy is currently stale; worth knowing if this is the
+          nudge.</span
+        ></label
+      >
+    </div>
+    <div class="probe">
+      <input
+        type="checkbox"
+        id="p4"
+        data-probe="es-419 copy should be human-reviewed, not just machine-translated"
+      /><label for="p4"
+        >es-419 strings need human review<span class="why"
+          >Two new user-facing strings land in both locale files.</span
+        ></label
+      >
+    </div>
+  </section>
+
+  <section class="reply">
+    <h2>Your reply, assembled</h2>
+    <textarea id="out" readonly aria-label="Assembled reply">
+(tap chips and probes above — your reply builds itself here)</textarea
+    >
+    <button type="button" id="copy">Copy reply</button>
+  </section>
+</main>
+
+<script>
+  const out = document.getElementById('out')
+  function rebuild() {
+    const lines = []
+    document.querySelectorAll('.chips').forEach(group => {
+      const on = group.querySelector('[aria-pressed="true"]')
+      if (on) lines.push(group.dataset.item + ': ' + on.dataset.vote)
+    })
+    document
+      .querySelectorAll('.probe input:checked')
+      .forEach(cb => lines.push('probe: ' + cb.dataset.probe))
+    out.value = lines.length
+      ? lines.join('\n')
+      : '(tap chips and probes above — your reply builds itself here)'
+  }
+  document.querySelectorAll('.chip').forEach(chip =>
+    chip.addEventListener('click', () => {
+      const group = chip.closest('.chips')
+      group.querySelectorAll('.chip').forEach(c => {
+        if (c !== chip) c.setAttribute('aria-pressed', 'false')
+      })
+      chip.setAttribute(
+        'aria-pressed',
+        chip.getAttribute('aria-pressed') === 'true' ? 'false' : 'true',
+      )
+      rebuild()
+    }),
+  )
+  document.querySelectorAll('.probe input').forEach(cb => cb.addEventListener('change', rebuild))
+  document.getElementById('copy').addEventListener('click', async () => {
+    await navigator.clipboard.writeText(out.value)
+    document.getElementById('copy').textContent = 'Copied'
+    setTimeout(() => (document.getElementById('copy').textContent = 'Copy reply'), 1500)
+  })
+</script>

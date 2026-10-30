@@ -1,0 +1,48 @@
+{
+  "gatewayPackage": {
+    "command": "bun run --filter @repo/gateway test",
+    "exitCode": 0,
+    "source": "terminal session 69837, completion chunk c47e5e",
+    "stdoutTail": [
+      "1380 pass",
+      "2 skip",
+      "0 fail",
+      "5214 expect() calls",
+      "Ran 1382 tests across 132 files. [44.54s]",
+      "@repo/gateway test: Exited with code 0"
+    ]
+  },
+  "ownershipChecks": {
+    "source": "terminal session 50403 (completion chunk 03ad51) and command chunk e516c6",
+    "exitCode": 0,
+    "outputs": [
+      "Shared UI visual coverage verified for 204 rendered symbols.",
+      "Verified the complete lander/web/docs/ui/official-apps visual owner union and contact-sheet index.",
+      "Verified 321 public asset paths, exact web reachability, 10 approved cross-app hash groups, and no tracked runtime artifacts."
+    ]
+  },
+  "postAcceptanceSweep": {
+    "command": "bun packages/exe/scripts/sweep-ephemeral-vms.ts",
+    "mode": "list-only",
+    "exitCode": 0,
+    "source": "terminal session 5806 completion chunk 7c3a07",
+    "output": "18 VMs on the account, 0 tagged duet-ephemeral"
+  },
+  "deploymentBeforeAcceptance": {
+    "source": "terminal chunk 1da36b, read before session 71526",
+    "revision": "db4ecc84c6616d7d684ab0e4848ea3cdb9327b21",
+    "backend": {
+      "revision": "db4ecc84c6616d7d684ab0e4848ea3cdb9327b21",
+      "schema": 1
+    },
+    "runtime": {
+      "version": "0.0.0+38f63099d947fddbcf0a2993890de0f20e1e4e43bca6b30279f86952b448dd19"
+    }
+  },
+  "focusedJourney": {
+    "command": "bun run e2e:staging -- --journey open-model-access",
+    "exitCode": 0,
+    "source": "terminal session 71526 completion chunk f953cd"
+  },
+  "note": "Captured terminal excerpts; raw full-gate logs and source journey artifacts remain in the working session. These do not claim a second full-suite run."
+}

@@ -1,0 +1,16 @@
+{
+  "dimensions": [
+    1440,
+    900
+  ],
+  "differenceBounds": [
+    1204,
+    10,
+    1440,
+    175
+  ],
+  "meanGrayscaleDifference": 0.15122916666666666,
+  "differentPixelRatio": 0.0014050925925925925,
+  "ratioOver32": 0.0011234567901234568,
+  "desktopBelowPanelIdentical": false
+}

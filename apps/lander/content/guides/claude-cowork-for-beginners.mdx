@@ -1,0 +1,467 @@
+---
+title: "Claude Cowork: Complete Beginner's Guide"
+description: 'Learn Claude Cowork from scratch. Setup, context files, plugins, connectors, scheduled tasks, and practical workflows for non-technical users.'
+date: '2026-03-05'
+updatedAt: '2026-05-08'
+author:
+  name: 'Sawyer Middeleer'
+  avatar: '/authors/sawyer-middeleer.png'
+  link: 'https://www.linkedin.com/in/sawyer-middeleer/'
+category: 'guides'
+tags: ['claude-cowork', 'tutorial', 'getting-started', 'beginner']
+type: 'guide'
+image: '/guides/claude-cowork-for-beginners/cover.png'
+relatedPosts:
+  ['claude-code-vs-claude-cowork', 'duet-vs-claude-code', 'how-to-build-your-ai-command-center']
+cta:
+  title: 'Cowork in the cloud, no Desktop app.'
+  subtitle: 'Duet runs Cowork-style agents in a shared workspace with memory, scheduled runs, and team handoffs. Setup in minutes, no install.'
+  buttonText: 'Try Duet'
+  href: '/sign-in?from=guide-cowork-beginners'
+---
+
+<Callout emoji="💡">
+Quick Summary
+
+This beginner's guide covers everything you need to know about Claude Cowork. What it is, how it differs from Claude Code, how to set it up, and how to run your first agent workflow with no prior AI agent experience required.
+
+</Callout>
+
+<Callout emoji="❓">
+Questions this page answers
+
+- What is Claude Cowork?
+- How does Claude Cowork work?
+- Claude Cowork beginner guide
+- How to get started with Claude Cowork
+- What is the difference between Claude Code and Claude Cowork?
+
+</Callout>
+
+Claude Cowork is a collaborative workspace built on top of Claude that lets teams interact with AI in shared, persistent sessions rather than individual one-off chats. Unlike standard Claude, Cowork maintains context across sessions, supports multiple team members in the same workspace, and can be configured with custom instructions and tools for your specific workflows.
+
+## What is Claude Cowork? A Beginner's Guide to Agentic AI for Non-Developers
+
+Claude Cowork is Anthropic's agentic productivity tool built into the Claude Desktop app. It turns Claude from a chatbot into a digital coworker that can read your files, create documents, research the web, and execute multi-step tasks on your computer, all without writing a single line of code.
+
+Unlike standard Claude chat where you go back and forth one message at a time, Cowork can take initiative. Ask it to organize your downloads folder, turn meeting notes into a formatted report, or research competitors and build a comparison spreadsheet, and it will plan the work, execute across multiple steps, and deliver finished output directly to your file system.
+
+### Why Use Claude Cowork Instead of Regular Claude Chat?
+
+In regular Claude chat, you paste content in and copy answers out. In Cowork, you describe what you want done, point Claude at your files, and supervise while it does the work. It can read entire folders, create polished Excel spreadsheets with working formulas, build PowerPoint presentations, and coordinate complex research, the kind of work that normally takes hours of manual effort.
+
+If Claude Code is built for developers, Cowork is built for everyone else. For a detailed side-by-side breakdown, see Claude Code vs Claude Cowork.
+
+---
+
+## How to Install and Set Up Claude Cowork on Mac or Windows
+
+Getting started with Cowork takes about five minutes. You need the Claude Desktop app and a paid subscription.
+
+### What You Need to Get Started with Claude Cowork
+
+1. Claude Desktop app: download from [claude.ai/download](https://claude.ai/download)
+1. Paid Claude subscription: Pro ($20/month), Max ($100-200/month), Team, or Enterprise
+   Cowork is available on macOS and Windows (x64). If you're on Windows with an ARM processor, you'll need to wait for ARM support.
+
+### How to Install Claude Cowork on Mac and Windows
+
+Mac:
+
+1. Go to [claude.ai/download](https://claude.ai/download) and download the macOS installer
+1. Open the `.dmg` file and drag Claude to your Applications folder
+1. Launch Claude Desktop and sign in with your paid account
+   Windows:
+
+1. Go to [claude.ai/download](https://claude.ai/download) and download the Windows installer
+1. Run the installer and follow the prompts
+1. Launch Claude Desktop and sign in
+
+### How to Switch to Cowork Mode in Claude Desktop
+
+Once Claude Desktop is open, you'll see tabs at the top of the window: Chat, Cowork, and Code. Click Cowork to switch modes.
+
+That's it. You're in Cowork.
+
+---
+
+## Getting Started with Claude Cowork: Your First Task in 5 Minutes
+
+### Your First Claude Cowork Task: A Step-by-Step Walkthrough
+
+The best way to learn Cowork is to give it something real to do. But start with a test folder - don't point it at critical files while you're still learning.
+
+1. Create a folder called `Claude_Test` in your Documents
+1. Add a few non-sensitive files, old documents, sample spreadsheets, random notes
+1. In Cowork, grant access to this folder when prompted
+1. Try a simple task: "Organize these files by topic and create a summary document listing what's in each category"
+   Claude will analyze your files, create a plan, and execute it. You'll see its progress in real time and can steer it if needed.
+
+### How to Grant Claude Cowork Access to Your Files and Folders
+
+Cowork runs inside an isolated virtual machine on your computer for safety. It can only access folders you explicitly grant permission to. When you start a task that involves files, Claude will ask which folders it can work with.
+
+Start narrow. Grant access to one specific project folder rather than your entire Documents
+
+directory. You can always add more folders later.
+
+### What Claude Cowork Can Do: 5 Core Capability Areas
+
+Cowork excels at five categories of work:
+
+## How to Work With Claude Cowork: Tasks, Prompts, and Approvals
+
+### How Claude Cowork Tasks Work: Plan, Execute, Deliver
+
+When you describe a task, Cowork follows a consistent pattern:
+
+1. Analyzes your request and asks clarifying questions if needed
+1. Plans the work, breaking it into subtasks
+1. Executes each subtask, often running multiple in parallel
+1. Delivers output directly to your file system
+   You maintain visibility throughout. Cowork shows you what it's doing at each step, and you can redirect it mid-task if something isn't right.
+
+### Prompting Claude Cowork: How to Write Instructions That Get Results
+
+Interacting with Cowork is similar to chatting with Claude, but with one key difference: you're describing outcomes, not asking questions.
+
+Good prompts describe what you want done:
+
+- "Take these 12 customer interview transcripts and extract the top 5 recurring themes with supporting quotes"
+- "Create an Excel spreadsheet tracking our Q1 marketing spend by channel, with formulas for totals and month-over-month change"
+- "Research the top 10 project management tools, compare features and pricing, and create a recommendation memo"
+  Less effective prompts are vague:
+
+- "Help me with my files" (which files? what help?)
+- "Do something with this data" (what output do you want?)
+  Cowork consumes more of your usage allocation than regular chat because it runs multi-step agentic
+
+workflows. For simple questions, use standard Chat mode instead.
+
+### Claude Cowork Approval Steps: Staying in Control of Your Agent
+
+Cowork asks for your approval before taking significant actions - especially anything that deletes files or accesses sensitive data. Review these carefully.
+
+A good default: always tell Claude "don't delete anything" unless you specifically want deletions. This prevents accidental data loss while you're learning.
+
+### The Scope-Plan-Execute Flow: The Best Way to Run Complex Cowork Tasks
+
+For complex work, the most reliable approach mirrors how you'd brief a new hire:
+
+Scope: Start by having a conversation about what you need. Share context, show examples of good output, clarify constraints.
+
+Plan: Ask Claude to write out its plan before executing. Review it. Adjust anything that looks off.
+
+Execute: Once the plan looks right, tell Claude to proceed. Monitor the first few steps, then let it run.
+
+This is iterative. After the first pass, review output, give feedback, and have Claude refine.
+
+## Claude Cowork Context Files: How to Give Your Agent Persistent Instructions
+
+This is the single most important section of this guide. Cowork out of the box is mediocre. Cowork with proper context files is a different tool entirely. The gap between those two experiences is about 30 minutes of setup.
+
+### Why Context Files Are the Most Important Part of Claude Cowork
+
+Cowork has no memory between sessions. Every conversation starts completely fresh. It doesn't know who you are, what your company does, or how you like things formatted. Without context, it produces generic output.
+
+The fix is context files, documents that live in your project folders and tell Claude everything it needs to know to do good work.
+
+### Global Instructions in Claude Cowork: Set It Once, Apply Everywhere
+
+Navigate to Settings > Cowork and click Edit next to Global Instructions. These apply to every Cowork session regardless of which folder you're working in.
+
+Good global instructions include:
+
+```markdown
+# About Me
+
+- Name: [Your name]
+- Role: [Your role] at [Company]
+- I prefer concise, direct communication
+
+# Output Preferences
+
+- Always use tables for comparisons
+- Default to bullet points over paragraphs
+- Include sources when citing research
+- Save output files with descriptive names (not "output.xlsx")
+
+# Safety
+
+- Never delete files without asking first
+- Always confirm before sending any emails or messages
+```
+
+### Folder-Level Instructions: Project-Specific Context for Claude Cowork
+
+When you grant Cowork access to a folder, you can add folder-specific instructions. These act like a project brief that Claude reads at the start of every session involving that folder.
+
+For example, a marketing folder might include:
+
+```markdown
+# Marketing Team Context
+
+- Brand voice: Professional but approachable. Never use jargon.
+- Target audience: SMB founders (1-50 employees)
+- Competitors: [list]
+- Style guide: See brand-guidelines.pdf in this folder
+
+# Common Tasks
+
+- Weekly reports use the template in /templates/weekly-report.xlsx
+- Blog drafts go in /drafts/ with the naming format YYYY-MM-DD-title.md
+```
+
+Context files compound over time. Start basic, then add notes each time Claude produces output
+
+that isn't quite right. After a few sessions, output quality improves dramatically.
+
+### What to Include in Your Claude Cowork Context Files
+
+## Claude Cowork Skills: How to Teach Your Agent Custom Workflows
+
+### What Are Claude Cowork Skills and How Do They Work?
+
+Skills are written instructions that teach Claude how to do something specific. Think of them as SOPs (Standard Operating Procedures) that Claude follows when it encounters a matching task.
+
+A skill might teach Claude how to:
+
+- Write blog posts in your company's voice
+- Format financial reports following your template
+- Run a specific research workflow step by step
+- Prepare meeting agendas from your calendar
+  Skills are just Markdown files. No coding required. You describe the process in plain English, and Claude follows the instructions whenever the skill is relevant.
+
+### How Skills Work Inside Claude Cowork Sessions
+
+Skills live inside plugins (more on those in section 7). When you install a plugin, its skills become available to Claude automatically. You can also trigger skills explicitly using slash commands - type / followed by the command name.
+
+For example, the open-source knowledge-work-plugins from Anthropic include skills for:
+
+- Sales: Call prep, deal analysis, pipeline reviews
+- Marketing: Content creation, competitive analysis, campaign planning
+- Finance: Expense categorization, report generation, reconciliation
+- Research: Literature reviews, market analysis, trend synthesis
+
+### How to Create Your Own Claude Cowork Skills (No Coding Required)
+
+You don't need to be technical to create skills. The simplest approach:
+
+1. Do a task manually with Claude once and get the output right
+1. Ask Claude: "Turn what we just did into a reusable skill"
+1. Claude generates the skill Markdown file
+1. Install it as part of a plugin
+   For a deeper dive on skill design, see Agent Skills 101: Tools vs MCP vs Skills.
+
+## Claude Cowork Connectors: Linking Your Agent to Slack, Gmail, and More
+
+### What Are Claude Cowork Connectors? (MCP Explained Simply)
+
+Connectors link Claude to external services and data sources. Without connectors, Cowork can only work with files on your computer and browse the web. With connectors, it can pull data from your CRM, post to Slack, query databases, and interact with dozens of business tools.
+
+Connectors use the Model Context Protocol (MCP), the same standard that powers tool integrations across the Claude ecosystem.
+
+### Available Claude Cowork Connectors: Supported Tools and Services
+
+Cowork supports connectors for many popular tools:
+
+### How to Set Up a Claude Cowork Connector Step by Step
+
+1. Open Claude Desktop and go to Settings > Connectors
+1. Click Browse connectors to see what's available
+1. Select a connector and follow the authentication flow
+1. Once connected, Claude can access that service during Cowork tasks
+   On Team and Enterprise plans, connectors may require admin approval before individual users can
+
+connect. Check with your IT admin if a connector isn't available.
+
+### Using Claude Cowork Connectors in Real Workflows
+
+Once a connector is set up, just reference it naturally in your tasks:
+
+- "Pull our Q1 sales data from Salesforce and create a trend analysis"
+- "Check Slack #marketing for messages about the product launch and summarize the key decisions"
+- "Create a Jira ticket for each action item in these meeting notes"
+  Claude knows which connector to use based on context. You don't need to specify technical details.
+
+## Claude Cowork Plugins: Bundling Skills, Connectors, and Slash Commands
+
+### What Are Claude Cowork Plugins and Why Do They Matter?
+
+Plugins are bundles that package skills, connectors, slash commands, and sub-agents together into a single installable unit. If skills are individual SOPs, plugins are entire departments.
+
+A sales plugin might include:
+
+- Skills: How to research accounts, prepare for calls, write follow-up emails
+- Connectors: CRM integration, LinkedIn data, email
+- Slash commands: `/sales:call-prep`, `/sales:deal-review`, `/sales:pipeline`
+- Sub-agents: Specialized Claude instances for specific sub-tasks
+
+### Why Plugins Are the Best Way to Share Skills Across Your Team
+
+Without plugins, you'd set up each skill, connector, and workflow manually. Plugins solve three problems:
+
+1. Bundling: everything a workflow needs in one package
+1. Sharing: install the same plugin on every team member's machine
+1. Versioning: update the plugin when workflows change, rather than editing config files
+
+### How to Find and Install Claude Cowork Plugins
+
+Anthropic maintains an open-source repository of plugins at github.com/anthropics/knowledge-work-plugins. These cover common knowledge work tasks across sales, marketing, finance, and general productivity.
+
+To install a plugin from the marketplace:
+
+1. Open the plugin browser in Claude Desktop
+1. Search or browse available plugins
+1. Click to install
+   To install from the command line:
+
+```bash
+claude plugins add knowledge-work-plugins/sales
+```
+
+### Understanding Claude Cowork Plugin Structure and Configuration
+
+Under the hood, plugins are just folders containing Markdown files and a bit of JSON configuration:
+
+```plaintext
+my-plugin/
+├── plugin.json          # Plugin metadata
+├── mcp.json             # Connector configuration
+├── commands/            # Slash commands
+│   ├── call-prep.md
+│   └── deal-review.md
+└── skills/              # Skills and instructions
+    ├── research.md
+    └── email-drafting.md
+```
+
+You can inspect, edit, and customize any plugin after installing it. They're designed to be transparent and modifiable.
+
+### How to Build a Custom Claude Cowork Plugin for Your Team
+
+The fastest way to build a plugin is to use the cowork-plugin-management plugin (yes, there's a plugin for managing plugins). Install it, then ask Claude to help you create a new plugin for your specific workflow.
+
+For the complete guide to building plugins, see Beyond Claude Code: Building a Shared Skill Library, the same principles that apply to Claude Code skills apply to Cowork plugins.
+
+## Claude Cowork Scheduled Tasks: Automating Recurring Workflows
+
+### What Are Claude Cowork Scheduled Tasks?
+
+Scheduled tasks let Claude run workflows automatically on a recurring basis, daily reports, weekly data pulls, automated file organization, or any other repeatable task.
+
+### How to Set Up Scheduled Tasks in Claude Cowork
+
+Use the /schedule slash command inside any Cowork task to set up automation:
+
+- "Generate a weekly expense summary every Monday at 9am from the receipts in my /finances folder"
+- "Every Friday, compile a status report from my project notes and save it to /reports"
+  You can manage scheduled tasks from the Scheduled option in the Cowork sidebar.
+
+### Claude Cowork Scheduled Task Limitations: What to Know Before You Automate
+
+Scheduled tasks only run when:
+
+- Your computer is awake (not sleeping or shut down)
+- The Claude Desktop app is open
+  If your machine is off when a task is scheduled, it won't execute. For workflows that need to run 24/7 regardless of whether your computer is on, you need a cloud environment.
+
+Cowork's scheduled tasks depend on your desktop being open. If you need always-on automation cron jobs, webhook listeners, background monitoring, a cloud-based agent environment like Duet provides a persistent server that runs even when your laptop is closed.
+
+## 10 Practical Claude Cowork Workflows for Knowledge Workers
+
+Here are practical workflows that showcase what Cowork does best. Each can be set up in under 30 minutes.
+
+### Claude Cowork for File Organization: Sort and Rename at Scale
+
+Point Cowork at a messy folder, your Downloads, Desktop, or a shared drive - and ask it to:
+
+- Sort files by type, project, or date
+- Rename files with consistent naming conventions
+- Create an index document listing everything and where it went
+- Identify and flag duplicates
+
+### Claude Cowork for Meeting Notes: Turn Transcripts into Action Items
+
+After a meeting, drop the transcript or your rough notes into a folder and ask Cowork to:
+
+- Extract action items with owners and deadlines
+- Create follow-up email drafts for each participant
+- Update your project tracker (via connectors)
+- Generate a formatted summary for stakeholders
+
+### Claude Cowork for Research and Analysis: From Question to Report
+
+Give Cowork a research question and let it:
+
+- Search the web for relevant sources
+- Synthesize findings into a structured report
+- Create comparison tables with specific data points
+- Generate charts and visualizations from the data
+
+### Claude Cowork for Expense Reports: Extract, Categorize, and Summarize
+
+Drop receipts (photos, PDFs, emails) into a folder and ask Cowork to:
+
+- Extract vendor, amount, date, and category from each receipt
+- Build an Excel spreadsheet with all expenses categorized
+- Add formulas for subtotals by category and grand total
+- Flag any potential duplicates or missing information
+
+### Claude Cowork for Competitive Intelligence: Research and Analysis Workflows
+
+Ask Cowork to research competitors and it can:
+
+- Analyze competitor websites, pricing pages, and feature lists
+- Build a comparison matrix in Excel
+- Identify gaps and opportunities
+- Draft a memo with strategic recommendations
+
+## Frequently Asked Questions
+
+### How much does Claude Cowork cost?
+
+Cowork requires a paid Claude subscription. Claude Pro ($20/month) gives you access to Cowork with standard usage limits. Claude Max ($100-200/month) provides significantly higher usage limits, worth it if you're running Cowork tasks daily. Team and Enterprise plans also include Cowork access. Note that Cowork tasks consume more usage allocation than regular chat because they involve multi-step agentic processing.
+
+### Do you need to know how to code to use Cowork?
+
+No. Cowork is specifically designed for knowledge workers who aren't developers. You interact with it in plain English, describe what you want done, and Claude handles the execution. Creating context files and skills requires writing Markdown (simple formatted text), but no programming knowledge. If you can write a Google Doc, you can configure Cowork.
+
+### What's the difference between Cowork and Claude Code?
+
+Claude Code is built for software development, it reads codebases, writes code, runs tests, and manages git repositories. It runs in the terminal and requires technical knowledge. Cowork is built for knowledge work, it manages files, creates documents, runs research, and automates business workflows. It runs in the Desktop app and requires no technical background. Same Claude brain, different interfaces for different jobs.
+
+### Does Cowork remember previous sessions?
+
+No, each Cowork session starts completely fresh. Claude doesn't retain any memory of previous conversations or tasks. This is why context files are so important: they provide the continuity that session memory doesn't. Good context files in your project folders mean Claude can produce consistent, high-quality output every time, even without remembering past sessions.
+
+### Is my data safe with Cowork?
+
+Cowork runs inside an isolated virtual machine on your computer. Your files stay local, they're not uploaded to Anthropic's servers for training. Claude asks for explicit permission before accessing folders, and requests approval before deleting any files. Conversation history is stored locally on your machine. That said, Cowork is still a "research preview," so Anthropic recommends against using it for regulated workloads. For sensitive industries, consult your compliance team before adoption.
+
+### What platforms does Cowork support?
+
+Cowork runs on macOS and Windows x64 via the Claude Desktop app. ARM-based Windows machines are not yet supported. There's no web, mobile, or Linux version, desktop only. Your computer must stay awake and the app must stay open for tasks to run.
+
+### Why does Cowork use so much of my usage allocation?
+
+Cowork tasks are compute-intensive because Claude is running multi-step agentic workflows, planning, executing subtasks, reading files, browsing the web, and coordinating outputs. A single Cowork task might involve dozens of internal steps. To manage usage: batch related work into single sessions, use standard Chat mode for simple questions, and monitor your usage in Settings > Usage. If you're hitting limits regularly, consider upgrading to Claude Max.
+
+### How do I connect Cowork to my tools?
+
+Go to Settings > Connectors > Browse connectors in Claude Desktop. Select the tool you want to connect (Slack, Notion, Salesforce, etc.) and follow the OAuth authentication flow. Once connected, Claude can access that service during any Cowork task. On Team and Enterprise plans, your admin may need to approve connectors before they're available. See the MCP tools section for more on how connectors work under the hood.
+
+### Can I run Cowork tasks when my computer is off?
+
+No. Cowork runs locally on your machine, so it requires your computer to be awake and the Claude Desktop app to be open. Scheduled tasks won't execute if your machine is sleeping or shut down. If you need always-on automation that runs 24/7, you'll need a cloud-based solution, a persistent AI server like Duet can run scheduled tasks, respond to webhooks, and process data around the clock without depending on your laptop.
+
+### Can Cowork create Excel files with real formulas?
+
+Yes. Unlike asking Claude in chat to "create a spreadsheet" (which gives you a text description), Cowork generates actual .xlsx files with working formulas, formatting, multiple sheets, and charts. It can also read existing Excel files, modify them, and create PowerPoint presentations. The Excel/PowerPoint integration is in research preview for Mac users on Max, Team, and Enterprise plans.
+
+## Keep Reading
+
+- Claude Code vs Claude Cowork: detailed side-by-side comparison.
+- Claude Code for Business: the developer-focused counterpart to Cowork.
+- How to Automate Content Creation: practical content workflows for solo operators.
+- How to Use AI as a Personal Research Assistant: research workflows that work in both Cowork and Code.

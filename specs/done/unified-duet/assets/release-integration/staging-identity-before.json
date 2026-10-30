@@ -1,0 +1,24 @@
+{
+  "environment": "staging",
+  "identity": {
+    "revision": "db2f70ae73399e186ada89ba82fc76ffcb80fd74",
+    "schema": 1
+  },
+  "observedAt": "2026-10-04T15:03:31.530Z",
+  "keysByKind": {
+    "system_vm": 1070,
+    "impersonation": 628,
+    "browser_session": 680,
+    "app": 2112,
+    "user": 52
+  },
+  "humanCount": 52,
+  "peerFieldsByKind": {},
+  "humanManagedOnlyFieldCount": 0,
+  "humanLegacyGrantCount": 52,
+  "userIdentitySha256": "d218cf0582b19185a9d744c48811df2ce7df02e9d84bc146850eb24eb1c4ca47",
+  "legacyDeviceCodeCount": 14,
+  "deviceCodeCount": 14,
+  "workspaceCount": 602,
+  "workspaceLegacyRuntimeCount": 582
+}

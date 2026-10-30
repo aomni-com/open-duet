@@ -1,0 +1,27 @@
+{
+  "name": "@repo/seed-drive",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./deterministic-bundle": "./src/deterministic-bundle.ts",
+    "./manifest": "./manifest.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "inspect": "bun src/inspect.ts",
+    "lint": "oxlint",
+    "publish": "bun scripts/publish.ts",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@repo/contract": "*"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "@types/bun": "catalog:",
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
+  }
+}

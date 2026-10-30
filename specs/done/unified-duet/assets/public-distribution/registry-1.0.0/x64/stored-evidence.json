@@ -1,0 +1,68 @@
+{
+  "install-config-rejected.txt.gz": {
+    "originalSha256": "9658aa2d9fc99dbcef61f07a1c670209b5bfa31491d0d7e8244e728c6e7360b3",
+    "storedSha256": "1890949f4e05975a31e9428c15b0437124a8c0e26d68f41185a866a0d5189c65",
+    "originalBytes": 163,
+    "compressed": true
+  },
+  "install.txt.gz": {
+    "originalSha256": "7352567af05cae61fea0dfe0d6f5e822d1c23472f1c0c05527de4275cdafa74e",
+    "storedSha256": "32f127fbeccf275aabc74fba74b561f85664500f20b4af40cbc7c2c3a9478a5e",
+    "originalBytes": 237,
+    "compressed": true
+  },
+  "installed-closure.json": {
+    "originalSha256": "2d6ed8752216aac20ae6b408613ac517c1385e966d0937e90676d36682448aa7",
+    "storedSha256": "2d6ed8752216aac20ae6b408613ac517c1385e966d0937e90676d36682448aa7",
+    "originalBytes": 6962,
+    "compressed": false
+  },
+  "journey.json.gz": {
+    "originalSha256": "fab565e7b260da2f9c07fc4c9689641bb260a95c95e1c28175bf99f70fbc9d92",
+    "storedSha256": "2d385f32073b7e93b454f68a5f7a368db75957f474888e266b9333e7f362c912",
+    "originalBytes": 18416,
+    "compressed": true
+  },
+  "journey.txt.gz": {
+    "originalSha256": "09e0420ae2d8ee76c6898cede4eb6c285c8bab158c2f681deafbe97fe2585abe",
+    "storedSha256": "73fc46e99408f607c20ed514ea78c0c596d36619db05cf768e3da955408ce89d",
+    "originalBytes": 313,
+    "compressed": true
+  },
+  "native.txt.gz": {
+    "originalSha256": "e4355fcb35615e031ab4bf877b71316e754120032a7032f162d4475cf1c7d9ec",
+    "storedSha256": "75836cf4b715eea52a5622592203dfd5ddab7ed5e4980ffd6c26af20561fde64",
+    "originalBytes": 347,
+    "compressed": true
+  },
+  "oauth.ndjson.gz": {
+    "originalSha256": "e543be6f0b5beeff419eaf2f20991f89944ffa25a5eac2215c412b6a31d5bacb",
+    "storedSha256": "a61353626e711563e78649f15ad99a9b2b202988e805b0c5b9da17e20c19eebb",
+    "originalBytes": 1446,
+    "compressed": true
+  },
+  "oauth.txt.gz": {
+    "originalSha256": "639b141f142d05bd1071252d6e7ce9a16735b9eb0d9dcb570a03ca5f58f5d065",
+    "storedSha256": "83efc26a0d00479600eed8a35abe2af0314cd4fcf750dd0dbb0e6550e9885931",
+    "originalBytes": 485,
+    "compressed": true
+  },
+  "runtime.json.gz": {
+    "originalSha256": "763caf68373e5cb1b8b0ccedbb7cde65e0a77675cea0812d4fe22ae127ea31fd",
+    "storedSha256": "63002b19678b24a2f5e824fdd09922849297f86c702dc92b3fc78b1792d1e1d0",
+    "originalBytes": 807342,
+    "compressed": true
+  },
+  "smoke.txt.gz": {
+    "originalSha256": "70b07258c5dd7b4505212f6b2d779e405a1a5e56a9b7b43e23c8e9457d8f0ef1",
+    "storedSha256": "aee032d38b0ef97222056ec194066e0e2800dae0933604872a2414cb812e7fa5",
+    "originalBytes": 302,
+    "compressed": true
+  },
+  "tui.ansi.gz": {
+    "originalSha256": "ae6ceef73006176fe8037351e444056f579a5d60fd309e1111a1a14845d12f4a",
+    "storedSha256": "3a99c6b1b4783b1774c8772dd8447b70f183c3876cbca828d0f484ffcd783501",
+    "originalBytes": 32995,
+    "compressed": true
+  }
+}

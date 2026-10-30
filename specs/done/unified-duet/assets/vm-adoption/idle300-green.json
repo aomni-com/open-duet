@@ -1,0 +1,62 @@
+{
+  "launch": {
+    "unit": "duet-runtime-adoption.service",
+    "runId": "55e01673-4070-4e28-b310-1d756cdd15a8",
+    "resultFile": "/tmp/transfer/idle-cert-1791119220871.json",
+    "settledFile": "/tmp/transfer/idle-cert-1791119220871.json.settled.json"
+  },
+  "receipt": {
+    "status": "complete",
+    "phase": "complete",
+    "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "restored": false,
+    "previousGatewayVersion": "0.0.0+01212abf6ba1",
+    "bootIdBefore": "2a9e90e5-1176-499f-b4f2-f642570ce19d",
+    "bootIdAfter": "2a9e90e5-1176-499f-b4f2-f642570ce19d"
+  },
+  "settled": {
+    "unit": "duet-runtime-adoption.service",
+    "runId": "55e01673-4070-4e28-b310-1d756cdd15a8",
+    "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "settled": true
+  },
+  "sampled": {
+    "instanceId": "0f800be8-e2a1-40e9-9cb5-a62916bb9a35",
+    "imageVersion": "0.0.0+fixture_old_image",
+    "runtimeVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "uptimeSeconds": 67,
+    "diagnostics": {
+      "runtimeUpdateInFlight": false,
+      "attribution": {
+        "rawEventsObserved": 0,
+        "droppedReads": 0,
+        "overflow": 0,
+        "mirrorReadsSkipped": 0,
+        "cgroupMisses": 0,
+        "helperRestarts": 14
+      },
+      "scanNudge": {
+        "scans": 0,
+        "failures": 0,
+        "loopGuardSkips": 0,
+        "rawPathsObserved": 0,
+        "latestPaths": []
+      },
+      "anchorReconcile": {
+        "path": "fast",
+        "anchorCount": 0,
+        "anchorProbes": 0,
+        "walkEntries": 0,
+        "markerResolutionOperations": 0,
+        "excludedSubtrees": 0,
+        "durationMs": 0.01758299999346491
+      },
+      "restoreInFlight": false,
+      "backup": null,
+      "bootHealthCertified": true
+    }
+  },
+  "targetSyncs": 7,
+  "main": "2391",
+  "pollAfterMs": 300000
+}

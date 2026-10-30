@@ -1,0 +1,979 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hello — a sample app in your Duet workspace</title>
+    <script>
+      const requestedTheme = new URLSearchParams(location.search).get('theme')
+      if (requestedTheme === 'light' || requestedTheme === 'dark') {
+        document.documentElement.dataset.theme = requestedTheme
+      }
+    </script>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --canvas: #f7f6f2;
+        --surface: rgba(255, 255, 255, 0.82);
+        --surface-solid: #ffffff;
+        --ink: #181916;
+        --ink-soft: #64655e;
+        --line: rgba(24, 25, 22, 0.12);
+        --line-strong: rgba(24, 25, 22, 0.2);
+        --lime: #d8ff73;
+        --lime-ink: #27350b;
+        --violet: #6f5bf5;
+        --violet-soft: #e8e4ff;
+        --orange: #ff8b5c;
+        --aqua: #4ec8b2;
+        --shadow: 0 28px 80px rgba(42, 38, 28, 0.11);
+      }
+
+      :root[data-theme='dark'] {
+        --canvas: #121311;
+        --surface: rgba(31, 33, 28, 0.8);
+        --surface-solid: #20221d;
+        --ink: #f3f4ed;
+        --ink-soft: #aaada2;
+        --line: rgba(255, 255, 255, 0.12);
+        --line-strong: rgba(255, 255, 255, 0.2);
+        --lime: #c8f45f;
+        --lime-ink: #172005;
+        --violet: #9588ff;
+        --violet-soft: #302d4b;
+        --orange: #ff9e75;
+        --aqua: #65d5c0;
+        --shadow: 0 28px 80px rgba(0, 0, 0, 0.3);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) {
+          --canvas: #121311;
+          --surface: rgba(31, 33, 28, 0.8);
+          --surface-solid: #20221d;
+          --ink: #f3f4ed;
+          --ink-soft: #aaada2;
+          --line: rgba(255, 255, 255, 0.12);
+          --line-strong: rgba(255, 255, 255, 0.2);
+          --lime: #c8f45f;
+          --lime-ink: #172005;
+          --violet: #9588ff;
+          --violet-soft: #302d4b;
+          --orange: #ff9e75;
+          --aqua: #65d5c0;
+          --shadow: 0 28px 80px rgba(0, 0, 0, 0.3);
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-width: 0;
+        min-height: 100vh;
+        margin: 0;
+        overflow-x: hidden;
+        background:
+          radial-gradient(
+            circle at 88% 8%,
+            color-mix(in srgb, var(--violet) 13%, transparent),
+            transparent 28rem
+          ),
+          radial-gradient(
+            circle at 5% 34%,
+            color-mix(in srgb, var(--lime) 25%, transparent),
+            transparent 25rem
+          ),
+          var(--canvas);
+        color: var(--ink);
+        font:
+          16px/1.5 ui-sans-serif,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      .shell {
+        width: min(100% - 2rem, 78rem);
+        margin: 0 auto;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 4.5rem;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        font-weight: 760;
+        letter-spacing: -0.025em;
+      }
+
+      .mark {
+        display: grid;
+        width: 2rem;
+        height: 2rem;
+        place-items: center;
+        border-radius: 0.7rem;
+        background: var(--ink);
+        color: var(--canvas);
+        font-family: ui-serif, Georgia, serif;
+        font-size: 1.2rem;
+        font-style: italic;
+      }
+
+      .sample-pill {
+        padding: 0.28rem 0.6rem;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        color: var(--ink-soft);
+        font-size: 0.68rem;
+        font-weight: 760;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .workspace-state {
+        display: flex;
+        align-items: center;
+        gap: 0.48rem;
+        color: var(--ink-soft);
+        font-size: 0.78rem;
+        font-weight: 650;
+      }
+
+      .workspace-state::before {
+        width: 0.48rem;
+        height: 0.48rem;
+        border-radius: 50%;
+        background: var(--aqua);
+        content: '';
+        box-shadow: 0 0 0 0.22rem color-mix(in srgb, var(--aqua) 20%, transparent);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.04fr) minmax(29rem, 0.96fr);
+        align-items: start;
+        gap: clamp(2.5rem, 7vw, 7rem);
+        min-height: calc(100svh - 4.5rem);
+        padding: clamp(4.5rem, 7vw, 6.5rem) 0;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        margin: 0 0 1.25rem;
+        padding: 0.4rem 0.72rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--surface-solid) 66%, transparent);
+        color: var(--ink-soft);
+        font-size: 0.72rem;
+        font-weight: 760;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        width: 0.38rem;
+        height: 0.38rem;
+        border-radius: 50%;
+        background: var(--violet);
+        content: '';
+      }
+
+      h1 {
+        max-width: 43rem;
+        margin: 0;
+        font-family: ui-serif, Georgia, 'Times New Roman', serif;
+        font-size: clamp(3.2rem, 6.4vw, 6.6rem);
+        font-weight: 470;
+        line-height: 0.93;
+        letter-spacing: -0.065em;
+      }
+
+      .intro {
+        max-width: 39rem;
+        margin: 1.7rem 0 0;
+        color: var(--ink-soft);
+        font-size: clamp(1.08rem, 1.7vw, 1.35rem);
+        line-height: 1.55;
+        text-wrap: balance;
+      }
+
+      .intro strong {
+        color: var(--ink);
+        font-weight: 720;
+      }
+
+      .proof-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem 1.25rem;
+        margin-top: 2.2rem;
+        color: var(--ink-soft);
+        font-size: 0.82rem;
+        font-weight: 650;
+      }
+
+      .proof-row span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+      }
+
+      .proof-row span::before {
+        color: var(--violet);
+        content: '✦';
+      }
+
+      .team-board {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--line-strong);
+        border-radius: 1.8rem;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(24px);
+      }
+
+      .board-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.1rem;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .board-title {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        font-size: 0.78rem;
+        font-weight: 760;
+      }
+
+      .board-title::before {
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 50%;
+        background: var(--lime);
+        content: '';
+        box-shadow: 0 0 0 0.22rem color-mix(in srgb, var(--lime) 28%, transparent);
+      }
+
+      .board-meta {
+        color: var(--ink-soft);
+        font-size: 0.7rem;
+      }
+
+      .specialists {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.65rem;
+        padding: 0.8rem;
+      }
+
+      .specialist {
+        min-width: 0;
+        padding: 1rem;
+        border: 1px solid var(--line);
+        border-radius: 1.15rem;
+        background: color-mix(in srgb, var(--surface-solid) 72%, transparent);
+      }
+
+      .specialist-icon {
+        display: grid;
+        width: 2.35rem;
+        height: 2.35rem;
+        margin-bottom: 1.45rem;
+        place-items: center;
+        border-radius: 0.75rem;
+        color: #1b1b18;
+        font-size: 1.05rem;
+        font-weight: 800;
+      }
+
+      .specialist:nth-child(1) .specialist-icon {
+        background: var(--lime);
+      }
+
+      .specialist:nth-child(2) .specialist-icon {
+        background: var(--violet-soft);
+        color: var(--violet);
+      }
+
+      .specialist:nth-child(3) .specialist-icon {
+        background: color-mix(in srgb, var(--orange) 25%, var(--surface-solid));
+        color: var(--orange);
+      }
+
+      .specialist strong,
+      .specialist small {
+        display: block;
+      }
+
+      .specialist strong {
+        font-size: 0.86rem;
+      }
+
+      .specialist small {
+        margin-top: 0.2rem;
+        overflow: hidden;
+        color: var(--ink-soft);
+        font-size: 0.68rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .activity {
+        margin: 0 0.8rem 0.8rem;
+        padding: 1rem;
+        border-radius: 1.15rem;
+        background: var(--ink);
+        color: var(--canvas);
+      }
+
+      .activity-label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        color: color-mix(in srgb, var(--canvas) 65%, transparent);
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .live {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        color: var(--lime);
+      }
+
+      .live::before {
+        width: 0.4rem;
+        height: 0.4rem;
+        border-radius: 50%;
+        background: currentColor;
+        content: '';
+      }
+
+      .activity-row {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0.65rem 0;
+        border-top: 1px solid color-mix(in srgb, var(--canvas) 12%, transparent);
+        font-size: 0.76rem;
+      }
+
+      .activity-row:first-of-type {
+        border-top: 0;
+      }
+
+      .activity-row > span:first-child {
+        color: var(--lime);
+      }
+
+      .activity-row small {
+        color: color-mix(in srgb, var(--canvas) 52%, transparent);
+        font-size: 0.65rem;
+      }
+
+      .capabilities {
+        padding: clamp(4.5rem, 8vw, 8rem) 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .section-kicker {
+        margin: 0 0 0.85rem;
+        color: var(--violet);
+        font-size: 0.74rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        max-width: 42rem;
+        margin: 0;
+        font-family: ui-serif, Georgia, serif;
+        font-size: clamp(2.25rem, 4.2vw, 4rem);
+        font-weight: 480;
+        line-height: 1;
+        letter-spacing: -0.045em;
+      }
+
+      .capability-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        margin-top: 3.2rem;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 1.5rem;
+        background: var(--line);
+      }
+
+      .capability {
+        min-height: 13rem;
+        padding: clamp(1.4rem, 3vw, 2.2rem);
+        background: var(--surface-solid);
+      }
+
+      .capability-number {
+        color: var(--ink-soft);
+        font-size: 0.7rem;
+        font-variant-numeric: tabular-nums;
+        font-weight: 760;
+      }
+
+      .capability h3 {
+        margin: 2.5rem 0 0.6rem;
+        font-size: 1.12rem;
+        letter-spacing: -0.025em;
+      }
+
+      .capability p {
+        margin: 0;
+        color: var(--ink-soft);
+        font-size: 0.88rem;
+        line-height: 1.6;
+      }
+
+      .agent-note {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 1rem;
+        margin-top: 1.5rem;
+        padding: 1.35rem;
+        border: 1px solid var(--line);
+        border-radius: 1.25rem;
+        background: color-mix(in srgb, var(--violet-soft) 35%, var(--surface-solid));
+      }
+
+      .agent-note-mark {
+        display: grid;
+        width: 2.5rem;
+        height: 2.5rem;
+        place-items: center;
+        border-radius: 0.8rem;
+        background: var(--surface-solid);
+        color: var(--violet);
+        font-size: 1rem;
+        box-shadow: 0 0 0 1px var(--line);
+      }
+
+      .agent-note strong {
+        display: block;
+        margin-bottom: 0.25rem;
+        font-size: 0.86rem;
+      }
+
+      .agent-note p {
+        margin: 0;
+        color: var(--ink-soft);
+        font-size: 0.84rem;
+      }
+
+      .demo {
+        display: grid;
+        grid-template-columns: minmax(0, 0.72fr) minmax(28rem, 1.28fr);
+        align-items: start;
+        gap: clamp(2.5rem, 7vw, 6rem);
+        padding: clamp(4.5rem, 8vw, 8rem) 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .demo-copy p {
+        max-width: 28rem;
+        margin: 1.1rem 0 0;
+        color: var(--ink-soft);
+      }
+
+      .ask {
+        max-width: 28rem;
+        margin-top: 1.6rem;
+        padding: 1.25rem 1.35rem;
+        border: 1px solid color-mix(in srgb, var(--lime) 45%, var(--line-strong));
+        border-radius: 1.25rem;
+        background: color-mix(in srgb, var(--lime) 11%, var(--surface-solid));
+      }
+
+      .ask strong {
+        display: block;
+        margin-bottom: 0.55rem;
+        color: var(--ink);
+        font-size: 0.9rem;
+      }
+
+      .ask q {
+        display: block;
+        color: var(--ink);
+        font-family: ui-serif, Georgia, serif;
+        font-size: 1.05rem;
+        font-style: italic;
+        line-height: 1.45;
+      }
+
+      .ask p {
+        margin: 0.75rem 0 0;
+        color: var(--ink-soft);
+        font-size: 0.82rem;
+      }
+
+      .panel {
+        overflow: hidden;
+        border: 1px solid var(--line-strong);
+        border-radius: 1.45rem;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(18px);
+      }
+
+      .panel-label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.8rem 1rem;
+        border-bottom: 1px solid var(--line);
+        color: var(--ink-soft);
+        font-size: 0.7rem;
+        font-weight: 700;
+      }
+
+      .panel-label span:last-child {
+        color: var(--aqua);
+      }
+
+      form {
+        display: flex;
+        gap: 0.7rem;
+        padding: 1rem;
+        border-bottom: 1px solid var(--line);
+      }
+
+      input {
+        min-width: 0;
+        flex: 1;
+        border: 1px solid var(--line-strong);
+        border-radius: 0.8rem;
+        outline: none;
+        background: var(--surface-solid);
+        color: var(--ink);
+        padding: 0.78rem 0.9rem;
+      }
+
+      input:focus {
+        border-color: var(--violet);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--violet) 18%, transparent);
+      }
+
+      input::placeholder {
+        color: var(--ink-soft);
+        opacity: 1;
+      }
+
+      button {
+        border: 0;
+        border-radius: 0.8rem;
+        background: var(--lime);
+        color: var(--lime-ink);
+        padding: 0.78rem 1.1rem;
+        font-weight: 780;
+        cursor: pointer;
+      }
+
+      button:hover {
+        filter: brightness(0.96);
+      }
+
+      button:disabled {
+        cursor: wait;
+        opacity: 0.6;
+      }
+
+      .status {
+        min-height: 1.5rem;
+        margin: 0;
+        padding: 0.75rem 1rem 0;
+        color: var(--ink-soft);
+        font-size: 0.8rem;
+      }
+
+      .status:empty {
+        display: none;
+      }
+
+      .empty {
+        padding: 2rem 1.4rem 2.2rem;
+        text-align: center;
+      }
+
+      .empty strong,
+      .empty span {
+        display: block;
+      }
+
+      .empty span {
+        margin-top: 0.25rem;
+        color: var(--ink-soft);
+        font-size: 0.82rem;
+      }
+
+      ol {
+        display: grid;
+        gap: 0;
+        margin: 0;
+        padding: 0.5rem 1rem 1rem;
+        counter-reset: task;
+        list-style: none;
+      }
+
+      li {
+        counter-increment: task;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        gap: 0.85rem;
+        padding: 0.9rem 0.35rem;
+        border-bottom: 1px solid var(--line);
+      }
+
+      li:last-child {
+        border-bottom: 0;
+      }
+
+      li::before {
+        color: var(--violet);
+        content: counter(task, decimal-leading-zero);
+        font-size: 0.7rem;
+        font-variant-numeric: tabular-nums;
+        font-weight: 800;
+      }
+
+      .task-title {
+        overflow-wrap: anywhere;
+        font-size: 0.88rem;
+        font-weight: 650;
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        padding: 1.5rem 0 2.5rem;
+        border-top: 1px solid var(--line);
+        color: var(--ink-soft);
+        font-size: 0.72rem;
+      }
+
+      @media (max-width: 900px) {
+        .hero,
+        .demo {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          min-height: auto;
+        }
+
+        .team-board {
+          width: min(100%, 38rem);
+        }
+
+        .demo {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .shell {
+          width: min(100% - 1.25rem, 78rem);
+        }
+
+        .topbar {
+          min-height: 4rem;
+        }
+
+        .hero {
+          padding: 3rem 0 4.5rem;
+        }
+
+        .proof-row {
+          flex-direction: column;
+          gap: 0.45rem;
+        }
+
+        h1 {
+          font-size: clamp(3rem, 15vw, 4.8rem);
+        }
+
+        .specialists,
+        .capability-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .specialist {
+          display: grid;
+          grid-template-columns: auto minmax(0, 1fr);
+          column-gap: 0.8rem;
+        }
+
+        .specialist-icon {
+          grid-row: span 2;
+          margin: 0;
+        }
+
+        .capability {
+          min-height: auto;
+        }
+
+        .capability h3 {
+          margin-top: 1.7rem;
+        }
+
+        form {
+          flex-direction: column;
+        }
+
+        button {
+          width: 100%;
+        }
+
+        footer {
+          gap: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="shell topbar">
+      <div class="brand">
+        <span class="mark">d</span> duet <span class="sample-pill">Sample app</span>
+      </div>
+      <div class="workspace-state">Workspace online</div>
+    </header>
+
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Your company, assembled</p>
+          <h1>An AI agent team that knows your business</h1>
+          <p class="intro">
+            <strong>Generalists like Claude and ChatGPT answer questions.</strong> Duet gives you a
+            team of specialist AI agents that runs your business.
+          </p>
+          <div class="proof-row" aria-label="Duet capabilities">
+            <span>Shared memory</span>
+            <span>Fresh business data</span>
+            <span>Work that keeps running</span>
+          </div>
+        </div>
+
+        <div class="team-board" aria-label="Your Duet specialist team">
+          <div class="board-head">
+            <span class="board-title">Your specialist team</span>
+            <span class="board-meta">3 active now</span>
+          </div>
+          <div class="specialists">
+            <article class="specialist">
+              <div class="specialist-icon">↗</div>
+              <strong>Growth</strong>
+              <small>Pipeline &amp; campaigns</small>
+            </article>
+            <article class="specialist">
+              <div class="specialist-icon">◎</div>
+              <strong>Research</strong>
+              <small>Market &amp; customers</small>
+            </article>
+            <article class="specialist">
+              <div class="specialist-icon">✓</div>
+              <strong>Operations</strong>
+              <small>Systems &amp; delivery</small>
+            </article>
+          </div>
+          <div class="activity">
+            <div class="activity-label">
+              <span>Company pulse</span><span class="live">Live</span>
+            </div>
+            <div class="activity-row">
+              <span>✦</span><span>Research refreshed the competitor brief</span><small>now</small>
+            </div>
+            <div class="activity-row">
+              <span>✦</span><span>Growth prepared this week’s follow-ups</span><small>2m</small>
+            </div>
+            <div class="activity-row">
+              <span>✦</span><span>Ops reconciled the project tracker</span><small>8m</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="capabilities">
+        <p class="section-kicker">One workspace, compounding context</p>
+        <h2>Specialists that remember, connect, and build.</h2>
+        <div class="capability-grid">
+          <article class="capability">
+            <span class="capability-number">01 / KNOWS</span>
+            <h3>Your context stays put</h3>
+            <p>
+              Company knowledge, decisions, and working files live together, so every specialist
+              starts informed.
+            </p>
+          </article>
+          <article class="capability">
+            <span class="capability-number">02 / RUNS</span>
+            <h3>Work continues on schedule</h3>
+            <p>
+              Research refreshes, reports arrive, and recurring operations happen without another
+              prompt.
+            </p>
+          </article>
+          <article class="capability">
+            <span class="capability-number">03 / BUILDS</span>
+            <h3>Ideas become real tools</h3>
+            <p>
+              Agents can create apps, APIs, and workflows here — then host them directly from your
+              workspace.
+            </p>
+          </article>
+        </div>
+        <aside class="agent-note">
+          <span class="agent-note-mark">⌘</span>
+          <div>
+            <strong>Bring the agents you already use.</strong>
+            <p>
+              Claude Cowork, Codex, OpenClaw, and your own scripts can read, write, and remember
+              through the same workspace.
+            </p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="demo">
+        <div class="demo-copy">
+          <p class="section-kicker">Sample app</p>
+          <h2>This page is a sample, and it really runs.</h2>
+          <p>
+            It came with your workspace as an example. Add a task here or through its API — it
+            persists and updates every open copy instantly. Change it, or delete it; nothing depends
+            on it.
+          </p>
+          <aside class="ask">
+            <strong>Want a different app? Just ask.</strong>
+            <q>Build me a dashboard for our weekly numbers.</q>
+            <p>
+              Say that to Duet in chat any time and it builds the app, runs it, and hosts it right
+              here in your workspace. You never have to start from this one.
+            </p>
+          </aside>
+        </div>
+        <section class="panel" aria-label="Task list">
+          <div class="panel-label"><span>hello-app / tasks</span><span>● synced</span></div>
+          <form id="task-form">
+            <input
+              id="task-title"
+              name="title"
+              maxlength="160"
+              required
+              autocomplete="off"
+              placeholder="What needs doing?"
+              aria-label="Task title"
+            />
+            <button type="submit">Add task</button>
+          </form>
+          <p id="status" class="status" role="status" aria-live="polite"></p>
+          <div id="empty" class="empty" hidden>
+            <strong>No tasks yet</strong>
+            <span>Add the first one above.</span>
+          </div>
+          <ol id="tasks" aria-label="Tasks"></ol>
+        </section>
+      </section>
+    </main>
+
+    <footer class="shell">
+      <span>Sample app — yours to edit, extend, or delete</span>
+      <span>Ask Duet for a new one any time</span>
+    </footer>
+
+    <script type="module">
+      const form = document.querySelector('#task-form')
+      const input = document.querySelector('#task-title')
+      const button = form.querySelector('button')
+      const list = document.querySelector('#tasks')
+      const empty = document.querySelector('#empty')
+      const status = document.querySelector('#status')
+
+      async function loadTasks() {
+        try {
+          const response = await fetch('/api/tasks')
+          if (!response.ok) throw new Error('Could not load tasks')
+          const { tasks } = await response.json()
+          list.replaceChildren(...tasks.map(renderTask))
+          empty.hidden = tasks.length !== 0
+          status.textContent = ''
+        } catch (error) {
+          status.textContent = error instanceof Error ? error.message : 'Could not load tasks'
+        }
+      }
+
+      function renderTask(task) {
+        const item = document.createElement('li')
+        const title = document.createElement('span')
+        title.className = 'task-title'
+        title.textContent = task.title
+        item.append(title)
+        return item
+      }
+
+      form.addEventListener('submit', async event => {
+        event.preventDefault()
+        button.disabled = true
+        status.textContent = 'Adding task…'
+        try {
+          const response = await fetch('/api/tasks', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ title: input.value }),
+          })
+          const body = await response.json()
+          if (!response.ok) throw new Error(body.error ?? 'Could not add task')
+          input.value = ''
+          input.focus()
+        } catch (error) {
+          status.textContent = error instanceof Error ? error.message : 'Could not add task'
+        } finally {
+          button.disabled = false
+        }
+      })
+
+      await loadTasks()
+      const events = new EventSource('/events')
+      events.onopen = loadTasks
+      events.onmessage = loadTasks
+    </script>
+  </body>
+</html>

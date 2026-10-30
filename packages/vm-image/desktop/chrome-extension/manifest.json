@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "Duet Browser Windows",
+  "version": "1.0.0",
+  "permissions": ["tabs", "windows", "debugger"],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

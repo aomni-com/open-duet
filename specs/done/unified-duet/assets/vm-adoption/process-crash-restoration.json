@@ -1,0 +1,50 @@
+{
+  "launch": {
+    "unit": "duet-runtime-adoption.service",
+    "runId": "bedac133-138a-4828-8b82-c7c1d242904c",
+    "resultFile": "/tmp/transfer/crash-result-1791113915395.json",
+    "settledFile": "/tmp/transfer/crash-result-1791113915395.json.settled.json"
+  },
+  "receipt": {
+    "status": "failed",
+    "phase": "restored",
+    "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "restored": true,
+    "reason": "Native memory CLI probe failed",
+    "previousGatewayVersion": "0.0.0+01212abf6ba1",
+    "bootIdBefore": "5a3f2a10-7bc3-4ae9-98db-56282788ca59",
+    "bootIdAfter": "5a3f2a10-7bc3-4ae9-98db-56282788ca59"
+  },
+  "settled": {
+    "unit": "duet-runtime-adoption.service",
+    "runId": "bedac133-138a-4828-8b82-c7c1d242904c",
+    "targetVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "settled": true
+  },
+  "killed": [
+    19596,
+    19672,
+    19713
+  ],
+  "quarantine": {
+    "attemptedVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2",
+    "consecutiveFailures": 10,
+    "quarantinedVersion": "0.0.0+0aac13839e00a21e0972783346f82bb2c4286e5f748089c5aae95f9faab78fb2"
+  },
+  "memory": [
+    {
+      "id": "mem_cZMOrwGOYpV5",
+      "content": "fixture memory must survive runtime adoption",
+      "kind": "note",
+      "source": "user",
+      "priority": "medium",
+      "createdAt": "2026-10-04T11:19:18.939Z",
+      "lastUsedAt": "2026-10-04T11:19:18.939Z",
+      "observedDate": "2026-10-04",
+      "tags": [],
+      "packScore": 2.9958865632954392
+    }
+  ],
+  "current": "/opt/duet/releases/0.0.0+01212abf6ba1",
+  "workspaceBun": "1.3.14"
+}

@@ -1,0 +1,2 @@
+exe.dev command failed: new --name duet-test-browser-extension-20260813t222429-l63a --image ghcr.io/aomni-com/duet-vm-image@sha256:71285a0068a6ed54ca33dd48791d0fe5ad2c3ccf69738ed5b25c9f9bd5c327dd --cpu 2 --memory 8GB --comment agent-browser-windows slice 00 extension/focus #duet-probe --tag duet-test --tag duet-probe --no-email (http 504)
+{"error":"command timed out"}

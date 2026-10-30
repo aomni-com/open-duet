@@ -1,0 +1,22 @@
+bun test v1.3.14 (0d9b296a)
+
+apps/edge/src/index.test.ts:
+(pass) private browser documents return through Duet while non-documents and signed denials stay forbidden [4.59ms]
+
+apps/web/src/server/app-open.test.ts:
+(pass) existing identity completion returns a private deep link through the protected bridge [1.03ms]
+
+ 2 pass
+ 46 filtered out
+ 0 fail
+ 42 expect() calls
+Ran 2 tests across 2 files. [84.00ms]
+
+Optimized Docker browser proof (real Next middleware, desktop/mobile):
+web:visual:     Expected: "http://localhost:3000/sign-in?returnTo=%2Fw%2Facme%2Fapps%2Ftodo%2Fopen%3Fhost%service.example.invalid%26path%3D%252Fdeep%253Fq%253Da%25252Fb"
+web:visual:     Received: "http://localhost:3000/sign-in?returnTo=%2Fw%2Facme%2Fapps%2Ftodo%2Fopen"
+web:visual:   ✓  2 [mobile] › tests/visual/auth-continuity.spec.ts:42:1 › playground/auth-surfaces preserves private app bridge targets through sign-in (851ms)
+web:visual:   ✓  1 [desktop] › tests/visual/auth-continuity.spec.ts:42:1 › playground/auth-surfaces preserves private app bridge targets through sign-in (853ms)
+web:visual:   2 passed (3.2s)
+
+The signed-in route-level seam uses controlled identity/API responses; email/Google providers and live DNS were not run.

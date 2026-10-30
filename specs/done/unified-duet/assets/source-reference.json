@@ -1,0 +1,21 @@
+{
+  "sourceRepository": "https://github.com/Example User/duet-agent",
+  "sourceRevision": "cad4c4ee7ab6ad822e11e9f64bf296cc2acd05b4",
+  "sourceCheckout": "/Users/synthetic-user/dev/duet-agent",
+  "sourceCheckoutClean": true,
+  "duetBaselineRevision": "a2fcdd2d03a1108579fd779dc776132908f15e61",
+  "sourceSha256": {
+    "bun.lock": "2b7d2096c2f20bcb4b227da6a71d1cc73f74dbd3b996a7fff505ec1ac270ba48",
+    "package.json": "da27b2145227fb18485507709bace00b43f9ab4e0449fea9925f4b57cdad08f5",
+    "patches/@user@example.invalid": "0bf942aa04e9a499f19771bc27e28467f33419dee89323598d96e116889adaac",
+    "benchmarks/swebench/src/packaging.ts": "bcc59710871061950627cf2a93b35eb7429db1d57d980349d233806ae61e71e2",
+    "src/memory/pglite.ts": "b76f1a339a433eec87277339d5a2d925eb2a75ec4ef3f452eb971a20bb0c108a"
+  },
+  "inspectionDate": "2026-10-03",
+  "evidenceStatus": "Source inspected. No target-runtime build or parity run performed during planning.",
+  "preservationOwner": "slices/00-packaging-proof.md; then slices/01-workspace-ownership.md",
+  "runtimePins": {
+    "workspaceBun": "1.3.14",
+    "gatewayBun": "1.4.2"
+  }
+}

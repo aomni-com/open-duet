@@ -1,0 +1,161 @@
+---
+title: 'Grok 4.5 vs Claude Opus 4.8: Which Should You Actually Use in 2026?'
+metaTitle: 'Grok 4.5 vs Claude Opus 4.8: Which to Use in 2026?'
+description: 'Grok 4.5 vs Claude Opus 4.8 compared: pricing, coding benchmarks, context windows, and reliability. Plus the smarter way to run or route between both without lock-in.'
+date: '2026-07-13'
+updatedAt: '2026-07-20'
+readTime: '7 min read'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/3.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'ai'
+tags: ['grok-4-5', 'claude-opus-4-8', 'model-comparison', 'ai-agents', 'pricing', 'cursor']
+type: 'article'
+image: '/blog/grok-4-5-vs-claude-opus-4-8/cover.png'
+relatedPosts:
+  - slug: 'claude-code-pricing'
+    context: 'Claude Code Pro vs Max vs API costs: full pricing breakdown and monthly scenarios'
+  - slug: 'how-to-run-claude-code-in-the-cloud'
+    context: 'Run your AI coding agent on a persistent cloud server, 24/7, no laptop needed'
+  - slug: 'claude-code-vs-cursor-vs-codex'
+    context: 'Compare the leading AI coding tools and when to pick each'
+cta:
+  title: 'Run Grok 4.5 and Opus 4.8 in one workspace.'
+  subtitle: 'Duet runs both, plus Fable 5, GPT-5.6 Sol, and more, with a model selector you can switch per session. Tokens at cost, no per-seat tax.'
+  buttonText: 'Try Duet free'
+  href: '/sign-in?from=blog-grok-vs-opus'
+---
+
+## The short answer
+
+**If you're optimizing for cost and running high-volume agentic work, use Grok 4.5. If you need the strongest coding and long-horizon reasoning, use Claude Opus 4.8.** On the coding benchmark where both vendors report scores, SWE-bench Pro, Opus 4.8 leads 69.2% to Grok 4.5's 64.7% ([Vellum](https://www.vellum.ai/blog/claude-opus-4-8-benchmarks-explained), [Developers Digest](https://www.developersdigest.tech/blog/grok-4-5-for-developers)), and on overall intelligence they're close (56 vs 54 on the Artificial Analysis Intelligence Index). But Grok undercuts Opus by roughly 60% on input and 76% on output pricing ([Anthropic](https://www.anthropic.com/news/claude-opus-4-8), [InfoWorld](https://www.infoworld.com/article/4194895/spacexai-launches-grok-4-5-touts-lower-coding-task-costs-than-ai-rivals.html)), and it runs far more token-efficiently. For most teams the honest answer isn't "pick one," it's use the right one per task, which is a setup decision, not a model decision. More on that below.
+
+---
+
+## What just happened
+
+The frontier-model race hit a new inflection in July 2026. On July 8, xAI (SpaceXAI) shipped **Grok 4.5**, which Elon Musk described as an "Opus-class model" at less than half the price of comparable Anthropic models ([TechCrunch](https://techcrunch.com/2026/07/08/spacexai-releases-grok-4-5-which-elon-describes-as-an-opus-class-model/)). xAI positions it as its "smartest model built to excel at coding, agentic tasks, and knowledge work" ([x.ai](https://x.ai/news/grok-4-5)).
+
+On the other side, **Claude Opus 4.8** is generally available and now hosted on Microsoft Foundry ([EdTech Innovation Hub](https://www.edtechinnovationhub.com/news/anthropic-brings-claude-to-microsoft-foundry-with-azure-hosting-and-governance-controls)), and Anthropic has been busy. It also shipped a lower-cost **Sonnet 5** on June 30 at $2/M input introductory pricing, through Aug 31; the standard rate is $3/$15 ([The Journal](https://thejournal.com/articles/2026/07/08/anthropic-intros-lower-cost-claude-sonnet-5.aspx)).
+
+So the obvious question everyone's asking: Grok 4.5 or Opus 4.8, which one should I actually use? Let's compare them honestly, then talk about the setup that makes the choice a lot less permanent.
+
+---
+
+## Grok 4.5 vs Claude Opus 4.8: the head-to-head
+
+|                                              | **Grok 4.5** (xAI)                                   | **Claude Opus 4.8** (Anthropic)                             |
+| -------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------- |
+| **Input price**                              | **$2 / M tokens**                                    | $5 / M                                                      |
+| **Output price**                             | **$6 / M tokens**                                    | $25 / M                                                     |
+| **SWE-bench Pro**                            | 64.7%                                                | **69.2%**                                                   |
+| **Intelligence Index** (Artificial Analysis) | 54                                                   | **56**                                                      |
+| **Context window**                           | 500K tokens                                          | 1,000,000 tokens                                            |
+| **Token efficiency**                         | **~4.2x fewer output tokens/task**                   | baseline                                                    |
+| **Released**                                 | July 8, 2026                                         | GA (also on MS Foundry)                                     |
+| **Best at**                                  | Cost efficiency, agentic and high-volume work        | Coding reliability, long-horizon reasoning, largest context |
+| **Watch-out**                                | New; $2/$6 applies under 200K context, doubles above | Recent reliability strain (see below)                       |
+
+Sources: pricing, [Anthropic](https://www.anthropic.com/news/claude-opus-4-8) and [InfoWorld](https://www.infoworld.com/article/4194895/spacexai-launches-grok-4-5-touts-lower-coding-task-costs-than-ai-rivals.html); Grok tiered pricing above 200K, [Developers Digest](https://www.developersdigest.tech/blog/grok-45-xai-cursor-coding-model); SWE-bench Pro, [Vellum](https://www.vellum.ai/blog/claude-opus-4-8-benchmarks-explained) (Opus 69.2%) and [MarkTechPost](https://www.marktechpost.com/2026/07/08/spacexai-releases-grok-4-5/) (Grok 64.7%); Intelligence Index and token efficiency, [Artificial Analysis](https://artificialanalysis.ai/articles/grok-4-5-brings-spacexai-to-the-the-intelligence-frontier); context windows, Grok 500K via Artificial Analysis, Opus 1M via [Price Per Token](https://pricepertoken.com/pricing-page/model/anthropic-claude-opus-4.8).
+
+> Note: Opus 4.8 also posts **88.6% on SWE-bench Verified**, up from Opus 4.7's 87.6% ([Vellum](https://www.vellum.ai/blog/claude-opus-4-8-benchmarks-explained)). Grok 4.5 doesn't publish a comparable SWE-bench Verified number, so the head-to-head above uses SWE-bench Pro, where both vendors report scores.
+
+### Price
+
+This is Grok's headline. At **$2 input / $6 output**, it undercuts Opus 4.8's **$5 / $25** by a wide margin, and the gap widens on output, which dominates real agent workloads. Grok's pricing does have a catch: the $2/$6 rate covers contexts under 200K tokens and roughly doubles above that ([Developers Digest](https://www.developersdigest.tech/blog/grok-45-xai-cursor-coding-model)). Opus also offers a premium fast mode for latency-sensitive work.
+
+**Verdict:** Grok 4.5, decisively, especially for high-token, high-volume agent runs.
+
+### Coding and reasoning
+
+On SWE-bench Pro, the coding benchmark where both xAI and Anthropic report scores, **Opus 4.8 leads at 69.2%, with Grok 4.5 at 64.7%** ([Vellum](https://www.vellum.ai/blog/claude-opus-4-8-benchmarks-explained), [MarkTechPost](https://www.marktechpost.com/2026/07/08/spacexai-releases-grok-4-5/)). On the broader Artificial Analysis Intelligence Index the two are close, Opus 4.8 at 56 and Grok 4.5 at 54. Anthropic still tends to win on long-horizon, multi-step reasoning where reliability compounds; Grok's counterweight is efficiency, xAI reports it uses roughly 4.2x fewer output tokens per task on agentic coding ([MarkTechPost](https://www.marktechpost.com/2026/07/08/spacexai-releases-grok-4-5/)).
+
+**Verdict:** Opus 4.8 for top coding reliability; Grok 4.5 for near-frontier results at a fraction of the token cost.
+
+### Context window
+
+Opus 4.8 carries a **1M-token** context ([Price Per Token](https://pricepertoken.com/pricing-page/model/anthropic-claude-opus-4.8)); Grok 4.5 ships with **500K**, actually a reduction from Grok 4.3's 1M ([Artificial Analysis](https://artificialanalysis.ai/articles/grok-4-5-brings-spacexai-to-the-the-intelligence-frontier)). For very large single-pass repos or document sets, Opus has the edge.
+
+**Verdict:** Opus 4.8 for the largest working sets; 500K is plenty for most tasks.
+
+### Reliability
+
+Worth flagging honestly: Anthropic went through a rough patch, with reporting of **ten significant service disruptions in twelve days** in June 2026, including Opus 4.8 errors ([TechTimes](https://www.techtimes.com/articles/318514/20260616/claude-outage-tenth-disruption-12-days-exposes-anthropic-infrastructure-strain.htm)). Grok 4.5 is newer and less battle-tested at scale. Neither is a clean win, and it's a reminder that single-provider dependency is itself a risk.
+
+---
+
+## Grok 4.5 vs Opus 4.8 in Cursor
+
+Both models are selectable in Cursor, so the same tradeoff plays out inside the IDE. Pick **Opus 4.8** when coding reliability matters most (SWE-bench Pro 69.2% vs 64.7%), and **Grok 4.5** when you want near-frontier quality at lower cost. On the underlying provider APIs Grok is far cheaper on output ($6 vs $25 per million tokens), but note these are external API rates: inside Cursor both models draw from your subscription's included model-request allotment rather than raw per-token billing, so the savings mainly show up on usage-based or API-metered work. Grok's token efficiency, roughly 4.2x fewer output tokens per agentic task, is a genuine edge on long agent runs (it does not affect Cursor's separate Tab autocomplete, which uses its own model).
+
+The catch is that Cursor ties the choice to one editor and a per-seat subscription, and the default model is a manual per-user setting. If your agents also run outside the IDE, or you want coding work routed to Opus and high-volume work routed to Grok automatically across a team, a runtime model selector handles that without the per-seat tax, which is exactly what the setup below does.
+
+---
+
+## So which should you actually use?
+
+- **Choose Grok 4.5 if** cost is the constraint, you're running lots of agentic or automation work, or you're price-sensitive on output-heavy tasks.
+- **Choose Claude Opus 4.8 if** you need the top coding score, the largest context window, or long-horizon reasoning where reliability matters more than token cost.
+
+But here's the thing the benchmark charts don't tell you: **this ranking will change again within weeks.** xAI already says a 2-trillion-parameter Grok is due in August 2026 ([news.az](https://news.az/news/musk-says-2t-grok-model-to-launch-next-month)), and Anthropic just shipped Sonnet 5 as a cheaper tier ([The Journal](https://thejournal.com/articles/2026/07/08/anthropic-intros-lower-cost-claude-sonnet-5.aspx)). Whichever you hard-code today, you'll want to reconsider next month.
+
+That's why the smartest teams stop treating this as a permanent choice, and set things up so it isn't one.
+
+---
+
+## The setup that makes the choice reversible: run (or route between) both
+
+If the winner keeps changing, the real advantage isn't picking correctly once, it's being able to **swap models per task without re-plumbing anything.** That's a runtime decision, and it's where [Duet](/) fits.
+
+Duet gives every workspace a persistent cloud server for running AI sessions. Each session keeps its event history, files, and resulting artifacts available to the team. Opus 4.8 is Duet's recommended frontier model, and Grok 4.5 just landed in the model selector as a Balanced option. Every monthly plan includes credits, and the paid reserve covers overage across models. Because the session and its work are decoupled from any single model, you can:
+
+- Point a coding-heavy agent at **Opus 4.8** and a high-volume research or outreach agent at **Grok 4.5**, in the same workspace.
+- Switch the model behind an agent when the leaderboard changes (or when one provider has an outage) without rebuilding the workflow. If you're already thinking this way about Claude tiers, the same logic applies across vendors, see our take on [model routing between Opus and Sonnet](/guides/claude-opus-vs-sonnet-model-routing).
+- Keep the agent's context, tools, and history intact across sessions, regardless of which model is answering.
+
+This is the honest version of the Duet pitch: it doesn't make Grok or Opus obsolete, and it isn't a third model competing with them. It's the layer that lets you use whichever one is winning this week, and route between them instead of committing. For a "which should you actually use" question, "you don't have to marry one" is the most useful answer there is.
+
+---
+
+## How to run Grok 4.5 or Opus 4.8 in Duet
+
+1. **Start a workspace** with <ProductLink path="/sign-in?from=blog-grok-vs-opus">Duet</ProductLink>. Every workspace gets a persistent cloud server.
+2. **Create a session** for the job, such as a coding task or lead-research run.
+3. **Assign the model that fits the task.** Opus 4.8 where coding reliability matters, Grok 4.5 where cost and volume do.
+4. **Let the session run.** It uses tools, records durable events, and keeps its files and results available to the team.
+5. **Swap the model anytime** the benchmarks or pricing shift. The workflow stays put.
+
+---
+
+## FAQ
+
+### Is Grok 4.5 better than Claude Opus 4.8?
+
+It depends on the task. Opus 4.8 leads on coding (SWE-bench Pro 69.2% vs 64.7%) and context window (1M vs 500K tokens), and edges it on overall intelligence (56 vs 54 on the Artificial Analysis Index). Grok 4.5 is far cheaper ($2/$6 vs $5/$25 per million tokens) and more token-efficient. For cost-sensitive, high-volume agent work, Grok wins; for top-tier coding reliability, Opus wins.
+
+### Is Grok 4.5 cheaper than Claude Opus 4.8?
+
+Yes, significantly. Grok 4.5 costs $2 per million input tokens and $6 per million output, versus Opus 4.8's $5 and $25 ([Anthropic](https://www.anthropic.com/news/claude-opus-4-8), [InfoWorld](https://www.infoworld.com/article/4194895/spacexai-launches-grok-4-5-touts-lower-coding-task-costs-than-ai-rivals.html)). Note Grok's rate roughly doubles above a 200K-token context.
+
+### Should I use Grok 4.5 or Opus 4.8 in Cursor?
+In Cursor the tradeoff is the same as anywhere: pick Opus 4.8 when coding reliability matters most (SWE-bench Pro 69.2% vs 64.7%) and Grok 4.5 when you want near-frontier quality at lower cost. On the provider APIs Grok is much cheaper on output ($6 vs $25 per million tokens); inside Cursor both run off your subscription's included model requests, so the biggest savings land on usage-based or API-metered work. Because Cursor lets you switch models per request, many developers keep Grok 4.5 as the default and reach for Opus 4.8 on the hardest tasks.
+
+### Which model is best for coding?
+
+Claude Opus 4.8. On SWE-bench Pro it leads 69.2% to Grok 4.5's 64.7% ([Vellum](https://www.vellum.ai/blog/claude-opus-4-8-benchmarks-explained)), and it posts 88.6% on SWE-bench Verified. The gap is modest, so if cost matters, Grok 4.5 is a strong value pick for coding too.
+
+### Can I use both Grok 4.5 and Opus 4.8 without choosing one?
+
+Yes. Platforms like <ProductLink path="/sign-in?from=blog-grok-vs-opus">Duet</ProductLink> let you run AI sessions on your own server and assign different models to different tasks, so you can route coding work to Opus 4.8 and high-volume work to Grok 4.5, and swap either as models change.
+
+### What's the most reliable way to run AI agents 24/7?
+
+Decouple the agent from any single model. Running agents on a persistent server, [the way Duet runs Claude Code in the cloud](/blog/how-to-run-claude-code-in-the-cloud), means an outage or price change at one provider doesn't break your workflow, you re-point the agent at another model and keep going.
+
+---
+
+## The bottom line
+
+Grok 4.5 and Claude Opus 4.8 are both excellent. Opus leads on coding (SWE-bench Pro 69.2% vs 64.7%) and context, and edges overall intelligence (56 vs 54); Grok wins big on price and token efficiency. Pick Grok for cost, Opus for coding-critical work. But given how fast the frontier is moving, a 2T Grok next month, cheaper Claude tiers this week, the durable move is to set up so you can run and switch between both. <ProductLink path="/sign-in?from=blog-grok-vs-opus">Try Duet free</ProductLink>.

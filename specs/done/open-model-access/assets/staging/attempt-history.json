@@ -1,0 +1,132 @@
+[
+  {
+    "runId": "staging-e2e-synthetic",
+    "attemptCount": 3,
+    "error": "generate_media returned an MCP tool error; inspect the existing generation before any paid retry",
+    "generations": [
+      {
+        "model": "openai/gpt-6.1-sol",
+        "status": "settled",
+        "upstreamGenerationId": "gen_01M4796ZTZ2FNPC1Z9K4FST9F0",
+        "upstreamCostMicroUsd": 96,
+        "billedCostMicroUsd": 96
+      },
+      {
+        "model": "recraft/recraft-v4.1-flash",
+        "status": "settled",
+        "upstreamGenerationId": "gen_01M4797KXQQQZFHE6MZZ442TXH",
+        "upstreamCostMicroUsd": 7000,
+        "billedCostMicroUsd": 7000
+      },
+      {
+        "model": "bytedance/seedance-v1.0-pro-fast",
+        "status": "released",
+        "error": "missing_generation_id"
+      }
+    ]
+  },
+  {
+    "runId": "staging-e2e-synthetic",
+    "attemptCount": 3,
+    "error": "generate_media returned an MCP tool error; inspect the existing generation before any paid retry",
+    "generations": [
+      {
+        "model": "openai/gpt-6.1-sol",
+        "status": "settled",
+        "upstreamGenerationId": "gen_01M47AG2MCP1HB9CYMQRHQ2R2R",
+        "upstreamCostMicroUsd": 96,
+        "billedCostMicroUsd": 96
+      },
+      {
+        "model": "recraft/recraft-v4.1-flash",
+        "status": "settled",
+        "upstreamGenerationId": "gen_01M47AGSHZ7AD1VB8H86YD8Y5R",
+        "upstreamCostMicroUsd": 7000,
+        "billedCostMicroUsd": 7000
+      },
+      {
+        "model": "spacexai/grok-imagine-video-1.5-lite",
+        "status": "charge_failed",
+        "upstreamGenerationId": "gen_01M47AHE35PW08ZMYNHVVKV4T3",
+        "upstreamCostMicroUsd": 20000,
+        "error": "payer_deleted_before_reservation_settlement"
+      }
+    ]
+  },
+  {
+    "runId": "staging-e2e-synthetic",
+    "attemptCount": 1,
+    "error": "direct generation carried a compound billing claim",
+    "generations": [
+      {
+        "model": "openai/gpt-6.1-sol",
+        "status": "settled",
+        "upstreamGenerationId": "gen_01M478RCBYS8C005SHKM046P0N",
+        "upstreamCostMicroUsd": 96,
+        "billedCostMicroUsd": 96
+      }
+    ]
+  },
+  {
+    "runId": "staging-e2e-synthetic",
+    "attemptCount": 3,
+    "error": "generate_media returned an MCP tool error; inspect the existing generation before any paid retry",
+    "generations": [
+      {
+        "model": "openai/gpt-6.1-sol",
+        "status": "settled",
+        "upstreamGenerationId": "gen_01M479Q80T6NDG8BTTS8E1CEHQ",
+        "upstreamCostMicroUsd": 96,
+        "billedCostMicroUsd": 96
+      },
+      {
+        "model": "recraft/recraft-v4.1-flash",
+        "status": "settled",
+        "upstreamGenerationId": "gen_01M479QW071A40EKYN4YJTFNZE",
+        "upstreamCostMicroUsd": 7000,
+        "billedCostMicroUsd": 7000
+      },
+      {
+        "model": "spacexai/grok-imagine-video-1.5-lite",
+        "status": "settled",
+        "upstreamGenerationId": "gen_01M479RGEPXNNKYH00B2XEKNTQ",
+        "upstreamCostMicroUsd": 20000,
+        "billedCostMicroUsd": 20000
+      }
+    ]
+  },
+  {
+    "runId": "staging-e2e-synthetic",
+    "attemptCount": 4,
+    "generations": [
+      {
+        "model": "openai/gpt-6.1-sol",
+        "status": "settled",
+        "upstreamGenerationId": "gen_01M47B7B2F1QPEHXB05V9BAGCX",
+        "upstreamCostMicroUsd": 96,
+        "billedCostMicroUsd": 96
+      },
+      {
+        "model": "recraft/recraft-v4.1-flash",
+        "status": "settled",
+        "upstreamGenerationId": "gen_01M47B80N0VAKS807PEWTGFWCX",
+        "upstreamCostMicroUsd": 7000,
+        "billedCostMicroUsd": 7000
+      },
+      {
+        "model": "spacexai/grok-imagine-video-1.5-lite",
+        "status": "settled",
+        "upstreamGenerationId": "gen_01M47B8PP9G61M13GB6T6R631K",
+        "upstreamCostMicroUsd": 20000,
+        "billedCostMicroUsd": 20000
+      },
+      {
+        "model": "google/gemini-3.1-flash-lite-image",
+        "status": "settled",
+        "upstreamGenerationId": "gen_01M47B9SX94SR5FYM67G8H7JCQ",
+        "upstreamCostMicroUsd": 34003,
+        "billedCostMicroUsd": 34003
+      }
+    ]
+  }
+]

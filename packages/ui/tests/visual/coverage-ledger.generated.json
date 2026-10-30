@@ -1,0 +1,1052 @@
+[
+  {
+    "target": "src/components/21dev/siri-orb.tsx#SiriOrb",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/21dev/siri-orb.tsx#SiriOrbComponent",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/ai-elements.tsx#AIMessage",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/ai-elements.tsx#AIReasoning",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/ai-elements.tsx#AITool",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/ai-elements.tsx#AIToolStatusIcon",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/ai-elements.tsx#AITrace",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/ai-elements.tsx#DisclosureMarker",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/common/animate-direction.tsx#AnimateDirection",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/animate-ellipsis.tsx#AnimatedEllipsis",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/animate-height.tsx#AnimateHeight",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/animate-in.tsx#AnimateIn",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/animated-blobs.tsx#AnimatedBlobs",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/animated-blobs.tsx#UnmemoizedAnimatedBlobs",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/autocomplete-input.tsx#AutoCompleteInput",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/autocomplete.tsx#Autocomplete",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/beta-badge.tsx#BetaBadge",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/box.tsx#Box",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/box.tsx#BoxContainer",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/box.tsx#BoxTitle",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/button-card.tsx#ButtonCard",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/confirm-dialog.tsx#ConfirmDialog",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/descriptive-sidebar.tsx#DescriptiveSidebar",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/descriptive-toggle.tsx#DescriptiveToggle",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/drawer.tsx#Drawer",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/drawer.tsx#DrawerClose",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/drawer.tsx#DrawerContent",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/drawer.tsx#DrawerDescription",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/drawer.tsx#DrawerFooter",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/drawer.tsx#DrawerHeader",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/drawer.tsx#DrawerOverlay",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/drawer.tsx#DrawerPortal",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/drawer.tsx#DrawerTitle",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/drawer.tsx#DrawerTrigger",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/empty-state-card.tsx#EmptyStateCard",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/error-state-card.tsx#ErrorStateCard",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/explainer-dialog.tsx#ExplainerDialog",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/full-screen-confetti.tsx#CelebrationBurst",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/full-screen-confetti.tsx#FullScreenConfetti",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/header.tsx#BackButton",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/header.tsx#Header",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/inline-edit-text.tsx#InlineEditText",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/markdown.tsx#createDefaultAnchor",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/markdown.tsx#DefaultParagraph",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/markdown.tsx#Markdown",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/permission-denied-box.tsx#PermissionDeniedBox",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/pretty-object.tsx#BooleanBadge",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/pretty-object.tsx#PrettyObject",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/pretty-object.tsx#PrettyValue",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/pretty-object.tsx#StringList",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/textarea-autosize.tsx#TextareaAutosize",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/common/theme-toggle.tsx#ThemeToggle",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#AttachmentCard",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBar",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarAction",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarAgent",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarAgents",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarAiToggle",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarAttachment",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarAttachments",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarAttachmentStatus",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarClassNames",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarFileInput",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarHandle",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarInput",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarOption",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarPicker",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarPickerLabels",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarProps",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarQualityControl",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarSession",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarSessionAction",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarSessionPhase",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarSessionQuestion",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarSessionQuestionLabels",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarSessionQuestionOption",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarSessionQuestions",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarSessionQuestionSelection",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarSessionTodo",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarSessionTodos",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarSkill",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarSkills",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarSubmit",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar.tsx#ComposeBarSubmitPayload",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar/compose-bar-attachment.tsx#AttachmentCard",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar/compose-bar-attachment.tsx#attachmentPreview",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar/compose-bar-attachment.tsx#ComposeBarAttachmentCard",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar/compose-bar-editor.tsx#ComposeBarEditor",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar/compose-bar-editor.tsx#ComposeBarEditorImpl",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar/compose-bar-mention-picker.tsx#ComposeBarMentionPicker",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar/compose-bar-picker.tsx#ComposeBarPickerControl",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar/compose-bar-session-questions.tsx#ComposeBarSessionQuestionsSection",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar/compose-bar-session.tsx#AnimatedEllipsis",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar/compose-bar-session.tsx#ComposeBarSessionPanel",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar/compose-bar-session.tsx#SessionVisual",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar/compose-bar-session.tsx#TodoIcon",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar/compose-bar.tsx#ComposeBar",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/compose-bar/compose-bar.tsx#ComposeBarImpl",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/magicui/blur-fade.tsx#BlurFade",
+    "kind": "owned-by",
+    "owner": "lander:route:/es/pricing"
+  },
+  {
+    "target": "src/components/quality-selector.tsx#QualityOptionContent",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/quality-selector.tsx#QualityScore",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/quality-selector.tsx#QualityScores",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/quality-selector.tsx#QualitySelector",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/accordion.tsx#Accordion",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-detail"
+  },
+  {
+    "target": "src/components/shadcn/accordion.tsx#AccordionContent",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-detail"
+  },
+  {
+    "target": "src/components/shadcn/accordion.tsx#AccordionItem",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-detail"
+  },
+  {
+    "target": "src/components/shadcn/accordion.tsx#AccordionTrigger",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-detail"
+  },
+  {
+    "target": "src/components/shadcn/alert-dialog.tsx#AlertDialog",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-detail"
+  },
+  {
+    "target": "src/components/shadcn/alert-dialog.tsx#AlertDialogAction",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-detail"
+  },
+  {
+    "target": "src/components/shadcn/alert-dialog.tsx#AlertDialogCancel",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-detail"
+  },
+  {
+    "target": "src/components/shadcn/alert-dialog.tsx#AlertDialogContent",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-detail"
+  },
+  {
+    "target": "src/components/shadcn/alert-dialog.tsx#AlertDialogDescription",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-detail"
+  },
+  {
+    "target": "src/components/shadcn/alert-dialog.tsx#AlertDialogFooter",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-detail"
+  },
+  {
+    "target": "src/components/shadcn/alert-dialog.tsx#AlertDialogHeader",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-detail"
+  },
+  {
+    "target": "src/components/shadcn/alert-dialog.tsx#AlertDialogOverlay",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-detail"
+  },
+  {
+    "target": "src/components/shadcn/alert-dialog.tsx#AlertDialogPortal",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-detail"
+  },
+  {
+    "target": "src/components/shadcn/alert-dialog.tsx#AlertDialogTitle",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-detail"
+  },
+  {
+    "target": "src/components/shadcn/alert-dialog.tsx#AlertDialogTrigger",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-detail"
+  },
+  {
+    "target": "src/components/shadcn/alert.tsx#Alert",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/alert.tsx#AlertDescription",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/alert.tsx#AlertTitle",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/badge.tsx#Badge",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/breadcrumb.tsx#Breadcrumb",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/breadcrumb.tsx#BreadcrumbEllipsis",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/breadcrumb.tsx#BreadcrumbItem",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/breadcrumb.tsx#BreadcrumbLink",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/breadcrumb.tsx#BreadcrumbList",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/breadcrumb.tsx#BreadcrumbPage",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/breadcrumb.tsx#BreadcrumbSeparator",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/button.tsx#Button",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/card.tsx#Card",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/card.tsx#CardContent",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/card.tsx#CardDescription",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/card.tsx#CardFooter",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/card.tsx#CardHeader",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/card.tsx#CardTitle",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/carousel.tsx#Carousel",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/carousel.tsx#CarouselContent",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/carousel.tsx#CarouselItem",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/carousel.tsx#CarouselNext",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/carousel.tsx#CarouselPrevious",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/checkbox.tsx#Checkbox",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/collapsible.tsx#Collapsible",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/collapsible.tsx#CollapsibleContent",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/collapsible.tsx#CollapsibleTrigger",
+    "kind": "owned-by",
+    "owner": "lander:route:/blog/6-best-ai-agent-builders-in-2026"
+  },
+  {
+    "target": "src/components/shadcn/command.tsx#Command",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/command.tsx#CommandDialog",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/command.tsx#CommandEmpty",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/command.tsx#CommandGroup",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/command.tsx#CommandInput",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/command.tsx#CommandItem",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/command.tsx#CommandList",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/command.tsx#CommandSeparator",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/command.tsx#CommandShortcut",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dialog.tsx#Dialog",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dialog.tsx#DialogClose",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dialog.tsx#DialogContent",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dialog.tsx#DialogDescription",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dialog.tsx#DialogFooter",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dialog.tsx#DialogHeader",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dialog.tsx#DialogOverlay",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dialog.tsx#DialogPortal",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dialog.tsx#DialogTitle",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dialog.tsx#DialogTrigger",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dropdown-menu.tsx#DropdownMenu",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dropdown-menu.tsx#DropdownMenuCheckboxItem",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dropdown-menu.tsx#DropdownMenuContent",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dropdown-menu.tsx#DropdownMenuGroup",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dropdown-menu.tsx#DropdownMenuItem",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dropdown-menu.tsx#DropdownMenuLabel",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dropdown-menu.tsx#DropdownMenuPortal",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dropdown-menu.tsx#DropdownMenuRadioGroup",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dropdown-menu.tsx#DropdownMenuRadioItem",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dropdown-menu.tsx#DropdownMenuSeparator",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dropdown-menu.tsx#DropdownMenuShortcut",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dropdown-menu.tsx#DropdownMenuSub",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dropdown-menu.tsx#DropdownMenuSubContent",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dropdown-menu.tsx#DropdownMenuSubTrigger",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/dropdown-menu.tsx#DropdownMenuTrigger",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/hover-card.tsx#HoverCard",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/hover-card.tsx#HoverCardContent",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/hover-card.tsx#HoverCardPortal",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/hover-card.tsx#HoverCardTrigger",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/input.tsx#Input",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/label.tsx#Label",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/popover.tsx#Popover",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/popover.tsx#PopoverAnchor",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/popover.tsx#PopoverContent",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/popover.tsx#PopoverPortal",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/popover.tsx#PopoverTrigger",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/radio-group.tsx#RadioGroup",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/radio-group.tsx#RadioGroupItem",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/separator.tsx#Separator",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/sheet.tsx#Sheet",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/sheet.tsx#SheetClose",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/sheet.tsx#SheetContent",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/sheet.tsx#SheetDescription",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/sheet.tsx#SheetFooter",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/sheet.tsx#SheetHeader",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/sheet.tsx#SheetOverlay",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/sheet.tsx#SheetPortal",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/sheet.tsx#SheetTitle",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/sheet.tsx#SheetTrigger",
+    "kind": "owned-by",
+    "owner": "web:fixture:agent-surface-busy"
+  },
+  {
+    "target": "src/components/shadcn/skeleton.tsx#Skeleton",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/textarea.tsx#Textarea",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/tooltip.tsx#Tooltip",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/tooltip.tsx#TooltipContent",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/tooltip.tsx#TooltipPortal",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/tooltip.tsx#TooltipProvider",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  },
+  {
+    "target": "src/components/shadcn/tooltip.tsx#TooltipTrigger",
+    "kind": "owned-by",
+    "owner": "web:fixture:ui-primitives"
+  }
+]

@@ -1,0 +1,105 @@
+{
+  "workspace": "Example User-zhang-s-workspace",
+  "mode": "--execute",
+  "selection": "openai-max",
+  "expectedVersion": "0.3.29",
+  "invocation": "bun /home/synthetic-user/.duet/cli-rail/bin/duet --rpc --incognito",
+  "status": "passed",
+  "backgroundRolloutSlotMs": 131747,
+  "activeRpcProcessCount": 0,
+  "desired": {
+    "generation": "82381",
+    "paused": false,
+    "quiesced": false,
+    "agentVersion": "0.3.29",
+    "gatewayVersion": "0.0.0+ec2b3d8e8e09"
+  },
+  "recentUpdates": [
+    {
+      "ts": "2026-09-28T00:10:01.239Z",
+      "operation": "gateway_update",
+      "status": "not_needed"
+    },
+    {
+      "ts": "2026-09-28T00:40:19.179Z",
+      "operation": "gateway_update",
+      "status": "not_needed"
+    },
+    {
+      "ts": "2026-09-28T04:41:12.742Z",
+      "operation": "gateway_update",
+      "status": "not_needed"
+    },
+    {
+      "ts": "2026-09-28T04:46:23.424Z",
+      "operation": "cli_reconcile",
+      "cli": "agent",
+      "status": "attempting",
+      "desiredVersion": "0.3.29"
+    },
+    {
+      "ts": "2026-09-28T04:46:24.875Z",
+      "operation": "cli_reconcile",
+      "cli": "agent",
+      "status": "applied",
+      "desiredVersion": "0.3.29"
+    }
+  ],
+  "version": "0.3.29",
+  "versionExitCode": 0,
+  "routingSha256": "31662d9bf4d3294dd634887121afe3f07c01c107d0f241b37650fed07884c11f",
+  "aliasPresent": true,
+  "savedTarget": "gpt-5.6-sol",
+  "installedPackageVersion": "0.3.29",
+  "memoryModel": "openai/gpt-6-luna",
+  "aliasReady": true,
+  "resolvedDestinations": [
+    {
+      "selector": "sol",
+      "model": "openai/gpt-6-sol",
+      "provider": "duet-gateway",
+      "thinkingLevel": "medium"
+    },
+    {
+      "selector": "sol",
+      "model": "openai/gpt-6-sol",
+      "provider": "duet-gateway",
+      "thinkingLevel": "medium"
+    }
+  ],
+  "exitCode": 0,
+  "elapsedMs": 3153,
+  "timeoutMs": 120000,
+  "signal": null,
+  "assistants": [
+    {
+      "model": "openai/gpt-6-sol",
+      "responseId": "gen_01M3K5F9CADD2G8H9VQZ0J5FKE",
+      "usage": {
+        "input": 3,
+        "output": 5,
+        "cacheRead": 0,
+        "cacheWrite": 13197,
+        "reasoning": 0,
+        "totalTokens": 13205,
+        "cost": {
+          "input": 0.000006,
+          "output": 0.00005,
+          "cacheRead": 0,
+          "cacheWrite": 0.0329925,
+          "total": 0.0330485
+        }
+      },
+      "stopReason": "stop",
+      "answer": "42",
+      "toolCalls": 0
+    }
+  ],
+  "terminal": "complete",
+  "terminalStatus": "completed",
+  "settlement": {
+    "reference": "ai_generation:gen_01M3K5F9CADD2G8H9VQZ0J5FKE",
+    "expectedMicroUsd": 132150,
+    "amountMicroUsd": -132150
+  }
+}

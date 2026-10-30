@@ -1,0 +1,22 @@
+{
+  "standardEdgeAlias": {
+    "alias": "staging.example.invalid",
+    "projectId": "prj_mPNx8yJ4JRlThnK3NMZOIpeenJjM",
+    "deploymentId": "dpl_4AunMAnNYiJWPHtjB6QFmLL3nvfa",
+    "revision": "4bb81b539e148f5f86d89b1921a11f1af6ca9109",
+    "branch": "staging"
+  },
+  "runtimeOwners": {
+    "api": {
+      "revision": "4bb81b539e148f5f86d89b1921a11f1af6ca9109",
+      "backendRevision": "4bb81b539e148f5f86d89b1921a11f1af6ca9109"
+    },
+    "web": {
+      "revision": "4bb81b539e148f5f86d89b1921a11f1af6ca9109",
+      "cacheSchema": 15
+    },
+    "docs": {
+      "revision": "4bb81b539e148f5f86d89b1921a11f1af6ca9109"
+    }
+  }
+}

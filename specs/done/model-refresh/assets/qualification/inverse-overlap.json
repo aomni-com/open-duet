@@ -1,0 +1,8 @@
+{
+  "version": "0.3.27",
+  "managedGatewayCommit": "9b2dee1eef0ef1d5a35a1d7e988846db30f3db6a",
+  "success": false,
+  "error": "Invalid routing table at /work/.duet/models.json:\n- tiers.openai-max.routes.general.target.modelName: Target \"gpt-5.6-sol\" is neither a virtual model nor a catalog name.\n- tiers.openai-max.advisor.target.modelName: Target \"gpt-5.6-sol\" is neither a virtual model nor a catalog name.\n- tiers.anthropic-max.routes.general.target.modelName: Target \"opus-5\" is neither a virtual model nor a catalog name.\n- tiers.anthropic-max.advisor.target.modelName: Target \"opus-5\" is neither a virtual model nor a catalog name.",
+  "httpRequests": 0,
+  "inputUnmodified": true
+}

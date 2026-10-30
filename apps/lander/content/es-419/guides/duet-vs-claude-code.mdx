@@ -1,0 +1,183 @@
+---
+title: 'Duet vs Claude Code: agent en la nube vs CLI'
+metaTitle: 'Duet vs Claude Code: agents en la nube vs CLI local, comparados'
+description: 'Compara Duet y Claude Code: un CLI en solitario vs un entorno de desarrollo en la nube con un agent persistente y siempre activo.'
+date: '2026-02-23'
+updatedAt: '2026-05-08'
+author:
+  name: 'David'
+  role: 'Founder'
+  link: '/'
+category: 'guides'
+tags: ['comparison', 'claude-code', 'agent-orchestration', 'alternatives']
+type: 'guide'
+image: '/guides/duet-vs-claude-code/cover.png'
+relatedPosts: ['duet-vs-codex', 'duet-vs-openclaw', 'claude-code-vs-claude-cowork']
+locale: es-419
+translationKey: 'duet-vs-claude-code'
+cta:
+  title: 'Claude Code, en la nube, siempre activo.'
+  subtitle: 'Duet corre Claude Code en un agent persistente que tu equipo comparte. Sin terminal, sin estado solo local, sin impuesto de configuración.'
+  buttonText: 'Prueba Duet gratis'
+  href: '/sign-in?from=guide-duet-vs-cc'
+---
+
+# Duet vs Claude Code
+
+<Callout emoji="💡">
+Resumen rápido
+
+Esta comparación cubre Duet vs Claude Code: una plataforma de agent en la nube gestionada vs una herramienta de programación local basada en CLI. Claude Code es potente, pero funciona por sesiones y es de un solo jugador. Duet te da Claude Code persistente, siempre activo y multijugador para todo tu equipo.
+
+</Callout>
+
+<Callout emoji="❓">
+Preguntas que responde esta página
+
+- ¿Cuál es la diferencia entre Duet y Claude Code?
+- Duet vs Claude Code: ¿cuál es mejor?
+- ¿Es Duet solo una versión en la nube de Claude Code?
+- ¿Cómo se compara Duet con Claude Code para equipos?
+- ¿Cuáles son las limitaciones de Claude Code frente a Duet?
+
+</Callout>
+
+Claude Code es la herramienta de programación agéntica de Anthropic y una de las herramientas para desarrolladores más potentes jamás construidas.
+
+Duet corre Claude Code (y otros agents) en la nube, con contexto de equipo, memoria persistente y despliegue sin configuración.
+
+Son complementarios, pero sirven casos de uso muy distintos.
+
+---
+
+## ¿Qué es Claude Code? (Y por qué los equipos topan con sus límites)
+
+Claude Code es la herramienta de programación agéntica de Anthropic, primero pensada para la terminal. Lee tu codebase, escribe y edita archivos, corre comandos, gestiona workflows de git y puede iterar durante horas en tareas complejas. Alcanzó los mil millones de dólares en ingresos anualizados dentro de los seis meses de su lanzamiento.
+
+Características clave:
+
+- Primero CLI, también disponible en VS Code, JetBrains y app de escritorio
+- Lee codebases completos, planea implementaciones de varios pasos, ejecuta de forma autónoma
+- Equipos multiagent experimentales (Agent Teams) para ejecución de tareas en paralelo
+- Claude Agent SDK para construir agents personalizados
+- Corre localmente en tu máquina durante las sesiones activas
+
+## ¿Qué es Duet?
+
+Una alternativa a Claude Code nativa en la nube
+
+Duet es un entorno de desarrollo en la nube que le da a cada usuario y equipo un servidor privado con un agent de AI persistente y siempre activo. En lugar de una sesión de terminal que muere cuando cierras tu laptop, Duet le da a tu agent su propio servidor con memoria persistente, más de 10,000 integraciones listas para usar, hosting de apps integrado, programación de tareas y un workspace compartido donde las personas asignan trabajo en sesiones duraderas e inspeccionan los eventos y artefactos resultantes.
+
+---
+
+## Duet vs Claude Code: comparación completa de funciones (2026)
+
+|                     | Duet                                                                      | Claude Code                                                                                   |
+| ------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Dónde corre         | Servidor en la nube gestionado (24/7)                                     | Tu máquina local (por sesiones)                                                               |
+| Persistencia        | Siempre activo con memoria persistente entre sesiones                     | Sin estado: cada sesión arranca desde cero                                                    |
+| Soporte de equipo   | Workspace, sesiones, archivos, apps y contexto organizacional compartidos | Un solo usuario; sin workspaces compartidos                                                   |
+| Configuración       | Un clic                                                                   | Instalar el CLI, configurar las API keys, armar los archivos CLAUDE.md                        |
+| Programación        | Cron integrado y automatización guiada por eventos                        | Ninguna: hay que construirla por fuera                                                        |
+| Modelos             | Claude Opus, Sonnet, GPT-5, enrutamiento multimodelo                      | Solo modelos Claude                                                                           |
+| Integraciones       | Más de 10,000 listas para usar (conectores gestionados + MCP)             | Ninguna integrada: requiere configuración manual de servidores MCP                            |
+| Tareas no de código | Full-stack: correo, investigación, GTM, ops, integraciones                | Enfocado en código (aunque el Agent SDK permite un uso más amplio)                            |
+| Límites de uso      | Créditos mensuales incluidos más una reserva pagada para uso adicional    | Límites por usuario que se reinician cada 5 horas, compartidos entre todas las apps de Claude |
+| Interfaz            | Workspace web con Sesiones, Apps, Archivos, Train e Integraciones         | Terminal / IDE                                                                                |
+| Identidad del agent | Identidad persistente con memoria, personalidad y contexto organizacional | Acotada a la sesión; la identidad se reinicia cada vez                                        |
+
+---
+
+## Dónde gana Claude Code: poder de programación en bruto
+
+Poder de programación en bruto. Claude Code con Opus 4.6 es posiblemente la mejor herramienta de programación con AI disponible. Entiende codebases complejos, planea cambios de varios archivos, maneja workflows de git y puede trabajar de forma autónoma durante horas. La función experimental Agent Teams incluso puede correr instancias de Claude en paralelo en distintas tareas.
+
+Ergonomía para desarrolladores. Si vives en la terminal, Claude Code se siente nativo. Se integra con VS Code, JetBrains y el workflow completo de git. El sistema de configuración CLAUDE.md es elegante.
+
+Agent SDK. El Claude Agent SDK te deja construir agents personalizados sobre la infraestructura de Claude Code, con una gestión de contexto adecuada, ecosistemas de herramientas y manejo de sesiones. Es una base potente para desarrolladores que construyen sus propios sistemas de agents.
+
+Ecosistema. El tagging con @claude en los PRs de GitHub, la extensión de Chrome para control del navegador y el soporte creciente de IDE hacen que Claude Code esté profundamente integrado en el workflow del desarrollador.
+
+## Dónde gana Duet:
+
+Equipos, persistencia y más allá del código
+
+Persistencia y memoria. Esta es la función ausente más pedida de Claude Code. Cada sesión de Claude Code arranca desde cero: sin memoria de sesiones anteriores, sin entendimiento acumulado. Los workarounds de la comunidad (archivos CLAUDE.md, flags --resume) son manuales e imperfectos. El agent de Duet tiene memoria persistente, personalidad y contexto organizacional que se construye con el tiempo. Mira [Duet AI para founders](/guides/duet-ai-for-founders) para el manual de operador que pone a trabajar esta persistencia.
+
+Siempre activo. Los agents de Claude Code corren solo cuando se les invoca y mueren cuando termina tu sesión. El agent de Duet corre 24/7 en su propio servidor en la nube, ejecuta tareas programadas y responde a eventos de sistemas conectados. No requiere una laptop encendida.
+
+Colaboración en equipo. Claude Code es, en esencia, de un solo usuario. Los topes de uso son por usuario, no compartidos. No hay forma de compartir contexto o análisis entre miembros del equipo: cada desarrollador trabaja aislado. Duet les da sesiones, archivos, apps, artefactos y contexto organizacional compartidos alrededor del mismo compañero de AI persistente.
+
+Más de 10,000 integraciones listas para usar. Claude Code no tiene integraciones integradas: conectarse a servicios externos significa configurar servidores MCP manualmente o escribir código de herramienta personalizado. Duet llega con más de 10,000 integraciones gestionadas y herramientas MCP, así que tu agent puede conectarse a Linear, Slack, Gmail, Google Calendar, GitHub y miles más sin ninguna configuración.
+
+Más allá de la programación. Claude Code está optimizado para la ingeniería de software. El agent de Duet maneja el stack completo: triage de correo, investigación de GTM, creación de contenido, automatización de operaciones, programación y más.
+
+Enrutamiento multimodelo. Claude Code solo soporta modelos Claude. Duet enruta al mejor modelo por tarea: Claude Opus para razonamiento complejo, Sonnet para velocidad, GPT-5 para casos de uso específicos.
+
+Propiedad clara de la facturación. Los límites de Claude Code se reinician cada 5 horas y se comparten entre sus apps. Los créditos mensuales de Duet se reinician con la renovación; un propietario del workspace designa al pagador, quien administra métodos, recargas de la reserva, límites e historial.
+
+---
+
+## Duet + Claude Code: por qué funcionan mejor juntos
+
+Duet no reemplaza a Claude Code: corre Claude Code (entre otros agents) en un entorno siempre activo y pensado primero para equipos. Míralo así:
+
+- Claude Code = el motor (potente AI de programación para un solo desarrollador)
+- Duet = el vehículo (plataforma en la nube gestionada que corre el motor 24/7 con contexto de equipo)
+  Muchos usuarios de Duet también usan Claude Code localmente para sesiones de programación más manuales. La diferencia es que el agent de Duet siempre está disponible, recuerda todo y trabaja para todo el equipo, no solo en la terminal de un desarrollador.
+
+---
+
+## ¿Quién debería elegir Claude Code vs Duet?
+
+Elige Claude Code (por sí solo) si:
+
+- Eres un desarrollador en solitario que quiere un asistente de programación potente basado en terminal
+- Tu trabajo es principalmente código: no necesitas correo, GTM, ops ni programación de tareas
+- Te sientes cómodo con workflows por sesiones y gestión manual de contexto
+- Prefieres la ejecución local y el control directo
+  Elige Duet si:
+
+- Eres un equipo que necesita contexto de AI compartido y workflows colaborativos
+- Quieres un agent siempre activo que trabaje mientras duermes
+- Necesitas más que programación: correo, investigación, operaciones, integraciones
+- Quieres memoria persistente que construya conocimiento organizacional con el tiempo
+- Quieres el poder de Claude Code sin gestionar infraestructura
+
+---
+
+## El veredicto: Claude Code vs Duet para equipos en 2026
+
+Claude Code es una herramienta para desarrolladores increíble. Pero es una herramienta en solitario: por sesiones, enfocada en código y sin estado. Duet toma ese mismo poder de fondo y lo envuelve en contexto de equipo, memoria persistente, infraestructura en la nube siempre activa y capacidades multidominio.
+
+Si eres un solo desarrollador escribiendo código, Claude Code es genial. Si eres un equipo corriendo agents de AI por toda tu operación, Duet es lo que necesitas.
+
+¿Listo para probar Duet? Despliega tu agent en un clic.
+
+---
+
+## Preguntas frecuentes
+
+### ¿Cuál es la diferencia principal entre Duet y Claude Code?
+
+Claude Code es una herramienta de CLI que corre en tu máquina local para tareas de programación y se detiene cuando cierras tu sesión. Duet es una plataforma en la nube donde los agents de AI corren de forma persistente 24/7 sin requerir que tu laptop esté abierta. Claude Code es una herramienta para desarrolladores; Duet es una plataforma de automatización para equipos.
+
+### ¿Puede Duet correr Claude Code en la nube?
+
+Duet corre agents impulsados por Claude en la nube que hacen muchas de las mismas cosas que hace Claude Code: generación de código, ejecución de tareas, operaciones con archivos. Usa la API de Claude con su propia infraestructura de agents, programación de tareas y funciones de equipo. Sirve para muchos de los mismos casos de uso de una forma nativa en la nube.
+
+### ¿Quién debería usar Claude Code vs Duet?
+
+Claude Code es mejor para desarrolladores individuales que quieren una integración estrecha con su entorno de desarrollo local y trabajan en tareas de programación que no necesitan correr continuamente. Duet es mejor para equipos que necesitan agents en horarios, workspaces compartidos y workflows de automatización más allá de la programación.
+
+### ¿Es Claude Code gratis comparado con Duet?
+
+Claude Code requiere una suscripción a la API de Anthropic y usa tokens por sesión. Duet incluye infraestructura en la nube y funciones de equipo además de los costos de API. Para un uso individual ligero, Claude Code puede salir más barato. Para equipos que corren agents continuamente, los precios empaquetados de Duet suelen tener más sentido.
+
+### ¿Puedes usar Claude Code y Duet juntos?
+
+Sí: muchos equipos usan Claude Code para el trabajo de desarrollo local y Duet para desplegar workflows automatizados en la nube. Claude Code para sesiones de programación interactivas; Duet para agents en segundo plano que monitorean, reportan y actúan según un calendario.
+
+### ¿Duet soporta las mismas integraciones MCP que Claude Code?
+
+Duet tiene su propio framework de integraciones para conectar agents a herramientas y APIs externas. Claude Code usa MCP para las integraciones de herramientas. Ambas plataformas permiten que los agents se conecten a servicios externos; la diferencia está en cómo se configuran y se gestionan.

@@ -1,0 +1,11 @@
+{
+  "extends": "@repo/typescript-config/react-library.json",
+  "compilerOptions": {
+    "types": ["bun", "node"],
+    "paths": {
+      "@repo/ui/*": ["./src/*"]
+    }
+  },
+  "include": [".", "src/react-styled-jsx.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}

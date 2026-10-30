@@ -1,0 +1,21 @@
+{
+  "sourceCommit": "588c89b23f669e9ab158848d1ecd53707dac09b8",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/get-convex/convex-backend/588c89b23f669e9ab158848d1ecd53707dac09b8/crates/udf/src/environment.rs",
+      "file": "crates-udf-src-environment.rs",
+      "sha256": "87d8be00f49962d83407285002cf773c9c46d791355eb340e1c441c2fea09a25"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/get-convex/convex-backend/588c89b23f669e9ab158848d1ecd53707dac09b8/crates/model/src/environment_variables/mod.rs",
+      "file": "crates-model-src-environment_variables-mod.rs",
+      "sha256": "fa728a6f8488d1721a9775aa02ce9d82ee179bd62e8263e3532c4800acf69095"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/get-convex/convex-backend/588c89b23f669e9ab158848d1ecd53707dac09b8/crates/isolate/src/environment/udf/phase.rs",
+      "file": "crates-isolate-src-environment-udf-phase.rs",
+      "sha256": "57a9cce405fe9ea57dcc2d09ac95aa211ca3c1b527e2aa7fd0834b05ee8ddc33"
+    }
+  ],
+  "conclusion": "A call-time process.env[name] read in a Convex UDF is a synchronous point lookup recorded in its transaction read set. The env edit writes the same system row. Therefore fence-aware admission mutations reading an old value must commit before the edit or be retried after it. This source proof does not replace the live deployment and drained-run census receipt."
+}

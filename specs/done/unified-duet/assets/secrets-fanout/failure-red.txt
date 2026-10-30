@@ -1,0 +1,23 @@
+bun test v1.3.14 (0d9b296a)
+
+scripts/secrets-push.test.ts:
+115 |   try {
+116 |     const key = 'api:production:DUET_API_INTERNAL_KEY'
+117 |     await writeFile(f.state, JSON.stringify({ vercel: { [key]: 'previous-secret' }, convex: {} }))
+118 |     const failed = await f.run('production', 'DUET_API_INTERNAL_KEY')
+119 |     expect(failed.exitCode).toBe(1)
+120 |     expect(failed.stored.vercel[key]).toBe('previous-secret')
+                                            ^
+error: expect(received).toBe(expected)
+
+Expected: "previous-secret"
+Received: undefined
+
+      at <anonymous> (/Users/synthetic-user/.codex/worktrees/unified-cli-sync/duet/scripts/secrets-push.test.ts:120:39)
+(fail) failed upsert preserves the prior value, cleans private input and permits retry [2426.54ms]
+
+ 0 pass
+ 1 filtered out
+ 1 fail
+ 2 expect() calls
+Ran 1 test across 1 file. [2.45s]

@@ -1,0 +1,142 @@
+{
+  "agentVersion": "0.3.26",
+  "table": {
+    "defaultTier": "frontier",
+    "tiers": {
+      "frontier": {
+        "routes": {
+          "visual": {
+            "description": "Frontend, 3D, or anything visual: UI implementation and debugging, styling, graphics, image inspection, and work where visual fidelity matters.",
+            "target": {
+              "modelName": "kimi",
+              "thinkingLevel": "medium"
+            }
+          },
+          "plan": {
+            "description": "Architecture, investigation, research, and high-stakes planning where the primary work is reasoning about what to build or do, not implementing it.",
+            "target": {
+              "modelName": "opus",
+              "thinkingLevel": "medium"
+            }
+          },
+          "implement": {
+            "description": "Backend, systems, data, CLI, and other implementation or debugging work, including tests and code changes.",
+            "target": {
+              "modelName": "sol",
+              "thinkingLevel": "medium"
+            }
+          },
+          "writing": {
+            "description": "Creative writing and prose where voice, narrative, or wording is the primary output rather than analysis or software work.",
+            "target": {
+              "modelName": "opus",
+              "thinkingLevel": "medium"
+            }
+          },
+          "general": {
+            "description": "General questions, explanations, summaries, and requests that do not fit a more specific route.",
+            "target": {
+              "modelName": "sol",
+              "thinkingLevel": "medium"
+            }
+          }
+        },
+        "advisor": {
+          "enabled": true,
+          "target": {
+            "modelName": "fable",
+            "thinkingLevel": "medium"
+          },
+          "minStepsBetween": 5
+        }
+      },
+      "balanced": {
+        "routes": {
+          "visual": {
+            "description": "Frontend, 3D, or anything visual: UI implementation and debugging, styling, graphics, image inspection, and work where visual fidelity matters.",
+            "target": {
+              "modelName": "kimi",
+              "thinkingLevel": "medium"
+            }
+          },
+          "plan": {
+            "description": "Architecture, investigation, research, and high-stakes planning where the primary work is reasoning about what to build or do, not implementing it.",
+            "target": {
+              "modelName": "sol",
+              "thinkingLevel": "medium"
+            }
+          },
+          "implement": {
+            "description": "Backend, systems, data, CLI, and other implementation or debugging work, including tests and code changes.",
+            "target": {
+              "modelName": "terra",
+              "thinkingLevel": "medium"
+            }
+          },
+          "writing": {
+            "description": "Creative writing and prose where voice, narrative, or wording is the primary output rather than analysis or software work.",
+            "target": {
+              "modelName": "sonnet",
+              "thinkingLevel": "medium"
+            }
+          },
+          "general": {
+            "description": "General questions, explanations, summaries, and requests that do not fit a more specific route.",
+            "target": {
+              "modelName": "terra",
+              "thinkingLevel": "medium"
+            }
+          }
+        },
+        "advisor": {
+          "enabled": true,
+          "target": {
+            "modelName": "fable",
+            "thinkingLevel": "medium"
+          },
+          "minStepsBetween": 5
+        }
+      },
+      "economy": {
+        "routes": {
+          "implement": {
+            "description": "Backend, systems, data, CLI, and other implementation or debugging work, including tests and code changes.",
+            "target": {
+              "modelName": "deepseek",
+              "thinkingLevel": "medium"
+            }
+          },
+          "writing": {
+            "description": "Creative writing and prose where voice, narrative, or wording is the primary output rather than analysis or software work.",
+            "target": {
+              "modelName": "luna",
+              "thinkingLevel": "low"
+            }
+          },
+          "general": {
+            "description": "General questions, explanations, summaries, and requests that do not fit a more specific route.",
+            "target": {
+              "modelName": "deepseek",
+              "thinkingLevel": "low"
+            }
+          }
+        },
+        "advisor": {
+          "enabled": false,
+          "target": {
+            "modelName": "terra",
+            "thinkingLevel": "medium"
+          },
+          "minStepsBetween": 5
+        }
+      }
+    },
+    "classifier": {
+      "target": {
+        "modelName": "typesafe-ai/jev"
+      },
+      "everySteps": 5,
+      "guidance": "Prefer continuity when the task has not materially changed, but switch routes when the work changes domains."
+    }
+  }
+}

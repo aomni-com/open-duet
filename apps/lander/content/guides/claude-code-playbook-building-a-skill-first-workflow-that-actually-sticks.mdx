@@ -1,0 +1,452 @@
+---
+title: 'The Claude Code Playbook: Skill-First Workflows'
+description: 'Build skill-first workflows with Claude Code that stick. CLAUDE.md, commands, skills, and the Explore-Plan-Execute-Verify loop. No coding required.'
+date: '2026-02-17'
+updatedAt: '2026-02-23'
+author:
+  name: 'Sawyer Middeleer'
+  avatar: '/authors/sawyer-middeleer.png'
+  link: 'https://www.linkedin.com/in/sawyer-middeleer/'
+category: 'guides'
+tags: ['claude-code', 'skills', 'workflow', 'automation', 'claude-md']
+type: 'guide'
+image: '/guides/claude-code-playbook-building-a-skill-first-workflow-that-actually-sticks/playbook.png'
+cta:
+  title: 'Skip the CLAUDE.md learning curve.'
+  subtitle: 'Duet runs durable AI sessions with shared playbook files, business context in Train, and managed Integrations in one workspace.'
+  buttonText: 'Start with the playbook'
+  href: '/sign-in?from=guide-cc-playbook'
+---
+
+We've been using Claude Code every day for months. Initially, it was chaos.
+
+Claude would overwrite work it shouldn't touch. Ignore instructions we'd given five minutes earlier. Generate walls of output when a few sentences would've done the job. And the longer a session went, the more it drifted — confidently wrong about things that were true 20 minutes ago.
+
+The model wasn't the problem. Our setup was.
+
+So we built a system that works — and we're giving it away. Every person on the Duet team runs a version of this, and it just works. No coding experience required.
+
+**TLDR;**
+
+- A `CLAUDE.md` file that makes Claude behave consistently every single time
+- Ready-made commands so you stop re-explaining yourself every session
+- Skills that give Claude deep expertise in specific domains (marketing, writing, strategy)
+- The Explore, Plan, Execute, Verify loop we run daily
+- Context habits that prevent the slow drift that makes AI unreliable
+
+<GuideTOC
+  items={[
+    {
+      number: 1,
+      title: 'Before You Start',
+      href: '#before-you-start-this-guide-is-good-for-you-if',
+    },
+    {
+      number: 2,
+      title: 'Why Most People Struggle',
+      href: '#why-most-people-struggle-with-claude-code',
+    },
+    {
+      number: 3,
+      title: 'CLAUDE.md: Your Instruction Manual',
+      href: '#claudemd-your-projects-instruction-manual',
+    },
+    { number: 4, title: 'Commands: One-Click Workflows', href: '#commands-one-click-workflows' },
+    { number: 5, title: 'Skills: Deep Expertise', href: '#skills-giving-claude-deep-expertise' },
+    {
+      number: 6,
+      title: 'Explore, Plan, Execute, Verify',
+      href: '#a-simple-workflow-that-keeps-things-on-track',
+    },
+    { number: 7, title: 'Connecting Tools with MCP', href: '#connecting-external-tools-with-mcp' },
+    { number: 8, title: 'Context Hygiene', href: '#context-hygiene-keeping-claude-sharp' },
+    { number: 9, title: "Mistakes We've Made", href: '#mistakes-weve-made-so-you-dont-have-to' },
+    { number: 10, title: 'Get the Starter Pack', href: '#get-the-starter-pack' },
+    { number: 11, title: 'FAQ', href: '#frequently-asked-questions' },
+  ]}
+/>
+
+---
+
+## Before you start. This guide is good for you if…
+
+You've tried Claude Code a few times. You think it's powerful but unpredictable. Some sessions are magic, others are a mess. You're tired of re-explaining the same things, or getting outputs that miss the mark.
+
+This is the fix. And you don't need to be a developer to use it. If you haven't used Claude Code at all yet, start with [The Ultimate Beginner's Guide](/guides/claude-code-for-founders) first.
+
+---
+
+## Why Most People Struggle with Claude Code
+
+Three gaps that explain 90% of bad sessions:
+
+**1. Nothing is written down.**
+
+Your brand voice, project context, preferences — they live in your head. Claude can't read minds. If your standards aren't in a file, Claude invents its own. Every time.
+
+**2. Everyone starts from scratch.**
+
+Every new session, you re-explain the same context. "Here's our brand voice. Here's our audience. Here's what we did last time." It's exhausting and the quality is inconsistent.
+
+**3. Context degrades over time.**
+
+Long sessions accumulate stale information. Claude starts referencing things from 30 minutes ago that aren't true anymore. Confidence stays high. Accuracy drops. You don't notice until you read the output closely.
+
+The fix isn't better prompting. It's a system.
+
+---
+
+## CLAUDE.md: Your Project's Instruction Manual
+
+`CLAUDE.md` is a file that Claude Code reads automatically at the start of every conversation. Think of it as a brief you'd write for a new freelancer — except this one actually gets read. Every. Single. Time.
+
+![Claude loads CLAUDE.md from three places](/guides/claude-code-playbook-building-a-skill-first-workflow-that-actually-sticks/claude-loads-it-from-three-places-priority-order.png)
+
+Claude loads it from three places:
+
+- `CLAUDE.md` in your project folder — shared context for your whole team
+- `.claude/CLAUDE.md` — additional project details
+- `~/.claude/CLAUDE.md` — your personal preferences (stays local to you)
+
+### What goes in it
+
+Keep it focused on five things:
+
+**Project Overview:** What is this project? What are we working on?
+
+> "Duet is a marketing platform for technical founders. Our audience is small teams under 10 people. Tone is direct, no-fluff, value-first."
+
+**Key Context:** What does Claude need to know to do good work?
+
+> "Our brand voice is conversational but authoritative. We never use corporate jargon. We target technical founders, not enterprise buyers."
+
+**Preferences:** How should Claude approach tasks?
+
+> "Keep outputs concise. Use bullet points over paragraphs. Always ask before making major changes to existing content."
+
+**Reference Files:** Where should Claude look for more detail?
+
+> "Brand voice guidelines are in `00_foundation/brand-voice/`. Check `raw-context/` for customer research and call notes."
+
+**Do-Not List:** What should Claude avoid?
+
+> "Never use buzzwords like 'synergy' or 'leverage.' Never publish content without review. Never change the brand voice doc without asking."
+
+### Keep it short
+
+This matters more than people think. `CLAUDE.md` loads into every conversation. The bigger it gets, the more space it takes up before you've even asked your first question. Aim for under 15KB. If it's growing past that, break things into separate files in `.claude/rules/` — they'll load automatically but only when relevant.
+
+### Add a Definition of Done
+
+This one addition will save you more frustration than everything else in this section combined:
+
+```
+## Definition of Done
+- Output matches our brand voice
+- Content is reviewed before publishing
+- Sources are cited where applicable
+- Formatting follows our style guide
+- No placeholder text left in final output
+```
+
+Without this, Claude declares work "complete" prematurely. With it, Claude has a concrete checklist to hit. Simple as that.
+
+---
+
+## Commands: One-Click Workflows
+
+Every time you type "write me a LinkedIn post about our new feature," you get slightly different results. The wording varies, the context changes, and Claude interprets it differently each time.
+
+Commands fix this.
+
+Commands are simple text files in `.claude/commands/` that become slash commands. The file name becomes the command name. The file content is the prompt. Everyone on your team gets identical, repeatable behavior.
+
+```
+.claude/commands/
+  blog-outline.md
+  linkedin-post.md
+  email-draft.md
+  competitor-brief.md
+  weekly-report.md
+  content-review.md
+```
+
+![The 6 commands you need on day one](/guides/claude-code-playbook-building-a-skill-first-workflow-that-actually-sticks/the-6-commands-you-need-on-day-one.png)
+
+### Commands you should create on day one
+
+| **Command**         | **What it does**                                                   | **When to use**                                   |
+| ------------------- | ------------------------------------------------------------------ | ------------------------------------------------- |
+| `/blog-outline`     | Creates a structured blog outline with key points and CTA          | Starting any new article                          |
+| `/linkedin-post`    | Drafts a LinkedIn post in your brand voice with a hook and CTA     | Daily or weekly content creation                  |
+| `/email-draft`      | Writes an email sequence or one-off email following your templates | Outreach, nurture sequences, announcements        |
+| `/competitor-brief` | Researches a competitor and produces a structured comparison       | Before writing comparison pages or sales material |
+| `/weekly-report`    | Summarizes this week's activity, metrics, and next steps           | Monday planning or Friday wrap-up                 |
+| `/content-review`   | Reviews any content for brand voice, clarity, and effectiveness    | Before publishing anything                        |
+
+These are starting points. Create commands for anything you do repeatedly.
+
+### Commands vs Skills: what's the difference?
+
+![Commands vs Skills explained](/guides/claude-code-playbook-building-a-skill-first-workflow-that-actually-sticks/skills-and-commands.png)
+
+This trips people up, so here's the simple version:
+
+**Commands** are buttons you press. You type `/linkedin-post` and it runs. Explicit. Intentional. You decide when to use them.
+
+**Skills** are expertise that activates automatically. Claude reads the skill description at startup. When your conversation matches a skill's domain — say, you ask about email sequences — the full skill instructions load automatically. You don't have to remember to trigger them.
+
+Commands live in `.claude/commands/` (single files). Skills live in `.claude/skills/` (folders with supporting reference material).
+
+**Use commands for repeatable workflows. Use skills for domain expertise.**
+
+For example, you might have a `/linkedin-post` command that kicks off the writing process, while a `social-content` skill ensures Claude always knows best practices for LinkedIn formatting, hooks, and engagement — without you having to explain it.
+
+---
+
+## Skills: Giving Claude Deep Expertise
+
+Skills are the most powerful — and most underused — feature in Claude Code. They turn Claude from a general-purpose assistant into a domain expert. For the full technical breakdown of how skills compare to tools and MCP, see [Agent Skills 101](/guides/agent-skills-101-tools-vs-mcp-vs-skills).
+
+A skill is a folder containing:
+
+- **`SKILL.md`** — the core instruction file with frameworks, best practices, and decision logic
+- **Supporting files** — templates, examples, reference material
+
+When Claude detects that your conversation matches a skill's domain, it automatically loads the full instructions. No prompting needed.
+
+### Why skills matter
+
+Without skills, every time you ask Claude to write marketing copy, you have to re-explain your frameworks, your audience, your voice. With skills, all of that is pre-loaded. Claude writes like someone who's read your entire marketing playbook — because it has.
+
+### Example: how skills work in practice
+
+Say you have these skills installed:
+
+- `copywriting` — your copy frameworks, persuasion patterns, CTA formulas
+- `brand-voice` — tone, vocabulary, dos and don'ts
+- `email-sequence` — drip campaign best practices, subject line templates
+
+When you say "write a welcome email sequence for new trial users," Claude automatically loads the email-sequence skill, cross-references your brand voice, and applies your copy frameworks. You get a polished output on the first try — not the third.
+
+### Building your own skills
+
+You don't need to be technical. A skill is just a markdown file with clear instructions:
+
+```
+# Skill: Blog Writing
+
+## When to activate
+When the user asks to write, outline, or edit a blog post.
+
+## Instructions
+- Always start with a hook that addresses a specific pain point
+- Use short paragraphs (2-3 sentences max)
+- Include a clear CTA at the end
+- Reference our customer research in raw-context/ for real examples
+- Follow our brand voice: conversational, direct, no jargon
+
+## Templates
+[Include your blog post template here]
+```
+
+Drop this in `.claude/skills/blog-writing/SKILL.md` and Claude picks it up automatically. For a deeper look at building a shared skill library that works across Claude.ai, the API, and the Agent SDK, see [Beyond Claude Code: Building a Shared Skill Library](/guides/beyond-claude-code-building-a-shared-skill-library).
+
+---
+
+## A Simple Workflow That Keeps Things on Track
+
+![Explore, Plan, Execute, Verify loop](/guides/claude-code-playbook-building-a-skill-first-workflow-that-actually-sticks/loop.png)
+
+Explore, Plan, Execute, Verify. This is what makes Claude Code predictable instead of chaotic.
+
+### Explore first
+
+Before Claude produces anything, make sure it understands the context.
+
+This prevents the most common failure mode: Claude generating content that ignores your existing work, your audience, or constraints you mentioned two messages ago.
+
+Point Claude to the relevant files. Have it read your brand guidelines, check your previous content, look at your notes. Never let Claude create from a blank slate when context exists.
+
+### Plan before you execute
+
+For anything beyond a quick one-liner, ask Claude to outline its approach first. This is the single biggest quality lever.
+
+The most expensive mistake: skipping the plan on a "simple" task. Claude will happily generate 2,000 words of content that misses the point entirely. A 30-second plan prevents a 30-minute rewrite.
+
+A good plan includes: what Claude will create, the structure it'll follow, which reference files it'll use, and what the output will look like.
+
+### Execute in focused chunks
+
+Once the plan looks right:
+
+- One task at a time — don't ask Claude to write a blog post, three emails, and a landing page in one message
+- Review as you go — catch drift early before it compounds
+- Keep the scope tight — if Claude starts expanding beyond what you asked, pull it back
+
+### Verify before you use it
+
+Every output should pass your Definition of Done before you consider it finished. Does it match your brand voice? Is it the right length? Does it actually say something useful?
+
+Build this into your `CLAUDE.md` so Claude checks itself — not because you remembered to ask.
+
+---
+
+## Connecting External Tools with MCP
+
+MCP (Model Context Protocol) lets Claude Code talk to external tools you already use — Google Sheets, Notion, your CRM, email platforms. Instead of copying and pasting data between tools, Claude can read from and write to them directly. For setup instructions, see the [MCP Tools section in the Beginner's Guide](/guides/claude-code-for-founders#6-mcp-tools).
+
+### Why this matters for GTM teams
+
+Imagine telling Claude: "Pull our latest campaign data from the Google Sheet, cross-reference it with leads in our CRM, and draft a performance summary." With MCP, Claude can actually do this — no manual data wrangling. See [How to Run Your Entire Business with Claude Code](/guides/claude-code-for-founders) for real examples of this in action.
+
+### Common MCP connections for non-engineering teams
+
+| **Tool**                  | **What Claude can do**                                      |
+| ------------------------- | ----------------------------------------------------------- |
+| Google Sheets             | Read campaign data, update tracking sheets, create reports  |
+| Notion                    | Read meeting notes, update content calendars, pull research |
+| CRM (Attio, HubSpot)      | Look up contacts, enrich lead data, update records          |
+| Email (Instantly, Resend) | Pull campaign analytics, manage lead lists                  |
+| LinkedIn                  | Research prospects, draft posts, check engagement           |
+
+### Start small
+
+Don't connect everything at once. Each connection takes up space in Claude's memory. The rules:
+
+- **Start with 1-2 tools** you use every day
+- **Read-only first** — let Claude pull data before you let it write data
+- **Test it** — make sure Claude returns the right information before building workflows around it
+- **Document it** in your `CLAUDE.md` so your team knows what's available
+
+---
+
+## Context Hygiene: Keeping Claude Sharp
+
+Every feature in this guide — `CLAUDE.md`, commands, skills, MCP — exists partly to manage one reality: Claude's memory fills up. And when it fills up, things go sideways quietly.
+
+### /clear between tasks
+
+If you're starting something unrelated to what Claude was just working on, type `/clear` first. Always.
+
+The cost of re-establishing context is lower than the cost of Claude referencing stale information from a previous task. Every time.
+
+### /compact when continuing
+
+If you want to keep the current conversation going but Claude seems to be slowing down or losing track:
+
+```
+/compact Keep the content plan and brand voice notes. Drop the research.
+```
+
+But compaction is lossy — you can't fully control what gets kept. When in doubt, `/clear` and start fresh.
+
+### The daily habits
+
+- `/clear` between unrelated tasks
+- Start new sessions for new projects
+- Keep `CLAUDE.md` concise — every extra line costs space every session
+- If Claude starts giving off-base responses, the context is stale. Clear it.
+
+---
+
+## Mistakes We've Made So You Don't Have To
+
+![Common mistakes and how to fix them](/guides/claude-code-playbook-building-a-skill-first-workflow-that-actually-sticks/mistakes-weve-made-so-you-dont-have-to.png)
+
+| **Mistake**                     | **What happens**                                          | **Fix**                                                   |
+| ------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| No `CLAUDE.md`                  | Claude reinvents your standards every session             | Create a minimal one today                                |
+| Huge `CLAUDE.md`                | Uses up Claude's memory before you even start             | Keep under 15KB, use `.claude/rules/` for the rest        |
+| No skills installed             | Claude gives generic outputs instead of expert-level work | Add skills for your core workflows (copy, email, content) |
+| Skipping the plan               | 2,000 words of content that misses the point              | Always plan non-trivial work                              |
+| Connecting too many tools       | Claude's memory shrinks, quality drops                    | Start with 1-2 MCP connections                            |
+| Never clearing context          | Drift, stale references, off-brand outputs                | `/clear` between tasks                                    |
+| Doing everything in one session | Claude loses track, outputs degrade                       | One task per session, use commands for consistency        |
+
+---
+
+## Get the Starter Pack
+
+![Get the starter pack](/guides/claude-code-playbook-building-a-skill-first-workflow-that-actually-sticks/get-the-starter-pack.png)
+
+We packaged everything from this guide into files you can drop into your project today:
+
+- **`CLAUDE.md` template** — ready to customize with your brand and context
+- **6 starter commands** — `/blog-outline`, `/linkedin-post`, `/email-draft`, `/competitor-brief`, `/weekly-report`, `/content-review`
+- **Example skills** — copywriting, brand voice, and email sequence skills you can adapt
+- **Context hygiene cheat sheet** — one-page reference for your team
+
+**→** [**Download the Starter Pack**](https://github.com/anianroid/claude-code-starter-pack)
+
+Drop your email and you'll get instant access to the full pack.
+
+---
+
+## Frequently Asked Questions
+
+<Accordion type="single" collapsible className="w-full">
+
+<AccordionItem value="claude-md">
+  <AccordionTrigger>What is CLAUDE.md and why does it matter?</AccordionTrigger>
+  <AccordionContent>
+    It's a file Claude Code reads automatically at the start of every session. Your project context,
+    brand guidelines, preferences — all in one place. Without it, Claude starts every session with
+    zero memory of how you work.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="coding">
+  <AccordionTrigger>Do I need coding experience to use this?</AccordionTrigger>
+  <AccordionContent>
+    No. `CLAUDE.md` is a plain text file. Commands are plain text files. Skills are plain text files
+    in folders. If you can write a Google Doc, you can set this up.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="skills">
+  <AccordionTrigger>What are skills and how do I use them?</AccordionTrigger>
+  <AccordionContent>
+    Skills are pre-written instructions that give Claude expertise in specific domains. Install them
+    in `.claude/skills/` and Claude automatically uses them when relevant. Think of them as hiring a
+    specialist instead of a generalist.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="commands-vs-skills">
+  <AccordionTrigger>Should I use commands or skills?</AccordionTrigger>
+  <AccordionContent>
+    Both, for different things. Commands for workflows you trigger on purpose (`/linkedin-post`,
+    `/email-draft`). Skills for expertise Claude should apply automatically (brand voice,
+    copywriting best practices). Start with commands. Add skills once you see patterns.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="mcp">
+  <AccordionTrigger>How do I connect Claude to my other tools?</AccordionTrigger>
+  <AccordionContent>
+    Through MCP (Model Context Protocol). You configure connections in a `.mcp.json` file. Start
+    with one tool — usually Google Sheets or Notion — and expand from there. Ask your team or check
+    the Claude Code docs for setup steps.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="clear-vs-compact">
+  <AccordionTrigger>When should I use /clear vs /compact?</AccordionTrigger>
+  <AccordionContent>
+    `/clear` between unrelated tasks — it's a full reset (but keeps your `CLAUDE.md`). `/compact`
+    when you want to keep working on the same thing but need more room. Default to `/clear` when
+    possible — compaction is lossy.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="team">
+  <AccordionTrigger>Can my whole team use the same setup?</AccordionTrigger>
+  <AccordionContent>
+    Yes. Everything in `.claude/commands/` and `.claude/skills/` can be shared. Commit it to your
+    project and everyone gets identical behavior. Personal preferences go in `~/.claude/` and stay
+    local.
+  </AccordionContent>
+</AccordionItem>
+
+</Accordion>

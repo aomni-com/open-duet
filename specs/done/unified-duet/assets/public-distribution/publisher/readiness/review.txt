@@ -1,0 +1,2 @@
+No actionable regressions found in the staged, unstaged, or untracked changes. The stock-staging test passed; publisher integration tests could not be rerun because Docker access was denied.
+No actionable regressions found in the staged, unstaged, or untracked changes. The stock-staging test passed; publisher integration tests could not be rerun because Docker access was denied.

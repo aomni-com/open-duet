@@ -1,0 +1,40 @@
+bun test v1.3.14 (0d9b296a)
+
+convex/strict-runtime-observation.test.ts:
+29 |         needsModelCredentials: false,
+30 |         versions: { gateway: '0.0.0+transition', agent: 'old-agent', duetfs: 'old-duetfs', image: 'original-image' },
+31 |       },
+32 |     })
+33 |     const row = await t.run(ctx => ctx.db.get(workspaceId))
+34 |     expect(row).toMatchObject({ runtimeVersion: '0.0.0+transition', imageVersion: 'original-image', imageRef: 'original-image' })
+                     ^
+error: expect(received).toMatchObject(expected)
+
+  {
++   "_creationTime": 1791118331280.001,
++   "_id": "0000000000000000010001workspaces",
++   "billingUserId": "000000000000000000000010000users",
++   "createdAt": 1,
++   "gatewayVersion": "0.0.0+transition",
+    "imageRef": "original-image",
+    "imageVersion": "original-image",
+-   "runtimeVersion": "0.0.0+transition",
++   "lastHeartbeatAt": 2,
++   "name": "Runtime observation",
++   "servicingStatus": "paused",
++   "slug": "runtime-observation",
++   "status": "active",
++   "updatedAt": 2,
++   "vmTokenHash": "fixture-token",
+  }
+
+- Expected  - 1
++ Received  + 12
+
+      at <anonymous> (/Users/synthetic-user/.codex/worktrees/unified-birth-fence/duet/packages/backend/convex/strict-runtime-observation.test.ts:34:17)
+(fail) the backend-first argument bridge writes only the complete runtime identity [17.35ms]
+
+ 0 pass
+ 1 fail
+ 1 expect() calls
+Ran 1 test across 1 file. [81.00ms]

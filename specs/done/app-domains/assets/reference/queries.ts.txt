@@ -1,0 +1,101 @@
+import { v } from 'convex/values'
+
+import { type Id } from '@repo/backend/convex/_generated/dataModel'
+import { query } from '@repo/backend/convex/_generated/server'
+import * as Auth from '@repo/backend/convex/model/auth'
+import * as OrganizationUsers from '@repo/backend/convex/model/organizationUsers'
+
+import { getImageUrl } from '../../../registry/endpoint'
+
+export const listForOrganization = query({
+  args: { organizationId: v.id('organizations') },
+  handler: async (ctx, args) => {
+    const { user } = await Auth.ensureAuthAndUser(ctx)
+    const isMember = await OrganizationUsers.isUserInOrganization(ctx, {
+      userId: user._id,
+      organizationId: args.organizationId,
+    })
+    if (!isMember) {
+      throw new Error('Not a member of this organization')
+    }
+
+    return await ctx.db
+      .query('customDomains')
+      .withIndex('by_organization', q => q.eq('organizationId', args.organizationId))
+      .collect()
+  },
+})
+
+export const listForApp = query({
+  args: {
+    organizationId: v.id('organizations'),
+    appSlug: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const { user } = await Auth.ensureAuthAndUser(ctx)
+    const isMember = await OrganizationUsers.isUserInOrganization(ctx, {
+      userId: user._id,
+      organizationId: args.organizationId,
+    })
+    if (!isMember) {
+      throw new Error('Not a member of this organization')
+    }
+
+    const all = await ctx.db
+      .query('customDomains')
+      .withIndex('by_organization', q => q.eq('organizationId', args.organizationId))
+      .collect()
+    return all.filter(d => d.appSlug === args.appSlug)
+  },
+})
+
+export const get = query({
+  args: { domainId: v.id('customDomains') },
+  handler: async (ctx, args) => {
+    const { user } = await Auth.ensureAuthAndUser(ctx)
+    const domain = await ctx.db.get(args.domainId)
+    if (!domain) return null
+
+    const isMember = await OrganizationUsers.isUserInOrganization(ctx, {
+      userId: user._id,
+      organizationId: domain.organizationId,
+    })
+    if (!isMember) {
+      throw new Error('Not a member of this organization')
+    }
+
+    return domain
+  },
+})
+
+export const listConfiguredApps = query({
+  args: { organizationId: v.id('organizations') },
+  handler: async (ctx, args) => {
+    const { user } = await Auth.ensureAuthAndUser(ctx)
+    const isMember = await OrganizationUsers.isUserInOrganization(ctx, {
+      userId: user._id,
+      organizationId: args.organizationId,
+    })
+    if (!isMember) {
+      throw new Error('Not a member of this organization')
+    }
+
+    const org = await ctx.db.get(args.organizationId)
+    if (!org?.sandboxId) return []
+
+    const apps = await ctx.db
+      .query('sandboxApps')
+      .withIndex('by_sandbox', q => q.eq('sandboxId', org.sandboxId as Id<'sandboxes'>))
+      .collect()
+
+    return apps.map(app => ({
+      _id: app._id,
+      name: app.name,
+      type: app.type,
+      path: app.path,
+      slug: app.slug,
+      headless: app.headless ?? false,
+      iconUrl: app.iconStorageId ? getImageUrl(app.iconStorageId, 64, 64) : null,
+    }))
+  },
+})

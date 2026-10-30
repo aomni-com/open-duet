@@ -1,0 +1,103 @@
+{
+  "status": "recovered-verification",
+  "package": "@duetso/agent@1.0.0",
+  "version": "1.0.0",
+  "verifiedAt": "2026-10-05T03:50:25.967315+00:00",
+  "source": {
+    "revision": "da3779eb8e153a57c6f7e7f4d28ff7c75afd336a",
+    "tree": "4e1943dcefc771a8c4058e53772818d778333415",
+    "repository": "https://github.com/aomni-com/duet",
+    "gitArchiveSha256": "71e614efe1784a113b3d72753cc7468c65888b1e44a400bf645b74ea46dbb9c4",
+    "inputSha256": {
+      "bun.lock": "ae0af7f27aa9f6bf41f61d4dc162702adf886409750b7d54b2ba4130a8eedf75",
+      "package.json": "37f45b34e4c461e0b50fe77cfae9161269595976704e99287887df168bf7aa85",
+      "packages/duet/package.json": "9ee9daf310a6830f7bd077187c39445d2dcc48b566a42d2a42893eeb131d3d50",
+      "packages/agent/package.json": "459add00bbef3513d64849dfb583c4f58ebe7f025da3c5f23706cac0e5e8e7aa",
+      "packages/duet/scripts/build-public-package.ts": "d1206b1395fb4031b9351d60dd771e2dffa9c44133b38f1a866e71eae24365aa",
+      "packages/duet/scripts/release-public-cli.ts": "f6ad76cf2174804e02eb4361993c39e61b6ac8d65045d560b9fe0e57f2903a02",
+      ".github/workflows/public-cli-release.yml": "c964c5c4ae8fc68238823899964ab44f0903e925f3cd6343d6380552b1f9be1e",
+      "patches/@user@example.invalid": "0bf942aa04e9a499f19771bc27e28467f33419dee89323598d96e116889adaac"
+    },
+    "checkoutClean": true
+  },
+  "originalWorkflow": {
+    "runId": 37259953781,
+    "url": "https://github.com/aomni-com/duet/actions/runs/37259953781",
+    "attempt": 1,
+    "conclusion": "failure",
+    "createdAt": "2026-10-05T03:34:12Z",
+    "completedAt": "2026-10-05T03:36:25Z",
+    "receiptAvailable": false,
+    "artifactsCount": 0,
+    "failure": "immediate post-publish npm view @duetso/agent@1.0.0 --json --fetch-retries=0 returned E404 No match found for version 1.0.0",
+    "productionReadinessLog": {
+      "observedAt": "2026-10-05T03:36:19.4186203Z",
+      "apiRevision": "da3779eb8e153a57c6f7e7f4d28ff7c75afd336a",
+      "backendRevision": "da3779eb8e153a57c6f7e7f4d28ff7c75afd336a"
+    }
+  },
+  "registry": {
+    "tarball": "https://registry.npmjs.org/@duetso/agent/-/agent-1.0.0.tgz",
+    "integrity": "sha512-hvOvJeiEYVvjoUZd7L9yry1ihPkd1ue5KGamytbksNXWGOeInJi4tsj1gj2kmhTXjZ3QUMKrRza8F/NsXlDnuA==",
+    "publishedAt": "2026-10-05T03:37:59.520Z",
+    "npmVersion": "11.19.0",
+    "nodeVersion": "24.21.0",
+    "gitHeadPresent": false
+  },
+  "artifact": {
+    "sha256": "2c41eff13547087d8d9e4ccec4f56442112213ef00bb1c91cc1cba541fed4630",
+    "integrity": "sha512-hvOvJeiEYVvjoUZd7L9yry1ihPkd1ue5KGamytbksNXWGOeInJi4tsj1gj2kmhTXjZ3QUMKrRza8F/NsXlDnuA==",
+    "sha1": "ea094c2c4cd8b78a819b525487ea8305f8f8b0fc",
+    "bytes": 2525030,
+    "entrySha256": "9828385eec4527f97eb01e7db67a9cdaf57041a62412c2dff1d746a46019d8a4",
+    "entryBytes": 13076321
+  },
+  "reconstruction": {
+    "bun": "1.3.14+0d9b296af",
+    "node": "24.21.0",
+    "npm": "11.19.0",
+    "platform": "linux/amd64",
+    "containerBaseImage": "sha256:9074d8e019c4b0a8e9ab64647a1b826067dbcb2d8351a8aa879d80e7c946711b",
+    "nodeDistribution": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.gz",
+    "nodeDistributionSha256": "6e1db87ef58b8819e5d5402eff1536491b18edd8eb7bee5ef7897876e88dc5ff",
+    "toolsMatchOriginalJobLog": true,
+    "frozenLockfile": true,
+    "sameCommandsAsOriginalStagingAndPacking": true,
+    "fullTarballByteEquality": true,
+    "integrityEqualsRegistry": true,
+    "commands": [
+      "bun install --frozen-lockfile --filter @repo/agent --filter @duetso/agent",
+      "bun run --cwd packages/agent build",
+      "bun packages/duet/scripts/build-public-package.ts",
+      "npm pack --json --ignore-scripts --pack-destination /evidence/rebuilt"
+    ],
+    "workingDirectory": "/home/synthetic-user/work/duet/duet",
+    "sharedCache": "duet-agent-bun-cache (standard shared package-content cache mounted read/write because Bun install rejected a read-only cache)",
+    "buildOutput": "independent disposable container /home/synthetic-user/work/duet/duet/packages/*/dist"
+  },
+  "registryInstallVerified": false,
+  "limitations": [
+    "The original workflow remains failed and has no published receipt. This receipt records verification recovered later, not an original success.",
+    "Registry time for 1.0.0 (03:37:59.520Z) is later than the original workflow end (03:36:25Z); the timestamp discrepancy is unresolved.",
+    "The registry version has no gitHead and publication used --provenance=false; exact reproducibility proves artifact/source equality, not a registry-signed source attestation.",
+    "Three cold registry installs and legacy deprecations are downstream work and not verified by this receipt."
+  ],
+  "externalWritesPerformed": false,
+  "evidence": {
+    "sourceArchive": "source-da3779eb8.tar",
+    "reconstructedTarball": "rebuilt/duetso-agent-1.0.0.tgz",
+    "originalRunLog": "original-run.log",
+    "reconstructionLog": "reconstruct.log",
+    "originalArtifacts": "original-artifacts.json",
+    "registryPackument": "registry-packument.json",
+    "nodeDistribution": "node-v24.21.0-linux-x64.tar.gz",
+    "nodeChecksums": "node-SHASUMS256.txt"
+  },
+  "timestampInvestigation": {
+    "workflowRuns": "source-workflow-runs.json",
+    "originalAttempt": "original-attempt1.json",
+    "matchingRuns": 1,
+    "attempts": 1,
+    "resolution": "unresolved: GitHub has one failed push run and one attempt for this source; registry timestamp is 94.520 seconds after run updated_at"
+  }
+}

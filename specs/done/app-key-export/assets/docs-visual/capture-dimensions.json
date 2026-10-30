@@ -1,0 +1,70 @@
+[
+  {
+    "id": "desktop-docs-apps",
+    "before": {
+      "width": 1440,
+      "height": 9053
+    },
+    "candidate": {
+      "width": 1440,
+      "height": 10804
+    },
+    "crop": {
+      "x": 0,
+      "y": 1050,
+      "width": 1440,
+      "height": 2000
+    }
+  },
+  {
+    "id": "desktop-docs-api-keys",
+    "before": {
+      "width": 1440,
+      "height": 2587
+    },
+    "candidate": {
+      "width": 1440,
+      "height": 2879
+    },
+    "crop": {
+      "x": 0,
+      "y": 1200,
+      "width": 1440,
+      "height": 1000
+    }
+  },
+  {
+    "id": "mobile-docs-apps",
+    "before": {
+      "width": 390,
+      "height": 14016
+    },
+    "candidate": {
+      "width": 390,
+      "height": 16384
+    },
+    "crop": {
+      "x": 0,
+      "y": 1850,
+      "width": 390,
+      "height": 2700
+    }
+  },
+  {
+    "id": "mobile-docs-api-keys",
+    "before": {
+      "width": 390,
+      "height": 4031
+    },
+    "candidate": {
+      "width": 390,
+      "height": 4597
+    },
+    "crop": {
+      "x": 0,
+      "y": 1700,
+      "width": 390,
+      "height": 1800
+    }
+  }
+]

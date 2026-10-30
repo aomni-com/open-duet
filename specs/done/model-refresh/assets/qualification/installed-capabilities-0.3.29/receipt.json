@@ -1,0 +1,267 @@
+{
+  "scope": "Controlled installed-package qualification, not a live model quality evaluation",
+  "package": {
+    "version": "0.3.29",
+    "gitHead": "a8676bc7f10fece825b4e82bd2d65d6dcdd0e072",
+    "integrity": "sha512-FSgTO2mBVc7rB/4Aa9sB0I8M4e1QQgcWF050R8L5hm7S8hJHQ2zqDYJaXgJT+1EDPUUmrkC9jBZN7v/Py1oHgw==",
+    "shasum": "dd1f7e1b1ef028f79b7a82f2d96c2d1b1bd36acd",
+    "tarball": "https://registry.npmjs.org/@duetso/agent/-/agent-0.3.29.tgz",
+    "bytes": 868157,
+    "integrityVerified": true,
+    "installedFilesVerified": 669,
+    "installedBytesMatchRegistryTarball": true
+  },
+  "runtime": {
+    "bun": "1.3.11",
+    "packages": {
+      "@duetso/agent": "0.3.29",
+      "@earendil-works/pi-ai": "0.85.1",
+      "@earendil-works/pi-agent-core": "0.85.1",
+      "typebox": "1.3.34"
+    }
+  },
+  "files": {
+    "capabilities.test.ts": {
+      "sha256": "6487c04dd6b25a8737c9f3fc58d210a160fc3bcb1fb415d064af5ccc7034cb4e"
+    },
+    "requests.json": {
+      "sha256": "ef4fac79f6db5fc292d7055cfcb56fb01ae61f525dbde6ce3e6cb4fefafb4163"
+    },
+    "verify-package.mjs": {
+      "sha256": "7eb0129600d398f2d35acdcdebc39a7c62284e29a1dae0d9614cc9fd4c62477e"
+    },
+    "run.sh": {
+      "sha256": "1f0bcac81dab78ecca593b633d389d858c660c9128a9638a2af22b6bc84f3c9e"
+    }
+  },
+  "green": {
+    "testsPassed": 20,
+    "behaviorTestsPassed": 19,
+    "receiptWriterTestsPassed": 1,
+    "testsFailed": 0,
+    "assertions": 192,
+    "seconds": 1.479,
+    "exitCode": 0,
+    "logSha256": "7ee41730165c8d3e6f84d3ae4a1ee4852be50de9f199b5dfe9e38c43481f23a5"
+  },
+  "actorMatrix": [
+    {
+      "selection": "duet-gateway:anthropic/claude-opus-5.5",
+      "api": "anthropic-messages",
+      "configuredEffort": "high",
+      "vision": true
+    },
+    {
+      "selection": "duet-gateway:openai/gpt-6-sol",
+      "api": "openai-responses",
+      "configuredEffort": "high",
+      "vision": true
+    },
+    {
+      "selection": "duet-gateway:openai/gpt-6-luna",
+      "api": "openai-responses",
+      "configuredEffort": "high",
+      "vision": true
+    },
+    {
+      "selection": "duet-gateway:spacexai/grok-4.7",
+      "api": "openai-completions",
+      "configuredEffort": "high",
+      "vision": true
+    },
+    {
+      "selection": "duet-gateway:zai/glm-5.3",
+      "api": "anthropic-messages",
+      "configuredEffort": "xhigh",
+      "vision": false
+    },
+    {
+      "selection": "vercel-ai-gateway:anthropic/claude-opus-5.5",
+      "api": "anthropic-messages",
+      "configuredEffort": "high",
+      "vision": true
+    },
+    {
+      "selection": "vercel-ai-gateway:openai/gpt-6-sol",
+      "api": "openai-responses",
+      "configuredEffort": "high",
+      "vision": true
+    },
+    {
+      "selection": "vercel-ai-gateway:openai/gpt-6-luna",
+      "api": "openai-responses",
+      "configuredEffort": "high",
+      "vision": true
+    },
+    {
+      "selection": "vercel-ai-gateway:spacexai/grok-4.7",
+      "api": "openai-completions",
+      "configuredEffort": "high",
+      "vision": true
+    },
+    {
+      "selection": "vercel-ai-gateway:zai/glm-5.3",
+      "api": "anthropic-messages",
+      "configuredEffort": "xhigh",
+      "vision": false
+    },
+    {
+      "selection": "openrouter:anthropic/claude-opus-5.5",
+      "api": "anthropic-messages",
+      "configuredEffort": "high",
+      "vision": true
+    },
+    {
+      "selection": "openrouter:openai/gpt-6-sol",
+      "api": "openai-completions",
+      "configuredEffort": "high",
+      "vision": true
+    },
+    {
+      "selection": "openrouter:openai/gpt-6-luna",
+      "api": "openai-completions",
+      "configuredEffort": "high",
+      "vision": true
+    },
+    {
+      "selection": "openrouter:x-ai/grok-4.7",
+      "api": "openai-completions",
+      "configuredEffort": "high",
+      "vision": true
+    },
+    {
+      "selection": "openrouter:z-ai/glm-5.3",
+      "api": "openai-completions",
+      "configuredEffort": "high",
+      "vision": false
+    }
+  ],
+  "structuredMatrix": [
+    {
+      "selection": "duet-gateway:luna",
+      "api": "openai-responses",
+      "configuredEffort": "low",
+      "parsedResult": {
+        "sum": 42,
+        "code": "export function add(a, b) { return a + b; }"
+      },
+      "executedCodeResults": [
+        42,
+        -5
+      ]
+    },
+    {
+      "selection": "vercel-ai-gateway:luna",
+      "api": "openai-responses",
+      "configuredEffort": "low",
+      "parsedResult": {
+        "sum": 42,
+        "code": "export function add(a, b) { return a + b; }"
+      },
+      "executedCodeResults": [
+        42,
+        -5
+      ]
+    },
+    {
+      "selection": "openrouter:luna",
+      "api": "openai-completions",
+      "configuredEffort": "low",
+      "parsedResult": {
+        "sum": 42,
+        "code": "export function add(a, b) { return a + b; }"
+      },
+      "executedCodeResults": [
+        42,
+        -5
+      ]
+    }
+  ],
+  "representativeCodingToolTask": {
+    "selection": "duet-gateway:sol",
+    "model": "openai/gpt-6-sol",
+    "configuredEffort": "high",
+    "ordinaryPrompt": true,
+    "actualRunnerTools": [
+      "write",
+      "bash"
+    ],
+    "checkedValues": [
+      42,
+      -5
+    ],
+    "stdout": "CHECKED_SUM=42",
+    "writtenFileReadBack": true,
+    "toolOutputReturnedOnNextWireRequest": true,
+    "modelDecisions": "controlled SSE; code execution and tool loop are real"
+  },
+  "falsification": [
+    {
+      "mutation": "tools",
+      "exitCode": 1,
+      "failedTests": 1,
+      "reason": "Outbound tools removed through SDK onPayload; missing named tool detected.",
+      "logSha256": "b9a166f8719a29ebf8d3a8dd99b622e98a5b652ee4b9ed35a85403ac02cdb106"
+    },
+    {
+      "mutation": "vision",
+      "exitCode": 1,
+      "failedTests": 1,
+      "reason": "Outbound image block removed through SDK onPayload; missing image detected.",
+      "logSha256": "0d174fe8645e2eb42ffad200e22cf162e340b20a7c4fdedc44e0ad4621f14f02"
+    },
+    {
+      "mutation": "reasoning",
+      "exitCode": 1,
+      "failedTests": 1,
+      "reason": "Outbound reasoning removed through SDK onPayload; exact high assertion failed.",
+      "logSha256": "6ad517900ef3011646a99aa13b2591bbf8ec28a53f876e61c2bdb6e64d67e0d9"
+    },
+    {
+      "mutation": "result",
+      "exitCode": 1,
+      "failedTests": 1,
+      "reason": "Controlled structured response sum changed to string; production argument-schema validator rejected it.",
+      "logSha256": "4b6cf6f32da390b2121686f071024cfffde8c996768587d8981946aa51d3a4f7"
+    },
+    {
+      "mutation": "coding",
+      "exitCode": 1,
+      "failedTests": 1,
+      "reason": "Controlled write tool produced subtraction; actual bash arithmetic checks failed, and errored tool result was detected.",
+      "logSha256": "0a3234ca53390a16e5f1aabdad3b84a51cc9f683921f2b0fde25d4b48cfc6c2e"
+    }
+  ],
+  "assertions": [
+    "Exact concrete model IDs and URLs captured after SDK serialization",
+    "Tool name and required sum/code schema properties are present on wire",
+    "PNG bytes preserved for every vision-capable target; no vision claim for text-only GLM",
+    "Sol/Luna preserve Responses through Duet/Vercel and native OpenRouter transport",
+    "High actor effort retained exactly; GLM xhigh maps to max for Anthropic transport",
+    "No temperature overrides on configured-reasoning requests",
+    "Actual Luna structured helper forces named tool and validates returned arguments",
+    "Returned code and real runner tool-loop arithmetic checked, not just payload serialization"
+  ],
+  "specMapping": {
+    "slice01.step4": "Controlled tool/vision/schema requests and exact configured actor/current-structured reasoning are captured through installed production SDK seams. Donor/catalog metadata and live latency remain separate receipts.",
+    "slice07.representativeTasks": "Deterministic coding/tool task and structured code-result assertions proven against packed runtime. Existing live Luna train and onboarding receipts provide separate live task evidence."
+  },
+  "limitations": [
+    "No paid calls and no live provider acceptance or autonomous coding-quality claim; provider completions are controlled.",
+    "Current Luna memory caller option shape through the shared structured-output helper is reasoningEffort:low. Raw Anthropic helper options have their own API-specific thinking grammar; generic reasoningEffort was not treated as an Anthropic setting. Actor effort used production streamSimple.",
+    "Existing configurable classifier raw reasoningEffort mapping is unchanged from6d12 baseline; no refresh regression is claimed for that pre-existing provider-specific distinction.",
+    "Connected OAuth account serviceability and refresh remain separate source/live qualification, not inferred from this metered-router matrix.",
+    "Astra is unchanged; five changed concrete targets were tested. Terra-to-Sol alias continuity is covered by existing installed-package selection regressions.",
+    "The live onboarding receipt proves four schema-valid recommendations; the staging train exit0 proves real Luna synthesis with parsed nonempty JSON handoff, not an independently graded coding benchmark."
+  ],
+  "liveProviderCalls": false,
+  "runtimeSourceCopiedOrModified": false,
+  "releaseCreated": false,
+  "cleanup": {
+    "ownedContainer": "agent-capability-029",
+    "absentVerified": true,
+    "isolatedHome": "/tmp/home in removed container",
+    "codingScratchRemovedInFinally": true
+  },
+  "fixtureKind": "Frozen qualification source and redacted immutable evidence; not product runtime code"
+}

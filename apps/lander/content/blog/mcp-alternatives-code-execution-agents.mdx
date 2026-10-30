@@ -1,0 +1,189 @@
+---
+title: 'Why We Replaced MCP With Code Execution Agents'
+description: "MCP looked promising. Then we tried code execution agents and never looked back. Here's what changed our minds."
+date: '2026-03-06'
+updatedAt: '2026-05-08'
+readTime: '11 min read'
+author:
+  name: 'Sawyer Middeleer'
+  role: 'Co-founder'
+  link: '/'
+category: 'ai'
+tags: ['ai-agents', 'mcp', 'integrations', 'ai-architecture', 'code-execution']
+type: 'article'
+image: '/blog/mcp-alternatives-code-execution-agents/cover.png'
+relatedPosts:
+  - 'how-to-set-up-a-24-7-ai-agent'
+  - 'openclaw-vs-managed-ai-agent-platforms'
+  - 'how-to-host-openclaw-in-the-cloud'
+cta:
+  title: 'Skip the MCP server zoo.'
+  subtitle: 'Duet runs code execution agents that talk to any tool, with persistent state and zero config drift. The MCP fix our team actually built.'
+  buttonText: 'Run a code-exec agent'
+  href: '/sign-in?from=blog-mcp-alternatives'
+---
+
+# Why We Replaced MCP With Code Execution Agents
+
+When we first built Duet's agent infrastructure, we leaned heavily on MCP, Model Context Protocol.
+
+It was clean, well-documented, and felt like the right abstraction layer for connecting AI models to external tools.
+
+For simple tool use, it worked well.
+
+But as our workflows got more complex, multi-step automations, conditional logic, error handling, dynamic tool creation, MCP started showing its limits.
+
+The stateless architecture that made it predictable also made it brittle for anything non-trivial.
+
+We eventually moved to code execution agents, and the difference was significant.
+
+This post explains exactly why, when MCP still makes sense, and what we'd recommend for teams building production AI workflows in 2026.
+
+<Callout emoji="💡">
+Quick Summary
+
+This post explains why the Duet team moved away from MCP (Model Context Protocol) toward code execution agents, covering MCP's limitations, what code execution agents do better, and when each approach makes sense.
+
+</Callout>
+
+<Callout emoji="❓">
+Questions this page answers
+
+- What is the difference between MCP and code execution agents?
+- Why replace MCP with code execution agents?
+- What are the limitations of MCP in AI workflows?
+- How do code execution agents work?
+- What is Model Context Protocol (MCP)?
+
+</Callout>
+
+---
+
+## The MCP Context Bloat Problem
+
+MCP (Model Context Protocol) is the standard way AI agents connect to external services. The pattern: define a set of tools with schemas, inject them into the agent's context, and let the agent call them.
+
+It works. Until it doesn't.
+
+The problem is linear context cost. Every MCP tool you add, its name, description, parameter schema, examples, takes up space in the agent's context window. Connect 10 services with 5 tools each, and you've burned thousands of tokens before the agent has done anything useful.
+
+This creates a painful tradeoff:
+
+- Load everything upfront and accept degraded performance on the actual task (less room for reasoning, conversation history, and working memory)
+- Limit integrations and accept that your agent can only talk to a handful of services
+- Build dynamic tool loading and accept the latency and complexity of tool-selection middleware
+  None of these are great. The context window is the most valuable real estate your agent has. Filling it with tool definitions it might never use is wasteful.
+
+Beyond context costs, MCP has other limitations that become clear at scale.
+
+Each tool only exposes what the original developer chose to include. Need a parameter the tool author didn't anticipate? You're stuck. Need to combine three API calls into one atomic operation? The tool abstraction gets in the way.
+
+## Agents That Write Their Own Integrations
+
+What if the agent didn't need pre-defined tools at all?
+
+Here's the approach we landed on: instead of injecting MCP tool definitions, give the agent a persistent server environment where it can write and execute code. When the agent needs to interact with an external service, it:
+
+1. Looks up the API: reads docs, finds endpoints, understands auth
+1. Writes integration code: a Python or TypeScript script that calls the API directly
+1. Executes it: runs the code on its server, gets results
+1. Saves it: stores the working code in its persistent memory for next time
+   The next time the agent needs that integration, it doesn't re-discover anything. It loads its saved code and runs it. Over time, the agent builds a growing library of integrations it wrote itself.
+
+The context cost? Zero at startup. The agent only loads what it needs, when it needs it.
+
+## MCP vs Code Execution
+
+This isn't just a performance optimization. Code execution is fundamentally more capable than MCP tools across every axis that matters for production AI agents.
+
+Consider a concrete example. An MCP tool for a project management service might expose createissue, listissues, update_issue, a fixed set of operations. An agent writing its own integration can hit any API endpoint, combine multiple calls into a single operation, transform data between formats, and handle edge cases the tool author never anticipated.
+
+The agent isn't limited to what someone pre-built. It has the full power of the API.
+
+## Self-Evolving Software
+
+The most interesting property of this architecture is that the agent improves its own integrations over time.
+
+When an API call fails, the agent debugs it, fixes the code, and saves the improved version. When a workflow needs a new data transformation, the agent writes it and adds it to its library. When a service changes its API, the agent updates its code the next time it runs.
+
+This is self-evolving software. The agent's integration layer isn't static, it grows and adapts with use.
+
+Compare this to MCP tools, which are frozen at the version the developer published. When an API changes, you wait for the tool author to update. When you need a feature the tool doesn't support, you file an issue and wait. The agent is at the mercy of external maintainers.
+
+With code execution, the agent is its own maintainer.
+
+This compounds over time. A 24/7 AI agent running on persistent infrastructure doesn't just execute tasks, it accumulates working integration code, error-handling patterns, and domain knowledge. Each session makes the next one more efficient.
+
+## The Infrastructure Requirement
+
+There's a catch. This architecture requires three things most AI products don't have:
+
+1. A persistent server: somewhere to run code, store files, and maintain state across sessions
+1. Memory: a way to save integration code and recall it later without using context window
+1. Code execution: a runtime environment with network access, package management, and file system access
+   This is why session-based AI tools can't do this. ChatGPT, Claude.ai, and most AI assistants spin up a fresh environment each conversation. There's no persistence. No memory. No way to build on previous work.
+
+You need a cloud server that stays on, one where the agent can write a script today and run it next week. Where it can install a package, save credentials, and build up a library of working code over time.
+
+This is the core architectural bet behind Duet. Every user gets a persistent cloud server with an always-on AI agent. The agent has its own file system, memory, scheduled tasks, and code execution environment. It writes its own integrations, saves them, and reuses them. Getting more capable the longer it runs.
+
+It's also why this approach is rare today. Most AI products are stateless by design. Building a persistent, server-backed agent is a fundamentally different infrastructure challenge. One that requires rethinking how AI agent platforms are built from the ground up.
+
+## What About MCP Security?
+
+MCP's security model introduces its own risks. Every MCP server you connect gets access to your agent's context and can execute operations on your behalf. The more servers you connect, the larger your attack surface.
+
+With code execution on a sandboxed server, the agent controls exactly what runs, when, and with what credentials. There's no third-party tool server sitting between your agent and the API. The agent writes direct API calls with explicit authentication, nothing hidden in middleware layers.
+
+This doesn't eliminate security concerns, but it shifts the trust boundary. Instead of trusting dozens of third-party MCP server implementations, you trust one sandboxed execution environment that you control.
+
+## When MCP Still Makes Sense
+
+MCP isn't going away, and it shouldn't. It's a useful standard for specific scenarios:
+
+- Quick prototyping: when you need a working integration in minutes, not hours
+- Well-defined, stable APIs: where the tool author's abstraction matches your use case exactly
+- Bootstrapping agent capabilities: getting a new agent productive before it builds its own library
+- Standardized interfaces: where interoperability between different agent frameworks matters
+  The Agent Skills 101 guide breaks down the spectrum from simple tool calls to MCP servers to full skill systems. MCP occupies a useful middle ground, it's just not the endgame for production agents that need to work across dozens of services.
+
+## What This Means for the Future of AI Integrations
+
+For production AI agents that need to work across dozens of services, handle edge cases, and improve over time, the future is code execution on persistent infrastructure.
+
+The integration layer of the future isn't a catalog of pre-built tools. It's an agent that can read API documentation and write its own.
+
+This shift has implications for how teams build with AI:
+
+- Stop optimizing for tool count. The number of pre-built integrations a platform offers matters less than whether the agent can write its own.
+- Invest in persistence. An agent that forgets everything between sessions can never build a reusable integration library. Cloud-hosted agents with persistent storage are table stakes.
+- Think in code, not configs. The most capable agents aren't the ones with the most pre-configured tools. They're the ones with the best code execution environments and the freedom to use them.
+  Teams already using AI for startup operations, competitive intelligence, and sales prospecting are discovering this firsthand: the agents that write their own integrations consistently outperform those limited to pre-built tool catalogs.
+
+The question isn't whether AI agents will move beyond MCP. It's how fast.
+
+## Frequently Asked Questions
+
+### What is MCP (Model Context Protocol)?
+
+MCP is an open standard for connecting AI agents to external services. It defines a protocol where tools (functions with input schemas) are injected into an agent's context window, allowing the agent to call them during conversations. It was designed to standardize how AI models interact with APIs, databases, and other services.
+
+### What are the main limitations of MCP?
+
+The primary MCP limitations are context bloat (each tool consumes tokens in the agent's context window), limited API coverage (tools only expose what the developer built), rigid parameterization (you can't customize beyond pre-defined inputs), and maintenance dependency (you wait for tool authors to update when APIs change). These compound as you add more integrations.
+
+### Is code execution a complete replacement for MCP?
+
+Not entirely. MCP is still useful for quick prototyping, stable APIs where pre-built abstractions match your needs, and standardized interfaces between agent frameworks. Code execution is better for production agents that need full API coverage, custom logic, and self-improving integrations across many services.
+
+### What infrastructure do AI agents need for code execution?
+
+AI agent code execution requires three things: a persistent server that stays running across sessions, a memory system for saving and recalling integration code, and a runtime environment with network access and package management. This is why most AI chatbots can't do it, they use ephemeral, stateless environments.
+
+### How does code execution improve AI agent security?
+
+Code execution on a sandboxed server shifts the trust boundary. Instead of connecting to dozens of third-party MCP servers (each with access to your agent's context), the agent makes direct API calls from a single controlled environment. You manage one trust boundary instead of many.
+
+### Can AI agents really write their own API integrations?
+
+Yes. Modern AI models can read API documentation, write integration scripts in Python or TypeScript, test them, debug failures, and save working code for reuse. On persistent infrastructure, agents build growing libraries of self-written integrations that improve with each use.

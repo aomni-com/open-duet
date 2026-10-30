@@ -1,0 +1,225 @@
+{/* DOCS-FIRST DRAFT (slice 17), revision 2 — reshaped after the unprimed
+    review (findings + resolutions recorded in
+    slices/17-sse-file-events-feed.md). The landed slice-06 file-activity page
+    extended with the SSE events route (the "Stream the feed live" section
+    plus the touched intro/split paragraphs). Lands at
+    apps/docs/app/file-activity/page.mdx in the slice-17 pass. Landing in the
+    same diff (review blockers #1/#2): the contract endpoint metadata
+    (`file-activity.events`, streaming: 'sse', Last-Event-ID header row) and
+    the /events page generalization (ids are the frame's SSE id — numeric on
+    session streams, a cursor string here; query fallback is per-route:
+    `?since=` sessions, `?cursor=` file activity; non-terminal streams end
+    segments deliberately). */}
+
+import { EndpointReference } from '../../components/endpoint-reference'
+
+export const metadata = {
+  title: 'File activity',
+  description: 'Query who read and wrote workspace files, and follow changes in order.',
+  alternates: { canonical: '/file-activity/' },
+}
+
+<p className="eyebrow">Resource guide</p>
+
+# Every file change has an actor
+
+Workspace file operations are recorded as one ordered event stream per workspace: who wrote,
+created, deleted, renamed, read, or restored what, and when. Use file activity to answer content
+questions — "who last touched this file", "what changed since my cursor". Workspace audit answers
+control-plane questions (membership, keys, lifecycle) and has its own shape; keep one adapter per
+endpoint as the [pagination](/pagination) page recommends.
+
+## History, seen-by, feed, and stream split one sequence four ways
+
+Per-file history returns the events for one file in sequence order. Seen-by aggregates the same
+stream into one row per actor. The feed pages every file event in the workspace; the events route
+streams the same feed live. All four require the workspace-scoped `files:read` capability; method,
+path, and wire schemas are owned by the endpoint contract panel below.
+
+```bash
+curl -H "authorization: Bearer $DUET_API_KEY" \
+  "$DUET_API_URL/v1/ws/acme/file-activity?path=notes/plan.md"
+```
+
+{/* schema: FileHistoryResponseSchema */}
+
+```json
+{
+  "events": [
+    {
+      "seq": 411,
+      "event": {
+        "kind": "create",
+        "path": "notes/plan.md",
+        "actor": "web:usr_1",
+        "userId": "usr_1",
+        "at": 1767290000000,
+        "size": 12,
+        "mtimeMs": 1767290000000
+      }
+    },
+    {
+      "seq": 502,
+      "event": {
+        "kind": "read",
+        "path": "notes/plan.md",
+        "actor": "session:ses_9",
+        "at": 1767293600000
+      }
+    }
+  ],
+  "nextCursor": "fe1:502"
+}
+```
+
+Events are ascending by `seq`. `limit` defaults to 100 and caps at 500. `path` names exactly one
+file, URL-encoded as a query value; a path with no recorded history returns an empty `events`
+array, not an error — the API cannot distinguish "never existed" from "not yet recorded".
+
+## One sequence, one cursor
+
+Pass `nextCursor` back unchanged as `?cursor=`; an absent `nextCursor` ends the traversal. Cursors
+are opaque positions in the workspace's single event sequence — never decode or fabricate one. As
+a deliberate exception to per-collection cursors, history, feed, and stream cursors are
+interchangeable positions in that one sequence: a client may resume the workspace feed — paged or
+streamed — from a cursor it obtained while reading one file's history. The sequence is monotonic
+per workspace, so resuming from a committed cursor never skips events. A malformed cursor is a
+validation error, not an empty page.
+
+## Actors are one stable grammar
+
+Every event names its actor in a string grammar that is part of the contract: split on the first
+colon; the prefix is the actor kind; `terminal` and `system` carry no id.
+
+| Actor          | Meaning                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------ |
+| `session:<id>` | An agent session's work, including everything it ran in bash                               |
+| `api-key:<id>` | A programmatic client authenticated with that key                                          |
+| `web:<id>`     | A person editing through the web app                                                       |
+| `sync:<id>`    | Changes arriving from a workspace-to-workspace share                                       |
+| `mirror:<id>`  | Changes arriving from a registered mirror device (for example a Mac running `duetfs sync`) |
+| `terminal`     | Interactive terminal use not owned by a session                                            |
+| `system`       | Duet platform operations                                                                   |
+
+When an authenticated person caused the event, `userId` accompanies the actor so seen-by can answer
+with people, not just credentials.
+
+## Event kinds carry only their own fields
+
+`rename` events carry both `path` (the new name) and `fromPath`. `size` and `mtimeMs` appear only
+on `write` and `create`; `mtimeMs` is the file's own modification time in epoch milliseconds —
+mirror devices preserve the original modification time, so it can predate `at`. (The files
+endpoints' `mtime` is an ISO string; the differing name here is deliberate.)
+
+`restore` records a whole-workspace restore from archive as a single event with no `path` —
+per-file rows are deliberately not replayed. Because a restore can change any file, per-file
+history includes the workspace's `restore` events inline; "what last changed this file" is
+answerable from history alone.
+
+## Reads are markers, not logs
+
+A read event means an actor actually fetched file content — listings and stats never count. Repeat
+reads by the same actor collapse into one marker per bounded window, so history stays legible under
+agents that re-read files constantly. Mirror devices are the one exception: their reads are
+mechanical replication, never attention, so `mirror:` actors produce no read markers at all.
+
+History, feed, and stream take the same `reads` flag. History includes read markers by default
+(`reads=0` omits them) — a file's history is about attention. The feed and the stream omit them by
+default (`reads=1` includes them) — a workspace feed is about change.
+
+## Ask who has seen a file
+
+```bash
+curl -H "authorization: Bearer $DUET_API_KEY" \
+  "$DUET_API_URL/v1/ws/acme/file-activity/seen-by?path=notes/plan.md"
+```
+
+{/* schema: SeenByResponseSchema */}
+
+```json
+{
+  "seenBy": [
+    {
+      "actor": "web:usr_1",
+      "userId": "usr_1",
+      "firstAt": 1767290000000,
+      "lastAt": 1767297300000,
+      "lastWriteAt": 1767290000000,
+      "readCount": 4,
+      "writeCount": 1
+    }
+  ]
+}
+```
+
+One row per actor context, most recently active first. Counts are authoritative totals — the
+read-marker window bounds rows in history, never these counters.
+
+## Follow the whole workspace
+
+```bash
+curl -H "authorization: Bearer $DUET_API_KEY" \
+  "$DUET_API_URL/v1/ws/acme/file-activity/feed?cursor=fe1:98070&limit=100"
+```
+
+The feed shares the history response shape and cursor grammar. Omitting `cursor` starts from the
+beginning of the workspace's sequence; long-lived consumers should persist the last cursor they
+fully processed and resume from it, exactly as the [SSE and resume](/events) page prescribes for
+streams. Process events by `seq` and make downstream effects idempotent.
+
+## Stream the feed live
+
+The events route is the feed as a server-sent event stream: the same rows, delivered as they are
+recorded instead of on request.
+
+```bash
+curl -N -H "authorization: Bearer $DUET_API_KEY" \
+  "$DUET_API_URL/v1/ws/acme/file-activity/events?cursor=fe1:98070"
+```
+
+```text
+id: fe1:98071
+event: write
+data: {"seq":98071,"event":{"kind":"write","path":"notes/plan.md","actor":"session:ses_9","at":1767293650000,"size":48,"mtimeMs":1767293650000}}
+
+: keepalive
+
+id: fe1:98072
+event: delete
+data: {"seq":98072,"event":{"kind":"delete","path":"notes/old.md","actor":"session:ses_9","at":1767293651000}}
+```
+
+Each frame's `data` is exactly one feed row — the same `{ seq, event }` object the paged feed
+returns — and its SSE `id` is the cursor for that row, so the value you commit for pagination and
+the value you send to resume the stream are the same string. The `event:` field names the event
+kind; subscribe to the kinds you handle, or read `kind` from the data frame.
+
+Resume with the `Last-Event-ID` header, or `?cursor=` when a client cannot set that header; the
+header wins when both are present. Either way the value is a frame's SSE `id` — the `fe1:` cursor
+string, never the bare `seq` number. Omitting both starts from the beginning of the workspace's
+sequence — a full replay, then the live tail. To tail with only a bounded replay, page the feed
+until `nextCursor` is absent and connect with the last cursor you received; the stream replays at
+most that final page before going live. Frames ascend by `seq`, and resuming from a committed
+cursor never skips or repeats an event. Idempotent processing still matters: a consumer that
+crashes between applying an event and committing its cursor legitimately sees that event again.
+
+Quiet stretches carry periodic SSE comment lines so intermediaries do not drop an idle connection.
+`EventSource` discards comments automatically; hand-rolled parsers must ignore lines starting with
+a colon.
+
+This stream declares no terminal state — a clean close is the end of a segment, not of the work.
+The platform ends every segment cleanly after a bounded duration, even while events continue;
+reconnect from your last committed cursor with the backoff discipline [SSE and resume](/events)
+prescribes. Disconnect-and-resume is the normal operating mode of this route, not a failure — a
+consumer that persists its cursor across segments observes one gapless sequence.
+
+The stream validates like its siblings: a malformed cursor or missing scope fails with an ordinary
+JSON error before any event bytes are sent.
+
+## Observation is not activity
+
+Reading file activity never creates file activity: these endpoints emit no read markers and do not
+count as workspace activity. A dashboard polling the feed — or holding the stream open — does not
+keep a workspace busy.
+
+<EndpointReference category="file-activity" />

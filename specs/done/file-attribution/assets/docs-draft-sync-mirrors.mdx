@@ -1,0 +1,164 @@
+{/* DOCS-FIRST DRAFT (slice 19), revision 2 — edited after the unprimed
+    review (findings + resolutions recorded in
+    specs/file-attribution/slices/19-mirror-device-orchestration.md). Full
+    text of the new apps/docs/app/mirror-devices/page.mdx. Lands with the
+    slice-19 implementation in the same diff. STRIP THIS COMMENT BLOCK
+    before any re-review. */}
+
+import { EndpointReference } from '../../components/endpoint-reference'
+
+export const metadata = {
+  title: 'Mirror devices',
+  description: 'Register a device as a whole-drive mirror of a workspace.',
+  alternates: { canonical: '/mirror-devices/' },
+}
+
+<p className="eyebrow">Resource guide</p>
+
+# A mirror is a whole-drive replica of one workspace
+
+A sync device — a machine holding a [sync-device credential](/api-keys) — joins a workspace as a
+mirror: the entire workspace drive is replicated to it and kept live in both directions. Edits on
+the workspace reach the device in seconds, and edits on the device flow back. This is the transfer
+plane behind `duetfs sync`. Register, list, and remove mirrors, and mint tunnel access, through the
+routes below; there is no lower-level file-transfer API on the public surface.
+
+Every mirror route authenticates with a sync-device credential — the one user-wide key kind, issued
+through the [device flow](/device-flow) and carrying `user:files:read` and `user:files:write`. A
+workspace key can never call them, and the credential reaches a workspace only while your membership
+holds (`403` once it does not). One credential is one device.
+
+## Register the calling device as a mirror
+
+Registration exchanges device sync identities. Your device announces its own sync identity; the
+response returns the workspace VM's identity so your side can add it as the sole peer. The calling
+device is named by the credential, not by the path.
+
+```bash
+curl -X POST -H "authorization: Bearer $DUET_API_KEY" \
+  -H "content-type: application/json" \
+  -d '{"syncthingDeviceId":"K5MNBGJ-QT4EVLE-... (your device sync ID)"}' \
+  "$DUET_API_URL/v1/ws/acme/mirror-devices"
+```
+
+{/* schema: MirrorRegisterRequestSchema */}
+
+```json
+{
+  "syncthingDeviceId": "K5MNBGJ-QT4EVLE-KPBQKY7-CPT4L2N-QU4WHNA-2XBTUXO-Q7XCLHS-6MZ4DAY"
+}
+```
+
+{/* schema: MirrorRegisteredSchema */}
+
+```json
+{
+  "folderId": "workspace-drive",
+  "vmSyncthingDeviceId": "R7ELVOD-P4WBW6H-... (the workspace VM's device sync ID)",
+  "tunnel": {
+    "url": "wss://acme-vm.exe.dev/v1/tunnel/accept/mirror-cred_9-a1b2c3",
+    "tunnelToken": "REDACTED",
+    "proxyToken": "exe_vm_...",
+    "expiresAt": 1767293700000
+  }
+}
+```
+
+The device sync ID you send is bound to your credential, and that binding is what attributes your
+edits: changes this device makes arrive in [file activity](/file-activity) as `mirror:<deviceId>`,
+where `deviceId` is the credential's document id — not the sync ID. Send the complete sync ID; only
+a short prefix of it travels on the wire, so the full value is bound once here and resolved back to
+your credential from that prefix.
+
+Registration is idempotent: re-POSTing with the same credential updates the bound sync ID if it
+changed and returns a fresh tunnel grant, and never creates a second mirror for the same device.
+
+## What a mirror syncs
+
+A mirror replicates the **whole drive** — one folder rooted at the workspace root, synchronized in
+both directions. Three things are always held back so machine-local state never crosses between
+machines:
+
+- `.git` directories — a repository under two active writers corrupts; history belongs on a git
+  remote, not in the mirror. Your working files still sync live; only the `.git` bookkeeping is
+  excluded.
+- `node_modules` — platform-specific and reinstallable; syncing it clobbers one machine's binaries
+  with another's architecture. Run your installer on each side.
+- `.duet` — Duet's own workspace state directory.
+
+Everything else replicates, including `.env` files and other dotfiles. A mirror is a personal
+replica of your own workspace, so its environment files travel with it — unlike a workspace
+[share](/shares-publishes), which withholds them by default. Treat a mirror credential as reaching
+every secret in the drive.
+
+## List the workspace's mirrors
+
+```bash
+curl -H "authorization: Bearer $DUET_API_KEY" \
+  "$DUET_API_URL/v1/ws/acme/mirror-devices"
+```
+
+{/* schema: MirrorDeviceListSchema */}
+
+```json
+{
+  "devices": [
+    {
+      "deviceId": "cred_9",
+      "deviceName": "MacBook Pro",
+      "syncthingDeviceId": "K5MNBGJ-QT4EVLE-KPBQKY7-CPT4L2N-QU4WHNA-2XBTUXO-Q7XCLHS-6MZ4DAY",
+      "registeredAt": 1767290000000
+    }
+  ]
+}
+```
+
+Every device mirroring this workspace is listed, so you can confirm a registration landed or spot a
+machine you no longer recognize. `deviceId` is the credential's document id — the same value that
+names the device in file activity and in the web app's device list.
+
+## Remove a device
+
+```bash
+curl -X DELETE -H "authorization: Bearer $DUET_API_KEY" \
+  "$DUET_API_URL/v1/ws/acme/mirror-devices/cred_9"
+```
+
+{/* schema: MirrorRemovedSchema */}
+
+```json
+{ "ok": true, "deviceId": "cred_9" }
+```
+
+The path names a device you own — the `deviceId` from the list, commonly the calling device itself.
+Removal detaches that device from this workspace's mirror folder and invalidates its tunnel access
+to this workspace; it leaves the credential and the device's mirrors of your other workspaces
+untouched. Removing a device that was not registered returns the same success — the end state is
+"not a mirror of this workspace" either way. To kill a lost machine everywhere at once, revoke its
+credential instead (next section).
+
+## Tunnel access, and re-minting it
+
+A mirror connects over a tunnel, exactly as workspace-to-workspace shares do: your device dials the
+`url` from the registration response, presenting `tunnelToken` and `proxyToken`, and the workspace
+VM bridges the connection. Tunnel tokens are deliberately short-lived, and every reconnect must
+present a fresh one — never cache a token across reconnects. Re-POST the registration route to mint
+a new grant; a reconnect costs one request. An idle tunnel holds no workspace open: a
+connected-but-quiet mirror never counts as workspace activity and never delays idle retirement.
+
+## Revocation and leaving a workspace both detach the mirror
+
+Two events detach a device from a workspace's mirror, each without a request from the device:
+
+- **Revoking the credential** — from the [web app](/api-keys) or
+  `DELETE /v1/user/sync-devices/{deviceId}` — removes that device from **every** workspace it
+  mirrors and invalidates all of its tunnel access. Revoke the machine you lost.
+- **Leaving a workspace** removes your devices from **that** workspace's mirror and tunnel only, the
+  moment membership ends. A mirror credential's reach follows live membership, so a workspace you are
+  no longer in stops mirroring on its own.
+
+Either way, the device's next request to a detached workspace fails — `401` if the credential was
+revoked, `403` if only membership was lost. Both are terminal for that workspace: drop it from the
+mirror set rather than retrying, exactly as the [errors](/errors) page prescribes.
+
+<EndpointReference category="sync" />

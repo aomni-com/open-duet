@@ -1,0 +1,188 @@
+---
+title: 'Open Source AI Models for Business: Is Kimi K3 the End of the Per-Seat AI Bill?'
+metaTitle: 'Open Source AI Models for Business: Kimi K3 Ends Seat Bills'
+description: "Kimi K3 launched open-weight. Here's the seats-vs-tokens math: when per-token AI pricing beats fixed seat subscriptions for SMB teams."
+date: '2026-07-17'
+updatedAt: '2026-07-17'
+readTime: '9 min read'
+author:
+  name: 'Duet Team'
+  avatar: '/mascots/6.png'
+  role: 'AI Cloud Platform'
+  link: '/'
+category: 'ai'
+tags: ['open-source-ai', 'kimi-k3', 'ai-pricing', 'ai-models', 'small-business']
+type: 'article'
+image: '/blog/kimi-k3-open-source-ai-models/cover.png'
+relatedPosts:
+  - slug: 'how-we-benchmark-ai-models-on-real-work'
+    context: 'How we evaluate models on real work instead of leaderboards'
+  - slug: 'how-to-choose-the-right-ai-model-for-your-business'
+    context: 'A practical guide to matching AI models to tasks'
+  - slug: 'grok-4-5-vs-claude-opus-4-8'
+    context: 'Model pricing and routing compared, without lock-in'
+cta:
+  title: 'Stop paying per seat. Pay per token.'
+  subtitle: 'Duet runs Kimi K3, Claude Opus 4.8, GPT-5.6 Sol, and more in one workspace, on a monthly plan with included credits and a paid reserve for overage. Start with a 7-day free trial, no card.'
+  buttonText: 'Try Duet free'
+  href: '/sign-in?from=blog-kimi-k3-open-source'
+---
+
+## When per-token AI beats per-seat pricing
+
+Per-token AI is cheaper than per-seat when your team's real monthly work costs less than the fixed seat bill for the same people. Multiply seats by monthly seat price for the subscription side; multiply input, output, and cached tokens by their rates for the usage side. When use is light or mixed, usage usually wins if assumptions stay visible.
+
+Kimi K3, a frontier-class open-weight model that launched this week, is the clearest live test of that math. It sits in Duet's Standard tier, one of the models the router reaches for on everyday work.
+
+## Why Kimi K3's launch changes your AI bill
+
+Moonshot AI released Kimi K3 on July 16, 2026: a 2.8-trillion-parameter mixture-of-experts model that activates just 16 of its 896 experts per token, with a 1-million-token context window: enough to hold roughly 1,573 pages of text in one pass.
+
+Independent benchmarks (next section) put it near the frontier. But precision matters here: K3 is **open-weight**, not open source today. [Moonshot's own announcement](https://www.kimi.com/blog/kimi-k3) commits to releasing the full model weights by July 27, 2026; for now, it's served only through the API.
+
+That's a real distinction from a model like GLM-5.2, which already ships under a genuine MIT license.
+
+What makes K3 matter for your AI bill isn't the launch itself. It's that frontier-class capability just became available with no per-seat license attached. It's priced instead by the token, the way electricity or bandwidth is.
+
+Duet added K3 to its Standard tier the same week. Capability plus no seat tax is what makes the rest of this article's math possible.
+
+## Are open-weight models good enough for work?
+
+Yes, for the large majority of drafting, research, ops, and reporting work. [Artificial Analysis' independent benchmark](https://artificialanalysis.ai/models/kimi-k3) ranks Kimi K3 at 57 on its Intelligence Index v4.1: #4 of 189 models tracked, behind only Claude Fable 5 (60) and GPT-5.6 Sol (59), ahead of Claude Opus 4.8 (56). That puts K3 ahead of every other open-weights model on the index.
+
+Even Moonshot admits K3 isn't the top model overall: its own blog says performance "still trails the most powerful proprietary models." That's an honest vendor claim worth taking at face value — K3 doesn't need to be #1 to change your bill.
+
+On the benchmark closest to actual knowledge work, AA-Briefcase, K3 scores an Elo of 1,547, a jump of 732 points over Moonshot's prior model. Only Claude Fable 5 ranks higher — that's the number that matters for drafting or research work.
+
+The pattern holds beyond K3. [MIT research on open models](https://mitsloan.mit.edu/ideas-made-to-matter/ai-open-models-have-benefits-so-why-arent-they-more-widely-used) found open-weight models now average 89.6% of closed-model performance, closing the gap to a new closed release within roughly 13 weeks. Optimal routing to open models, by MIT's estimate, could save businesses up to ~$25B a year, industry-wide.
+
+Featherless's CEO summed up the practical takeaway: most open models run "N-1" behind the leader, "and N-1 is fine" for the bulk of business work. For more on how we test models against real work instead of invented prompts, see [how we evaluate models on real work](/blog/how-we-benchmark-ai-models-on-real-work).
+
+## What your team really spends on AI seats
+
+Take a real team. Maya runs ops for a 5-person boutique event-services company. Nobody on her team writes code. They draft client proposals, research vendors and competitors, run weekly ops checklists, and put together monthly reports.
+
+Here's what Maya's team pays today, seat by seat:
+
+| Role                      | Tool/tier                   | Seats | Price/seat/mo |    Subtotal |
+| ------------------------- | --------------------------- | ----: | ------------: | ----------: |
+| 3 team members            | ChatGPT Business (Standard) |     3 |           $25 |         $75 |
+| Ops lead + reporting lead | Claude Team (Premium)       |     2 |          $125 |        $250 |
+| **Total seat bill**       |                             | **5** |               | **$325/mo** |
+
+Those aren't inflated numbers: ChatGPT Business runs $20–25/user/month; Claude Team runs $20–25 Standard or $100–125 Premium. Two people on Premium for research and reporting is common, not an edge case.
+
+That $325 bills the same in a slow week as a busy one. A seat is a fixed, provisioned-per-human cost, owed whether the person opens the app once or fifty times that month.
+
+## What that same work costs per token
+
+Now price that exact same month of work by the token, at Kimi K3's real Duet rates: $3 per million input tokens, $15 per million output tokens, $0.30 per million cached input tokens.
+
+Here's Maya's team's actual monthly volume, with every assumption labeled:
+
+| Work type                           | Volume/mo | Assumption                                                | Tokens                                           |
+| ----------------------------------- | --------- | --------------------------------------------------------- | ------------------------------------------------ |
+| Drafts (emails, proposals, updates) | ~440      | ~700 words in, ~900 words out                             | 410K in / 527K out                               |
+| Research briefs                     | ~66       | ~10K words cached background + ~1.5K new, ~1.8K words out | 878K cached / 132K in / 158K out                 |
+| Ops checklists                      | ~220      | ~300 words in, ~200 words out                             | 88K in / 59K out                                 |
+| Monthly reports                     | 4         | ~20K words cached prior data, ~2.4K words out             | 106K cached / 13K out                            |
+| **Total**                           |           |                                                           | **630K uncached in / 1.0M cached in / 760K out** |
+
+Priced at Kimi K3's rates:
+
+| Token type           | Volume | Rate/1M |            Cost |
+| -------------------- | -----: | ------: | --------------: |
+| Uncached input       |  0.63M |   $3.00 |           $1.89 |
+| Cached input         |   1.0M |   $0.30 |           $0.30 |
+| Output               |  0.76M |  $15.00 |          $11.40 |
+| **Total usage bill** |        |         | **≈ $13.60/mo** |
+
+That $13.60 covers the same ~730 pieces of work the $325 seat bill covered. Nothing was rationed. The research briefs and reports lean on caching because they reuse the same client and vendor background repeatedly. That's how agentic work actually runs, not a trick.
+
+## Seats vs tokens: which wins for your team?
+
+This isn't hypothetical: [NPR reported](https://www.npr.org/2026/07/15/nx-s1-5886476/startups-cheap-chinese-ai-models) that Lindy.ai switched its traffic to a metered model after its AI bill became "by far" its No. 1 expense, cutting costs roughly 10x.
+
+Put Maya's numbers side by side with the general shape of the decision:
+
+|                      | Per-seat (fixed)                                                                | Per-token (usage)                                                         |
+| -------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| What you pay for     | A person having access                                                          | Work actually run                                                         |
+| Predictability       | Same bill regardless of use                                                     | Scales with volume                                                        |
+| Idle cost            | Full price even unused                                                          | $0 if no work runs                                                        |
+| Heavy vs. light user | Same price either way                                                           | Heavy user pays more, light pays less                                     |
+| Typical price today  | ChatGPT Business $20–25/user/mo; Claude Team $20–25 Standard / $100–125 Premium | Kimi K3 runs in Duet's Standard tier: $5/1M input, $0.50/1M cached, $30/1M output |
+| Best fit             | One person using it constantly                                                  | Multiple people, spiky or occasional use                                  |
+
+![A bar chart compares a fixed $325 per month AI seat bill for a five-person team with a $13.60 per month usage bill for the same work priced per token at Kimi K3 rates.](/blog/kimi-k3-open-source-ai-models/chart-seats-vs-tokens.png)
+
+The rule underneath the table: a seat only earns its keep once a person's real usage would cost more metered than the seat itself. For Maya's team, that threshold sits at roughly **20–25× today's actual volume**: tens of millions of output tokens a month, sustained.
+
+![A line chart shows a flat $325 seat line and a rising token-cost line that starts at $13.60 for Maya's team and only crosses the seat line at roughly 20 to 25 times today's volume.](/blog/kimi-k3-open-source-ai-models/chart-break-even.png)
+
+For most non-technical work like this, that line rarely gets crossed outside an agent running near-continuously.
+
+## Is Kimi K3 the cheapest model to route to?
+
+No. Worth saying plainly. At $3/1M input and $15/1M output, Kimi K3 is priced near frontier rates, not floor rates. On provider rates, GLM-5.2 ($1.40/$4.40/$0.26) and Grok 4.5 ($2/$6) are both cheaper.
+
+K3 costs what it costs because it performs close to what it costs. [The Decoder's analysis](https://the-decoder.com/kimis-open-model-k3-nears-gpt-5-6-sol-and-fable-5-while-signaling-the-end-of-super-cheap-chinese-ai/) puts K3's cost-per-task at $0.94, close to GPT-5.6 Sol's $1.04, about half Opus 4.8's $1.80, but still well above GLM-5.2's $0.32 and DeepSeek V4 Pro's $0.04. As the piece frames it, this is the end of super-cheap Chinese AI.
+
+There's a real caveat too. On an adversarial knowledge-probing benchmark (AA-Omniscience), K3's hallucination rate rose to 51%, up from 39% on its predecessor, even as its raw accuracy improved from 33% to 46%.
+
+That's one narrow, adversarial eval, not a claim that K3 gets facts wrong half the time. It's a reason to keep a human reviewing anything client-facing, not a reason to skip the model.
+
+The savings story here was never about finding the cheapest token. It was about killing the seat tax and paying only for real usage.
+
+## How to route work across AI models
+
+The answer isn't picking one model and living with it forever. It's routing: send routine work to a balanced model by default, and send the specific tasks that need more to a frontier model, one click at a time.
+
+Concretely: drafts, research, ops checklists, and reports default to Balanced. A high-stakes deliverable or long-horizon analysis escalates to frontier for that one task, not the whole team.
+
+This is exactly the mechanism a managed multi-model workspace is for. In Duet, Kimi K3 is one of the models behind the Standard tier: routine drafts, research, ops checklists, and reports route to it automatically. When a task actually needs more, you move that session to the Max tier, mid-session, without losing context or starting a new subscription.
+
+There's no seat to provision for the switch and no separate bill to reconcile. Every model behind a tier, from Kimi K3 to Claude Opus 4.8 to GPT-5.6 Sol, bills at that tier's flat token rate, so moving a task changes the rate rather than the number of subscriptions.
+
+[Duet's pricing page](/pricing) shows each quality tier's token rate and a sample month's bill itemized to the cent, plus a 7-day free trial with no card required, so you can run your own team's numbers first.
+
+## When to still pay for a frontier model
+
+Frontier models earn their higher price in three places: the hardest long-horizon reasoning, the highest-stakes client-facing deliverables, and anything where a small accuracy gap costs real money: a legal-adjacent clause, a board-level analysis, a make-or-break pitch.
+
+That's where K3's hallucination caveat from the last section actually matters. On work where being wrong is expensive, route it to Claude Opus 4.8, GPT-5.6 Sol, or Claude Fable 5 instead, and pay the premium on purpose.
+
+Frontier isn't obsolete. It's just not the default for the routine work that fills most of a non-technical team's month. Match the model to the stakes of the task, not to habit or to whichever subscription happens to be open. For a deeper walkthrough of matching models to tasks, see [choosing the right AI model for your business](/blog/how-to-choose-the-right-ai-model-for-your-business).
+
+<DuetCTA
+  title="Run your team's numbers, not ours."
+  subtitle="Duet runs Kimi K3, Claude Opus 4.8, GPT-5.6 Sol and more in one workspace, on a monthly plan with included credits and a paid reserve for overage. Start with a 7-day free trial, no card."
+  buttonText="Try Duet free"
+  href="/sign-in?from=blog-kimi-k3-open-source"
+/>
+
+## Frequently asked questions
+
+### Is Kimi K3 open source?
+Not yet, precisely. Kimi K3 is open-weight. Moonshot has committed to releasing the full weights by July 27, 2026, but at launch it's served only through the API. That's different from GLM-5.2, which already ships under a genuine MIT license.
+
+Both are "open" in the sense that matters for cost: no single vendor controls who can serve them.
+
+### Is Kimi K3 the cheapest AI model?
+No. At $3/1M input and $15/1M output, K3 is priced near frontier rates: on provider rates GLM-5.2 ($1.40/$4.40) and Grok 4.5 ($2/$6) are both cheaper. K3's price reflects near-frontier performance, not a budget position. The savings story in this article isn't about picking the cheapest token.
+
+### How much do AI tokens actually cost compared to a seat subscription?
+It depends entirely on how much you use the seat. A seat costs the same $20–125/month whether one person uses it constantly or barely opens it.
+
+Token pricing charges only for what you actually send and receive. For most non-coding work, that's typically a small fraction of the equivalent seat bill.
+
+### What kind of work is safe to route to a balanced open-weight model like Kimi K3?
+Routine business work: drafting emails and proposals, first-pass research and account briefs, operations checklists, and recurring reports. These are high-volume, lower-stakes tasks where the gap between a #4-ranked model and a #1-ranked model doesn't show up in the output.
+
+### When should I still use a frontier model instead?
+For the hardest long-horizon reasoning, the highest-stakes client-facing work, and anything where a mistake is expensive: legal-adjacent drafts, board-level analysis, a make-or-break pitch. Route those specific tasks to the Max tier and keep everything else on Standard.
+
+### How do I actually try this without ripping out my current AI subscriptions?
+Start by mapping what your team's seats cost per month against what the same work would cost metered. The worked example above is a template.
+
+Duet's pricing page shows the quality tier Kimi K3 sits in, its token rate, and a 7-day free trial with no card required, so you can run the comparison against your real workload before changing anything.

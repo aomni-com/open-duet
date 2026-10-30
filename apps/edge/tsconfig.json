@@ -1,0 +1,15 @@
+{
+  // edge deploys as a bundled Build Output API function under Framework Preset
+  // "Other". DOM can stay because the build script owns emitted JavaScript; the
+  // explicit bundler resolution also matches Bun's production bundle.
+  "extends": "@repo/typescript-config/base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "types": ["bun", "node"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler"
+  },
+  "include": ["src", "scripts", "tests"],
+  "exclude": ["node_modules", "dist"]
+}

@@ -1,0 +1,115 @@
+{
+  "agentVersion": "0.3.29",
+  "agentReleaseSha": "a8676bc7f10fece825b4e82bd2d65d6dcdd0e072",
+  "stagingSource": "f891c7cd477dff080faa2ac140d414b4045adcf2",
+  "productionSource": "e5b29f63ee91afe45667f45b3448cbfe8305315a",
+  "gatewayVersion": "0.0.0+ec2b3d8e8e09",
+  "promotion": "bun run promote:main; normal isolated remote-tip merge",
+  "stagingDeployments": {
+    "sha": "f891c7cd477dff080faa2ac140d414b4045adcf2",
+    "state": "success",
+    "statuses": [
+      {
+        "context": "Vercel \u2013 duet-edge",
+        "state": "success",
+        "target_url": "https://vercel.com/aomni/duet-edge/GHQh266FUP6vMGpKbib5Eq42n7Es"
+      },
+      {
+        "context": "Vercel \u2013 duet-model-gateway",
+        "state": "success",
+        "target_url": "https://vercel.com/aomni/duet-model-gateway/74XmXxJ3t4CGyguVTpG4agTQngNX"
+      },
+      {
+        "context": "Vercel \u2013 duet-mcp",
+        "state": "success",
+        "target_url": "https://vercel.com/aomni/duet-mcp/8kXkrFfqjTCaZVrpdCsUmhR4sXLp"
+      },
+      {
+        "context": "Vercel \u2013 duet-docs",
+        "state": "success",
+        "target_url": "https://vercel.com/aomni/duet-docs/96P8USEsgph8VNshA1DQGcNcnRuq"
+      },
+      {
+        "context": "Vercel \u2013 duet-web",
+        "state": "success",
+        "target_url": "https://vercel.com/aomni/duet-web/6x7qc23WXFqHPdoteFamagDT1NDx"
+      },
+      {
+        "context": "Vercel \u2013 duet-api",
+        "state": "success",
+        "target_url": "https://vercel.com/aomni/duet-api/342Vq3mCSgZHa32DinPGN26M7i4t"
+      },
+      {
+        "context": "Vercel \u2013 duet-lander",
+        "state": "success",
+        "target_url": "https://vercel.com/aomni/duet-lander/3jCvhhjSRvPWALHt6VnzkFSmZPLg"
+      }
+    ]
+  },
+  "productionDeployments": {
+    "sha": "e5b29f63ee91afe45667f45b3448cbfe8305315a",
+    "state": "success",
+    "statuses": [
+      {
+        "context": "Vercel \u2013 duet-edge",
+        "state": "success",
+        "target_url": "https://vercel.com/aomni/duet-edge/HmwEiUvYDj6HqktWQMdEznfbMXhV"
+      },
+      {
+        "context": "Vercel \u2013 duet-mcp",
+        "state": "success",
+        "target_url": "https://vercel.com/aomni/duet-mcp/DxqDskxa1V56eu9jJ6bZREzniDAV"
+      },
+      {
+        "context": "Vercel \u2013 duet-model-gateway",
+        "state": "success",
+        "target_url": "https://vercel.com/aomni/duet-model-gateway/DcaZfUQpzcJnQgVERcp7ybWH98gW"
+      },
+      {
+        "context": "Vercel \u2013 duet-docs",
+        "state": "success",
+        "target_url": "https://vercel.com/aomni/duet-docs/EZEzTzj6XsHbtgMv4XwwFX3X8N5k"
+      },
+      {
+        "context": "Vercel \u2013 duet-web",
+        "state": "success",
+        "target_url": "https://vercel.com/aomni/duet-web/5AoANND15kR7eN3oqdrnJ2Xe47xN"
+      },
+      {
+        "context": "Vercel \u2013 duet-api",
+        "state": "success",
+        "target_url": "https://vercel.com/aomni/duet-api/EuoVRjKdHcKuFk8SVrX4QRXJdyGj"
+      },
+      {
+        "context": "Vercel \u2013 duet-lander",
+        "state": "success",
+        "target_url": "https://vercel.com/aomni/duet-lander/9fXAbNqjSK2QMubro3Tx4yZrzp1Q"
+      }
+    ]
+  },
+  "productionReleaseVerifier": {
+    "backendSchema": 1,
+    "cacheSchema": 13,
+    "gatewayVersion": "0.0.0+ec2b3d8e8e09"
+  },
+  "workspace": "Example User-zhang-s-workspace",
+  "runtimeReceipt": "../qualification/production-runtime-0.3.29.json",
+  "contentReceipt": "../qualification/official-hub-production.json",
+  "rootSuite": "Stopped with failures at user direction; not green. See ../qualification/root-suite-cancelled.json.",
+  "followup": {
+    "automationId": "model-refresh-regression-follow-up",
+    "status": "ACTIVE",
+    "firstCheck": "about three hours after scheduling",
+    "condition": "production rollout complete and sustained spare CPU/memory",
+    "action": "one full-suite run then report and pause automation",
+    "completed": false
+  },
+  "previousProduction": {
+    "source": "9b2dee1eef0ef1d5a35a1d7e988846db30f3db6a",
+    "agentVersion": "0.3.26",
+    "apiDeployment": "dpl_9eTf3gcXRf8t1iFKF2Hq3zbQrXoB",
+    "modelGatewayDeployment": "dpl_4Ewa72MC3keceK7XMQJLS4JGnYYr",
+    "gatewayVersion": "0.0.0+9eb02b344ffe"
+  },
+  "rollback": "Existing Vercel deployment and VM desired-release rails; no additional rollback mechanism."
+}
